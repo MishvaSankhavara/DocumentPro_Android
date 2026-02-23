@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.ImageUtils;
 import com.example.documenpro.utils.Utils;
@@ -111,13 +111,13 @@ public class ImageToPdfConverter {
 
                 File file = new File(generatedPDFPath_ImageToPdfConverter);
 
-                PDFModel fileHolderModel = new PDFModel();
-                fileHolderModel.setName(file.getName());
-                fileHolderModel.setAbsolutePath(file.getAbsolutePath());
-                fileHolderModel.setFileUri(file.getAbsolutePath());
-                fileHolderModel.setLength(file.length());
-                fileHolderModel.setLastModified(file.lastModified());
-                fileHolderModel.setDirectory(file.isDirectory());
+                PDFReaderModel fileHolderModel = new PDFReaderModel();
+                fileHolderModel.setName_PDFModel(file.getName());
+                fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
+                fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
+                fileHolderModel.setLength_PDFModel(file.length());
+                fileHolderModel.setLastModified_PDFModel(file.lastModified());
+                fileHolderModel.setDirectory_PDFModel(file.isDirectory());
 
                 weakReference_ImageToPdfConverter.get().pdfModelFinal = fileHolderModel;
 

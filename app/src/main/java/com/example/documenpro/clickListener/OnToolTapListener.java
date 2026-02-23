@@ -1,8 +1,8 @@
 package com.example.documenpro.clickListener;
 
 
-import com.example.documenpro.model.Tools;
+import com.example.documenpro.model_reader.ToolsModel;
 
 public interface OnToolTapListener {
-    void onToolTap(Tools toolTypeTap);
+    void onToolTap(ToolsModel toolTypeTap);
 }

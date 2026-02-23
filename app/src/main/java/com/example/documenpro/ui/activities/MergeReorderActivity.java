@@ -34,7 +34,7 @@ import com.example.documenpro.adapter_reader.MergeReorderAdapter;
 import com.example.documenpro.docHelper.ItemTouchCallback;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.OnDragStartListener;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.dialog.RenameDialog;
 import com.example.documenpro.utils.DialogUtils;
 
@@ -43,7 +43,7 @@ import java.util.Objects;
 
 public class MergeReorderActivity extends AppCompatActivity implements OnDragStartListener {
     private MergeReorderAdapter adapter;
-    private ArrayList<PDFModel> arrayList = new ArrayList<>();
+    private ArrayList<PDFReaderModel> arrayList = new ArrayList<>();
     private AppCompatTextView btnMerge;
 
     private LinearLayout llTip;

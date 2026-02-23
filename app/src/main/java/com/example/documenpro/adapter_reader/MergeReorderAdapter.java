@@ -19,7 +19,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.clickListener.ItemTouchAdapter;
 import com.example.documenpro.clickListener.OnRemovePdfItemListener;
 import com.example.documenpro.clickListener.OnDragStartListener;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.activities.MergeReorderActivity;
 import com.example.documenpro.utils.Utils;
 
@@ -29,7 +29,7 @@ import java.util.Collections;
 public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapter.ViewHolder> implements ItemTouchAdapter {
 
     public OnRemovePdfItemListener listener_MergeReorder;
-    public ArrayList<PDFModel> pdfModels_MergeReorder;
+    public ArrayList<PDFReaderModel> pdfModels_MergeReorder;
     public OnDragStartListener mDragStartListener_MergeReorder;
     public MergeReorderActivity mActivity_MergeReorder;
 
@@ -56,13 +56,13 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PDFModel pdfModel_MergeReorder = pdfModels_MergeReorder.get(position);
+        PDFReaderModel pdfModel_MergeReorder = pdfModels_MergeReorder.get(position);
 
         holder.ivLock_MergeReorder.setVisibility(GONE);
         holder.lock_line_MergeReorder.setVisibility(GONE);
-        holder.tvName_MergeReorder.setText(pdfModel_MergeReorder.getName());
-        holder.tvDate_MergeReorder.setText(Utils.formatDateToHumanReadable(pdfModel_MergeReorder.getLastModified()));
-        holder.tvFileSize_MergeReorder.setText(Formatter.formatFileSize(mActivity_MergeReorder, pdfModel_MergeReorder.getLength()));
+        holder.tvName_MergeReorder.setText(pdfModel_MergeReorder.getName_PDFModel());
+        holder.tvDate_MergeReorder.setText(Utils.formatDateToHumanReadable(pdfModel_MergeReorder.getLastModified_PDFModel()));
+        holder.tvFileSize_MergeReorder.setText(Formatter.formatFileSize(mActivity_MergeReorder, pdfModel_MergeReorder.getLength_PDFModel()));
 
         holder.ivRemove_MergeReorder.setOnClickListener(view -> {
             if (listener_MergeReorder != null) {
@@ -85,7 +85,7 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pdf_merge, parent, false));
     }
 
-    public MergeReorderAdapter(MergeReorderActivity mActivity, OnDragStartListener mDragStartListener, ArrayList<PDFModel> pdfModels, OnRemovePdfItemListener listener) {
+    public MergeReorderAdapter(MergeReorderActivity mActivity, OnDragStartListener mDragStartListener, ArrayList<PDFReaderModel> pdfModels, OnRemovePdfItemListener listener) {
         this.listener_MergeReorder = listener;
         this.pdfModels_MergeReorder = pdfModels;
         this.mDragStartListener_MergeReorder = mDragStartListener;

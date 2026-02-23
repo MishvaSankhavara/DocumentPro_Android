@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import com.example.documenpro.R;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -107,8 +107,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         closeDb_DatabaseHelper();
     }
 
-    public ArrayList<Document> getStarredDocuments_DatabaseHelper() {
-        ArrayList<Document> arrayList_DatabaseHelper = new ArrayList<>();
+    public ArrayList<DocumentModel> getStarredDocuments_DatabaseHelper() {
+        ArrayList<DocumentModel> arrayList_DatabaseHelper = new ArrayList<>();
         Cursor rawQuery = getReadableDb_DatabaseHelper()
                 .rawQuery("SELECT * FROM stared_pdfs ORDER BY created_at DESC", null);
 
@@ -118,13 +118,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String string = rawQuery.getString(rawQuery.getColumnIndex("path"));
                 File file = new File(string);
                 if (file.exists()) {
-                    Document document = new Document();
-                    document.setFileName(file.getName());
-                    document.setFileUri(file.getAbsolutePath());
-                    document.setLength(file.length());
-                    document.setSrcImage(getDocumentSrc(file));
-                    document.setLastModified(file.lastModified());
-                    document.setStarred(true);
+                    DocumentModel document = new DocumentModel();
+                    document.setFileName_DocModel(file.getName());
+                    document.setFileUri_DocModel(file.getAbsolutePath());
+                    document.setLength_DocModel(file.length());
+                    document.setSrcImage_DocModel(getDocumentSrc(file));
+                    document.setLastModified_DocModel(file.lastModified());
+                    document.setStarred_DocModel(true);
                     arrayList_DatabaseHelper.add(document);
                 } else {
                     removeStaredDocument_DatabaseHelper(string);
@@ -158,8 +158,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         closeDb_DatabaseHelper();
     }
 
-    public ArrayList<Document> getRecentDocuments_DatabaseHelper() {
-        ArrayList<Document> arrayList_DatabaseHelper = new ArrayList<>();
+    public ArrayList<DocumentModel> getRecentDocuments_DatabaseHelper() {
+        ArrayList<DocumentModel> arrayList_DatabaseHelper = new ArrayList<>();
         SQLiteDatabase readableDb_DatabaseHelper = getReadableDb_DatabaseHelper();
         Cursor rawQuery = readableDb_DatabaseHelper
                 .rawQuery("SELECT * FROM history_pdfs ORDER BY last_accessed_at DESC", null);
@@ -172,13 +172,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 File file = new File(string_DatabaseHelper);
 
                 if (file.exists()) {
-                    Document document = new Document();
-                    document.setFileName(file.getName());
-                    document.setFileUri(file.getAbsolutePath());
-                    document.setLength(file.length());
-                    document.setSrcImage(getDocumentSrc(file));
-                    document.setLastModified(file.lastModified());
-                    document.setStarred(
+                    DocumentModel document = new DocumentModel();
+                    document.setFileName_DocModel(file.getName());
+                    document.setFileUri_DocModel(file.getAbsolutePath());
+                    document.setLength_DocModel(file.length());
+                    document.setSrcImage_DocModel(getDocumentSrc(file));
+                    document.setLastModified_DocModel(file.lastModified());
+                    document.setStarred_DocModel(
                             isStared_DatabaseHelper(readableDb_DatabaseHelper,
                                     file.getAbsolutePath())
                     );

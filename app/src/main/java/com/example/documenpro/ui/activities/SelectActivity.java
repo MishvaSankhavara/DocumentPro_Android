@@ -39,7 +39,7 @@ import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.AppExecutor.FavoriteRemovalExecutor;
 import com.example.documenpro.clickListener.OnItemSelectListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.ui.dialog.ProgressDialog;
 import com.example.documenpro.utils.DialogUtils;
@@ -62,7 +62,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     private AppCompatImageView imgDelete;
     private AppCompatTextView tvShare;
     private AppCompatTextView tvMove;
-    public ArrayList<Document> arrayList;
+    public ArrayList<DocumentModel> arrayList;
     public ConstraintLayout clMain;
     private Menu menu;
     private int fileType;
@@ -196,7 +196,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
                 try {
                     ArrayList<Uri> arrayList = new ArrayList<>();
                     for (int i = 0; i < adapter.getSelected_FilePicker().size(); i++) {
-                        arrayList.add(FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(adapter.getSelected_FilePicker().get(i).getFileUri())));
+                        arrayList.add(FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(adapter.getSelected_FilePicker().get(i).getFileUri_DocModel())));
                     }
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -335,18 +335,18 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         protected Void doInBackground(Void... voids) {
-            ArrayList<Document> arrayList1 = weakReference.get().adapter.getSelected_FilePicker();
+            ArrayList<DocumentModel> arrayList1 = weakReference.get().adapter.getSelected_FilePicker();
             for (int i = 0; i < arrayList1.size(); i++) {
-                Document pdfModel = arrayList1.get(i);
-                File file = new File(pdfModel.getFileUri());
+                DocumentModel pdfModel = arrayList1.get(i);
+                File file = new File(pdfModel.getFileUri_DocModel());
                 file.delete();
-                MediaScannerConnection.scanFile(weakReference.get(), new String[]{pdfModel.getFileUri()}, null, null);
-                if (DatabaseHelper.getInstance(weakReference.get()).isStared_DatabaseHelper(pdfModel.getFileUri())) {
-                    DatabaseHelper.getInstance(weakReference.get()).removeStaredDocument_DatabaseHelper(pdfModel.getFileUri());
+                MediaScannerConnection.scanFile(weakReference.get(), new String[]{pdfModel.getFileUri_DocModel()}, null, null);
+                if (DatabaseHelper.getInstance(weakReference.get()).isStared_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
+                    DatabaseHelper.getInstance(weakReference.get()).removeStaredDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
 
                 }
-                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri())) {
-                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri());
+                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
+                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
 
                 }
             }
@@ -428,11 +428,11 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         protected Void doInBackground(Void... voids) {
-            ArrayList<Document> arrayListRemove = weakReference.get().adapter.getSelected_FilePicker();
+            ArrayList<DocumentModel> arrayListRemove = weakReference.get().adapter.getSelected_FilePicker();
             for (int i = 0; i < arrayListRemove.size(); i++) {
-                Document pdfModel = arrayListRemove.get(i);
-                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri())) {
-                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri());
+                DocumentModel pdfModel = arrayListRemove.get(i);
+                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
+                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
                 }
             }
             for (int i = 0; i < 100; i++) {

@@ -35,8 +35,8 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
 import com.example.documenpro.clickListener.OnThumbnailClickListener;
-import com.example.documenpro.model.PDFModel;
-import com.example.documenpro.model.PDFPage;
+import com.example.documenpro.model_reader.PDFReaderModel;
+import com.example.documenpro.model_reader.PDFPageModel;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.ui.dialog.ConvertDialog;
 import com.example.documenpro.utils.Utils;
@@ -56,11 +56,11 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
     private Toolbar toolbar;
     private EmptyRecyclerView recyclerView;
     private PdfPreviewThumbnailAdapter adapter;
-    private final ArrayList<PDFPage> listPdfPages = new ArrayList<>();
+    private final ArrayList<PDFPageModel> listPdfPages = new ArrayList<>();
 
     private String strAllPdfPictureDir;
     private String pdfDirAsFileName;
-    PDFModel pdfModel;
+    PDFReaderModel pdfModel;
     private String fileName;
     private Context mContext;
     private boolean finishLoad = false;
@@ -86,7 +86,7 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
         initViews();
         Intent intent = getIntent();
         if (intent != null) {
-            pdfModel = (PDFModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+            pdfModel = (PDFReaderModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
 
             toolType = intent.getIntExtra(GlobalConstant.TOOL_TYPE, 1);
             if (toolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
@@ -94,8 +94,8 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
             } else if (toolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
                 btnContinue.setText(R.string.tool_tittle_pdf_to_image);
             }
-            fileName = pdfModel.getName();
-            String pdfSavedFile = pdfModel.getAbsolutePath();
+            fileName = pdfModel.getName_PDFModel();
+            String pdfSavedFile = pdfModel.getAbsolutePath_PDFModel();
             Uri uri = Uri.fromFile(new File(pdfSavedFile));
             new LoadThumbnailPdf(this).execute(uri.toString());
 
@@ -115,7 +115,7 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                     if (adapter.getSelected_PdfPreview().size() < 50) {
                         ArrayList<Uri> arrayList = new ArrayList<>();
                         for (int i = 0; i < adapter.getSelected_PdfPreview().size(); i++) {
-                            arrayList.add(FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", new File(Objects.requireNonNull(adapter.getSelected_PdfPreview().get(i).getThumbnailUri().getPath()))));
+                            arrayList.add(FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", new File(Objects.requireNonNull(adapter.getSelected_PdfPreview().get(i).getThumbnailUri_PDFPageModel().getPath()))));
                         }
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -279,7 +279,7 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                                 fileOutputStream = fileOutputStream2;
                                 Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
-                                weakReference.get().listPdfPages.add(new PDFPage(i3, Uri.fromFile(new File(str))));
+                                weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                                 fileOutputStream.close();
                             }
                         } catch (OutOfMemoryError e3) {
@@ -289,10 +289,10 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                             str = sb5;
                             Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
-                            weakReference.get().listPdfPages.add(new PDFPage(i3, Uri.fromFile(new File(str))));
+                            weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                             fileOutputStream.close();
                         }
-                        weakReference.get().listPdfPages.add(new PDFPage(i3, Uri.fromFile(new File(str))));
+                        weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                         fileOutputStream.close();
                         i2 = i3;
                         pageCount = i;

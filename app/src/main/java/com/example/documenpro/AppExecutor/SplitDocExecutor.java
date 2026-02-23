@@ -12,7 +12,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.Utils;
 
@@ -98,14 +98,14 @@ public class SplitDocExecutor {
 
                     File file_SplitDoc = new File(generatedPDFPath_SplitDoc);
 
-                    PDFModel fileHolderModel_SplitDoc = new PDFModel();
+                    PDFReaderModel fileHolderModel_SplitDoc = new PDFReaderModel();
 
-                    fileHolderModel_SplitDoc.setName(file_SplitDoc.getName());
-                    fileHolderModel_SplitDoc.setAbsolutePath(file_SplitDoc.getAbsolutePath());
-                    fileHolderModel_SplitDoc.setFileUri(file_SplitDoc.getAbsolutePath());
-                    fileHolderModel_SplitDoc.setLength(file_SplitDoc.length());
-                    fileHolderModel_SplitDoc.setLastModified(file_SplitDoc.lastModified());
-                    fileHolderModel_SplitDoc.setDirectory(file_SplitDoc.isDirectory());
+                    fileHolderModel_SplitDoc.setName_PDFModel(file_SplitDoc.getName());
+                    fileHolderModel_SplitDoc.setAbsolutePath_PDFModel(file_SplitDoc.getAbsolutePath());
+                    fileHolderModel_SplitDoc.setFileUri_PDFModel(file_SplitDoc.getAbsolutePath());
+                    fileHolderModel_SplitDoc.setLength_PDFModel(file_SplitDoc.length());
+                    fileHolderModel_SplitDoc.setLastModified_PDFModel(file_SplitDoc.lastModified());
+                    fileHolderModel_SplitDoc.setDirectory_PDFModel(file_SplitDoc.isDirectory());
 
                     weakReference_SplitDoc.get().pdfModelFinal = fileHolderModel_SplitDoc;
 

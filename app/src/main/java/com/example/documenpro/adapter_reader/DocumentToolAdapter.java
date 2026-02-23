@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.OnToolTapListener;
-import com.example.documenpro.model.Tools;
+import com.example.documenpro.model_reader.ToolsModel;
 
 import java.util.ArrayList;
 
 public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapter.ViewHolder> {
 
     private final Context mContext_DocumentTool;
-    private final ArrayList<Tools> arrayList_DocumentTool;
+    private final ArrayList<ToolsModel> arrayList_DocumentTool;
     private final OnToolTapListener listener_DocumentTool;
 
     @Override
@@ -34,16 +34,16 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Tools toolType = arrayList_DocumentTool.get(position);
+        ToolsModel toolType = arrayList_DocumentTool.get(position);
         float scale = mContext_DocumentTool.getResources().getDisplayMetrics().density;
-        int padding = (int) (toolType.getPadding() * scale + 0.5f);
+        int padding = (int) (toolType.getPadding_toolModel() * scale + 0.5f);
 
         holder.tvTool_DocumentTool.setText(
-                mContext_DocumentTool.getResources().getString(toolType.getNameTool())
+                mContext_DocumentTool.getResources().getString(toolType.getNameTool_toolModel())
         );
 
         holder.imgTool_DocumentTool.setPadding(padding, padding, padding, padding);
-        holder.imgTool_DocumentTool.setImageResource(toolType.getIcRes());
+        holder.imgTool_DocumentTool.setImageResource(toolType.getIcRes_toolModel());
 
         holder.imgTool_DocumentTool.setOnClickListener(view -> {
             if (listener_DocumentTool != null) {

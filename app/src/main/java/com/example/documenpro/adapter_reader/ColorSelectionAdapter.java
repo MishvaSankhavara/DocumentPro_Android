@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.R;
-import com.example.documenpro.model.ColorModel;
+import com.example.documenpro.model_reader.CodeColorModel;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,9 @@ public class ColorSelectionAdapter extends RecyclerView.Adapter<ColorSelectionAd
 
     private final ColorChangedListener_ColorSelection listener_ColorSelection;
 
-    private final ArrayList<ColorModel> colorModelArrayList_ColorSelection;
+    private final ArrayList<CodeColorModel> colorModelArrayList_ColorSelection;
 
-    public ColorSelectionAdapter(ArrayList<ColorModel> colorList,
+    public ColorSelectionAdapter(ArrayList<CodeColorModel> colorList,
                                  int lstPosition,
                                  ColorChangedListener_ColorSelection listener) {
         this.colorModelArrayList_ColorSelection = colorList;
@@ -42,10 +42,10 @@ public class ColorSelectionAdapter extends RecyclerView.Adapter<ColorSelectionAd
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
 
-        ColorModel colorModel =
+        CodeColorModel colorModel =
                 colorModelArrayList_ColorSelection.get(position);
 
-        if (colorModel.isWhite()) {
+        if (colorModel.isWhite_ColorModel()) {
             holder.imgChoose_ColorSelection.setImageResource(
                     R.drawable.ic_color_choosed_main);
         } else {
@@ -54,7 +54,7 @@ public class ColorSelectionAdapter extends RecyclerView.Adapter<ColorSelectionAd
         }
 
         holder.viewBg_ColorSelection.setBackgroundResource(
-                colorModel.getIdSourceBg());
+                colorModel.getIdSourceBg_ColorModel());
 
         if (lastPost_ColorSelection == position) {
             holder.imgChoose_ColorSelection.setVisibility(View.VISIBLE);
@@ -73,7 +73,7 @@ public class ColorSelectionAdapter extends RecyclerView.Adapter<ColorSelectionAd
 
                 if (listener_ColorSelection != null) {
                     listener_ColorSelection.onColorChanged(
-                            colorModel.getCodeColor());
+                            colorModel.getCodeColor_ColorModel());
                 }
             }
         });

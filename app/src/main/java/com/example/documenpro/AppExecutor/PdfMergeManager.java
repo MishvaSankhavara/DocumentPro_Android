@@ -11,7 +11,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
 import com.example.documenpro.R;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.Utils;
 
@@ -122,14 +122,14 @@ public class PdfMergeManager {
 
                 File file1_PdfMergeManager = new File(mergedFilePath_PdfMergeManager);
 
-                PDFModel fileHolderModel_PdfMergeManager = new PDFModel();
+                PDFReaderModel fileHolderModel_PdfMergeManager = new PDFReaderModel();
 
-                fileHolderModel_PdfMergeManager.setName(file1_PdfMergeManager.getName());
-                fileHolderModel_PdfMergeManager.setAbsolutePath(file1_PdfMergeManager.getAbsolutePath());
-                fileHolderModel_PdfMergeManager.setFileUri(file1_PdfMergeManager.getAbsolutePath());
-                fileHolderModel_PdfMergeManager.setLength(file1_PdfMergeManager.length());
-                fileHolderModel_PdfMergeManager.setLastModified(file1_PdfMergeManager.lastModified());
-                fileHolderModel_PdfMergeManager.setDirectory(file1_PdfMergeManager.isDirectory());
+                fileHolderModel_PdfMergeManager.setName_PDFModel(file1_PdfMergeManager.getName());
+                fileHolderModel_PdfMergeManager.setAbsolutePath_PDFModel(file1_PdfMergeManager.getAbsolutePath());
+                fileHolderModel_PdfMergeManager.setFileUri_PDFModel(file1_PdfMergeManager.getAbsolutePath());
+                fileHolderModel_PdfMergeManager.setLength_PDFModel(file1_PdfMergeManager.length());
+                fileHolderModel_PdfMergeManager.setLastModified_PDFModel(file1_PdfMergeManager.lastModified());
+                fileHolderModel_PdfMergeManager.setDirectory_PDFModel(file1_PdfMergeManager.isDirectory());
 
                 weakReference_PdfMergeManager.get().pdfModelFinal = fileHolderModel_PdfMergeManager;
 

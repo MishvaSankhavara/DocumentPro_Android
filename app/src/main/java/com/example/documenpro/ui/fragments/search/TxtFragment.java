@@ -18,7 +18,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.clickListener.DocClickListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
 import com.example.documenpro.viewmodel.SearchViewModel;
@@ -32,7 +32,7 @@ public class TxtFragment extends Fragment implements DocClickListener {
     private Activity mActivity;
     private EmptyRecyclerView recyclerView;
     private FileListAdapter adapter;
-    private ArrayList<Document> arrayList;
+    private ArrayList<DocumentModel> arrayList;
     private SearchViewModel searchViewModel;
     private ProgressBar progressBar;
     private final Executor executor = Executors.newSingleThreadExecutor();
@@ -98,7 +98,7 @@ public class TxtFragment extends Fragment implements DocClickListener {
     }
 
     @Override
-    public void onDocClick(Document document) {
+    public void onDocClick(DocumentModel document) {
         Utils.openFile(mActivity, document);
 
     }

@@ -18,7 +18,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.OnRemovePhotoListener;
-import com.example.documenpro.model.Photo;
+import com.example.documenpro.model_reader.PhotoModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,11 +28,11 @@ public class PhotoSelectionAdapter
         implements DraggableItemAdapter<PhotoSelectionAdapter.ViewHolder> {
 
     private final OnRemovePhotoListener mListener_PhotoSelection;
-    private final ArrayList<Photo> arrayListPhoto_PhotoSelection;
+    private final ArrayList<PhotoModel> arrayListPhoto_PhotoSelection;
     private final Context mContext_PhotoSelection;
 
     public PhotoSelectionAdapter(Context mContext,
-                                 ArrayList<Photo> arrayListPhoto,
+                                 ArrayList<PhotoModel> arrayListPhoto,
                                  OnRemovePhotoListener listener) {
         this.mContext_PhotoSelection = mContext;
         this.arrayListPhoto_PhotoSelection = arrayListPhoto;
@@ -95,14 +95,14 @@ public class PhotoSelectionAdapter
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
 
-        Photo photo =
+        PhotoModel photo =
                 arrayListPhoto_PhotoSelection.get(position);
 
         holder.tvNumber_PhotoSelection
                 .setText(String.valueOf(holder.getAdapterPosition()));
 
         Glide.with(mContext_PhotoSelection)
-                .load(photo.getFilePath())
+                .load(photo.getFilePath_PhotoModel())
                 .into(holder.imgPhoto_PhotoSelection);
 
         holder.imgRemove_PhotoSelection
@@ -118,7 +118,7 @@ public class PhotoSelectionAdapter
     public long getItemId(int position) {
         return arrayListPhoto_PhotoSelection
                 .get(position)
-                .getId();
+                .getId_PhotoModel();
     }
 
     @NonNull

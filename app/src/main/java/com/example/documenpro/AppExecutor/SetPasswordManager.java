@@ -9,7 +9,7 @@ import android.view.View;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.Utils;
 
@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 
 public class SetPasswordManager {
 
-    PDFModel mPdfModel_setPW;
+    PDFReaderModel mPdfModel_setPW;
     String mPassword_setPW;
     private final WeakReference<ProcessingTaskActivity> weakReference_setPW;
     private final ExecutorService executor_setPW = Executors.newSingleThreadExecutor();
@@ -48,25 +48,25 @@ public class SetPasswordManager {
                 publishProgress_setPW(i);
             }
 
-            boolean isSetPassword = Utils.setPassPDF(mPdfModel_setPW.getAbsolutePath(), mPdfModel_setPW.getName(), mPassword_setPW);
+            boolean isSetPassword = Utils.setPassPDF(mPdfModel_setPW.getAbsolutePath_PDFModel(), mPdfModel_setPW.getName_PDFModel(), mPassword_setPW);
 
             if (isSetPassword) {
 
-                PDFModel pdfModel_setPW = new PDFModel();
+                PDFReaderModel pdfModel_setPW = new PDFReaderModel();
                 String path_setPW = GlobalConstant.RootDirectoryLock;
-                String filePathNeW_setPW = path_setPW + "Locked" + mPdfModel_setPW.getName();
+                String filePathNeW_setPW = path_setPW + "Locked" + mPdfModel_setPW.getName_PDFModel();
 
                 final File file = new File(filePathNeW_setPW);
 
-                pdfModel_setPW.setName(file.getName());
-                pdfModel_setPW.setAbsolutePath(file.getAbsolutePath());
-                pdfModel_setPW.setFileUri(file.getAbsolutePath());
-                pdfModel_setPW.setProtected(true);
-                pdfModel_setPW.setLength(file.length());
-                pdfModel_setPW.setLastModified(file.lastModified());
-                pdfModel_setPW.setDirectory(file.isDirectory());
+                pdfModel_setPW.setName_PDFModel(file.getName());
+                pdfModel_setPW.setAbsolutePath_PDFModel(file.getAbsolutePath());
+                pdfModel_setPW.setFileUri_PDFModel(file.getAbsolutePath());
+                pdfModel_setPW.setProtected_PDFModel(true);
+                pdfModel_setPW.setLength_PDFModel(file.length());
+                pdfModel_setPW.setLastModified_PDFModel(file.lastModified());
+                pdfModel_setPW.setDirectory_PDFModel(file.isDirectory());
 
-                MediaScannerConnection.scanFile(MyApplication.getInstance(), new String[]{pdfModel_setPW.getAbsolutePath()}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(MyApplication.getInstance(), new String[]{pdfModel_setPW.getAbsolutePath_PDFModel()}, new String[]{"application/pdf"}, null);
 
                 weakReference_setPW.get().runOnUiThread(() -> {
 
@@ -77,9 +77,9 @@ public class SetPasswordManager {
                     weakReference_setPW.get().ltAnimBg.playAnimation();
                     weakReference_setPW.get().ltAnimDone.playAnimation();
 
-                    weakReference_setPW.get().tvPdfName.setText(new File(pdfModel_setPW.getName()).getName());
+                    weakReference_setPW.get().tvPdfName.setText(new File(pdfModel_setPW.getName_PDFModel()).getName());
 
-                    weakReference_setPW.get().tvPdfPath.setText(pdfModel_setPW.getAbsolutePath());
+                    weakReference_setPW.get().tvPdfPath.setText(pdfModel_setPW.getAbsolutePath_PDFModel());
 
                     weakReference_setPW.get().pdfModelFinal = pdfModel_setPW;
 
@@ -95,7 +95,7 @@ public class SetPasswordManager {
         executor_setPW.shutdownNow();
     }
 
-    public SetPasswordManager(ProcessingTaskActivity activity_setPW, String mPassword_setPW, PDFModel mPdfModel_setPW) {
+    public SetPasswordManager(ProcessingTaskActivity activity_setPW, String mPassword_setPW, PDFReaderModel mPdfModel_setPW) {
 
         this.weakReference_setPW = new WeakReference<>(activity_setPW);
 

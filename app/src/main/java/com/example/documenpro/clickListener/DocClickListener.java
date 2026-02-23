@@ -1,7 +1,7 @@
 package com.example.documenpro.clickListener;
 
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 
 public interface DocClickListener {
-    void onDocClick(Document doc);
+    void onDocClick(DocumentModel doc);
 }

@@ -1,7 +1,7 @@
 package com.example.documenpro.clickListener;
 
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 
 public interface OnPdfTapListener {
-    void onPdfTap(PDFModel pdfModelTap);
+    void onPdfTap(PDFReaderModel pdfModelTap);
 }

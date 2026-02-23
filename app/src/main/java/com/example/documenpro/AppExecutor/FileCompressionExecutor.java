@@ -19,7 +19,7 @@ import com.itextpdf.text.pdf.parser.PdfImageObject;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.ImageUtils;
 import com.example.documenpro.utils.Utils;
@@ -169,14 +169,14 @@ public class FileCompressionExecutor {
 
                             weakReference_FileCompression.get().tvResult.setText(sb2);
 
-                            PDFModel fileHolderModel_FileCompression = new PDFModel();
+                            PDFReaderModel fileHolderModel_FileCompression = new PDFReaderModel();
 
-                            fileHolderModel_FileCompression.setName(file1.getName());
-                            fileHolderModel_FileCompression.setAbsolutePath(file1.getAbsolutePath());
-                            fileHolderModel_FileCompression.setFileUri(file1.getAbsolutePath());
-                            fileHolderModel_FileCompression.setLength(file1.length());
-                            fileHolderModel_FileCompression.setLastModified(file1.lastModified());
-                            fileHolderModel_FileCompression.setDirectory(file1.isDirectory());
+                            fileHolderModel_FileCompression.setName_PDFModel(file1.getName());
+                            fileHolderModel_FileCompression.setAbsolutePath_PDFModel(file1.getAbsolutePath());
+                            fileHolderModel_FileCompression.setFileUri_PDFModel(file1.getAbsolutePath());
+                            fileHolderModel_FileCompression.setLength_PDFModel(file1.length());
+                            fileHolderModel_FileCompression.setLastModified_PDFModel(file1.lastModified());
+                            fileHolderModel_FileCompression.setDirectory_PDFModel(file1.isDirectory());
 
                             weakReference_FileCompression.get().pdfModelFinal = fileHolderModel_FileCompression;
 

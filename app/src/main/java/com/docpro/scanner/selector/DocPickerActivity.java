@@ -29,7 +29,7 @@ import com.example.documenpro.adapter_reader.FileSelectionAdapter;
 import com.example.documenpro.docHelper.PdfPrintUtils;
 import com.example.documenpro.clickListener.PdfSelectionListener;
 import com.example.documenpro.clickListener.PasswordClickListener;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.activities.ShareImageActivity;
 import com.example.documenpro.ui.activities.SplitChooseFileActivity;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
@@ -48,10 +48,10 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
     private EmptyRecyclerView rvPicker;
     private FileSelectionAdapter pickerAdapter;
     private LottieAnimationView lottieLoader;
-    private ArrayList<PDFModel> docList;
+    private ArrayList<PDFReaderModel> docList;
     private int operationMode;
     private int selectedPosition;
-    private PDFModel selectedDoc;
+    private PDFReaderModel selectedDoc;
     private Context baseContextWrapper;
     private final Executor asyncExecutor = Executors.newSingleThreadExecutor();
     private FrameLayout adFrame;
@@ -139,18 +139,18 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
     }
 
     @Override
-    public void onPdfSelect(PDFModel pdfModel_listener, int position) {
+    public void onPdfSelect(PDFReaderModel pdfModel_listener, int position) {
         this.selectedPosition = position;
         this.selectedDoc = pdfModel_listener;
 
         if (operationMode == GlobalConstant.TOOL_PRINT) {
-            if (pdfModel_listener.isProtected()) {
+            if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_print_toast);
             } else {
-                PdfPrintUtils.printPdf_Utils(this, Uri.fromFile(new File(pdfModel_listener.getAbsolutePath())));
+                PdfPrintUtils.printPdf_Utils(this, Uri.fromFile(new File(pdfModel_listener.getAbsolutePath_PDFModel())));
             }
         } else if (operationMode == GlobalConstant.TOOL_COMPRESS) {
-            if (pdfModel_listener.isProtected()) {
+            if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_compress_toast);
             } else {
                 Intent taskIntent = new Intent(this, ProcessingTaskActivity.class);
@@ -160,7 +160,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                 finish();
             }
         } else if (operationMode == GlobalConstant.TOOL_SPLIT) {
-            if (pdfModel_listener.isProtected()) {
+            if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_split_toast);
             } else {
                 Intent splitIntent = new Intent(this, SplitChooseFileActivity.class);
@@ -169,7 +169,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                 finish();
             }
         } else if (operationMode == GlobalConstant.TOOL_PDF_TO_PHOTO) {
-            if (pdfModel_listener.isProtected()) {
+            if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_convert_toast);
             } else {
                 Intent convertIntent = new Intent(this, ShareImageActivity.class);
@@ -179,7 +179,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                 finish();
             }
         } else if (operationMode == GlobalConstant.TOOL_LOCK_PDF) {
-            if (pdfModel_listener.isProtected()) {
+            if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_convert_toast);
             } else {
                 DialogUtils.showSetPasswordDialog(this, new PasswordClickListener() {

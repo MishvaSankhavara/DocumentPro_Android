@@ -1,9 +1,9 @@
 package com.example.documenpro.clickListener;
 
 
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 
 public interface PdfSelectionListener {
 
-    void onPdfSelect(PDFModel pdfModel_listener, int position_listener);
+    void onPdfSelect(PDFReaderModel pdfModel_listener, int position_listener);
 }

@@ -62,8 +62,8 @@ import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.SortingListener;
-import com.example.documenpro.model.Document;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.DocumentModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.activities.ListFileActivity;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SplashActivity;
@@ -139,16 +139,16 @@ public class Utils {
         }
     }
 
-    public static PDFModel removePassWordPDF(PDFModel pdfModel, String password) {
+    public static PDFReaderModel removePassWordPDF(PDFReaderModel pdfModel, String password) {
         try {
             String path = GlobalConstant.RootDirectoryLock;
             File file2 = new File(path);
             if (!file2.exists()) {
                 file2.mkdirs();
             }
-            String filePathNeW = path + "Unlock_" + pdfModel.getName();
+            String filePathNeW = path + "Unlock_" + pdfModel.getName_PDFModel();
 
-            PDDocument document = PDDocument.load(new File(pdfModel.getAbsolutePath()), password);
+            PDDocument document = PDDocument.load(new File(pdfModel.getAbsolutePath_PDFModel()), password);
 
 
 //            AccessPermission ap = document.getCurrentAccessPermission();
@@ -157,14 +157,14 @@ public class Utils {
             document.save(filePathNeW);
 
             final File file = new File(filePathNeW);
-            PDFModel fileHolderModel = new PDFModel();
-            fileHolderModel.setName(file.getName());
-            fileHolderModel.setAbsolutePath(file.getAbsolutePath());
-            fileHolderModel.setFileUri(file.getAbsolutePath());
-            fileHolderModel.setProtected(false);
-            fileHolderModel.setLength(file.length());
-            fileHolderModel.setLastModified(file.lastModified());
-            fileHolderModel.setDirectory(file.isDirectory());
+            PDFReaderModel fileHolderModel = new PDFReaderModel();
+            fileHolderModel.setName_PDFModel(file.getName());
+            fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
+            fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
+            fileHolderModel.setProtected_PDFModel(false);
+            fileHolderModel.setLength_PDFModel(file.length());
+            fileHolderModel.setLastModified_PDFModel(file.lastModified());
+            fileHolderModel.setDirectory_PDFModel(file.isDirectory());
             return fileHolderModel;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -281,8 +281,8 @@ public class Utils {
         }
     }
 
-    public static ArrayList<PDFModel> getUnLockPDF(Context mContext) {
-        ArrayList<PDFModel> pdfList = new ArrayList<>();
+    public static ArrayList<PDFReaderModel> getUnLockPDF(Context mContext) {
+        ArrayList<PDFReaderModel> pdfList = new ArrayList<>();
         Uri collection;
         final String[] projection = new String[]{
                 MediaStore.Files.FileColumns.DISPLAY_NAME,
@@ -315,15 +315,15 @@ public class Utils {
                     }
                     if (!Utils.checkHavePassword(mContext, Uri.fromFile(new File(file_path)))) {
                         if (file.length() != 0) {
-                            PDFModel fileHolderModel = new PDFModel();
-                            fileHolderModel.setName(file.getName());
-                            fileHolderModel.setAbsolutePath(file.getAbsolutePath());
-                            fileHolderModel.setFileUri(file.getAbsolutePath());
-                            fileHolderModel.setProtected(false);
+                            PDFReaderModel fileHolderModel = new PDFReaderModel();
+                            fileHolderModel.setName_PDFModel(file.getName());
+                            fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
+                            fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
+                            fileHolderModel.setProtected_PDFModel(false);
 //                        fileHolderModel.setUrlThumbnail(Utils.generateThumbnailPdf(mContext, file));
-                            fileHolderModel.setLength(file.length());
-                            fileHolderModel.setLastModified(file.lastModified());
-                            fileHolderModel.setDirectory(file.isDirectory());
+                            fileHolderModel.setLength_PDFModel(file.length());
+                            fileHolderModel.setLastModified_PDFModel(file.lastModified());
+                            fileHolderModel.setDirectory_PDFModel(file.isDirectory());
                             pdfList.add(fileHolderModel);
                         }
                     }
@@ -333,8 +333,8 @@ public class Utils {
         return pdfList;
     }
 
-    public static ArrayList<PDFModel> getLockPDF(Context mContext) {
-        ArrayList<PDFModel> pdfList = new ArrayList<>();
+    public static ArrayList<PDFReaderModel> getLockPDF(Context mContext) {
+        ArrayList<PDFReaderModel> pdfList = new ArrayList<>();
         Uri collection;
         final String[] projection = new String[]{
                 MediaStore.Files.FileColumns.DISPLAY_NAME,
@@ -367,15 +367,15 @@ public class Utils {
                     }
                     if (Utils.checkHavePassword(mContext, Uri.fromFile(new File(file_path)))) {
                         if (file.length() != 0) {
-                            PDFModel fileHolderModel = new PDFModel();
-                            fileHolderModel.setName(file.getName());
-                            fileHolderModel.setAbsolutePath(file.getAbsolutePath());
-                            fileHolderModel.setFileUri(file.getAbsolutePath());
-                            fileHolderModel.setProtected(true);
+                            PDFReaderModel fileHolderModel = new PDFReaderModel();
+                            fileHolderModel.setName_PDFModel(file.getName());
+                            fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
+                            fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
+                            fileHolderModel.setProtected_PDFModel(true);
 //                        fileHolderModel.setUrlThumbnail(Utils.generateThumbnailPdf(mContext, file));
-                            fileHolderModel.setLength(file.length());
-                            fileHolderModel.setLastModified(file.lastModified());
-                            fileHolderModel.setDirectory(file.isDirectory());
+                            fileHolderModel.setLength_PDFModel(file.length());
+                            fileHolderModel.setLastModified_PDFModel(file.lastModified());
+                            fileHolderModel.setDirectory_PDFModel(file.isDirectory());
                             pdfList.add(fileHolderModel);
                         }
                     }
@@ -534,30 +534,30 @@ public class Utils {
         }
     }
 
-    public static void searchDocument(String string, ArrayList<Document> itemList, FileListAdapter adapter) {
-        ArrayList<Document> arrayList = new ArrayList<>();
-        for (Document documentModel : itemList) {
-            if (documentModel.getFileName().toLowerCase().contains(string.toLowerCase())) {
+    public static void searchDocument(String string, ArrayList<DocumentModel> itemList, FileListAdapter adapter) {
+        ArrayList<DocumentModel> arrayList = new ArrayList<>();
+        for (DocumentModel documentModel : itemList) {
+            if (documentModel.getFileName_DocModel().toLowerCase().contains(string.toLowerCase())) {
                 arrayList.add(documentModel);
             }
             adapter.filter(arrayList);
         }
     }
 
-    public static ArrayList<PDFModel> getCreatedPdf(File directory) {
-        ArrayList<PDFModel> pdfList = new ArrayList<>();
+    public static ArrayList<PDFReaderModel> getCreatedPdf(File directory) {
+        ArrayList<PDFReaderModel> pdfList = new ArrayList<>();
 
         File[] files = directory.listFiles();
 
         if (files != null) {
             for (File file : files) {
-                PDFModel fileHolderModel = new PDFModel();
-                fileHolderModel.setName(file.getName());
-                fileHolderModel.setAbsolutePath(file.getAbsolutePath());
-                fileHolderModel.setFileUri(file.getAbsolutePath());
-                fileHolderModel.setLength(file.length());
-                fileHolderModel.setLastModified(file.lastModified());
-                fileHolderModel.setDirectory(file.isDirectory());
+                PDFReaderModel fileHolderModel = new PDFReaderModel();
+                fileHolderModel.setName_PDFModel(file.getName());
+                fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
+                fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
+                fileHolderModel.setLength_PDFModel(file.length());
+                fileHolderModel.setLastModified_PDFModel(file.lastModified());
+                fileHolderModel.setDirectory_PDFModel(file.isDirectory());
                 pdfList.add(fileHolderModel);
             }
         }
@@ -568,7 +568,7 @@ public class Utils {
 
     }
 
-    public static void openFileWithAds(Activity mContext, Document document, int number) {
+    public static void openFileWithAds(Activity mContext, DocumentModel document, int number) {
         int numberAds = SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.ADS_COUNT, 1);
         if (countAds(mContext, number)) {
             AdManager.showAds_AdManager(mContext, new OnAdDismissedListener() {
@@ -590,9 +590,9 @@ public class Utils {
         return SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.ADS_COUNT, 2) % numberAds == 0;
     }
 
-    public static void openFile(Activity mContext, Document document) {
+    public static void openFile(Activity mContext, DocumentModel document) {
         try {
-            File file = new File(document.getFileUri());
+            File file = new File(document.getFileUri_DocModel());
 
 //            File file = new File(fileHolderModel.getAbsolutePath());
             DatabaseHelper.getInstance(mContext).addRecentDocument_DatabaseHelper(file.getAbsolutePath());
@@ -672,8 +672,8 @@ public class Utils {
 
     }
 
-    public static ArrayList<Document> countFile(Context mContext, String whereClause) {
-        ArrayList<Document> arrayList = new ArrayList<>();
+    public static ArrayList<DocumentModel> countFile(Context mContext, String whereClause) {
+        ArrayList<DocumentModel> arrayList = new ArrayList<>();
         Uri collection;
         final String[] projection = new String[]{
                 MediaStore.Files.FileColumns.DISPLAY_NAME,
@@ -705,12 +705,12 @@ public class Utils {
                             break;
                         }
                         if (file.length() != 0) {
-                            Document document = new Document();
-                            document.setFileName(file.getName());
-                            document.setFileUri(file.getAbsolutePath());
-                            document.setLength(file.length());
-                            document.setSrcImage(getDocumentSrc(file));
-                            document.setLastModified(file.lastModified());
+                            DocumentModel document = new DocumentModel();
+                            document.setFileName_DocModel(file.getName());
+                            document.setFileUri_DocModel(file.getAbsolutePath());
+                            document.setLength_DocModel(file.length());
+                            document.setSrcImage_DocModel(getDocumentSrc(file));
+                            document.setLastModified_DocModel(file.lastModified());
 
                             arrayList.add(document);
                         }
@@ -810,20 +810,20 @@ public class Utils {
         }
     }
 
-    public static ArrayList<Document> getAllDocument() {
-        ArrayList<Document> documents = new ArrayList<>();
+    public static ArrayList<DocumentModel> getAllDocument() {
+        ArrayList<DocumentModel> documents = new ArrayList<>();
         File directory = new File(Environment.getExternalStorageDirectory().toString());
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && isDocumentFile(file)) {
-                        Document document = new Document();
-                        document.setFileName(file.getName());
-                        document.setFileUri(file.getAbsolutePath());
-                        document.setLength(file.length());
-                        document.setSrcImage(getDocumentSrc(file));
-                        document.setLastModified(file.lastModified());
+                        DocumentModel document = new DocumentModel();
+                        document.setFileName_DocModel(file.getName());
+                        document.setFileUri_DocModel(file.getAbsolutePath());
+                        document.setLength_DocModel(file.length());
+                        document.setSrcImage_DocModel(getDocumentSrc(file));
+                        document.setLastModified_DocModel(file.lastModified());
                         documents.add(document);
                     }
                 }
@@ -832,20 +832,20 @@ public class Utils {
         return documents;
     }
 
-    public static ArrayList<Document> getPdfDocument() {
-        ArrayList<Document> documents = new ArrayList<>();
+    public static ArrayList<DocumentModel> getPdfDocument() {
+        ArrayList<DocumentModel> documents = new ArrayList<>();
         File directory = new File(Environment.getExternalStorageDirectory().toString());
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && isPdfFile(file)) {
-                        Document document = new Document();
-                        document.setFileName(file.getName());
-                        document.setFileUri(file.getAbsolutePath());
-                        document.setLength(file.length());
-                        document.setSrcImage(getDocumentSrc(file));
-                        document.setLastModified(file.lastModified());
+                        DocumentModel document = new DocumentModel();
+                        document.setFileName_DocModel(file.getName());
+                        document.setFileUri_DocModel(file.getAbsolutePath());
+                        document.setLength_DocModel(file.length());
+                        document.setSrcImage_DocModel(getDocumentSrc(file));
+                        document.setLastModified_DocModel(file.lastModified());
                         documents.add(document);
                     }
                 }
@@ -854,20 +854,20 @@ public class Utils {
         return documents;
     }
 
-    public static ArrayList<Document> getWordDocument() {
-        ArrayList<Document> documents = new ArrayList<>();
+    public static ArrayList<DocumentModel> getWordDocument() {
+        ArrayList<DocumentModel> documents = new ArrayList<>();
         File directory = new File(Environment.getExternalStorageDirectory().toString());
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && isWordFile(file)) {
-                        Document document = new Document();
-                        document.setFileName(file.getName());
-                        document.setFileUri(file.getAbsolutePath());
-                        document.setLength(file.length());
-                        document.setSrcImage(getDocumentSrc(file));
-                        document.setLastModified(file.lastModified());
+                        DocumentModel document = new DocumentModel();
+                        document.setFileName_DocModel(file.getName());
+                        document.setFileUri_DocModel(file.getAbsolutePath());
+                        document.setLength_DocModel(file.length());
+                        document.setSrcImage_DocModel(getDocumentSrc(file));
+                        document.setLastModified_DocModel(file.lastModified());
                         documents.add(document);
                     }
                 }
@@ -876,20 +876,20 @@ public class Utils {
         return documents;
     }
 
-    public static ArrayList<Document> getPPTDocument() {
-        ArrayList<Document> documents = new ArrayList<>();
+    public static ArrayList<DocumentModel> getPPTDocument() {
+        ArrayList<DocumentModel> documents = new ArrayList<>();
         File directory = new File(Environment.getExternalStorageDirectory().toString());
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && isPPTFile(file)) {
-                        Document document = new Document();
-                        document.setFileName(file.getName());
-                        document.setFileUri(file.getAbsolutePath());
-                        document.setLength(file.length());
-                        document.setSrcImage(getDocumentSrc(file));
-                        document.setLastModified(file.lastModified());
+                        DocumentModel document = new DocumentModel();
+                        document.setFileName_DocModel(file.getName());
+                        document.setFileUri_DocModel(file.getAbsolutePath());
+                        document.setLength_DocModel(file.length());
+                        document.setSrcImage_DocModel(getDocumentSrc(file));
+                        document.setLastModified_DocModel(file.lastModified());
                         documents.add(document);
                     }
                 }
@@ -898,20 +898,20 @@ public class Utils {
         return documents;
     }
 
-    public static ArrayList<Document> getExcelDocument() {
-        ArrayList<Document> documents = new ArrayList<>();
+    public static ArrayList<DocumentModel> getExcelDocument() {
+        ArrayList<DocumentModel> documents = new ArrayList<>();
         File directory = new File(Environment.getExternalStorageDirectory().toString());
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile() && isExcelFile(file)) {
-                        Document document = new Document();
-                        document.setFileName(file.getName());
-                        document.setFileUri(file.getAbsolutePath());
-                        document.setLength(file.length());
-                        document.setSrcImage(getDocumentSrc(file));
-                        document.setLastModified(file.lastModified());
+                        DocumentModel document = new DocumentModel();
+                        document.setFileName_DocModel(file.getName());
+                        document.setFileUri_DocModel(file.getAbsolutePath());
+                        document.setLength_DocModel(file.length());
+                        document.setSrcImage_DocModel(getDocumentSrc(file));
+                        document.setLastModified_DocModel(file.lastModified());
                         documents.add(document);
                     }
                 }
@@ -996,7 +996,7 @@ public class Utils {
     }
 
 
-    public static void showMoreDialog(Activity mContext, Document mDocument, boolean isRecent, MoreClickListener moreListener) {
+    public static void showMoreDialog(Activity mContext, DocumentModel mDocument, boolean isRecent, MoreClickListener moreListener) {
         if (mContext == null) {
             return;
         }
@@ -1062,7 +1062,7 @@ public class Utils {
         SharedPreferenceUtils.getInstance(mContext).setBoolean(GlobalConstant.NIGHT_MODE_KEY, isDark);
     }
 
-    public static void createShortcut(Context mContext, Document document) {
+    public static void createShortcut(Context mContext, DocumentModel document) {
         Intent launchIntentForPackage = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());
         if (launchIntentForPackage == null) {
             // Xử lý trường hợp không tìm thấy intent khởi chạy
@@ -1071,8 +1071,8 @@ public class Utils {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
             intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntentForPackage);
-            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, document.getFileName());
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(mContext, document.getSrcImage()));
+            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, document.getFileName_DocModel());
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(mContext, document.getSrcImage_DocModel()));
             intent.putExtra("duplicate", true);
             mContext.sendBroadcast(intent);
         } else {
@@ -1084,13 +1084,13 @@ public class Utils {
 
             Intent shortcutIntent = new Intent(mContext, SplashActivity.class);
             shortcutIntent.setAction(Intent.ACTION_VIEW);
-            shortcutIntent.setData(Uri.parse(document.getFileUri()));
+            shortcutIntent.setData(Uri.parse(document.getFileUri_DocModel()));
 
-            File file = new File(document.getFileUri());
-            ShortcutInfo shortcutInfo = new ShortcutInfo.Builder(mContext, document.getFileName())
+            File file = new File(document.getFileUri_DocModel());
+            ShortcutInfo shortcutInfo = new ShortcutInfo.Builder(mContext, document.getFileName_DocModel())
                     .setShortLabel(file.getName())
                     .setLongLabel(file.getPath())
-                    .setIcon(Icon.createWithResource(mContext, document.getSrcImage()))
+                    .setIcon(Icon.createWithResource(mContext, document.getSrcImage_DocModel()))
                     .setIntent(shortcutIntent)
                     .build();
 

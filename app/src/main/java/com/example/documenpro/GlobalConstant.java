@@ -3,9 +3,9 @@ package com.example.documenpro;
 import android.os.Environment;
 import android.provider.MediaStore;
 
-import com.example.documenpro.model.ColorModel;
-import com.example.documenpro.model.Language;
-import com.example.documenpro.model.Tools;
+import com.example.documenpro.model_reader.CodeColorModel;
+import com.example.documenpro.model_reader.LanguageModel;
+import com.example.documenpro.model_reader.ToolsModel;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -124,96 +124,96 @@ public class GlobalConstant {
 
     public static String TOOL_TYPE = "tool_type";
 
-    public static ArrayList<Language> createArrayLanguage() {
-        ArrayList<Language> arrayList = new ArrayList<>();
-        arrayList.add(new Language("en", "English", R.drawable.flag_en));
-        arrayList.add(new Language("vi", "Tiếng Việt", R.drawable.flag_vi));
-        arrayList.add(new Language("de", "Deutsch", R.drawable.flag_de));
-        arrayList.add(new Language("in", "Indonesia", R.drawable.flag_in));
-        arrayList.add(new Language("it", "Italiano", R.drawable.flag_it));
-        arrayList.add(new Language("ja", "日本語", R.drawable.flag_ja));
-        arrayList.add(new Language("ko", "한국어", R.drawable.flag_ko));
-        arrayList.add(new Language("pt", "Português", R.drawable.flag_pt));
-        arrayList.add(new Language("ru", "Русский", R.drawable.flag_ru));
-        arrayList.add(new Language("ar", "عربي", R.drawable.flag_ar));
-        arrayList.add(new Language("cs", "čeština", R.drawable.flag_cs));
-        arrayList.add(new Language("es", "Español", R.drawable.flag_es));
-        arrayList.add(new Language("hi", "हिंदी", R.drawable.flag_hi));
-        arrayList.add(new Language("pl", "Język polski", R.drawable.flag_pl));
-        arrayList.add(new Language("ro", "Română", R.drawable.flag_ro));
-        arrayList.add(new Language("sv", "Svenska", R.drawable.flag_sv));
-        arrayList.add(new Language("th", "แบบไทย", R.drawable.flag_th));
+    public static ArrayList<LanguageModel> createArrayLanguage() {
+        ArrayList<LanguageModel> arrayList = new ArrayList<>();
+        arrayList.add(new LanguageModel("en", "English", R.drawable.flag_en));
+        arrayList.add(new LanguageModel("vi", "Tiếng Việt", R.drawable.flag_vi));
+        arrayList.add(new LanguageModel("de", "Deutsch", R.drawable.flag_de));
+        arrayList.add(new LanguageModel("in", "Indonesia", R.drawable.flag_in));
+        arrayList.add(new LanguageModel("it", "Italiano", R.drawable.flag_it));
+        arrayList.add(new LanguageModel("ja", "日本語", R.drawable.flag_ja));
+        arrayList.add(new LanguageModel("ko", "한국어", R.drawable.flag_ko));
+        arrayList.add(new LanguageModel("pt", "Português", R.drawable.flag_pt));
+        arrayList.add(new LanguageModel("ru", "Русский", R.drawable.flag_ru));
+        arrayList.add(new LanguageModel("ar", "عربي", R.drawable.flag_ar));
+        arrayList.add(new LanguageModel("cs", "čeština", R.drawable.flag_cs));
+        arrayList.add(new LanguageModel("es", "Español", R.drawable.flag_es));
+        arrayList.add(new LanguageModel("hi", "हिंदी", R.drawable.flag_hi));
+        arrayList.add(new LanguageModel("pl", "Język polski", R.drawable.flag_pl));
+        arrayList.add(new LanguageModel("ro", "Română", R.drawable.flag_ro));
+        arrayList.add(new LanguageModel("sv", "Svenska", R.drawable.flag_sv));
+        arrayList.add(new LanguageModel("th", "แบบไทย", R.drawable.flag_th));
         return arrayList;
     }
 
-    public static ArrayList<ColorModel> getColorDrawList() {
+    public static ArrayList<CodeColorModel> getColorDrawList() {
 
-        ArrayList<ColorModel> arrayList = new ArrayList<>();
-        arrayList.add(new ColorModel(R.drawable.bg_color_1, "#000000", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_2, "#ffffff", true));
-        arrayList.add(new ColorModel(R.drawable.bg_color_3, "#888888", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_4, "#fe0000", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_5, "#00f402", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_6, "#1f20fb", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_7, "#ff00aa", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_8, "#00effe", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_9, "#ff5c02", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_10, "#ffc44e", false));
-
-
-        return arrayList;
-    }
-
-    public static ArrayList<ColorModel> getColorTextList() {
-
-        ArrayList<ColorModel> arrayList = new ArrayList<>();
-        arrayList.add(new ColorModel(R.drawable.bg_color_1, "#000000", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_2, "#ffffff", true));
-        arrayList.add(new ColorModel(R.drawable.bg_color_3, "#888888", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_4, "#fe0000", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_5, "#00f402", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_6, "#1f20fb", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_7, "#ff00aa", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_8, "#00effe", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_9, "#ff5c02", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_10, "#ffc44e", false));
+        ArrayList<CodeColorModel> arrayList = new ArrayList<>();
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_1, "#000000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_2, "#ffffff", true));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_3, "#888888", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_4, "#fe0000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_5, "#00f402", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_6, "#1f20fb", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_7, "#ff00aa", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_8, "#00effe", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_9, "#ff5c02", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_10, "#ffc44e", false));
 
 
         return arrayList;
     }
 
-    public static ArrayList<ColorModel> getColorBgList() {
+    public static ArrayList<CodeColorModel> getColorTextList() {
 
-        ArrayList<ColorModel> arrayList = new ArrayList<>();
-        arrayList.add(new ColorModel(R.drawable.bg_color_tran, "transparent", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_1, "#000000", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_2, "#ffffff", true));
-        arrayList.add(new ColorModel(R.drawable.bg_color_3, "#888888", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_4, "#fe0000", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_5, "#00f402", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_6, "#1f20fb", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_7, "#ff00aa", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_8, "#00effe", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_9, "#ff5c02", false));
-        arrayList.add(new ColorModel(R.drawable.bg_color_10, "#ffc44e", false));
+        ArrayList<CodeColorModel> arrayList = new ArrayList<>();
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_1, "#000000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_2, "#ffffff", true));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_3, "#888888", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_4, "#fe0000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_5, "#00f402", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_6, "#1f20fb", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_7, "#ff00aa", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_8, "#00effe", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_9, "#ff5c02", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_10, "#ffc44e", false));
 
 
         return arrayList;
     }
 
-    public static ArrayList<Tools> setToolsList() {
-        ArrayList<Tools> arrayList = new ArrayList<>();
+    public static ArrayList<CodeColorModel> getColorBgList() {
 
-        arrayList.add(new Tools(R.string.tool_tittle_your_pdf, R.drawable.ic_tools_your_pdf, GlobalConstant.TOOL_YOUR_PDF, 12));
-        arrayList.add(new Tools(R.string.tool_tittle_merge, R.drawable.ic_tools_merge, GlobalConstant.TOOL_MERGE, 12));
-        arrayList.add(new Tools(R.string.tool_tittle_compress, R.drawable.ic_tools_compress, GlobalConstant.TOOL_COMPRESS, 12));
-        arrayList.add(new Tools(R.string.tool_tittle_split, R.drawable.ic_tools_split, GlobalConstant.TOOL_SPLIT, 0));
+        ArrayList<CodeColorModel> arrayList = new ArrayList<>();
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_tran, "transparent", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_1, "#000000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_2, "#ffffff", true));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_3, "#888888", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_4, "#fe0000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_5, "#00f402", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_6, "#1f20fb", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_7, "#ff00aa", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_8, "#00effe", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_9, "#ff5c02", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color_10, "#ffc44e", false));
+
+
+        return arrayList;
+    }
+
+    public static ArrayList<ToolsModel> setToolsList() {
+        ArrayList<ToolsModel> arrayList = new ArrayList<>();
+
+        arrayList.add(new ToolsModel(R.string.tool_tittle_your_pdf, R.drawable.ic_tools_your_pdf, GlobalConstant.TOOL_YOUR_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_merge, R.drawable.ic_tools_merge, GlobalConstant.TOOL_MERGE, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_compress, R.drawable.ic_tools_compress, GlobalConstant.TOOL_COMPRESS, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_split, R.drawable.ic_tools_split, GlobalConstant.TOOL_SPLIT, 0));
 //        arrayList.add(new Tools(R.string.tool_tittle_browse, R.drawable.ic_tools_browse_pdf, GlobalConstant.TOOL_BROWSE_PDF, 12));
-        arrayList.add(new Tools(R.string.tool_tittle_print, R.drawable.ic_tools_print, GlobalConstant.TOOL_PRINT, 12));
-        arrayList.add(new Tools(R.string.tool_tittle_image_to_pdf, R.drawable.ic_tools_img_to_pdf, GlobalConstant.TOOL_PHOTO_TO_PDF, 12));
-        arrayList.add(new Tools(R.string.tool_tittle_pdf_to_image, R.drawable.ic_pdf_to_image, GlobalConstant.TOOL_PDF_TO_PHOTO, 0));
-        arrayList.add(new Tools(R.string.tool_tittle_lock_pdf, R.drawable.ic_tools_lock, GlobalConstant.TOOL_LOCK_PDF, 12));
-        arrayList.add(new Tools(R.string.tool_tittle_unlock_pdf, R.drawable.ic_tools_unlock, GlobalConstant.TOOL_UNLOCK_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_print, R.drawable.ic_tools_print, GlobalConstant.TOOL_PRINT, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_image_to_pdf, R.drawable.ic_tools_img_to_pdf, GlobalConstant.TOOL_PHOTO_TO_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_pdf_to_image, R.drawable.ic_pdf_to_image, GlobalConstant.TOOL_PDF_TO_PHOTO, 0));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_lock_pdf, R.drawable.ic_tools_lock, GlobalConstant.TOOL_LOCK_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_unlock_pdf, R.drawable.ic_tools_unlock, GlobalConstant.TOOL_UNLOCK_PDF, 12));
         return arrayList;
     }
 }

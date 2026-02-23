@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.OnItemSelectListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.utils.Utils;
 
 import java.util.ArrayList;
@@ -23,13 +23,13 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
 
     public boolean isSelectedAll_FilePicker = false;
     private final OnItemSelectListener listener_FilePicker;
-    private final ArrayList<Document> arrayList_FilePicker;
+    private final ArrayList<DocumentModel> arrayList_FilePicker;
     private final Context mContext_FilePicker;
 
-    public ArrayList<Document> getSelected_FilePicker() {
-        ArrayList<Document> selected_FilePicker = new ArrayList<>();
+    public ArrayList<DocumentModel> getSelected_FilePicker() {
+        ArrayList<DocumentModel> selected_FilePicker = new ArrayList<>();
         for (int i = 0; i < arrayList_FilePicker.size(); i++) {
-            if (arrayList_FilePicker.get(i).isChecked()) {
+            if (arrayList_FilePicker.get(i).isChecked_DocModel()) {
                 selected_FilePicker.add(arrayList_FilePicker.get(i));
             }
         }
@@ -38,7 +38,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
 
     public void setUnSelectedAll_FilePicker() {
         for (int i = 0; i < arrayList_FilePicker.size(); i++) {
-            arrayList_FilePicker.get(i).setChecked(false);
+            arrayList_FilePicker.get(i).setChecked_DocModel(false);
         }
         isSelectedAll_FilePicker = false;
         notifyDataSetChanged();
@@ -46,7 +46,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
 
     public void setSelectedAll_FilePicker() {
         for (int i = 0; i < arrayList_FilePicker.size(); i++) {
-            arrayList_FilePicker.get(i).setChecked(true);
+            arrayList_FilePicker.get(i).setChecked_DocModel(true);
         }
         isSelectedAll_FilePicker = true;
         notifyDataSetChanged();
@@ -63,33 +63,33 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Document document = arrayList_FilePicker.get(position);
+        DocumentModel document = arrayList_FilePicker.get(position);
 
         holder.imgCheck_FilePicker.setImageResource(
-                document.isChecked() ? R.drawable.ic_check : R.drawable.ic_un_check
+                document.isChecked_DocModel() ? R.drawable.ic_check : R.drawable.ic_un_check
         );
 
         holder.tvFileSize_FilePicker.setText(
-                Formatter.formatFileSize(mContext_FilePicker, document.getLength())
+                Formatter.formatFileSize(mContext_FilePicker, document.getLength_DocModel())
         );
 
         holder.tvFileDate_FilePicker.setText(
-                Utils.formatDateToHumanReadable(document.getLastModified())
+                Utils.formatDateToHumanReadable(document.getLastModified_DocModel())
         );
 
-        holder.tvFileName_FilePicker.setText(document.getFileName());
+        holder.tvFileName_FilePicker.setText(document.getFileName_DocModel());
 
         Glide.with(mContext_FilePicker)
-                .load(document.getSrcImage())
+                .load(document.getSrcImage_DocModel())
                 .into(holder.imgIcon_FilePicker);
 
         holder.imgCheck_FilePicker.setClickable(false);
         holder.imgCheck_FilePicker.setFocusable(false);
 
         holder.itemView.setOnClickListener(v -> {
-            document.setChecked(!document.isChecked());
+            document.setChecked_DocModel(!document.isChecked_DocModel());
 
-            if (document.isChecked()) {
+            if (document.isChecked_DocModel()) {
                 holder.imgCheck_FilePicker.setImageResource(R.drawable.ic_check);
             } else {
                 holder.imgCheck_FilePicker.setImageResource(R.drawable.ic_un_check);
@@ -109,7 +109,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
         return new ViewHolder(view);
     }
 
-    public FilePickerAdapter(Context mContext, ArrayList<Document> arrayList, OnItemSelectListener listener) {
+    public FilePickerAdapter(Context mContext, ArrayList<DocumentModel> arrayList, OnItemSelectListener listener) {
         this.listener_FilePicker = listener;
         this.arrayList_FilePicker = arrayList;
         this.mContext_FilePicker = mContext;

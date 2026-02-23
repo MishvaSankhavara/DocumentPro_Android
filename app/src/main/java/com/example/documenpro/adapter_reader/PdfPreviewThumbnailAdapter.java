@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.OnThumbnailClickListener;
-import com.example.documenpro.model.PDFPage;
+import com.example.documenpro.model_reader.PDFPageModel;
 
 import java.util.ArrayList;
 
@@ -21,13 +21,13 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
 
     public boolean isSelectedAll_PdfPreview = false;
     private final OnThumbnailClickListener mListener_PdfPreview;
-    private final ArrayList<PDFPage> arrayList_PdfPreview;
+    private final ArrayList<PDFPageModel> arrayList_PdfPreview;
     public Context mContext_PdfPreview;
 
-    public ArrayList<PDFPage> getSelected_PdfPreview() {
-        ArrayList<PDFPage> selected_PdfPreview = new ArrayList<>();
+    public ArrayList<PDFPageModel> getSelected_PdfPreview() {
+        ArrayList<PDFPageModel> selected_PdfPreview = new ArrayList<>();
         for (int i = 0; i < arrayList_PdfPreview.size(); i++) {
-            if (arrayList_PdfPreview.get(i).isChecked()) {
+            if (arrayList_PdfPreview.get(i).isChecked_PDFPageModel()) {
                 selected_PdfPreview.add(arrayList_PdfPreview.get(i));
             }
         }
@@ -37,7 +37,7 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
     public ArrayList<Integer> getPageNumbers_PdfPreview() {
         ArrayList<Integer> pageNumbers_PdfPreview = new ArrayList<>();
         for (int i = 0; i < arrayList_PdfPreview.size(); i++) {
-            if (arrayList_PdfPreview.get(i).isChecked()) {
+            if (arrayList_PdfPreview.get(i).isChecked_PDFPageModel()) {
                 pageNumbers_PdfPreview.add(i);
             }
         }
@@ -55,7 +55,7 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
 
     public void setUnSelectedAll_PdfPreview() {
         for (int i = 0; i < arrayList_PdfPreview.size(); i++) {
-            arrayList_PdfPreview.get(i).setChecked(false);
+            arrayList_PdfPreview.get(i).setChecked_PDFPageModel(false);
         }
         isSelectedAll_PdfPreview = false;
         notifyDataSetChanged();
@@ -63,7 +63,7 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
 
     public void setSelectedAll_PdfPreview() {
         for (int i = 0; i < arrayList_PdfPreview.size(); i++) {
-            arrayList_PdfPreview.get(i).setChecked(true);
+            arrayList_PdfPreview.get(i).setChecked_PDFPageModel(true);
         }
         isSelectedAll_PdfPreview = true;
         notifyDataSetChanged();
@@ -71,24 +71,24 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PDFPage pdfPage = arrayList_PdfPreview.get(position);
+        PDFPageModel pdfPage = arrayList_PdfPreview.get(position);
 
         Glide.with(mContext_PdfPreview)
-                .load(pdfPage.getThumbnailUri())
+                .load(pdfPage.getThumbnailUri_PDFPageModel())
                 .into(holder.imgThumbnail_PdfPreview);
 
-        holder.tvPageNumber_PdfPreview.setText(String.valueOf(pdfPage.getPageNumber()));
+        holder.tvPageNumber_PdfPreview.setText(String.valueOf(pdfPage.getPageNumber_PDFPageModel()));
 
-        if (pdfPage.isChecked()) {
+        if (pdfPage.isChecked_PDFPageModel()) {
             holder.ivBorder_PdfPreview.setVisibility(View.VISIBLE);
         } else {
             holder.ivBorder_PdfPreview.setVisibility(View.GONE);
         }
 
         holder.itemView.setOnClickListener(view -> {
-            pdfPage.setChecked(!pdfPage.isChecked());
+            pdfPage.setChecked_PDFPageModel(!pdfPage.isChecked_PDFPageModel());
             holder.ivBorder_PdfPreview.setVisibility(
-                    pdfPage.isChecked() ? View.VISIBLE : View.GONE
+                    pdfPage.isChecked_PDFPageModel() ? View.VISIBLE : View.GONE
             );
 
             if (mListener_PdfPreview != null) {
@@ -106,7 +106,7 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
         );
     }
 
-    public PdfPreviewThumbnailAdapter(Context mContext, ArrayList<PDFPage> arrayList, OnThumbnailClickListener listener) {
+    public PdfPreviewThumbnailAdapter(Context mContext, ArrayList<PDFPageModel> arrayList, OnThumbnailClickListener listener) {
         this.mListener_PdfPreview = listener;
         this.arrayList_PdfPreview = arrayList;
         this.mContext_PdfPreview = mContext;

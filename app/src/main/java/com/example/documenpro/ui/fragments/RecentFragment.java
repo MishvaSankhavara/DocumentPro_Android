@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.RecentFilesAdapter;
 import com.example.documenpro.clickListener.DocClickListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
@@ -45,9 +45,9 @@ public class RecentFragment extends Fragment implements DocClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         initViews(view);
-        RecentDataSingleton.getInstance().getRecentLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<Document>>() {
+        RecentDataSingleton.getInstance().getRecentLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<DocumentModel>>() {
             @Override
-            public void onChanged(ArrayList<Document> documents) {
+            public void onChanged(ArrayList<DocumentModel> documents) {
                 // Update RecyclerView with new favorite list
 //                adapter.notifyDataSetChanged();
                 adapter = new RecentFilesAdapter(mActivity, RecentFragment.this);
@@ -87,7 +87,7 @@ public class RecentFragment extends Fragment implements DocClickListener {
     }
 
     @Override
-    public void onDocClick(Document document) {
+    public void onDocClick(DocumentModel document) {
         Utils.openFile(mActivity, document);
 //        Utils.openFileWithAds(mActivity, document, 2);
 //        FullAds.showAds(mActivity, () -> Utils.openFile(mActivity, document));

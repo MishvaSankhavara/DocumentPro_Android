@@ -19,8 +19,8 @@ import com.example.documenpro.database.OnDataUpdatedEvent;
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.clickListener.OnPdfTapListener;
-import com.example.documenpro.model.Document;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.DocumentModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.example.documenpro.utils.Utils;
 
@@ -33,11 +33,11 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
 
     private DatabaseHelper databaseHelper_FileListAdapter2;
     private OnPdfTapListener mListener_FileListAdapter2;
-    private ArrayList<PDFModel> originalData_FileListAdapter2;
+    private ArrayList<PDFReaderModel> originalData_FileListAdapter2;
     private ResultViewerActivity mContext_FileListAdapter2;
 
     public CompactFileListAdapter(ResultViewerActivity mContext,
-                                  ArrayList<PDFModel> originalData,
+                                  ArrayList<PDFReaderModel> originalData,
                                   OnPdfTapListener mListener) {
         this.mContext_FileListAdapter2 = mContext;
         this.originalData_FileListAdapter2 = originalData;
@@ -57,7 +57,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
-        PDFModel pdfModel =
+        PDFReaderModel pdfModel =
                 originalData_FileListAdapter2.get(position);
         holder.bindPdf_FileListAdapter2(pdfModel);
     }
@@ -110,15 +110,15 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                     itemView.findViewById(R.id.img_favorite);
         }
 
-        public void bindPdf_FileListAdapter2(PDFModel pdfModel) {
+        public void bindPdf_FileListAdapter2(PDFReaderModel pdfModel) {
 
-            Document document = new Document();
-            document.setFileUri(pdfModel.getFileUri());
-            document.setFileName(pdfModel.getName());
-            document.setLastModified(pdfModel.getLastModified());
-            document.setLength(pdfModel.getLength());
+            DocumentModel document = new DocumentModel();
+            document.setFileUri_DocModel(pdfModel.getFileUri_PDFModel());
+            document.setFileName_DocModel(pdfModel.getName_PDFModel());
+            document.setLastModified_DocModel(pdfModel.getLastModified_PDFModel());
+            document.setLength_DocModel(pdfModel.getLength_PDFModel());
 
-            if (pdfModel.isProtected()) {
+            if (pdfModel.isProtected_PDFModel()) {
                 lock_line_FileListAdapter2.setVisibility(View.VISIBLE);
                 ivLock_FileListAdapter2.setVisibility(View.VISIBLE);
             } else {
@@ -126,18 +126,18 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                 lock_line_FileListAdapter2.setVisibility(View.GONE);
             }
 
-            tvName_FileListAdapter2.setText(pdfModel.getName());
+            tvName_FileListAdapter2.setText(pdfModel.getName_PDFModel());
             tvDate_FileListAdapter2.setText(
                     Utils.formatDateToHumanReadable(
-                            pdfModel.getLastModified()));
+                            pdfModel.getLastModified_PDFModel()));
 
             tvFileSize_FileListAdapter2.setText(
                     Formatter.formatFileSize(
                             mContext_FileListAdapter2,
-                            pdfModel.getLength()));
+                            pdfModel.getLength_PDFModel()));
 
             if (databaseHelper_FileListAdapter2.isStared_DatabaseHelper(
-                    pdfModel.getFileUri())) {
+                    pdfModel.getFileUri_PDFModel())) {
                 btnFavorite_FileListAdapter2
                         .setImageResource(R.drawable.ic_favorite);
             } else {
@@ -154,18 +154,18 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
             btnFavorite_FileListAdapter2.setOnClickListener(v -> {
 
                 if (databaseHelper_FileListAdapter2.isStared_DatabaseHelper(
-                        pdfModel.getFileUri())) {
+                        pdfModel.getFileUri_PDFModel())) {
 
                     btnFavorite_FileListAdapter2
                             .setImageResource(R.drawable.ic_favorite_unselect);
 
                     databaseHelper_FileListAdapter2
-                            .removeStaredDocument_DatabaseHelper(pdfModel.getFileUri());
+                            .removeStaredDocument_DatabaseHelper(pdfModel.getFileUri_PDFModel());
 
                 } else {
 
                     databaseHelper_FileListAdapter2
-                            .addStaredDocument_DatabaseHelper(pdfModel.getFileUri());
+                            .addStaredDocument_DatabaseHelper(pdfModel.getFileUri_PDFModel());
 
                     btnFavorite_FileListAdapter2
                             .setImageResource(R.drawable.ic_favorite);
@@ -183,13 +183,13 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                 public void onRenameListener(String newName) {
 
                                     final File fileOldPdfName =
-                                            new File(pdfModel.getFileUri());
+                                            new File(pdfModel.getFileUri_PDFModel());
 
                                     final String replaceName =
-                                            pdfModel.getFileUri()
+                                            pdfModel.getFileUri_PDFModel()
                                                     .replace(
                                                             Utils.removeExtension(
-                                                                    pdfModel.getName()),
+                                                                    pdfModel.getName_PDFModel()),
                                                             newName);
 
                                     if (fileOldPdfName.renameTo(
@@ -200,7 +200,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
 
                                             databaseHelper_FileListAdapter2
                                                     .updateStarred_DatabaseHelper(
-                                                            pdfModel.getFileUri(),
+                                                            pdfModel.getFileUri_PDFModel(),
                                                             replaceName);
 
                                             EventBus.getDefault()
@@ -212,7 +212,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
 
                                             databaseHelper_FileListAdapter2
                                                     .updateHistory_DatabaseHelper(
-                                                            pdfModel.getFileUri(),
+                                                            pdfModel.getFileUri_PDFModel(),
                                                             replaceName);
 
                                             EventBus.getDefault()
@@ -221,11 +221,11 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
 
                                         File newFile = new File(replaceName);
 
-                                        PDFModel documentNew = new PDFModel();
-                                        documentNew.setName(newFile.getName());
-                                        documentNew.setFileUri(newFile.getAbsolutePath());
-                                        documentNew.setLength(newFile.length());
-                                        documentNew.setLastModified(newFile.lastModified());
+                                        PDFReaderModel documentNew = new PDFReaderModel();
+                                        documentNew.setName_PDFModel(newFile.getName());
+                                        documentNew.setFileUri_PDFModel(newFile.getAbsolutePath());
+                                        documentNew.setLength_PDFModel(newFile.length());
+                                        documentNew.setLastModified_PDFModel(newFile.lastModified());
 
                                         int position = getAdapterPosition();
 
@@ -252,7 +252,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                 public void onDeleteListener() {
 
                                     File fileToDelete =
-                                            new File(pdfModel.getFileUri());
+                                            new File(pdfModel.getFileUri_PDFModel());
 
                                     if (fileToDelete.exists()) {
 
@@ -260,24 +260,24 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
 
                                             MediaScannerConnection.scanFile(
                                                     mContext_FileListAdapter2,
-                                                    new String[]{pdfModel.getFileUri()},
+                                                    new String[]{pdfModel.getFileUri_PDFModel()},
                                                     null,
                                                     null);
 
                                             if (databaseHelper_FileListAdapter2.isStared_DatabaseHelper(
-                                                    pdfModel.getFileUri())) {
+                                                    pdfModel.getFileUri_PDFModel())) {
 
                                                 databaseHelper_FileListAdapter2
                                                         .removeStaredDocument_DatabaseHelper(
-                                                                pdfModel.getFileUri());
+                                                                pdfModel.getFileUri_PDFModel());
                                             }
 
                                             if (databaseHelper_FileListAdapter2.isRecent_DatabaseHelper(
-                                                    pdfModel.getFileUri())) {
+                                                    pdfModel.getFileUri_PDFModel())) {
 
                                                 databaseHelper_FileListAdapter2
                                                         .removeRecentDocument_DatabaseHelper(
-                                                                pdfModel.getFileUri());
+                                                                pdfModel.getFileUri_PDFModel());
                                             }
 
                                             int position = getAdapterPosition();

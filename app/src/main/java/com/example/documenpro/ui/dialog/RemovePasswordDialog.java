@@ -18,7 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.PasswordClickListener;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.utils.ViewUtils;
 import com.tom_roush.pdfbox.pdmodel.PDDocument;
 
@@ -38,10 +38,10 @@ public class RemovePasswordDialog extends Dialog {
     public TextView tvDes;
 
     private final PasswordClickListener mListener;
-    private final PDFModel mPdfMode;
+    private final PDFReaderModel mPdfMode;
 
 
-    public RemovePasswordDialog(@NonNull Context context, PDFModel pdfModel, PasswordClickListener listener) {
+    public RemovePasswordDialog(@NonNull Context context, PDFReaderModel pdfModel, PasswordClickListener listener) {
         super(context);
         setContentView(R.layout.dialog_enter_password_2);
         this.mListener = listener;
@@ -80,7 +80,7 @@ public class RemovePasswordDialog extends Dialog {
             PDDocument pdDocument;
             if (edtPassword.getText() != null && edtPassword.getText().length() > 0) {
                 try {
-                    pdDocument = PDDocument.load(new File(mPdfMode.getAbsolutePath()), edtPassword.getText().toString());
+                    pdDocument = PDDocument.load(new File(mPdfMode.getAbsolutePath_PDFModel()), edtPassword.getText().toString());
                     pdDocument.close();
                     if (mListener != null) {
                         mListener.onOkClickListener(edtPassword.getText().toString());

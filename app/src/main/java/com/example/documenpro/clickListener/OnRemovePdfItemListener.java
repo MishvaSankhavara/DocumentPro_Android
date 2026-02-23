@@ -1,9 +1,9 @@
 package com.example.documenpro.clickListener;
 
 
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 
 public interface OnRemovePdfItemListener {
-    void removePdfItemListener(PDFModel pdfModelListener, int mPositionListener);
+    void removePdfItemListener(PDFReaderModel pdfModelListener, int mPositionListener);
 
 }

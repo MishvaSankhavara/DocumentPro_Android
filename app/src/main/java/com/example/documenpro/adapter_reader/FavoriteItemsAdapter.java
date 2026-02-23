@@ -25,7 +25,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.clickListener.MoreClickListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.utils.Utils;
 import com.example.documenpro.viewmodel.FavoriteDataSingleton;
 import com.example.documenpro.viewmodel.RecentDataSingleton;
@@ -37,7 +37,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
     private final DocClickListener listener_FavoriteItems;
     private DatabaseHelper databaseHelper_FavoriteItems;
-    private final ArrayList<Document> arrayList_FavoriteItems;
+    private final ArrayList<DocumentModel> arrayList_FavoriteItems;
     private final Activity mContext_FavoriteItems;
 
     public FavoriteItemsAdapter(Activity mContext,
@@ -63,21 +63,21 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
 
-        Document document = arrayList_FavoriteItems.get(position);
+        DocumentModel document = arrayList_FavoriteItems.get(position);
 
-        holder.tvFileName_FavoriteItems.setText(document.getFileName());
+        holder.tvFileName_FavoriteItems.setText(document.getFileName_DocModel());
         holder.tvFileDate_FavoriteItems.setText(
-                Utils.formatDateToHumanReadable(document.getLastModified()));
+                Utils.formatDateToHumanReadable(document.getLastModified_DocModel()));
         holder.tvFileSize_FavoriteItems.setText(
                 Formatter.formatFileSize(
                         mContext_FavoriteItems,
-                        document.getLength()));
+                        document.getLength_DocModel()));
 
         Glide.with(mContext_FavoriteItems)
-                .load(document.getSrcImage())
+                .load(document.getSrcImage_DocModel())
                 .into(holder.imgIcon_FavoriteItems);
 
-        if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(document.getFileUri())) {
+        if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(document.getFileUri_DocModel())) {
             holder.imgFavorite_FavoriteItems.setFrame(50);
         } else {
             holder.imgFavorite_FavoriteItems.setFrame(0);
@@ -99,11 +99,11 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                         public void onRenameListener(String newName) {
 
                             final File fileOldPdfName =
-                                    new File(document.getFileUri());
+                                    new File(document.getFileUri_DocModel());
 
                             final String replaceName =
-                                    document.getFileUri().replace(
-                                            Utils.removeExtension(document.getFileName()),
+                                    document.getFileUri_DocModel().replace(
+                                            Utils.removeExtension(document.getFileName_DocModel()),
                                             newName);
 
                             if (fileOldPdfName.renameTo(new File(replaceName))) {
@@ -112,7 +112,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                                         fileOldPdfName.getAbsolutePath())) {
 
                                     databaseHelper_FavoriteItems.updateHistory_DatabaseHelper(
-                                            document.getFileUri(),
+                                            document.getFileUri_DocModel(),
                                             replaceName);
 
                                     RecentDataSingleton.getInstance()
@@ -120,17 +120,17 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                                 }
 
                                 databaseHelper_FavoriteItems.updateStaredDocument_DatabaseHelper(
-                                        document.getFileUri(),
+                                        document.getFileUri_DocModel(),
                                         replaceName);
 
                                 File newFile = new File(replaceName);
 
-                                Document documentNew = new Document();
-                                documentNew.setFileName(newFile.getName());
-                                documentNew.setFileUri(newFile.getAbsolutePath());
-                                documentNew.setLength(newFile.length());
-                                documentNew.setSrcImage(getDocumentSrc(newFile));
-                                documentNew.setLastModified(newFile.lastModified());
+                                DocumentModel documentNew = new DocumentModel();
+                                documentNew.setFileName_DocModel(newFile.getName());
+                                documentNew.setFileUri_DocModel(newFile.getAbsolutePath());
+                                documentNew.setLength_DocModel(newFile.length());
+                                documentNew.setSrcImage_DocModel(getDocumentSrc(newFile));
+                                documentNew.setLastModified_DocModel(newFile.lastModified());
 
                                 int pos = holder.getAdapterPosition();
 
@@ -157,7 +157,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                         public void onDeleteListener() {
 
                             File fileToDelete =
-                                    new File(document.getFileUri());
+                                    new File(document.getFileUri_DocModel());
 
                             if (fileToDelete.exists()) {
 
@@ -165,25 +165,25 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
                                     MediaScannerConnection.scanFile(
                                             mContext_FavoriteItems,
-                                            new String[]{document.getFileUri()},
+                                            new String[]{document.getFileUri_DocModel()},
                                             null,
                                             null);
 
                                     if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(
-                                            document.getFileUri())) {
+                                            document.getFileUri_DocModel())) {
 
                                         databaseHelper_FavoriteItems.removeStaredDocument_DatabaseHelper(
-                                                document.getFileUri());
+                                                document.getFileUri_DocModel());
 
                                         FavoriteDataSingleton.getInstance()
                                                 .removeFavoriteDocument(document);
                                     }
 
                                     if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(
-                                            document.getFileUri())) {
+                                            document.getFileUri_DocModel())) {
 
                                         databaseHelper_FavoriteItems.removeRecentDocument_DatabaseHelper(
-                                                document.getFileUri());
+                                                document.getFileUri_DocModel());
                                     }
 
                                     int pos = holder.getAdapterPosition();
@@ -209,14 +209,14 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
         holder.btnFavorite_FavoriteItems.setOnClickListener(v -> {
 
-            if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(document.getFileUri())) {
+            if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(document.getFileUri_DocModel())) {
 
                 holder.imgFavorite_FavoriteItems.setFrame(0);
                 arrayList_FavoriteItems.remove(document);
                 notifyItemRemoved(holder.getAdapterPosition());
 
                 databaseHelper_FavoriteItems.removeStaredDocument_DatabaseHelper(
-                        document.getFileUri());
+                        document.getFileUri_DocModel());
 
                 if (arrayList_FavoriteItems.isEmpty()) {
                     notifyDataSetChanged();
@@ -225,7 +225,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
             } else {
 
                 databaseHelper_FavoriteItems.addStaredDocument_DatabaseHelper(
-                        document.getFileUri());
+                        document.getFileUri_DocModel());
 
                 holder.imgFavorite_FavoriteItems.playAnimation();
 
@@ -246,7 +246,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                         });
             }
 
-            if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(document.getFileUri())) {
+            if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(document.getFileUri_DocModel())) {
                 RecentDataSingleton.getInstance()
                         .addRecentDocument(document);
             }

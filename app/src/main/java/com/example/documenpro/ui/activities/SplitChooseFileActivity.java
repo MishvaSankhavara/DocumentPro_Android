@@ -34,8 +34,8 @@ import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.clickListener.OnThumbnailClickListener;
-import com.example.documenpro.model.PDFModel;
-import com.example.documenpro.model.PDFPage;
+import com.example.documenpro.model_reader.PDFReaderModel;
+import com.example.documenpro.model_reader.PDFPageModel;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
@@ -55,10 +55,10 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     private Toolbar toolbar;
     private EmptyRecyclerView recyclerView;
     private PdfPreviewThumbnailAdapter adapter;
-    private final ArrayList<PDFPage> listPdfPages = new ArrayList<>();
+    private final ArrayList<PDFPageModel> listPdfPages = new ArrayList<>();
     private String strAllPdfPictureDir;
     private String pdfDirAsFileName;
-    PDFModel pdfModel;
+    PDFReaderModel pdfModel;
     private String fileName;
     private boolean finishLoad = false;
 
@@ -80,10 +80,10 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
         initViews();
         Intent intent = getIntent();
         if (intent != null) {
-            pdfModel = (PDFModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+            pdfModel = (PDFReaderModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
             if (pdfModel != null) {
-                fileName = pdfModel.getName();
-                String pdfSavedFile = pdfModel.getAbsolutePath();
+                fileName = pdfModel.getName_PDFModel();
+                String pdfSavedFile = pdfModel.getAbsolutePath_PDFModel();
                 Uri uri = Uri.fromFile(new File(pdfSavedFile));
                 new LoadThumbnailPdf(this).execute(uri.toString());
             }
@@ -265,7 +265,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
                                         weakReference.get().getString(R.string.toast_failed_low_memory),
                                         Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
-                                weakReference.get().listPdfPages.add(new PDFPage(i3, Uri.fromFile(new File(str))));
+                                weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                                 fileOutputStream.close();
                             }
                         } catch (OutOfMemoryError e3) {
@@ -277,10 +277,10 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
                                     weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG)
                                     .show();
                             e.printStackTrace();
-                            weakReference.get().listPdfPages.add(new PDFPage(i3, Uri.fromFile(new File(str))));
+                            weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                             fileOutputStream.close();
                         }
-                        weakReference.get().listPdfPages.add(new PDFPage(i3, Uri.fromFile(new File(str))));
+                        weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                         fileOutputStream.close();
                         i2 = i3;
                         pageCount = i;

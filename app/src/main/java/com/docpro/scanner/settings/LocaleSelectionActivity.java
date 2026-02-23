@@ -67,15 +67,15 @@ public class LocaleSelectionActivity extends BaseActivity {
                         SharedPreferenceUtils utils = SharedPreferenceUtils.getInstance(LocaleSelectionActivity.this);
                         utils.setBoolean(GlobalConstant.LANGUAGE_SET, true);
                         utils.setString(GlobalConstant.LANGUAGE_NAME,
-                                GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getNameLanguage());
+                                GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getNameLanguage_LanModel());
                         utils.setString(GlobalConstant.LANGUAGE_KEY,
-                                GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage());
+                                GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel());
                         utils.setInt(GlobalConstant.LANGUAGE_KEY_NUMBER, selectedLocaleIndex);
 
                         Intent restartIntent = new Intent(LocaleSelectionActivity.this, OnBoardActivity.class);
                         restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                        String key = GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage();
+                        String key = GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel();
                         MultiLanguages.setAppLanguage(context, new Locale(key));
 
                         startActivity(restartIntent);

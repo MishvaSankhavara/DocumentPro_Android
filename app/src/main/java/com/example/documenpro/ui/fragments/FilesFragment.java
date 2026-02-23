@@ -28,7 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SelectActivity;
 import com.example.documenpro.ui.customviews.FileTypeItem;
@@ -52,11 +52,11 @@ public class FilesFragment extends Fragment implements View.OnClickListener {
     private FileTypeItem btnWord;
     private FileTypeItem btnExcel;
     private FileTypeItem btnPpt;
-    ArrayList<Document> txtFile;
-    ArrayList<Document> excelFile;
-    ArrayList<Document> pdfFile;
-    ArrayList<Document> wordFile;
-    ArrayList<Document> pptFile;
+    ArrayList<DocumentModel> txtFile;
+    ArrayList<DocumentModel> excelFile;
+    ArrayList<DocumentModel> pdfFile;
+    ArrayList<DocumentModel> wordFile;
+    ArrayList<DocumentModel> pptFile;
     private int mPosition;
     private final Executor executor = Executors.newSingleThreadExecutor();
 

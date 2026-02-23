@@ -23,7 +23,7 @@ import com.google.android.gms.ads.appopen.AppOpenAd;
 import com.hjq.language.MultiLanguages;
 import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.advertisement.AdConsentManager;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.utils.AdsUtils;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class MyApplication extends Application implements Application.ActivityLi
     private AppOpenAdManager appOpenAdManager;
     private Activity currentActivity;
     private static MyApplication mInstance;
-    private static ArrayList<PDFModel> arrayListAll;
-    private static ArrayList<PDFModel> arrayListMerge;
+    private static ArrayList<PDFReaderModel> arrayListAll;
+    private static ArrayList<PDFReaderModel> arrayListMerge;
     private static ArrayList<Integer> arraySplit;
     private static ArrayList<String> arrayPhoto;
 
@@ -86,19 +86,19 @@ public class MyApplication extends Application implements Application.ActivityLi
 
     }
 
-    public void setAllPdfList(ArrayList<PDFModel> arrayList) {
+    public void setAllPdfList(ArrayList<PDFReaderModel> arrayList) {
         arrayListAll = arrayList;
     }
 
-    public ArrayList<PDFModel> getArrayListAll() {
+    public ArrayList<PDFReaderModel> getArrayListAll() {
         return arrayListAll;
     }
 
-    public void setMergePdfList(ArrayList<PDFModel> arrayList) {
+    public void setMergePdfList(ArrayList<PDFReaderModel> arrayList) {
         arrayListMerge = arrayList;
     }
 
-    public ArrayList<PDFModel> getArrayListMerge() {
+    public ArrayList<PDFReaderModel> getArrayListMerge() {
         return arrayListMerge;
     }
 

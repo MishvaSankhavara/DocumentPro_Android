@@ -20,7 +20,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.MergeFileSelectionAdapter;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
 
@@ -34,7 +34,7 @@ public class MergeChooseFileActivity extends AppCompatActivity {
     private MergeFileSelectionAdapter adapter;
     private Toolbar toolbar;
 
-    private ArrayList<PDFModel> arrayList;
+    private ArrayList<PDFReaderModel> arrayList;
 
     private final Executor executor = Executors.newSingleThreadExecutor();
 

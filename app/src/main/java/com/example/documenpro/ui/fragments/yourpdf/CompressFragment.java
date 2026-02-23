@@ -17,7 +17,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.CompactFileListAdapter;
 import com.example.documenpro.clickListener.OnPdfTapListener;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
@@ -30,7 +30,7 @@ public class CompressFragment extends Fragment implements OnPdfTapListener {
 
     private ResultViewerActivity mActivity;
     private LottieAnimationView loadingView;
-    private ArrayList<PDFModel> arrayList;
+    private ArrayList<PDFReaderModel> arrayList;
     EmptyRecyclerView recyclerView;
     CompactFileListAdapter adapter;
 
@@ -75,9 +75,9 @@ public class CompressFragment extends Fragment implements OnPdfTapListener {
     }
 
     @Override
-    public void onPdfTap(PDFModel pdfModel) {
+    public void onPdfTap(PDFReaderModel pdfModel) {
         // Utils.openPDF(mActivity, pdfModel);
-        File file = new File(pdfModel.getAbsolutePath());
+        File file = new File(pdfModel.getAbsolutePath_PDFModel());
         Utils.openFile(mActivity, file);
     }
 

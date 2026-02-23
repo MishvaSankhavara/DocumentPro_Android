@@ -29,7 +29,7 @@ import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.clickListener.SortingListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
 
@@ -44,7 +44,7 @@ public class ListFileActivity extends BaseActivity implements DocClickListener, 
     private LottieAnimationView loadingView;
     Toolbar toolbar;
 
-    private ArrayList<Document> itemsList;
+    private ArrayList<DocumentModel> itemsList;
     private FileListAdapter adapter;
     private ConstraintLayout clMain;
     private String codeType;
@@ -183,7 +183,7 @@ public class ListFileActivity extends BaseActivity implements DocClickListener, 
     }
 
     @Override
-    public void onDocClick(Document document) {
+    public void onDocClick(DocumentModel document) {
 //        Utils.openFile(this, document);
         AdManager.showAds_AdManager(this, () -> Utils.openFile(this, document));
 
@@ -192,37 +192,37 @@ public class ListFileActivity extends BaseActivity implements DocClickListener, 
 
     @Override
     public void onSortingDateOldest() {
-        itemsList.sort(Document.sortDateAscendingComparator);
+        itemsList.sort(DocumentModel.sortDateAscendingComparator_DocModel);
         adapter.setData(itemsList);
     }
 
     @Override
     public void onSortingByDateNewest() {
-        itemsList.sort(Document.sortDateDescendingComparator);
+        itemsList.sort(DocumentModel.sortDateDescendingComparator_DocModel);
         adapter.setData(itemsList);
     }
 
     @Override
     public void onSortingAtoZ() {
-        itemsList.sort(Document.sortNameAZComparator);
+        itemsList.sort(DocumentModel.sortNameAZComparator_DocModel);
         adapter.setData(itemsList);
     }
 
     @Override
     public void onSortingZtoA() {
-        itemsList.sort(Document.sortNameZAComparator);
+        itemsList.sort(DocumentModel.sortNameZAComparator_DocModel);
         adapter.setData(itemsList);
     }
 
     @Override
     public void onSortingFileSizeUp() {
-        itemsList.sort(Document.sortFileSizeAscendingComparator);
+        itemsList.sort(DocumentModel.sortFileSizeAscendingComparator_DocModel);
         adapter.setData(itemsList);
     }
 
     @Override
     public void onSortingFileSizeDown() {
-        itemsList.sort(Document.sortFileSizeDescendingComparator);
+        itemsList.sort(DocumentModel.sortFileSizeDescendingComparator_DocModel);
         adapter.setData(itemsList);
     }
 }

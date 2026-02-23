@@ -14,7 +14,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.RenameDialogClickListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
 
@@ -22,12 +22,12 @@ import java.io.File;
 
 public class MoreDialog extends Dialog implements View.OnClickListener {
 
-    Document mDocument;
+    DocumentModel mDocument;
     Activity mContext;
     boolean mIsRecent;
     MoreClickListener mListener;
 
-    public MoreDialog(@NonNull Activity context, Document document, boolean isRecent, MoreClickListener listener) {
+    public MoreDialog(@NonNull Activity context, DocumentModel document, boolean isRecent, MoreClickListener listener) {
         super(context);
         this.mDocument = document;
         this.mContext = context;
@@ -38,10 +38,10 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
         TextView tvFileDate = findViewById(R.id.tvFileDate);
         TextView tvFileSize = findViewById(R.id.tvFileSize);
         AppCompatImageView imgIcon = findViewById(R.id.iv_icon);
-        tvName.setText(mDocument.getFileName());
-        imgIcon.setImageResource(mDocument.getSrcImage());
-        tvFileDate.setText(Utils.formatDateToHumanReadable(mDocument.getLastModified()));
-        tvFileSize.setText(Formatter.formatFileSize(mContext, mDocument.getLength()));
+        tvName.setText(mDocument.getFileName_DocModel());
+        imgIcon.setImageResource(mDocument.getSrcImage_DocModel());
+        tvFileDate.setText(Utils.formatDateToHumanReadable(mDocument.getLastModified_DocModel()));
+        tvFileSize.setText(Formatter.formatFileSize(mContext, mDocument.getLength_DocModel()));
         if (isRecent) {
             findViewById(R.id.ll_remove_from_recent).setVisibility(View.VISIBLE);
         } else {
@@ -59,7 +59,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         int idView = v.getId();
         if (idView == R.id.ll_rename) {
-            DialogUtils.showRenameDialog(mContext, mDocument.getFileName(), new RenameDialogClickListener() {
+            DialogUtils.showRenameDialog(mContext, mDocument.getFileName_DocModel(), new RenameDialogClickListener() {
                 @Override
                 public void onRenameDialogListener(String newName) {
                     if (mListener != null) {
@@ -69,7 +69,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
             });
             dismiss();
         } else if (idView == R.id.ll_share) {
-            Utils.shareFile(mContext, new File(mDocument.getFileUri()));
+            Utils.shareFile(mContext, new File(mDocument.getFileUri_DocModel()));
             dismiss();
         } else if (idView == R.id.ll_info) {
             DialogUtils.showInformationDialog(mContext, mDocument);

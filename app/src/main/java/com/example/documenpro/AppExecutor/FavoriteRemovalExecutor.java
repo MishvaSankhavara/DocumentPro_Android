@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.database.DatabaseHelper;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.SelectActivity;
 import com.example.documenpro.ui.dialog.ProgressDialog;
 
@@ -69,14 +69,14 @@ public class FavoriteRemovalExecutor {
 
             weakReference_removeFav.get().runOnUiThread(this::showProgressDialog_removeFav);
 
-            ArrayList<Document> arrayListRemove_removeFav = weakReference_removeFav.get().adapter.getSelected_FilePicker();
+            ArrayList<DocumentModel> arrayListRemove_removeFav = weakReference_removeFav.get().adapter.getSelected_FilePicker();
 
             for (int i = 0; i < arrayListRemove_removeFav.size(); i++) {
-                Document pdfModel_removeFav = arrayListRemove_removeFav.get(i);
+                DocumentModel pdfModel_removeFav = arrayListRemove_removeFav.get(i);
 
-                if (DatabaseHelper.getInstance(weakReference_removeFav.get()).isStared_DatabaseHelper(pdfModel_removeFav.getFileUri())) {
+                if (DatabaseHelper.getInstance(weakReference_removeFav.get()).isStared_DatabaseHelper(pdfModel_removeFav.getFileUri_DocModel())) {
 
-                    DatabaseHelper.getInstance(weakReference_removeFav.get()).removeStaredDocument_DatabaseHelper(pdfModel_removeFav.getFileUri());
+                    DatabaseHelper.getInstance(weakReference_removeFav.get()).removeStaredDocument_DatabaseHelper(pdfModel_removeFav.getFileUri_DocModel());
                 }
             }
 

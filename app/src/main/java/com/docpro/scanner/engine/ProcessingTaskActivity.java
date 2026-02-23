@@ -21,7 +21,7 @@ import com.example.documenpro.AppExecutor.ImageToPdfConverter;
 import com.example.documenpro.AppExecutor.RemovePasswordExecutor;
 import com.example.documenpro.AppExecutor.SetPasswordManager;
 import com.example.documenpro.AppExecutor.SplitDocExecutor;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -46,7 +46,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
 
     public AppCompatTextView txtCurrentPageStatus;
 
-    public PDFModel finalPdfResult;
+    public PDFReaderModel finalPdfResult;
     public AppCompatImageView btnStopTaskExecutor;
 
     // Aliases for compatibility with old executors
@@ -64,7 +64,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     public TextView tvResult;
     public AppCompatImageView imgThumbnail;
     public TextView tvPageNumber;
-    public PDFModel pdfModelFinal;
+    public PDFReaderModel pdfModelFinal;
 
     public FileCompressionExecutor coreCompressExecutor;
     public ImageToPdfConverter corePhotoToPdfExecutor;
@@ -86,37 +86,37 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         if (taskIntent != null) {
             int taskId = taskIntent.getIntExtra(GlobalConstant.TOOL_TYPE, 1);
             if (taskId == GlobalConstant.TOOL_COMPRESS) {
-                PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 if (model != null) {
-                    coreCompressExecutor = new FileCompressionExecutor(this, model.getAbsolutePath());
+                    coreCompressExecutor = new FileCompressionExecutor(this, model.getAbsolutePath_PDFModel());
                     coreCompressExecutor.executeTask_FileCompression();
                 }
             } else if (taskId == GlobalConstant.TOOL_MERGE) {
                 String name = taskIntent.getStringExtra(GlobalConstant.MERGE_PDF_FILE_NAME);
-                ArrayList<PDFModel> models = MyApplication.getInstance().getArrayListMerge();
+                ArrayList<PDFReaderModel> models = MyApplication.getInstance().getArrayListMerge();
                 ArrayList<String> filePaths = new ArrayList<>();
                 for (int i = 0; i < models.size(); i++) {
-                    filePaths.add(models.get(i).getAbsolutePath());
+                    filePaths.add(models.get(i).getAbsolutePath_PDFModel());
                 }
                 coreMergeExecutor = new PdfMergeManager(this, filePaths, name);
                 coreMergeExecutor.executeTask_PdfMergeManager();
             } else if (taskId == GlobalConstant.TOOL_SPLIT) {
-                PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 if (model != null) {
                     String name = taskIntent.getStringExtra(GlobalConstant.PDF_FILE_NAME);
                     coreSplitExecutor = new SplitDocExecutor(this, name,
-                            MyApplication.getInstance().getArrayListSplit(), model.getAbsolutePath());
+                            MyApplication.getInstance().getArrayListSplit(), model.getAbsolutePath_PDFModel());
                     coreSplitExecutor.executeTask_SplitDoc();
                 }
             } else if (taskId == GlobalConstant.TOOL_LOCK_PDF) {
-                PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 String pass = taskIntent.getStringExtra(GlobalConstant.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
                     coreLockExecutor = new SetPasswordManager(ProcessingTaskActivity.this, pass, model);
                     coreLockExecutor.executeTask_setPW();
                 }
             } else if (taskId == GlobalConstant.TOOL_UNLOCK_PDF) {
-                PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 String pass = taskIntent.getStringExtra(GlobalConstant.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
                     coreUnlockExecutor = new RemovePasswordExecutor(ProcessingTaskActivity.this, pass, model);
@@ -170,12 +170,12 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         btnOpenResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File targetFile = new File(finalPdfResult.getAbsolutePath());
+                File targetFile = new File(finalPdfResult.getAbsolutePath_PDFModel());
                 Utils.openFile(ProcessingTaskActivity.this, targetFile);
             }
         });
         btnShareResult.setOnClickListener(
-                v -> Utils.shareFile(ProcessingTaskActivity.this, new File(finalPdfResult.getFileUri())));
+                v -> Utils.shareFile(ProcessingTaskActivity.this, new File(finalPdfResult.getFileUri_PDFModel())));
     }
 
     @Override

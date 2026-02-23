@@ -30,7 +30,7 @@ import com.example.documenpro.adapter_reader.PhotoSelectionAdapter;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.OnRemovePhotoListener;
 import com.example.documenpro.clickListener.RenameDialogClickListener;
-import com.example.documenpro.model.Photo;
+import com.example.documenpro.model_reader.PhotoModel;
 import com.example.documenpro.photopick.Matisse;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.DialogUtils;
@@ -43,7 +43,7 @@ import java.util.Objects;
 public class MediaSorterActivity extends AppCompatActivity {
     private PhotoSelectionAdapter mediaListAdapter;
 
-    private ArrayList<Photo> photoCollection;
+    private ArrayList<PhotoModel> photoCollection;
 
     private LinearLayout containerTips;
 
@@ -67,7 +67,7 @@ public class MediaSorterActivity extends AppCompatActivity {
         if (incomingIntent != null) {
             List<String> pathsFound = Matisse.obtainPathResult(incomingIntent);
             for (int i = 0; i < pathsFound.size(); i++) {
-                photoCollection.add(new Photo(pathsFound.get(i), i));
+                photoCollection.add(new PhotoModel(pathsFound.get(i), i));
             }
         }
     }
@@ -168,7 +168,7 @@ public class MediaSorterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ArrayList<String> mediaPaths = new ArrayList<>();
                 for (int i = 0; i < photoCollection.size(); i++) {
-                    mediaPaths.add(photoCollection.get(i).getFilePath());
+                    mediaPaths.add(photoCollection.get(i).getFilePath_PhotoModel());
                 }
 
                 String defaultFileName = "Photo2PDF" + System.currentTimeMillis();

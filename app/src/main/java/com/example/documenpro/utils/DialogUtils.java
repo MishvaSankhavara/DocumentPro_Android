@@ -9,8 +9,8 @@ import android.view.Window;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.PasswordClickListener;
 import com.example.documenpro.clickListener.RenameDialogClickListener;
-import com.example.documenpro.model.Document;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.DocumentModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.dialog.ConfirmDialog;
 import com.example.documenpro.ui.dialog.FileProtectedDialog;
 import com.example.documenpro.ui.dialog.InformationDialog;
@@ -46,7 +46,7 @@ public class DialogUtils {
         informationDialog.show();
     }
 
-    public static void showRemovePasswordDialog(Activity mContext, PDFModel pdfModel, PasswordClickListener listener) {
+    public static void showRemovePasswordDialog(Activity mContext, PDFReaderModel pdfModel, PasswordClickListener listener) {
         if (mContext == null) {
             return;
         }
@@ -85,7 +85,7 @@ public class DialogUtils {
         renameDialog.show();
     }
 
-    public static void showInformationDialog(Activity mContext, Document document) {
+    public static void showInformationDialog(Activity mContext, DocumentModel document) {
         if (mContext == null) {
             return;
         }

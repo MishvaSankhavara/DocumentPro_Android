@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.MergeSelectListener;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.utils.Utils;
 
 import java.util.ArrayList;
@@ -26,21 +26,21 @@ import java.util.ArrayList;
 public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSelectionAdapter.ViewHolder> {
 
     private final MergeSelectListener mListenerMergeFileSelection;
-    private final ArrayList<PDFModel> originalDataMergeFileSelection;
+    private final ArrayList<PDFReaderModel> originalDataMergeFileSelection;
     private final Context mContextMergeFileSelection;
 
     public MergeFileSelectionAdapter(Context mContext,
-                                     ArrayList<PDFModel> originalData,
+                                     ArrayList<PDFReaderModel> originalData,
                                      MergeSelectListener listener) {
         this.mContextMergeFileSelection = mContext;
         this.originalDataMergeFileSelection = originalData;
         this.mListenerMergeFileSelection = listener;
     }
 
-    public ArrayList<PDFModel> getSelected_MergeFileSelection() {
-        ArrayList<PDFModel> selected = new ArrayList<>();
+    public ArrayList<PDFReaderModel> getSelected_MergeFileSelection() {
+        ArrayList<PDFReaderModel> selected = new ArrayList<>();
         for (int i = 0; i < originalDataMergeFileSelection.size(); i++) {
-            if (originalDataMergeFileSelection.get(i).isChecked()) {
+            if (originalDataMergeFileSelection.get(i).isChecked_PDFModel()) {
                 selected.add(originalDataMergeFileSelection.get(i));
             }
         }
@@ -59,25 +59,25 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        PDFModel pdfModel = originalDataMergeFileSelection.get(position);
+        PDFReaderModel pdfModel = originalDataMergeFileSelection.get(position);
 
-        holder.tvName_MergeFileSelection.setText(pdfModel.getName());
+        holder.tvName_MergeFileSelection.setText(pdfModel.getName_PDFModel());
         holder.ivLock_MergeFileSelection.setVisibility(GONE);
         holder.lock_line_MergeFileSelection.setVisibility(GONE);
         holder.cbSelect_MergeFileSelection.setVisibility(View.VISIBLE);
 
         holder.tvDate_MergeFileSelection.setText(
-                Utils.formatDateToHumanReadable(pdfModel.getLastModified()));
+                Utils.formatDateToHumanReadable(pdfModel.getLastModified_PDFModel()));
 
         holder.tvFileSize_MergeFileSelection.setText(
                 Formatter.formatFileSize(
                         mContextMergeFileSelection,
-                        pdfModel.getLength()));
+                        pdfModel.getLength_PDFModel()));
 
-        holder.cbSelect_MergeFileSelection.setChecked(pdfModel.isChecked());
+        holder.cbSelect_MergeFileSelection.setChecked(pdfModel.isChecked_PDFModel());
 
         holder.rootView_MergeFileSelection.setBackground(
-                pdfModel.isChecked()
+                pdfModel.isChecked_PDFModel()
                         ? ResourcesCompat.getDrawable(
                         mContextMergeFileSelection.getResources(),
                         R.drawable.bg_selected,
@@ -95,11 +95,11 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
             @Override
             public void onClick(View view) {
 
-                pdfModel.setChecked(!pdfModel.isChecked());
-                holder.cbSelect_MergeFileSelection.setChecked(pdfModel.isChecked());
+                pdfModel.setChecked_PDFModel(!pdfModel.isChecked_PDFModel());
+                holder.cbSelect_MergeFileSelection.setChecked(pdfModel.isChecked_PDFModel());
 
                 holder.rootView_MergeFileSelection.setBackground(
-                        pdfModel.isChecked()
+                        pdfModel.isChecked_PDFModel()
                                 ? ResourcesCompat.getDrawable(
                                 mContextMergeFileSelection.getResources(),
                                 R.drawable.bg_selected,

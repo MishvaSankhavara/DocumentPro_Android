@@ -13,7 +13,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.LanguagePickerDialogAdapter;
-import com.example.documenpro.model.Language;
+import com.example.documenpro.model_reader.LanguageModel;
 import com.example.documenpro.ui.activities.SplashActivity;
 
 import java.util.ArrayList;
@@ -31,18 +31,18 @@ public class LanguageDialog extends Dialog {
         this.mContext = context;
         langChoice = SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.LANGUAGE_KEY_NUMBER, 0);
         recyclerView = findViewById(R.id.rcv_list);
-        final ArrayList<Language> arrayList = GlobalConstant.createArrayLanguage();
+        final ArrayList<LanguageModel> arrayList = GlobalConstant.createArrayLanguage();
         adapter = new LanguagePickerDialogAdapter(getContext(), lang -> langChoice = lang);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         findViewById(R.id.tv_ok).setOnClickListener(view1 -> {
             SharedPreferenceUtils.getInstance(mContext).setBoolean(GlobalConstant.LANGUAGE_SET, true);
-            SharedPreferenceUtils.getInstance(mContext).setString(GlobalConstant.LANGUAGE_NAME, GlobalConstant.createArrayLanguage().get(langChoice).getNameLanguage());
-            SharedPreferenceUtils.getInstance(mContext).setString(GlobalConstant.LANGUAGE_KEY, GlobalConstant.createArrayLanguage().get(langChoice).getKeyLanguage());
+            SharedPreferenceUtils.getInstance(mContext).setString(GlobalConstant.LANGUAGE_NAME, GlobalConstant.createArrayLanguage().get(langChoice).getNameLanguage_LanModel());
+            SharedPreferenceUtils.getInstance(mContext).setString(GlobalConstant.LANGUAGE_KEY, GlobalConstant.createArrayLanguage().get(langChoice).getKeyLanguage_LanModel());
             SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.LANGUAGE_KEY_NUMBER, langChoice);
             Intent refresh = new Intent(mContext, SplashActivity.class);
             refresh.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            MultiLanguages.setAppLanguage(context, new Locale(GlobalConstant.createArrayLanguage().get(langChoice).getKeyLanguage()));
+            MultiLanguages.setAppLanguage(context, new Locale(GlobalConstant.createArrayLanguage().get(langChoice).getKeyLanguage_LanModel()));
 
             mContext.startActivity(refresh);
             dismiss();

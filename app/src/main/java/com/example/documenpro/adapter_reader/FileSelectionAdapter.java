@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.PdfSelectionListener;
-import com.example.documenpro.model.PDFModel;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.utils.Utils;
 
 import java.util.ArrayList;
@@ -22,11 +22,11 @@ import java.util.ArrayList;
 public class FileSelectionAdapter extends RecyclerView.Adapter<FileSelectionAdapter.ViewHolder> {
 
     private final PdfSelectionListener mListenerFileSelection;
-    private final ArrayList<PDFModel> originalDataFileSelection;
+    private final ArrayList<PDFReaderModel> originalDataFileSelection;
     private final Context mContextFileSelection;
 
     public FileSelectionAdapter(Context mContext,
-                                ArrayList<PDFModel> originalData,
+                                ArrayList<PDFReaderModel> originalData,
                                 PdfSelectionListener mListener) {
         this.mContextFileSelection = mContext;
         this.originalDataFileSelection = originalData;
@@ -42,7 +42,7 @@ public class FileSelectionAdapter extends RecyclerView.Adapter<FileSelectionAdap
         }
     }
 
-    public void updateData(PDFModel pdfModelFileSelection,
+    public void updateData(PDFReaderModel pdfModelFileSelection,
                            int positionFileSelection) {
         originalDataFileSelection.set(positionFileSelection,
                 pdfModelFileSelection);
@@ -53,10 +53,10 @@ public class FileSelectionAdapter extends RecyclerView.Adapter<FileSelectionAdap
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
 
-        PDFModel pdfModelFileSelection =
+        PDFReaderModel pdfModelFileSelection =
                 originalDataFileSelection.get(position);
 
-        if (pdfModelFileSelection.isProtected()) {
+        if (pdfModelFileSelection.isProtected_PDFModel()) {
             holder.ivPdfFileSelection.setImageResource(
                     R.drawable.ic_pdf_no);
             holder.ivLockFileSelection.setVisibility(View.VISIBLE);
@@ -71,15 +71,15 @@ public class FileSelectionAdapter extends RecyclerView.Adapter<FileSelectionAdap
 
         holder.tvDateFileSelection.setText(
                 Utils.formatDateToHumanReadable(
-                        pdfModelFileSelection.getLastModified()));
+                        pdfModelFileSelection.getLastModified_PDFModel()));
 
         holder.tvFileSizeFileSelection.setText(
                 Formatter.formatFileSize(
                         mContextFileSelection,
-                        pdfModelFileSelection.getLength()));
+                        pdfModelFileSelection.getLength_PDFModel()));
 
         holder.tvNameFileSelection.setText(
-                pdfModelFileSelection.getName());
+                pdfModelFileSelection.getName_PDFModel());
 
         holder.itemView.setOnClickListener(view -> {
             if (mListenerFileSelection != null) {

@@ -15,7 +15,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.clickListener.LanguageClickListener;
-import com.example.documenpro.model.Language;
+import com.example.documenpro.model_reader.LanguageModel;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapte
     private final LanguageClickListener listener_LanguageList;
     private final Context mContext_LanguageList;
     private int selectedItem_LanguageList;
-    private final ArrayList<Language> languages_LanguageList;
+    private final ArrayList<LanguageModel> languages_LanguageList;
 
     public LanguageListAdapter(Context mContext,
                                LanguageClickListener mListener) {
@@ -108,14 +108,14 @@ public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapte
 
         public void bind(int position) {
 
-            Language language =
+            LanguageModel language =
                     languages_LanguageList.get(position);
 
             tvLang_LanguageList.setText(
-                    language.getNameLanguage());
+                    language.getNameLanguage_LanModel());
 
             Glide.with(mContext_LanguageList)
-                    .load(language.getImgResource())
+                    .load(language.getImgResource_LanModel())
                     .into(imgFlag_LanguageList);
 
             if (selectedItem_LanguageList == position) {

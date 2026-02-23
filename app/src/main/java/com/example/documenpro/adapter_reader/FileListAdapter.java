@@ -25,7 +25,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.clickListener.MoreClickListener;
-import com.example.documenpro.model.Document;
+import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -35,11 +35,11 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
     private final DocClickListener listener_FileList;
     DatabaseHelper databaseHelper_FileList;
-    private ArrayList<Document> arrayList_FileList;
+    private ArrayList<DocumentModel> arrayList_FileList;
     private final Activity mContext_FileList;
 
     public FileListAdapter(Activity mContext,
-                           ArrayList<Document> arrayList,
+                           ArrayList<DocumentModel> arrayList,
                            DocClickListener listener) {
         this.mContext_FileList = mContext;
         this.arrayList_FileList = arrayList;
@@ -52,7 +52,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         return arrayList_FileList.size();
     }
 
-    public void filter(ArrayList<Document> list) {
+    public void filter(ArrayList<DocumentModel> list) {
         arrayList_FileList = list;
         notifyDataSetChanged();
     }
@@ -60,11 +60,11 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
-        Document document = arrayList_FileList.get(position);
+        DocumentModel document = arrayList_FileList.get(position);
         holder.bindDocument_FileList(document);
     }
 
-    public void setData(ArrayList<Document> dataList) {
+    public void setData(ArrayList<DocumentModel> dataList) {
         this.arrayList_FileList = dataList;
         notifyDataSetChanged();
     }
@@ -115,25 +115,25 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                     itemView.findViewById(R.id.iv_more);
         }
 
-        public void bindDocument_FileList(Document document_FileList) {
+        public void bindDocument_FileList(DocumentModel document_FileList) {
 
-            tvFileName_FileList.setText(document_FileList.getFileName());
+            tvFileName_FileList.setText(document_FileList.getFileName_DocModel());
 
             tvFileDate_FileList.setText(
                     Utils.formatDateToHumanReadable(
-                            document_FileList.getLastModified()));
+                            document_FileList.getLastModified_DocModel()));
 
             tvFileSize_FileList.setText(
                     Formatter.formatFileSize(
                             mContext_FileList,
-                            document_FileList.getLength()));
+                            document_FileList.getLength_DocModel()));
 
             Glide.with(mContext_FileList)
-                    .load(document_FileList.getSrcImage())
+                    .load(document_FileList.getSrcImage_DocModel())
                     .into(imgIcon_FileList);
 
             if (databaseHelper_FileList.isStared_DatabaseHelper(
-                    document_FileList.getFileUri())) {
+                    document_FileList.getFileUri_DocModel())) {
                 imgFavorite_FileList.setFrame(50);
             } else {
                 imgFavorite_FileList.setFrame(0);
@@ -156,13 +156,13 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                 public void onRenameListener(String newName) {
 
                                     final File fileOldPdfName =
-                                            new File(document_FileList.getFileUri());
+                                            new File(document_FileList.getFileUri_DocModel());
 
                                     final String replaceName =
-                                            document_FileList.getFileUri()
+                                            document_FileList.getFileUri_DocModel()
                                                     .replace(
                                                             Utils.removeExtension(
-                                                                    document_FileList.getFileName()),
+                                                                    document_FileList.getFileName_DocModel()),
                                                             newName);
 
                                     if (fileOldPdfName.renameTo(
@@ -172,7 +172,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                                 fileOldPdfName.getAbsolutePath())) {
 
                                             databaseHelper_FileList.updateStaredDocument_DatabaseHelper(
-                                                    document_FileList.getFileUri(),
+                                                    document_FileList.getFileUri_DocModel(),
                                                     replaceName);
                                         }
 
@@ -180,18 +180,18 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                                 fileOldPdfName.getAbsolutePath())) {
 
                                             databaseHelper_FileList.updateHistory_DatabaseHelper(
-                                                    document_FileList.getFileUri(),
+                                                    document_FileList.getFileUri_DocModel(),
                                                     replaceName);
                                         }
 
                                         File newFile = new File(replaceName);
 
-                                        Document documentNew = new Document();
-                                        documentNew.setFileName(newFile.getName());
-                                        documentNew.setFileUri(newFile.getAbsolutePath());
-                                        documentNew.setLength(newFile.length());
-                                        documentNew.setSrcImage(getDocumentSrc(newFile));
-                                        documentNew.setLastModified(newFile.lastModified());
+                                        DocumentModel documentNew = new DocumentModel();
+                                        documentNew.setFileName_DocModel(newFile.getName());
+                                        documentNew.setFileUri_DocModel(newFile.getAbsolutePath());
+                                        documentNew.setLength_DocModel(newFile.length());
+                                        documentNew.setSrcImage_DocModel(getDocumentSrc(newFile));
+                                        documentNew.setLastModified_DocModel(newFile.lastModified());
 
                                         int position = getAdapterPosition();
 
@@ -218,7 +218,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                 public void onDeleteListener() {
 
                                     File fileToDelete =
-                                            new File(document_FileList.getFileUri());
+                                            new File(document_FileList.getFileUri_DocModel());
 
                                     if (fileToDelete.exists()) {
 
@@ -227,22 +227,22 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                             MediaScannerConnection.scanFile(
                                                     mContext_FileList,
                                                     new String[]{
-                                                            document_FileList.getFileUri()},
+                                                            document_FileList.getFileUri_DocModel()},
                                                     null,
                                                     null);
 
                                             if (databaseHelper_FileList.isStared_DatabaseHelper(
-                                                    document_FileList.getFileUri())) {
+                                                    document_FileList.getFileUri_DocModel())) {
 
                                                 databaseHelper_FileList.removeStaredDocument_DatabaseHelper(
-                                                        document_FileList.getFileUri());
+                                                        document_FileList.getFileUri_DocModel());
                                             }
 
                                             if (databaseHelper_FileList.isRecent_DatabaseHelper(
-                                                    document_FileList.getFileUri())) {
+                                                    document_FileList.getFileUri_DocModel())) {
 
                                                 databaseHelper_FileList.removeRecentDocument_DatabaseHelper(
-                                                        document_FileList.getFileUri());
+                                                        document_FileList.getFileUri_DocModel());
                                             }
 
                                             int position = getAdapterPosition();
@@ -268,16 +268,16 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
             btnFavorite_FileList.setOnClickListener(v -> {
 
                 if (databaseHelper_FileList.isStared_DatabaseHelper(
-                        document_FileList.getFileUri())) {
+                        document_FileList.getFileUri_DocModel())) {
 
                     imgFavorite_FileList.setFrame(0);
                     databaseHelper_FileList.removeStaredDocument_DatabaseHelper(
-                            document_FileList.getFileUri());
+                            document_FileList.getFileUri_DocModel());
 
                 } else {
 
                     databaseHelper_FileList.addStaredDocument_DatabaseHelper(
-                            document_FileList.getFileUri());
+                            document_FileList.getFileUri_DocModel());
 
                     imgFavorite_FileList.playAnimation();
 

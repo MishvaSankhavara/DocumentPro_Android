@@ -14,7 +14,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.clickListener.OnPdfItemClickListener;
-import com.example.documenpro.model.Language;
+import com.example.documenpro.model_reader.LanguageModel;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class LanguagePickerDialogAdapter extends RecyclerView.Adapter<LanguagePi
 
     int lastPost_LanguagePickerDialog;
     private final OnPdfItemClickListener mListener_LanguagePickerDialog;
-    private final ArrayList<Language> languages_LanguagePickerDialog;
+    private final ArrayList<LanguageModel> languages_LanguagePickerDialog;
 
     public LanguagePickerDialogAdapter(Context mContext,
                                        OnPdfItemClickListener mListener) {
@@ -47,14 +47,14 @@ public class LanguagePickerDialogAdapter extends RecyclerView.Adapter<LanguagePi
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
 
-        Language language =
+        LanguageModel language =
                 languages_LanguagePickerDialog.get(position);
 
         holder.imgFlag_LanguagePickerDialog
-                .setImageResource(language.getImgResource());
+                .setImageResource(language.getImgResource_LanModel());
 
         holder.tvLang_LanguagePickerDialog
-                .setText(language.getNameLanguage());
+                .setText(language.getNameLanguage_LanModel());
 
         if (lastPost_LanguagePickerDialog == position) {
             holder.imgChoice_LanguagePickerDialog

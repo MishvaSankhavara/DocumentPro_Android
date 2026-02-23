@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.model.PDFPage;
+import com.example.documenpro.model_reader.PDFPageModel;
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.example.documenpro.ui.activities.ShareImageActivity;
 import com.example.documenpro.ui.customviews.HorizontalProgressBar;
@@ -24,14 +24,14 @@ import java.util.ArrayList;
 public class ConvertDialog extends Dialog {
     private HorizontalProgressBar progressBar;
     private TextView tvDes;
-    private ArrayList<PDFPage> listSave;
+    private ArrayList<PDFPageModel> listSave;
 
     private TextView btnCancel;
     private TextView btnViewImage;
     private TextView tvPercent;
     private ShareImageActivity mContext;
 
-    public ConvertDialog(@NonNull ShareImageActivity context, ArrayList<PDFPage> arrayList) {
+    public ConvertDialog(@NonNull ShareImageActivity context, ArrayList<PDFPageModel> arrayList) {
         super(context);
         this.mContext = context;
         this.listSave = arrayList;
@@ -95,9 +95,9 @@ public class ConvertDialog extends Dialog {
             }
 
             for (int i = 0; i < weakReference.get().listSave.size(); i++) {
-                String fileName = Utils.getFileNameFromUri(weakReference.get().listSave.get(i).getThumbnailUri());
+                String fileName = Utils.getFileNameFromUri(weakReference.get().listSave.get(i).getThumbnailUri_PDFPageModel());
                 String pathCopy = pathFolder + "/" + fileName;
-                Utils.copyFile(weakReference.get().mContext, weakReference.get().listSave.get(i).getThumbnailUri(),
+                Utils.copyFile(weakReference.get().mContext, weakReference.get().listSave.get(i).getThumbnailUri_PDFPageModel(),
                         pathCopy);
                 publishProgress(i + 1);
             }
