@@ -15,12 +15,12 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.executor.CompressActivityExecutor;
-import com.example.documenpro.executor.MergedPdfExecutor;
-import com.example.documenpro.executor.PhotoToPdfExecutor;
-import com.example.documenpro.executor.RemovePasswordActivityExecutor;
-import com.example.documenpro.executor.SetPasswordActivityExecutor;
-import com.example.documenpro.executor.SplitFileExecutor;
+import com.example.documenpro.AppExecutor.FileCompressionExecutor;
+import com.example.documenpro.AppExecutor.PdfMergeManager;
+import com.example.documenpro.AppExecutor.ImageToPdfConverter;
+import com.example.documenpro.AppExecutor.RemovePasswordExecutor;
+import com.example.documenpro.AppExecutor.SetPasswordManager;
+import com.example.documenpro.AppExecutor.SplitDocExecutor;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.utils.Utils;
 
@@ -66,12 +66,12 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     public TextView tvPageNumber;
     public PDFModel pdfModelFinal;
 
-    public CompressActivityExecutor coreCompressExecutor;
-    public PhotoToPdfExecutor corePhotoToPdfExecutor;
-    public MergedPdfExecutor coreMergeExecutor;
-    public SetPasswordActivityExecutor coreLockExecutor;
-    public SplitFileExecutor coreSplitExecutor;
-    public RemovePasswordActivityExecutor coreUnlockExecutor;
+    public FileCompressionExecutor coreCompressExecutor;
+    public ImageToPdfConverter corePhotoToPdfExecutor;
+    public PdfMergeManager coreMergeExecutor;
+    public SetPasswordManager coreLockExecutor;
+    public SplitDocExecutor coreSplitExecutor;
+    public RemovePasswordExecutor coreUnlockExecutor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +88,8 @@ public class ProcessingTaskActivity extends AppCompatActivity {
             if (taskId == GlobalConstant.TOOL_COMPRESS) {
                 PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 if (model != null) {
-                    coreCompressExecutor = new CompressActivityExecutor(this, model.getAbsolutePath());
-                    coreCompressExecutor.executeTask();
+                    coreCompressExecutor = new FileCompressionExecutor(this, model.getAbsolutePath());
+                    coreCompressExecutor.executeTask_FileCompression();
                 }
             } else if (taskId == GlobalConstant.TOOL_MERGE) {
                 String name = taskIntent.getStringExtra(GlobalConstant.MERGE_PDF_FILE_NAME);
@@ -98,35 +98,35 @@ public class ProcessingTaskActivity extends AppCompatActivity {
                 for (int i = 0; i < models.size(); i++) {
                     filePaths.add(models.get(i).getAbsolutePath());
                 }
-                coreMergeExecutor = new MergedPdfExecutor(this, filePaths, name);
-                coreMergeExecutor.executeTask();
+                coreMergeExecutor = new PdfMergeManager(this, filePaths, name);
+                coreMergeExecutor.executeTask_PdfMergeManager();
             } else if (taskId == GlobalConstant.TOOL_SPLIT) {
                 PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 if (model != null) {
                     String name = taskIntent.getStringExtra(GlobalConstant.PDF_FILE_NAME);
-                    coreSplitExecutor = new SplitFileExecutor(this, name,
+                    coreSplitExecutor = new SplitDocExecutor(this, name,
                             MyApplication.getInstance().getArrayListSplit(), model.getAbsolutePath());
-                    coreSplitExecutor.executeTask();
+                    coreSplitExecutor.executeTask_SplitDoc();
                 }
             } else if (taskId == GlobalConstant.TOOL_LOCK_PDF) {
                 PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 String pass = taskIntent.getStringExtra(GlobalConstant.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
-                    coreLockExecutor = new SetPasswordActivityExecutor(ProcessingTaskActivity.this, pass, model);
-                    coreLockExecutor.executeTask();
+                    coreLockExecutor = new SetPasswordManager(ProcessingTaskActivity.this, pass, model);
+                    coreLockExecutor.executeTask_setPW();
                 }
             } else if (taskId == GlobalConstant.TOOL_UNLOCK_PDF) {
                 PDFModel model = (PDFModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
                 String pass = taskIntent.getStringExtra(GlobalConstant.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
-                    coreUnlockExecutor = new RemovePasswordActivityExecutor(ProcessingTaskActivity.this, pass, model);
-                    coreUnlockExecutor.executeTask();
+                    coreUnlockExecutor = new RemovePasswordExecutor(ProcessingTaskActivity.this, pass, model);
+                    coreUnlockExecutor.executeTask_removePW();
                 }
             } else if (taskId == GlobalConstant.TOOL_PHOTO_TO_PDF) {
                 String name = taskIntent.getStringExtra(GlobalConstant.PHOTO_2_PDF_FILE_NAME);
-                corePhotoToPdfExecutor = new PhotoToPdfExecutor(this, name,
+                corePhotoToPdfExecutor = new ImageToPdfConverter(this, name,
                         MyApplication.getInstance().getSelectedImages());
-                corePhotoToPdfExecutor.executeTask();
+                corePhotoToPdfExecutor.executeTask_ImageToPdfConverter();
             }
         }
     }
@@ -182,16 +182,16 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (coreCompressExecutor != null)
-            coreCompressExecutor.shutdownNow();
+            coreCompressExecutor.shutdownNow_FileCompression();
         if (corePhotoToPdfExecutor != null)
-            corePhotoToPdfExecutor.shutdownNow();
+            corePhotoToPdfExecutor.shutdownNow_ImageToPdfConverter();
         if (coreMergeExecutor != null)
-            coreMergeExecutor.shutdownNow();
+            coreMergeExecutor.shutdownNow_PdfMergeManager();
         if (coreLockExecutor != null)
-            coreLockExecutor.shutdownNow();
+            coreLockExecutor.shutdownNow_setPW();
         if (coreUnlockExecutor != null)
-            coreUnlockExecutor.shutdownNow();
+            coreUnlockExecutor.shutdownNow_removePW();
         if (coreSplitExecutor != null)
-            coreSplitExecutor.shutdownNow();
+            coreSplitExecutor.shutdownNow_SplitDoc();
     }
 }

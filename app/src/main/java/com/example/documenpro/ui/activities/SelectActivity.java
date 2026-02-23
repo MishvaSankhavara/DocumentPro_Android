@@ -36,7 +36,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.database.DatabaseHelper;
-import com.example.documenpro.executor.RemoveFavoriteExecutor;
+import com.example.documenpro.AppExecutor.FavoriteRemovalExecutor;
 import com.example.documenpro.listener.ItemSelectListener;
 import com.example.documenpro.listener.OnConfirmListener;
 import com.example.documenpro.model.Document;
@@ -223,8 +223,8 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
                 DialogUtils.showConfirmDialog(SelectActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_FAV, new OnConfirmListener() {
                     @Override
                     public void onConfirm() {
-                        RemoveFavoriteExecutor removeFavoriteExecutor = new RemoveFavoriteExecutor(SelectActivity.this);
-                        removeFavoriteExecutor.executeTask();
+                        FavoriteRemovalExecutor removeFavoriteExecutor = new FavoriteRemovalExecutor(SelectActivity.this);
+                        removeFavoriteExecutor.executeTask_removeFav();
                     }
                 });
             }
