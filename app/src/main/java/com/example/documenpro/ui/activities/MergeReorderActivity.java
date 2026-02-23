@@ -31,7 +31,7 @@ import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.MergeReorderAdapter;
-import com.example.documenpro.helper.SimpleItemTouchHelperCallback;
+import com.example.documenpro.docHelper.ItemTouchCallback;
 import com.example.documenpro.listener.OnConfirmListener;
 import com.example.documenpro.listener.OnStartDragListener;
 import com.example.documenpro.model.PDFModel;
@@ -148,7 +148,7 @@ public class MergeReorderActivity extends AppCompatActivity implements OnStartDr
         });
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SimpleItemTouchHelperCallback(adapter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchCallback(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         btnMerge.setOnClickListener(view -> {

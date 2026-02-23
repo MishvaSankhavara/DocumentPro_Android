@@ -26,7 +26,7 @@ import com.google.android.gms.ads.AdView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileSelectionAdapter;
-import com.example.documenpro.helper.PdfPrintHelper;
+import com.example.documenpro.docHelper.PdfPrintUtils;
 import com.example.documenpro.listener.ChoosePdfListener;
 import com.example.documenpro.listener.PasswordListener;
 import com.example.documenpro.model.PDFModel;
@@ -147,7 +147,7 @@ public class DocPickerActivity extends AppCompatActivity implements ChoosePdfLis
             if (pdfModel.isProtected()) {
                 DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_print_toast);
             } else {
-                PdfPrintHelper.printPdf(this, Uri.fromFile(new File(pdfModel.getAbsolutePath())));
+                PdfPrintUtils.printPdf_Utils(this, Uri.fromFile(new File(pdfModel.getAbsolutePath())));
             }
         } else if (operationMode == GlobalConstant.TOOL_COMPRESS) {
             if (pdfModel.isProtected()) {
