@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.db.DataUpdateEvent;
-import com.example.documenpro.db.DbHelper;
+import com.example.documenpro.database.OnDataUpdatedEvent;
+import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.listener.MoreListener;
 import com.example.documenpro.listener.OnPdfClickListener;
 import com.example.documenpro.model.Document;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileListAdapter.ViewHolder> {
 
-    private DbHelper dbHelper_FileListAdapter2;
+    private DatabaseHelper databaseHelper_FileListAdapter2;
     private OnPdfClickListener mListener_FileListAdapter2;
     private ArrayList<PDFModel> originalData_FileListAdapter2;
     private ResultViewerActivity mContext_FileListAdapter2;
@@ -42,7 +42,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
         this.mContext_FileListAdapter2 = mContext;
         this.originalData_FileListAdapter2 = originalData;
         this.mListener_FileListAdapter2 = mListener;
-        this.dbHelper_FileListAdapter2 = DbHelper.getInstance(mContext);
+        this.databaseHelper_FileListAdapter2 = DatabaseHelper.getInstance(mContext);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                             mContext_FileListAdapter2,
                             pdfModel.getLength()));
 
-            if (dbHelper_FileListAdapter2.isStared(
+            if (databaseHelper_FileListAdapter2.isStared_DatabaseHelper(
                     pdfModel.getFileUri())) {
                 btnFavorite_FileListAdapter2
                         .setImageResource(R.drawable.ic_favorite);
@@ -153,19 +153,19 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
 
             btnFavorite_FileListAdapter2.setOnClickListener(v -> {
 
-                if (dbHelper_FileListAdapter2.isStared(
+                if (databaseHelper_FileListAdapter2.isStared_DatabaseHelper(
                         pdfModel.getFileUri())) {
 
                     btnFavorite_FileListAdapter2
                             .setImageResource(R.drawable.ic_favorite_unselect);
 
-                    dbHelper_FileListAdapter2
-                            .removeStaredDocument(pdfModel.getFileUri());
+                    databaseHelper_FileListAdapter2
+                            .removeStaredDocument_DatabaseHelper(pdfModel.getFileUri());
 
                 } else {
 
-                    dbHelper_FileListAdapter2
-                            .addStaredDocument(pdfModel.getFileUri());
+                    databaseHelper_FileListAdapter2
+                            .addStaredDocument_DatabaseHelper(pdfModel.getFileUri());
 
                     btnFavorite_FileListAdapter2
                             .setImageResource(R.drawable.ic_favorite);
@@ -195,28 +195,28 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                     if (fileOldPdfName.renameTo(
                                             new File(replaceName))) {
 
-                                        if (dbHelper_FileListAdapter2.isStared(
+                                        if (databaseHelper_FileListAdapter2.isStared_DatabaseHelper(
                                                 fileOldPdfName.getAbsolutePath())) {
 
-                                            dbHelper_FileListAdapter2
-                                                    .updateStarred(
+                                            databaseHelper_FileListAdapter2
+                                                    .updateStarred_DatabaseHelper(
                                                             pdfModel.getFileUri(),
                                                             replaceName);
 
                                             EventBus.getDefault()
-                                                    .post(new DataUpdateEvent.updateFav());
+                                                    .post(new OnDataUpdatedEvent.updateFav_DataUpdated());
                                         }
 
-                                        if (dbHelper_FileListAdapter2.isRecent(
+                                        if (databaseHelper_FileListAdapter2.isRecent_DatabaseHelper(
                                                 fileOldPdfName.getAbsolutePath())) {
 
-                                            dbHelper_FileListAdapter2
-                                                    .updateHistory(
+                                            databaseHelper_FileListAdapter2
+                                                    .updateHistory_DatabaseHelper(
                                                             pdfModel.getFileUri(),
                                                             replaceName);
 
                                             EventBus.getDefault()
-                                                    .post(new DataUpdateEvent.updateRecent());
+                                                    .post(new OnDataUpdatedEvent.updateRecent_DataUpdated());
                                         }
 
                                         File newFile = new File(replaceName);
@@ -264,19 +264,19 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                                     null,
                                                     null);
 
-                                            if (dbHelper_FileListAdapter2.isStared(
+                                            if (databaseHelper_FileListAdapter2.isStared_DatabaseHelper(
                                                     pdfModel.getFileUri())) {
 
-                                                dbHelper_FileListAdapter2
-                                                        .removeStaredDocument(
+                                                databaseHelper_FileListAdapter2
+                                                        .removeStaredDocument_DatabaseHelper(
                                                                 pdfModel.getFileUri());
                                             }
 
-                                            if (dbHelper_FileListAdapter2.isRecent(
+                                            if (databaseHelper_FileListAdapter2.isRecent_DatabaseHelper(
                                                     pdfModel.getFileUri())) {
 
-                                                dbHelper_FileListAdapter2
-                                                        .removeRecentDocument(
+                                                databaseHelper_FileListAdapter2
+                                                        .removeRecentDocument_DatabaseHelper(
                                                                 pdfModel.getFileUri());
                                             }
 

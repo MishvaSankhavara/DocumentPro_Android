@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
-import com.example.documenpro.db.DbHelper;
+import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.activities.SelectActivity;
 import com.example.documenpro.ui.dialog.ProgressDialog;
@@ -31,8 +31,8 @@ public class RemoveFavoriteExecutor {
             ArrayList<Document> arrayListRemove = weakReference.get().adapter.getSelected_FilePicker();
             for (int i = 0; i < arrayListRemove.size(); i++) {
                 Document pdfModel = arrayListRemove.get(i);
-                if (DbHelper.getInstance(weakReference.get()).isStared(pdfModel.getFileUri())) {
-                    DbHelper.getInstance(weakReference.get()).removeStaredDocument(pdfModel.getFileUri());
+                if (DatabaseHelper.getInstance(weakReference.get()).isStared_DatabaseHelper(pdfModel.getFileUri())) {
+                    DatabaseHelper.getInstance(weakReference.get()).removeStaredDocument_DatabaseHelper(pdfModel.getFileUri());
                 }
             }
 
@@ -76,7 +76,7 @@ public class RemoveFavoriteExecutor {
     }
 
     private void updateUI() {
-        weakReference.get().arrayList = DbHelper.getInstance(weakReference.get()).getStarredDocuments();
+        weakReference.get().arrayList = DatabaseHelper.getInstance(weakReference.get()).getStarredDocuments_DatabaseHelper();
 
         if (weakReference.get().arrayList.size() == 0) {
             weakReference.get().finish();

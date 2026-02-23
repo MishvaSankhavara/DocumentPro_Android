@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
-import com.example.documenpro.db.DbHelper;
+import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.listener.MoreListener;
 import com.example.documenpro.model.Document;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHolder> {
 
     private final DocumentClickListener listener_FileList;
-    DbHelper dbHelper_FileList;
+    DatabaseHelper databaseHelper_FileList;
     private ArrayList<Document> arrayList_FileList;
     private final Activity mContext_FileList;
 
@@ -44,7 +44,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         this.mContext_FileList = mContext;
         this.arrayList_FileList = arrayList;
         this.listener_FileList = listener;
-        this.dbHelper_FileList = DbHelper.getInstance(mContext);
+        this.databaseHelper_FileList = DatabaseHelper.getInstance(mContext);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                     .load(document_FileList.getSrcImage())
                     .into(imgIcon_FileList);
 
-            if (dbHelper_FileList.isStared(
+            if (databaseHelper_FileList.isStared_DatabaseHelper(
                     document_FileList.getFileUri())) {
                 imgFavorite_FileList.setFrame(50);
             } else {
@@ -168,18 +168,18 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                     if (fileOldPdfName.renameTo(
                                             new File(replaceName))) {
 
-                                        if (dbHelper_FileList.isStared(
+                                        if (databaseHelper_FileList.isStared_DatabaseHelper(
                                                 fileOldPdfName.getAbsolutePath())) {
 
-                                            dbHelper_FileList.updateStaredDocument(
+                                            databaseHelper_FileList.updateStaredDocument_DatabaseHelper(
                                                     document_FileList.getFileUri(),
                                                     replaceName);
                                         }
 
-                                        if (dbHelper_FileList.isRecent(
+                                        if (databaseHelper_FileList.isRecent_DatabaseHelper(
                                                 fileOldPdfName.getAbsolutePath())) {
 
-                                            dbHelper_FileList.updateHistory(
+                                            databaseHelper_FileList.updateHistory_DatabaseHelper(
                                                     document_FileList.getFileUri(),
                                                     replaceName);
                                         }
@@ -231,17 +231,17 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                                     null,
                                                     null);
 
-                                            if (dbHelper_FileList.isStared(
+                                            if (databaseHelper_FileList.isStared_DatabaseHelper(
                                                     document_FileList.getFileUri())) {
 
-                                                dbHelper_FileList.removeStaredDocument(
+                                                databaseHelper_FileList.removeStaredDocument_DatabaseHelper(
                                                         document_FileList.getFileUri());
                                             }
 
-                                            if (dbHelper_FileList.isRecent(
+                                            if (databaseHelper_FileList.isRecent_DatabaseHelper(
                                                     document_FileList.getFileUri())) {
 
-                                                dbHelper_FileList.removeRecentDocument(
+                                                databaseHelper_FileList.removeRecentDocument_DatabaseHelper(
                                                         document_FileList.getFileUri());
                                             }
 
@@ -267,16 +267,16 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
             btnFavorite_FileList.setOnClickListener(v -> {
 
-                if (dbHelper_FileList.isStared(
+                if (databaseHelper_FileList.isStared_DatabaseHelper(
                         document_FileList.getFileUri())) {
 
                     imgFavorite_FileList.setFrame(0);
-                    dbHelper_FileList.removeStaredDocument(
+                    databaseHelper_FileList.removeStaredDocument_DatabaseHelper(
                             document_FileList.getFileUri());
 
                 } else {
 
-                    dbHelper_FileList.addStaredDocument(
+                    databaseHelper_FileList.addStaredDocument_DatabaseHelper(
                             document_FileList.getFileUri());
 
                     imgFavorite_FileList.playAnimation();

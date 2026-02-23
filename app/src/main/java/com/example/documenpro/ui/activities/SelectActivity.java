@@ -35,7 +35,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
-import com.example.documenpro.db.DbHelper;
+import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.executor.RemoveFavoriteExecutor;
 import com.example.documenpro.listener.ItemSelectListener;
 import com.example.documenpro.listener.OnConfirmListener;
@@ -168,7 +168,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
             getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
             btnMove.setVisibility(View.VISIBLE);
-            arrayList = DbHelper.getInstance(this).getStarredDocuments();
+            arrayList = DatabaseHelper.getInstance(this).getStarredDocuments_DatabaseHelper();
             imgMove.setImageResource(R.drawable.ic_un_bookmark);
             tvMove.setText(getResources().getString(R.string.str_remove_favorite));
         } else if (fileType == GlobalConstant.RECENT_FILE_TYPE) {
@@ -177,7 +177,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
             getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
             btnMove.setVisibility(View.VISIBLE);
-            arrayList = DbHelper.getInstance(this).getRecentDocuments();
+            arrayList = DatabaseHelper.getInstance(this).getRecentDocuments_DatabaseHelper();
             imgMove.setImageResource(R.drawable.ic_remove);
             tvMove.setText(R.string.str_move_out);
         }
@@ -341,12 +341,12 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
                 File file = new File(pdfModel.getFileUri());
                 file.delete();
                 MediaScannerConnection.scanFile(weakReference.get(), new String[]{pdfModel.getFileUri()}, null, null);
-                if (DbHelper.getInstance(weakReference.get()).isStared(pdfModel.getFileUri())) {
-                    DbHelper.getInstance(weakReference.get()).removeStaredDocument(pdfModel.getFileUri());
+                if (DatabaseHelper.getInstance(weakReference.get()).isStared_DatabaseHelper(pdfModel.getFileUri())) {
+                    DatabaseHelper.getInstance(weakReference.get()).removeStaredDocument_DatabaseHelper(pdfModel.getFileUri());
 
                 }
-                if (DbHelper.getInstance(weakReference.get()).isRecent(pdfModel.getFileUri())) {
-                    DbHelper.getInstance(weakReference.get()).removeRecentDocument(pdfModel.getFileUri());
+                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri())) {
+                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri());
 
                 }
             }
@@ -378,10 +378,10 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
                 weakReference.get().arrayList = Utils.countFile(weakReference.get(), GlobalConstant.COUNT_WORD_FILE);
 
             } else if (weakReference.get().fileType == GlobalConstant.FAV_FILE_TYPE) {
-                weakReference.get().arrayList = DbHelper.getInstance(weakReference.get()).getStarredDocuments();
+                weakReference.get().arrayList = DatabaseHelper.getInstance(weakReference.get()).getStarredDocuments_DatabaseHelper();
 
             } else if (weakReference.get().fileType == GlobalConstant.RECENT_FILE_TYPE) {
-                weakReference.get().arrayList = DbHelper.getInstance(weakReference.get()).getRecentDocuments();
+                weakReference.get().arrayList = DatabaseHelper.getInstance(weakReference.get()).getRecentDocuments_DatabaseHelper();
             }
 
 
@@ -431,8 +431,8 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             ArrayList<Document> arrayListRemove = weakReference.get().adapter.getSelected_FilePicker();
             for (int i = 0; i < arrayListRemove.size(); i++) {
                 Document pdfModel = arrayListRemove.get(i);
-                if (DbHelper.getInstance(weakReference.get()).isRecent(pdfModel.getFileUri())) {
-                    DbHelper.getInstance(weakReference.get()).removeRecentDocument(pdfModel.getFileUri());
+                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri())) {
+                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri());
                 }
             }
             for (int i = 0; i < 100; i++) {
@@ -448,7 +448,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         onPostExecute(Void unused) {
             super.onPostExecute(unused);
             dialog.dismiss();
-            this.weakReference.get().arrayList = DbHelper.getInstance(weakReference.get()).getRecentDocuments();
+            this.weakReference.get().arrayList = DatabaseHelper.getInstance(weakReference.get()).getRecentDocuments_DatabaseHelper();
 
             if (weakReference.get().arrayList.isEmpty()) {
                 weakReference.get().finish();

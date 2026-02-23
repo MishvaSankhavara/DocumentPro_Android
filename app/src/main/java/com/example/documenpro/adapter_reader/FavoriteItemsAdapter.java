@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
-import com.example.documenpro.db.DbHelper;
+import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.listener.MoreListener;
 import com.example.documenpro.model.Document;
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdapter.ViewHolder> {
 
     private final DocumentClickListener listener_FavoriteItems;
-    private DbHelper dbHelper_FavoriteItems;
+    private DatabaseHelper databaseHelper_FavoriteItems;
     private final ArrayList<Document> arrayList_FavoriteItems;
     private final Activity mContext_FavoriteItems;
 
@@ -45,9 +45,9 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
         this.mContext_FavoriteItems = mContext;
         this.listener_FavoriteItems = listener;
         this.arrayList_FavoriteItems =
-                DbHelper.getInstance(mContext).getStarredDocuments();
-        this.dbHelper_FavoriteItems =
-                DbHelper.getInstance(mContext);
+                DatabaseHelper.getInstance(mContext).getStarredDocuments_DatabaseHelper();
+        this.databaseHelper_FavoriteItems =
+                DatabaseHelper.getInstance(mContext);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                 .load(document.getSrcImage())
                 .into(holder.imgIcon_FavoriteItems);
 
-        if (dbHelper_FavoriteItems.isStared(document.getFileUri())) {
+        if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(document.getFileUri())) {
             holder.imgFavorite_FavoriteItems.setFrame(50);
         } else {
             holder.imgFavorite_FavoriteItems.setFrame(0);
@@ -108,10 +108,10 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
                             if (fileOldPdfName.renameTo(new File(replaceName))) {
 
-                                if (dbHelper_FavoriteItems.isRecent(
+                                if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(
                                         fileOldPdfName.getAbsolutePath())) {
 
-                                    dbHelper_FavoriteItems.updateHistory(
+                                    databaseHelper_FavoriteItems.updateHistory_DatabaseHelper(
                                             document.getFileUri(),
                                             replaceName);
 
@@ -119,7 +119,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                                             .addRecentDocument(document);
                                 }
 
-                                dbHelper_FavoriteItems.updateStaredDocument(
+                                databaseHelper_FavoriteItems.updateStaredDocument_DatabaseHelper(
                                         document.getFileUri(),
                                         replaceName);
 
@@ -169,20 +169,20 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                                             null,
                                             null);
 
-                                    if (dbHelper_FavoriteItems.isStared(
+                                    if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(
                                             document.getFileUri())) {
 
-                                        dbHelper_FavoriteItems.removeStaredDocument(
+                                        databaseHelper_FavoriteItems.removeStaredDocument_DatabaseHelper(
                                                 document.getFileUri());
 
                                         FavoriteDataSingleton.getInstance()
                                                 .removeFavoriteDocument(document);
                                     }
 
-                                    if (dbHelper_FavoriteItems.isRecent(
+                                    if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(
                                             document.getFileUri())) {
 
-                                        dbHelper_FavoriteItems.removeRecentDocument(
+                                        databaseHelper_FavoriteItems.removeRecentDocument_DatabaseHelper(
                                                 document.getFileUri());
                                     }
 
@@ -209,13 +209,13 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
         holder.btnFavorite_FavoriteItems.setOnClickListener(v -> {
 
-            if (dbHelper_FavoriteItems.isStared(document.getFileUri())) {
+            if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(document.getFileUri())) {
 
                 holder.imgFavorite_FavoriteItems.setFrame(0);
                 arrayList_FavoriteItems.remove(document);
                 notifyItemRemoved(holder.getAdapterPosition());
 
-                dbHelper_FavoriteItems.removeStaredDocument(
+                databaseHelper_FavoriteItems.removeStaredDocument_DatabaseHelper(
                         document.getFileUri());
 
                 if (arrayList_FavoriteItems.isEmpty()) {
@@ -224,7 +224,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
             } else {
 
-                dbHelper_FavoriteItems.addStaredDocument(
+                databaseHelper_FavoriteItems.addStaredDocument_DatabaseHelper(
                         document.getFileUri());
 
                 holder.imgFavorite_FavoriteItems.playAnimation();
@@ -246,7 +246,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                         });
             }
 
-            if (dbHelper_FavoriteItems.isRecent(document.getFileUri())) {
+            if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(document.getFileUri())) {
                 RecentDataSingleton.getInstance()
                         .addRecentDocument(document);
             }

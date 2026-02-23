@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
-import com.example.documenpro.db.DbHelper;
+import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.listener.MoreListener;
 import com.example.documenpro.model.Document;
@@ -35,15 +35,15 @@ import java.util.ArrayList;
 public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHolder> {
 
     private final DocumentClickListener listener_RecentFiles;
-    private DbHelper dbHelper_RecentFiles;
+    private DatabaseHelper databaseHelper_RecentFiles;
     private final ArrayList<Document> arrayList_RecentFiles;
     private final Activity mContext_RecentFiles;
 
     public RecentFilesAdapter(Activity mContext, DocumentClickListener listener) {
         this.mContext_RecentFiles = mContext;
         this.listener_RecentFiles = listener;
-        this.arrayList_RecentFiles = DbHelper.getInstance(mContext).getRecentDocuments();
-        this.dbHelper_RecentFiles = DbHelper.getInstance(mContext);
+        this.arrayList_RecentFiles = DatabaseHelper.getInstance(mContext).getRecentDocuments_DatabaseHelper();
+        this.databaseHelper_RecentFiles = DatabaseHelper.getInstance(mContext);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
         Glide.with(mContext_RecentFiles).load(document.getSrcImage()).into(holder.imgIcon_RecentFiles);
 
-        if (dbHelper_RecentFiles.isStared(document.getFileUri())) {
+        if (databaseHelper_RecentFiles.isStared_DatabaseHelper(document.getFileUri())) {
             holder.imgFavorite_RecentFiles.setFrame(50);
         } else {
             holder.imgFavorite_RecentFiles.setFrame(0);
@@ -92,14 +92,14 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
                     if (fileOldPdfName.renameTo(new File(replaceName))) {
 
-                        if (dbHelper_RecentFiles.isStared(fileOldPdfName.getAbsolutePath())) {
+                        if (databaseHelper_RecentFiles.isStared_DatabaseHelper(fileOldPdfName.getAbsolutePath())) {
 
-                            dbHelper_RecentFiles.updateStaredDocument(document.getFileUri(), replaceName);
+                            databaseHelper_RecentFiles.updateStaredDocument_DatabaseHelper(document.getFileUri(), replaceName);
 
                             FavoriteDataSingleton.getInstance().addFavoriteDocument(document);
                         }
 
-                        dbHelper_RecentFiles.updateHistory(document.getFileUri(), replaceName);
+                        databaseHelper_RecentFiles.updateHistory_DatabaseHelper(document.getFileUri(), replaceName);
 
                         File newFile = new File(replaceName);
 
@@ -141,16 +141,16 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
                         MediaScannerConnection.scanFile(mContext_RecentFiles, new String[]{document.getFileUri()}, null, null);
 
-                        if (dbHelper_RecentFiles.isStared(document.getFileUri())) {
+                        if (databaseHelper_RecentFiles.isStared_DatabaseHelper(document.getFileUri())) {
 
-                            dbHelper_RecentFiles.removeStaredDocument(document.getFileUri());
+                            databaseHelper_RecentFiles.removeStaredDocument_DatabaseHelper(document.getFileUri());
 
                             FavoriteDataSingleton.getInstance().removeFavoriteDocument(document);
                         }
 
-                        if (dbHelper_RecentFiles.isRecent(document.getFileUri())) {
+                        if (databaseHelper_RecentFiles.isRecent_DatabaseHelper(document.getFileUri())) {
 
-                            dbHelper_RecentFiles.removeRecentDocument(document.getFileUri());
+                            databaseHelper_RecentFiles.removeRecentDocument_DatabaseHelper(document.getFileUri());
                         }
 
                         int position = holder.getAdapterPosition();
@@ -171,13 +171,13 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
                 @Override
                 public void onRemove() {
 
-                    if (dbHelper_RecentFiles.isRecent(document.getFileUri())) {
+                    if (databaseHelper_RecentFiles.isRecent_DatabaseHelper(document.getFileUri())) {
 
                         arrayList_RecentFiles.remove(document);
 
                         notifyItemRemoved(holder.getAdapterPosition());
 
-                        dbHelper_RecentFiles.removeRecentDocument(document.getFileUri());
+                        databaseHelper_RecentFiles.removeRecentDocument_DatabaseHelper(document.getFileUri());
 
                         if (arrayList_RecentFiles.isEmpty()) {
                             notifyDataSetChanged();
@@ -189,17 +189,17 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
         holder.btnFavorite_RecentFiles.setOnClickListener(v -> {
 
-            if (dbHelper_RecentFiles.isStared(document.getFileUri())) {
+            if (databaseHelper_RecentFiles.isStared_DatabaseHelper(document.getFileUri())) {
 
                 holder.imgFavorite_RecentFiles.setFrame(0);
 
-                dbHelper_RecentFiles.removeStaredDocument(document.getFileUri());
+                databaseHelper_RecentFiles.removeStaredDocument_DatabaseHelper(document.getFileUri());
 
                 FavoriteDataSingleton.getInstance().removeFavoriteDocument(document);
 
             } else {
 
-                dbHelper_RecentFiles.addStaredDocument(document.getFileUri());
+                databaseHelper_RecentFiles.addStaredDocument_DatabaseHelper(document.getFileUri());
 
                 FavoriteDataSingleton.getInstance().addFavoriteDocument(document);
 

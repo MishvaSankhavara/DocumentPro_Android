@@ -58,7 +58,7 @@ import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
-import com.example.documenpro.db.DbHelper;
+import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.listener.MoreListener;
 import com.example.documenpro.listener.OnConfirmListener;
 import com.example.documenpro.listener.SortByListener;
@@ -595,7 +595,7 @@ public class Utils {
             File file = new File(document.getFileUri());
 
 //            File file = new File(fileHolderModel.getAbsolutePath());
-            DbHelper.getInstance(mContext).addRecentDocument(file.getAbsolutePath());
+            DatabaseHelper.getInstance(mContext).addRecentDocument_DatabaseHelper(file.getAbsolutePath());
             Uri fromFile = Uri.fromFile(file);
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
             intent.setAction("android.intent.action.VIEW");
@@ -613,7 +613,7 @@ public class Utils {
     public static void openFile(Activity mContext, File file) {
         try {
 //            File file = new File(fileHolderModel.getAbsolutePath());
-            DbHelper.getInstance(mContext).addRecentDocument(file.getAbsolutePath());
+            DatabaseHelper.getInstance(mContext).addRecentDocument_DatabaseHelper(file.getAbsolutePath());
             Uri fromFile = Uri.fromFile(file);
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
             intent.setAction("android.intent.action.VIEW");
