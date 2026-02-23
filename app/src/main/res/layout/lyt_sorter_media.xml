@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lay_main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_media_sorter"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/toolbar_title_image_to_pdf" />
+
+    <View
+        android:id="@+id/divider_line_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimaryDim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_media_sorter" />
+
+    <View
+        android:id="@+id/header_shadow_view"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:background="@drawable/shape_shadow_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_media_sorter" />
+
+    <LinearLayout
+        android:id="@+id/container_sorting_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_img_convert_pdf_change_tip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_media_sorter">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_tip_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            app:srcCompat="@drawable/ic_home_failure"
+            app:tint="@color/colorTextSecondary" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_sorting_instruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/medium"
+            android:includeFontPadding="false"
+            android:text="@string/long_press_to_manual_sorting"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_close_tips"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="12dp"
+            app:srcCompat="@drawable/ic_home_search_clear"
+            app:tint="@color/colorTextSecondary" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_media_gallery"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingStart="11dp"
+        android:paddingTop="7dp"
+        android:paddingEnd="11dp"
+        android:paddingBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/footer_action_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_sorting_tips" />
+
+    <FrameLayout
+        android:id="@+id/footer_action_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@id/ad_panel_media"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:id="@+id/footer_divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.6dp"
+            android:layout_gravity="top"
+            android:background="@color/colorPositiveLineTint" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_proceed_convert"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_merge_chooser_continue"
+            android:enabled="false"
+            android:fontFamily="@font/bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/str_action_convert"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <include
+        android:id="@+id/ad_panel_media"
+        layout="@layout/ad_container_big_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

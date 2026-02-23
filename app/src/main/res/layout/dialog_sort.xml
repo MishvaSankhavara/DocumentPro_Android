@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.7">
+
+        <TextView
+            android:id="@+id/tvTitleDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24sp"
+            android:layout_marginTop="24sp"
+            android:fontFamily="@font/bold"
+            android:text="@string/sort_by"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvTitleDialog"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleDialog">
+
+            <RadioButton
+                android:id="@+id/rbTimeOld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:button="@drawable/bg_radio"
+                android:checked="false"
+                android:fontFamily="@font/medium"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="@string/date_created_old"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:theme="@style/CustomBottomSheetDialogTheme" />
+
+            <RadioButton
+                android:id="@+id/rbTimeNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:button="@drawable/bg_radio"
+                android:checked="false"
+                android:fontFamily="@font/medium"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="@string/date_created_new"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:theme="@style/CustomBottomSheetDialogTheme" />
+
+            <RadioButton
+                android:id="@+id/rbAZ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/bg_radio"
+                android:checked="false"
+                android:fontFamily="@font/medium"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="@string/name_a_to_z"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:theme="@style/CustomBottomSheetDialogTheme" />
+
+            <RadioButton
+                android:id="@+id/rbZA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/bg_radio"
+                android:fontFamily="@font/medium"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="@string/name_z_to_a"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:theme="@style/CustomBottomSheetDialogTheme" />
+
+            <RadioButton
+                android:id="@+id/rbLargest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/bg_radio"
+                android:fontFamily="@font/medium"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="@string/file_size_largest"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:theme="@style/CustomBottomSheetDialogTheme" />
+
+            <RadioButton
+                android:id="@+id/rbMinimum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/bg_radio"
+                android:fontFamily="@font/medium"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="@string/file_size_minimum"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:theme="@style/CustomBottomSheetDialogTheme" />
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_bt_ok"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_button_action_round_8"
+            android:fontFamily="@font/medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/str_action_ok"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_bt_ok" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

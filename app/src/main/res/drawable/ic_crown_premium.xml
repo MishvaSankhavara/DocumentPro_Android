@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Corona principal -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M5,16L19,16L17,8L15.5,10L12,4L8.5,10L7,8L5,16Z" />
+
+    <!-- Detalles de la corona -->
+    <path
+        android:fillColor="#FFA500"
+        android:pathData="M7,8L8.5,10L12,4L15.5,10L17,8L19,16L17.5,16L15,9L12,6L9,9L6.5,16L5,16L7,8Z" />
+
+    <!-- Gema roja -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M 8,11 a 1,1 0 1,0 0,2 a 1,1 0 1,0 0,-2" />
+
+    <!-- Gema verde -->
+    <path
+        android:fillColor="#4ECDC4"
+        android:pathData="M 12,8.8 a 1.2,1.2 0 1,0 0,2.4 a 1.2,1.2 0 1,0 0,-2.4" />
+
+    <!-- Gema azul -->
+    <path
+        android:fillColor="#45B7D1"
+        android:pathData="M 16,11 a 1,1 0 1,0 0,2 a 1,1 0 1,0 0,-2" />
+
+    <!-- Base de la corona -->
+    <path
+        android:fillColor="#FFB300"
+        android:pathData="M5,16L19,16L19,18L5,18Z" />
+</vector>

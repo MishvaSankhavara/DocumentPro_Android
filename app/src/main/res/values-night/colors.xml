@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorAccent">#0b61da</color>
+    <color name="bg_title">#141515</color>
+
+    <color name="colorPrimary">#141515</color>
+    <color name="colorPrimaryDark">#141515</color>
+    <color name="colorPrimaryContainer">#141515</color>
+    <color name="colorRippleSelectItem">#281617</color>
+    <color name="colorSolidText">#ffffffff</color>
+    <color name="colorSurface">#ffffff</color>
+    <color name="colorHomeLine">#141515</color>
+    <color name="colorPrimaryOld">#232528</color>
+    <color name="colorBgItemTools">#2b2e32</color>
+
+    <color name="colorNegativeTint">#383a43</color>
+    <color name="colorProgressBg">#444953</color>
+    <color name="ip_color_convert_bg">#27282d</color>
+    <color name="colorEtTint">#78869d</color>
+    <color name="bg_main">#141515</color>
+
+    <color name="colorIcon">#FFFFFFFF</color>
+    <color name="colorOnPrimary">#141515</color>
+    <color name="background_tab">#383838</color>
+    <color name="colorPrimaryDim">#232528</color>
+    <color name="colorSelectItemBackground">#1add202a</color>
+    <color name="busy_indicator">#c0202020</color>
+    <color name="bg_ads">#141515</color>
+    <color name="bg_cancel_text_color">#ffffff</color>
+    <color name="color_btn_negative_bound">#3b3d43</color>
+    <color name="colorAccentPressed">#133566</color>
+    <color name="color_bg_dialog_edit_text">#1a89909c</color>
+    <color name="bg_dialog">#141515</color>
+    <color name="colorConvertLoadingBg">#383a43</color>
+    <color name="colorDivider">#383a43</color>
+    <color name="colorBackground">#ff1c1e24</color>
+
+    <color name="color_pdf_selection_background">#2b2b2b</color>
+    <color name="color_pdf_selection_border">#3e3e3e</color>
+
+    <color name="tint_settings_icon_unselected">#ffffff</color>
+    <color name="colorTextPrimary">#FFFFFFFF</color>
+    <color name="colorTextSecondary">#9798a2</color>
+
+    <color name="colorPrimaryText">#FFFFFFFF</color>
+    <color name="text_main_color">#FFFFFFFF</color>
+
+</resources>

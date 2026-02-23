@@ -1,0 +1,56 @@
+[versions]
+agp = "8.13.2"
+junit = "4.13.2"
+junitVersion = "1.3.0"
+espressoCore = "3.7.0"
+appcompat = "1.7.1"
+material = "1.13.0"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
+lottie = "6.6.7"
+glide = "4.16.0"
+multilanguages = "9.5"
+shimmer = "0.5.0"
+userMessagingPlatform = "3.2.0"
+lifecycleProcess = "2.9.3"
+playServicesAds = "24.5.0"
+rxjava = "3.1.11"
+rxandroid = "3.0.2"
+dexter = "6.2.3"
+imagezoom = "2.3.0"
+eventbus = "3.3.1"
+advrecyclerview = "1.0.0"
+pdfboxAndroid = "2.0.27.0"
+itextpdf = "5.5.13.4"
+androidPdfViewer = "3.2.0-beta05"
+androidpdfviewerVersion = "3.1.0-beta.1"
+
+[libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+dexter = { module = "com.karumi:dexter", version.ref = "dexter" }
+rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+multilanguages = { module = "com.github.getActivity:MultiLanguages", version.ref = "multilanguages" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "userMessagingPlatform" }
+lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleProcess" }
+imagezoom = { module = "it.sephiroth.android.library.imagezoom:imagezoom", version.ref = "imagezoom" }
+eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
+advrecyclerview = { module = "com.h6ah4i.android.widget.advrecyclerview:advrecyclerview", version.ref = "advrecyclerview" }
+pdfbox-android = { module = "com.tom-roush:pdfbox-android", version.ref = "pdfboxAndroid" }
+itextpdf = { module = "com.itextpdf:itextpdf", version.ref = "itextpdf" }
+android-pdf-viewer = { module = "io.github.oothp:android-pdf-viewer", version.ref = "androidPdfViewer" }
+androidpdfviewer = { module = "com.github.DImuthuUpe:AndroidPdfViewer", version.ref = "androidpdfviewerVersion" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+

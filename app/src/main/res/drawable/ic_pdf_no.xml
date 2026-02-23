@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="37dp"
+    android:height="42dp"
+    android:viewportWidth="37"
+    android:viewportHeight="42">
+    <path
+        android:fillColor="@color/pdf_file_list_bg"
+        android:fillType="evenOdd"
+        android:pathData="M34.3571,12.5629L34.3571,35.8125L34.3571,35.8125C34.3571,38.5049 32.3287,40.6875 29.8265,40.6875L7.1735,40.6875C4.6713,40.6875 2.6429,38.5049 2.6429,35.8125L2.6429,6.1875C2.6429,3.4951 4.6713,1.3125 7.1735,1.3125L23.5306,1.3125C24.9897,1.3125 26.383,1.9197 27.3763,2.9885L32.9528,8.9889C33.8554,9.9602 34.3571,11.237 34.3571,12.5629Z"
+        android:strokeWidth="1.215"
+        android:strokeColor="@color/pdf_file_list_bg"
+        android:strokeLineCap="square" />
+</vector>

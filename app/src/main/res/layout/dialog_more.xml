@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.7">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="26dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_type_pdf" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/bold"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:lines="1"
+            android:text="@string/name"
+            android:textAlignment="viewStart"
+            android:textColor="@color/text_main_color"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvFileDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_icon"
+            app:layout_constraintTop_toTopOf="@+id/iv_icon"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFileDate"
+            style="@style/FontMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:text="@string/name"
+            android:textAlignment="viewStart"
+            android:textColor="#89909c"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <ImageView
+            android:id="@+id/ivDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_separator"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
+            app:layout_constraintStart_toEndOf="@id/tvFileDate"
+            app:layout_constraintTop_toTopOf="@id/tvFileDate" />
+
+        <TextView
+            android:id="@+id/tvFileSize"
+            style="@style/FontMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:text="@string/name"
+            android:textAlignment="viewStart"
+            android:textColor="#89909c"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
+            app:layout_constraintEnd_toEndOf="@id/tv_name"
+            app:layout_constraintStart_toEndOf="@id/ivDot"
+            app:layout_constraintTop_toTopOf="@id/tvFileDate" />
+
+        <View
+            android:id="@+id/view_seg"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/line_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
+
+        <LinearLayout
+            android:id="@+id/ll_rename"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/view_seg">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitXY"
+                android:tint="@color/text_main_color"
+                app:srcCompat="@drawable/ic_list_more_rename" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/FontMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/str_action_rename"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_main_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_share"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ll_rename">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitXY"
+                android:tint="@color/text_main_color"
+                app:srcCompat="@drawable/ic_menu_share" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/FontMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/str_action_share"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_main_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ll_share">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitXY"
+                android:tint="@color/text_main_color"
+                app:srcCompat="@drawable/ic_list_more_info" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/FontMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/info"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_main_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_create_shortcut"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ll_info">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitXY"
+                android:tint="@color/text_main_color"
+                app:srcCompat="@drawable/ic_shortcut" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/FontMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/create_shortcut"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_main_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_remove_from_recent"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ll_create_shortcut">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitXY"
+                android:tint="@color/text_main_color"
+                app:srcCompat="@drawable/ic_remove" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_remove"
+                style="@style/FontMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/remove_from_recent"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_main_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_delete"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ll_remove_from_recent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitXY"
+                android:tint="@color/text_main_color"
+                app:srcCompat="@drawable/ic_delete" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/FontMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/str_action_delete"
+                android:textAlignment="viewStart"
+                android:textColor="@color/text_main_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_delete" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

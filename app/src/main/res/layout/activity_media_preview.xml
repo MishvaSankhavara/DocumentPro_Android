@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.documenpro.photopick.internal.ui.widget.PreviewViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/act_picker_img_pre_foot"
+        android:layout_below="@+id/act_picker_img_pre_title" />
+
+    <RelativeLayout
+        android:id="@+id/act_picker_img_pre_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/act_picker_img_pre_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:padding="6dp"
+            android:rotation="180"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_return_rtl"
+            android:tint="@color/colorIcon" />
+
+        <TextView
+            android:id="@+id/tvNumberPhoto"
+            style="@style/FontSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@id/act_picker_img_pre_title"
+        android:background="@drawable/shape_shadow_toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/act_picker_img_pre_foot"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/main_nav_bar_bg"
+        android:elevation="4dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <LinearLayout
+            android:id="@+id/btnSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/btnSelect"
+            android:orientation="horizontal">
+
+            <com.example.documenpro.photopick.internal.ui.widget.CheckView
+                android:id="@+id/check_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/tv_select_text"
+                style="@style/FontSemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:gravity="center"
+                android:text="@string/select"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_apply"
+            style="@style/FontSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_import_enable"
+            android:gravity="center"
+            android:minWidth="100dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/button_apply"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <FrameLayout
+        android:id="@+id/centerFl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="83:100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/pageIv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_shape_corner10_icon" />
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/removeIv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_convert_remove" />
+
+    <View
+        android:id="@+id/bottomBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_black_c10_a10"
+        app:layout_constraintBottom_toBottomOf="@+id/centerFl"
+        app:layout_constraintDimensionRatio="83:18"
+        app:layout_constraintEnd_toEndOf="@+id/centerFl"
+        app:layout_constraintStart_toStartOf="@+id/centerFl" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pageIndex"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/medium"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomBg"
+        app:layout_constraintStart_toStartOf="@+id/bottomBg"
+        app:layout_constraintTop_toTopOf="@+id/bottomBg" />
+
+    <FrameLayout
+        android:id="@+id/progressFl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_convert_item_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/centerFl"
+        app:layout_constraintEnd_toEndOf="@+id/centerFl"
+        app:layout_constraintStart_toStartOf="@+id/centerFl"
+        app:layout_constraintTop_toTopOf="@+id/centerFl">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:indeterminateOnly="true"
+            android:indeterminateTint="@color/colorNormalTint" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

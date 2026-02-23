@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lay_task_processor_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.docpro.scanner.engine.ProcessingTaskActivity">
+
+    <include
+        android:id="@+id/inc_task_progress"
+        layout="@layout/layout_tools_operate_01"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/inc_task_completion"
+        layout="@layout/layout_tools_operate_02"
+        android:visibility="invisible" />
+</FrameLayout>

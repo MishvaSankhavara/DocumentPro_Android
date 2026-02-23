@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:background="@drawable/ripple_select_item">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="14dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_type_excel" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="90dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/medium"
+        android:gravity="start"
+        android:includeFontPadding="false"
+        android:lines="1"
+        android:text="@string/document_all"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvFileDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvFileDate"
+        style="@style/FontRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:includeFontPadding="false"
+        android:text="24-09-2018"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <ImageView
+        android:id="@+id/ivDot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/ic_separator"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
+        app:layout_constraintStart_toEndOf="@id/tvFileDate"
+        app:layout_constraintTop_toTopOf="@id/tvFileDate" />
+
+    <TextView
+        android:id="@+id/tvFileSize"
+        style="@style/FontRegular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:maxLines="1"
+        android:text="24KB"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
+        app:layout_constraintEnd_toStartOf="@id/ll_favorite"
+        app:layout_constraintStart_toEndOf="@id/ivDot"
+        app:layout_constraintTop_toTopOf="@id/tvFileDate" />
+
+    <LinearLayout
+        android:id="@+id/ll_favorite"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="35dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lt_favorite"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/lottie_favorite"
+            app:lottie_speed="2" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_more"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="7dp"
+        android:background="?attr/actionBarItemBackground"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_list_more" />
+
+    <View
+        android:id="@+id/divider_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="3dp"
+        android:background="@color/line_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_more"
+        app:layout_constraintStart_toStartOf="@+id/tv_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

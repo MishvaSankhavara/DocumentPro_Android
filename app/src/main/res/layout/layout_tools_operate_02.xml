@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    app:layoutDescription="@xml/img_success_scene">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/operateCloseImg"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_home_search_clear"
+        app:tint="@color/colorEtTint" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Space
+            android:id="@+id/topSpace2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/bgAnimView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/no_color"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/topLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_operate_done_bg" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@+id/topSpace2"
+            app:layout_constraintDimensionRatio="w,230:190"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_operate_done_icon"
+            app:lottie_speed="1.5" />
+
+        <Space
+            android:id="@+id/topSpace"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/animationView"
+            app:layout_constraintEnd_toEndOf="@+id/animationView"
+            app:layout_constraintStart_toStartOf="@+id/animationView"
+            app:layout_constraintTop_toTopOf="@+id/animationView"
+            app:layout_constraintVertical_bias="0.7" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleTv"
+            style="@style/FontSemiBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="50dp"
+            android:gravity="center"
+            android:text="Successfully!"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animationView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/bodyBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ip_bg_convert_success_body"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTop" />
+
+    <LinearLayout
+        android:id="@+id/fileLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTop">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/previewImg"
+                    android:layout_width="80dp"
+                    android:layout_height="94dp"
+                    android:background="@drawable/ip_shape_item_edge_conner_8"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_pdf_no" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/bg_imgthumbnail"
+                android:layout_width="80dp"
+                android:layout_height="94dp"
+                android:background="@drawable/ip_shape_item_edge_conner_6_2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/indexTv"
+                style="@style/FontSemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/ip_bg_convert_index"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fileNameTv"
+            style="@style/FontSemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingLeft="48dp"
+            android:paddingRight="48dp"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/filePathTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/medium"
+            android:gravity="center"
+            android:maxLines="3"
+            android:paddingLeft="48dp"
+            android:paddingRight="48dp"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/optLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fileLayout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shareTv"
+            style="@style/FontSemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:background="@drawable/bg_btn_positive"
+            android:gravity="center"
+            android:text="@string/str_action_share"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:textAllCaps="true" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/openTv"
+            style="@style/FontSemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="72dp"
+            android:background="@drawable/ip_bg_open_btn"
+            android:gravity="center"
+            android:text="@string/str_action_open"
+            android:textColor="@color/ip_color_main_red"
+            android:textSize="18sp"
+            app:textAllCaps="true" />
+    </LinearLayout>
+    <!--    <include layout="@layout/ad_native_container_banner_1"/>-->
+</androidx.constraintlayout.motion.widget.MotionLayout>
+

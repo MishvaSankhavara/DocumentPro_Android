@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.documenpro.photopick.internal.ui.widget.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?item.placeholder"
+    android:foreground="?selectableItemBackground">
+
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/medium"
+        android:gravity="center"
+        android:text="@string/photo_grid_capture"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="14sp"
+        app:drawableTopCompat="@drawable/ic_photo_camera" />
+</com.example.documenpro.photopick.internal.ui.widget.SquareFrameLayout>

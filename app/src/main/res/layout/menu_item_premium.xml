@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/iv_premium_crown"
+    android:layout_width="28dp"
+    android:layout_height="28dp"
+    android:layout_marginEnd="8dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:padding="6dp"
+    android:scaleType="center"
+    android:contentDescription="Premium Features"
+    app:srcCompat="@drawable/ic_crown_premium" />
