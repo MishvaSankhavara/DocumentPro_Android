@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ListFileAdapter;
+import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
 public class WordFragment extends Fragment implements DocumentClickListener {
     private Activity mActivity;
     private EmptyRecyclerView recyclerView;
-    private ListFileAdapter adapter;
+    private FileListAdapter adapter;
     private ArrayList<Document> arrayList;
     private SearchViewModel searchViewModel;
     private ProgressBar progressBar;
@@ -68,7 +68,7 @@ public class WordFragment extends Fragment implements DocumentClickListener {
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new ListFileAdapter(mActivity, arrayList, WordFragment.this);
+                        adapter = new FileListAdapter(mActivity, arrayList, WordFragment.this);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.GONE);

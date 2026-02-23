@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ViewPagerYourPdfAdapter;
+import com.example.documenpro.adapter_reader.PdfViewerPagerAdapter;
 import com.example.documenpro.utils.Utils;
 
 import java.util.Objects;
@@ -68,7 +68,7 @@ public class ResultViewerActivity extends AppCompatActivity {
         tabLayout = categoryTabs;
         viewPager = contentPager;
 
-        ViewPagerYourPdfAdapter resultAdapter = new ViewPagerYourPdfAdapter(this, this);
+        PdfViewerPagerAdapter resultAdapter = new PdfViewerPagerAdapter(this, this);
         contentPager.setAdapter(resultAdapter);
 
         new TabLayoutMediator(categoryTabs, contentPager, (currentTab, pos) -> {

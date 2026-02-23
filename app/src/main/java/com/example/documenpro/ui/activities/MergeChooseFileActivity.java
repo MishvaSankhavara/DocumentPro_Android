@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ChooseMergeFileAdapter;
+import com.example.documenpro.adapter_reader.MergeFileSelectionAdapter;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
@@ -31,7 +31,7 @@ import java.util.concurrent.Executors;
 
 public class MergeChooseFileActivity extends AppCompatActivity {
     private AppCompatTextView btnContinue;
-    private ChooseMergeFileAdapter adapter;
+    private MergeFileSelectionAdapter adapter;
     private Toolbar toolbar;
 
     private ArrayList<PDFModel> arrayList;
@@ -88,8 +88,8 @@ public class MergeChooseFileActivity extends AppCompatActivity {
         executor.execute(() -> {
             arrayList = Utils.getUnLockPDF(MergeChooseFileActivity.this);
             runOnUiThread(() -> {
-                adapter = new ChooseMergeFileAdapter(MergeChooseFileActivity.this, arrayList, position -> {
-                    if (adapter.getSelected().size() > 1) {
+                adapter = new MergeFileSelectionAdapter(MergeChooseFileActivity.this, arrayList, position -> {
+                    if (adapter.getSelected_MergeFileSelection().size() > 1) {
                         btnContinue.setEnabled(true);
                         btnContinue.setClickable(true);
                         btnContinue.setFocusable(true);
@@ -98,7 +98,7 @@ public class MergeChooseFileActivity extends AppCompatActivity {
                         btnContinue.setClickable(false);
                         btnContinue.setFocusable(false);
                     }
-                    toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected().size())));
+                    toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_MergeFileSelection().size())));
                 });
                 recyclerView.setAdapter(adapter);
                 loadingView.setVisibility(View.GONE);
@@ -108,7 +108,7 @@ public class MergeChooseFileActivity extends AppCompatActivity {
 
 
         btnContinue.setOnClickListener(view -> {
-            MyApplication.getInstance().setMergePdfList(adapter.getSelected());
+            MyApplication.getInstance().setMergePdfList(adapter.getSelected_MergeFileSelection());
             Intent intent = new Intent(MergeChooseFileActivity.this, MergeReorderActivity.class);
             startActivity(intent);
             finish();

@@ -5,7 +5,7 @@ import android.os.SystemClock;
 import android.view.ViewGroup;
 
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.SelectFileAdapter;
+import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.db.DbHelper;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.activities.SelectActivity;
@@ -28,7 +28,7 @@ public class RemoveFavoriteExecutor {
     public void executeTask() {
         executor.execute(() -> {
             weakReference.get().runOnUiThread(this::showProgressDialog);
-            ArrayList<Document> arrayListRemove = weakReference.get().adapter.getSelected();
+            ArrayList<Document> arrayListRemove = weakReference.get().adapter.getSelected_FilePicker();
             for (int i = 0; i < arrayListRemove.size(); i++) {
                 Document pdfModel = arrayListRemove.get(i);
                 if (DbHelper.getInstance(weakReference.get()).isStared(pdfModel.getFileUri())) {
@@ -81,10 +81,10 @@ public class RemoveFavoriteExecutor {
         if (weakReference.get().arrayList.size() == 0) {
             weakReference.get().finish();
         } else {
-            weakReference.get().adapter = new SelectFileAdapter(weakReference.get(), weakReference.get().arrayList, weakReference.get());
+            weakReference.get().adapter = new FilePickerAdapter(weakReference.get(), weakReference.get().arrayList, weakReference.get());
             weakReference.get().recyclerView.setAdapter(weakReference.get().adapter);
-            weakReference.get().activeButton(weakReference.get().adapter.getSelected().size() > 0);
-            weakReference.get().toolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().adapter.getSelected().size())));
+            weakReference.get().activeButton(weakReference.get().adapter.getSelected_FilePicker().size() > 0);
+            weakReference.get().toolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().adapter.getSelected_FilePicker().size())));
         }
     }
 }

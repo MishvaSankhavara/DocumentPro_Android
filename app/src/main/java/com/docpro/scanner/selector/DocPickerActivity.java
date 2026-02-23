@@ -25,7 +25,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ChooseFileAdapter;
+import com.example.documenpro.adapter_reader.FileSelectionAdapter;
 import com.example.documenpro.helper.PdfPrintHelper;
 import com.example.documenpro.listener.ChoosePdfListener;
 import com.example.documenpro.listener.PasswordListener;
@@ -46,7 +46,7 @@ import java.util.concurrent.Executors;
 
 public class DocPickerActivity extends AppCompatActivity implements ChoosePdfListener {
     private EmptyRecyclerView rvPicker;
-    private ChooseFileAdapter pickerAdapter;
+    private FileSelectionAdapter pickerAdapter;
     private LottieAnimationView lottieLoader;
     private ArrayList<PDFModel> docList;
     private int operationMode;
@@ -128,7 +128,7 @@ public class DocPickerActivity extends AppCompatActivity implements ChoosePdfLis
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pickerAdapter = new ChooseFileAdapter(DocPickerActivity.this, docList, DocPickerActivity.this);
+                        pickerAdapter = new FileSelectionAdapter(DocPickerActivity.this, docList, DocPickerActivity.this);
                         rvPicker.setAdapter(pickerAdapter);
                         lottieLoader.setVisibility(View.GONE);
                         rvPicker.setVisibility(View.VISIBLE);

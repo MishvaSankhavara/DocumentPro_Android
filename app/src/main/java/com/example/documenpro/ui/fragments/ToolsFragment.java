@@ -1,10 +1,7 @@
 package com.example.documenpro.ui.fragments;
 
-import com.docpro.scanner.engine.ProcessingTaskActivity;
-import com.docpro.scanner.media.MediaSorterActivity;
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.docpro.scanner.selector.DocPickerActivity;
-import com.docpro.scanner.settings.LocaleSelectionActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,15 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.RecyclerViewItemDecoration;
-import com.example.documenpro.adapter.ToolAdapter;
+import com.example.documenpro.adapter_reader.ViewItemDecoration;
+import com.example.documenpro.adapter_reader.DocumentToolAdapter;
 import com.example.documenpro.listener.OnToolClickListener;
 import com.example.documenpro.model.Tools;
 import com.example.documenpro.photopick.Matisse;
 import com.example.documenpro.photopick.MimeType;
 import com.example.documenpro.photopick.engine.GlideEngine;
-import com.docpro.scanner.selector.DocPickerActivity;
-import com.docpro.scanner.result.ResultViewerActivity;
 import com.example.documenpro.ui.activities.MergeChooseFileActivity;
 import com.example.documenpro.utils.Utils;
 
@@ -61,10 +56,10 @@ public class ToolsFragment extends Fragment {
     private void initViews(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.tools_rv);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen._1sdp);
-        recyclerView.addItemDecoration(new RecyclerViewItemDecoration(spacingInPixels));
+        recyclerView.addItemDecoration(new ViewItemDecoration(spacingInPixels));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(mActivity, 4, RecyclerView.VERTICAL, false));
-        ToolAdapter adapter = new ToolAdapter(mActivity, new OnToolClickListener() {
+        DocumentToolAdapter adapter = new DocumentToolAdapter(mActivity, new OnToolClickListener() {
             @Override
             public void onTool(Tools toolType) {
                 mToolType = toolType;

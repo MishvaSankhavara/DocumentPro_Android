@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.documenpro.BaseActivity;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.SelectFileAdapter;
+import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.ads.NativeAdAdmob;
 import com.example.documenpro.db.DbHelper;
 import com.example.documenpro.executor.RemoveFavoriteExecutor;
@@ -52,7 +52,7 @@ import java.util.Objects;
 
 public class SelectActivity extends BaseActivity implements View.OnClickListener, ItemSelectListener {
     public EmptyRecyclerView recyclerView;
-    public SelectFileAdapter adapter;
+    public FilePickerAdapter adapter;
     public Toolbar toolbar;
     private LinearLayout btnShare;
     private LinearLayout btnMove;
@@ -181,7 +181,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             imgMove.setImageResource(R.drawable.ic_remove);
             tvMove.setText(R.string.str_move_out);
         }
-        adapter = new SelectFileAdapter(this, arrayList, this);
+        adapter = new FilePickerAdapter(this, arrayList, this);
 
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.GONE);
@@ -192,11 +192,11 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         int idView = v.getId();
         if (idView == R.id.ll_share) {
-            if (adapter.getSelected().size() < 50) {
+            if (adapter.getSelected_FilePicker().size() < 50) {
                 try {
                     ArrayList<Uri> arrayList = new ArrayList<>();
-                    for (int i = 0; i < adapter.getSelected().size(); i++) {
-                        arrayList.add(FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(adapter.getSelected().get(i).getFileUri())));
+                    for (int i = 0; i < adapter.getSelected_FilePicker().size(); i++) {
+                        arrayList.add(FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(adapter.getSelected_FilePicker().get(i).getFileUri())));
                     }
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -281,16 +281,16 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             finish();
         } else if (item.getItemId() == R.id.item_select_all) {
 
-            if (adapter.isSelectedAll) {
-                adapter.setUnSelectedAll();
+            if (adapter.isSelectedAll_FilePicker) {
+                adapter.setUnSelectedAll_FilePicker();
                 menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
                 activeButton(false);
             } else {
-                adapter.setSelectedAll();
+                adapter.setSelectedAll_FilePicker();
                 menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                 activeButton(true);
             }
-            toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected().size())));
+            toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_FilePicker().size())));
 
         }
 
@@ -299,14 +299,14 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onItemSelect() {
-        activeButton(!adapter.getSelected().isEmpty());
-        toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected().size())));
-        if (adapter.getSelected().size() == arrayList.size()) {
+        activeButton(!adapter.getSelected_FilePicker().isEmpty());
+        toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_FilePicker().size())));
+        if (adapter.getSelected_FilePicker().size() == arrayList.size()) {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
-            adapter.isSelectedAll = true;
+            adapter.isSelectedAll_FilePicker = true;
         } else {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
-            adapter.isSelectedAll = false;
+            adapter.isSelectedAll_FilePicker = false;
         }
     }
 
@@ -335,7 +335,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         protected Void doInBackground(Void... voids) {
-            ArrayList<Document> arrayList1 = weakReference.get().adapter.getSelected();
+            ArrayList<Document> arrayList1 = weakReference.get().adapter.getSelected_FilePicker();
             for (int i = 0; i < arrayList1.size(); i++) {
                 Document pdfModel = arrayList1.get(i);
                 File file = new File(pdfModel.getFileUri());
@@ -385,11 +385,11 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             }
 
 
-            weakReference.get().adapter = new SelectFileAdapter(weakReference.get(), weakReference.get().arrayList, weakReference.get());
+            weakReference.get().adapter = new FilePickerAdapter(weakReference.get(), weakReference.get().arrayList, weakReference.get());
             weakReference.get().recyclerView.setAdapter(weakReference.get().adapter);
 
-            weakReference.get().activeButton(!weakReference.get().adapter.getSelected().isEmpty());
-            weakReference.get().toolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().adapter.getSelected().size())));
+            weakReference.get().activeButton(!weakReference.get().adapter.getSelected_FilePicker().isEmpty());
+            weakReference.get().toolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().adapter.getSelected_FilePicker().size())));
 
 
         }
@@ -428,7 +428,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
 
         @Override
         protected Void doInBackground(Void... voids) {
-            ArrayList<Document> arrayListRemove = weakReference.get().adapter.getSelected();
+            ArrayList<Document> arrayListRemove = weakReference.get().adapter.getSelected_FilePicker();
             for (int i = 0; i < arrayListRemove.size(); i++) {
                 Document pdfModel = arrayListRemove.get(i);
                 if (DbHelper.getInstance(weakReference.get()).isRecent(pdfModel.getFileUri())) {
@@ -453,10 +453,10 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             if (weakReference.get().arrayList.isEmpty()) {
                 weakReference.get().finish();
             } else {
-                weakReference.get().adapter = new SelectFileAdapter(weakReference.get(), weakReference.get().arrayList, weakReference.get());
+                weakReference.get().adapter = new FilePickerAdapter(weakReference.get(), weakReference.get().arrayList, weakReference.get());
                 weakReference.get().recyclerView.setAdapter(weakReference.get().adapter);
-                weakReference.get().activeButton(!weakReference.get().adapter.getSelected().isEmpty());
-                weakReference.get().toolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().adapter.getSelected().size())));
+                weakReference.get().activeButton(!weakReference.get().adapter.getSelected_FilePicker().isEmpty());
+                weakReference.get().toolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().adapter.getSelected_FilePicker().size())));
             }
         }
 

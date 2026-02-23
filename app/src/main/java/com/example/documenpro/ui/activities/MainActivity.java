@@ -37,7 +37,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.adapter.ViewPagerAdapter;
+import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.ads.AdClosedListener;
 import com.example.documenpro.ads.FullAds;
 import com.example.documenpro.ui.customviews.switchdaynight.DayNightSwitch;
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        PagerViewAdapter viewPagerAdapter = new PagerViewAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFrag(new FilesFragment(this), "Home");
         viewPagerAdapter.addFrag(new ToolsFragment(this), "Files");
         viewPagerAdapter.addFrag(new SettingFragment(this), "Settings");

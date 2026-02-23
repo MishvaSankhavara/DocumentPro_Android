@@ -30,8 +30,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.adapter.ReorderMergeAdapter;
-import com.docpro.scanner.engine.ProcessingTaskActivity;
+import com.example.documenpro.adapter_reader.MergeReorderAdapter;
 import com.example.documenpro.helper.SimpleItemTouchHelperCallback;
 import com.example.documenpro.listener.OnConfirmListener;
 import com.example.documenpro.listener.OnStartDragListener;
@@ -43,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MergeReorderActivity extends AppCompatActivity implements OnStartDragListener {
-    private ReorderMergeAdapter adapter;
+    private MergeReorderAdapter adapter;
     private ArrayList<PDFModel> arrayList = new ArrayList<>();
     private AppCompatTextView btnMerge;
 
@@ -133,7 +132,7 @@ public class MergeReorderActivity extends AppCompatActivity implements OnStartDr
                 String.valueOf(MyApplication.getInstance().getArrayListMerge().size())));
         arrayList = MyApplication.getInstance().getArrayListMerge();
 
-        adapter = new ReorderMergeAdapter(this, this, arrayList, (pdfModel, mPosition) -> {
+        adapter = new MergeReorderAdapter(this, this, arrayList, (pdfModel, mPosition) -> {
             arrayList.remove(mPosition);
             adapter.notifyItemRemoved(mPosition);
             saveList();

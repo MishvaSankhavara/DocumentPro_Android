@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.RecentAdapter;
+import com.example.documenpro.adapter_reader.RecentFilesAdapter;
 import com.example.documenpro.ads.FullAds;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.model.Document;
@@ -32,7 +32,7 @@ public class RecentFragment2 extends Fragment implements DocumentClickListener {
     private EmptyRecyclerView recyclerView;
     private TextView tvDesEmpty;
     private ProgressBar loadingView;
-    RecentAdapter adapter;
+    RecentFilesAdapter adapter;
 
     public RecentFragment2() {
     }
@@ -51,7 +51,7 @@ public class RecentFragment2 extends Fragment implements DocumentClickListener {
             public void onChanged(ArrayList<Document> documents) {
                 // Update RecyclerView with new favorite list
 //                adapter.notifyDataSetChanged();
-                adapter = new RecentAdapter(mActivity, RecentFragment2.this);
+                adapter = new RecentFilesAdapter(mActivity, RecentFragment2.this);
                 recyclerView.setAdapter(adapter);
             }
         });
@@ -67,7 +67,7 @@ public class RecentFragment2 extends Fragment implements DocumentClickListener {
         tvDesEmpty = view.findViewById(R.id.tv_empty_desc);
         loadingView = view.findViewById(R.id.loadingView);
         tvDesEmpty.setText(mActivity.getResources().getString(R.string.recent_files_appear_here));
-        adapter = new RecentAdapter(mActivity, this);
+        adapter = new RecentFilesAdapter(mActivity, this);
         recyclerView.setAdapter(adapter);
         loadingView.setVisibility(View.GONE);
     }
@@ -83,7 +83,7 @@ public class RecentFragment2 extends Fragment implements DocumentClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        adapter = new RecentAdapter(mActivity, this);
+        adapter = new RecentFilesAdapter(mActivity, this);
         recyclerView.setAdapter(adapter);
     }
 

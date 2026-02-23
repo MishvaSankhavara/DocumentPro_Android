@@ -55,7 +55,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.adapter.ListFileAdapter;
+import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.ads.AdClosedListener;
 import com.example.documenpro.ads.FullAds;
 import com.example.documenpro.db.DbHelper;
@@ -534,7 +534,7 @@ public class Utils {
         }
     }
 
-    public static void searchDocument(String string, ArrayList<Document> itemList, ListFileAdapter adapter) {
+    public static void searchDocument(String string, ArrayList<Document> itemList, FileListAdapter adapter) {
         ArrayList<Document> arrayList = new ArrayList<>();
         for (Document documentModel : itemList) {
             if (documentModel.getFileName().toLowerCase().contains(string.toLowerCase())) {

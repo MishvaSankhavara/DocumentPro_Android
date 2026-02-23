@@ -23,7 +23,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.adapter.OnBoardAdapter;
+import com.example.documenpro.adapter_reader.OnboardingScreenAdapter;
 import com.example.documenpro.ads.AdClosedListener;
 import com.example.documenpro.ads.FullAds;
 import com.example.documenpro.ads.NativeAdAdmob;
@@ -98,8 +98,8 @@ public class OnBoardActivity extends AppCompatActivity {
 
     private void initViewPager() {
         if (viewPager2 != null) {
-            OnBoardAdapter aVar = new OnBoardAdapter();
-            aVar.list = this.listView;
+            OnboardingScreenAdapter aVar = new OnboardingScreenAdapter();
+            aVar.list_OnboardingScreen = this.listView;
             viewPager2.setAdapter(aVar);
             viewPager2.setCurrentItem(0);
             viewPager2.registerOnPageChangeCallback(new ViewPagerChange(this));

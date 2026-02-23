@@ -27,7 +27,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ViewPagerAdapter;
+import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SelectActivity;
@@ -115,7 +115,7 @@ public class FilesFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.btnSelect).setOnClickListener(this);
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         ViewPager viewPager = view.findViewById(R.id.vp_content);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(mActivity.getSupportFragmentManager());
+        PagerViewAdapter adapter = new PagerViewAdapter(mActivity.getSupportFragmentManager());
         adapter.addFrag(new RecentFragment2(mActivity), getResources().getString(R.string.str_recent));
         adapter.addFrag(new FavoriteFragment2(mActivity), getResources().getString(R.string.str_favorite));
         viewPager.setAdapter(adapter);

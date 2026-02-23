@@ -24,7 +24,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.BaseActivity;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ListFileAdapter;
+import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.ads.FullAds;
 import com.example.documenpro.ads.NativeAdAdmob;
 import com.example.documenpro.listener.DocumentClickListener;
@@ -45,7 +45,7 @@ public class ListFileActivity extends BaseActivity implements DocumentClickListe
     Toolbar toolbar;
 
     private ArrayList<Document> itemsList;
-    private ListFileAdapter adapter;
+    private FileListAdapter adapter;
     private ConstraintLayout clMain;
     private String codeType;
     private final Executor executor = Executors.newSingleThreadExecutor();
@@ -80,7 +80,7 @@ public class ListFileActivity extends BaseActivity implements DocumentClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        adapter = new ListFileAdapter(ListFileActivity.this, itemsList, ListFileActivity.this);
+                        adapter = new FileListAdapter(ListFileActivity.this, itemsList, ListFileActivity.this);
                         recyclerView.setAdapter(adapter);
                         recyclerView.setVisibility(View.VISIBLE);
                         loadingView.setVisibility(View.GONE);

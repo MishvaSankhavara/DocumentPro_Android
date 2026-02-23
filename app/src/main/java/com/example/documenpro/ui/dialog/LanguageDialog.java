@@ -12,7 +12,7 @@ import com.hjq.language.MultiLanguages;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.adapter.LanguageDialogAdapter;
+import com.example.documenpro.adapter_reader.LanguagePickerDialogAdapter;
 import com.example.documenpro.model.Language;
 import com.example.documenpro.ui.activities.SplashActivity;
 
@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class LanguageDialog extends Dialog {
     RecyclerView recyclerView;
-    LanguageDialogAdapter adapter;
+    LanguagePickerDialogAdapter adapter;
     Context mContext;
     int langChoice;
 
@@ -32,7 +32,7 @@ public class LanguageDialog extends Dialog {
         langChoice = SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.LANGUAGE_KEY_NUMBER, 0);
         recyclerView = findViewById(R.id.rcv_list);
         final ArrayList<Language> arrayList = GlobalConstant.createArrayLanguage();
-        adapter = new LanguageDialogAdapter(getContext(), lang -> langChoice = lang);
+        adapter = new LanguagePickerDialogAdapter(getContext(), lang -> langChoice = lang);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         findViewById(R.id.tv_ok).setOnClickListener(view1 -> {

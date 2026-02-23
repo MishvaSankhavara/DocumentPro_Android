@@ -17,7 +17,7 @@ import com.example.documenpro.BaseActivity;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.adapter.LanguageAdapter;
+import com.example.documenpro.adapter_reader.LanguageListAdapter;
 import com.example.documenpro.ads.AdClosedListener;
 import com.example.documenpro.ads.FullAds;
 import com.example.documenpro.ads.NativeAdAdmob;
@@ -29,7 +29,7 @@ import java.util.Locale;
 public class LocaleSelectionActivity extends BaseActivity {
 
     private RecyclerView rcvLocales;
-    private LanguageAdapter localeAdapter;
+    private LanguageListAdapter localeAdapter;
     private int selectedLocaleIndex = 0;
 
     @Override
@@ -48,7 +48,7 @@ public class LocaleSelectionActivity extends BaseActivity {
         NativeAdAdmob.showNativeBanner1(this, null);
 
         rcvLocales = findViewById(R.id.rv_locale_list);
-        localeAdapter = new LanguageAdapter(this, new LanguageListener() {
+        localeAdapter = new LanguageListAdapter(this, new LanguageListener() {
             @Override
             public void onLangChoice(int index) {
                 selectedLocaleIndex = index;

@@ -30,14 +30,13 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ThumbnailPdfAdapter;
+import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
 import com.example.documenpro.listener.OnConfirmListener;
 import com.example.documenpro.listener.RenameDialogListener;
 import com.example.documenpro.listener.ThumbnailClickListener;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.model.PDFPage;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
-import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
 import com.shockwave.pdfium.PdfDocument;
@@ -55,7 +54,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements Thumbn
     private LottieAnimationView loadingView;
     private Toolbar toolbar;
     private EmptyRecyclerView recyclerView;
-    private ThumbnailPdfAdapter adapter;
+    private PdfPreviewThumbnailAdapter adapter;
     private final ArrayList<PDFPage> listPdfPages = new ArrayList<>();
     private String strAllPdfPictureDir;
     private String pdfDirAsFileName;
@@ -116,16 +115,16 @@ public class SplitChooseFileActivity extends AppCompatActivity implements Thumbn
             onBackPressed();
         } else if (item.getItemId() == R.id.item_select_all) {
             if (finishLoad) {
-                if (adapter.isSelectedAll) {
-                    adapter.setUnSelectedAll();
+                if (adapter.isSelectedAll_PdfPreview) {
+                    adapter.setUnSelectedAll_PdfPreview();
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
                     activeButton(false);
                 } else {
-                    adapter.setSelectedAll();
+                    adapter.setSelectedAll_PdfPreview();
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                     activeButton(true);
                 }
-                toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected().size())));
+                toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_PdfPreview().size())));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -149,7 +148,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements Thumbn
                 DialogUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile, new RenameDialogListener() {
                     @Override
                     public void onRenameDialog(String newName) {
-                        MyApplication.getInstance().setArraylistSplit(adapter.getPageNumbers());
+                        MyApplication.getInstance().setArraylistSplit(adapter.getPageNumbers_PdfPreview());
                         Intent intent = new Intent(SplitChooseFileActivity.this, ProcessingTaskActivity.class);
                         intent.putExtra(GlobalConstant.PDF_FILE_NAME, newName);
                         intent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_SPLIT);
@@ -188,14 +187,14 @@ public class SplitChooseFileActivity extends AppCompatActivity implements Thumbn
 
     @Override
     public void onChoosePdfSplit() {
-        activeButton(!adapter.getSelected().isEmpty());
-        toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected().size())));
-        if (adapter.getSelected().size() == listPdfPages.size()) {
+        activeButton(!adapter.getSelected_PdfPreview().isEmpty());
+        toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_PdfPreview().size())));
+        if (adapter.getSelected_PdfPreview().size() == listPdfPages.size()) {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
-            adapter.isSelectedAll = true;
+            adapter.isSelectedAll_PdfPreview = true;
         } else {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
-            adapter.isSelectedAll = false;
+            adapter.isSelectedAll_PdfPreview = false;
         }
 
     }
@@ -301,7 +300,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements Thumbn
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             if (weakReference.get() != null) {
-                weakReference.get().adapter = new ThumbnailPdfAdapter(weakReference.get(),
+                weakReference.get().adapter = new PdfPreviewThumbnailAdapter(weakReference.get(),
                         weakReference.get().listPdfPages, weakReference.get());
                 int i = Utils.isTablet(weakReference.get()) ? 6 : 2;
                 weakReference.get().recyclerView

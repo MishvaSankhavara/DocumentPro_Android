@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ThumbnailPdfAdapter;
+import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
 import com.example.documenpro.listener.ThumbnailClickListener;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.model.PDFPage;
@@ -55,7 +55,7 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
     private LottieAnimationView loadingView;
     private Toolbar toolbar;
     private EmptyRecyclerView recyclerView;
-    private ThumbnailPdfAdapter adapter;
+    private PdfPreviewThumbnailAdapter adapter;
     private final ArrayList<PDFPage> listPdfPages = new ArrayList<>();
 
     private String strAllPdfPictureDir;
@@ -112,10 +112,10 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
             @Override
             public void onClick(View view) {
                 if (toolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
-                    if (adapter.getSelected().size() < 50) {
+                    if (adapter.getSelected_PdfPreview().size() < 50) {
                         ArrayList<Uri> arrayList = new ArrayList<>();
-                        for (int i = 0; i < adapter.getSelected().size(); i++) {
-                            arrayList.add(FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", new File(Objects.requireNonNull(adapter.getSelected().get(i).getThumbnailUri().getPath()))));
+                        for (int i = 0; i < adapter.getSelected_PdfPreview().size(); i++) {
+                            arrayList.add(FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", new File(Objects.requireNonNull(adapter.getSelected_PdfPreview().get(i).getThumbnailUri().getPath()))));
                         }
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -128,7 +128,7 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
                     }
                 } else if (toolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
 
-                    ConvertDialog dialog = new ConvertDialog(ShareImageActivity.this, adapter.getSelected());
+                    ConvertDialog dialog = new ConvertDialog(ShareImageActivity.this, adapter.getSelected_PdfPreview());
                     Window window4 = dialog.getWindow();
                     assert window4 != null;
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -146,16 +146,16 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
             onBackPressed();
         } else if (item.getItemId() == R.id.item_select_all) {
             if (finishLoad) {
-                if (adapter.isSelectedAll) {
-                    adapter.setUnSelectedAll();
+                if (adapter.isSelectedAll_PdfPreview) {
+                    adapter.setUnSelectedAll_PdfPreview();
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
                     activeButton(false);
                 } else {
-                    adapter.setSelectedAll();
+                    adapter.setSelectedAll_PdfPreview();
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                     activeButton(true);
                 }
-                toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected().size())));
+                toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_PdfPreview().size())));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -193,7 +193,7 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
     }
 
     private void checkBtnContinue() {
-        activeButton(!adapter.getSelected().isEmpty());
+        activeButton(!adapter.getSelected_PdfPreview().isEmpty());
     }
 
     private void activeButton(boolean b) {
@@ -205,13 +205,13 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
     @Override
     public void onChoosePdfSplit() {
         checkBtnContinue();
-        toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected().size())));
-        if (adapter.getSelected().size() == listPdfPages.size()) {
+        toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_PdfPreview().size())));
+        if (adapter.getSelected_PdfPreview().size() == listPdfPages.size()) {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
-            adapter.isSelectedAll = true;
+            adapter.isSelectedAll_PdfPreview = true;
         } else {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
-            adapter.isSelectedAll = false;
+            adapter.isSelectedAll_PdfPreview = false;
         }
     }
 
@@ -313,7 +313,7 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             if (weakReference.get() != null) {
-                weakReference.get().adapter = new ThumbnailPdfAdapter(weakReference.get(), weakReference.get().listPdfPages, weakReference.get());
+                weakReference.get().adapter = new PdfPreviewThumbnailAdapter(weakReference.get(), weakReference.get().listPdfPages, weakReference.get());
                 int i = Utils.isTablet(weakReference.get()) ? 6 : 3;
                 weakReference.get().recyclerView.setLayoutManager(new GridLayoutManager(weakReference.get(), i, RecyclerView.VERTICAL, false));
                 weakReference.get().loadingView.setVisibility(View.GONE);

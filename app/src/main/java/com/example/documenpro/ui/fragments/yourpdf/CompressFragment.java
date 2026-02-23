@@ -1,6 +1,5 @@
 package com.example.documenpro.ui.fragments.yourpdf;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ListFileAdapter2;
+import com.example.documenpro.adapter_reader.CompactFileListAdapter;
 import com.example.documenpro.listener.OnPdfClickListener;
 import com.example.documenpro.model.PDFModel;
 import com.docpro.scanner.result.ResultViewerActivity;
@@ -33,7 +32,7 @@ public class CompressFragment extends Fragment implements OnPdfClickListener {
     private LottieAnimationView loadingView;
     private ArrayList<PDFModel> arrayList;
     EmptyRecyclerView recyclerView;
-    ListFileAdapter2 adapter;
+    CompactFileListAdapter adapter;
 
     public CompressFragment() {
     }
@@ -98,7 +97,7 @@ public class CompressFragment extends Fragment implements OnPdfClickListener {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            weakReference.get().adapter = new ListFileAdapter2(weakReference.get().mActivity,
+            weakReference.get().adapter = new CompactFileListAdapter(weakReference.get().mActivity,
                     weakReference.get().arrayList, weakReference.get());
             weakReference.get().recyclerView.setAdapter(weakReference.get().adapter);
             weakReference.get().loadingView.setVisibility(View.GONE);

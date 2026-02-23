@@ -21,7 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.example.documenpro.BaseActivity;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ViewPagerAdapter;
+import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.ads.NativeAdAdmob;
 import com.example.documenpro.ui.fragments.search.AllFileFragment;
 import com.example.documenpro.ui.fragments.search.ExcelFragment;
@@ -118,7 +118,7 @@ public class SearchActivity extends BaseActivity implements ViewPager.OnPageChan
         tabLayout = findViewById(R.id.tab_layout);
         ViewPager viewPager = findViewById(R.id.vp_content);
         findViewById(R.id.tv_back).setOnClickListener(view -> finish());
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        PagerViewAdapter adapter = new PagerViewAdapter(getSupportFragmentManager());
         adapter.addFrag(new AllFileFragment(this), getResources().getString(R.string.document_all));
         adapter.addFrag(new ExcelFragment(this), getResources().getString(R.string.document_excel));
         adapter.addFrag(new PdfFragment(this), getResources().getString(R.string.document_pdf));

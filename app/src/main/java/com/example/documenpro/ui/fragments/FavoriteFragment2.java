@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.FavoriteAdapter;
+import com.example.documenpro.adapter_reader.FavoriteItemsAdapter;
 import com.example.documenpro.ads.FullAds;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.model.Document;
@@ -33,7 +33,7 @@ public class FavoriteFragment2 extends Fragment implements DocumentClickListener
 
     private TextView tvDesEmpty;
     private ProgressBar loadingView;
-    FavoriteAdapter adapter;
+    FavoriteItemsAdapter adapter;
 
     public FavoriteFragment2() {
     }
@@ -52,7 +52,7 @@ public class FavoriteFragment2 extends Fragment implements DocumentClickListener
             @Override
             public void onChanged(ArrayList<Document> documents) {
 
-                adapter = new FavoriteAdapter(mActivity, FavoriteFragment2.this);
+                adapter = new FavoriteItemsAdapter(mActivity, FavoriteFragment2.this);
                 recyclerView.setAdapter(adapter);
             }
         });
@@ -68,7 +68,7 @@ public class FavoriteFragment2 extends Fragment implements DocumentClickListener
         tvDesEmpty = view.findViewById(R.id.tv_empty_desc);
         loadingView = view.findViewById(R.id.loadingView);
         tvDesEmpty.setText(mActivity.getResources().getString(R.string.img_add_to_favorites));
-        adapter = new FavoriteAdapter(mActivity, this);
+        adapter = new FavoriteItemsAdapter(mActivity, this);
         recyclerView.setAdapter(adapter);
         loadingView.setVisibility(View.GONE);
     }
@@ -76,7 +76,7 @@ public class FavoriteFragment2 extends Fragment implements DocumentClickListener
     @Override
     public void onResume() {
         super.onResume();
-        adapter = new FavoriteAdapter(mActivity, this);
+        adapter = new FavoriteItemsAdapter(mActivity, this);
         recyclerView.setAdapter(adapter);
     }
 

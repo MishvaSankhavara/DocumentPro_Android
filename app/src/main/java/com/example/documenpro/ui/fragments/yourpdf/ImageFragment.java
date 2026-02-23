@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.adapter.ImageAdapter;
+import com.example.documenpro.adapter_reader.ImageItemAdapter;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 
 import java.io.File;
@@ -29,7 +29,7 @@ public class ImageFragment extends Fragment {
     private LottieAnimationView loadingView;
     private ArrayList<File> arrayList;
     EmptyRecyclerView recyclerView;
-    ImageAdapter adapter;
+    ImageItemAdapter adapter;
 
     public ImageFragment() {
     }
@@ -78,7 +78,7 @@ public class ImageFragment extends Fragment {
             File[] files = GlobalConstant.RootDirectoryImageSaved.listFiles();
             if (files != null) {
                 Collections.addAll(weakReference.get().arrayList, files);
-                weakReference.get().adapter = new ImageAdapter(weakReference.get().mActivity, weakReference.get().arrayList);
+                weakReference.get().adapter = new ImageItemAdapter(weakReference.get().mActivity, weakReference.get().arrayList);
             }
             return null;
         }

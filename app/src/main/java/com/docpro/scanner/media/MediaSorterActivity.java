@@ -26,7 +26,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.adapter.PhotoAdapter;
+import com.example.documenpro.adapter_reader.PhotoSelectionAdapter;
 import com.example.documenpro.listener.OnConfirmListener;
 import com.example.documenpro.listener.OnRemovePhoto;
 import com.example.documenpro.listener.RenameDialogListener;
@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class MediaSorterActivity extends AppCompatActivity {
-    private PhotoAdapter mediaListAdapter;
+    private PhotoSelectionAdapter mediaListAdapter;
 
     private ArrayList<Photo> photoCollection;
 
@@ -137,7 +137,7 @@ public class MediaSorterActivity extends AppCompatActivity {
         dragDropManager.setDraggingItemScale(1.3f);
         dragDropManager.setDraggingItemRotation(15.0f);
 
-        final PhotoAdapter internalAdapter = new PhotoAdapter(this, photoCollection, new OnRemovePhoto() {
+        final PhotoSelectionAdapter internalAdapter = new PhotoSelectionAdapter(this, photoCollection, new OnRemovePhoto() {
             @Override
             public void onRemove(int position) {
                 photoCollection.remove(position);

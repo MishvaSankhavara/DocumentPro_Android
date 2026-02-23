@@ -60,7 +60,7 @@ import com.artifex.sonui.editor.SODocSession.SODocSessionLoadListener;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.ui.activities.ViewOfficeActivity;
-import com.example.documenpro.adapter.ColorPickAdapter;
+import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
 import com.example.documenpro.ads.NativeAdAdmob;
 import com.example.documenpro.ui.customviews.BottomBtn;
 import com.example.documenpro.ui.customviews.EditBtn;
@@ -1213,7 +1213,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         recyclerBgColor.setLayoutManager(layoutManager1);
         recyclerBgColor.setHasFixedSize(true);
 
-        ColorPickAdapter adapterBgColor = new ColorPickAdapter(GlobalConstant.getColorBgList(), 0, new ColorPickAdapter.ColorChangedListener() {
+        ColorSelectionAdapter adapterBgColor = new ColorSelectionAdapter(GlobalConstant.getColorBgList(), 0, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
             @Override
             public void onColorChanged(String var1) {
                 if (var1.equals("transparent")) {
@@ -1233,7 +1233,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerTextColor.setLayoutManager(layoutManager2);
         recyclerTextColor.setHasFixedSize(true);
-        ColorPickAdapter adapterTextColor = new ColorPickAdapter(GlobalConstant.getColorTextList(), 0, new ColorPickAdapter.ColorChangedListener() {
+        ColorSelectionAdapter adapterTextColor = new ColorSelectionAdapter(GlobalConstant.getColorTextList(), 0, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
             @Override
             public void onColorChanged(String var1) {
                 NUIDocView.this.mSession.getDoc().setSelectionFontColor(var1);
