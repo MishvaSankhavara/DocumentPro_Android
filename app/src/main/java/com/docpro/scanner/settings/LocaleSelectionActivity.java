@@ -18,9 +18,9 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.LanguageListAdapter;
-import com.example.documenpro.ads.AdClosedListener;
-import com.example.documenpro.ads.FullAds;
-import com.example.documenpro.ads.NativeAdAdmob;
+import com.example.documenpro.advertisement.OnAdDismissedListener;
+import com.example.documenpro.advertisement.AdManager;
+import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.listener.LanguageListener;
 import com.example.documenpro.ui.activities.OnBoardActivity;
 
@@ -45,7 +45,7 @@ public class LocaleSelectionActivity extends BaseActivity {
         });
 
         getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
-        NativeAdAdmob.showNativeBanner1(this, null);
+        AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
 
         rcvLocales = findViewById(R.id.rv_locale_list);
         localeAdapter = new LanguageListAdapter(this, new LanguageListener() {
@@ -61,9 +61,9 @@ public class LocaleSelectionActivity extends BaseActivity {
         findViewById(R.id.btn_apply_locale).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FullAds.showAds(LocaleSelectionActivity.this, new AdClosedListener() {
+                AdManager.showAds_AdManager(LocaleSelectionActivity.this, new OnAdDismissedListener() {
                     @Override
-                    public void AdClosed() {
+                    public void OnAdDismissedListener() {
                         SharedPreferenceUtils utils = SharedPreferenceUtils.getInstance(LocaleSelectionActivity.this);
                         utils.setBoolean(GlobalConstant.LANGUAGE_SET, true);
                         utils.setString(GlobalConstant.LANGUAGE_NAME,

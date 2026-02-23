@@ -56,8 +56,8 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.FileListAdapter;
-import com.example.documenpro.ads.AdClosedListener;
-import com.example.documenpro.ads.FullAds;
+import com.example.documenpro.advertisement.OnAdDismissedListener;
+import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.db.DbHelper;
 import com.example.documenpro.listener.MoreListener;
 import com.example.documenpro.listener.OnConfirmListener;
@@ -442,9 +442,9 @@ public class Utils {
     public static void backWithAds(Activity mContext, int number) {
         int numberAds = SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.ADS_COUNT_BACK, 1);
         if (countAds(mContext, GlobalConstant.ADS_COUNT_BACK, number)) {
-            FullAds.showAds(mContext, new AdClosedListener() {
+            AdManager.showAds_AdManager(mContext, new OnAdDismissedListener() {
                 @Override
-                public void AdClosed() {
+                public void OnAdDismissedListener() {
                     SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.ADS_COUNT_BACK, numberAds + 1);
                     mContext.finish();
                 }
@@ -571,9 +571,9 @@ public class Utils {
     public static void openFileWithAds(Activity mContext, Document document, int number) {
         int numberAds = SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.ADS_COUNT, 1);
         if (countAds(mContext, number)) {
-            FullAds.showAds(mContext, new AdClosedListener() {
+            AdManager.showAds_AdManager(mContext, new OnAdDismissedListener() {
                 @Override
-                public void AdClosed() {
+                public void OnAdDismissedListener() {
                     openFile(mContext, document);
                 }
 

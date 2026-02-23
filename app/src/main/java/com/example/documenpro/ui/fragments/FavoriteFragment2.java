@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FavoriteItemsAdapter;
-import com.example.documenpro.ads.FullAds;
+import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.activities.MainActivity;
@@ -90,7 +90,7 @@ public class FavoriteFragment2 extends Fragment implements DocumentClickListener
 
     @Override
     public void onDocument(Document document) {
-        FullAds.showAds(mActivity, () -> Utils.openFile(mActivity, document));
+        AdManager.showAds_AdManager(mActivity, () -> Utils.openFile(mActivity, document));
 
     }
 

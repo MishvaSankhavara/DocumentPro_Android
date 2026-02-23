@@ -25,8 +25,8 @@ import com.example.documenpro.BaseActivity;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
-import com.example.documenpro.ads.FullAds;
-import com.example.documenpro.ads.NativeAdAdmob;
+import com.example.documenpro.advertisement.AdManager;
+import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.listener.DocumentClickListener;
 import com.example.documenpro.listener.SortByListener;
 import com.example.documenpro.model.Document;
@@ -67,7 +67,7 @@ public class ListFileActivity extends BaseActivity implements DocumentClickListe
             fileType = getIntent().getIntExtra(FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
         }
         intViews();
-        NativeAdAdmob.showNativeBanner1(this, null);
+        AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
         setUpToolbar();
         loadFiles(codeType);
     }
@@ -185,7 +185,7 @@ public class ListFileActivity extends BaseActivity implements DocumentClickListe
     @Override
     public void onDocument(Document document) {
 //        Utils.openFile(this, document);
-        FullAds.showAds(this, () -> Utils.openFile(this, document));
+        AdManager.showAds_AdManager(this, () -> Utils.openFile(this, document));
 
 //        Utils.openFileWithAds(this, document, 2);
     }

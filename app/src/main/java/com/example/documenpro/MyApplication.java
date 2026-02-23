@@ -21,8 +21,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.appopen.AppOpenAd;
 import com.hjq.language.MultiLanguages;
-import com.example.documenpro.ads.FullAds;
-import com.example.documenpro.ads.GoogleMobileAdsConsentManager;
+import com.example.documenpro.advertisement.AdManager;
+import com.example.documenpro.advertisement.AdConsentManager;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.utils.AdsUtils;
 
@@ -82,7 +82,7 @@ public class MyApplication extends Application implements Application.ActivityLi
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
         appOpenAdManager = new AppOpenAdManager();
 
-        FullAds.loadAds(this);
+        AdManager.loadAds_AdManager(this);
 
     }
 
@@ -197,8 +197,8 @@ public class MyApplication extends Application implements Application.ActivityLi
         private static final String LOG_TAG = "AppOpenAdManager";
         private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/9257395921";
 
-        private final GoogleMobileAdsConsentManager googleMobileAdsConsentManager =
-                GoogleMobileAdsConsentManager.getInstance(getApplicationContext());
+        private final AdConsentManager googleMobileAdsConsentManager =
+                AdConsentManager.getInstance(getApplicationContext());
         private AppOpenAd appOpenAd = null;
         private boolean isLoadingAd = false;
         private boolean isShowingAd = false;

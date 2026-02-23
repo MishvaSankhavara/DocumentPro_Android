@@ -22,7 +22,7 @@ import com.example.documenpro.BaseActivity;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
-import com.example.documenpro.ads.NativeAdAdmob;
+import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.ui.fragments.search.AllFileFragment;
 import com.example.documenpro.ui.fragments.search.ExcelFragment;
 import com.example.documenpro.ui.fragments.search.PdfFragment;
@@ -58,7 +58,7 @@ public class SearchActivity extends BaseActivity implements ViewPager.OnPageChan
             fileType = intent.getIntExtra(GlobalConstant.FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
         }
         initViews();
-        NativeAdAdmob.showNativeBanner3(this, null);
+        AdMobNativeAdManager.showNativeBanner3_AdMob(this, null);
         setUpToolBarColor(fileType);
         searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
     }

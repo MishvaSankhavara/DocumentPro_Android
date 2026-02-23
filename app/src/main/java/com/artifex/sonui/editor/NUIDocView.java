@@ -61,7 +61,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.ui.activities.ViewOfficeActivity;
 import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
-import com.example.documenpro.ads.NativeAdAdmob;
+import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.ui.customviews.BottomBtn;
 import com.example.documenpro.ui.customviews.EditBtn;
 import com.example.documenpro.ui.dialog.GoPageDialog;
@@ -774,7 +774,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
 
     protected void afterFirstLayoutComplete() {
 
-        NativeAdAdmob.showNativeBanner2(activity(), null);
+        AdMobNativeAdManager.showNativeBanner2_AdMob(activity(), null);
 
         this.mFinished = false;
         if (this.mConfigOptions.r()) {

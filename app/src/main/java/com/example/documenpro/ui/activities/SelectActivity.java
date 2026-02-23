@@ -34,7 +34,7 @@ import com.example.documenpro.BaseActivity;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
-import com.example.documenpro.ads.NativeAdAdmob;
+import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.db.DbHelper;
 import com.example.documenpro.executor.RemoveFavoriteExecutor;
 import com.example.documenpro.listener.ItemSelectListener;
@@ -83,7 +83,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         initToolbar();
         getData();
         initViews();
-        NativeAdAdmob.showNativeBanner3(this, null);
+        AdMobNativeAdManager.showNativeBanner3_AdMob(this, null);
         activeButton(false);
     }
 

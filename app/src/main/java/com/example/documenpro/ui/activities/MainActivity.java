@@ -38,8 +38,8 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
-import com.example.documenpro.ads.AdClosedListener;
-import com.example.documenpro.ads.FullAds;
+import com.example.documenpro.advertisement.OnAdDismissedListener;
+import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.ui.customviews.switchdaynight.DayNightSwitch;
 import com.example.documenpro.ui.fragments.FilesFragment;
 import com.example.documenpro.ui.fragments.SettingFragment;
@@ -114,9 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Tăng số lần click
                 navigationClickCount++;
                 if (navigationClickCount % 3 == 0) {
-                    FullAds.showAds(MainActivity.this, new AdClosedListener() {
+                    AdManager.showAds_AdManager(MainActivity.this, new OnAdDismissedListener() {
                         @Override
-                        public void AdClosed() {
+                        public void OnAdDismissedListener() {
 
                         }
                     });

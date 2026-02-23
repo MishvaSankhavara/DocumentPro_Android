@@ -24,9 +24,9 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.OnboardingScreenAdapter;
-import com.example.documenpro.ads.AdClosedListener;
-import com.example.documenpro.ads.FullAds;
-import com.example.documenpro.ads.NativeAdAdmob;
+import com.example.documenpro.advertisement.OnAdDismissedListener;
+import com.example.documenpro.advertisement.AdManager;
+import com.example.documenpro.advertisement.AdMobNativeAdManager;
 
 import java.util.ArrayList;
 
@@ -91,7 +91,7 @@ public class OnBoardActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        NativeAdAdmob.showNativeBanner1(this, null);
+        AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
         initView();
         initViewPager();
     }
@@ -148,9 +148,9 @@ public class OnBoardActivity extends AppCompatActivity {
                     SharedPreferenceUtils.getInstance(OnBoardActivity.this).setBoolean(GlobalConstant.GUIDE_SET, true);
 
 
-                    FullAds.showAds(OnBoardActivity.this, new AdClosedListener() {
+                    AdManager.showAds_AdManager(OnBoardActivity.this, new OnAdDismissedListener() {
                         @Override
-                        public void AdClosed() {
+                        public void OnAdDismissedListener() {
                             startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
                             finish();
                         }

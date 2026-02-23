@@ -24,8 +24,8 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.ads.AdClosedListener;
-import com.example.documenpro.ads.GoogleMobileAdsConsentManager;
+import com.example.documenpro.advertisement.OnAdDismissedListener;
+import com.example.documenpro.advertisement.AdConsentManager;
 import com.example.documenpro.utils.AdsUtils;
 import com.example.documenpro.utils.Utils;
 
@@ -40,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
     private AdView adView;
     private final AtomicBoolean isMobileAdsInitializeCalled = new AtomicBoolean(false);
     private final AtomicBoolean gatherConsentFinished = new AtomicBoolean(false);
-    private GoogleMobileAdsConsentManager googleMobileAdsConsentManager;
+    private AdConsentManager googleMobileAdsConsentManager;
     private static final long COUNTER_TIME_MILLISECONDS = 4000;
     private long secondsRemaining;
 
@@ -55,9 +55,9 @@ public class SplashActivity extends AppCompatActivity {
         adsCase = 0;
 
         createTimer();
-        googleMobileAdsConsentManager = GoogleMobileAdsConsentManager.getInstance(getApplicationContext());
-        googleMobileAdsConsentManager.gatherConsent(this,
-                new GoogleMobileAdsConsentManager.OnConsentGatheringCompleteListener() {
+        googleMobileAdsConsentManager = AdConsentManager.getInstance(getApplicationContext());
+        googleMobileAdsConsentManager.gatherConsent_AdConsentManager(this,
+                new AdConsentManager.OnConsentGatheringCompleteListener() {
                     @Override
                     public void consentGatheringComplete(FormError consentError) {
                         if (consentError != null) {
@@ -158,9 +158,9 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    public class ExecuteAdsAction implements AdClosedListener {
+    public class ExecuteAdsAction implements OnAdDismissedListener {
         @Override
-        public void AdClosed() {
+        public void OnAdDismissedListener() {
             switch (adsCase) {
                 case 1:
                     startActivity(new Intent(SplashActivity.this, LocaleSelectionActivity.class));
