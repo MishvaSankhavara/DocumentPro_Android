@@ -17,7 +17,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.documenpro.R;
-import com.example.documenpro.listener.PasswordListener;
+import com.example.documenpro.clickListener.PasswordClickListener;
 import com.example.documenpro.utils.ViewUtils;
 
 
@@ -32,10 +32,10 @@ public class SetPasswordDialog extends Dialog {
     public TextView tvError;
     public TextView tvDes;
 
-    private final PasswordListener mListener;
+    private final PasswordClickListener mListener;
 
 
-    public SetPasswordDialog(@NonNull Context context, PasswordListener listener) {
+    public SetPasswordDialog(@NonNull Context context, PasswordClickListener listener) {
         super(context);
         setContentView(R.layout.dialog_enter_password_2);
 
@@ -73,7 +73,7 @@ public class SetPasswordDialog extends Dialog {
         findViewById(R.id.tv_bt_positive).setOnClickListener(view -> {
             if (edtPassword.getText() != null && edtPassword.getText().length() > 0) {
                 if (mListener != null) {
-                    mListener.onOkClick(edtPassword.getText().toString());
+                    mListener.onOkClickListener(edtPassword.getText().toString());
                     dismiss();
                 }
             } else {

@@ -12,11 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.documenpro.R;
-import com.example.documenpro.listener.GoPageDialogListener;
+import com.example.documenpro.clickListener.GoToPageDialogListener;
 import com.example.documenpro.utils.Utils;
 
 public class GoPageDialog extends Dialog {
-    private final GoPageDialogListener listener;
+    private final GoToPageDialogListener listener;
     TextView tvRangePage;
     ConstraintLayout rootView;
     EditText edtPage;
@@ -24,7 +24,7 @@ public class GoPageDialog extends Dialog {
     TextView tvCancel;
 
     @SuppressLint("SetTextI18n")
-    public GoPageDialog(@NonNull Context context, GoPageDialogListener mListener, int pageCount) {
+    public GoPageDialog(@NonNull Context context, GoToPageDialogListener mListener, int pageCount) {
         super(context);
         setContentView(R.layout.dialog_go_page);
         this.listener = mListener;
@@ -40,7 +40,7 @@ public class GoPageDialog extends Dialog {
             if (isValidPageNumber(obj, pageCount)) {
                 dismiss();
                 if (listener != null) {
-                    listener.onPageNumber(Integer.parseInt(obj) - 1);
+                    listener.onPageNum(Integer.parseInt(obj) - 1);
                 }
 
             } else {

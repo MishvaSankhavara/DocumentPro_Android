@@ -7,12 +7,12 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 
 import com.example.documenpro.R;
-import com.example.documenpro.listener.SortByListener;
+import com.example.documenpro.clickListener.SortingListener;
 
 public class SortByDialog extends Dialog {
     private final RadioGroup radioGroup;
 
-    public SortByDialog(@NonNull Context context, SortByListener listener) {
+    public SortByDialog(@NonNull Context context, SortingListener listener) {
         super(context);
         setContentView(R.layout.dialog_sort);
         radioGroup = findViewById(R.id.radioGroup);
@@ -20,32 +20,32 @@ public class SortByDialog extends Dialog {
             int idRadio = radioGroup.getCheckedRadioButtonId();
             if (idRadio == R.id.rbTimeNew) {
                 if (listener != null) {
-                    listener.onSortByDateNewest();
+                    listener.onSortingByDateNewest();
                     dismiss();
                 }
             } else if (idRadio == R.id.rbTimeOld) {
                 if (listener != null) {
-                    listener.onSortByDateOldest();
+                    listener.onSortingDateOldest();
                     dismiss();
                 }
             } else if (idRadio == R.id.rbAZ) {
                 if (listener != null) {
-                    listener.onSortAtoZ();
+                    listener.onSortingAtoZ();
                     dismiss();
                 }
             } else if (idRadio == R.id.rbZA) {
                 if (listener != null) {
-                    listener.onSortZtoA();
+                    listener.onSortingZtoA();
                     dismiss();
                 }
             } else if (idRadio == R.id.rbMinimum) {
                 if (listener != null) {
-                    listener.onSortFileSizeUp();
+                    listener.onSortingFileSizeUp();
                     dismiss();
                 }
             } else if (idRadio == R.id.rbLargest) {
                 if (listener != null) {
-                    listener.onSortFileSizeDown();
+                    listener.onSortingFileSizeDown();
                     dismiss();
                 }
             } else {

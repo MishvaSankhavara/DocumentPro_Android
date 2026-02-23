@@ -17,7 +17,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.R;
-import com.example.documenpro.listener.MergeChooseListener;
+import com.example.documenpro.clickListener.MergeSelectListener;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.utils.Utils;
 
@@ -25,13 +25,13 @@ import java.util.ArrayList;
 
 public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSelectionAdapter.ViewHolder> {
 
-    private final MergeChooseListener mListenerMergeFileSelection;
+    private final MergeSelectListener mListenerMergeFileSelection;
     private final ArrayList<PDFModel> originalDataMergeFileSelection;
     private final Context mContextMergeFileSelection;
 
     public MergeFileSelectionAdapter(Context mContext,
                                      ArrayList<PDFModel> originalData,
-                                     MergeChooseListener listener) {
+                                     MergeSelectListener listener) {
         this.mContextMergeFileSelection = mContext;
         this.originalDataMergeFileSelection = originalData;
         this.mListenerMergeFileSelection = listener;
@@ -111,7 +111,7 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
                 );
 
                 if (mListenerMergeFileSelection != null) {
-                    mListenerMergeFileSelection.onMergeChoose(holder.getAdapterPosition());
+                    mListenerMergeFileSelection.onMergeSelect(holder.getAdapterPosition());
                 }
             }
         });

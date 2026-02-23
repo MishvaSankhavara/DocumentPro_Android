@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.RecentFilesAdapter;
 import com.example.documenpro.advertisement.AdManager;
-import com.example.documenpro.listener.DocumentClickListener;
+import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
@@ -27,7 +27,7 @@ import com.example.documenpro.viewmodel.RecentDataSingleton;
 
 import java.util.ArrayList;
 
-public class RecentFragment2 extends Fragment implements DocumentClickListener {
+public class RecentFragment2 extends Fragment implements DocClickListener {
     private MainActivity mActivity;
     private EmptyRecyclerView recyclerView;
     private TextView tvDesEmpty;
@@ -88,7 +88,7 @@ public class RecentFragment2 extends Fragment implements DocumentClickListener {
     }
 
     @Override
-    public void onDocument(Document document) {
+    public void onDocClick(Document document) {
 //        Utils.openFile(mActivity, document);
 //        Utils.openFileWithAds(mActivity, document, 2);
         AdManager.showAds_AdManager(mActivity, () -> Utils.openFile(mActivity, document));

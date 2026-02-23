@@ -14,20 +14,20 @@ import com.bumptech.glide.Glide;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.listener.LanguageListener;
+import com.example.documenpro.clickListener.LanguageClickListener;
 import com.example.documenpro.model.Language;
 
 import java.util.ArrayList;
 
 public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapter.ViewHolder> {
 
-    private final LanguageListener listener_LanguageList;
+    private final LanguageClickListener listener_LanguageList;
     private final Context mContext_LanguageList;
     private int selectedItem_LanguageList;
     private final ArrayList<Language> languages_LanguageList;
 
     public LanguageListAdapter(Context mContext,
-                               LanguageListener mListener) {
+                               LanguageClickListener mListener) {
         this.mContext_LanguageList = mContext;
         this.languages_LanguageList =
                 GlobalConstant.createArrayLanguage();
@@ -101,7 +101,7 @@ public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapte
                 setSelectedItem_LanguageList(position);
 
                 if (listener_LanguageList != null) {
-                    listener_LanguageList.onLangChoice(position);
+                    listener_LanguageList.onLangClickListener(position);
                 }
             }
         }

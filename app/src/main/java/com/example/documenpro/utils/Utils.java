@@ -59,9 +59,9 @@ import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.database.DatabaseHelper;
-import com.example.documenpro.listener.MoreListener;
-import com.example.documenpro.listener.OnConfirmListener;
-import com.example.documenpro.listener.SortByListener;
+import com.example.documenpro.clickListener.MoreClickListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
+import com.example.documenpro.clickListener.SortingListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.ui.activities.ListFileActivity;
@@ -425,7 +425,7 @@ public class Utils {
         }
     }
 
-    public static void showConfirmDialog(Activity mContext, int typeConfirm, OnConfirmListener listener) {
+    public static void showConfirmDialog(Activity mContext, int typeConfirm, OnConfirmClickListener listener) {
         if (mContext == null) {
             return;
         }
@@ -996,7 +996,7 @@ public class Utils {
     }
 
 
-    public static void showMoreDialog(Activity mContext, Document mDocument, boolean isRecent, MoreListener moreListener) {
+    public static void showMoreDialog(Activity mContext, Document mDocument, boolean isRecent, MoreClickListener moreListener) {
         if (mContext == null) {
             return;
         }
@@ -1009,7 +1009,7 @@ public class Utils {
         moreDialog.show();
     }
 
-    public static void showSortDialog(Activity mContext, SortByListener listener) {
+    public static void showSortDialog(Activity mContext, SortingListener listener) {
         if (mContext == null) {
             return;
         }

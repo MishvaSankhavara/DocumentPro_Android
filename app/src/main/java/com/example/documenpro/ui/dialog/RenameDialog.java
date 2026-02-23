@@ -13,17 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.documenpro.R;
-import com.example.documenpro.listener.RenameDialogListener;
+import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.utils.Utils;
 
 
 public class RenameDialog extends Dialog {
     private final EditText edtRename;
-    private final RenameDialogListener listener;
+    private final RenameDialogClickListener listener;
     private final ConstraintLayout rootLayout;
     private final LinearLayout llError;
     private final TextView tvError;
-    public RenameDialog(@NonNull Context context, String oldName, RenameDialogListener mListener) {
+    public RenameDialog(@NonNull Context context, String oldName, RenameDialogClickListener mListener) {
         super(context);
         setContentView(R.layout.dialog_file_name);
         this.listener = mListener;
@@ -42,7 +42,7 @@ public class RenameDialog extends Dialog {
                 objectAnimator.start();
             } else if (Utils.isFileNameValid(edtRename.getText().toString())) {
                 if (listener != null) {
-                    listener.onRenameDialog(edtRename.getText().toString());
+                    listener.onRenameDialogListener(edtRename.getText().toString());
                     dismiss();
                 }
             } else {

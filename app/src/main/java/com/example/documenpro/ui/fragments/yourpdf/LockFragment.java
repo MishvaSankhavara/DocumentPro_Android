@@ -16,7 +16,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.CompactFileListAdapter;
-import com.example.documenpro.listener.OnPdfClickListener;
+import com.example.documenpro.clickListener.OnPdfTapListener;
 import com.example.documenpro.model.PDFModel;
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
@@ -26,7 +26,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class LockFragment extends Fragment implements OnPdfClickListener {
+public class LockFragment extends Fragment implements OnPdfTapListener {
     private ResultViewerActivity mActivity;
     private LottieAnimationView loadingView;
     private ArrayList<PDFModel> arrayList;
@@ -74,7 +74,7 @@ public class LockFragment extends Fragment implements OnPdfClickListener {
     }
 
     @Override
-    public void onPdfClick(PDFModel pdfModel) {
+    public void onPdfTap(PDFModel pdfModel) {
         // PdfUtils.openPDF(mActivity, pdfModel);
         File file = new File(pdfModel.getAbsolutePath());
         Utils.openFile(mActivity, file);

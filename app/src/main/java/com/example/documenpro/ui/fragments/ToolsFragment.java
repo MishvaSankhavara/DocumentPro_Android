@@ -23,7 +23,7 @@ import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.ViewItemDecoration;
 import com.example.documenpro.adapter_reader.DocumentToolAdapter;
-import com.example.documenpro.listener.OnToolClickListener;
+import com.example.documenpro.clickListener.OnToolTapListener;
 import com.example.documenpro.model.Tools;
 import com.example.documenpro.photopick.Matisse;
 import com.example.documenpro.photopick.MimeType;
@@ -59,9 +59,9 @@ public class ToolsFragment extends Fragment {
         recyclerView.addItemDecoration(new ViewItemDecoration(spacingInPixels));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(mActivity, 4, RecyclerView.VERTICAL, false));
-        DocumentToolAdapter adapter = new DocumentToolAdapter(mActivity, new OnToolClickListener() {
+        DocumentToolAdapter adapter = new DocumentToolAdapter(mActivity, new OnToolTapListener() {
             @Override
-            public void onTool(Tools toolType) {
+            public void onToolTap(Tools toolType) {
                 mToolType = toolType;
 
                 if (Utils.checkPermission(mActivity)) {

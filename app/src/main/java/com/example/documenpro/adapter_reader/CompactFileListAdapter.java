@@ -17,8 +17,8 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.database.OnDataUpdatedEvent;
 import com.example.documenpro.database.DatabaseHelper;
-import com.example.documenpro.listener.MoreListener;
-import com.example.documenpro.listener.OnPdfClickListener;
+import com.example.documenpro.clickListener.MoreClickListener;
+import com.example.documenpro.clickListener.OnPdfTapListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.model.PDFModel;
 import com.docpro.scanner.result.ResultViewerActivity;
@@ -32,13 +32,13 @@ import java.util.ArrayList;
 public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileListAdapter.ViewHolder> {
 
     private DatabaseHelper databaseHelper_FileListAdapter2;
-    private OnPdfClickListener mListener_FileListAdapter2;
+    private OnPdfTapListener mListener_FileListAdapter2;
     private ArrayList<PDFModel> originalData_FileListAdapter2;
     private ResultViewerActivity mContext_FileListAdapter2;
 
     public CompactFileListAdapter(ResultViewerActivity mContext,
                                   ArrayList<PDFModel> originalData,
-                                  OnPdfClickListener mListener) {
+                                  OnPdfTapListener mListener) {
         this.mContext_FileListAdapter2 = mContext;
         this.originalData_FileListAdapter2 = originalData;
         this.mListener_FileListAdapter2 = mListener;
@@ -147,7 +147,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
 
             itemView.setOnClickListener(v -> {
                 if (mListener_FileListAdapter2 != null) {
-                    mListener_FileListAdapter2.onPdfClick(pdfModel);
+                    mListener_FileListAdapter2.onPdfTap(pdfModel);
                 }
             });
 
@@ -177,10 +177,10 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                             mContext_FileListAdapter2,
                             document,
                             false,
-                            new MoreListener() {
+                            new MoreClickListener() {
 
                                 @Override
-                                public void onRename(String newName) {
+                                public void onRenameListener(String newName) {
 
                                     final File fileOldPdfName =
                                             new File(pdfModel.getFileUri());
@@ -249,7 +249,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                 }
 
                                 @Override
-                                public void onDelete() {
+                                public void onDeleteListener() {
 
                                     File fileToDelete =
                                             new File(pdfModel.getFileUri());
@@ -298,7 +298,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                 }
 
                                 @Override
-                                public void onRemove() {
+                                public void onRemoveListener() {
                                 }
                             }));
         }

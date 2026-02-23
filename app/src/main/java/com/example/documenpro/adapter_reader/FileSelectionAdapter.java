@@ -13,7 +13,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.R;
-import com.example.documenpro.listener.ChoosePdfListener;
+import com.example.documenpro.clickListener.PdfSelectionListener;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.utils.Utils;
 
@@ -21,13 +21,13 @@ import java.util.ArrayList;
 
 public class FileSelectionAdapter extends RecyclerView.Adapter<FileSelectionAdapter.ViewHolder> {
 
-    private final ChoosePdfListener mListenerFileSelection;
+    private final PdfSelectionListener mListenerFileSelection;
     private final ArrayList<PDFModel> originalDataFileSelection;
     private final Context mContextFileSelection;
 
     public FileSelectionAdapter(Context mContext,
                                 ArrayList<PDFModel> originalData,
-                                ChoosePdfListener mListener) {
+                                PdfSelectionListener mListener) {
         this.mContextFileSelection = mContext;
         this.originalDataFileSelection = originalData;
         this.mListenerFileSelection = mListener;
@@ -83,7 +83,7 @@ public class FileSelectionAdapter extends RecyclerView.Adapter<FileSelectionAdap
 
         holder.itemView.setOnClickListener(view -> {
             if (mListenerFileSelection != null) {
-                mListenerFileSelection.onPdfChoose(
+                mListenerFileSelection.onPdfSelect(
                         pdfModelFileSelection,
                         holder.getAdapterPosition());
             }

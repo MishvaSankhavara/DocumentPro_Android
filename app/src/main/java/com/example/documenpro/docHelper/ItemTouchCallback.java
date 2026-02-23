@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.documenpro.listener.ItemTouchHelperAdapter;
+import com.example.documenpro.clickListener.ItemTouchAdapter;
 
 public class ItemTouchCallback extends ItemTouchHelper.Callback {
 
@@ -43,7 +43,7 @@ public class ItemTouchCallback extends ItemTouchHelper.Callback {
     }
 
     public void onSwiped(RecyclerView.ViewHolder viewHolder_Callback, int i) {
-        this.mAdapter_Callback.onItemDismiss(viewHolder_Callback.getAdapterPosition());
+        this.mAdapter_Callback.itemDismiss(viewHolder_Callback.getAdapterPosition());
     }
 
     public boolean onMove(@NonNull RecyclerView recyclerView_Callback, RecyclerView.ViewHolder viewHolder_Callback, RecyclerView.ViewHolder viewHolder2_Callback) {
@@ -52,7 +52,7 @@ public class ItemTouchCallback extends ItemTouchHelper.Callback {
             return false;
         }
 
-        this.mAdapter_Callback.onItemMove(viewHolder_Callback.getAdapterPosition(), viewHolder2_Callback.getAdapterPosition());
+        this.mAdapter_Callback.itemMove(viewHolder_Callback.getAdapterPosition(), viewHolder2_Callback.getAdapterPosition());
 
         return true;
     }
@@ -67,7 +67,7 @@ public class ItemTouchCallback extends ItemTouchHelper.Callback {
         return makeMovementFlags(3, 48);
     }
 
-    public ItemTouchCallback(ItemTouchHelperAdapter itemTouchHelperAdapter) {
+    public ItemTouchCallback(ItemTouchAdapter itemTouchHelperAdapter) {
         this.mAdapter_Callback = itemTouchHelperAdapter;
     }
 
@@ -79,5 +79,5 @@ public class ItemTouchCallback extends ItemTouchHelper.Callback {
         return false;
     }
 
-    private final ItemTouchHelperAdapter mAdapter_Callback;
+    private final ItemTouchAdapter mAdapter_Callback;
 }

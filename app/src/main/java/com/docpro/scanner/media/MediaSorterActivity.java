@@ -27,9 +27,9 @@ import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.PhotoSelectionAdapter;
-import com.example.documenpro.listener.OnConfirmListener;
-import com.example.documenpro.listener.OnRemovePhoto;
-import com.example.documenpro.listener.RenameDialogListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
+import com.example.documenpro.clickListener.OnRemovePhotoListener;
+import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.model.Photo;
 import com.example.documenpro.photopick.Matisse;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
@@ -91,9 +91,9 @@ public class MediaSorterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Utils.showConfirmDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_PHOTO_2_PDF, new OnConfirmListener() {
+        Utils.showConfirmDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_PHOTO_2_PDF, new OnConfirmClickListener() {
             @Override
-            public void onConfirm() {
+            public void onConfirmClickListener() {
                 finish();
             }
 
@@ -137,9 +137,9 @@ public class MediaSorterActivity extends AppCompatActivity {
         dragDropManager.setDraggingItemScale(1.3f);
         dragDropManager.setDraggingItemRotation(15.0f);
 
-        final PhotoSelectionAdapter internalAdapter = new PhotoSelectionAdapter(this, photoCollection, new OnRemovePhoto() {
+        final PhotoSelectionAdapter internalAdapter = new PhotoSelectionAdapter(this, photoCollection, new OnRemovePhotoListener() {
             @Override
-            public void onRemove(int position) {
+            public void onRemoveListener(int position) {
                 photoCollection.remove(position);
                 mediaListAdapter.notifyItemRemoved(position);
                 mediaListAdapter.notifyDataSetChanged();
@@ -172,9 +172,9 @@ public class MediaSorterActivity extends AppCompatActivity {
                 }
 
                 String defaultFileName = "Photo2PDF" + System.currentTimeMillis();
-                DialogUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName, new RenameDialogListener() {
+                DialogUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName, new RenameDialogClickListener() {
                     @Override
-                    public void onRenameDialog(String newChosenName) {
+                    public void onRenameDialogListener(String newChosenName) {
                         String finalOutName = newChosenName + System.currentTimeMillis();
                         MyApplication.getInstance().setSelectedImages(mediaPaths);
                         Intent taskIntent = new Intent(MediaSorterActivity.this, ProcessingTaskActivity.class);

@@ -8,10 +8,10 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.listener.OnConfirmListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
 
 public class ConfirmDialog extends Dialog {
-    private final OnConfirmListener mListener;
+    private final OnConfirmClickListener mListener;
     private final int typeDialog;
 
     private AppCompatTextView tvTittle;
@@ -19,7 +19,7 @@ public class ConfirmDialog extends Dialog {
     private AppCompatTextView btnPositive;
     private AppCompatTextView btnNegative;
 
-    public ConfirmDialog(@NonNull Context context, int mTypeDialog, OnConfirmListener listener) {
+    public ConfirmDialog(@NonNull Context context, int mTypeDialog, OnConfirmClickListener listener) {
         super(context);
         setContentView(R.layout.dialog_confirm);
         this.mListener = listener;
@@ -28,7 +28,7 @@ public class ConfirmDialog extends Dialog {
         initData();
         btnPositive.setOnClickListener(view -> {
             if (mListener != null) {
-                mListener.onConfirm();
+                mListener.onConfirmClickListener();
                 dismiss();
             }
             dismiss();

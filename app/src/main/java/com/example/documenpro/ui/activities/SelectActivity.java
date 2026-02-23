@@ -37,8 +37,8 @@ import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.AppExecutor.FavoriteRemovalExecutor;
-import com.example.documenpro.listener.ItemSelectListener;
-import com.example.documenpro.listener.OnConfirmListener;
+import com.example.documenpro.clickListener.OnItemSelectListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.ui.dialog.ProgressDialog;
@@ -50,7 +50,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SelectActivity extends BaseActivity implements View.OnClickListener, ItemSelectListener {
+public class SelectActivity extends BaseActivity implements View.OnClickListener, OnItemSelectListener {
     public EmptyRecyclerView recyclerView;
     public FilePickerAdapter adapter;
     public Toolbar toolbar;
@@ -213,25 +213,25 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             }
         } else if (idView == R.id.ll_remove) {
             if (fileType == GlobalConstant.RECENT_FILE_TYPE) {
-                DialogUtils.showConfirmDialog(SelectActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmListener() {
+                DialogUtils.showConfirmDialog(SelectActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
                     @Override
-                    public void onConfirm() {
+                    public void onConfirmClickListener() {
                         new RemoveRecent(SelectActivity.this).execute();
                     }
                 });
             } else if (fileType == GlobalConstant.FAV_FILE_TYPE) {
-                DialogUtils.showConfirmDialog(SelectActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_FAV, new OnConfirmListener() {
+                DialogUtils.showConfirmDialog(SelectActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_FAV, new OnConfirmClickListener() {
                     @Override
-                    public void onConfirm() {
+                    public void onConfirmClickListener() {
                         FavoriteRemovalExecutor removeFavoriteExecutor = new FavoriteRemovalExecutor(SelectActivity.this);
                         removeFavoriteExecutor.executeTask_removeFav();
                     }
                 });
             }
         } else if (idView == R.id.ll_delete) {
-            DialogUtils.showConfirmDialog(SelectActivity.this, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmListener() {
+            DialogUtils.showConfirmDialog(SelectActivity.this, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
                 @Override
-                public void onConfirm() {
+                public void onConfirmClickListener() {
                     new DeleteMultiFile(SelectActivity.this).execute();
                 }
             });
@@ -298,7 +298,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     }
 
     @Override
-    public void onItemSelect() {
+    public void onItemSelected() {
         activeButton(!adapter.getSelected_FilePicker().isEmpty());
         toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_FilePicker().size())));
         if (adapter.getSelected_FilePicker().size() == arrayList.size()) {

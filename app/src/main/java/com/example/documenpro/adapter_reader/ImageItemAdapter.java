@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.listener.OnConfirmListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -53,9 +53,9 @@ public class ImageItemAdapter extends RecyclerView.Adapter<ImageItemAdapter.View
                 Utils.showConfirmDialog(
                         mContext_ImageItem,
                         GlobalConstant.DIALOG_CONFIRM_DELETE,
-                        new OnConfirmListener() {
+                        new OnConfirmClickListener() {
                             @Override
-                            public void onConfirm() {
+                            public void onConfirmClickListener() {
 
                                 File fileDelete =
                                         new File(file.getAbsolutePath());

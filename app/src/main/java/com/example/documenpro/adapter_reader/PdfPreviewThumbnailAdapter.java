@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
-import com.example.documenpro.listener.ThumbnailClickListener;
+import com.example.documenpro.clickListener.OnThumbnailClickListener;
 import com.example.documenpro.model.PDFPage;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewThumbnailAdapter.ViewHolder> {
 
     public boolean isSelectedAll_PdfPreview = false;
-    private final ThumbnailClickListener mListener_PdfPreview;
+    private final OnThumbnailClickListener mListener_PdfPreview;
     private final ArrayList<PDFPage> arrayList_PdfPreview;
     public Context mContext_PdfPreview;
 
@@ -92,7 +92,7 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
             );
 
             if (mListener_PdfPreview != null) {
-                mListener_PdfPreview.onChoosePdfSplit();
+                mListener_PdfPreview.onChoosePdfSplitListener();
             }
         });
     }
@@ -106,7 +106,7 @@ public class PdfPreviewThumbnailAdapter extends RecyclerView.Adapter<PdfPreviewT
         );
     }
 
-    public PdfPreviewThumbnailAdapter(Context mContext, ArrayList<PDFPage> arrayList, ThumbnailClickListener listener) {
+    public PdfPreviewThumbnailAdapter(Context mContext, ArrayList<PDFPage> arrayList, OnThumbnailClickListener listener) {
         this.mListener_PdfPreview = listener;
         this.arrayList_PdfPreview = arrayList;
         this.mContext_PdfPreview = mContext;

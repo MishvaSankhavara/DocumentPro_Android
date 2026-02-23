@@ -23,8 +23,8 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
 import com.example.documenpro.database.DatabaseHelper;
-import com.example.documenpro.listener.DocumentClickListener;
-import com.example.documenpro.listener.MoreListener;
+import com.example.documenpro.clickListener.DocClickListener;
+import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.utils.Utils;
 import com.example.documenpro.viewmodel.FavoriteDataSingleton;
@@ -35,13 +35,13 @@ import java.util.ArrayList;
 
 public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdapter.ViewHolder> {
 
-    private final DocumentClickListener listener_FavoriteItems;
+    private final DocClickListener listener_FavoriteItems;
     private DatabaseHelper databaseHelper_FavoriteItems;
     private final ArrayList<Document> arrayList_FavoriteItems;
     private final Activity mContext_FavoriteItems;
 
     public FavoriteItemsAdapter(Activity mContext,
-                                DocumentClickListener listener) {
+                                DocClickListener listener) {
         this.mContext_FavoriteItems = mContext;
         this.listener_FavoriteItems = listener;
         this.arrayList_FavoriteItems =
@@ -85,7 +85,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
         holder.itemView.setOnClickListener(v -> {
             if (listener_FavoriteItems != null) {
-                listener_FavoriteItems.onDocument(document);
+                listener_FavoriteItems.onDocClick(document);
             }
         });
 
@@ -93,10 +93,10 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
             Utils.showMoreDialog(mContext_FavoriteItems,
                     document,
                     false,
-                    new MoreListener() {
+                    new MoreClickListener() {
 
                         @Override
-                        public void onRename(String newName) {
+                        public void onRenameListener(String newName) {
 
                             final File fileOldPdfName =
                                     new File(document.getFileUri());
@@ -154,7 +154,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                         }
 
                         @Override
-                        public void onDelete() {
+                        public void onDeleteListener() {
 
                             File fileToDelete =
                                     new File(document.getFileUri());
@@ -202,7 +202,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                         }
 
                         @Override
-                        public void onRemove() {
+                        public void onRemoveListener() {
                         }
                     });
         });

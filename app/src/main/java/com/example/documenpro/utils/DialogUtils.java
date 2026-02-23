@@ -6,9 +6,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.ViewGroup;
 import android.view.Window;
 
-import com.example.documenpro.listener.OnConfirmListener;
-import com.example.documenpro.listener.PasswordListener;
-import com.example.documenpro.listener.RenameDialogListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
+import com.example.documenpro.clickListener.PasswordClickListener;
+import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.ui.dialog.ConfirmDialog;
@@ -20,7 +20,7 @@ import com.example.documenpro.ui.dialog.RenameDialog;
 import com.example.documenpro.ui.dialog.SetPasswordDialog;
 
 public class DialogUtils {
-    public static void showSetPasswordDialog(Activity mContext, PasswordListener listener) {
+    public static void showSetPasswordDialog(Activity mContext, PasswordClickListener listener) {
         if (mContext == null) {
             return;
         }
@@ -46,7 +46,7 @@ public class DialogUtils {
         informationDialog.show();
     }
 
-    public static void showRemovePasswordDialog(Activity mContext, PDFModel pdfModel, PasswordListener listener) {
+    public static void showRemovePasswordDialog(Activity mContext, PDFModel pdfModel, PasswordClickListener listener) {
         if (mContext == null) {
             return;
         }
@@ -72,7 +72,7 @@ public class DialogUtils {
         dialog.show();
     }
 
-    public static void showRenameDialog(Activity mContext, String oldName, RenameDialogListener listener) {
+    public static void showRenameDialog(Activity mContext, String oldName, RenameDialogClickListener listener) {
         if (mContext == null) {
             return;
         }
@@ -98,7 +98,7 @@ public class DialogUtils {
         informationDialog.show();
     }
 
-    public static void showConfirmDialog(Activity mContext, int typeConfirm, OnConfirmListener listener) {
+    public static void showConfirmDialog(Activity mContext, int typeConfirm, OnConfirmClickListener listener) {
         if (mContext == null) {
             return;
         }

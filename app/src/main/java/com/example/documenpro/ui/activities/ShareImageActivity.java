@@ -34,7 +34,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
-import com.example.documenpro.listener.ThumbnailClickListener;
+import com.example.documenpro.clickListener.OnThumbnailClickListener;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.model.PDFPage;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
@@ -50,7 +50,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ShareImageActivity extends AppCompatActivity implements ThumbnailClickListener {
+public class ShareImageActivity extends AppCompatActivity implements OnThumbnailClickListener {
     private AppCompatTextView btnContinue;
     private LottieAnimationView loadingView;
     private Toolbar toolbar;
@@ -203,7 +203,7 @@ public class ShareImageActivity extends AppCompatActivity implements ThumbnailCl
     }
 
     @Override
-    public void onChoosePdfSplit() {
+    public void onChoosePdfSplitListener() {
         checkBtnContinue();
         toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_PdfPreview().size())));
         if (adapter.getSelected_PdfPreview().size() == listPdfPages.size()) {

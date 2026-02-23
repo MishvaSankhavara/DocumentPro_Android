@@ -21,7 +21,7 @@ import com.example.documenpro.adapter_reader.LanguageListAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
-import com.example.documenpro.listener.LanguageListener;
+import com.example.documenpro.clickListener.LanguageClickListener;
 import com.example.documenpro.ui.activities.OnBoardActivity;
 
 import java.util.Locale;
@@ -48,9 +48,9 @@ public class LocaleSelectionActivity extends BaseActivity {
         AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
 
         rcvLocales = findViewById(R.id.rv_locale_list);
-        localeAdapter = new LanguageListAdapter(this, new LanguageListener() {
+        localeAdapter = new LanguageListAdapter(this, new LanguageClickListener() {
             @Override
-            public void onLangChoice(int index) {
+            public void onLangClickListener(int index) {
                 selectedLocaleIndex = index;
             }
         });

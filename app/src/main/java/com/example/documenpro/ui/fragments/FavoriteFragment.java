@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FavoriteItemsAdapter;
-import com.example.documenpro.listener.DocumentClickListener;
+import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
@@ -26,7 +26,7 @@ import com.example.documenpro.viewmodel.FavoriteDataSingleton;
 
 import java.util.ArrayList;
 
-public class FavoriteFragment extends Fragment implements DocumentClickListener {
+public class FavoriteFragment extends Fragment implements DocClickListener {
     private MainActivity mActivity;
     private EmptyRecyclerView recyclerView;
 
@@ -88,7 +88,7 @@ public class FavoriteFragment extends Fragment implements DocumentClickListener 
     }
 
     @Override
-    public void onDocument(Document document) {
+    public void onDocClick(Document document) {
 //        FullAds.showAds(mActivity, () -> Utils.openFile(mActivity, document));
 
 

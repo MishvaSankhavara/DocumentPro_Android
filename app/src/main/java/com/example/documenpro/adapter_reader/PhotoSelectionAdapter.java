@@ -17,7 +17,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
 import com.example.documenpro.R;
-import com.example.documenpro.listener.OnRemovePhoto;
+import com.example.documenpro.clickListener.OnRemovePhotoListener;
 import com.example.documenpro.model.Photo;
 
 import java.util.ArrayList;
@@ -27,13 +27,13 @@ public class PhotoSelectionAdapter
         extends RecyclerView.Adapter<PhotoSelectionAdapter.ViewHolder>
         implements DraggableItemAdapter<PhotoSelectionAdapter.ViewHolder> {
 
-    private final OnRemovePhoto mListener_PhotoSelection;
+    private final OnRemovePhotoListener mListener_PhotoSelection;
     private final ArrayList<Photo> arrayListPhoto_PhotoSelection;
     private final Context mContext_PhotoSelection;
 
     public PhotoSelectionAdapter(Context mContext,
                                  ArrayList<Photo> arrayListPhoto,
-                                 OnRemovePhoto listener) {
+                                 OnRemovePhotoListener listener) {
         this.mContext_PhotoSelection = mContext;
         this.arrayListPhoto_PhotoSelection = arrayListPhoto;
         this.mListener_PhotoSelection = listener;
@@ -108,7 +108,7 @@ public class PhotoSelectionAdapter
         holder.imgRemove_PhotoSelection
                 .setOnClickListener(view -> {
                     if (mListener_PhotoSelection != null) {
-                        mListener_PhotoSelection.onRemove(
+                        mListener_PhotoSelection.onRemoveListener(
                                 holder.getAdapterPosition());
                     }
                 });

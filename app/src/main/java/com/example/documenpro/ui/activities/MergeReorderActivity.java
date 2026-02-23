@@ -32,8 +32,8 @@ import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.MergeReorderAdapter;
 import com.example.documenpro.docHelper.ItemTouchCallback;
-import com.example.documenpro.listener.OnConfirmListener;
-import com.example.documenpro.listener.OnStartDragListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
+import com.example.documenpro.clickListener.OnDragStartListener;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.ui.dialog.RenameDialog;
 import com.example.documenpro.utils.DialogUtils;
@@ -41,7 +41,7 @@ import com.example.documenpro.utils.DialogUtils;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MergeReorderActivity extends AppCompatActivity implements OnStartDragListener {
+public class MergeReorderActivity extends AppCompatActivity implements OnDragStartListener {
     private MergeReorderAdapter adapter;
     private ArrayList<PDFModel> arrayList = new ArrayList<>();
     private AppCompatTextView btnMerge;
@@ -87,9 +87,9 @@ public class MergeReorderActivity extends AppCompatActivity implements OnStartDr
     @Override
     public void onBackPressed() {
 
-        DialogUtils.showConfirmDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_MERGE, new OnConfirmListener() {
+        DialogUtils.showConfirmDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_MERGE, new OnConfirmClickListener() {
             @Override
-            public void onConfirm() {
+            public void onConfirmClickListener() {
                 finish();
             }
 
@@ -174,7 +174,7 @@ public class MergeReorderActivity extends AppCompatActivity implements OnStartDr
     }
 
     @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+    public void onDragStart(RecyclerView.ViewHolder viewHolder) {
 
     }
 }

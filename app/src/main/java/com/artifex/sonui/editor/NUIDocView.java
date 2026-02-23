@@ -66,7 +66,7 @@ import com.example.documenpro.ui.customviews.BottomBtn;
 import com.example.documenpro.ui.customviews.EditBtn;
 import com.example.documenpro.ui.dialog.GoPageDialog;
 import com.example.documenpro.ui.dialog.LoadingDialog;
-import com.example.documenpro.listener.GoPageDialogListener;
+import com.example.documenpro.clickListener.GoToPageDialogListener;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -833,9 +833,9 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         this.tvPageNumber.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                GoPageDialog dialog = new GoPageDialog(getContext(), new GoPageDialogListener() {
+                GoPageDialog dialog = new GoPageDialog(getContext(), new GoToPageDialogListener() {
                     @Override
-                    public void onPageNumber(int pageNumber) {
+                    public void onPageNum(int pageNumber) {
                         goToPage(pageNumber);
                     }
                 }, getPageCount());

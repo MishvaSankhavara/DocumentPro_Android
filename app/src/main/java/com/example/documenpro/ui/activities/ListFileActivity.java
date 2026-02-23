@@ -27,8 +27,8 @@ import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
-import com.example.documenpro.listener.DocumentClickListener;
-import com.example.documenpro.listener.SortByListener;
+import com.example.documenpro.clickListener.DocClickListener;
+import com.example.documenpro.clickListener.SortingListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
@@ -38,7 +38,7 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class ListFileActivity extends BaseActivity implements DocumentClickListener, SortByListener {
+public class ListFileActivity extends BaseActivity implements DocClickListener, SortingListener {
     private EmptyRecyclerView recyclerView;
 
     private LottieAnimationView loadingView;
@@ -183,7 +183,7 @@ public class ListFileActivity extends BaseActivity implements DocumentClickListe
     }
 
     @Override
-    public void onDocument(Document document) {
+    public void onDocClick(Document document) {
 //        Utils.openFile(this, document);
         AdManager.showAds_AdManager(this, () -> Utils.openFile(this, document));
 
@@ -191,37 +191,37 @@ public class ListFileActivity extends BaseActivity implements DocumentClickListe
     }
 
     @Override
-    public void onSortByDateOldest() {
+    public void onSortingDateOldest() {
         itemsList.sort(Document.sortDateAscendingComparator);
         adapter.setData(itemsList);
     }
 
     @Override
-    public void onSortByDateNewest() {
+    public void onSortingByDateNewest() {
         itemsList.sort(Document.sortDateDescendingComparator);
         adapter.setData(itemsList);
     }
 
     @Override
-    public void onSortAtoZ() {
+    public void onSortingAtoZ() {
         itemsList.sort(Document.sortNameAZComparator);
         adapter.setData(itemsList);
     }
 
     @Override
-    public void onSortZtoA() {
+    public void onSortingZtoA() {
         itemsList.sort(Document.sortNameZAComparator);
         adapter.setData(itemsList);
     }
 
     @Override
-    public void onSortFileSizeUp() {
+    public void onSortingFileSizeUp() {
         itemsList.sort(Document.sortFileSizeAscendingComparator);
         adapter.setData(itemsList);
     }
 
     @Override
-    public void onSortFileSizeDown() {
+    public void onSortingFileSizeDown() {
         itemsList.sort(Document.sortFileSizeDescendingComparator);
         adapter.setData(itemsList);
     }

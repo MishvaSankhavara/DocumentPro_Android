@@ -16,9 +16,9 @@ import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.R;
-import com.example.documenpro.listener.ItemTouchHelperAdapter;
-import com.example.documenpro.listener.OnRemovePdfItem;
-import com.example.documenpro.listener.OnStartDragListener;
+import com.example.documenpro.clickListener.ItemTouchAdapter;
+import com.example.documenpro.clickListener.OnRemovePdfItemListener;
+import com.example.documenpro.clickListener.OnDragStartListener;
 import com.example.documenpro.model.PDFModel;
 import com.example.documenpro.ui.activities.MergeReorderActivity;
 import com.example.documenpro.utils.Utils;
@@ -26,21 +26,21 @@ import com.example.documenpro.utils.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapter.ViewHolder> implements ItemTouchHelperAdapter {
+public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapter.ViewHolder> implements ItemTouchAdapter {
 
-    public OnRemovePdfItem listener_MergeReorder;
+    public OnRemovePdfItemListener listener_MergeReorder;
     public ArrayList<PDFModel> pdfModels_MergeReorder;
-    public OnStartDragListener mDragStartListener_MergeReorder;
+    public OnDragStartListener mDragStartListener_MergeReorder;
     public MergeReorderActivity mActivity_MergeReorder;
 
     @Override
-    public void onItemMove(int i, int i2) {
+    public void itemMove(int i, int i2) {
         Collections.swap(this.pdfModels_MergeReorder, i, i2);
         notifyItemMoved(i, i2);
     }
 
     @Override
-    public void onItemDismiss(int i) {
+    public void itemDismiss(int i) {
 
     }
 
@@ -66,7 +66,7 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
 
         holder.ivRemove_MergeReorder.setOnClickListener(view -> {
             if (listener_MergeReorder != null) {
-                listener_MergeReorder.removePdfItem(pdfModel_MergeReorder, holder.getAdapterPosition());
+                listener_MergeReorder.removePdfItemListener(pdfModel_MergeReorder, holder.getAdapterPosition());
             }
         });
 
@@ -74,7 +74,7 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
             if (MotionEventCompat.getActionMasked(motionEvent) != 0) {
                 return false;
             }
-            mDragStartListener_MergeReorder.onStartDrag(holder);
+            mDragStartListener_MergeReorder.onDragStart(holder);
             return false;
         });
     }
@@ -85,7 +85,7 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pdf_merge, parent, false));
     }
 
-    public MergeReorderAdapter(MergeReorderActivity mActivity, OnStartDragListener mDragStartListener, ArrayList<PDFModel> pdfModels, OnRemovePdfItem listener) {
+    public MergeReorderAdapter(MergeReorderActivity mActivity, OnDragStartListener mDragStartListener, ArrayList<PDFModel> pdfModels, OnRemovePdfItemListener listener) {
         this.listener_MergeReorder = listener;
         this.pdfModels_MergeReorder = pdfModels;
         this.mDragStartListener_MergeReorder = mDragStartListener;

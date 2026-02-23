@@ -11,9 +11,9 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.listener.MoreListener;
-import com.example.documenpro.listener.OnConfirmListener;
-import com.example.documenpro.listener.RenameDialogListener;
+import com.example.documenpro.clickListener.MoreClickListener;
+import com.example.documenpro.clickListener.OnConfirmClickListener;
+import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
@@ -25,9 +25,9 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
     Document mDocument;
     Activity mContext;
     boolean mIsRecent;
-    MoreListener mListener;
+    MoreClickListener mListener;
 
-    public MoreDialog(@NonNull Activity context, Document document, boolean isRecent, MoreListener listener) {
+    public MoreDialog(@NonNull Activity context, Document document, boolean isRecent, MoreClickListener listener) {
         super(context);
         this.mDocument = document;
         this.mContext = context;
@@ -59,11 +59,11 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         int idView = v.getId();
         if (idView == R.id.ll_rename) {
-            DialogUtils.showRenameDialog(mContext, mDocument.getFileName(), new RenameDialogListener() {
+            DialogUtils.showRenameDialog(mContext, mDocument.getFileName(), new RenameDialogClickListener() {
                 @Override
-                public void onRenameDialog(String newName) {
+                public void onRenameDialogListener(String newName) {
                     if (mListener != null) {
-                        mListener.onRename(newName);
+                        mListener.onRenameListener(newName);
                     }
                 }
             });
@@ -78,21 +78,21 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
             Utils.createShortcut(mContext, mDocument);
             dismiss();
         } else if (idView == R.id.ll_remove_from_recent) {
-            DialogUtils.showConfirmDialog(mContext, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmListener() {
+            DialogUtils.showConfirmDialog(mContext, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
                 @Override
-                public void onConfirm() {
+                public void onConfirmClickListener() {
                     if (mListener != null) {
-                        mListener.onRemove();
+                        mListener.onRemoveListener();
                     }
                 }
             });
             dismiss();
         } else if (idView == R.id.ll_delete) {
-            DialogUtils.showConfirmDialog(mContext, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmListener() {
+            DialogUtils.showConfirmDialog(mContext, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
                 @Override
-                public void onConfirm() {
+                public void onConfirmClickListener() {
                     if (mListener != null) {
-                        mListener.onDelete();
+                        mListener.onDeleteListener();
                     }
                 }
             });

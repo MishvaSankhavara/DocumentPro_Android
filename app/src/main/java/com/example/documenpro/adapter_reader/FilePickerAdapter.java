@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
-import com.example.documenpro.listener.ItemSelectListener;
+import com.example.documenpro.clickListener.OnItemSelectListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.utils.Utils;
 
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.ViewHolder> {
 
     public boolean isSelectedAll_FilePicker = false;
-    private final ItemSelectListener listener_FilePicker;
+    private final OnItemSelectListener listener_FilePicker;
     private final ArrayList<Document> arrayList_FilePicker;
     private final Context mContext_FilePicker;
 
@@ -96,7 +96,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
             }
 
             if (listener_FilePicker != null) {
-                listener_FilePicker.onItemSelect();
+                listener_FilePicker.onItemSelected();
             }
         });
     }
@@ -109,7 +109,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
         return new ViewHolder(view);
     }
 
-    public FilePickerAdapter(Context mContext, ArrayList<Document> arrayList, ItemSelectListener listener) {
+    public FilePickerAdapter(Context mContext, ArrayList<Document> arrayList, OnItemSelectListener listener) {
         this.listener_FilePicker = listener;
         this.arrayList_FilePicker = arrayList;
         this.mContext_FilePicker = mContext;

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.listener.OnToolClickListener;
+import com.example.documenpro.clickListener.OnToolTapListener;
 import com.example.documenpro.model.Tools;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
 
     private final Context mContext_DocumentTool;
     private final ArrayList<Tools> arrayList_DocumentTool;
-    private final OnToolClickListener listener_DocumentTool;
+    private final OnToolTapListener listener_DocumentTool;
 
     @Override
     public int getItemCount() {
@@ -47,7 +47,7 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
 
         holder.imgTool_DocumentTool.setOnClickListener(view -> {
             if (listener_DocumentTool != null) {
-                listener_DocumentTool.onTool(toolType);
+                listener_DocumentTool.onToolTap(toolType);
             }
         });
     }
@@ -59,7 +59,7 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
         return new ViewHolder(view);
     }
 
-    public DocumentToolAdapter(Context mContext, OnToolClickListener listener) {
+    public DocumentToolAdapter(Context mContext, OnToolTapListener listener) {
         this.mContext_DocumentTool = mContext;
         this.arrayList_DocumentTool = GlobalConstant.setToolsList();
         this.listener_DocumentTool = listener;

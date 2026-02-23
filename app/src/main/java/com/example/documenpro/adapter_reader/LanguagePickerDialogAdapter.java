@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.listener.ItemClickListener;
+import com.example.documenpro.clickListener.OnPdfItemClickListener;
 import com.example.documenpro.model.Language;
 
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 public class LanguagePickerDialogAdapter extends RecyclerView.Adapter<LanguagePickerDialogAdapter.ViewHolder> {
 
     int lastPost_LanguagePickerDialog;
-    private final ItemClickListener mListener_LanguagePickerDialog;
+    private final OnPdfItemClickListener mListener_LanguagePickerDialog;
     private final ArrayList<Language> languages_LanguagePickerDialog;
 
     public LanguagePickerDialogAdapter(Context mContext,
-                                       ItemClickListener mListener) {
+                                       OnPdfItemClickListener mListener) {
         this.languages_LanguagePickerDialog =
                 GlobalConstant.createArrayLanguage();
         this.mListener_LanguagePickerDialog = mListener;
@@ -74,7 +74,7 @@ public class LanguagePickerDialogAdapter extends RecyclerView.Adapter<LanguagePi
 
             if (mListener_LanguagePickerDialog != null) {
                 mListener_LanguagePickerDialog
-                        .onItemSelected(holder.getAdapterPosition());
+                        .onItemSelect(holder.getAdapterPosition());
             }
         });
     }

@@ -23,8 +23,8 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
 import com.example.documenpro.database.DatabaseHelper;
-import com.example.documenpro.listener.DocumentClickListener;
-import com.example.documenpro.listener.MoreListener;
+import com.example.documenpro.clickListener.DocClickListener;
+import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.utils.Utils;
 
@@ -33,14 +33,14 @@ import java.util.ArrayList;
 
 public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHolder> {
 
-    private final DocumentClickListener listener_FileList;
+    private final DocClickListener listener_FileList;
     DatabaseHelper databaseHelper_FileList;
     private ArrayList<Document> arrayList_FileList;
     private final Activity mContext_FileList;
 
     public FileListAdapter(Activity mContext,
                            ArrayList<Document> arrayList,
-                           DocumentClickListener listener) {
+                           DocClickListener listener) {
         this.mContext_FileList = mContext;
         this.arrayList_FileList = arrayList;
         this.listener_FileList = listener;
@@ -141,7 +141,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
             itemView.setOnClickListener(v -> {
                 if (listener_FileList != null) {
-                    listener_FileList.onDocument(document_FileList);
+                    listener_FileList.onDocClick(document_FileList);
                 }
             });
 
@@ -150,10 +150,10 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                             mContext_FileList,
                             document_FileList,
                             false,
-                            new MoreListener() {
+                            new MoreClickListener() {
 
                                 @Override
-                                public void onRename(String newName) {
+                                public void onRenameListener(String newName) {
 
                                     final File fileOldPdfName =
                                             new File(document_FileList.getFileUri());
@@ -215,7 +215,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                 }
 
                                 @Override
-                                public void onDelete() {
+                                public void onDeleteListener() {
 
                                     File fileToDelete =
                                             new File(document_FileList.getFileUri());
@@ -261,7 +261,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                 }
 
                                 @Override
-                                public void onRemove() {
+                                public void onRemoveListener() {
                                 }
                             }));
 

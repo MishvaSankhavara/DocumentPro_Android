@@ -23,8 +23,8 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.documenpro.R;
 import com.example.documenpro.database.DatabaseHelper;
-import com.example.documenpro.listener.DocumentClickListener;
-import com.example.documenpro.listener.MoreListener;
+import com.example.documenpro.clickListener.DocClickListener;
+import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.utils.Utils;
 import com.example.documenpro.viewmodel.FavoriteDataSingleton;
@@ -34,12 +34,12 @@ import java.util.ArrayList;
 
 public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHolder> {
 
-    private final DocumentClickListener listener_RecentFiles;
+    private final DocClickListener listener_RecentFiles;
     private DatabaseHelper databaseHelper_RecentFiles;
     private final ArrayList<Document> arrayList_RecentFiles;
     private final Activity mContext_RecentFiles;
 
-    public RecentFilesAdapter(Activity mContext, DocumentClickListener listener) {
+    public RecentFilesAdapter(Activity mContext, DocClickListener listener) {
         this.mContext_RecentFiles = mContext;
         this.listener_RecentFiles = listener;
         this.arrayList_RecentFiles = DatabaseHelper.getInstance(mContext).getRecentDocuments_DatabaseHelper();
@@ -76,15 +76,15 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
         holder.itemView.setOnClickListener(v -> {
             if (listener_RecentFiles != null) {
-                listener_RecentFiles.onDocument(document);
+                listener_RecentFiles.onDocClick(document);
             }
         });
 
         holder.imgMore_RecentFiles.setOnClickListener(v -> {
-            Utils.showMoreDialog(mContext_RecentFiles, document, true, new MoreListener() {
+            Utils.showMoreDialog(mContext_RecentFiles, document, true, new MoreClickListener() {
 
                 @Override
-                public void onRename(String newName) {
+                public void onRenameListener(String newName) {
 
                     final File fileOldPdfName = new File(document.getFileUri());
 
@@ -133,7 +133,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
                 }
 
                 @Override
-                public void onDelete() {
+                public void onDeleteListener() {
 
                     File fileToDelete = new File(document.getFileUri());
 
@@ -169,7 +169,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
                 }
 
                 @Override
-                public void onRemove() {
+                public void onRemoveListener() {
 
                     if (databaseHelper_RecentFiles.isRecent_DatabaseHelper(document.getFileUri())) {
 

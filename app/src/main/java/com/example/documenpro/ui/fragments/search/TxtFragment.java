@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
-import com.example.documenpro.listener.DocumentClickListener;
+import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model.Document;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
 import com.example.documenpro.utils.Utils;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class TxtFragment extends Fragment implements DocumentClickListener {
+public class TxtFragment extends Fragment implements DocClickListener {
 
     private Activity mActivity;
     private EmptyRecyclerView recyclerView;
@@ -98,7 +98,7 @@ public class TxtFragment extends Fragment implements DocumentClickListener {
     }
 
     @Override
-    public void onDocument(Document document) {
+    public void onDocClick(Document document) {
         Utils.openFile(mActivity, document);
 
     }
