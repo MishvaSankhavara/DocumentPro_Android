@@ -83,10 +83,10 @@ public class PreviewItemFragment extends Fragment {
 
         Point size = PhotoMetadataUtils.getBitmapSize(item.getContentUri(), getActivity());
         if (item.isGif()) {
-            SelectionSpec.getInstance().imageEngine.loadGifImage(getContext(), size.x, size.y, image,
+            SelectionSpec.getInstance().imageEngine.loadGifImage_ImageEngine(getContext(), size.x, size.y, image,
                     item.getContentUri());
         } else {
-            SelectionSpec.getInstance().imageEngine.loadImage(getContext(), size.x, size.y, image,
+            SelectionSpec.getInstance().imageEngine.loadImage_ImageEngine(getContext(), size.x, size.y, image,
                     item.getContentUri());
         }
     }

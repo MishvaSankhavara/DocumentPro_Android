@@ -7,9 +7,9 @@ import androidx.annotation.StyleRes;
 
 import com.example.documenpro.R;
 import com.example.documenpro.photopick.MimeType;
-import com.example.documenpro.photopick.engine.GlideEngine;
-import com.example.documenpro.photopick.engine.ImageEngine;
-import com.example.documenpro.photopick.filter.Filter;
+import com.example.documenpro.photoPickReader.engineReader.GlideEngineManager;
+import com.example.documenpro.photoPickReader.engineReader.ImageEngineManager;
+import com.example.documenpro.photoPickReader.filterReader.FilterEngine;
 import com.example.documenpro.photopick.listener.OnCheckedListener;
 import com.example.documenpro.photopick.listener.OnSelectedListener;
 
@@ -28,13 +28,13 @@ public final class SelectionSpec {
     public int maxSelectable;
     public int maxImageSelectable;
     public int maxVideoSelectable;
-    public List<Filter> filters;
+    public List<FilterEngine> filters;
     public boolean capture;
     public CaptureStrategy captureStrategy;
     public int spanCount;
     public int gridExpectedSize;
     public float thumbnailScale;
-    public ImageEngine imageEngine;
+    public ImageEngineManager imageEngine;
     public boolean hasInited;
     public OnSelectedListener onSelectedListener;
     public boolean originalable;
@@ -72,7 +72,7 @@ public final class SelectionSpec {
         spanCount = 3;
         gridExpectedSize = 0;
         thumbnailScale = 0.5f;
-        imageEngine = new GlideEngine();
+        imageEngine = new GlideEngineManager();
         hasInited = true;
         originalable = false;
         autoHideToobar = false;

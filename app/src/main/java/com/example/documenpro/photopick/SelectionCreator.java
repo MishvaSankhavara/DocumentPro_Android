@@ -27,8 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.fragment.app.Fragment;
 
-import com.example.documenpro.photopick.engine.ImageEngine;
-import com.example.documenpro.photopick.filter.Filter;
+import com.example.documenpro.photoPickReader.engineReader.ImageEngineManager;
+import com.example.documenpro.photoPickReader.filterReader.FilterEngine;
 import com.example.documenpro.photopick.internal.entity.CaptureStrategy;
 import com.example.documenpro.photopick.internal.entity.SelectionSpec;
 import com.example.documenpro.photopick.listener.OnCheckedListener;
@@ -128,7 +128,7 @@ public final class SelectionCreator {
         mSelectionSpec.maxVideoSelectable = maxVideoSelectable;
         return this;
     }
-    public SelectionCreator addFilter(@NonNull Filter filter) {
+    public SelectionCreator addFilter(@NonNull FilterEngine filter) {
         if (mSelectionSpec.filters == null) {
             mSelectionSpec.filters = new ArrayList<>();
         }
@@ -195,7 +195,7 @@ public final class SelectionCreator {
     }
 
 
-    public SelectionCreator imageEngine(ImageEngine imageEngine) {
+    public SelectionCreator imageEngine(ImageEngineManager imageEngine) {
         mSelectionSpec.imageEngine = imageEngine;
         return this;
     }

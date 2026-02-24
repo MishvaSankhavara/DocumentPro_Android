@@ -27,7 +27,7 @@ import com.example.documenpro.clickListener.OnToolTapListener;
 import com.example.documenpro.model_reader.ToolsModel;
 import com.example.documenpro.photopick.Matisse;
 import com.example.documenpro.photopick.MimeType;
-import com.example.documenpro.photopick.engine.GlideEngine;
+import com.example.documenpro.photoPickReader.engineReader.GlideEngineManager;
 import com.example.documenpro.ui.activities.MergeChooseFileActivity;
 import com.example.documenpro.utils.Utils;
 
@@ -107,7 +107,7 @@ public class ToolsFragment extends Fragment {
                     .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                     .thumbnailScale(0.85f)
-                    .imageEngine(new GlideEngine())
+                    .imageEngine(new GlideEngineManager())
                     .showPreview(false) // Default is `true`
                     .forResult(11);
 

@@ -15,7 +15,7 @@ import android.util.Log;
 
 import com.example.documenpro.R;
 import com.example.documenpro.photopick.MimeType;
-import com.example.documenpro.photopick.filter.Filter;
+import com.example.documenpro.photoPickReader.filterReader.FilterEngine;
 import com.example.documenpro.photopick.internal.entity.IncapableCause;
 import com.example.documenpro.photopick.internal.entity.Item;
 import com.example.documenpro.photopick.internal.entity.SelectionSpec;
@@ -109,8 +109,8 @@ public final class PhotoMetadataUtils {
         }
 
         if (SelectionSpec.getInstance().filters != null) {
-            for (Filter filter : SelectionSpec.getInstance().filters) {
-                IncapableCause incapableCause = filter.filter(context, item);
+            for (FilterEngine filter : SelectionSpec.getInstance().filters) {
+                IncapableCause incapableCause = filter.filter_FilterEngine(context, item);
                 if (incapableCause != null) {
                     return incapableCause;
                 }
