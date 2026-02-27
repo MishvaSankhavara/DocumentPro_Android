@@ -64,7 +64,7 @@ import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.SortingListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.ui.activities.ListFileActivity;
+import com.example.documenpro.ui.activities.DocumentListActivity;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SplashActivity;
 import com.example.documenpro.ui.activities.ViewOfficeActivity;
@@ -1040,7 +1040,7 @@ public class Utils {
     }
 
     public static void openListFileActivity(MainActivity mainActivity, int i) {
-        Intent intent = new Intent(mainActivity, ListFileActivity.class);
+        Intent intent = new Intent(mainActivity, DocumentListActivity.class);
         intent.putExtra(GlobalConstant.FILE_TYPE, i);
         mainActivity.startActivity(intent);
 
