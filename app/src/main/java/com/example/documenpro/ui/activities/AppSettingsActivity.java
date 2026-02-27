@@ -24,10 +24,10 @@ import com.example.documenpro.utils.Utils;
 
 import java.util.Objects;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
-    private AppCompatTextView tvLanguage;
+public class AppSettingsActivity extends AppCompatActivity implements View.OnClickListener {
+    private AppCompatTextView languageTextView;
 
-    private AppCompatTextView tvVersion;
+    private AppCompatTextView appVersionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +39,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        initToolbar();
-        initViews();
-        initListener();
-        initData();
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar_settings);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-
-        }
+        setupToolbar();
+        initializeViews();
+        initializeListeners();
+        loadSettingsData();
     }
 
     @Override
@@ -63,14 +53,28 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
-    private void initData() {
-        tvVersion.setText(BuildConfig.VERSION_NAME);
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar_settings);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
 
-        tvLanguage.setText(SharedPreferenceUtils.getInstance(this).getString(GlobalConstant.LANGUAGE_NAME, "English"));
-
+        }
     }
 
-    private void initListener() {
+    private void loadSettingsData() {
+        appVersionTextView.setText(BuildConfig.VERSION_NAME);
+
+        languageTextView.setText(SharedPreferenceUtils.getInstance(this).getString(GlobalConstant.LANGUAGE_NAME, "English"));
+    }
+
+    private void initializeViews() {
+        languageTextView = findViewById(R.id.tv_language_hint);
+        appVersionTextView = findViewById(R.id.tv_version);
+    }
+
+    private void initializeListeners() {
         findViewById(R.id.cl_file_manage).setOnClickListener(this);
         findViewById(R.id.cl_rate_app).setOnClickListener(this);
         findViewById(R.id.cl_share_app).setOnClickListener(this);
@@ -79,12 +83,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.cl_request).setOnClickListener(this);
         findViewById(R.id.cl_feedback).setOnClickListener(this);
         findViewById(R.id.cl_privacy_policy).setOnClickListener(this);
-
-    }
-
-    private void initViews() {
-        tvLanguage = findViewById(R.id.tv_language_hint);
-        tvVersion = findViewById(R.id.tv_version);
     }
 
     @Override
@@ -97,7 +95,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         } else if (idView == R.id.cl_share_app) {
             Utils.shareApp(this);
         } else if (idView == R.id.cl_language_options) {
-            DialogUtils.showLanguageDialog(SettingsActivity.this);
+            DialogUtils.showLanguageDialog(AppSettingsActivity.this);
         } else if (idView == R.id.cl_faq) {
 
         } else if (idView == R.id.cl_request) {

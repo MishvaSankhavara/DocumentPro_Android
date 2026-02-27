@@ -8,7 +8,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.model_reader.DocumentModel;
-import com.example.documenpro.ui.activities.SelectActivity;
+import com.example.documenpro.ui.activities.SelectDocumentActivity;
 import com.example.documenpro.ui.dialog.ProgressDialog;
 
 import java.lang.ref.WeakReference;
@@ -20,21 +20,21 @@ public class FavoriteRemovalExecutor {
 
     private final Executor executor_removeFav = Executors.newSingleThreadExecutor();
     private ProgressDialog dialog_removeFav;
-    private final WeakReference<SelectActivity> weakReference_removeFav;
+    private final WeakReference<SelectDocumentActivity> weakReference_removeFav;
 
     private void updateUI_removeFav() {
-        weakReference_removeFav.get().arrayList = DatabaseHelper.getInstance(weakReference_removeFav.get()).getStarredDocuments_DatabaseHelper();
+        weakReference_removeFav.get().documentList = DatabaseHelper.getInstance(weakReference_removeFav.get()).getStarredDocuments_DatabaseHelper();
 
-        if (weakReference_removeFav.get().arrayList.size() == 0) {
+        if (weakReference_removeFav.get().documentList.size() == 0) {
             weakReference_removeFav.get().finish();
         } else {
-            weakReference_removeFav.get().adapter = new FilePickerAdapter(weakReference_removeFav.get(), weakReference_removeFav.get().arrayList, weakReference_removeFav.get());
+            weakReference_removeFav.get().filePickerAdapter = new FilePickerAdapter(weakReference_removeFav.get(), weakReference_removeFav.get().documentList, weakReference_removeFav.get());
 
-            weakReference_removeFav.get().recyclerView.setAdapter(weakReference_removeFav.get().adapter);
+            weakReference_removeFav.get().documentRecyclerView.setAdapter(weakReference_removeFav.get().filePickerAdapter);
 
-            weakReference_removeFav.get().activeButton(weakReference_removeFav.get().adapter.getSelected_FilePicker().size() > 0);
+            weakReference_removeFav.get().updateActionButtonsState(weakReference_removeFav.get().filePickerAdapter.getSelected_FilePicker().size() > 0);
 
-            weakReference_removeFav.get().toolbar.setTitle(weakReference_removeFav.get().getString(R.string.x_selected, String.valueOf(weakReference_removeFav.get().adapter.getSelected_FilePicker().size())));
+            weakReference_removeFav.get().topToolbar.setTitle(weakReference_removeFav.get().getString(R.string.x_selected, String.valueOf(weakReference_removeFav.get().filePickerAdapter.getSelected_FilePicker().size())));
         }
     }
 
@@ -69,7 +69,7 @@ public class FavoriteRemovalExecutor {
 
             weakReference_removeFav.get().runOnUiThread(this::showProgressDialog_removeFav);
 
-            ArrayList<DocumentModel> arrayListRemove_removeFav = weakReference_removeFav.get().adapter.getSelected_FilePicker();
+            ArrayList<DocumentModel> arrayListRemove_removeFav = weakReference_removeFav.get().filePickerAdapter.getSelected_FilePicker();
 
             for (int i = 0; i < arrayListRemove_removeFav.size(); i++) {
                 DocumentModel pdfModel_removeFav = arrayListRemove_removeFav.get(i);
@@ -94,7 +94,7 @@ public class FavoriteRemovalExecutor {
         });
     }
 
-    public FavoriteRemovalExecutor(SelectActivity activity_removeFav) {
+    public FavoriteRemovalExecutor(SelectDocumentActivity activity_removeFav) {
         this.weakReference_removeFav = new WeakReference<>(activity_removeFav);
     }
 }

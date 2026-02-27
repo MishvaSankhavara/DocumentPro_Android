@@ -30,7 +30,7 @@ import com.example.documenpro.docHelper.PdfPrintUtils;
 import com.example.documenpro.clickListener.PdfSelectionListener;
 import com.example.documenpro.clickListener.PasswordClickListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.ui.activities.ShareImageActivity;
+import com.example.documenpro.ui.activities.SharePdfAsImageActivity;
 import com.example.documenpro.ui.activities.SplitChooseFileActivity;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.ui.customviews.EmptyRecyclerView;
@@ -172,7 +172,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_convert_toast);
             } else {
-                Intent convertIntent = new Intent(this, ShareImageActivity.class);
+                Intent convertIntent = new Intent(this, SharePdfAsImageActivity.class);
                 convertIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_PDF_TO_PHOTO);
                 convertIntent.putExtra(GlobalConstant.PDF_MODEL_SEND, pdfModel_listener);
                 startActivity(convertIntent);

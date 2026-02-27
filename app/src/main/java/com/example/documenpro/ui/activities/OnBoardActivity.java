@@ -31,26 +31,26 @@ import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import java.util.ArrayList;
 
 public class OnBoardActivity extends AppCompatActivity {
-    public AnimationSet animationSetTitle;
-    public AnimationSet animationSetDes;
-    public LinearLayout btnNext;
-    public AppCompatTextView tvNext;
-    ViewPager2 viewPager2;
+
+    public AnimationSet titleAnimationSet;
+    public AnimationSet descriptionAnimationSet;
+    ViewPager2 onboardingViewPager;
     public final ArrayList<View> listView = new ArrayList<>();
+    public LinearLayout nextButtonLayout;
+    public AppCompatTextView nextButtonText;
     public View viewGuide1;
     public View viewGuide2;
     public View viewGuide3;
     public View indicator1;
     public View indicator2;
     public View indicator3;
-    public int positionOld;
-
-    public AppCompatTextView tvTitle1;
-    public AppCompatTextView tvDes1;
-    public AppCompatTextView tvTitle2;
-    public AppCompatTextView tvDes2;
-    public AppCompatTextView tvTitle3;
-    public AppCompatTextView tvDes3;
+    public int previousPagePosition;
+    public AppCompatTextView titlePageOneText;
+    public AppCompatTextView descriptionPageOneText;
+    public AppCompatTextView titlePageTwoText;
+    public AppCompatTextView descriptionPageTwoText;
+    public AppCompatTextView titlePageThreeText;
+    public AppCompatTextView descriptionPageThreeText;
 
     public static final class ViewPagerChange extends ViewPager2.OnPageChangeCallback {
         public final OnBoardActivity activity;
@@ -62,18 +62,18 @@ public class OnBoardActivity extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             super.onPageSelected(position);
-            activity.animationIndicator(position);
-            if (position > activity.positionOld) {
-                activity.animationTv(position);
+            activity.updateIndicatorAnimation(position);
+            if (position > activity.previousPagePosition) {
+                activity.animatePageText(position);
             }
-            activity.positionOld = position;
+            activity.previousPagePosition = position;
             if (position == 2) {
-                AppCompatTextView appCompatTextView = activity.tvNext;
+                AppCompatTextView appCompatTextView = activity.nextButtonText;
                 if (appCompatTextView != null) {
                     appCompatTextView.setText(R.string.str_action_start);
                 }
             } else {
-                AppCompatTextView appCompatTextView2 = activity.tvNext;
+                AppCompatTextView appCompatTextView2 = activity.nextButtonText;
                 if (appCompatTextView2 != null) {
                     appCompatTextView2.setText(R.string.str_next);
                 }
@@ -97,19 +97,19 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private void initViewPager() {
-        if (viewPager2 != null) {
+        if (onboardingViewPager != null) {
             OnboardingScreenAdapter aVar = new OnboardingScreenAdapter();
             aVar.list_OnboardingScreen = this.listView;
-            viewPager2.setAdapter(aVar);
-            viewPager2.setCurrentItem(0);
-            viewPager2.registerOnPageChangeCallback(new ViewPagerChange(this));
+            onboardingViewPager.setAdapter(aVar);
+            onboardingViewPager.setCurrentItem(0);
+            onboardingViewPager.registerOnPageChangeCallback(new ViewPagerChange(this));
         }
     }
 
     private void initView() {
-        viewPager2 = findViewById(R.id.guide_vp);
-        this.btnNext = findViewById(R.id.next_layout);
-        this.tvNext = findViewById(R.id.next_start_tv);
+        onboardingViewPager = findViewById(R.id.guide_vp);
+        this.nextButtonLayout = findViewById(R.id.next_layout);
+        this.nextButtonText = findViewById(R.id.next_start_tv);
         LayoutInflater from = LayoutInflater.from(this);
 
         this.viewGuide1 = from.inflate(R.layout.layout_on_board_1, null);
@@ -121,29 +121,29 @@ public class OnBoardActivity extends AppCompatActivity {
         View view = this.viewGuide1;
         if (view != null) {
             this.listView.add(view);
-            this.tvTitle1 = view.findViewById(R.id.title_tv);
-            this.tvDes1 = view.findViewById(R.id.subtitle_tv);
+            this.titlePageOneText = view.findViewById(R.id.title_tv);
+            this.descriptionPageOneText = view.findViewById(R.id.subtitle_tv);
         }
         View view3 = this.viewGuide2;
         if (view3 != null) {
             listView.add(view3);
-            this.tvTitle2 = view3.findViewById(R.id.title_tv2);
-            this.tvDes2 = view3.findViewById(R.id.subtitle_tv2);
+            this.titlePageTwoText = view3.findViewById(R.id.title_tv2);
+            this.descriptionPageTwoText = view3.findViewById(R.id.subtitle_tv2);
         }
         View view4 = this.viewGuide3;
         if (view4 != null) {
             listView.add(view4);
-            this.tvTitle3 = view4.findViewById(R.id.title_tv3);
-            this.tvDes3 = view4.findViewById(R.id.subtitle_tv3);
+            this.titlePageThreeText = view4.findViewById(R.id.title_tv3);
+            this.descriptionPageThreeText = view4.findViewById(R.id.subtitle_tv3);
         }
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        nextButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (positionOld == 0) {
-                    viewPager2.setCurrentItem(1);
-                } else if (positionOld == 1) {
-                    viewPager2.setCurrentItem(2);
+                if (previousPagePosition == 0) {
+                    onboardingViewPager.setCurrentItem(1);
+                } else if (previousPagePosition == 1) {
+                    onboardingViewPager.setCurrentItem(2);
                 } else {
                     SharedPreferenceUtils.getInstance(OnBoardActivity.this).setBoolean(GlobalConstant.GUIDE_SET, true);
 
@@ -160,37 +160,37 @@ public class OnBoardActivity extends AppCompatActivity {
         });
     }
 
-    public final void animationTv(int position) {
+    public final void animatePageText(int position) {
         if (position == 0) {
-            tvTitleAnimation(this.tvTitle1);
-            tvDesAnimation(this.tvDes1);
+            animateTitleText(this.titlePageOneText);
+            animateDescriptionText(this.descriptionPageOneText);
         } else if (position == 1) {
-            tvTitleAnimation(this.tvTitle2);
-            tvDesAnimation(this.tvDes2);
+            animateTitleText(this.titlePageTwoText);
+            animateDescriptionText(this.descriptionPageTwoText);
         } else if (position == 2) {
-            tvTitleAnimation(this.tvTitle3);
-            tvDesAnimation(this.tvDes3);
+            animateTitleText(this.titlePageThreeText);
+            animateDescriptionText(this.descriptionPageThreeText);
         }
     }
 
-    public final void animationIndicator(int position) {
+    public final void updateIndicatorAnimation(int position) {
         if (position == 0) {
-            changeIndicator(this.indicator1, true);
-            changeIndicator(this.indicator2, false);
-            changeIndicator(this.indicator3, false);
+            updateIndicator(this.indicator1, true);
+            updateIndicator(this.indicator2, false);
+            updateIndicator(this.indicator3, false);
         } else if (position == 1) {
-            changeIndicator(this.indicator1, false);
-            changeIndicator(this.indicator2, true);
-            changeIndicator(this.indicator3, false);
+            updateIndicator(this.indicator1, false);
+            updateIndicator(this.indicator2, true);
+            updateIndicator(this.indicator3, false);
         } else if (position == 2) {
-            changeIndicator(this.indicator1, false);
-            changeIndicator(this.indicator2, false);
-            changeIndicator(this.indicator3, true);
+            updateIndicator(this.indicator1, false);
+            updateIndicator(this.indicator2, false);
+            updateIndicator(this.indicator3, true);
         }
     }
 
-    public final void tvDesAnimation(AppCompatTextView tvDes) {
-        if (this.animationSetDes == null) {
+    public final void animateDescriptionText(AppCompatTextView tvDes) {
+        if (this.descriptionAnimationSet == null) {
             float dimensionPixelSize = (float) getResources().getDimensionPixelSize(R.dimen.dp_75);
 //            if (this.H) {
 //                dimensionPixelSize = -dimensionPixelSize;
@@ -198,49 +198,27 @@ public class OnBoardActivity extends AppCompatActivity {
             AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
             TranslateAnimation translateAnimation = new TranslateAnimation(dimensionPixelSize, 0.0f, 0.0f, 0.0f);
             AnimationSet animationSet = new AnimationSet(true);
-            this.animationSetDes = animationSet;
+            this.descriptionAnimationSet = animationSet;
             animationSet.setDuration(350);
-            AnimationSet animationSet2 = this.animationSetDes;
+            AnimationSet animationSet2 = this.descriptionAnimationSet;
             if (animationSet2 != null) {
                 animationSet2.addAnimation(alphaAnimation);
             }
-            AnimationSet animationSet3 = this.animationSetDes;
+            AnimationSet animationSet3 = this.descriptionAnimationSet;
             if (animationSet3 != null) {
                 animationSet3.addAnimation(translateAnimation);
             }
-            AnimationSet animationSet4 = this.animationSetDes;
+            AnimationSet animationSet4 = this.descriptionAnimationSet;
             if (animationSet4 != null) {
                 animationSet4.setStartOffset(50);
             }
         }
         if (tvDes != null) {
-            tvDes.startAnimation(this.animationSetDes);
+            tvDes.startAnimation(this.descriptionAnimationSet);
         }
     }
 
-    public final void tvTitleAnimation(AppCompatTextView tvTitle) {
-        if (animationSetTitle == null) {
-            float dimensionPixelSize = (float) getResources().getDimensionPixelSize(R.dimen.dp_60);
-            AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
-            TranslateAnimation translateAnimation = new TranslateAnimation(dimensionPixelSize, 0.0f, 0.0f, 0.0f);
-            AnimationSet animationSet = new AnimationSet(true);
-            animationSetTitle = animationSet;
-            animationSet.setDuration(350);
-            AnimationSet animationSet2 = this.animationSetTitle;
-            if (animationSet2 != null) {
-                animationSet2.addAnimation(alphaAnimation);
-            }
-            AnimationSet animationSet3 = this.animationSetTitle;
-            if (animationSet3 != null) {
-                animationSet3.addAnimation(translateAnimation);
-            }
-        }
-        if (tvTitle != null) {
-            tvTitle.startAnimation(this.animationSetTitle);
-        }
-    }
-
-    public final void changeIndicator(View view, boolean selected) {
+    public final void updateIndicator(View view, boolean selected) {
         int idResource;
         int idDimen;
         if (view != null) {
@@ -265,4 +243,25 @@ public class OnBoardActivity extends AppCompatActivity {
         }
     }
 
+    public final void animateTitleText(AppCompatTextView tvTitle) {
+        if (titleAnimationSet == null) {
+            float dimensionPixelSize = (float) getResources().getDimensionPixelSize(R.dimen.dp_60);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
+            TranslateAnimation translateAnimation = new TranslateAnimation(dimensionPixelSize, 0.0f, 0.0f, 0.0f);
+            AnimationSet animationSet = new AnimationSet(true);
+            titleAnimationSet = animationSet;
+            animationSet.setDuration(350);
+            AnimationSet animationSet2 = this.titleAnimationSet;
+            if (animationSet2 != null) {
+                animationSet2.addAnimation(alphaAnimation);
+            }
+            AnimationSet animationSet3 = this.titleAnimationSet;
+            if (animationSet3 != null) {
+                animationSet3.addAnimation(translateAnimation);
+            }
+        }
+        if (tvTitle != null) {
+            tvTitle.startAnimation(this.titleAnimationSet);
+        }
+    }
 }

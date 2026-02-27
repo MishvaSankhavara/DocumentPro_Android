@@ -41,12 +41,12 @@ import com.example.documenpro.utils.DialogUtils;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MergeReorderActivity extends AppCompatActivity implements OnDragStartListener {
-    private MergeReorderAdapter adapter;
-    private ArrayList<PDFReaderModel> arrayList = new ArrayList<>();
-    private AppCompatTextView btnMerge;
+public class ReorderMergePdfActivity extends AppCompatActivity implements OnDragStartListener {
+    private MergeReorderAdapter mergeReorderAdapter;
+    private ArrayList<PDFReaderModel> mergePdfList = new ArrayList<>();
+    private AppCompatTextView mergeButtonText;
 
-    private LinearLayout llTip;
+    private LinearLayout tipsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,24 +99,24 @@ public class MergeReorderActivity extends AppCompatActivity implements OnDragSta
 
     private void initViews() {
 
-        llTip = findViewById(R.id.tipsLl);
-        ImageView imgClose = findViewById(R.id.tipsCloseIv);
+        tipsLayout = findViewById(R.id.tipsLl);
+        ImageView closeTipsImageView = findViewById(R.id.tipsCloseIv);
 
         if (SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.MERGE_ORDER_TIP, false)) {
-            llTip.setVisibility(View.GONE);
+            tipsLayout.setVisibility(View.GONE);
 
         }
 
-        imgClose.setOnClickListener(new View.OnClickListener() {
+        closeTipsImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                llTip.animate().translationY((float) (-llTip.getHeight())).alpha(0.0f)
+                tipsLayout.animate().translationY((float) (-tipsLayout.getHeight())).alpha(0.0f)
                         .setListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationEnd(Animator animation) {
                                 super.onAnimationEnd(animation);
-                                llTip.setVisibility(View.GONE);
-                                SharedPreferenceUtils.getInstance(MergeReorderActivity.this)
+                                tipsLayout.setVisibility(View.GONE);
+                                SharedPreferenceUtils.getInstance(ReorderMergePdfActivity.this)
                                         .setBoolean(GlobalConstant.MERGE_ORDER_TIP, true);
                             }
                         });
@@ -126,35 +126,35 @@ public class MergeReorderActivity extends AppCompatActivity implements OnDragSta
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        btnMerge = findViewById(R.id.tv_continue);
-        btnMerge.setEnabled(true);
-        btnMerge.setText(getResources().getString(R.string.merge_x,
+        mergeButtonText = findViewById(R.id.tv_continue);
+        mergeButtonText.setEnabled(true);
+        mergeButtonText.setText(getResources().getString(R.string.merge_x,
                 String.valueOf(MyApplication.getInstance().getArrayListMerge().size())));
-        arrayList = MyApplication.getInstance().getArrayListMerge();
+        mergePdfList = MyApplication.getInstance().getArrayListMerge();
 
-        adapter = new MergeReorderAdapter(this, this, arrayList, (pdfModel, mPosition) -> {
-            arrayList.remove(mPosition);
-            adapter.notifyItemRemoved(mPosition);
-            saveList();
-            btnMerge.setText(getString(R.string.merge_x,
+        mergeReorderAdapter = new MergeReorderAdapter(this, this, mergePdfList, (pdfModel, mPosition) -> {
+            mergePdfList.remove(mPosition);
+            mergeReorderAdapter.notifyItemRemoved(mPosition);
+            saveMergePdfList();
+            mergeButtonText.setText(getString(R.string.merge_x,
                     String.valueOf(MyApplication.getInstance().getArrayListMerge().size())));
             if (MyApplication.getInstance().getArrayListMerge().size() < 2) {
-                btnMerge.setEnabled(false);
+                mergeButtonText.setEnabled(false);
             }
             if (MyApplication.getInstance().getArrayListMerge().isEmpty()) {
                 finish();
             }
 
         });
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mergeReorderAdapter);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchCallback(adapter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchCallback(mergeReorderAdapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        btnMerge.setOnClickListener(view -> {
+        mergeButtonText.setOnClickListener(view -> {
             String sb2 = "Merged" + System.currentTimeMillis();
-            RenameDialog dialog = new RenameDialog(MergeReorderActivity.this, sb2, nameFile -> {
-                Intent intent = new Intent(MergeReorderActivity.this, ProcessingTaskActivity.class);
+            RenameDialog dialog = new RenameDialog(ReorderMergePdfActivity.this, sb2, nameFile -> {
+                Intent intent = new Intent(ReorderMergePdfActivity.this, ProcessingTaskActivity.class);
                 intent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_MERGE);
                 intent.putExtra(GlobalConstant.MERGE_PDF_FILE_NAME, nameFile);
                 startActivity(intent);
@@ -169,8 +169,8 @@ public class MergeReorderActivity extends AppCompatActivity implements OnDragSta
         });
     }
 
-    private void saveList() {
-        MyApplication.getInstance().setMergePdfList(arrayList);
+    private void saveMergePdfList() {
+        MyApplication.getInstance().setMergePdfList(mergePdfList);
     }
 
     @Override

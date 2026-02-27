@@ -20,7 +20,7 @@ import com.example.documenpro.clickListener.ItemTouchAdapter;
 import com.example.documenpro.clickListener.OnRemovePdfItemListener;
 import com.example.documenpro.clickListener.OnDragStartListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.ui.activities.MergeReorderActivity;
+import com.example.documenpro.ui.activities.ReorderMergePdfActivity;
 import com.example.documenpro.utils.Utils;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
     public OnRemovePdfItemListener listener_MergeReorder;
     public ArrayList<PDFReaderModel> pdfModels_MergeReorder;
     public OnDragStartListener mDragStartListener_MergeReorder;
-    public MergeReorderActivity mActivity_MergeReorder;
+    public ReorderMergePdfActivity mActivity_MergeReorder;
 
     @Override
     public void itemMove(int i, int i2) {
@@ -85,7 +85,7 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pdf_merge, parent, false));
     }
 
-    public MergeReorderAdapter(MergeReorderActivity mActivity, OnDragStartListener mDragStartListener, ArrayList<PDFReaderModel> pdfModels, OnRemovePdfItemListener listener) {
+    public MergeReorderAdapter(ReorderMergePdfActivity mActivity, OnDragStartListener mDragStartListener, ArrayList<PDFReaderModel> pdfModels, OnRemovePdfItemListener listener) {
         this.listener_MergeReorder = listener;
         this.pdfModels_MergeReorder = pdfModels;
         this.mDragStartListener_MergeReorder = mDragStartListener;

@@ -30,7 +30,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
-import com.example.documenpro.ui.activities.SelectActivity;
+import com.example.documenpro.ui.activities.SelectDocumentActivity;
 import com.example.documenpro.ui.customviews.FileTypeItem;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.header.ClassicsHeader;
@@ -246,11 +246,11 @@ public class FilesFragment extends Fragment implements View.OnClickListener {
             Utils.askPermission(mActivity);
         } else if (idView == R.id.btnSelect) {
             if (mPosition == 0) {
-                Intent intentAll = new Intent(mActivity, SelectActivity.class);
+                Intent intentAll = new Intent(mActivity, SelectDocumentActivity.class);
                 intentAll.putExtra(GlobalConstant.FILE_TYPE, GlobalConstant.RECENT_FILE_TYPE);
                 startActivity(intentAll);
             } else if (mPosition == 1) {
-                Intent intentRecent = new Intent(mActivity, SelectActivity.class);
+                Intent intentRecent = new Intent(mActivity, SelectDocumentActivity.class);
                 intentRecent.putExtra(GlobalConstant.FILE_TYPE, GlobalConstant.FAV_FILE_TYPE);
                 startActivity(intentRecent);
             }

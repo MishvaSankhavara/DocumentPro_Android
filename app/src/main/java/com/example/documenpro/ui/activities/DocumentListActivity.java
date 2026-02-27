@@ -63,13 +63,13 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
         if (getIntent() != null) {
             fileType = getIntent().getIntExtra(FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
         }
-        intViews();
+        initializeViews();
         AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
         setUpToolbar();
-        loadFiles(selectedFileType);
+        loadDocuments(selectedFileType);
     }
 
-    private void loadFiles(String fileType) {
+    private void loadDocuments(String fileType) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -92,10 +92,22 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        setToolbarColor(fileType);
+        applyToolbarTheme(fileType);
     }
 
-    private void setToolbarColor(int fileType) {
+    private void initializeViews() {
+        mainContainerLayout = findViewById(R.id.cl_main);
+        documentRecyclerView = findViewById(R.id.recycler);
+        loadingAnimationView = findViewById(R.id.loadingView);
+        topToolbar = findViewById(R.id.toolbar_list_file);
+        documentRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        documentRecyclerView.setLayoutManager(layoutManager);
+        documentRecyclerView.setEmptyView(findViewById(R.id.empty_layout));
+        documentList = new ArrayList<>();
+    }
+
+    private void applyToolbarTheme(int fileType) {
         int colorCode = R.color.all_file_list_bg;
         int title = R.string.tittle_toolbar_all;
         selectedFileType = GlobalConstant.COUNT_ALL_FILE;
@@ -127,18 +139,6 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
         topToolbar.setTitle(getResources().getString(title));
     }
 
-    private void intViews() {
-        mainContainerLayout = findViewById(R.id.cl_main);
-        documentRecyclerView = findViewById(R.id.recycler);
-        loadingAnimationView = findViewById(R.id.loadingView);
-        topToolbar = findViewById(R.id.toolbar_list_file);
-        documentRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        documentRecyclerView.setLayoutManager(layoutManager);
-        documentRecyclerView.setEmptyView(findViewById(R.id.empty_layout));
-        documentList = new ArrayList<>();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -154,11 +154,10 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
             finish();
         } else if (idView == R.id.item_search) {
 
-            Intent intent = new Intent(DocumentListActivity.this, SearchActivity.class);
+            Intent intent = new Intent(DocumentListActivity.this, SearchDocumentActivity.class);
             intent.putExtra(GlobalConstant.FILE_TYPE, fileType);
             startActivity(intent);
             finish();
-
 
         } else if (idView == R.id.item_sort) {
             if (documentListAdapter.getItemCount() == 0) {
@@ -168,14 +167,11 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
             }
         } else if (idView == R.id.item_multi_select) {
 
-            Intent intent = new Intent(DocumentListActivity.this, SelectActivity.class);
+            Intent intent = new Intent(DocumentListActivity.this, SelectDocumentActivity.class);
             intent.putExtra(GlobalConstant.FILE_TYPE, fileType);
             startActivity(intent);
             finish();
-
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -188,20 +184,14 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
     }
 
     @Override
-    public void onSortingDateOldest() {
-        documentList.sort(DocumentModel.sortDateAscendingComparator_DocModel);
-        documentListAdapter.setData(documentList);
-    }
-
-    @Override
     public void onSortingByDateNewest() {
         documentList.sort(DocumentModel.sortDateDescendingComparator_DocModel);
         documentListAdapter.setData(documentList);
     }
 
     @Override
-    public void onSortingAtoZ() {
-        documentList.sort(DocumentModel.sortNameAZComparator_DocModel);
+    public void onSortingDateOldest() {
+        documentList.sort(DocumentModel.sortDateAscendingComparator_DocModel);
         documentListAdapter.setData(documentList);
     }
 
@@ -212,14 +202,20 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
     }
 
     @Override
-    public void onSortingFileSizeUp() {
-        documentList.sort(DocumentModel.sortFileSizeAscendingComparator_DocModel);
+    public void onSortingAtoZ() {
+        documentList.sort(DocumentModel.sortNameAZComparator_DocModel);
         documentListAdapter.setData(documentList);
     }
 
     @Override
     public void onSortingFileSizeDown() {
         documentList.sort(DocumentModel.sortFileSizeDescendingComparator_DocModel);
+        documentListAdapter.setData(documentList);
+    }
+
+    @Override
+    public void onSortingFileSizeUp() {
+        documentList.sort(DocumentModel.sortFileSizeAscendingComparator_DocModel);
         documentListAdapter.setData(documentList);
     }
 }

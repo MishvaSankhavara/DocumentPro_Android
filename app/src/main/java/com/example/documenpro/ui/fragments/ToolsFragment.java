@@ -28,7 +28,7 @@ import com.example.documenpro.model_reader.ToolsModel;
 import com.example.documenpro.photopick.Matisse;
 import com.example.documenpro.photopick.MimeType;
 import com.example.documenpro.photoPickReader.engineReader.GlideEngineManager;
-import com.example.documenpro.ui.activities.MergeChooseFileActivity;
+import com.example.documenpro.ui.activities.MergeSelectFileActivity;
 import com.example.documenpro.utils.Utils;
 
 public class ToolsFragment extends Fragment {
@@ -79,7 +79,7 @@ public class ToolsFragment extends Fragment {
         if (toolType == GlobalConstant.TOOL_YOUR_PDF) {
             startActivity(new Intent(mActivity, ResultViewerActivity.class));
         } else if (toolType == GlobalConstant.TOOL_MERGE) {
-            startActivity(new Intent(mActivity, MergeChooseFileActivity.class));
+            startActivity(new Intent(mActivity, MergeSelectFileActivity.class));
             MyApplication.getInstance().clearArrayListMerge();
         } else if (toolType == GlobalConstant.TOOL_COMPRESS) {
 

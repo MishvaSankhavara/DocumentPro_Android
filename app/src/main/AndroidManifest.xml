@@ -31,11 +31,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".ui.activities.MergeReorderActivity"
+            android:name=".ui.activities.ReorderMergePdfActivity"
             android:exported="false"
             android:theme="@style/ActivityCommon" />
         <activity
-            android:name=".ui.activities.ShareImageActivity"
+            android:name=".ui.activities.SharePdfAsImageActivity"
             android:exported="false"
             android:theme="@style/ActivityCommon" />
         <activity
@@ -50,7 +50,7 @@
             android:exported="false"
             android:theme="@style/ActivityCommon" />
         <activity
-            android:name=".ui.activities.MergeChooseFileActivity"
+            android:name=".ui.activities.MergeSelectFileActivity"
             android:exported="false"
             android:theme="@style/ActivityCommon" />
         <activity
@@ -62,7 +62,7 @@
             android:exported="false"
             android:theme="@style/ActivityCommon" />
         <activity
-            android:name=".ui.activities.SettingsActivity"
+            android:name=".ui.activities.AppSettingsActivity"
             android:exported="false"
             android:theme="@style/ActivityCommon" />
         <activity
@@ -148,7 +148,7 @@
             android:exported="false"
             android:theme="@style/ListFileTheme" />
         <activity
-            android:name=".ui.activities.SelectActivity"
+            android:name=".ui.activities.SelectDocumentActivity"
             android:exported="false"
             android:theme="@style/ListFileTheme" />
         <activity
@@ -156,7 +156,7 @@
             android:exported="false"
             android:theme="@style/ListFileTheme" />
         <activity
-            android:name=".ui.activities.SearchActivity"
+            android:name=".ui.activities.SearchDocumentActivity"
             android:exported="false"
             android:theme="@style/SearchTheme" />
         <activity

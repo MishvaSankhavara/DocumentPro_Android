@@ -29,14 +29,14 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class MergeChooseFileActivity extends AppCompatActivity {
-    private AppCompatTextView btnContinue;
-    private MergeFileSelectionAdapter adapter;
-    private Toolbar toolbar;
+public class MergeSelectFileActivity extends AppCompatActivity {
+    private AppCompatTextView continueButtonText;
+    private MergeFileSelectionAdapter pdfSelectionAdapter;
+    private Toolbar mergeToolbar;
 
-    private ArrayList<PDFReaderModel> arrayList;
+    private ArrayList<PDFReaderModel> availablePdfList;
 
-    private final Executor executor = Executors.newSingleThreadExecutor();
+    private final Executor backgroundExecutor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +51,14 @@ public class MergeChooseFileActivity extends AppCompatActivity {
         });
 //        NativeAdsAdmob.showNativeBanner1(this, null);
         initToolBar();
-
         initViews();
     }
 
     private void initToolBar() {
-        toolbar = findViewById(R.id.toolbar);
+        mergeToolbar = findViewById(R.id.toolbar);
 
-        toolbar.setTitle(getString(R.string.x_selected, "0"));
-        setSupportActionBar(toolbar);
+        mergeToolbar.setTitle(getString(R.string.x_selected, "0"));
+        setSupportActionBar(mergeToolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -71,50 +70,45 @@ public class MergeChooseFileActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     private void initViews() {
-        LottieAnimationView loadingView = findViewById(R.id.loadingView);
-        FrameLayout flContinue = findViewById(R.id.continue_fl);
-        btnContinue = findViewById(R.id.tv_continue);
+        LottieAnimationView loadingAnimation = findViewById(R.id.loadingView);
+        FrameLayout continueButtonContainer = findViewById(R.id.continue_fl);
+        continueButtonText = findViewById(R.id.tv_continue);
         EmptyRecyclerView recyclerView = findViewById(R.id.chooser_recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setEmptyView(findViewById(R.id.tv_empty_title));
 
-        executor.execute(() -> {
-            arrayList = Utils.getUnLockPDF(MergeChooseFileActivity.this);
+        backgroundExecutor.execute(() -> {
+            availablePdfList = Utils.getUnLockPDF(MergeSelectFileActivity.this);
             runOnUiThread(() -> {
-                adapter = new MergeFileSelectionAdapter(MergeChooseFileActivity.this, arrayList, position -> {
-                    if (adapter.getSelected_MergeFileSelection().size() > 1) {
-                        btnContinue.setEnabled(true);
-                        btnContinue.setClickable(true);
-                        btnContinue.setFocusable(true);
+                pdfSelectionAdapter = new MergeFileSelectionAdapter(MergeSelectFileActivity.this, availablePdfList, position -> {
+                    if (pdfSelectionAdapter.getSelected_MergeFileSelection().size() > 1) {
+                        continueButtonText.setEnabled(true);
+                        continueButtonText.setClickable(true);
+                        continueButtonText.setFocusable(true);
                     } else {
-                        btnContinue.setEnabled(false);
-                        btnContinue.setClickable(false);
-                        btnContinue.setFocusable(false);
+                        continueButtonText.setEnabled(false);
+                        continueButtonText.setClickable(false);
+                        continueButtonText.setFocusable(false);
                     }
-                    toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_MergeFileSelection().size())));
+                    mergeToolbar.setTitle(getString(R.string.x_selected, String.valueOf(pdfSelectionAdapter.getSelected_MergeFileSelection().size())));
                 });
-                recyclerView.setAdapter(adapter);
-                loadingView.setVisibility(View.GONE);
-                flContinue.setVisibility(View.VISIBLE);
+                recyclerView.setAdapter(pdfSelectionAdapter);
+                loadingAnimation.setVisibility(View.GONE);
+                continueButtonContainer.setVisibility(View.VISIBLE);
             });
         });
 
-
-        btnContinue.setOnClickListener(view -> {
-            MyApplication.getInstance().setMergePdfList(adapter.getSelected_MergeFileSelection());
-            Intent intent = new Intent(MergeChooseFileActivity.this, MergeReorderActivity.class);
+        continueButtonText.setOnClickListener(view -> {
+            MyApplication.getInstance().setMergePdfList(pdfSelectionAdapter.getSelected_MergeFileSelection());
+            Intent intent = new Intent(MergeSelectFileActivity.this, ReorderMergePdfActivity.class);
             startActivity(intent);
             finish();
         });
-
     }
-
-
 }

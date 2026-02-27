@@ -50,24 +50,24 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ShareImageActivity extends AppCompatActivity implements OnThumbnailClickListener {
-    private AppCompatTextView btnContinue;
-    private LottieAnimationView loadingView;
-    private Toolbar toolbar;
-    private EmptyRecyclerView recyclerView;
-    private PdfPreviewThumbnailAdapter adapter;
-    private final ArrayList<PDFPageModel> listPdfPages = new ArrayList<>();
+public class SharePdfAsImageActivity extends AppCompatActivity implements OnThumbnailClickListener {
+    private AppCompatTextView continueActionText;
+    private LottieAnimationView loadingAnimationView;
+    private Toolbar topToolbar;
+    private EmptyRecyclerView pdfPageRecyclerView;
+    private PdfPreviewThumbnailAdapter thumbnailAdapter;
+    private final ArrayList<PDFPageModel> pdfPageList = new ArrayList<>();
 
-    private String strAllPdfPictureDir;
-    private String pdfDirAsFileName;
-    PDFReaderModel pdfModel;
-    private String fileName;
-    private Context mContext;
-    private boolean finishLoad = false;
-    private final String TAG = ShareImageActivity.class.getSimpleName();
+    private String tempPdfImageDirectory;
+    private String pdfFolderName;
+    PDFReaderModel selectedPdfModel;
+    private String pdfFileName;
+    private Context context;
+    private boolean isLoadCompleted = false;
+    private final String logTag = SharePdfAsImageActivity.class.getSimpleName();
 
-    private int toolType;
-    private Menu menu;
+    private int selectedToolType;
+    private Menu optionsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,21 +81,21 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
             return insets;
         });
         initToolBar();
-        strAllPdfPictureDir = Environment.getExternalStorageDirectory() + "/Pictures/AllPdf/tmp/";
-        mContext = this;
+        tempPdfImageDirectory = Environment.getExternalStorageDirectory() + "/Pictures/AllPdf/tmp/";
+        context = this;
         initViews();
         Intent intent = getIntent();
         if (intent != null) {
-            pdfModel = (PDFReaderModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+            selectedPdfModel = (PDFReaderModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
 
-            toolType = intent.getIntExtra(GlobalConstant.TOOL_TYPE, 1);
-            if (toolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
-                btnContinue.setText(R.string.str_action_share);
-            } else if (toolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
-                btnContinue.setText(R.string.tool_tittle_pdf_to_image);
+            selectedToolType = intent.getIntExtra(GlobalConstant.TOOL_TYPE, 1);
+            if (selectedToolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
+                continueActionText.setText(R.string.str_action_share);
+            } else if (selectedToolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
+                continueActionText.setText(R.string.tool_tittle_pdf_to_image);
             }
-            fileName = pdfModel.getName_PDFModel();
-            String pdfSavedFile = pdfModel.getAbsolutePath_PDFModel();
+            pdfFileName = selectedPdfModel.getName_PDFModel();
+            String pdfSavedFile = selectedPdfModel.getAbsolutePath_PDFModel();
             Uri uri = Uri.fromFile(new File(pdfSavedFile));
             new LoadThumbnailPdf(this).execute(uri.toString());
 
@@ -105,17 +105,17 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
     }
 
     private void initViews() {
-        loadingView = findViewById(R.id.loadingView);
-        btnContinue = findViewById(R.id.tv_continue);
-        recyclerView = findViewById(R.id.chooser_recycler_view);
-        btnContinue.setOnClickListener(new View.OnClickListener() {
+        loadingAnimationView = findViewById(R.id.loadingView);
+        continueActionText = findViewById(R.id.tv_continue);
+        pdfPageRecyclerView = findViewById(R.id.chooser_recycler_view);
+        continueActionText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (toolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
-                    if (adapter.getSelected_PdfPreview().size() < 50) {
+                if (selectedToolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
+                    if (thumbnailAdapter.getSelected_PdfPreview().size() < 50) {
                         ArrayList<Uri> arrayList = new ArrayList<>();
-                        for (int i = 0; i < adapter.getSelected_PdfPreview().size(); i++) {
-                            arrayList.add(FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", new File(Objects.requireNonNull(adapter.getSelected_PdfPreview().get(i).getThumbnailUri_PDFPageModel().getPath()))));
+                        for (int i = 0; i < thumbnailAdapter.getSelected_PdfPreview().size(); i++) {
+                            arrayList.add(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(Objects.requireNonNull(thumbnailAdapter.getSelected_PdfPreview().get(i).getThumbnailUri_PDFPageModel().getPath()))));
                         }
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -124,11 +124,11 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, arrayList);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(mContext, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT).show();
                     }
-                } else if (toolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
+                } else if (selectedToolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
 
-                    ConvertDialog dialog = new ConvertDialog(ShareImageActivity.this, adapter.getSelected_PdfPreview());
+                    ConvertDialog dialog = new ConvertDialog(SharePdfAsImageActivity.this, thumbnailAdapter.getSelected_PdfPreview());
                     Window window4 = dialog.getWindow();
                     assert window4 != null;
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -145,17 +145,17 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         } else if (item.getItemId() == R.id.item_select_all) {
-            if (finishLoad) {
-                if (adapter.isSelectedAll_PdfPreview) {
-                    adapter.setUnSelectedAll_PdfPreview();
-                    menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
+            if (isLoadCompleted) {
+                if (thumbnailAdapter.isSelectedAll_PdfPreview) {
+                    thumbnailAdapter.setUnSelectedAll_PdfPreview();
+                    optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
                     activeButton(false);
                 } else {
-                    adapter.setSelectedAll_PdfPreview();
-                    menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
+                    thumbnailAdapter.setSelectedAll_PdfPreview();
+                    optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                     activeButton(true);
                 }
-                toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_PdfPreview().size())));
+                topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -164,19 +164,19 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        File dir = new File(this.strAllPdfPictureDir);
+        File dir = new File(this.tempPdfImageDirectory);
 
-        Utils.deletePdfFiles(this.strAllPdfPictureDir);
+        Utils.deletePdfFiles(this.tempPdfImageDirectory);
         String sb = "Deleting temp dir " +
-                this.strAllPdfPictureDir;
-        Log.d(this.TAG, sb);
+                this.tempPdfImageDirectory;
+        Log.d(this.logTag, sb);
     }
 
     private void initToolBar() {
-        toolbar = findViewById(R.id.toolbar);
+        topToolbar = findViewById(R.id.toolbar);
 
-        toolbar.setTitle(getString(R.string.x_selected, "0"));
-        setSupportActionBar(toolbar);
+        topToolbar.setTitle(getString(R.string.x_selected, "0"));
+        setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -186,39 +186,39 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        this.menu = menu;
+        this.optionsMenu = menu;
 
         inflater.inflate(R.menu.menu_activity_select, menu);
         return true;
     }
 
     private void checkBtnContinue() {
-        activeButton(!adapter.getSelected_PdfPreview().isEmpty());
+        activeButton(!thumbnailAdapter.getSelected_PdfPreview().isEmpty());
     }
 
     private void activeButton(boolean b) {
-        btnContinue.setEnabled(b);
-        btnContinue.setClickable(b);
-        btnContinue.setFocusable(b);
+        continueActionText.setEnabled(b);
+        continueActionText.setClickable(b);
+        continueActionText.setFocusable(b);
     }
 
     @Override
     public void onChoosePdfSplitListener() {
         checkBtnContinue();
-        toolbar.setTitle(getString(R.string.x_selected, String.valueOf(adapter.getSelected_PdfPreview().size())));
-        if (adapter.getSelected_PdfPreview().size() == listPdfPages.size()) {
-            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
-            adapter.isSelectedAll_PdfPreview = true;
+        topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
+        if (thumbnailAdapter.getSelected_PdfPreview().size() == pdfPageList.size()) {
+            optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
+            thumbnailAdapter.isSelectedAll_PdfPreview = true;
         } else {
-            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
-            adapter.isSelectedAll_PdfPreview = false;
+            optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
+            thumbnailAdapter.isSelectedAll_PdfPreview = false;
         }
     }
 
     public static class LoadThumbnailPdf extends AsyncTask<String, Void, Void> {
-        WeakReference<ShareImageActivity> weakReference;
+        WeakReference<SharePdfAsImageActivity> weakReference;
 
-        public LoadThumbnailPdf(ShareImageActivity activity) {
+        public LoadThumbnailPdf(SharePdfAsImageActivity activity) {
             this.weakReference = new WeakReference<>(activity);
         }
 
@@ -228,11 +228,11 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
             String str;
             FileOutputStream fileOutputStream;
             PdfiumCore pdfiumCore = new PdfiumCore(weakReference.get());
-            weakReference.get().pdfDirAsFileName = weakReference.get().fileName;
+            weakReference.get().pdfFolderName = weakReference.get().pdfFileName;
             Uri parse = Uri.parse(strings[0]);
             String sb = "Loading page thumbs from uri " +
                     parse.toString();
-            Log.d(weakReference.get().TAG, sb);
+            Log.d(weakReference.get().logTag, sb);
             try {
                 if (!isCancelled()) {
 
@@ -240,9 +240,9 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                     int pageCount = pdfiumCore.getPageCount(newDocument);
                     String sb2 = "Total number of pages " +
                             pageCount;
-                    Log.d(weakReference.get().TAG, sb2);
-                    String sb3 = weakReference.get().strAllPdfPictureDir +
-                            weakReference.get().pdfDirAsFileName;
+                    Log.d(weakReference.get().logTag, sb2);
+                    String sb3 = weakReference.get().tempPdfImageDirectory +
+                            weakReference.get().pdfFolderName;
                     File file = new File(sb3);
                     if (!file.exists()) {
                         file.mkdirs();
@@ -250,14 +250,14 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                     int i2 = 0;
                     while (i2 < pageCount) {
                         int i3 = i2 + 1;
-                        String sb5 = weakReference.get().strAllPdfPictureDir +
-                                weakReference.get().pdfDirAsFileName +
+                        String sb5 = weakReference.get().tempPdfImageDirectory +
+                                weakReference.get().pdfFolderName +
                                 "page-" +
                                 i3 +
                                 ".jpg";
                         String sb6 = "Generating temp share img " +
                                 sb5;
-                        Log.d(weakReference.get().TAG, sb6);
+                        Log.d(weakReference.get().logTag, sb6);
                         FileOutputStream fileOutputStream2 = new FileOutputStream(sb5);
                         pdfiumCore.openPage(newDocument, i2);
                         int pageWidthPoint = pdfiumCore.getPageWidthPoint(newDocument, i2);
@@ -279,7 +279,7 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                                 fileOutputStream = fileOutputStream2;
                                 Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
-                                weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
+                                weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                                 fileOutputStream.close();
                             }
                         } catch (OutOfMemoryError e3) {
@@ -289,10 +289,10 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
                             str = sb5;
                             Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
-                            weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
+                            weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                             fileOutputStream.close();
                         }
-                        weakReference.get().listPdfPages.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
+                        weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                         fileOutputStream.close();
                         i2 = i3;
                         pageCount = i;
@@ -313,12 +313,12 @@ public class ShareImageActivity extends AppCompatActivity implements OnThumbnail
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             if (weakReference.get() != null) {
-                weakReference.get().adapter = new PdfPreviewThumbnailAdapter(weakReference.get(), weakReference.get().listPdfPages, weakReference.get());
+                weakReference.get().thumbnailAdapter = new PdfPreviewThumbnailAdapter(weakReference.get(), weakReference.get().pdfPageList, weakReference.get());
                 int i = Utils.isTablet(weakReference.get()) ? 6 : 3;
-                weakReference.get().recyclerView.setLayoutManager(new GridLayoutManager(weakReference.get(), i, RecyclerView.VERTICAL, false));
-                weakReference.get().loadingView.setVisibility(View.GONE);
-                weakReference.get().recyclerView.setAdapter(weakReference.get().adapter);
-                weakReference.get().finishLoad = true;
+                weakReference.get().pdfPageRecyclerView.setLayoutManager(new GridLayoutManager(weakReference.get(), i, RecyclerView.VERTICAL, false));
+                weakReference.get().loadingAnimationView.setVisibility(View.GONE);
+                weakReference.get().pdfPageRecyclerView.setAdapter(weakReference.get().thumbnailAdapter);
+                weakReference.get().isLoadCompleted = true;
 
             }
 

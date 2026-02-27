@@ -13,7 +13,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.model_reader.PDFPageModel;
 import com.docpro.scanner.result.ResultViewerActivity;
-import com.example.documenpro.ui.activities.ShareImageActivity;
+import com.example.documenpro.ui.activities.SharePdfAsImageActivity;
 import com.example.documenpro.ui.customviews.HorizontalProgressBar;
 import com.example.documenpro.utils.Utils;
 
@@ -29,9 +29,9 @@ public class ConvertDialog extends Dialog {
     private TextView btnCancel;
     private TextView btnViewImage;
     private TextView tvPercent;
-    private ShareImageActivity mContext;
+    private SharePdfAsImageActivity mContext;
 
-    public ConvertDialog(@NonNull ShareImageActivity context, ArrayList<PDFPageModel> arrayList) {
+    public ConvertDialog(@NonNull SharePdfAsImageActivity context, ArrayList<PDFPageModel> arrayList) {
         super(context);
         this.mContext = context;
         this.listSave = arrayList;

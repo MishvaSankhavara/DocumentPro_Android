@@ -33,14 +33,14 @@ import com.example.documenpro.viewmodel.SearchViewModel;
 
 import java.util.Objects;
 
-public class SearchActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
-    private TabLayout tabLayout;
-    private AppCompatEditText edtSearch;
-    private ConstraintLayout clToolbar;
-    private ConstraintLayout mainCl;
-    private AppCompatImageView btnClear;
+public class SearchDocumentActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+    private ConstraintLayout mainContainer;
+    private ConstraintLayout toolbarContainer;
+    private TabLayout searchTabLayout;
+    private AppCompatEditText searchEditText;
+    private AppCompatImageView clearSearchButton;
     private SearchViewModel searchViewModel;
-    private int fileType = GlobalConstant.ALL_FILE_TYPE;
+    private int selectedFileType = GlobalConstant.ALL_FILE_TYPE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,67 +55,67 @@ public class SearchActivity extends BaseActivity implements ViewPager.OnPageChan
         });
         Intent intent = getIntent();
         if (intent != null) {
-            fileType = intent.getIntExtra(GlobalConstant.FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
+            selectedFileType = intent.getIntExtra(GlobalConstant.FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
         }
         initViews();
         AdMobNativeAdManager.showNativeBanner3_AdMob(this, null);
-        setUpToolBarColor(fileType);
+        applyToolbarTheme(selectedFileType);
         searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
     }
 
-    private void setUpToolBarColor(int fileType) {
+    private void applyToolbarTheme(int fileType) {
         switch (fileType) {
             case GlobalConstant.ALL_FILE_TYPE:
-                clToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
-                mainCl.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
 
-                tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
                 break;
             case GlobalConstant.PDF_FILE_TYPE:
-                clToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
-                mainCl.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
 
-                tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.pdf_file_list_bg));
                 break;
             case GlobalConstant.WORD_FILE_TYPE:
-                clToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
-                mainCl.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
 
-                tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.word_file_list_bg));
 
                 break;
             case GlobalConstant.EXCEL_FILE_TYPE:
-                clToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
-                mainCl.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
 
-                tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.excel_file_list_bg));
                 break;
             case GlobalConstant.PPT_FILE_TYPE:
-                clToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
-                mainCl.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
 
-                tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.ppt_file_list_bg));
                 break;
             case GlobalConstant.TXT_FILE_TYPE:
-                clToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
-                mainCl.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
-                tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.txt_file_list_bg));
                 break;
         }
     }
 
     private void initViews() {
-        btnClear = findViewById(R.id.iv_clear);
-        mainCl = findViewById(R.id.main);
-        clToolbar = findViewById(R.id.cl_toolbar);
-        edtSearch = findViewById(R.id.et_search_text);
-        tabLayout = findViewById(R.id.tab_layout);
+        clearSearchButton = findViewById(R.id.iv_clear);
+        mainContainer = findViewById(R.id.main);
+        toolbarContainer = findViewById(R.id.cl_toolbar);
+        searchEditText = findViewById(R.id.et_search_text);
+        searchTabLayout = findViewById(R.id.tab_layout);
         ViewPager viewPager = findViewById(R.id.vp_content);
         findViewById(R.id.tv_back).setOnClickListener(view -> finish());
         PagerViewAdapter adapter = new PagerViewAdapter(getSupportFragmentManager());
@@ -129,12 +129,12 @@ public class SearchActivity extends BaseActivity implements ViewPager.OnPageChan
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(6);
-        tabLayout.setupWithViewPager(viewPager);
+        searchTabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(this);
 
-        viewPager.setCurrentItem(fileType);
+        viewPager.setCurrentItem(selectedFileType);
 
-        edtSearch.addTextChangedListener(new TextWatcher() {
+        searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -143,12 +143,11 @@ public class SearchActivity extends BaseActivity implements ViewPager.OnPageChan
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() > 0) {
-                    btnClear.setVisibility(View.VISIBLE);
+                    clearSearchButton.setVisibility(View.VISIBLE);
                     searchViewModel.setQuery(charSequence.toString());
                 } else if (charSequence.length() == 0) {
-                    btnClear.setVisibility(View.GONE);
+                    clearSearchButton.setVisibility(View.GONE);
                 }
-
             }
 
             @Override
@@ -157,35 +156,35 @@ public class SearchActivity extends BaseActivity implements ViewPager.OnPageChan
             }
         });
 
-        btnClear.setOnClickListener(view -> Objects.requireNonNull(edtSearch.getText()).clear());
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        clearSearchButton.setOnClickListener(view -> Objects.requireNonNull(searchEditText.getText()).clear());
     }
 
     @Override
     public void onPageSelected(int position) {
         switch (position) {
             case 0:
-                setUpToolBarColor(GlobalConstant.ALL_FILE_TYPE);
+                applyToolbarTheme(GlobalConstant.ALL_FILE_TYPE);
                 break;
             case 1:
-                setUpToolBarColor(GlobalConstant.EXCEL_FILE_TYPE);
+                applyToolbarTheme(GlobalConstant.EXCEL_FILE_TYPE);
                 break;
             case 2:
-                setUpToolBarColor(GlobalConstant.PDF_FILE_TYPE);
+                applyToolbarTheme(GlobalConstant.PDF_FILE_TYPE);
                 break;
             case 3:
-                setUpToolBarColor(GlobalConstant.WORD_FILE_TYPE);
+                applyToolbarTheme(GlobalConstant.WORD_FILE_TYPE);
                 break;
             case 4:
-                setUpToolBarColor(GlobalConstant.PPT_FILE_TYPE);
+                applyToolbarTheme(GlobalConstant.PPT_FILE_TYPE);
             case 5:
-                setUpToolBarColor(GlobalConstant.TXT_FILE_TYPE);
+                applyToolbarTheme(GlobalConstant.TXT_FILE_TYPE);
                 break;
         }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
     }
 
     @Override
