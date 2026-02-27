@@ -64,10 +64,9 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
     private String pdfFileName;
     private Context context;
     private boolean isLoadCompleted = false;
-    private final String logTag = SharePdfAsImageActivity.class.getSimpleName();
-
     private int selectedToolType;
     private Menu optionsMenu;
+    private final String logTag = SharePdfAsImageActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
