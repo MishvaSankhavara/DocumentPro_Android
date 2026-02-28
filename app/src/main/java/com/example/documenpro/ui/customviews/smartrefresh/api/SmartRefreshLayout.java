@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnLoadMoreListener;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnMultiPurposeListener;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshListener;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshLoadMoreListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.LoadMoreListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.MultiPurposeListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.RefreshListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.RefreshLoadListener;
 
 public interface SmartRefreshLayout {
 
@@ -65,10 +65,10 @@ public interface SmartRefreshLayout {
     SmartRefreshLayout setNestedScrollEnable(boolean enabled);
     SmartRefreshLayout setContentWhenRefreshDisable(boolean disable);
     SmartRefreshLayout setContentWhenLoadingDisable(boolean disable);
-    SmartRefreshLayout setRefreshListener(OnRefreshListener listener);
-    SmartRefreshLayout setLoadMoreListener(OnLoadMoreListener listener);
-    SmartRefreshLayout setRefreshLoadMoreListener(OnRefreshLoadMoreListener listener);
-    SmartRefreshLayout setMultiPurposeListener(OnMultiPurposeListener listener);
+    SmartRefreshLayout setRefreshListener(RefreshListener listener);
+    SmartRefreshLayout setLoadMoreListener(LoadMoreListener listener);
+    SmartRefreshLayout setRefreshLoadMoreListener(RefreshLoadListener listener);
+    SmartRefreshLayout setMultiPurposeListener(MultiPurposeListener listener);
     SmartRefreshLayout setScrollBoundary(RefreshScrollBoundaryDecider boundary);
     SmartRefreshLayout setPrimaryColors(@ColorInt int... primaryColors);
     SmartRefreshLayout setThemeColorResources(@ColorRes int... primaryColorId);

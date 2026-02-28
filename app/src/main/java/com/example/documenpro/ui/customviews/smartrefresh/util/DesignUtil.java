@@ -24,7 +24,7 @@ public class DesignUtil {
                         ((AppBarLayout) view).addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
                             @Override
                             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                                listener.onCoordinatorUpdate(
+                                listener.coordinatorUpdate(
                                         verticalOffset >= 0,
                                         (appBarLayout.getTotalScrollRange() + verticalOffset) <= 0);
                             }

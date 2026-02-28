@@ -21,7 +21,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.StateChangedListener;
 
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
@@ -150,14 +150,14 @@ public class TwoLevelRefreshHeader extends RefreshInternalAbstract implements Re
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
+    public void stateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         final RefreshComponent refreshHeader = this.refreshHeader;
         if (refreshHeader != null) {
-            final OnStateChangedListener listener = this.refreshHeader;
+            final StateChangedListener listener = this.refreshHeader;
             if (newState == RefreshLayoutState.RELEASE_TO_REFRESH && !enableFloorRefresh) {
                 newState = RefreshLayoutState.PULL_DOWN_TO_REFRESH;
             }
-            listener.onStateChanged(refreshLayout, oldState, newState);
+            listener.stateChanged(refreshLayout, oldState, newState);
             switch (newState) {
                 case TwoLevelReleased:
                     if (refreshHeader.getComponentView() != this) {

@@ -258,7 +258,7 @@ public class RadarRefreshHeader extends RefreshInternalAbstract implements Refre
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
+    public void stateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         switch (newState) {
             case IDLE:
             case PULL_DOWN_TO_REFRESH:

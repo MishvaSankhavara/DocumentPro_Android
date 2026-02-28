@@ -198,7 +198,7 @@ public class ClassicRefreshFooterView extends RefreshClassicComponent<ClassicRef
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
+    public void stateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         final View arrowView = this.arrowView;
         if (!noMoreDataAvailable) {
             switch (newState) {

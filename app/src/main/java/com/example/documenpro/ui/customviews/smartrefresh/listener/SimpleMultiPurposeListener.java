@@ -12,50 +12,50 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayout
  * 多功能监听器
  * Created by scwang on 2017/5/26.
  */
-public class SimpleMultiPurposeListener implements OnMultiPurposeListener {
+public class SimpleMultiPurposeListener implements MultiPurposeListener {
 
     @Override
-    public void onHeaderMoving(RefreshHeaderComponent header, boolean isDragging, float percent, int offset, int headerHeight, int maxDragHeight) {
+    public void headerMoving(RefreshHeaderComponent header, boolean isDragging, float percent, int offset, int headerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onHeaderReleased(RefreshHeaderComponent header, int headerHeight, int maxDragHeight) {
+    public void headerReleased(RefreshHeaderComponent header, int headerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onHeaderStartAnimator(RefreshHeaderComponent header, int footerHeight, int maxDragHeight) {
+    public void headerAnimationStart(RefreshHeaderComponent header, int footerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onHeaderFinish(RefreshHeaderComponent header, boolean success) {
+    public void headerFinish(RefreshHeaderComponent header, boolean success) {
 
     }
 
     @Override
-    public void onFooterMoving(RefreshFooterComponent footer, boolean isDragging, float percent, int offset, int footerHeight, int maxDragHeight) {
+    public void footerMoving(RefreshFooterComponent footer, boolean isDragging, float percent, int offset, int footerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onFooterReleased(RefreshFooterComponent footer, int footerHeight, int maxDragHeight) {
+    public void footerReleased(RefreshFooterComponent footer, int footerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onFooterStartAnimator(RefreshFooterComponent footer, int headerHeight, int maxDragHeight) {
+    public void footerAnimationStart(RefreshFooterComponent footer, int headerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onFooterFinish(RefreshFooterComponent footer, boolean success) {
+    public void footerFinish(RefreshFooterComponent footer, boolean success) {
 
     }
 
     @Override
-    public void onRefresh(@NonNull SmartRefreshLayout refreshLayout) {
+    public void refresh(@NonNull SmartRefreshLayout refreshLayout) {
 
     }
 
@@ -65,7 +65,7 @@ public class SimpleMultiPurposeListener implements OnMultiPurposeListener {
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
+    public void stateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
 
     }
 

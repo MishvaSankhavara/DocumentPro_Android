@@ -22,7 +22,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayout
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.FooterComponentWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.HeaderComponentWrapper;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.StateChangedListener;
 
 public abstract class RefreshInternalAbstract extends RelativeLayout implements RefreshComponent {
 
@@ -157,7 +157,7 @@ public abstract class RefreshInternalAbstract extends RelativeLayout implements 
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
+    public void stateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         if (wrappedInternal != null && wrappedInternal != this) {
             if (this instanceof FooterComponentWrapper && wrappedInternal instanceof RefreshHeaderComponent) {
                 if (oldState.isFooterState) {
@@ -174,9 +174,9 @@ public abstract class RefreshInternalAbstract extends RelativeLayout implements 
                     newState = newState.convertToFooterState();
                 }
             }
-            final OnStateChangedListener listener = wrappedInternal;
+            final StateChangedListener listener = wrappedInternal;
             if (listener != null) {
-                listener.onStateChanged(refreshLayout, oldState, newState);
+                listener.stateChanged(refreshLayout, oldState, newState);
             }
         }
     }

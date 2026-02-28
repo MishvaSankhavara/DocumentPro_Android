@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.StateChangedListener;
 
-public interface RefreshComponent extends OnStateChangedListener {
+public interface RefreshComponent extends StateChangedListener {
 
     @NonNull
     View getComponentView();

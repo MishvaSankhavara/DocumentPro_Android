@@ -95,7 +95,7 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
     }
 
     @Override
-    public void onCoordinatorUpdate(boolean enableRefresh, boolean enableLoadMore) {
+    public void coordinatorUpdate(boolean enableRefresh, boolean enableLoadMore) {
         this.enableRefresh = enableRefresh;
         this.enableLoadMore = enableLoadMore;
     }

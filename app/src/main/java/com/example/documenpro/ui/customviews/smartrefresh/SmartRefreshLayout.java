@@ -65,11 +65,11 @@ import com.example.documenpro.ui.customviews.smartrefresh.header.RadarRefreshHea
 import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshContentContainer;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.FooterComponentWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.HeaderComponentWrapper;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnLoadMoreListener;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnMultiPurposeListener;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshListener;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshLoadMoreListener;
-import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.LoadMoreListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.MultiPurposeListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.RefreshListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.RefreshLoadListener;
+import com.example.documenpro.ui.customviews.smartrefresh.listener.StateChangedListener;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
@@ -140,9 +140,9 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
     //</editor-fold>
 
     //<editor-fold desc="监听属性">
-    protected OnRefreshListener mRefreshListener;
-    protected OnLoadMoreListener mLoadMoreListener;
-    protected OnMultiPurposeListener mOnMultiPurposeListener;
+    protected RefreshListener mRefreshListener;
+    protected LoadMoreListener mLoadMoreListener;
+    protected MultiPurposeListener mOnMultiPurposeListener;
     protected RefreshScrollBoundaryDecider mScrollBoundaryDecider;
     //</editor-fold>
 
@@ -1195,17 +1195,17 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
         if (oldState != state) {
             mState = state;
             mViceState = state;
-            final OnStateChangedListener refreshHeader = mRefreshHeader;
-            final OnStateChangedListener refreshFooter = mRefreshFooter;
-            final OnStateChangedListener refreshListener = mOnMultiPurposeListener;
+            final StateChangedListener refreshHeader = mRefreshHeader;
+            final StateChangedListener refreshFooter = mRefreshFooter;
+            final StateChangedListener refreshListener = mOnMultiPurposeListener;
             if (refreshHeader != null) {
-                refreshHeader.onStateChanged(this, oldState, state);
+                refreshHeader.stateChanged(this, oldState, state);
             }
             if (refreshFooter != null) {
-                refreshFooter.onStateChanged(this, oldState, state);
+                refreshFooter.stateChanged(this, oldState, state);
             }
             if (refreshListener != null) {
-                refreshListener.onStateChanged(this, oldState, state);
+                refreshListener.stateChanged(this, oldState, state);
             }
             if (state == RefreshLayoutState.LoadFinish) {
                 mFooterLocked = false;
@@ -1250,11 +1250,11 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 mRefreshFooter.onAnimationStart(this, mFooterHeight, (int) (mFooterMaxDragRate * mFooterHeight));
             }
             if (mOnMultiPurposeListener != null && mRefreshFooter instanceof RefreshFooterComponent) {
-                final OnLoadMoreListener listener = mOnMultiPurposeListener;
+                final LoadMoreListener listener = mOnMultiPurposeListener;
                 if (triggerLoadMoreEvent) {
                     listener.onLoadMore(this);
                 }
-                mOnMultiPurposeListener.onFooterStartAnimator((RefreshFooterComponent) mRefreshFooter, mFooterHeight, (int) (mFooterMaxDragRate * mFooterHeight));
+                mOnMultiPurposeListener.footerAnimationStart((RefreshFooterComponent) mRefreshFooter, mFooterHeight, (int) (mFooterMaxDragRate * mFooterHeight));
             }
         }
     }
@@ -1285,7 +1285,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
         }
         if (mOnMultiPurposeListener != null && mRefreshFooter instanceof RefreshFooterComponent) {
             //同 mRefreshFooter.onReleased 一致
-            mOnMultiPurposeListener.onFooterReleased((RefreshFooterComponent) mRefreshFooter, mFooterHeight, (int) (mFooterMaxDragRate * mFooterHeight));
+            mOnMultiPurposeListener.footerReleased((RefreshFooterComponent) mRefreshFooter, mFooterHeight, (int) (mFooterMaxDragRate * mFooterHeight));
         }
         if (animator == null) {
             //onAnimationEnd 会改变状态为 loading 必须在 onReleased 之后调用
@@ -1308,7 +1308,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 notifyStateChanged(RefreshLayoutState.REFRESHING);
                 if (mRefreshListener != null) {
                     if(notify) {
-                        mRefreshListener.onRefresh(SmartRefreshLayout.this);
+                        mRefreshListener.refresh(SmartRefreshLayout.this);
                     }
                 } else if (mOnMultiPurposeListener == null) {
                     completeRefresh(3000);
@@ -1318,9 +1318,9 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 }
                 if (mOnMultiPurposeListener != null && mRefreshHeader instanceof RefreshHeaderComponent) {
                     if (notify) {
-                        mOnMultiPurposeListener.onRefresh(SmartRefreshLayout.this);
+                        mOnMultiPurposeListener.refresh(SmartRefreshLayout.this);
                     }
-                    mOnMultiPurposeListener.onHeaderStartAnimator((RefreshHeaderComponent) mRefreshHeader, mHeaderHeight,  (int) (mHeaderMaxDragRate * mHeaderHeight));
+                    mOnMultiPurposeListener.headerAnimationStart((RefreshHeaderComponent) mRefreshHeader, mHeaderHeight,  (int) (mHeaderMaxDragRate * mHeaderHeight));
                 }
             }
         };
@@ -1336,7 +1336,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
         }
         if (mOnMultiPurposeListener != null && mRefreshHeader instanceof RefreshHeaderComponent) {
             //同 mRefreshHeader.onReleased 一致
-            mOnMultiPurposeListener.onHeaderReleased((RefreshHeaderComponent)mRefreshHeader, mHeaderHeight,  (int) (mHeaderMaxDragRate * mHeaderHeight));
+            mOnMultiPurposeListener.headerReleased((RefreshHeaderComponent)mRefreshHeader, mHeaderHeight,  (int) (mHeaderMaxDragRate * mHeaderHeight));
         }
         if (animator == null) {
             //onAnimationEnd 会改变状态为 Refreshing 必须在 onReleased 之后调用
@@ -1757,7 +1757,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                     } else if (mOnMultiPurposeListener == null) {
                         completeLoadMore(2000);//如果没有任何加载监听器，两秒之后自动关闭
                     }
-                    final OnLoadMoreListener listener = mOnMultiPurposeListener;
+                    final LoadMoreListener listener = mOnMultiPurposeListener;
                     if (listener != null) {
                         listener.onLoadMore(SmartRefreshLayout.this);
                     }
@@ -2681,7 +2681,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
      * @return RefreshLayout
      */
     @Override
-    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setRefreshListener(OnRefreshListener listener) {
+    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setRefreshListener(RefreshListener listener) {
         this.mRefreshListener = listener;
         return this;
     }
@@ -2693,7 +2693,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
      * @return RefreshLayout
      */
     @Override
-    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setLoadMoreListener(OnLoadMoreListener listener) {
+    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setLoadMoreListener(LoadMoreListener listener) {
         this.mLoadMoreListener = listener;
         this.mEnableLoadMore = mEnableLoadMore || (!mManualLoadMore && listener != null);
         return this;
@@ -2706,7 +2706,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
      * @return RefreshLayout
      */
     @Override
-    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setRefreshLoadMoreListener(OnRefreshLoadMoreListener listener) {
+    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setRefreshLoadMoreListener(RefreshLoadListener listener) {
         this.mRefreshListener = listener;
         this.mLoadMoreListener = listener;
         this.mEnableLoadMore = mEnableLoadMore || (!mManualLoadMore && listener != null);
@@ -2715,7 +2715,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
 
 
     @Override
-    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setMultiPurposeListener(OnMultiPurposeListener listener) {
+    public com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout setMultiPurposeListener(MultiPurposeListener listener) {
         this.mOnMultiPurposeListener = listener;
         return this;
     }
@@ -2918,7 +2918,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 } else {
                     int startDelay = mRefreshHeader.onAnimationFinish(SmartRefreshLayout.this, success);
                     if (mOnMultiPurposeListener != null && mRefreshHeader instanceof RefreshHeaderComponent) {
-                        mOnMultiPurposeListener.onHeaderFinish((RefreshHeaderComponent) mRefreshHeader, success);
+                        mOnMultiPurposeListener.headerFinish((RefreshHeaderComponent) mRefreshHeader, success);
                     }
                     //startDelay < Integer.MAX_VALUE 表示 延时 startDelay 毫秒之后，回弹关闭刷新
                     if (startDelay < Integer.MAX_VALUE) {
@@ -3058,7 +3058,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 } else {
                     final int startDelay = mRefreshFooter.onAnimationFinish(SmartRefreshLayout.this, success);
                     if (mOnMultiPurposeListener != null && mRefreshFooter instanceof RefreshFooterComponent) {
-                        mOnMultiPurposeListener.onFooterFinish((RefreshFooterComponent) mRefreshFooter, success);
+                        mOnMultiPurposeListener.footerFinish((RefreshFooterComponent) mRefreshFooter, success);
                     }
                     if (startDelay < Integer.MAX_VALUE) {
                         //计算布局将要移动的偏移量
@@ -3759,7 +3759,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 }
 
                 if (oldSpinner != mSpinner && mOnMultiPurposeListener != null && mRefreshHeader instanceof RefreshHeaderComponent) {
-                    mOnMultiPurposeListener.onHeaderMoving((RefreshHeaderComponent) mRefreshHeader, isDragging, percent, offset, headerHeight, maxDragHeight);
+                    mOnMultiPurposeListener.headerMoving((RefreshHeaderComponent) mRefreshHeader, isDragging, percent, offset, headerHeight, maxDragHeight);
                 }
 
             }
@@ -3805,7 +3805,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 }
 
                 if (oldSpinner != mSpinner && mOnMultiPurposeListener != null && mRefreshFooter instanceof RefreshFooterComponent) {
-                    mOnMultiPurposeListener.onFooterMoving((RefreshFooterComponent)mRefreshFooter, isDragging, percent, offset, footerHeight, maxDragHeight);
+                    mOnMultiPurposeListener.footerMoving((RefreshFooterComponent)mRefreshFooter, isDragging, percent, offset, footerHeight, maxDragHeight);
                 }
             }
             return this;
