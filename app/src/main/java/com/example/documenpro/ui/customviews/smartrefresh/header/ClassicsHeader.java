@@ -19,8 +19,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeader;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.ArrowDrawable;
@@ -36,7 +36,7 @@ import java.util.Locale;
 
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements RefreshHeader {
+public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements RefreshHeaderComponent {
 
     public static final int ID_TEXT_UPDATE = R.id.srl_classics_update;
 
@@ -232,7 +232,7 @@ public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements 
 
     //<editor-fold desc="RefreshHeader">
     @Override
-    public int onFinish(@NonNull RefreshLayout layout, boolean success) {
+    public int onAnimationFinish(@NonNull SmartRefreshLayout layout, boolean success) {
         if (success) {
             mTitleText.setText(mTextFinish);
             if (mLastTime != null) {
@@ -241,11 +241,11 @@ public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements 
         } else {
             mTitleText.setText(mTextFailed);
         }
-        return super.onFinish(layout, success);//延迟500毫秒之后再弹回
+        return super.onAnimationFinish(layout, success);//延迟500毫秒之后再弹回
     }
 
     @Override
-    public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
         final View arrowView = mArrowView;
         final View updateView = mLastUpdateText;
         switch (newState) {
@@ -313,7 +313,7 @@ public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements 
         mEnableLastTime = enable;
         updateView.setVisibility(enable ? VISIBLE : GONE);
         if (mRefreshKernel != null) {
-            mRefreshKernel.requestRemeasureHeightFor(this);
+            mRefreshKernel.requestRemeasureHeight(this);
         }
         return this;
     }
@@ -321,7 +321,7 @@ public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements 
     public ClassicsHeader setTextSizeTime(float size) {
         mLastUpdateText.setTextSize(size);
         if (mRefreshKernel != null) {
-            mRefreshKernel.requestRemeasureHeightFor(this);
+            mRefreshKernel.requestRemeasureHeight(this);
         }
         return this;
     }

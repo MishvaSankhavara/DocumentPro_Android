@@ -3,7 +3,7 @@ package com.example.documenpro.ui.customviews.smartrefresh.listener;
 
 import androidx.annotation.NonNull;
 
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 
 
 /**
@@ -11,5 +11,5 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
  * Created by scwang on 2017/5/26.
  */
 public interface OnRefreshListener {
-    void onRefresh(@NonNull RefreshLayout refreshLayout);
+    void onRefresh(@NonNull SmartRefreshLayout refreshLayout);
 }

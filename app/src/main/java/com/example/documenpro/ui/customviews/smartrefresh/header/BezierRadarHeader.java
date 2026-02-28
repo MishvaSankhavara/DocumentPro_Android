@@ -20,8 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeader;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
@@ -29,7 +29,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
 @SuppressWarnings({"UnusedReturnValue", "unused"})
-public class BezierRadarHeader extends InternalAbstract implements RefreshHeader {
+public class BezierRadarHeader extends InternalAbstract implements RefreshHeaderComponent {
 
     //<editor-fold desc="属性字段">
     protected int mAccentColor;
@@ -213,7 +213,7 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
 
     //<editor-fold desc="刷新接口 - RefreshHeader">
     @Override
-    public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
+    public void onDragging(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
         mWaveOffsetY = offset;
         if (isDragging || mWavePulling) {
             mWavePulling = true;
@@ -227,7 +227,7 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
     }
 
     @Override
-    public void onReleased(@NonNull final RefreshLayout refreshLayout, int height, int maxDragHeight) {
+    public void onDragReleased(@NonNull final SmartRefreshLayout refreshLayout, int height, int maxDragHeight) {
         mWaveTop = height - 1;//减1，是为了消除边缘绘制，冒出线条问题
         mWavePulling = false;
 
@@ -264,7 +264,7 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
     }
 
     @Override
-    public int onFinish(@NonNull RefreshLayout layout, boolean success) {
+    public int onAnimationFinish(@NonNull SmartRefreshLayout layout, boolean success) {
         if (mAnimatorSet != null) {
             mAnimatorSet.removeAllListeners();
             mAnimatorSet.end();
@@ -284,7 +284,7 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
     }
 
     @Override
-    public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
         switch (newState) {
             case None:
             case PullDownToRefresh:
@@ -296,7 +296,7 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
     }
 
     @Override@Deprecated
-    public void setPrimaryColors(@ColorInt int ... colors) {
+    public void applyPrimaryColors(@ColorInt int ... colors) {
         if (colors.length > 0 && !mManualPrimaryColor) {
             setPrimaryColor(colors[0]);
             mManualPrimaryColor = false;
@@ -308,12 +308,12 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
     }
 
     @Override
-    public boolean isSupportHorizontalDrag() {
+    public boolean isHorizontalDragSupported() {
         return mEnableHorizontalDrag;
     }
 
     @Override
-    public void onHorizontalDrag(float percentX, int offsetX, int offsetMax) {
+    public void onHorizontalDragging(float percentX, int offsetX, int offsetMax) {
         mWaveOffsetX = offsetX;
         final View thisView = this;
         thisView.invalidate();

@@ -3,9 +3,9 @@ package com.example.documenpro.ui.customviews.smartrefresh.listener;
 
 import androidx.annotation.NonNull;
 
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooter;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeader;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
 
 /**
@@ -15,57 +15,57 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
 public class SimpleMultiPurposeListener implements OnMultiPurposeListener {
 
     @Override
-    public void onHeaderMoving(RefreshHeader header, boolean isDragging, float percent, int offset, int headerHeight, int maxDragHeight) {
+    public void onHeaderMoving(RefreshHeaderComponent header, boolean isDragging, float percent, int offset, int headerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onHeaderReleased(RefreshHeader header, int headerHeight, int maxDragHeight) {
+    public void onHeaderReleased(RefreshHeaderComponent header, int headerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onHeaderStartAnimator(RefreshHeader header, int footerHeight, int maxDragHeight) {
+    public void onHeaderStartAnimator(RefreshHeaderComponent header, int footerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onHeaderFinish(RefreshHeader header, boolean success) {
+    public void onHeaderFinish(RefreshHeaderComponent header, boolean success) {
 
     }
 
     @Override
-    public void onFooterMoving(RefreshFooter footer, boolean isDragging, float percent, int offset, int footerHeight, int maxDragHeight) {
+    public void onFooterMoving(RefreshFooterComponent footer, boolean isDragging, float percent, int offset, int footerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onFooterReleased(RefreshFooter footer, int footerHeight, int maxDragHeight) {
+    public void onFooterReleased(RefreshFooterComponent footer, int footerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onFooterStartAnimator(RefreshFooter footer, int headerHeight, int maxDragHeight) {
+    public void onFooterStartAnimator(RefreshFooterComponent footer, int headerHeight, int maxDragHeight) {
 
     }
 
     @Override
-    public void onFooterFinish(RefreshFooter footer, boolean success) {
+    public void onFooterFinish(RefreshFooterComponent footer, boolean success) {
 
     }
 
     @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+    public void onRefresh(@NonNull SmartRefreshLayout refreshLayout) {
 
     }
 
     @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+    public void onLoadMore(@NonNull SmartRefreshLayout refreshLayout) {
 
     }
 
     @Override
-    public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
 
     }
 

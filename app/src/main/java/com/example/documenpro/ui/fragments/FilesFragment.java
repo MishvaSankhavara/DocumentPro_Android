@@ -32,7 +32,7 @@ import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SelectDocumentActivity;
 import com.example.documenpro.ui.customviews.FileTypeItem;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.header.ClassicsHeader;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshListener;
 import com.example.documenpro.utils.Utils;
@@ -128,13 +128,13 @@ public class FilesFragment extends Fragment implements View.OnClickListener {
         btnWord = view.findViewById(R.id.btnWord);
         btnExcel = view.findViewById(R.id.btnExcel);
         btnPpt = view.findViewById(R.id.btnPpt);
-        RefreshLayout refreshLayout = view.findViewById(R.id.smartRefreshLayout);
-        refreshLayout.setRefreshHeader(new ClassicsHeader(mActivity));
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        SmartRefreshLayout refreshLayout = view.findViewById(R.id.smartRefreshLayout);
+        refreshLayout.setHeaderRefresh(new ClassicsHeader(mActivity));
+        refreshLayout.setRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+            public void onRefresh(@NonNull SmartRefreshLayout refreshLayout) {
                 countFile();
-                refreshLayout.finishRefresh(1);
+                refreshLayout.completeRefresh(1);
             }
         });
     }

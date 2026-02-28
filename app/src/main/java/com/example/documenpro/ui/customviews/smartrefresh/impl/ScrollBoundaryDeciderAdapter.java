@@ -3,7 +3,7 @@ package com.example.documenpro.ui.customviews.smartrefresh.impl;
 import android.graphics.PointF;
 import android.view.View;
 
-import com.example.documenpro.ui.customviews.smartrefresh.api.ScrollBoundaryDecider;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshScrollBoundaryDecider;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 /**
@@ -11,11 +11,11 @@ import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
  * Created by scwang on 2017/7/8.
  */
 @SuppressWarnings("WeakerAccess")
-public class ScrollBoundaryDeciderAdapter implements ScrollBoundaryDecider {
+public class ScrollBoundaryDeciderAdapter implements RefreshScrollBoundaryDecider {
 
     //<editor-fold desc="Internal">
     public PointF mActionEvent;
-    public ScrollBoundaryDecider boundary;
+    public RefreshScrollBoundaryDecider boundary;
     public boolean mEnableLoadMoreWhenContentNotFull = true;
 
 //    void setScrollBoundaryDecider(ScrollBoundaryDecider boundary){
@@ -34,18 +34,18 @@ public class ScrollBoundaryDeciderAdapter implements ScrollBoundaryDecider {
 
     //<editor-fold desc="ScrollBoundaryDecider">
     @Override
-    public boolean canRefresh(View content) {
+    public boolean canTriggerRefresh(View content) {
         if (boundary != null) {
-            return boundary.canRefresh(content);
+            return boundary.canTriggerRefresh(content);
         }
         //mActionEvent == null 时 canRefresh 不会动态递归搜索
         return SmartUtil.canRefresh(content, mActionEvent);
     }
 
     @Override
-    public boolean canLoadMore(View content) {
+    public boolean canTriggerLoadMore(View content) {
         if (boundary != null) {
-            return boundary.canLoadMore(content);
+            return boundary.canTriggerLoadMore(content);
         }
 //        if (mEnableLoadMoreWhenContentNotFull) {
 //            //mActionEvent == null 时 canScrollDown 不会动态递归搜索

@@ -8,7 +8,7 @@ import static androidx.annotation.RestrictTo.Scope.SUBCLASSES;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
 
 /**
@@ -23,5 +23,5 @@ public interface OnStateChangedListener {
      * @param newState 改变之后的状态
      */
     @RestrictTo({LIBRARY,LIBRARY_GROUP,SUBCLASSES})
-    void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState);
+    void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState);
 }

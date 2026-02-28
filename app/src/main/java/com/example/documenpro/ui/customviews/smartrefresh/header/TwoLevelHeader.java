@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.smartrefresh.api.OnTwoLevelListener;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeader;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshInternal;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshKernel;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.TwoLevelRefreshListener;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
@@ -25,7 +25,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChange
 
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*, NestedScrollingParent*/ {
+public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderComponent/*, NestedScrollingParent*/ {
 
     //<editor-fold desc="属性字段">
     protected int mSpinner;
@@ -42,9 +42,9 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
     protected float mFloorBottomDragLayoutRate = 1f/6;//二楼打开时，底部上划关闭二楼，所占高度比
     //    protected int mPaintAlpha;
 //    protected Paint mPaint;
-    protected RefreshInternal mRefreshHeader;
-    protected RefreshKernel mRefreshKernel;
-    protected OnTwoLevelListener mTwoLevelListener;
+    protected RefreshComponent mRefreshHeader;
+    protected RefreshManager mRefreshKernel;
+    protected TwoLevelRefreshListener mTwoLevelListener;
 //    protected SpinnerStyle mSpinnerStyle = SpinnerStyle.FixedBehind;
 //    protected Method mRequestDrawBackgroundForHeaderMethod;
     //</editor-fold>
@@ -85,9 +85,9 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
         final ViewGroup thisGroup = this;
         for (int i = 0, len = thisGroup.getChildCount(); i < len; i++) {
             View childAt = thisGroup.getChildAt(i);
-            if (childAt instanceof RefreshHeader) {
-                mRefreshHeader = (RefreshHeader) childAt;
-                mWrappedInternal = (RefreshInternal) childAt;
+            if (childAt instanceof RefreshHeaderComponent) {
+                mRefreshHeader = (RefreshHeaderComponent) childAt;
+                mWrappedInternal = (RefreshComponent) childAt;
                 thisGroup.bringChildToFront(childAt);
                 break;
             }
@@ -112,12 +112,12 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        final RefreshInternal refreshHeader = mRefreshHeader;
+        final RefreshComponent refreshHeader = mRefreshHeader;
         if (refreshHeader != null) {
             int mode = MeasureSpec.getMode(heightMeasureSpec);
             if (mode == MeasureSpec.AT_MOST) {
-                refreshHeader.getView().measure(widthMeasureSpec, heightMeasureSpec);
-                int height = refreshHeader.getView().getMeasuredHeight();
+                refreshHeader.getComponentView().measure(widthMeasureSpec, heightMeasureSpec);
+                int height = refreshHeader.getComponentView().getMeasuredHeight();
                 super.setMeasuredDimension(View.resolveSize(super.getSuggestedMinimumWidth(), widthMeasureSpec), height);
             } else {
                 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -134,37 +134,37 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
     }
 
     @Override
-    public void onInitialized(@NonNull RefreshKernel kernel, int height, int maxDragHeight) {
+    public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
         final View thisView = this;
-        final RefreshInternal refreshHeader = mRefreshHeader;
+        final RefreshComponent refreshHeader = mRefreshHeader;
         if (refreshHeader == null) {
             return;
         }
         if (1f * (maxDragHeight + height) / height != mMaxRate && mHeaderHeight == 0) {
             mHeaderHeight = height;
             mRefreshHeader = null;
-            kernel.getRefreshLayout().setHeaderMaxDragRate(mMaxRate);
+            kernel.getLayoutRefresh().setHeaderMaxDragRate(mMaxRate);
             mRefreshHeader = refreshHeader;
         }
         if (mRefreshKernel == null //第一次初始化
-                && refreshHeader.getSpinnerStyle() == SpinnerStyle.Translate
+                && refreshHeader.getSpinnerBehavior() == SpinnerStyle.Translate
                 && !thisView.isInEditMode()) {
-            MarginLayoutParams params = (MarginLayoutParams) refreshHeader.getView().getLayoutParams();
+            MarginLayoutParams params = (MarginLayoutParams) refreshHeader.getComponentView().getLayoutParams();
             params.topMargin -= height;
-            refreshHeader.getView().setLayoutParams(params);
+            refreshHeader.getComponentView().setLayoutParams(params);
         }
 
         mHeaderHeight = height;
         mRefreshKernel = kernel;
-        kernel.requestFloorParams(mFloorDuration, mFloorOpenLayoutRate, mFloorBottomDragLayoutRate);
-        kernel.requestNeedTouchEventFor(this, !mEnablePullToCloseTwoLevel);
-        refreshHeader.onInitialized(kernel, height, maxDragHeight);
+        kernel.setTwoLevelParameters(mFloorDuration, mFloorOpenLayoutRate, mFloorBottomDragLayoutRate);
+        kernel.requestNeedTouchEvent(this, !mEnablePullToCloseTwoLevel);
+        refreshHeader.onComponentInitialized(kernel, height, maxDragHeight);
 
     }
 
     @Override
-    public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
-        final RefreshInternal refreshHeader = mRefreshHeader;
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+        final RefreshComponent refreshHeader = mRefreshHeader;
         if (refreshHeader != null) {
             final OnStateChangedListener listener = mRefreshHeader;
             if (newState == RefreshState.ReleaseToRefresh && !mEnableFloorRefresh) {
@@ -173,25 +173,25 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
             listener.onStateChanged(refreshLayout, oldState, newState);
             switch (newState) {
                 case TwoLevelReleased:
-                    if (refreshHeader.getView() != this) {
-                        refreshHeader.getView().animate().alpha(0).setDuration(mFloorDuration / 2);
+                    if (refreshHeader.getComponentView() != this) {
+                        refreshHeader.getComponentView().animate().alpha(0).setDuration(mFloorDuration / 2);
                     }
-                    final RefreshKernel refreshKernel = mRefreshKernel;
+                    final RefreshManager refreshKernel = mRefreshKernel;
                     if (refreshKernel != null) {
-                        final OnTwoLevelListener twoLevelListener = mTwoLevelListener;
-                        refreshKernel.startTwoLevel(twoLevelListener == null || twoLevelListener.onTwoLevel(refreshLayout));
+                        final TwoLevelRefreshListener twoLevelListener = mTwoLevelListener;
+                        refreshKernel.openTwoLevel(twoLevelListener == null || twoLevelListener.onTwoLevelRefresh(refreshLayout));
                     }
                     break;
                 case TwoLevel:
                     break;
                 case TwoLevelFinish:
-                    if (refreshHeader.getView() != this) {
-                        refreshHeader.getView().animate().alpha(1).setDuration(mFloorDuration / 2);
+                    if (refreshHeader.getComponentView() != this) {
+                        refreshHeader.getComponentView().animate().alpha(1).setDuration(mFloorDuration / 2);
                     }
                     break;
                 case PullDownToRefresh:
-                    if (refreshHeader.getView().getAlpha() == 0 && refreshHeader.getView() != this) {
-                        refreshHeader.getView().setAlpha(1);
+                    if (refreshHeader.getComponentView().getAlpha() == 0 && refreshHeader.getComponentView() != this) {
+                        refreshHeader.getComponentView().setAlpha(1);
                     }
                     break;
             }
@@ -199,36 +199,36 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
     }
 
     @Override
-    public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
+    public void onDragging(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
         moveSpinner(offset);
-        final RefreshInternal refreshHeader = mRefreshHeader;
-        final RefreshKernel refreshKernel = mRefreshKernel;
+        final RefreshComponent refreshHeader = mRefreshHeader;
+        final RefreshManager refreshKernel = mRefreshKernel;
         if (refreshHeader != null) {
-            refreshHeader.onMoving(isDragging, percent, offset, height, maxDragHeight);
+            refreshHeader.onDragging(isDragging, percent, offset, height, maxDragHeight);
         }
         if (isDragging) {
             if (mPercent < mFloorRate && percent >= mFloorRate && mEnableTwoLevel) {
-                refreshKernel.setState(RefreshState.ReleaseToTwoLevel);
+                refreshKernel.setRefreshState(RefreshState.ReleaseToTwoLevel);
             } else if (mPercent >= mFloorRate && percent < mRefreshRate) {
-                refreshKernel.setState(RefreshState.PullDownToRefresh);
+                refreshKernel.setRefreshState(RefreshState.PullDownToRefresh);
             } else if (mPercent >= mFloorRate && percent < mFloorRate && mEnableFloorRefresh) {
-                refreshKernel.setState(RefreshState.ReleaseToRefresh);
-            } else if (!mEnableFloorRefresh && refreshKernel.getRefreshLayout().getState() != RefreshState.ReleaseToTwoLevel) {
-                refreshKernel.setState(RefreshState.PullDownToRefresh);
+                refreshKernel.setRefreshState(RefreshState.ReleaseToRefresh);
+            } else if (!mEnableFloorRefresh && refreshKernel.getLayoutRefresh().getRefreshState() != RefreshState.ReleaseToTwoLevel) {
+                refreshKernel.setRefreshState(RefreshState.PullDownToRefresh);
             }
             mPercent = percent;
         }
     }
 
     protected void moveSpinner(int spinner) {
-        final RefreshInternal refreshHeader = mRefreshHeader;
+        final RefreshComponent refreshHeader = mRefreshHeader;
         if (mSpinner != spinner && refreshHeader != null) {
             mSpinner = spinner;
-            SpinnerStyle style = refreshHeader.getSpinnerStyle();
+            SpinnerStyle style = refreshHeader.getSpinnerBehavior();
             if (style == SpinnerStyle.Translate) {
-                refreshHeader.getView().setTranslationY(spinner);
+                refreshHeader.getComponentView().setTranslationY(spinner);
             } else if (style.scale) {
-                View view = refreshHeader.getView();
+                View view = refreshHeader.getComponentView();
                 view.layout(view.getLeft(), view.getTop(), view.getRight(), view.getTop() + Math.max(0, spinner));
             }
         }
@@ -256,7 +256,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
      * @param header RefreshHeader
      * @return TwoLevelHeader
      */
-    public TwoLevelHeader setRefreshHeader(RefreshHeader header) {
+    public TwoLevelHeader setRefreshHeader(RefreshHeaderComponent header) {
         return setRefreshHeader(header, MATCH_PARENT, WRAP_CONTENT);
     }
 
@@ -267,12 +267,12 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
      * @param height 指定高度
      * @return TwoLevelHeader
      */
-    public TwoLevelHeader setRefreshHeader(RefreshHeader header, int width, int height) {
+    public TwoLevelHeader setRefreshHeader(RefreshHeaderComponent header, int width, int height) {
         final ViewGroup thisGroup = this;
         if (header != null) {
-            RefreshInternal refreshHeader = mRefreshHeader;
+            RefreshComponent refreshHeader = mRefreshHeader;
             if (refreshHeader != null) {
-                thisGroup.removeView(refreshHeader.getView());
+                thisGroup.removeView(refreshHeader.getComponentView());
             }
             refreshHeader = header;
             /*
@@ -281,14 +281,14 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
             width = width == 0 ? MATCH_PARENT : width;
             height = height == 0 ? WRAP_CONTENT : height;
             LayoutParams lp = new LayoutParams(width, height);
-            Object olp = refreshHeader.getView().getLayoutParams();
+            Object olp = refreshHeader.getComponentView().getLayoutParams();
             if (olp instanceof LayoutParams) {
                 lp = ((LayoutParams) olp);
             }
-            if (refreshHeader.getSpinnerStyle() == SpinnerStyle.FixedBehind) {
-                thisGroup.addView(refreshHeader.getView(), 0, lp);
+            if (refreshHeader.getSpinnerBehavior() == SpinnerStyle.FixedBehind) {
+                thisGroup.addView(refreshHeader.getComponentView(), 0, lp);
             } else {
-                thisGroup.addView(refreshHeader.getView(), thisGroup.getChildCount(), lp);
+                thisGroup.addView(refreshHeader.getComponentView(), thisGroup.getChildCount(), lp);
             }
             this.mRefreshHeader = header;
             this.mWrappedInternal = header;
@@ -304,10 +304,10 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
     public TwoLevelHeader setMaxRate(float rate) {
         if (this.mMaxRate != rate) {
             this.mMaxRate = rate;
-            final RefreshKernel refreshKernel = mRefreshKernel;
+            final RefreshManager refreshKernel = mRefreshKernel;
             if (refreshKernel != null) {
                 this.mHeaderHeight = 0;
-                refreshKernel.getRefreshLayout().setHeaderMaxDragRate(mMaxRate);
+                refreshKernel.getLayoutRefresh().setHeaderMaxDragRate(mMaxRate);
             }
         }
         return this;
@@ -319,10 +319,10 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
      * @return TwoLevelHeader
      */
     public TwoLevelHeader setEnablePullToCloseTwoLevel(boolean enabled) {
-        final RefreshKernel refreshKernel = mRefreshKernel;
+        final RefreshManager refreshKernel = mRefreshKernel;
         this.mEnablePullToCloseTwoLevel = enabled;
         if (refreshKernel != null) {
-            refreshKernel.requestNeedTouchEventFor(this, !enabled);
+            refreshKernel.requestNeedTouchEvent(this, !enabled);
         }
         return this;
     }
@@ -372,7 +372,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
      * @param listener 监听器
      * @return TwoLevelHeader
      */
-    public TwoLevelHeader setOnTwoLevelListener(OnTwoLevelListener listener) {
+    public TwoLevelHeader setOnTwoLevelListener(TwoLevelRefreshListener listener) {
         this.mTwoLevelListener = listener;
         return this;
     }
@@ -382,9 +382,9 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
      * @return TwoLevelHeader
      */
     public TwoLevelHeader finishTwoLevel() {
-        final RefreshKernel refreshKernel = mRefreshKernel;
+        final RefreshManager refreshKernel = mRefreshKernel;
         if (refreshKernel != null) {
-            refreshKernel.finishTwoLevel();
+            refreshKernel.closeTwoLevel();
         }
         return this;
     }
@@ -396,10 +396,10 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeader/*,
      * @return TwoLevelHeader
      */
     public TwoLevelHeader openTwoLevel(boolean widthOnTwoLevelListener) {
-        final RefreshKernel refreshKernel = mRefreshKernel;
+        final RefreshManager refreshKernel = mRefreshKernel;
         if (refreshKernel != null) {
-            final OnTwoLevelListener twoLevelListener = mTwoLevelListener;
-            refreshKernel.startTwoLevel(!widthOnTwoLevelListener || twoLevelListener == null || twoLevelListener.onTwoLevel(refreshKernel.getRefreshLayout()));
+            final TwoLevelRefreshListener twoLevelListener = mTwoLevelListener;
+            refreshKernel.openTwoLevel(!widthOnTwoLevelListener || twoLevelListener == null || twoLevelListener.onTwoLevelRefresh(refreshKernel.getLayoutRefresh()));
         }
         return this;
     }

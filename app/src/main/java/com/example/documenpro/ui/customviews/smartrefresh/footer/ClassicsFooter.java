@@ -10,8 +10,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooter;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.ArrowDrawable;
@@ -24,7 +24,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
  * Created by scwang on 2017/5/28.
  */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements RefreshFooter {
+public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements RefreshFooterComponent {
 
     public static String REFRESH_FOOTER_PULLING = null;//"上拉加载更多";
     public static String REFRESH_FOOTER_RELEASE = null;//"释放立即加载";
@@ -172,9 +172,9 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
 
 
     @Override
-    public int onFinish(@NonNull RefreshLayout layout, boolean success) {
+    public int onAnimationFinish(@NonNull SmartRefreshLayout layout, boolean success) {
 
-        super.onFinish(layout, success);
+        super.onAnimationFinish(layout, success);
         if (!mNoMoreData) {
             mTitleText.setText(success ? mTextFinish : mTextFailed);
             return mFinishDuration;
@@ -184,15 +184,15 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
 
 
     @Override@Deprecated
-    public void setPrimaryColors(@ColorInt int ... colors) {
+    public void applyPrimaryColors(@ColorInt int ... colors) {
         if (mSpinnerStyle == SpinnerStyle.FixedBehind) {
-            super.setPrimaryColors(colors);
+            super.applyPrimaryColors(colors);
         }
     }
 
 
     @Override
-    public boolean setNoMoreData(boolean noMoreData) {
+    public boolean setNoMoreDataAvailable(boolean noMoreData) {
         if (mNoMoreData != noMoreData) {
             mNoMoreData = noMoreData;
             final View arrowView = mArrowView;
@@ -208,7 +208,7 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
     }
 
     @Override
-    public void onStateChanged(@NonNull RefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
         final View arrowView = mArrowView;
         if (!mNoMoreData) {
             switch (newState) {

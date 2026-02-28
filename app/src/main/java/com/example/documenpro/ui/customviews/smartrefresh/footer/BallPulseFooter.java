@@ -16,8 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooter;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
@@ -25,7 +25,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class BallPulseFooter extends InternalAbstract implements RefreshFooter {
+public class BallPulseFooter extends InternalAbstract implements RefreshFooterComponent {
 
     //<editor-fold desc="属性变量">
 
@@ -124,7 +124,7 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooter {
 
     //<editor-fold desc="刷新方法 - RefreshFooter">
     @Override
-    public void onStartAnimator(@NonNull RefreshLayout layout, int height, int maxDragHeight) {
+    public void onAnimationStart(@NonNull SmartRefreshLayout layout, int height, int maxDragHeight) {
         if (mIsStarted) return;
 
         final View thisView = this;
@@ -135,7 +135,7 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooter {
     }
 
     @Override
-    public int onFinish(@NonNull RefreshLayout layout, boolean success) {
+    public int onAnimationFinish(@NonNull SmartRefreshLayout layout, boolean success) {
         mIsStarted = false;
         mStartTime = 0;
         mPaint.setColor(mNormalColor);
@@ -143,7 +143,7 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooter {
     }
 
     @Override@Deprecated
-    public void setPrimaryColors(@ColorInt int... colors) {
+    public void applyPrimaryColors(@ColorInt int... colors) {
         if (!mManualAnimationColor && colors.length > 1) {
             setAnimatingColor(colors[0]);
             mManualAnimationColor = false;

@@ -19,15 +19,15 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshInternal;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshKernel;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public abstract class InternalClassics<T extends InternalClassics> extends InternalAbstract implements RefreshInternal {
+public abstract class InternalClassics<T extends InternalClassics> extends InternalAbstract implements RefreshComponent {
 
     public static final int ID_TEXT_TITLE = R.id.srl_classics_title;
     public static final int ID_IMAGE_ARROW = R.id.srl_classics_arrow;
@@ -37,7 +37,7 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
     protected ImageView mArrowView;
     protected ImageView mProgressView;
 
-    protected RefreshKernel mRefreshKernel;
+    protected RefreshManager mRefreshKernel;
     protected PaintDrawable mArrowDrawable;
     protected PaintDrawable mProgressDrawable;
 
@@ -117,13 +117,13 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
 
     //<editor-fold desc="RefreshHeader">
     @Override
-    public void onInitialized(@NonNull RefreshKernel kernel, int height, int maxDragHeight) {
+    public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
         mRefreshKernel = kernel;
-        mRefreshKernel.requestDrawBackgroundFor(this, mBackgroundColor);
+        mRefreshKernel.requestDrawBackground(this, mBackgroundColor);
     }
 
     @Override
-    public void onStartAnimator(@NonNull RefreshLayout refreshLayout, int height, int maxDragHeight) {
+    public void onAnimationStart(@NonNull SmartRefreshLayout refreshLayout, int height, int maxDragHeight) {
         final View progressView = mProgressView;
         if (progressView.getVisibility() != VISIBLE) {
             progressView.setVisibility(VISIBLE);
@@ -137,12 +137,12 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
     }
 
     @Override
-    public void onReleased(@NonNull RefreshLayout refreshLayout, int height, int maxDragHeight) {
-        onStartAnimator(refreshLayout, height, maxDragHeight);
+    public void onDragReleased(@NonNull SmartRefreshLayout refreshLayout, int height, int maxDragHeight) {
+        onAnimationStart(refreshLayout, height, maxDragHeight);
     }
 
     @Override
-    public int onFinish(@NonNull RefreshLayout refreshLayout, boolean success) {
+    public int onAnimationFinish(@NonNull SmartRefreshLayout refreshLayout, boolean success) {
         final View progressView = mProgressView;
         Drawable drawable = mProgressView.getDrawable();
         if (drawable instanceof Animatable) {
@@ -157,7 +157,7 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
     }
 
     @Override
-    public void setPrimaryColors(@ColorInt int ... colors) {
+    public void applyPrimaryColors(@ColorInt int ... colors) {
         if (colors.length > 0) {
             final View thisView = this;
             if (!(thisView.getBackground() instanceof BitmapDrawable) && !mSetPrimaryColor) {
@@ -224,7 +224,7 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
         mSetPrimaryColor = true;
         mBackgroundColor = primaryColor;
         if (mRefreshKernel != null) {
-            mRefreshKernel.requestDrawBackgroundFor(this, primaryColor);
+            mRefreshKernel.requestDrawBackground(this, primaryColor);
         }
         return self();
     }
@@ -263,7 +263,7 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
     public T setTextSizeTitle(float size) {
         mTitleText.setTextSize(size);
         if (mRefreshKernel != null) {
-            mRefreshKernel.requestRemeasureHeightFor(this);
+            mRefreshKernel.requestRemeasureHeight(this);
         }
         return self();
     }

@@ -15,17 +15,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooter;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshKernel;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshLayout;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
+import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
 @SuppressWarnings("unused")
-public class FalsifyFooter extends InternalAbstract implements RefreshFooter {
+public class FalsifyFooter extends InternalAbstract implements RefreshFooterComponent {
 
-    private RefreshKernel mRefreshKernel;
+    private RefreshManager mRefreshKernel;
 
     //<editor-fold desc="FalsifyHeader">
     public FalsifyFooter(Context context) {
@@ -66,13 +66,13 @@ public class FalsifyFooter extends InternalAbstract implements RefreshFooter {
 
     //<editor-fold desc="RefreshFooter">
     @Override
-    public void onInitialized(@NonNull RefreshKernel kernel, int height, int maxDragHeight) {
+    public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
         mRefreshKernel = kernel;
-        kernel.getRefreshLayout().setEnableAutoLoadMore(false);
+        kernel.getLayoutRefresh().setAutoLoadMoreEnable(false);
     }
 
     @Override
-    public void onReleased(@NonNull RefreshLayout layout, int height, int maxDragHeight) {
+    public void onDragReleased(@NonNull SmartRefreshLayout layout, int height, int maxDragHeight) {
         if (mRefreshKernel != null) {
             /*
              * 2020-3-15 BUG修复
@@ -80,7 +80,7 @@ public class FalsifyFooter extends InternalAbstract implements RefreshFooter {
              * 强化了 closeHeaderOrFooter 的关闭逻辑，帮助 Footer 取消刷新
              * FalsifyFooter 是不能触发加载的
              */
-            layout.closeHeaderOrFooter();
+            layout.closeHeaderFooter();
 //            mRefreshKernel.setState(RefreshState.None);
 //            //onReleased 的时候 调用 setState(RefreshState.None); 并不会立刻改变成 None
 //            //而是先执行一个回弹动画，LoadFinish 是介于 Refreshing 和 None 之间的状态

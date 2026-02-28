@@ -23,9 +23,9 @@ import androidx.core.view.NestedScrollingChild;
 import androidx.core.view.NestedScrollingParent;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshContent;
-import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshKernel;
-import com.example.documenpro.ui.customviews.smartrefresh.api.ScrollBoundaryDecider;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshContentHandler;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
+import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshScrollBoundaryDecider;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.CoordinatorLayoutListener;
 import com.example.documenpro.ui.customviews.smartrefresh.util.DesignUtil;
 
@@ -35,7 +35,7 @@ import java.util.Queue;
 
 
 @SuppressWarnings("WeakerAccess")
-public class RefreshContentWrapper implements RefreshContent, CoordinatorLayoutListener, AnimatorUpdateListener {
+public class RefreshContentWrapper implements RefreshContentHandler, CoordinatorLayoutListener, AnimatorUpdateListener {
 
 //    protected int mHeaderHeight = Integer.MAX_VALUE;
 //    protected int mFooterHeight = mHeaderHeight - 1;
@@ -55,7 +55,7 @@ public class RefreshContentWrapper implements RefreshContent, CoordinatorLayoutL
     }
 
     //<editor-fold desc="findScrollableView">
-    protected void findScrollableView(View content, RefreshKernel kernel) {
+    protected void findScrollableView(View content, RefreshManager kernel) {
         View scrollableView = null;
         boolean isInEditMode = mContentView.isInEditMode();
         while (scrollableView == null || (scrollableView instanceof NestedScrollingParent
@@ -125,18 +125,18 @@ public class RefreshContentWrapper implements RefreshContent, CoordinatorLayoutL
 
     //<editor-fold desc="implements">
     @NonNull
-    public View getView() {
+    public View getContentView() {
         return mContentView;
     }
 
     @Override
     @NonNull
-    public View getScrollableView() {
+    public View getScrollableContentView() {
         return mScrollableView;
     }
 
     @Override
-    public void moveSpinner(int spinner, int headerTranslationViewId, int footerTranslationViewId) {
+    public void updateSpinnerPosition(int spinner, int headerTranslationViewId, int footerTranslationViewId) {
         boolean translated = false;
         if (headerTranslationViewId != View.NO_ID) {
             View headerTranslationView = mOriginalContentView.findViewById(headerTranslationViewId);
@@ -174,17 +174,17 @@ public class RefreshContentWrapper implements RefreshContent, CoordinatorLayoutL
     }
 
     @Override
-    public boolean canRefresh() {
-        return mEnableRefresh && mBoundaryAdapter.canRefresh(mContentView);
+    public boolean isRefreshPossible() {
+        return mEnableRefresh && mBoundaryAdapter.canTriggerRefresh(mContentView);
     }
 
     @Override
-    public boolean canLoadMore() {
-        return mEnableLoadMore && mBoundaryAdapter.canLoadMore(mContentView);
+    public boolean isLoadMorePossible() {
+        return mEnableLoadMore && mBoundaryAdapter.canTriggerLoadMore(mContentView);
     }
 
     @Override
-    public void onActionDown(MotionEvent e) {
+    public void handleActionDown(MotionEvent e) {
 //        mMotionEvent = MotionEvent.obtain(e);
 //        mMotionEvent.offsetLocation(-mContentView.getLeft(), -mContentView.getTop());
         PointF point = new PointF(e.getX(), e.getY());
@@ -206,18 +206,18 @@ public class RefreshContentWrapper implements RefreshContent, CoordinatorLayoutL
 
 
     @Override
-    public void setUpComponent(RefreshKernel kernel, View fixedHeader, View fixedFooter) {
+    public void setupComponent(RefreshManager kernel, View fixedHeader, View fixedFooter) {
         findScrollableView(mContentView, kernel);
 
         if (fixedHeader != null || fixedFooter != null) {
             mFixedHeader = fixedHeader;
             mFixedFooter = fixedFooter;
             ViewGroup frameLayout = new FrameLayout(mContentView.getContext());
-            int index = kernel.getRefreshLayout().getLayout().indexOfChild(mContentView);
-            kernel.getRefreshLayout().getLayout().removeView(mContentView);
+            int index = kernel.getLayoutRefresh().getLayoutView().indexOfChild(mContentView);
+            kernel.getLayoutRefresh().getLayoutView().removeView(mContentView);
             frameLayout.addView(mContentView, 0, new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));
             ViewGroup.LayoutParams layoutParams = mContentView.getLayoutParams();
-            kernel.getRefreshLayout().getLayout().addView(frameLayout, index, layoutParams);
+            kernel.getLayoutRefresh().getLayoutView().addView(frameLayout, index, layoutParams);
             mContentView = frameLayout;
             if (fixedHeader != null) {
                 fixedHeader.setTag("fixed-top");
@@ -253,7 +253,7 @@ public class RefreshContentWrapper implements RefreshContent, CoordinatorLayoutL
 //    }
 
     @Override
-    public void setScrollBoundaryDecider(ScrollBoundaryDecider boundary) {
+    public void setScrollBoundaryChecker(RefreshScrollBoundaryDecider boundary) {
         if (boundary instanceof ScrollBoundaryDeciderAdapter) {
             mBoundaryAdapter = ((ScrollBoundaryDeciderAdapter) boundary);
         } else {
@@ -262,13 +262,13 @@ public class RefreshContentWrapper implements RefreshContent, CoordinatorLayoutL
     }
 
     @Override
-    public void setEnableLoadMoreWhenContentNotFull(boolean enable) {
+    public void setLoadMoreWhenContentNotFullEnabled(boolean enable) {
 //        mBoundaryAdapter.setEnableLoadMoreWhenContentNotFull(enable);
         mBoundaryAdapter.mEnableLoadMoreWhenContentNotFull = enable;
     }
 
     @Override
-    public AnimatorUpdateListener scrollContentWhenFinished(final int spinner) {
+    public AnimatorUpdateListener createScrollAnimatorOnFinish(final int spinner) {
         if (mScrollableView != null && spinner != 0) {
             if ((spinner < 0 && canScrollVertically(mScrollableView, 1)) || (spinner > 0 && canScrollVertically(mScrollableView, -1))) {
                 mLastSpinner = spinner;
