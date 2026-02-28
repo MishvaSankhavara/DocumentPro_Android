@@ -22,16 +22,15 @@ import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstr
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
-public class FalsifyHeader extends InternalAbstract implements RefreshHeaderComponent {
+public class PlaceholderRefreshHeader extends InternalAbstract implements RefreshHeaderComponent {
 
-    protected RefreshManager mRefreshKernel;
+    protected RefreshManager refreshKernel;
 
-    //<editor-fold desc="FalsifyHeader">
-    public FalsifyHeader(Context context) {
+    public PlaceholderRefreshHeader(Context context) {
         this(context, null);
     }
 
-    public FalsifyHeader(Context context, AttributeSet attrs) {
+    public PlaceholderRefreshHeader(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
     }
 
@@ -39,7 +38,7 @@ public class FalsifyHeader extends InternalAbstract implements RefreshHeaderComp
     protected void dispatchDraw(@NonNull Canvas canvas) {
         super.dispatchDraw(canvas);
         final View thisView = this;
-        if (thisView.isInEditMode()) {//这段代码在运行时不会执行，只会在Studio编辑预览时运行，不用在意性能问题
+        if (thisView.isInEditMode()) {
             final int d = SmartUtil.dp2px(5);
             final Context context = thisView.getContext();
 
@@ -61,31 +60,15 @@ public class FalsifyHeader extends InternalAbstract implements RefreshHeaderComp
             view.draw(canvas);
         }
     }
-    //</editor-fold>
-
-    //<editor-fold desc="RefreshHeader">
-    @Override
-    public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
-        mRefreshKernel = kernel;
-    }
 
     @Override
     public void onDragReleased(@NonNull SmartRefreshLayout layout, int height, int maxDragHeight) {
-        if (mRefreshKernel != null) {
-            /*
-             * 2020-3-15 BUG修复
-             * https://github.com/scwang90/SmartRefreshLayout/issues/1018
-             * 强化了 closeHeaderOrFooter 的关闭逻辑，帮助 Header 取消刷新
-             * FalsifyHeader 是不能触发刷新的
-             */
+        if (refreshKernel != null) {
             layout.closeHeaderFooter();
-//            mRefreshKernel.setState(RefreshState.None);
-//            //onReleased 的时候 调用 setState(RefreshState.None); 并不会立刻改变成 None
-//            //而是先执行一个回弹动画，RefreshFinish 是介于 Refreshing 和 None 之间的状态
-//            //RefreshFinish 用于在回弹动画结束时候能顺利改变为 None
-//            mRefreshKernel.setState(RefreshState.RefreshFinish);
         }
     }
-    //</editor-fold>
-
+    @Override
+    public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
+        refreshKernel = kernel;
+    }
 }

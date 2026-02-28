@@ -33,7 +33,7 @@ import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SelectDocumentActivity;
 import com.example.documenpro.ui.customviews.FileTypeItem;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.header.ClassicsHeader;
+import com.example.documenpro.ui.customviews.smartrefresh.header.ClassicRefreshHeaderView;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshListener;
 import com.example.documenpro.utils.Utils;
 
@@ -129,7 +129,7 @@ public class FilesFragment extends Fragment implements View.OnClickListener {
         btnExcel = view.findViewById(R.id.btnExcel);
         btnPpt = view.findViewById(R.id.btnPpt);
         SmartRefreshLayout refreshLayout = view.findViewById(R.id.smartRefreshLayout);
-        refreshLayout.setHeaderRefresh(new ClassicsHeader(mActivity));
+        refreshLayout.setHeaderRefresh(new ClassicRefreshHeaderView(mActivity));
         refreshLayout.setRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull SmartRefreshLayout refreshLayout) {
