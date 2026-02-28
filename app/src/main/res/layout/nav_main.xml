@@ -321,7 +321,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <com.example.documenpro.ui.customviews.switchdaynight.DayNightSwitch
+            <com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch
                 android:id="@+id/nav_dark_mode_switch"
                 android:layout_width="45dp"
                 android:layout_height="25dp" />

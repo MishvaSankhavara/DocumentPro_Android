@@ -40,7 +40,7 @@ import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
-import com.example.documenpro.ui.customviews.switchdaynight.DayNightSwitch;
+import com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch;
 import com.example.documenpro.ui.fragments.FilesFragment;
 import com.example.documenpro.ui.fragments.SettingFragment;
 import com.example.documenpro.ui.fragments.ToolsFragment;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ConstraintLayout filesButtonLayout;
     Menu mainMenu;
     TextView languageTextView;
-    private DayNightSwitch dayNightSwitch;
+    private ThemeToggleSwitch dayNightSwitch;
     private AdView bannerAdView;
     private FrameLayout adContainer;
     private TextView appVersionTextView;
@@ -129,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeData() {
-        dayNightSwitch.setIsNight(SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.NIGHT_MODE_KEY, false));
-        dayNightSwitch.setListener(is_night -> {
+        dayNightSwitch.setNightMode(SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.NIGHT_MODE_KEY, false));
+        dayNightSwitch.setSwitchListener(is_night -> {
             startActivity(new Intent(MainActivity.this, SplashScreenActivity.class));
             finish();
             Utils.setTheme(getApplication(), is_night);
@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (idView == R.id.cl_privacy_policy) {
 
         } else if (idView == R.id.nav_dark_mode) {
-            dayNightSwitch.setIsNight(!dayNightSwitch.isNight());
+            dayNightSwitch.setNightMode(!dayNightSwitch.isNightMode());
 
         }
     }
