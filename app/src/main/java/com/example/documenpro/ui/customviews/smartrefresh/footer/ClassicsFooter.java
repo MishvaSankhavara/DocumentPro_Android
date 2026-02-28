@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.ArrowDrawable;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalClassics;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.ProgressDrawable;
@@ -78,7 +78,7 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
         lpProgress.height = ta.getLayoutDimension(R.styleable.ClassicsFooter_srlDrawableSize, lpProgress.height);
 
         mFinishDuration = ta.getInt(R.styleable.ClassicsFooter_srlFinishDuration, mFinishDuration);
-        mSpinnerStyle = SpinnerStyle.values[ta.getInt(R.styleable.ClassicsFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
+        mSpinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.ClassicsFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
 
         if (ta.hasValue(R.styleable.ClassicsFooter_srlDrawableArrow)) {
             mArrowView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsFooter_srlDrawableArrow));
@@ -185,7 +185,7 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
 
     @Override@Deprecated
     public void applyPrimaryColors(@ColorInt int ... colors) {
-        if (mSpinnerStyle == SpinnerStyle.FixedBehind) {
+        if (mSpinnerStyle == RefreshSpinnerStyle.FIXED_BEHIND) {
             super.applyPrimaryColors(colors);
         }
     }
@@ -208,11 +208,11 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         final View arrowView = mArrowView;
         if (!mNoMoreData) {
             switch (newState) {
-                case None:
+                case IDLE:
                     arrowView.setVisibility(VISIBLE);
                 case PullUpToLoad:
                     mTitleText.setText(mTextPulling);
@@ -227,7 +227,7 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
                     mTitleText.setText(mTextRelease);
                     arrowView.animate().rotation(0);
                     break;
-                case Refreshing:
+                case REFRESHING:
                     mTitleText.setText(mTextRefreshing);
                     arrowView.setVisibility(GONE);
                     break;

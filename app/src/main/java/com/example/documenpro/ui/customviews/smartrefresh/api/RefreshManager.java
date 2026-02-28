@@ -4,7 +4,7 @@ import android.animation.ValueAnimator;
 
 import androidx.annotation.NonNull;
 
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 
 public interface RefreshManager {
 
@@ -14,7 +14,7 @@ public interface RefreshManager {
     @NonNull
     RefreshContentHandler getContentRefresh();
 
-    RefreshManager setRefreshState(@NonNull RefreshState state);
+    RefreshManager setRefreshState(@NonNull RefreshLayoutState state);
 
     RefreshManager openTwoLevel(boolean open);
 

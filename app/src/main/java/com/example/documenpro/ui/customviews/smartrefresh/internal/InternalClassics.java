@@ -22,7 +22,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
@@ -52,7 +52,7 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
     //<editor-fold desc="RelativeLayout">
     public InternalClassics(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mSpinnerStyle = SpinnerStyle.Translate;
+        mSpinnerStyle = RefreshSpinnerStyle.TRANSLATE;
     }
 
     @Override
@@ -215,7 +215,7 @@ public abstract class InternalClassics<T extends InternalClassics> extends Inter
         return self();
     }
 
-    public T setSpinnerStyle(SpinnerStyle style) {
+    public T setSpinnerStyle(RefreshSpinnerStyle style) {
         this.mSpinnerStyle = style;
         return self();
     }

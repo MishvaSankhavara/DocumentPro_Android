@@ -18,8 +18,8 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderCompo
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
 
@@ -57,7 +57,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
     public TwoLevelHeader(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs, 0);
 
-        mSpinnerStyle = SpinnerStyle.FixedBehind;
+        mSpinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TwoLevelHeader);
 
@@ -97,7 +97,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mSpinnerStyle = SpinnerStyle.MatchLayout;
+        mSpinnerStyle = RefreshSpinnerStyle.MATCH_LAYOUT;
         if (mRefreshHeader == null) {
             final View thisView = this;
             setRefreshHeader(new ClassicsHeader(thisView.getContext()));
@@ -107,7 +107,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mSpinnerStyle = SpinnerStyle.FixedBehind;
+        mSpinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
     }
 
     @Override
@@ -147,7 +147,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
             mRefreshHeader = refreshHeader;
         }
         if (mRefreshKernel == null //第一次初始化
-                && refreshHeader.getSpinnerBehavior() == SpinnerStyle.Translate
+                && refreshHeader.getSpinnerBehavior() == RefreshSpinnerStyle.TRANSLATE
                 && !thisView.isInEditMode()) {
             MarginLayoutParams params = (MarginLayoutParams) refreshHeader.getComponentView().getLayoutParams();
             params.topMargin -= height;
@@ -163,12 +163,12 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         final RefreshComponent refreshHeader = mRefreshHeader;
         if (refreshHeader != null) {
             final OnStateChangedListener listener = mRefreshHeader;
-            if (newState == RefreshState.ReleaseToRefresh && !mEnableFloorRefresh) {
-                newState = RefreshState.PullDownToRefresh;
+            if (newState == RefreshLayoutState.RELEASE_TO_REFRESH && !mEnableFloorRefresh) {
+                newState = RefreshLayoutState.PULL_DOWN_TO_REFRESH;
             }
             listener.onStateChanged(refreshLayout, oldState, newState);
             switch (newState) {
@@ -189,7 +189,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
                         refreshHeader.getComponentView().animate().alpha(1).setDuration(mFloorDuration / 2);
                     }
                     break;
-                case PullDownToRefresh:
+                case PULL_DOWN_TO_REFRESH:
                     if (refreshHeader.getComponentView().getAlpha() == 0 && refreshHeader.getComponentView() != this) {
                         refreshHeader.getComponentView().setAlpha(1);
                     }
@@ -208,13 +208,13 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
         }
         if (isDragging) {
             if (mPercent < mFloorRate && percent >= mFloorRate && mEnableTwoLevel) {
-                refreshKernel.setRefreshState(RefreshState.ReleaseToTwoLevel);
+                refreshKernel.setRefreshState(RefreshLayoutState.RELEASE_TO_TWO_LEVEL);
             } else if (mPercent >= mFloorRate && percent < mRefreshRate) {
-                refreshKernel.setRefreshState(RefreshState.PullDownToRefresh);
+                refreshKernel.setRefreshState(RefreshLayoutState.PULL_DOWN_TO_REFRESH);
             } else if (mPercent >= mFloorRate && percent < mFloorRate && mEnableFloorRefresh) {
-                refreshKernel.setRefreshState(RefreshState.ReleaseToRefresh);
-            } else if (!mEnableFloorRefresh && refreshKernel.getLayoutRefresh().getRefreshState() != RefreshState.ReleaseToTwoLevel) {
-                refreshKernel.setRefreshState(RefreshState.PullDownToRefresh);
+                refreshKernel.setRefreshState(RefreshLayoutState.RELEASE_TO_REFRESH);
+            } else if (!mEnableFloorRefresh && refreshKernel.getLayoutRefresh().getRefreshState() != RefreshLayoutState.RELEASE_TO_TWO_LEVEL) {
+                refreshKernel.setRefreshState(RefreshLayoutState.PULL_DOWN_TO_REFRESH);
             }
             mPercent = percent;
         }
@@ -224,8 +224,8 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
         final RefreshComponent refreshHeader = mRefreshHeader;
         if (mSpinner != spinner && refreshHeader != null) {
             mSpinner = spinner;
-            SpinnerStyle style = refreshHeader.getSpinnerBehavior();
-            if (style == SpinnerStyle.Translate) {
+            RefreshSpinnerStyle style = refreshHeader.getSpinnerBehavior();
+            if (style == RefreshSpinnerStyle.TRANSLATE) {
                 refreshHeader.getComponentView().setTranslationY(spinner);
             } else if (style.scale) {
                 View view = refreshHeader.getComponentView();
@@ -285,7 +285,7 @@ public class TwoLevelHeader extends InternalAbstract implements RefreshHeaderCom
             if (olp instanceof LayoutParams) {
                 lp = ((LayoutParams) olp);
             }
-            if (refreshHeader.getSpinnerBehavior() == SpinnerStyle.FixedBehind) {
+            if (refreshHeader.getSpinnerBehavior() == RefreshSpinnerStyle.FIXED_BEHIND) {
                 thisGroup.addView(refreshHeader.getComponentView(), 0, lp);
             } else {
                 thisGroup.addView(refreshHeader.getComponentView(), thisGroup.getChildCount(), lp);

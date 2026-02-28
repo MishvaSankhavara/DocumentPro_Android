@@ -10,7 +10,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
 
 public interface RefreshComponent extends OnStateChangedListener {
@@ -18,7 +18,7 @@ public interface RefreshComponent extends OnStateChangedListener {
     @NonNull
     View getComponentView();
     @NonNull
-    SpinnerStyle getSpinnerBehavior();
+    RefreshSpinnerStyle getSpinnerBehavior();
     @RestrictTo({LIBRARY, LIBRARY_GROUP, SUBCLASSES})
     void applyPrimaryColors(@ColorInt int... colors);
     @RestrictTo({LIBRARY, LIBRARY_GROUP, SUBCLASSES})

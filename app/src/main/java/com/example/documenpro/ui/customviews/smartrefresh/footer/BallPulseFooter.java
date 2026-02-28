@@ -18,7 +18,7 @@ import androidx.core.graphics.ColorUtils;
 import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
@@ -62,8 +62,8 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooterCo
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setAntiAlias(true);
 
-        mSpinnerStyle = SpinnerStyle.Translate;
-        mSpinnerStyle = SpinnerStyle.values[ta.getInt(R.styleable.BallPulseFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
+        mSpinnerStyle = RefreshSpinnerStyle.TRANSLATE;
+        mSpinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.BallPulseFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
 
         if (ta.hasValue(R.styleable.BallPulseFooter_srlNormalColor)) {
             setNormalColor(ta.getColor(R.styleable.BallPulseFooter_srlNormalColor, 0));
@@ -161,7 +161,7 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooterCo
     //</editor-fold>
 
     //<editor-fold desc="开放接口 - API">
-    public BallPulseFooter setSpinnerStyle(SpinnerStyle mSpinnerStyle) {
+    public BallPulseFooter setSpinnerStyle(RefreshSpinnerStyle mSpinnerStyle) {
         this.mSpinnerStyle = mSpinnerStyle;
         return this;
     }

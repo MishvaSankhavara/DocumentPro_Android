@@ -21,8 +21,8 @@ import androidx.fragment.app.FragmentManager;
 import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.ArrowDrawable;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalClassics;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.ProgressDrawable;
@@ -105,7 +105,7 @@ public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements 
 
         mFinishDuration = ta.getInt(R.styleable.ClassicsHeader_srlFinishDuration, mFinishDuration);
         mEnableLastTime = ta.getBoolean(R.styleable.ClassicsHeader_srlEnableLastTime, mEnableLastTime);
-        mSpinnerStyle = SpinnerStyle.values[ta.getInt(R.styleable.ClassicsHeader_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
+        mSpinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.ClassicsHeader_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlDrawableArrow)) {
             mArrowView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsHeader_srlDrawableArrow));
@@ -245,27 +245,27 @@ public class ClassicsHeader extends InternalClassics<ClassicsHeader> implements 
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         final View arrowView = mArrowView;
         final View updateView = mLastUpdateText;
         switch (newState) {
-            case None:
+            case IDLE:
                 updateView.setVisibility(mEnableLastTime ? VISIBLE : GONE);
-            case PullDownToRefresh:
+            case PULL_DOWN_TO_REFRESH:
                 mTitleText.setText(mTextPulling);
                 arrowView.setVisibility(VISIBLE);
                 arrowView.animate().rotation(0);
                 break;
-            case Refreshing:
-            case RefreshReleased:
+            case REFRESHING:
+            case REFRESH_RELEASED:
                 mTitleText.setText(mTextRefreshing);
                 arrowView.setVisibility(GONE);
                 break;
-            case ReleaseToRefresh:
+            case RELEASE_TO_REFRESH:
                 mTitleText.setText(mTextRelease);
                 arrowView.animate().rotation(180);
                 break;
-            case ReleaseToTwoLevel:
+            case RELEASE_TO_TWO_LEVEL:
                 mTitleText.setText(mTextSecondary);
                 arrowView.animate().rotation(0);
                 break;

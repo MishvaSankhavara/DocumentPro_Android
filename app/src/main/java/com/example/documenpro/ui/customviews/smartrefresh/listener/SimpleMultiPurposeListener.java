@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 
 /**
  * 多功能监听器
@@ -65,7 +65,7 @@ public class SimpleMultiPurposeListener implements OnMultiPurposeListener {
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
 
     }
 

@@ -18,8 +18,8 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderCompo
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshFooterWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshHeaderWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
@@ -27,7 +27,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChange
 public abstract class InternalAbstract extends RelativeLayout implements RefreshComponent {
 
     protected View mWrappedView;
-    protected SpinnerStyle mSpinnerStyle;
+    protected RefreshSpinnerStyle mSpinnerStyle;
     protected RefreshComponent mWrappedInternal;
 
     protected InternalAbstract(@NonNull View wrapped) {
@@ -38,9 +38,9 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
         super(wrappedView.getContext(), null, 0);
         this.mWrappedView = wrappedView;
         this.mWrappedInternal = wrappedInternal;
-        if (this instanceof RefreshFooterWrapper && mWrappedInternal instanceof RefreshHeaderComponent && mWrappedInternal.getSpinnerBehavior() == SpinnerStyle.MatchLayout) {
+        if (this instanceof RefreshFooterWrapper && mWrappedInternal instanceof RefreshHeaderComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
             wrappedInternal.getComponentView().setScaleY(-1);
-        } else if (this instanceof RefreshHeaderWrapper && mWrappedInternal instanceof RefreshFooterComponent && mWrappedInternal.getSpinnerBehavior() == SpinnerStyle.MatchLayout) {
+        } else if (this instanceof RefreshHeaderWrapper && mWrappedInternal instanceof RefreshFooterComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
             wrappedInternal.getComponentView().setScaleY(-1);
         }
     }
@@ -83,7 +83,7 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
 
     @NonNull
     @Override
-    public SpinnerStyle getSpinnerBehavior() {
+    public RefreshSpinnerStyle getSpinnerBehavior() {
         if (mSpinnerStyle != null) {
             return mSpinnerStyle;
         }
@@ -100,7 +100,7 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
             }
             if (params != null) {
                 if (params.height == 0 || params.height == MATCH_PARENT) {
-                    for (SpinnerStyle style : SpinnerStyle.values) {
+                    for (RefreshSpinnerStyle style : RefreshSpinnerStyle.STYLES) {
                         if (style.scale) {
                             return mSpinnerStyle = style;
                         }
@@ -108,7 +108,7 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
                 }
             }
         }
-        return mSpinnerStyle = SpinnerStyle.Translate;
+        return mSpinnerStyle = RefreshSpinnerStyle.TRANSLATE;
     }
 
     @Override
@@ -157,21 +157,21 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         if (mWrappedInternal != null && mWrappedInternal != this) {
             if (this instanceof RefreshFooterWrapper && mWrappedInternal instanceof RefreshHeaderComponent) {
-                if (oldState.isFooter) {
-                    oldState = oldState.toHeader();
+                if (oldState.isFooterState) {
+                    oldState = oldState.convertToHeaderState();
                 }
-                if (newState.isFooter) {
-                    newState = newState.toHeader();
+                if (newState.isFooterState) {
+                    newState = newState.convertToHeaderState();
                 }
             } else if (this instanceof RefreshHeaderWrapper && mWrappedInternal instanceof RefreshFooterComponent) {
-                if (oldState.isHeader) {
-                    oldState = oldState.toFooter();
+                if (oldState.isHeaderState) {
+                    oldState = oldState.convertToFooterState();
                 }
-                if (newState.isHeader) {
-                    newState = newState.toFooter();
+                if (newState.isHeaderState) {
+                    newState = newState.convertToFooterState();
                 }
             }
             final OnStateChangedListener listener = mWrappedInternal;

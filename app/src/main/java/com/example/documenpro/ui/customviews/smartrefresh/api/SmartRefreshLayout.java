@@ -10,7 +10,7 @@ import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnLoadMoreListener;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnMultiPurposeListener;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshListener;
@@ -90,7 +90,7 @@ public interface SmartRefreshLayout {
     @Nullable
     RefreshFooterComponent getFooter();
     @NonNull
-    RefreshState getRefreshState();
+    RefreshLayoutState getRefreshState();
     @NonNull
     ViewGroup getLayoutView();
     boolean autoRefresh();

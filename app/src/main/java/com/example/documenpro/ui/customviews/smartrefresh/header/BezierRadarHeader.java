@@ -22,8 +22,8 @@ import androidx.core.content.ContextCompat;
 import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshState;
-import com.example.documenpro.ui.customviews.smartrefresh.constant.SpinnerStyle;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
+import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
@@ -68,7 +68,7 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
     public BezierRadarHeader(Context context, AttributeSet attrs) {
         super(context, attrs,0);
 
-        mSpinnerStyle = SpinnerStyle.FixedBehind;
+        mSpinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
 
         final View thisView = this;
 
@@ -284,10 +284,10 @@ public class BezierRadarHeader extends InternalAbstract implements RefreshHeader
     }
 
     @Override
-    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshState oldState, @NonNull RefreshState newState) {
+    public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         switch (newState) {
-            case None:
-            case PullDownToRefresh:
+            case IDLE:
+            case PULL_DOWN_TO_REFRESH:
                 mDotAlpha = 1;
                 mRadarScale = 0;
                 mRippleRadius = 0;
