@@ -23,16 +23,15 @@ import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
 @SuppressWarnings("unused")
-public class FalsifyFooter extends InternalAbstract implements RefreshFooterComponent {
+public class PlaceholderFalsifyFooter extends InternalAbstract implements RefreshFooterComponent {
 
-    private RefreshManager mRefreshKernel;
+    private RefreshManager refreshManager;
 
-    //<editor-fold desc="FalsifyHeader">
-    public FalsifyFooter(Context context) {
+    public PlaceholderFalsifyFooter(Context context) {
         this(context, null);
     }
 
-    public FalsifyFooter(Context context, AttributeSet attrs) {
+    public PlaceholderFalsifyFooter(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
     }
 
@@ -40,7 +39,7 @@ public class FalsifyFooter extends InternalAbstract implements RefreshFooterComp
     protected void dispatchDraw(@NonNull Canvas canvas) {
         super.dispatchDraw(canvas);
         final View thisView = this;
-        if (thisView.isInEditMode()) {//这段代码在运行时不会执行，只会在Studio编辑预览时运行，不用在意性能问题
+        if (thisView.isInEditMode()) {
             final int d = SmartUtil.dp2px(5);
             final Context context = thisView.getContext();
 
@@ -62,37 +61,17 @@ public class FalsifyFooter extends InternalAbstract implements RefreshFooterComp
             view.draw(canvas);
         }
     }
-    //</editor-fold>
-
-    //<editor-fold desc="RefreshFooter">
-    @Override
-    public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
-        mRefreshKernel = kernel;
-        kernel.getLayoutRefresh().setAutoLoadMoreEnable(false);
-    }
 
     @Override
     public void onDragReleased(@NonNull SmartRefreshLayout layout, int height, int maxDragHeight) {
-        if (mRefreshKernel != null) {
-            /*
-             * 2020-3-15 BUG修复
-             * https://github.com/scwang90/SmartRefreshLayout/issues/1018
-             * 强化了 closeHeaderOrFooter 的关闭逻辑，帮助 Footer 取消刷新
-             * FalsifyFooter 是不能触发加载的
-             */
+        if (refreshManager != null) {
             layout.closeHeaderFooter();
-//            mRefreshKernel.setState(RefreshState.None);
-//            //onReleased 的时候 调用 setState(RefreshState.None); 并不会立刻改变成 None
-//            //而是先执行一个回弹动画，LoadFinish 是介于 Refreshing 和 None 之间的状态
-//            //LoadFinish 用于在回弹动画结束时候能顺利改变为 None
-//            mRefreshKernel.setState(RefreshState.LoadFinish);
         }
     }
 
-//    @Override
-//    public boolean setNoMoreData(boolean noMoreData) {
-//        return false;
-//    }
-    //</editor-fold>
-
+    @Override
+    public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
+        refreshManager = kernel;
+        kernel.getLayoutRefresh().setAutoLoadMoreEnable(false);
+    }
 }

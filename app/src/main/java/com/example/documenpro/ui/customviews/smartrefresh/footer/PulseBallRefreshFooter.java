@@ -22,34 +22,27 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinne
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
+public class PulseBallRefreshFooter extends InternalAbstract implements RefreshFooterComponent {
 
+    protected boolean isNormalColorManuallySet;
+    protected boolean isAnimationColorManuallySet;
 
-@SuppressWarnings({"unused", "UnusedReturnValue"})
-public class BallPulseFooter extends InternalAbstract implements RefreshFooterComponent {
+    protected Paint circlePaint;
 
-    //<editor-fold desc="属性变量">
+    protected int normalColor = 0xffeeeeee;
+    protected int animationColor = 0xffe75946;
 
-    protected boolean mManualNormalColor;
-    protected boolean mManualAnimationColor;
+    protected float circleSpacing;
 
-    protected Paint mPaint;
+    protected long animationStartTime = 0;
+    protected boolean animationRunning = false;
+    protected TimeInterpolator animationInterpolator = new AccelerateDecelerateInterpolator();
 
-    protected int mNormalColor = 0xffeeeeee;
-    protected int mAnimatingColor = 0xffe75946;
-
-    protected float mCircleSpacing;
-
-    protected long mStartTime = 0;
-    protected boolean mIsStarted = false;
-    protected TimeInterpolator mInterpolator = new AccelerateDecelerateInterpolator();
-    //</editor-fold>
-
-    //<editor-fold desc="构造方法">
-    public BallPulseFooter(Context context) {
+    public PulseBallRefreshFooter(Context context) {
         this(context, null);
     }
 
-    public BallPulseFooter(Context context, @Nullable AttributeSet attrs) {
+    public PulseBallRefreshFooter(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs, 0);
 
         final View thisView = this;
@@ -57,10 +50,10 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooterCo
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BallPulseFooter);
 
-        mPaint = new Paint();
-        mPaint.setColor(Color.WHITE);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setAntiAlias(true);
+        circlePaint = new Paint();
+        circlePaint.setColor(Color.WHITE);
+        circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setAntiAlias(true);
 
         mSpinnerStyle = RefreshSpinnerStyle.TRANSLATE;
         mSpinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.BallPulseFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
@@ -74,32 +67,29 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooterCo
 
         ta.recycle();
 
-        mCircleSpacing = SmartUtil.dp2px(4);
-
+        circleSpacing = SmartUtil.dp2px(4);
     }
-
-    //</editor-fold>
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
         final View thisView = this;
         final int width = thisView.getWidth();
         final int height = thisView.getHeight();
-        float radius = (Math.min(width, height) - mCircleSpacing * 2) / 6;
-        float x = width / 2f - (radius * 2 + mCircleSpacing);
+        float radius = (Math.min(width, height) - circleSpacing * 2) / 6;
+        float x = width / 2f - (radius * 2 + circleSpacing);
         float y = height / 2f;
 
         final long now = System.currentTimeMillis();
 
         for (int i = 0; i < 3; i++) {
 
-            long time = now - mStartTime - 120 * (i + 1);
+            long time = now - animationStartTime - 120 * (i + 1);
             float percent = time > 0 ? ((time%750)/750f) : 0;
-            percent = mInterpolator.getInterpolation(percent);
+            percent = animationInterpolator.getInterpolation(percent);
 
             canvas.save();
 
-            float translateX = x + (radius * 2) * i + mCircleSpacing * i;
+            float translateX = x + (radius * 2) * i + circleSpacing * i;
             canvas.translate(translateX, y);
 
             if (percent < 0.5) {
@@ -110,78 +100,72 @@ public class BallPulseFooter extends InternalAbstract implements RefreshFooterCo
                 canvas.scale(scale, scale);
             }
 
-            canvas.drawCircle(0, 0, radius, mPaint);
+            canvas.drawCircle(0, 0, radius, circlePaint);
             canvas.restore();
         }
 
         super.dispatchDraw(canvas);
 
-        if (mIsStarted) {
+        if (animationRunning) {
             thisView.invalidate();
         }
     }
 
-
-    //<editor-fold desc="刷新方法 - RefreshFooter">
     @Override
     public void onAnimationStart(@NonNull SmartRefreshLayout layout, int height, int maxDragHeight) {
-        if (mIsStarted) return;
+        if (animationRunning) return;
 
         final View thisView = this;
         thisView.invalidate();
-        mIsStarted = true;
-        mStartTime = System.currentTimeMillis();
-        mPaint.setColor(mAnimatingColor);
+        animationRunning = true;
+        animationStartTime = System.currentTimeMillis();
+        circlePaint.setColor(animationColor);
     }
 
     @Override
     public int onAnimationFinish(@NonNull SmartRefreshLayout layout, boolean success) {
-        mIsStarted = false;
-        mStartTime = 0;
-        mPaint.setColor(mNormalColor);
+        animationRunning = false;
+        animationStartTime = 0;
+        circlePaint.setColor(normalColor);
         return 0;
     }
 
     @Override@Deprecated
     public void applyPrimaryColors(@ColorInt int... colors) {
-        if (!mManualAnimationColor && colors.length > 1) {
+        if (!isAnimationColorManuallySet && colors.length > 1) {
             setAnimatingColor(colors[0]);
-            mManualAnimationColor = false;
+            isAnimationColorManuallySet = false;
         }
-        if (!mManualNormalColor) {
+        if (!isNormalColorManuallySet) {
             if (colors.length > 1) {
                 setNormalColor(colors[1]);
             } else if (colors.length > 0) {
                 setNormalColor(ColorUtils.compositeColors(0x99ffffff,colors[0]));
             }
-            mManualNormalColor = false;
+            isNormalColorManuallySet = false;
         }
     }
 
-    //</editor-fold>
+    public PulseBallRefreshFooter setAnimatingColor(@ColorInt int color) {
+        animationColor = color;
+        isAnimationColorManuallySet = true;
+        if (animationRunning) {
+            circlePaint.setColor(color);
+        }
+        return this;
+    }
 
-    //<editor-fold desc="开放接口 - API">
-    public BallPulseFooter setSpinnerStyle(RefreshSpinnerStyle mSpinnerStyle) {
+    public PulseBallRefreshFooter setNormalColor(@ColorInt int color) {
+        normalColor = color;
+        isNormalColorManuallySet = true;
+        if (!animationRunning) {
+            circlePaint.setColor(color);
+        }
+        return this;
+    }
+
+    public PulseBallRefreshFooter setSpinnerStyle(RefreshSpinnerStyle mSpinnerStyle) {
         this.mSpinnerStyle = mSpinnerStyle;
         return this;
     }
-
-    public BallPulseFooter setNormalColor(@ColorInt int color) {
-        mNormalColor = color;
-        mManualNormalColor = true;
-        if (!mIsStarted) {
-            mPaint.setColor(color);
-        }
-        return this;
-    }
-
-    public BallPulseFooter setAnimatingColor(@ColorInt int color) {
-        mAnimatingColor = color;
-        mManualAnimationColor = true;
-        if (mIsStarted) {
-            mPaint.setColor(color);
-        }
-        return this;
-    }
-    //</editor-fold>
 }

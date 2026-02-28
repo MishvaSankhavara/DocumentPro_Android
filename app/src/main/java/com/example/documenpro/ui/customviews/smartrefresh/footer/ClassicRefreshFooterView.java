@@ -19,37 +19,31 @@ import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalClass
 import com.example.documenpro.ui.customviews.smartrefresh.internal.ProgressDrawable;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
-/**
- * 经典上拉底部组件
- * Created by scwang on 2017/5/28.
- */
-@SuppressWarnings({"unused", "UnusedReturnValue"})
-public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements RefreshFooterComponent {
 
-    public static String REFRESH_FOOTER_PULLING = null;//"上拉加载更多";
-    public static String REFRESH_FOOTER_RELEASE = null;//"释放立即加载";
-    public static String REFRESH_FOOTER_LOADING = null;//"正在加载...";
-    public static String REFRESH_FOOTER_REFRESHING = null;//"正在刷新...";
-    public static String REFRESH_FOOTER_FINISH = null;//"加载完成";
-    public static String REFRESH_FOOTER_FAILED = null;//"加载失败";
-    public static String REFRESH_FOOTER_NOTHING = null;//"没有更多数据了";
+public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFooterView> implements RefreshFooterComponent {
 
-    protected String mTextPulling;//"上拉加载更多";
-    protected String mTextRelease;//"释放立即加载";
-    protected String mTextLoading;//"正在加载...";
-    protected String mTextRefreshing;//"正在刷新...";
-    protected String mTextFinish;//"加载完成";
-    protected String mTextFailed;//"加载失败";
-    protected String mTextNothing;//"没有更多数据了";
+    public static String REFRESH_FOOTER_TEXT_PULLING = null;
+    public static String REFRESH_FOOTER_TEXT_RELEASE = null;
+    public static String REFRESH_FOOTER_TEXT_LOADING = null;
+    public static String REFRESH_FOOTER_TEXT_REFRESHING = null;
+    public static String REFRESH_FOOTER_TEXT_FINISH = null;
+    public static String REFRESH_FOOTER_TEXT_FAILED = null;
+    public static String REFRESH_FOOTER_TEXT_NOTHING = null;
 
-    protected boolean mNoMoreData = false;
+    protected String textPulling;
+    protected String textRelease;
+    protected String textLoading;
+    protected String textRefreshing;
+    protected String textFinish;
+    protected String textFailed;
+    protected String textNoMoreData;
+    protected boolean noMoreDataAvailable = false;
 
-    //<editor-fold desc="LinearLayout">
-    public ClassicsFooter(Context context) {
+    public ClassicRefreshFooterView(Context context) {
         this(context, null);
     }
 
-    public ClassicsFooter(Context context, AttributeSet attrs) {
+    public ClassicRefreshFooterView(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
 
         View.inflate(context, R.layout.srl_classics_footer, this);
@@ -108,59 +102,59 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
         }
 
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextPulling)){
-            mTextPulling = ta.getString(R.styleable.ClassicsFooter_srlTextPulling);
-        } else if(REFRESH_FOOTER_PULLING != null) {
-            mTextPulling = REFRESH_FOOTER_PULLING;
+            textPulling = ta.getString(R.styleable.ClassicsFooter_srlTextPulling);
+        } else if(REFRESH_FOOTER_TEXT_PULLING != null) {
+            textPulling = REFRESH_FOOTER_TEXT_PULLING;
         } else {
-            mTextPulling = context.getString(R.string.srl_footer_pulling);
+            textPulling = context.getString(R.string.srl_footer_pulling);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextRelease)){
-            mTextRelease = ta.getString(R.styleable.ClassicsFooter_srlTextRelease);
-        } else if(REFRESH_FOOTER_RELEASE != null) {
-            mTextRelease = REFRESH_FOOTER_RELEASE;
+            textRelease = ta.getString(R.styleable.ClassicsFooter_srlTextRelease);
+        } else if(REFRESH_FOOTER_TEXT_RELEASE != null) {
+            textRelease = REFRESH_FOOTER_TEXT_RELEASE;
         } else {
-            mTextRelease = context.getString(R.string.srl_footer_release);
+            textRelease = context.getString(R.string.srl_footer_release);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextLoading)){
-            mTextLoading = ta.getString(R.styleable.ClassicsFooter_srlTextLoading);
-        } else if(REFRESH_FOOTER_LOADING != null) {
-            mTextLoading = REFRESH_FOOTER_LOADING;
+            textLoading = ta.getString(R.styleable.ClassicsFooter_srlTextLoading);
+        } else if(REFRESH_FOOTER_TEXT_LOADING != null) {
+            textLoading = REFRESH_FOOTER_TEXT_LOADING;
         } else {
-            mTextLoading = context.getString(R.string.srl_footer_loading);
+            textLoading = context.getString(R.string.srl_footer_loading);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextRefreshing)){
-            mTextRefreshing = ta.getString(R.styleable.ClassicsFooter_srlTextRefreshing);
-        } else if(REFRESH_FOOTER_REFRESHING != null) {
-            mTextRefreshing = REFRESH_FOOTER_REFRESHING;
+            textRefreshing = ta.getString(R.styleable.ClassicsFooter_srlTextRefreshing);
+        } else if(REFRESH_FOOTER_TEXT_REFRESHING != null) {
+            textRefreshing = REFRESH_FOOTER_TEXT_REFRESHING;
         } else {
-            mTextRefreshing = context.getString(R.string.srl_footer_refreshing);
+            textRefreshing = context.getString(R.string.srl_footer_refreshing);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextFinish)){
-            mTextFinish = ta.getString(R.styleable.ClassicsFooter_srlTextFinish);
-        } else if(REFRESH_FOOTER_FINISH != null) {
-            mTextFinish = REFRESH_FOOTER_FINISH;
+            textFinish = ta.getString(R.styleable.ClassicsFooter_srlTextFinish);
+        } else if(REFRESH_FOOTER_TEXT_FINISH != null) {
+            textFinish = REFRESH_FOOTER_TEXT_FINISH;
         } else {
-            mTextFinish = context.getString(R.string.srl_footer_finish);
+            textFinish = context.getString(R.string.srl_footer_finish);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextFailed)){
-            mTextFailed = ta.getString(R.styleable.ClassicsFooter_srlTextFailed);
-        } else if(REFRESH_FOOTER_FAILED != null) {
-            mTextFailed = REFRESH_FOOTER_FAILED;
+            textFailed = ta.getString(R.styleable.ClassicsFooter_srlTextFailed);
+        } else if(REFRESH_FOOTER_TEXT_FAILED != null) {
+            textFailed = REFRESH_FOOTER_TEXT_FAILED;
         } else {
-            mTextFailed = context.getString(R.string.srl_footer_failed);
+            textFailed = context.getString(R.string.srl_footer_failed);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextNothing)){
-            mTextNothing = ta.getString(R.styleable.ClassicsFooter_srlTextNothing);
-        } else if(REFRESH_FOOTER_NOTHING != null) {
-            mTextNothing = REFRESH_FOOTER_NOTHING;
+            textNoMoreData = ta.getString(R.styleable.ClassicsFooter_srlTextNothing);
+        } else if(REFRESH_FOOTER_TEXT_NOTHING != null) {
+            textNoMoreData = REFRESH_FOOTER_TEXT_NOTHING;
         } else {
-            mTextNothing = context.getString(R.string.srl_footer_nothing);
+            textNoMoreData = context.getString(R.string.srl_footer_nothing);
         }
 
         ta.recycle();
 
         progressView.animate().setInterpolator(null);
-        mTitleText.setText(thisView.isInEditMode() ? mTextLoading : mTextPulling);
+        mTitleText.setText(thisView.isInEditMode() ? textLoading : textPulling);
 
         if (thisView.isInEditMode()) {
             arrowView.setVisibility(GONE);
@@ -169,19 +163,32 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
         }
     }
 
-
-
     @Override
     public int onAnimationFinish(@NonNull SmartRefreshLayout layout, boolean success) {
 
         super.onAnimationFinish(layout, success);
-        if (!mNoMoreData) {
-            mTitleText.setText(success ? mTextFinish : mTextFailed);
+        if (!noMoreDataAvailable) {
+            mTitleText.setText(success ? textFinish : textFailed);
             return mFinishDuration;
         }
         return 0;
     }
 
+    @Override
+    public boolean setNoMoreDataAvailable(boolean noMoreData) {
+        if (noMoreDataAvailable != noMoreData) {
+            noMoreDataAvailable = noMoreData;
+            final View arrowView = mArrowView;
+            if (noMoreData) {
+                mTitleText.setText(textNoMoreData);
+                arrowView.setVisibility(GONE);
+            } else {
+                mTitleText.setText(textPulling);
+                arrowView.setVisibility(VISIBLE);
+            }
+        }
+        return true;
+    }
 
     @Override@Deprecated
     public void applyPrimaryColors(@ColorInt int ... colors) {
@@ -190,50 +197,31 @@ public class ClassicsFooter extends InternalClassics<ClassicsFooter> implements 
         }
     }
 
-
-    @Override
-    public boolean setNoMoreDataAvailable(boolean noMoreData) {
-        if (mNoMoreData != noMoreData) {
-            mNoMoreData = noMoreData;
-            final View arrowView = mArrowView;
-            if (noMoreData) {
-                mTitleText.setText(mTextNothing);
-                arrowView.setVisibility(GONE);
-            } else {
-                mTitleText.setText(mTextPulling);
-                arrowView.setVisibility(VISIBLE);
-            }
-        }
-        return true;
-    }
-
     @Override
     public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         final View arrowView = mArrowView;
-        if (!mNoMoreData) {
+        if (!noMoreDataAvailable) {
             switch (newState) {
                 case IDLE:
                     arrowView.setVisibility(VISIBLE);
                 case PullUpToLoad:
-                    mTitleText.setText(mTextPulling);
+                    mTitleText.setText(textPulling);
                     arrowView.animate().rotation(180);
                     break;
                 case Loading:
                 case LoadReleased:
                     arrowView.setVisibility(GONE);
-                    mTitleText.setText(mTextLoading);
+                    mTitleText.setText(textLoading);
                     break;
                 case ReleaseToLoad:
-                    mTitleText.setText(mTextRelease);
+                    mTitleText.setText(textRelease);
                     arrowView.animate().rotation(0);
                     break;
                 case REFRESHING:
-                    mTitleText.setText(mTextRefreshing);
+                    mTitleText.setText(textRefreshing);
                     arrowView.setVisibility(GONE);
                     break;
             }
         }
     }
-    //</editor-fold>
-
 }

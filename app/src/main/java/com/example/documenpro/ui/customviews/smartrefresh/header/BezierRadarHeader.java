@@ -27,8 +27,6 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinne
 import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
-
-@SuppressWarnings({"UnusedReturnValue", "unused"})
 public class BezierRadarHeader extends InternalAbstract implements RefreshHeaderComponent {
 
     //<editor-fold desc="属性字段">

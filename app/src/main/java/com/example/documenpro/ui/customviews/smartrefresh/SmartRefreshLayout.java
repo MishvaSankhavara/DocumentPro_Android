@@ -60,7 +60,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshScrollBound
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshDimensionStatus;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.footer.BallPulseFooter;
+import com.example.documenpro.ui.customviews.smartrefresh.footer.PulseBallRefreshFooter;
 import com.example.documenpro.ui.customviews.smartrefresh.header.BezierRadarHeader;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshContentWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshFooterWrapper;
@@ -407,7 +407,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                     setFooterRefresh(footer);
                 } else {
                     boolean old = mEnableLoadMore;
-                    setFooterRefresh(new BallPulseFooter(thisView.getContext()));
+                    setFooterRefresh(new PulseBallRefreshFooter(thisView.getContext()));
                     mEnableLoadMore = old;
                 }
             } else {
