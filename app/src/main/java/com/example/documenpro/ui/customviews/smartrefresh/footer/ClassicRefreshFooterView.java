@@ -17,7 +17,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinne
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshArrowDrawable;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshClassicComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshProgressDrawable;
-import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil;
 
 
 public class ClassicRefreshFooterView extends RefreshClassicComponent<ClassicRefreshFooterView> implements RefreshFooterComponent {
@@ -58,7 +58,7 @@ public class ClassicRefreshFooterView extends RefreshClassicComponent<ClassicRef
 
         LayoutParams lpArrow = (LayoutParams) arrowView.getLayoutParams();
         LayoutParams lpProgress = (LayoutParams) progressView.getLayoutParams();
-        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlDrawableMarginRight, SmartUtil.dp2px(20));
+        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlDrawableMarginRight, SmartViewUtil.dpToPx(20));
         lpArrow.rightMargin = lpProgress.rightMargin;
 
         lpArrow.width = ta.getLayoutDimension(R.styleable.ClassicsFooter_srlDrawableArrowSize, lpArrow.width);
@@ -91,7 +91,7 @@ public class ClassicRefreshFooterView extends RefreshClassicComponent<ClassicRef
         }
 
         if (ta.hasValue(R.styleable.ClassicsFooter_srlTextSizeTitle)) {
-            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlTextSizeTitle, SmartUtil.dp2px(16)));
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlTextSizeTitle, SmartViewUtil.dpToPx(16)));
         }
 
         if (ta.hasValue(R.styleable.ClassicsFooter_srlPrimaryColor)) {

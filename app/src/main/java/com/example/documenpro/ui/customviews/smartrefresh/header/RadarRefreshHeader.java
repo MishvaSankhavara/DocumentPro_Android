@@ -25,7 +25,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
-import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil;
 
 public class RadarRefreshHeader extends RefreshInternalAbstract implements RefreshHeaderComponent {
 
@@ -70,12 +70,12 @@ public class RadarRefreshHeader extends RefreshInternalAbstract implements Refre
         paint = new Paint();
         paint.setAntiAlias(true);
 
-        dotsRadius = SmartUtil.dp2px(7);
-        radarRadius = SmartUtil.dp2px(20);
-        radarCircle = SmartUtil.dp2px(7);
-        paint.setStrokeWidth(SmartUtil.dp2px(3));
+        dotsRadius = SmartViewUtil.dpToPx(7);
+        radarRadius = SmartViewUtil.dpToPx(20);
+        radarCircle = SmartViewUtil.dpToPx(7);
+        paint.setStrokeWidth(SmartViewUtil.dpToPx(3));
 
-        thisView.setMinimumHeight(SmartUtil.dp2px(100));
+        thisView.setMinimumHeight(SmartViewUtil.dpToPx(100));
 
         if (thisView.isInEditMode()) {
             waveTop = 1000;
@@ -131,7 +131,7 @@ public class RadarRefreshHeader extends RefreshInternalAbstract implements Refre
         if (dotsAlpha > 0) {
             paint.setColor(accentColor);
             final int num = 7;
-            float x = SmartUtil.px2dp(height);
+            float x = SmartViewUtil.pxToDp(height);
             float wide = (1f * width / num) * dotsFraction -((dotsFraction >1)?((dotsFraction -1)*(1f * width / num)/ dotsFraction):0);//y1 = t*(w/n)-(t>1)*((t-1)*(w/n)/t)
             float high = height - ((dotsFraction > 1) ? ((dotsFraction - 1) * height / 2 / dotsFraction) : 0);//y2 = x - (t>1)*((t-1)*x/t);
             for (int i = 0 ; i < num; i++) {
@@ -198,7 +198,7 @@ public class RadarRefreshHeader extends RefreshInternalAbstract implements Refre
         waveTop = height - 1;
         waveDragging = false;
 
-        Interpolator interpolatorDecelerate = new SmartUtil(SmartUtil.INTERPOLATOR_DECELERATE);//new DecelerateInterpolator();
+        Interpolator interpolatorDecelerate = new SmartViewUtil(SmartViewUtil.INTERPOLATOR_DINTERPOLATOR_SLOW_DOWNCELERATE);//new DecelerateInterpolator();
         ValueAnimator animatorDotAlpha = ValueAnimator.ofFloat(1, 0);
         animatorDotAlpha.setInterpolator(interpolatorDecelerate);
         animatorDotAlpha.addUpdateListener(new AnimationPropertyUpdater(ANIM_DOT_ALPHA));
@@ -218,7 +218,7 @@ public class RadarRefreshHeader extends RefreshInternalAbstract implements Refre
                 -(int)(waveHeight *0.8f),0,
                 -(int)(waveHeight *0.4f),0);
         animatorWave.addUpdateListener(new AnimationPropertyUpdater(ANIM_WAVE_HEIGHT));
-        animatorWave.setInterpolator(new SmartUtil(SmartUtil.INTERPOLATOR_DECELERATE));
+        animatorWave.setInterpolator(new SmartViewUtil(SmartViewUtil.INTERPOLATOR_DINTERPOLATOR_SLOW_DOWNCELERATE));
         animatorWave.setDuration(800);
         animatorWave.start();
 

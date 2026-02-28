@@ -26,7 +26,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinne
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshArrowDrawable;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshClassicComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshProgressDrawable;
-import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -85,8 +85,8 @@ public class ClassicRefreshHeaderView extends RefreshClassicComponent<ClassicRef
         LayoutParams lpArrow = (LayoutParams) arrowView.getLayoutParams();
         LayoutParams lpProgress = (LayoutParams) progressView.getLayoutParams();
         LinearLayout.LayoutParams lpUpdateText = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-        lpUpdateText.topMargin = ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextTimeMarginTop, SmartUtil.dp2px(0));
-        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlDrawableMarginRight, SmartUtil.dp2px(20));
+        lpUpdateText.topMargin = ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextTimeMarginTop, SmartViewUtil.dpToPx(0));
+        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlDrawableMarginRight, SmartViewUtil.dpToPx(20));
         lpArrow.rightMargin = lpProgress.rightMargin;
 
         lpArrow.width = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableArrowSize, lpArrow.width);
@@ -120,11 +120,11 @@ public class ClassicRefreshHeaderView extends RefreshClassicComponent<ClassicRef
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextSizeTitle)) {
-            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextSizeTitle, SmartUtil.dp2px(16)));
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextSizeTitle, SmartViewUtil.dpToPx(16)));
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextSizeTime)) {
-            lastUpdateText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextSizeTime, SmartUtil.dp2px(12)));
+            lastUpdateText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextSizeTime, SmartViewUtil.dpToPx(12)));
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlPrimaryColor)) {
@@ -310,7 +310,7 @@ public class ClassicRefreshHeaderView extends RefreshClassicComponent<ClassicRef
     public ClassicRefreshHeaderView setLastUpdateMarginTop(float dp) {
         final View updateView = lastUpdateText;
         MarginLayoutParams lp = (MarginLayoutParams) updateView.getLayoutParams();
-        lp.topMargin = SmartUtil.dp2px(dp);
+        lp.topMargin = SmartViewUtil.dpToPx(dp);
         updateView.setLayoutParams(lp);
         return this;
     }

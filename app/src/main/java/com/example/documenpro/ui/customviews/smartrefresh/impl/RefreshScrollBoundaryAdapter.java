@@ -4,7 +4,7 @@ import android.graphics.PointF;
 import android.view.View;
 
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshScrollBoundaryDecider;
-import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil;
 
 public class RefreshScrollBoundaryAdapter implements RefreshScrollBoundaryDecider {
 
@@ -17,7 +17,7 @@ public class RefreshScrollBoundaryAdapter implements RefreshScrollBoundaryDecide
         if (customBoundaryDecider != null) {
             return customBoundaryDecider.canTriggerLoadMore(content);
         }
-        return SmartUtil.canLoadMore(content, actionEvent, loadMoreWhenContentNotFullEnabled);
+        return SmartViewUtil.canTriggerLoadMore(content, actionEvent, loadMoreWhenContentNotFullEnabled);
     }
 
     @Override
@@ -25,6 +25,6 @@ public class RefreshScrollBoundaryAdapter implements RefreshScrollBoundaryDecide
         if (customBoundaryDecider != null) {
             return customBoundaryDecider.canTriggerRefresh(content);
         }
-        return SmartUtil.canRefresh(content, actionEvent);
+        return SmartViewUtil.canTriggerRefresh(content, actionEvent);
     }
 }

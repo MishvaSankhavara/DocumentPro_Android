@@ -20,7 +20,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterCompo
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
-import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil;
 
 public class PulseBallRefreshFooter extends RefreshInternalAbstract implements RefreshFooterComponent {
 
@@ -46,7 +46,7 @@ public class PulseBallRefreshFooter extends RefreshInternalAbstract implements R
         super(context, attrs, 0);
 
         final View thisView = this;
-        thisView.setMinimumHeight(SmartUtil.dp2px(60));
+        thisView.setMinimumHeight(SmartViewUtil.dpToPx(60));
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BallPulseFooter);
 
@@ -67,7 +67,7 @@ public class PulseBallRefreshFooter extends RefreshInternalAbstract implements R
 
         ta.recycle();
 
-        circleSpacing = SmartUtil.dp2px(4);
+        circleSpacing = SmartViewUtil.dpToPx(4);
     }
 
     @Override

@@ -19,7 +19,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderCompo
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
-import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil;
 
 
 public class PlaceholderRefreshHeader extends RefreshInternalAbstract implements RefreshHeaderComponent {
@@ -39,18 +39,18 @@ public class PlaceholderRefreshHeader extends RefreshInternalAbstract implements
         super.dispatchDraw(canvas);
         final View thisView = this;
         if (thisView.isInEditMode()) {
-            final int d = SmartUtil.dp2px(5);
+            final int d = SmartViewUtil.dpToPx(5);
             final Context context = thisView.getContext();
 
             Paint paint = new Paint();
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(0xcccccccc);
-            paint.setStrokeWidth(SmartUtil.dp2px(1));
+            paint.setStrokeWidth(SmartViewUtil.dpToPx(1));
             paint.setPathEffect(new DashPathEffect(new float[]{d, d, d, d}, 1));
             canvas.drawRect(d, d, thisView.getWidth() - d, thisView.getBottom() - d, paint);
 
             TextView textView = new TextView(context);
-            textView.setText(context.getString(R.string.srl_component_falsify, getClass().getSimpleName(), SmartUtil.px2dp(thisView.getHeight())));
+            textView.setText(context.getString(R.string.srl_component_falsify, getClass().getSimpleName(), SmartViewUtil.pxToDp(thisView.getHeight())));
             textView.setTextColor(0xcccccccc);
             textView.setGravity(Gravity.CENTER);
             //noinspection UnnecessaryLocalVariable

@@ -23,7 +23,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil;
 
 public abstract class RefreshClassicComponent<T extends RefreshClassicComponent> extends RefreshInternalAbstract implements RefreshComponent {
 
@@ -61,8 +61,8 @@ public abstract class RefreshClassicComponent<T extends RefreshClassicComponent>
             if (contentPaddingTop == 0 || contentPaddingBottom == 0) {
                 int paddingLeft = thisView.getPaddingLeft();
                 int paddingRight = thisView.getPaddingRight();
-                contentPaddingTop = contentPaddingTop == 0 ? SmartUtil.dp2px(20) : contentPaddingTop;
-                contentPaddingBottom = contentPaddingBottom == 0 ? SmartUtil.dp2px(20) : contentPaddingBottom;
+                contentPaddingTop = contentPaddingTop == 0 ? SmartViewUtil.dpToPx(20) : contentPaddingTop;
+                contentPaddingBottom = contentPaddingBottom == 0 ? SmartViewUtil.dpToPx(20) : contentPaddingBottom;
                 thisView.setPadding(paddingLeft, contentPaddingTop, paddingRight, contentPaddingBottom);
             }
             final ViewGroup thisGroup = this;
@@ -250,7 +250,7 @@ public abstract class RefreshClassicComponent<T extends RefreshClassicComponent>
         final View progressView = this.progressView;
         MarginLayoutParams lpArrow = (MarginLayoutParams)arrowView.getLayoutParams();
         MarginLayoutParams lpProgress = (MarginLayoutParams)progressView.getLayoutParams();
-        lpArrow.rightMargin = lpProgress.rightMargin = SmartUtil.dp2px(dp);
+        lpArrow.rightMargin = lpProgress.rightMargin = SmartViewUtil.dpToPx(dp);
         arrowView.setLayoutParams(lpArrow);
         progressView.setLayoutParams(lpProgress);
         return getSelf();
@@ -261,8 +261,8 @@ public abstract class RefreshClassicComponent<T extends RefreshClassicComponent>
         final View progressView = this.progressView;
         ViewGroup.LayoutParams lpArrow = arrowView.getLayoutParams();
         ViewGroup.LayoutParams lpProgress = progressView.getLayoutParams();
-        lpArrow.width = lpProgress.width = SmartUtil.dp2px(dp);
-        lpArrow.height = lpProgress.height = SmartUtil.dp2px(dp);
+        lpArrow.width = lpProgress.width = SmartViewUtil.dpToPx(dp);
+        lpArrow.height = lpProgress.height = SmartViewUtil.dpToPx(dp);
         arrowView.setLayoutParams(lpArrow);
         progressView.setLayoutParams(lpProgress);
         return getSelf();
@@ -271,7 +271,7 @@ public abstract class RefreshClassicComponent<T extends RefreshClassicComponent>
     public T setArrowSize(float dp) {
         final View arrowView = this.arrowView;
         ViewGroup.LayoutParams lpArrow = arrowView.getLayoutParams();
-        lpArrow.height = lpArrow.width = SmartUtil.dp2px(dp);
+        lpArrow.height = lpArrow.width = SmartViewUtil.dpToPx(dp);
         arrowView.setLayoutParams(lpArrow);
         return getSelf();
     }
@@ -279,7 +279,7 @@ public abstract class RefreshClassicComponent<T extends RefreshClassicComponent>
     public T setProgressSize(float dp) {
         final View progressView = this.progressView;
         ViewGroup.LayoutParams lpProgress = progressView.getLayoutParams();
-        lpProgress.height = lpProgress.width = SmartUtil.dp2px(dp);
+        lpProgress.height = lpProgress.width = SmartViewUtil.dpToPx(dp);
         progressView.setLayoutParams(lpProgress);
         return getSelf();
     }

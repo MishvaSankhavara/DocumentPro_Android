@@ -1,11 +1,11 @@
 package com.example.documenpro.ui.customviews.smartrefresh.impl;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil.canScrollVertically;
-import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil.isContentView;
-import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil.isTransformedTouchPointInView;
-import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil.measureViewHeight;
-import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil.scrollListBy;
+import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil.checkVerticalScroll;
+import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil.isContent;
+import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil.isTouchInsideChild;
+import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil.getViewHeight;
+import static com.example.documenpro.ui.customviews.smartrefresh.util.SmartViewUtil.scrollList;
 
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
@@ -27,7 +27,7 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshContentHand
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshScrollBoundaryDecider;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.CoordinatorLayoutListener;
-import com.example.documenpro.ui.customviews.smartrefresh.util.DesignUtil;
+import com.example.documenpro.ui.customviews.smartrefresh.util.CoordinatorLayoutUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
                 break;
             }
             if (!isInEditMode) {
-                DesignUtil.checkCoordinatorLayout(content, kernel, this);
+                CoordinatorLayoutUtil.handleCoordinatorLayout(content, kernel, this);
             }
             scrollableView = content;
         }
@@ -81,7 +81,7 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
         while (list.size() > 0 && scrollableView == null) {
             View view = views.poll();
             if (view != null) {
-                if ((selfAble || view != content) && isContentView(view)) {
+                if ((selfAble || view != content) && isContent(view)) {
                     scrollableView = view;
                 } else if (view instanceof ViewGroup) {
                     ViewGroup group = (ViewGroup) view;
@@ -107,8 +107,8 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
             PointF point = new PointF();
             for (int i = childCount; i > 0; i--) {
                 View child = viewGroup.getChildAt(i - 1);
-                if (isTransformedTouchPointInView(viewGroup, child, event.x, event.y, point)) {
-                    if (child instanceof ViewPager || !isContentView(child)) {
+                if (isTouchInsideChild(viewGroup, child, event.x, event.y, point)) {
+                    if (child instanceof ViewPager || !isContent(child)) {
                         event.offset(point.x, point.y);
                         child = locateScrollableViewByTouchPoint(child, event, orgScrollableView);
                         event.offset(-point.x, -point.y);
@@ -213,7 +213,7 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
                 ViewGroup parent = (ViewGroup) fixedHeader.getParent();
                 index = parent.indexOfChild(fixedHeader);
                 parent.removeView(fixedHeader);
-                lp.height = measureViewHeight(fixedHeader);
+                lp.height = getViewHeight(fixedHeader);
                 parent.addView(new Space(contentView.getContext()), index, lp);
                 frameLayout.addView(fixedHeader, 1, lp);
             }
@@ -224,7 +224,7 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
                 index = parent.indexOfChild(fixedFooter);
                 parent.removeView(fixedFooter);
                 FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(lp);
-                lp.height = measureViewHeight(fixedFooter);
+                lp.height = getViewHeight(fixedFooter);
                 parent.addView(new Space(contentView.getContext()), index, lp);
                 flp.gravity = Gravity.BOTTOM;
                 frameLayout.addView(fixedFooter, 1, flp);
@@ -249,7 +249,7 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
     @Override
     public AnimatorUpdateListener createScrollAnimatorOnFinish(final int spinner) {
         if (scrollableView != null && spinner != 0) {
-            if ((spinner < 0 && canScrollVertically(scrollableView, 1)) || (spinner > 0 && canScrollVertically(scrollableView, -1))) {
+            if ((spinner < 0 && checkVerticalScroll(scrollableView, 1)) || (spinner > 0 && checkVerticalScroll(scrollableView, -1))) {
                 lastSpinner = spinner;
                 return this;
             }
@@ -263,7 +263,7 @@ public class RefreshContentContainer implements RefreshContentHandler, Coordinat
         try {
             float dy = (value - lastSpinner) * scrollableView.getScaleY();
             if (scrollableView instanceof AbsListView) {
-                scrollListBy((AbsListView) scrollableView, (int)dy);
+                scrollList((AbsListView) scrollableView, (int)dy);
             } else {
                 scrollableView.scrollBy(0, (int)dy);
             }
