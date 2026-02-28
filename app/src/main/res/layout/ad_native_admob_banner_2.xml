@@ -99,7 +99,7 @@
                     app:cardBackgroundColor="@color/red"
                     app:cardCornerRadius="15dp">
 
-                    <com.example.documenpro.ui.customviews.flashbutton.AdsFlashButton
+                    <com.example.documenpro.ui.customviews.flashbutton.AdsFlashEffectButton
                         android:id="@+id/ad_call_to_action"
                         android:layout_width="wrap_content"
                         android:layout_height="28dp"
