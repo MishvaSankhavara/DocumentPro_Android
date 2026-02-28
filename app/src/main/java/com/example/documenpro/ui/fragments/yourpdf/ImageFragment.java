@@ -18,7 +18,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.ImageItemAdapter;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -28,7 +28,7 @@ public class ImageFragment extends Fragment {
     private Activity mActivity;
     private LottieAnimationView loadingView;
     private ArrayList<File> arrayList;
-    EmptyRecyclerView recyclerView;
+    EmptyStateRecyclerView recyclerView;
     ImageItemAdapter adapter;
 
     public ImageFragment() {

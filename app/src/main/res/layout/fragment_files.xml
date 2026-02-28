@@ -45,7 +45,7 @@
                         app:layout_collapseMode="parallax"
                         app:layout_collapseParallaxMultiplier="0">
 
-                        <com.example.documenpro.ui.customviews.FileTypeItem
+                        <com.example.documenpro.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnAllFile"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                             app:imgFileType="@drawable/ic_document_all"
                             app:nameFileType="@string/document_all" />
 
-                        <com.example.documenpro.ui.customviews.FileTypeItem
+                        <com.example.documenpro.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnPdf"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                             app:imgFileType="@drawable/ic_type_pdf"
                             app:nameFileType="@string/document_pdf" />
 
-                        <com.example.documenpro.ui.customviews.FileTypeItem
+                        <com.example.documenpro.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnWord"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                             app:imgFileType="@drawable/ic_type_word"
                             app:nameFileType="@string/document_word" />
 
-                        <com.example.documenpro.ui.customviews.FileTypeItem
+                        <com.example.documenpro.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnExcel"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                             app:imgFileType="@drawable/ic_type_excel"
                             app:nameFileType="@string/document_excel" />
 
-                        <com.example.documenpro.ui.customviews.FileTypeItem
+                        <com.example.documenpro.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnPpt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                             app:imgFileType="@drawable/ic_type_ppt"
                             app:nameFileType="@string/document_ppt" />
 
-                        <com.example.documenpro.ui.customviews.FileTypeItem
+                        <com.example.documenpro.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnTXT"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

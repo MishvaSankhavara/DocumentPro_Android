@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.documenpro.ui.customviews.AspectRatioFrameLayout
+        <com.example.documenpro.ui.customviews.AspectRatioLayout
             android:id="@+id/v_mediaViewContainerWrap"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -24,7 +24,7 @@
                 android:id="@+id/ad_media"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </com.example.documenpro.ui.customviews.AspectRatioFrameLayout>
+        </com.example.documenpro.ui.customviews.AspectRatioLayout>
 
         <include layout="@layout/view_ad_attribute" />
 

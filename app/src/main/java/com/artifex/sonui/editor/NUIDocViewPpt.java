@@ -11,11 +11,11 @@ import com.artifex.solib.SOSelectionLimits;
 import com.artifex.sonui.editor.ShapeDialog.Shape;
 import com.artifex.sonui.editor.ShapeDialog.onSelectShapeListener;
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.BottomBtn;
+import com.example.documenpro.ui.customviews.BottomButtonView;
 
 public class NUIDocViewPpt extends NUIDocView {
     boolean b = false;
-    private BottomBtn btnSlideshow;
+    private BottomButtonView btnSlideshow;
 
     public NUIDocViewPpt(Context context) {
         super(context);
@@ -40,7 +40,7 @@ public class NUIDocViewPpt extends NUIDocView {
         super.afterFirstLayoutComplete();
 
 //        this.btnInsertShape = (LinearLayout) this.createToolbarButton(R.id.insert_shape_button);
-        this.btnSlideshow = (BottomBtn) this.createToolbarButton(R.id.btnSlideShowTab);
+        this.btnSlideshow = (BottomButtonView) this.createToolbarButton(R.id.btnSlideShowTab);
     }
 
 

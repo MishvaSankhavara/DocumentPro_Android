@@ -40,7 +40,7 @@ import com.example.documenpro.AppExecutor.FavoriteRemovalExecutor;
 import com.example.documenpro.clickListener.OnItemSelectListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.ui.dialog.ProgressDialog;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SelectDocumentActivity extends BaseActivity implements View.OnClickListener, OnItemSelectListener {
-    public EmptyRecyclerView documentRecyclerView;
+    public EmptyStateRecyclerView documentRecyclerView;
     public FilePickerAdapter filePickerAdapter;
     public Toolbar topToolbar;
     private LinearLayout shareButtonLayout;

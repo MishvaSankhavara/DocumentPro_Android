@@ -20,7 +20,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.CompactFileListAdapter;
 import com.example.documenpro.clickListener.OnPdfTapListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -32,7 +32,7 @@ public class SplitFragment extends Fragment implements OnPdfTapListener {
     private ResultViewerActivity mActivity;
     private LottieAnimationView loadingView;
     private ArrayList<PDFReaderModel> arrayList;
-    EmptyRecyclerView recyclerView;
+    EmptyStateRecyclerView recyclerView;
     CompactFileListAdapter adapter;
 
     public SplitFragment() {

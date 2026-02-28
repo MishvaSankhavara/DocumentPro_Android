@@ -36,7 +36,7 @@ import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.clickListener.OnThumbnailClickListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.model_reader.PDFPageModel;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
 import com.shockwave.pdfium.PdfDocument;
@@ -54,7 +54,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     private Toolbar topToolbar;
     private AppCompatTextView continueButton;
     private LottieAnimationView loadingAnimationView;
-    private EmptyRecyclerView pdfPagesRecyclerView;
+    private EmptyStateRecyclerView pdfPagesRecyclerView;
     private PdfPreviewThumbnailAdapter pdfThumbnailAdapter;
     private final ArrayList<PDFPageModel> pdfPageList = new ArrayList<>();
     PDFReaderModel selectedPdfModel;

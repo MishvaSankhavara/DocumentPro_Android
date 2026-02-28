@@ -62,7 +62,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.ui.activities.ViewOfficeActivity;
 import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
-import com.example.documenpro.ui.customviews.BottomBtn;
+import com.example.documenpro.ui.customviews.BottomButtonView;
 import com.example.documenpro.ui.customviews.EditBtn;
 import com.example.documenpro.ui.dialog.GoPageDialog;
 import com.example.documenpro.ui.dialog.LoadingDialog;
@@ -99,10 +99,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     protected EditBtn btnCut;
     protected EditBtn btnCopy;
     protected EditBtn btnPaste;
-    protected BottomBtn btnRotateTab;
-    protected BottomBtn btnEditTab;
-    protected BottomBtn btnSearchTab;
-    protected BottomBtn btnThumbnailTab;
+    protected BottomButtonView btnRotateTab;
+    protected BottomButtonView btnEditTab;
+    protected BottomButtonView btnSearchTab;
+    protected BottomButtonView btnThumbnailTab;
     protected AppCompatImageView btnFullScreen;
     protected ImageView btnRedo;
     protected ImageView btnUndo;
@@ -799,10 +799,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         this.bottomToolBar = this.findViewById(R.id.bottomToolBar);
         this.bottomToolBarEdit = this.findViewById(R.id.bottomEditToolBar);
 
-        this.btnRotateTab = (BottomBtn) this.createToolbarButton(R.id.btnRotateTab);
-        this.btnEditTab = (BottomBtn) this.createToolbarButton(R.id.btnEditTab);
-        this.btnSearchTab = (BottomBtn) this.createToolbarButton(R.id.btnSearchTab);
-        this.btnThumbnailTab = (BottomBtn) this.createToolbarButton(R.id.btnThumbnailTab);
+        this.btnRotateTab = (BottomButtonView) this.createToolbarButton(R.id.btnRotateTab);
+        this.btnEditTab = (BottomButtonView) this.createToolbarButton(R.id.btnEditTab);
+        this.btnSearchTab = (BottomButtonView) this.createToolbarButton(R.id.btnSearchTab);
+        this.btnThumbnailTab = (BottomButtonView) this.createToolbarButton(R.id.btnThumbnailTab);
 
         this.toolbarSearchContainer = this.findViewById(R.id.search_container);
         this.toolbarContainer = this.findViewById(R.id.toolbar_container);

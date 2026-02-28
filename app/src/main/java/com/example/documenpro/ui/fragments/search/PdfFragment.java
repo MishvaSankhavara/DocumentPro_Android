@@ -19,7 +19,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
 import com.example.documenpro.viewmodel.SearchViewModel;
 
@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 
 public class PdfFragment extends Fragment implements DocClickListener {
     private Activity mActivity;
-    private EmptyRecyclerView recyclerView;
+    private EmptyStateRecyclerView recyclerView;
     private FileListAdapter adapter;
     private ArrayList<DocumentModel> arrayList;
     private SearchViewModel searchViewModel;

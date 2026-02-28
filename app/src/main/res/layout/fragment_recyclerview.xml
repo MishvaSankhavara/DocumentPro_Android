@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
 
-    <com.example.documenpro.ui.customviews.EmptyRecyclerView
+    <com.example.documenpro.ui.customviews.EmptyStateRecyclerView
         android:id="@+id/recyclerRecent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

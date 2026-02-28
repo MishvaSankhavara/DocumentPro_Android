@@ -11,25 +11,18 @@ import androidx.annotation.Nullable;
 import com.example.documenpro.R;
 
 
-public class AspectRatioFrameLayout extends FrameLayout {
-    public int f41101a = 0;
+public class AspectRatioLayout extends FrameLayout {
+    public int df41101a = 0;
+    public int df41102b = 0;
 
-    public int f41102b = 0;
-
-
-    public AspectRatioFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public AspectRatioLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         if (attrs != null) {
             TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attrs, new int[]{R.attr.arfl_ratioHeight, R.attr.arfl_ratioWidth, R.attr.resize_mode1});
-            this.f41101a = obtainStyledAttributes.getInteger(1, 0);
-            this.f41102b = obtainStyledAttributes.getInteger(0, 0);
+            this.df41101a = obtainStyledAttributes.getInteger(1, 0);
+            this.df41102b = obtainStyledAttributes.getInteger(0, 0);
             obtainStyledAttributes.recycle();
         }
-    }
-
-    public void onMeasure(int i, int i2) {
-        int[] c = m35003c(i, i2, this.f41101a, this.f41102b);
-        super.onMeasure(c[0], c[1]);
     }
 
     public static int[] m35003c(int i, int i2, int i3, int i4) {
@@ -48,5 +41,10 @@ public class AspectRatioFrameLayout extends FrameLayout {
             return new int[]{MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(size2, MeasureSpec.EXACTLY)};
         }
         return new int[]{i, i2};
+    }
+
+    public void onMeasure(int i, int i2) {
+        int[] c = m35003c(i, i2, this.df41101a, this.df41102b);
+        super.onMeasure(c[0], c[1]);
     }
 }

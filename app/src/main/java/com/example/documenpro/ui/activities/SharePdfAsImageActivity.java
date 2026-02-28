@@ -37,7 +37,7 @@ import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
 import com.example.documenpro.clickListener.OnThumbnailClickListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.model_reader.PDFPageModel;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.ui.dialog.ConvertDialog;
 import com.example.documenpro.utils.Utils;
 import com.shockwave.pdfium.PdfDocument;
@@ -54,7 +54,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
     private AppCompatTextView continueActionText;
     private LottieAnimationView loadingAnimationView;
     private Toolbar topToolbar;
-    private EmptyRecyclerView pdfPageRecyclerView;
+    private EmptyStateRecyclerView pdfPageRecyclerView;
     private PdfPreviewThumbnailAdapter thumbnailAdapter;
     private final ArrayList<PDFPageModel> pdfPageList = new ArrayList<>();
 

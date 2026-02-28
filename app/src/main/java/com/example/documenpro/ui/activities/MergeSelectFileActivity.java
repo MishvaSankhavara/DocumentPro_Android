@@ -21,7 +21,7 @@ import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.MergeFileSelectionAdapter;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class MergeSelectFileActivity extends AppCompatActivity {
         LottieAnimationView loadingAnimation = findViewById(R.id.loadingView);
         FrameLayout continueButtonContainer = findViewById(R.id.continue_fl);
         continueButtonText = findViewById(R.id.tv_continue);
-        EmptyRecyclerView recyclerView = findViewById(R.id.chooser_recycler_view);
+        EmptyStateRecyclerView recyclerView = findViewById(R.id.chooser_recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

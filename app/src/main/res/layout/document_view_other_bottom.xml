@@ -8,7 +8,7 @@
     android:baselineAligned="false"
     android:orientation="horizontal">
 
-    <com.example.documenpro.ui.customviews.BottomBtn
+    <com.example.documenpro.ui.customviews.BottomButtonView
         android:id="@+id/btnRotateTab"
 
         android:layout_width="0dp"
@@ -17,7 +17,7 @@
         app:Image="@drawable/ic_flip_black"
         app:Name="@string/str_action_rotate" />
 
-    <com.example.documenpro.ui.customviews.BottomBtn
+    <com.example.documenpro.ui.customviews.BottomButtonView
         android:id="@+id/btnSearchTab"
 
         android:layout_width="0dp"
@@ -26,7 +26,7 @@
         app:Image="@drawable/ic_search_text"
         app:Name="@string/search_menu_title" />
 
-    <com.example.documenpro.ui.customviews.BottomBtn
+    <com.example.documenpro.ui.customviews.BottomButtonView
         android:id="@+id/btnPrintTab"
 
         android:layout_width="0dp"

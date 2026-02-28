@@ -7,10 +7,10 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.BottomBtn;
+import com.example.documenpro.ui.customviews.BottomButtonView;
 
 public class NUIDocViewOther extends NUIDocView {
-    private BottomBtn btnPrintTab;
+    private BottomButtonView btnPrintTab;
 
 
     public NUIDocViewOther(Context var1) {
@@ -55,7 +55,7 @@ public class NUIDocViewOther extends NUIDocView {
 
     protected void afterFirstLayoutComplete() {
         super.afterFirstLayoutComplete();
-        this.btnPrintTab = (BottomBtn) this.createToolbarButton(R.id.btnPrintTab);
+        this.btnPrintTab = (BottomButtonView) this.createToolbarButton(R.id.btnPrintTab);
     }
 
     protected PageAdapter createAdapter() {

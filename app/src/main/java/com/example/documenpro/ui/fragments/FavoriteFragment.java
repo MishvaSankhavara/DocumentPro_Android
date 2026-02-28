@@ -20,7 +20,7 @@ import com.example.documenpro.adapter_reader.FavoriteItemsAdapter;
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
 import com.example.documenpro.viewmodel.FavoriteDataSingleton;
 
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class FavoriteFragment extends Fragment implements DocClickListener {
     private MainActivity mActivity;
-    private EmptyRecyclerView recyclerView;
+    private EmptyStateRecyclerView recyclerView;
 
     private TextView tvDesEmpty;
     private ProgressBar loadingView;

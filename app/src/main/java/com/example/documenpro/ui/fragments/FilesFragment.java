@@ -31,7 +31,7 @@ import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SelectDocumentActivity;
-import com.example.documenpro.ui.customviews.FileTypeItem;
+import com.example.documenpro.ui.customviews.DocumentTypeItemView;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.header.ClassicRefreshHeaderView;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.RefreshListener;
@@ -47,11 +47,11 @@ public class FilesFragment extends Fragment implements View.OnClickListener {
 
     private MainActivity mActivity;
     private LinearLayout llPermissionContainer;
-    private FileTypeItem btnTXT;
-    private FileTypeItem btnPdf;
-    private FileTypeItem btnWord;
-    private FileTypeItem btnExcel;
-    private FileTypeItem btnPpt;
+    private DocumentTypeItemView btnTXT;
+    private DocumentTypeItemView btnPdf;
+    private DocumentTypeItemView btnWord;
+    private DocumentTypeItemView btnExcel;
+    private DocumentTypeItemView btnPpt;
     ArrayList<DocumentModel> txtFile;
     ArrayList<DocumentModel> excelFile;
     ArrayList<DocumentModel> pdfFile;

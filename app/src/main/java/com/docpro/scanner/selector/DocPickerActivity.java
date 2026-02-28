@@ -33,7 +33,7 @@ import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.activities.SharePdfAsImageActivity;
 import com.example.documenpro.ui.activities.SplitChooseFileActivity;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.AdsUtils;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
@@ -45,7 +45,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class DocPickerActivity extends AppCompatActivity implements PdfSelectionListener {
-    private EmptyRecyclerView rvPicker;
+    private EmptyStateRecyclerView rvPicker;
     private FileSelectionAdapter pickerAdapter;
     private LottieAnimationView lottieLoader;
     private ArrayList<PDFReaderModel> docList;

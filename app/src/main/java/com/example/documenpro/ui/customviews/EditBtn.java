@@ -15,7 +15,7 @@ import com.example.documenpro.R;
 
 public class EditBtn extends ConstraintLayout {
 
-    View viewBg;
+    View backgroundView;
 
     public EditBtn(@NonNull Context context) {
         super(context);
@@ -25,14 +25,14 @@ public class EditBtn extends ConstraintLayout {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.layout_edit_buton, this, true);
         if (attrs != null) {
-            viewBg = findViewById(R.id.viewBg);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attrs, R.styleable.EditBtn);
-            int resourceId = obtainStyledAttributes.getResourceId(R.styleable.EditBtn_ImageEdt, R.drawable.ic_preview_highlight);
-            if (resourceId > 0) {
-                ((ImageView) findViewById(R.id.imgEdit)).setImageResource(resourceId);
+            backgroundView = findViewById(R.id.viewBg);
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.EditBtn);
+            int iconResId = typedArray.getResourceId(R.styleable.EditBtn_ImageEdt, R.drawable.ic_preview_highlight);
+            if (iconResId > 0) {
+                ((ImageView) findViewById(R.id.imgEdit)).setImageResource(iconResId);
             }
 
-            obtainStyledAttributes.recycle();
+            typedArray.recycle();
         }
         setClickable(true);
         setFocusable(true);
@@ -44,21 +44,21 @@ public class EditBtn extends ConstraintLayout {
     }
     public void setChoose(boolean isChoose){
         if (isChoose){
-            viewBg.setVisibility(VISIBLE);
+            backgroundView.setVisibility(VISIBLE);
         }else {
-            viewBg.setVisibility(INVISIBLE);
+            backgroundView.setVisibility(INVISIBLE);
         }
     }
 
     public void setEnable(boolean enable) {
-        float alpha;
+        float viewAlpha;
         if (enable) {
-            alpha = 1.0F;
+            viewAlpha = 1.0F;
         } else {
-            alpha = 0.4F;
+            viewAlpha = 0.4F;
         }
 
-        EditBtn.this.setAlpha(alpha);
+        EditBtn.this.setAlpha(viewAlpha);
         EditBtn.this.setClickable(enable);
         EditBtn.this.setFocusable(enable);
     }

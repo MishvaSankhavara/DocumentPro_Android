@@ -30,7 +30,7 @@ import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.clickListener.SortingListener;
 import com.example.documenpro.model_reader.DocumentModel;
-import com.example.documenpro.ui.customviews.EmptyRecyclerView;
+import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import java.util.concurrent.Executors;
 public class DocumentListActivity extends BaseActivity implements DocClickListener, SortingListener {
     private Toolbar topToolbar;
     private ConstraintLayout mainContainerLayout;
-    private EmptyRecyclerView documentRecyclerView;
+    private EmptyStateRecyclerView documentRecyclerView;
     private LottieAnimationView loadingAnimationView;
     private FileListAdapter documentListAdapter;
     private ArrayList<DocumentModel> documentList;
