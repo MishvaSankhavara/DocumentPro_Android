@@ -62,9 +62,9 @@ import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayout
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
 import com.example.documenpro.ui.customviews.smartrefresh.footer.PulseBallRefreshFooter;
 import com.example.documenpro.ui.customviews.smartrefresh.header.RadarRefreshHeader;
-import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshContentWrapper;
-import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshFooterWrapper;
-import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshHeaderWrapper;
+import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshContentContainer;
+import com.example.documenpro.ui.customviews.smartrefresh.impl.FooterComponentWrapper;
+import com.example.documenpro.ui.customviews.smartrefresh.impl.HeaderComponentWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnLoadMoreListener;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnMultiPurposeListener;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnRefreshListener;
@@ -347,7 +347,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
         int indexHeader = -1;
         int indexFooter = -1;
         if (indexContent >= 0) {
-            mRefreshContent = new RefreshContentWrapper(super.getChildAt(indexContent));
+            mRefreshContent = new RefreshContentContainer(super.getChildAt(indexContent));
             if (indexContent == 1) {
                 indexHeader = 0;
                 if (count == 3) {
@@ -361,10 +361,10 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
         for (int i = 0; i < count; i++) {
             View view = super.getChildAt(i);
             if (i == indexHeader || (i != indexFooter && indexHeader == -1 && mRefreshHeader == null && view instanceof RefreshHeaderComponent)) {
-                mRefreshHeader = (view instanceof RefreshHeaderComponent) ? (RefreshHeaderComponent) view : new RefreshHeaderWrapper(view);
+                mRefreshHeader = (view instanceof RefreshHeaderComponent) ? (RefreshHeaderComponent) view : new HeaderComponentWrapper(view);
             } else if (i == indexFooter || (indexFooter == -1 && view instanceof RefreshFooterComponent)) {
                 mEnableLoadMore = (mEnableLoadMore || !mManualLoadMore);
-                mRefreshFooter = (view instanceof RefreshFooterComponent) ? (RefreshFooterComponent) view : new RefreshFooterWrapper(view);
+                mRefreshFooter = (view instanceof RefreshFooterComponent) ? (RefreshFooterComponent) view : new FooterComponentWrapper(view);
 //            } else if (mRefreshContent == null) {
 //                mRefreshContent = new RefreshContentWrapper(view);
             }
@@ -419,7 +419,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                     View view = getChildAt(i);
                     if ((mRefreshHeader == null || view != mRefreshHeader.getComponentView())&&
                             (mRefreshFooter == null || view != mRefreshFooter.getComponentView())) {
-                        mRefreshContent = new RefreshContentWrapper(view);
+                        mRefreshContent = new RefreshContentContainer(view);
                     }
                 }
             }
@@ -431,7 +431,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 errorView.setTextSize(20);
                 errorView.setText(R.string.srl_content_empty);
                 super.addView(errorView, 0, new LayoutParams(MATCH_PARENT, MATCH_PARENT));
-                mRefreshContent = new RefreshContentWrapper(errorView);
+                mRefreshContent = new RefreshContentContainer(errorView);
                 mRefreshContent.getContentView().setPadding(padding, padding, padding, padding);
             }
 
@@ -2611,7 +2611,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
 
         super.addView(content, thisGroup.getChildCount(), lp);
 
-        mRefreshContent = new RefreshContentWrapper(content);
+        mRefreshContent = new RefreshContentContainer(content);
         if (mAttachedToWindow) {
             View fixedHeaderView = thisView.findViewById(mFixedHeaderViewId);
             View fixedFooterView = thisView.findViewById(mFixedFooterViewId);

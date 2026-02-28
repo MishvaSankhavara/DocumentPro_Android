@@ -20,8 +20,8 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshFooterWrapper;
-import com.example.documenpro.ui.customviews.smartrefresh.impl.RefreshHeaderWrapper;
+import com.example.documenpro.ui.customviews.smartrefresh.impl.FooterComponentWrapper;
+import com.example.documenpro.ui.customviews.smartrefresh.impl.HeaderComponentWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
 
 public abstract class InternalAbstract extends RelativeLayout implements RefreshComponent {
@@ -38,9 +38,9 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
         super(wrappedView.getContext(), null, 0);
         this.mWrappedView = wrappedView;
         this.mWrappedInternal = wrappedInternal;
-        if (this instanceof RefreshFooterWrapper && mWrappedInternal instanceof RefreshHeaderComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
+        if (this instanceof FooterComponentWrapper && mWrappedInternal instanceof RefreshHeaderComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
             wrappedInternal.getComponentView().setScaleY(-1);
-        } else if (this instanceof RefreshHeaderWrapper && mWrappedInternal instanceof RefreshFooterComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
+        } else if (this instanceof HeaderComponentWrapper && mWrappedInternal instanceof RefreshFooterComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
             wrappedInternal.getComponentView().setScaleY(-1);
         }
     }
@@ -159,14 +159,14 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
     @Override
     public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
         if (mWrappedInternal != null && mWrappedInternal != this) {
-            if (this instanceof RefreshFooterWrapper && mWrappedInternal instanceof RefreshHeaderComponent) {
+            if (this instanceof FooterComponentWrapper && mWrappedInternal instanceof RefreshHeaderComponent) {
                 if (oldState.isFooterState) {
                     oldState = oldState.convertToHeaderState();
                 }
                 if (newState.isFooterState) {
                     newState = newState.convertToHeaderState();
                 }
-            } else if (this instanceof RefreshHeaderWrapper && mWrappedInternal instanceof RefreshFooterComponent) {
+            } else if (this instanceof HeaderComponentWrapper && mWrappedInternal instanceof RefreshFooterComponent) {
                 if (oldState.isHeaderState) {
                     oldState = oldState.convertToFooterState();
                 }
