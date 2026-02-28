@@ -14,7 +14,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.adapter_reader.LanguagePickerDialogAdapter;
 import com.example.documenpro.model_reader.LanguageModel;
-import com.example.documenpro.ui.activities.SplashActivity;
+import com.example.documenpro.ui.activities.SplashScreenActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -40,7 +40,7 @@ public class LanguageDialog extends Dialog {
             SharedPreferenceUtils.getInstance(mContext).setString(GlobalConstant.LANGUAGE_NAME, GlobalConstant.createArrayLanguage().get(langChoice).getNameLanguage_LanModel());
             SharedPreferenceUtils.getInstance(mContext).setString(GlobalConstant.LANGUAGE_KEY, GlobalConstant.createArrayLanguage().get(langChoice).getKeyLanguage_LanModel());
             SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.LANGUAGE_KEY_NUMBER, langChoice);
-            Intent refresh = new Intent(mContext, SplashActivity.class);
+            Intent refresh = new Intent(mContext, SplashScreenActivity.class);
             refresh.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             MultiLanguages.setAppLanguage(context, new Locale(GlobalConstant.createArrayLanguage().get(langChoice).getKeyLanguage_LanModel()));
 

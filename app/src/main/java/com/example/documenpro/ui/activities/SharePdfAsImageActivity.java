@@ -79,10 +79,10 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        initToolBar();
+        setupToolbar();
         tempPdfImageDirectory = Environment.getExternalStorageDirectory() + "/Pictures/AllPdf/tmp/";
         context = this;
-        initViews();
+        initializeViews();
         Intent intent = getIntent();
         if (intent != null) {
             selectedPdfModel = (PDFReaderModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
@@ -96,14 +96,14 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
             pdfFileName = selectedPdfModel.getName_PDFModel();
             String pdfSavedFile = selectedPdfModel.getAbsolutePath_PDFModel();
             Uri uri = Uri.fromFile(new File(pdfSavedFile));
-            new LoadThumbnailPdf(this).execute(uri.toString());
+            new LoadPdfThumbnailsTask(this).execute(uri.toString());
 
         }
 
 
     }
 
-    private void initViews() {
+    private void initializeViews() {
         loadingAnimationView = findViewById(R.id.loadingView);
         continueActionText = findViewById(R.id.tv_continue);
         pdfPageRecyclerView = findViewById(R.id.chooser_recycler_view);
@@ -148,11 +148,11 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                 if (thumbnailAdapter.isSelectedAll_PdfPreview) {
                     thumbnailAdapter.setUnSelectedAll_PdfPreview();
                     optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_select_all));
-                    activeButton(false);
+                    activeButtonEnabled(false);
                 } else {
                     thumbnailAdapter.setSelectedAll_PdfPreview();
                     optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
-                    activeButton(true);
+                    activeButtonEnabled(true);
                 }
                 topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
             }
@@ -171,7 +171,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         Log.d(this.logTag, sb);
     }
 
-    private void initToolBar() {
+    private void setupToolbar() {
         topToolbar = findViewById(R.id.toolbar);
 
         topToolbar.setTitle(getString(R.string.x_selected, "0"));
@@ -191,11 +191,11 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         return true;
     }
 
-    private void checkBtnContinue() {
-        activeButton(!thumbnailAdapter.getSelected_PdfPreview().isEmpty());
+    private void updateContinueButtonState() {
+        activeButtonEnabled(!thumbnailAdapter.getSelected_PdfPreview().isEmpty());
     }
 
-    private void activeButton(boolean b) {
+    private void activeButtonEnabled(boolean b) {
         continueActionText.setEnabled(b);
         continueActionText.setClickable(b);
         continueActionText.setFocusable(b);
@@ -203,7 +203,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
 
     @Override
     public void onChoosePdfSplitListener() {
-        checkBtnContinue();
+        updateContinueButtonState();
         topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
         if (thumbnailAdapter.getSelected_PdfPreview().size() == pdfPageList.size()) {
             optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
@@ -214,10 +214,10 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         }
     }
 
-    public static class LoadThumbnailPdf extends AsyncTask<String, Void, Void> {
+    public static class LoadPdfThumbnailsTask extends AsyncTask<String, Void, Void> {
         WeakReference<SharePdfAsImageActivity> weakReference;
 
-        public LoadThumbnailPdf(SharePdfAsImageActivity activity) {
+        public LoadPdfThumbnailsTask(SharePdfAsImageActivity activity) {
             this.weakReference = new WeakReference<>(activity);
         }
 
@@ -318,10 +318,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                 weakReference.get().loadingAnimationView.setVisibility(View.GONE);
                 weakReference.get().pdfPageRecyclerView.setAdapter(weakReference.get().thumbnailAdapter);
                 weakReference.get().isLoadCompleted = true;
-
             }
-
         }
     }
-
 }

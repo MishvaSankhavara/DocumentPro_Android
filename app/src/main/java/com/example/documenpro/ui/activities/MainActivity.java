@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initializeData() {
         dayNightSwitch.setIsNight(SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.NIGHT_MODE_KEY, false));
         dayNightSwitch.setListener(is_night -> {
-            startActivity(new Intent(MainActivity.this, SplashActivity.class));
+            startActivity(new Intent(MainActivity.this, SplashScreenActivity.class));
             finish();
             Utils.setTheme(getApplication(), is_night);
         });

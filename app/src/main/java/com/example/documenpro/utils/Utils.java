@@ -66,7 +66,7 @@ import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.activities.DocumentListActivity;
 import com.example.documenpro.ui.activities.MainActivity;
-import com.example.documenpro.ui.activities.SplashActivity;
+import com.example.documenpro.ui.activities.SplashScreenActivity;
 import com.example.documenpro.ui.activities.ViewOfficeActivity;
 import com.example.documenpro.ui.dialog.ConfirmDialog;
 import com.example.documenpro.ui.dialog.LoadingDialog;
@@ -1082,7 +1082,7 @@ public class Utils {
                 return;
             }
 
-            Intent shortcutIntent = new Intent(mContext, SplashActivity.class);
+            Intent shortcutIntent = new Intent(mContext, SplashScreenActivity.class);
             shortcutIntent.setAction(Intent.ACTION_VIEW);
             shortcutIntent.setData(Uri.parse(document.getFileUri_DocModel()));
 

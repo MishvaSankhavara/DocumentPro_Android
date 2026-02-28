@@ -14,28 +14,26 @@ import com.example.documenpro.utils.Utils;
 
 public class ViewOfficeActivity extends AppNUIActivity {
 
-    public static final int REQUEST_CAMERA_PERMISSIONS = 0x11111;
-
-    String tempFileExtension;
-
+    public static final int REQUEST_CAMERA_PERMISSION_CODE = 0x11111;
+    String openedFileExtension;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
-            ImageView imvBack = findViewById(R.id.img_back);
-            if (imvBack != null)
-                imvBack.setOnClickListener(view -> finish());
+            ImageView backButton = findViewById(R.id.img_back);
+            if (backButton != null)
+                backButton.setOnClickListener(view -> finish());
             if (SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.RATE_APP, true)) {
                 Utils.showRateDialog(this);
             }
             Intent intent = getIntent();
 
-            String filePath;
+            String selectedFilePath;
             if (intent.getData() != null && intent.getData().getPath() != null && !intent.getData().getPath().isEmpty()) {
-                filePath = intent.getStringExtra(GlobalConstant.KEY_SELECTED_FILE_URI);
-                if (filePath != null)
-                    tempFileExtension = filePath.substring(filePath.lastIndexOf("."));
+                selectedFilePath = intent.getStringExtra(GlobalConstant.KEY_SELECTED_FILE_URI);
+                if (selectedFilePath != null)
+                    openedFileExtension = selectedFilePath.substring(selectedFilePath.lastIndexOf("."));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.bg_tittle));
             }
         } catch (Exception e) {

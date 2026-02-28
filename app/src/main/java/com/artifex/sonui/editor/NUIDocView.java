@@ -2490,7 +2490,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
             }
         }
         if (!permissionsToRequest.isEmpty()) {
-            ActivityCompat.requestPermissions(activity(), permissionsToRequest.toArray(new String[0]), ViewOfficeActivity.REQUEST_CAMERA_PERMISSIONS);
+            ActivityCompat.requestPermissions(activity(), permissionsToRequest.toArray(new String[0]), ViewOfficeActivity.REQUEST_CAMERA_PERMISSION_CODE);
         } else {
             onInsertPhotoButton();
         }

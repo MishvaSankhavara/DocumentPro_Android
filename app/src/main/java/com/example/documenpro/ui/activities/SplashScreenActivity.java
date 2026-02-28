@@ -33,30 +33,30 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
-    int adsCase;
-    private FrameLayout adContainer;
-    private AdView adView;
-    private final AtomicBoolean isMobileAdsInitializeCalled = new AtomicBoolean(false);
-    private final AtomicBoolean gatherConsentFinished = new AtomicBoolean(false);
-    private AdConsentManager googleMobileAdsConsentManager;
-    private static final long COUNTER_TIME_MILLISECONDS = 4000;
-    private long secondsRemaining;
+    int navigationCase;
+    private FrameLayout bannerAdContainer;
+    private AdView bannerAdView;
+    private final AtomicBoolean isMobileAdsInitialized = new AtomicBoolean(false);
+    private final AtomicBoolean isConsentProcessCompleted = new AtomicBoolean(false);
+    private AdConsentManager adsConsentManager;
+    private static final long SPLASH_DURATION_MS = 4000;
+    private long remainingSeconds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        adContainer = findViewById(R.id.my_template_banner);
+        bannerAdContainer = findViewById(R.id.my_template_banner);
 
         // TextView tvAppName = findViewById(R.id.tvNameApp);
         // tvAppName.setText(Utils.setAppName(this));
-        adsCase = 0;
+        navigationCase = 0;
 
-        createTimer();
-        googleMobileAdsConsentManager = AdConsentManager.getInstance(getApplicationContext());
-        googleMobileAdsConsentManager.gatherConsent_AdConsentManager(this,
+        startSplashTimer();
+        adsConsentManager = AdConsentManager.getInstance(getApplicationContext());
+        adsConsentManager.gatherConsent_AdConsentManager(this,
                 new AdConsentManager.OnConsentGatheringCompleteListener() {
                     @Override
                     public void consentGatheringComplete(FormError consentError) {
@@ -66,25 +66,25 @@ public class SplashActivity extends AppCompatActivity {
                                     String.format("%s: %s", consentError.getErrorCode(), consentError.getMessage()));
                         }
 
-                        gatherConsentFinished.set(true);
+                        isConsentProcessCompleted.set(true);
 
-                        if (googleMobileAdsConsentManager.canRequestAds()) {
-                            initializeMobileAdsSdk();
+                        if (adsConsentManager.canRequestAds()) {
+                            initializeAdsSdk();
                         }
 
-                        if (secondsRemaining <= 0) {
-                            executeCase();
+                        if (remainingSeconds <= 0) {
+                            handleNavigationAfterSplash();
                         }
                     }
                 });
 
-        if (googleMobileAdsConsentManager.canRequestAds()) {
-            initializeMobileAdsSdk();
+        if (adsConsentManager.canRequestAds()) {
+            initializeAdsSdk();
         }
     }
 
-    private void initializeMobileAdsSdk() {
-        if (isMobileAdsInitializeCalled.getAndSet(true)) {
+    private void initializeAdsSdk() {
+        if (isMobileAdsInitialized.getAndSet(true)) {
             return;
         }
         // Set your test devices.
@@ -102,41 +102,40 @@ public class SplashActivity extends AppCompatActivity {
                 .start();
     }
 
-    private void createTimer() {
-        CountDownTimer countDownTimer = new CountDownTimer(COUNTER_TIME_MILLISECONDS, 1000) {
+    private void startSplashTimer() {
+        CountDownTimer countDownTimer = new CountDownTimer(SPLASH_DURATION_MS, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                secondsRemaining = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1;
+                remainingSeconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1;
             }
 
             @Override
             public void onFinish() {
-                secondsRemaining = 0;
+                remainingSeconds = 0;
 
                 Application application = getApplication();
                 ((MyApplication) application).showAdIfAvailable(
-                        SplashActivity.this,
+                        SplashScreenActivity.this,
                         new MyApplication.OnShowAdCompleteListener() {
                             @Override
                             public void onShowAdComplete() {
                                 // Check if the consent form is currently on screen before moving to the
                                 // main activity.
-                                if (gatherConsentFinished.get()) {
-                                    executeCase();
+                                if (isConsentProcessCompleted.get()) {
+                                    handleNavigationAfterSplash();
                                 }
                             }
                         });
-
             }
         };
         countDownTimer.start();
     }
 
-    private void executeCase() {
+    private void handleNavigationAfterSplash() {
         if (getIntent() != null && getIntent().getData() != null) {
-            adsCase = 3;
+            navigationCase = 3;
             Uri uri = getIntent().getData();
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
             if (uri != null) {
                 intent.putExtra(GlobalConstant.KEY_DATA_FROM_OUTSIDE, uri.toString());
             } else {
@@ -145,34 +144,34 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            if (!SharedPreferenceUtils.getInstance(SplashActivity.this).getBoolean(GlobalConstant.LANGUAGE_SET,
+            if (!SharedPreferenceUtils.getInstance(SplashScreenActivity.this).getBoolean(GlobalConstant.LANGUAGE_SET,
                     false)) {
-                adsCase = 1;
-                startActivity(new Intent(SplashActivity.this, LocaleSelectionActivity.class));
+                navigationCase = 1;
+                startActivity(new Intent(SplashScreenActivity.this, LocaleSelectionActivity.class));
                 finish();
             } else {
-                adsCase = 2;
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                navigationCase = 2;
+                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 finish();
             }
         }
     }
 
-    public class ExecuteAdsAction implements OnAdDismissedListener {
+    public class AdDismissActionHandler implements OnAdDismissedListener {
         @Override
         public void OnAdDismissedListener() {
-            switch (adsCase) {
+            switch (navigationCase) {
                 case 1:
-                    startActivity(new Intent(SplashActivity.this, LocaleSelectionActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, LocaleSelectionActivity.class));
                     finish();
                     break;
                 case 2:
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                     finish();
                     break;
                 case 3:
                     Uri uri = getIntent().getData();
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                     if (uri != null) {
                         intent.putExtra(GlobalConstant.KEY_DATA_FROM_OUTSIDE, uri.toString());
                     } else {
@@ -184,28 +183,27 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void loadAdBanner() {
-        adView = new AdView(this);
-        adView.setAdUnitId(AdsUtils.ADMOB_ID_BANNER_TM);
+    private void loadBannerAd() {
+        bannerAdView = new AdView(this);
+        bannerAdView.setAdUnitId(AdsUtils.ADMOB_ID_BANNER_TM);
 
-        AdSize adSize = Utils.getAdSize(SplashActivity.this, adContainer);
-        adView.setAdSize(adSize);
+        AdSize adSize = Utils.getAdSize(SplashScreenActivity.this, bannerAdContainer);
+        bannerAdView.setAdSize(adSize);
 
         Bundle extras = new Bundle();
         extras.putString("collapsible", "bottom");
         AdRequest adRequest = new AdRequest.Builder()
                 .addNetworkExtrasBundle(AdMobAdapter.class, extras)
                 .build();
-        adView.setAdListener(new AdListener() {
+        bannerAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
-                adContainer.removeAllViews();
-                adContainer.addView(adView);
+                bannerAdContainer.removeAllViews();
+                bannerAdContainer.addView(bannerAdView);
             }
         });
 
-        adView.loadAd(adRequest);
-
+        bannerAdView.loadAd(adRequest);
     }
 }
