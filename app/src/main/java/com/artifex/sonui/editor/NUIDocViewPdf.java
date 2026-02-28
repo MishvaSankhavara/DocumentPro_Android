@@ -24,7 +24,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
 import com.example.documenpro.ui.customviews.EditBtn;
-import com.example.documenpro.ui.customviews.seekbar.OnRangeChangedListener;
+import com.example.documenpro.ui.customviews.seekbar.RangeSeekBarChangeListener;
 import com.example.documenpro.ui.customviews.seekbar.RangeSeekBar;
 import com.example.documenpro.utils.Utils;
 
@@ -112,9 +112,9 @@ public class NUIDocViewPdf extends NUIDocView {
                 return false;
             }
         });
-        seekBarThickness.setOnRangeChangedListener(new OnRangeChangedListener() {
+        seekBarThickness.setOnRangeChangedListener(new RangeSeekBarChangeListener() {
             @Override
-            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
+            public void onRangeValueChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
                 activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -136,12 +136,12 @@ public class NUIDocViewPdf extends NUIDocView {
             }
 
             @Override
-            public void onStartTrackingTouch(RangeSeekBar view, boolean isLeft) {
+            public void onTrackingStarted(RangeSeekBar view, boolean isLeft) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(RangeSeekBar view, boolean isLeft) {
+            public void onTrackingStopped(RangeSeekBar view, boolean isLeft) {
 
             }
         });

@@ -1,13 +1,13 @@
 package com.example.documenpro.ui.customviews.seekbar;
 
 public class SeekBarState {
-    public String indicatorText;
-    public float value; //now progress value
-    public boolean isMin;
-    public boolean isMax;
+    public String indicatorDisplayText;
+    public float progressValue; //now progress value
+    public boolean isMinimum;
+    public boolean isMaximum;
 
     @Override
     public String toString() {
-        return "indicatorText: " + indicatorText + " ,isMin: " + isMin + " ,isMax: " + isMax;
+        return "indicatorText: " + indicatorDisplayText + " ,isMin: " + isMinimum + " ,isMax: " + isMaximum;
     }
 }

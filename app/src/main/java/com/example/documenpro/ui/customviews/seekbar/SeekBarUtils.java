@@ -16,12 +16,12 @@ import android.util.Log;
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
 
-public class Utils {
+public class SeekBarUtils {
 
-    private static final String TAG = "RangeSeekBar";
+    private static final String LOG_TAG = "RangeSeekBar";
 
     public static void print(String log) {
-        Log.d(TAG, log);
+        Log.d(LOG_TAG, log);
     }
 
     public static void print(Object... logs) {
@@ -29,25 +29,19 @@ public class Utils {
         for (Object log : logs) {
             stringBuilder.append(log);
         }
-        Log.d(TAG, stringBuilder.toString());
+        Log.d(LOG_TAG, stringBuilder.toString());
     }
 
-    public static Bitmap drawableToBitmap(Context context, int width, int height, int drawableId) {
+    public static Bitmap convertDrawableResToBitmap(Context context, int width, int height, int drawableId) {
         if (context == null || width <= 0 || height <= 0 || drawableId == 0) return null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return Utils.drawableToBitmap(width, height, context.getResources().getDrawable(drawableId, null));
+            return SeekBarUtils.convertDrawableToBitmap(width, height, context.getResources().getDrawable(drawableId, null));
         } else {
-            return Utils.drawableToBitmap(width, height, context.getResources().getDrawable(drawableId));
+            return SeekBarUtils.convertDrawableToBitmap(width, height, context.getResources().getDrawable(drawableId));
         }
     }
 
-    /**
-     * make a drawable to a bitmap
-     *
-     * @param drawable drawable you want convert
-     * @return converted bitmap
-     */
-    public static Bitmap drawableToBitmap(int width, int height, Drawable drawable) {
+    public static Bitmap convertDrawableToBitmap(int width, int height, Drawable drawable) {
         Bitmap bitmap = null;
         try {
             if (drawable instanceof BitmapDrawable) {
@@ -72,23 +66,16 @@ public class Utils {
         return bitmap;
     }
 
-    /**
-     * draw 9Path
-     *
-     * @param canvas Canvas
-     * @param bmp    9path bitmap
-     * @param rect   9path rect
-     */
-    public static void drawNinePath(Canvas canvas, Bitmap bmp, Rect rect) {
+    public static void drawNinePatchBitmap(Canvas canvas, Bitmap bmp, Rect rect) {
         NinePatch.isNinePatchChunk(bmp.getNinePatchChunk());
         NinePatch patch = new NinePatch(bmp, bmp.getNinePatchChunk(), null);
         patch.draw(canvas, rect);
     }
 
-    public static void drawBitmap(Canvas canvas, Paint paint, Bitmap bmp, Rect rect) {
+    public static void drawBitmapSafely(Canvas canvas, Paint paint, Bitmap bmp, Rect rect) {
         try {
             if (NinePatch.isNinePatchChunk(bmp.getNinePatchChunk())) {
-                drawNinePath(canvas, bmp, rect);
+                drawNinePatchBitmap(canvas, bmp, rect);
                 return;
             }
         } catch (Exception e) {
@@ -96,22 +83,13 @@ public class Utils {
         canvas.drawBitmap(bmp, rect.left, rect.top, paint);
     }
 
-    public static int dp2px(Context context, float dpValue) {
-        if (context == null || compareFloat(0f, dpValue) == 0) return 0;
+    public static int dpToPx(Context context, float dpValue) {
+        if (context == null || compareFloatPrecision(0f, dpValue) == 0) return 0;
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
-    /**
-     * Compare the size of two floating point numbers
-     *
-     * @param a
-     * @param b
-     * @return 1 is a > b
-     * -1 is a < b
-     * 0 is a == b
-     */
-    public static int compareFloat(float a, float b) {
+    public static int compareFloatPrecision(float a, float b) {
         int ta = Math.round(a * 1000000);
         int tb = Math.round(b * 1000000);
         if (ta > tb) {
@@ -123,16 +101,7 @@ public class Utils {
         }
     }
 
-    /**
-     * Compare the size of two floating point numbers with accuracy
-     *
-     * @param a
-     * @param b
-     * @return 1 is a > b
-     * -1 is a < b
-     * 0 is a == b
-     */
-    public static int compareFloat(float a, float b, int degree) {
+    public static int compareFloatWithTolerance(float a, float b, int degree) {
         if (Math.abs(a-b) < Math.pow(0.1, degree)) {
             return 0;
         } else {
@@ -144,7 +113,7 @@ public class Utils {
         }
     }
 
-    public static float parseFloat(String s) {
+    public static float safeParseFloat(String s) {
         try {
             return Float.parseFloat(s);
         } catch (NumberFormatException e) {
@@ -152,7 +121,7 @@ public class Utils {
         }
     }
 
-    public static Rect measureText(String text, float textSize) {
+    public static Rect measureTextBounds(String text, float textSize) {
         Paint paint = new Paint();
         Rect textRect = new Rect();
         paint.setTextSize(textSize);
@@ -161,14 +130,14 @@ public class Utils {
         return textRect;
     }
 
-    public static boolean verifyBitmap(Bitmap bitmap) {
+    public static boolean isBitmapValid(Bitmap bitmap) {
         if (bitmap == null || bitmap.isRecycled() || bitmap.getWidth() <= 0 || bitmap.getHeight() <= 0) {
             return false;
         }
         return true;
     }
 
-    public static int getColor(Context context, @ColorRes int colorId) {
+    public static int getColorCompat(Context context, @ColorRes int colorId) {
         if (context != null) {
             return ContextCompat.getColor(context.getApplicationContext(), colorId);
         }
