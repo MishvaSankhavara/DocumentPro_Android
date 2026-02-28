@@ -24,29 +24,25 @@ import com.example.documenpro.ui.customviews.smartrefresh.impl.FooterComponentWr
 import com.example.documenpro.ui.customviews.smartrefresh.impl.HeaderComponentWrapper;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
 
-public abstract class InternalAbstract extends RelativeLayout implements RefreshComponent {
+public abstract class RefreshInternalAbstract extends RelativeLayout implements RefreshComponent {
 
-    protected View mWrappedView;
-    protected RefreshSpinnerStyle mSpinnerStyle;
-    protected RefreshComponent mWrappedInternal;
+    protected View wrappedView;
+    protected RefreshComponent wrappedInternal;
+    protected RefreshSpinnerStyle spinnerStyle;
 
-    protected InternalAbstract(@NonNull View wrapped) {
-        this(wrapped, wrapped instanceof RefreshComponent ? (RefreshComponent) wrapped : null);
-    }
-
-    protected InternalAbstract(@NonNull View wrappedView, @Nullable RefreshComponent wrappedInternal) {
+    protected RefreshInternalAbstract(@NonNull View wrappedView, @Nullable RefreshComponent wrappedInternal) {
         super(wrappedView.getContext(), null, 0);
-        this.mWrappedView = wrappedView;
-        this.mWrappedInternal = wrappedInternal;
-        if (this instanceof FooterComponentWrapper && mWrappedInternal instanceof RefreshHeaderComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
+        this.wrappedView = wrappedView;
+        this.wrappedInternal = wrappedInternal;
+        if (this instanceof FooterComponentWrapper && this.wrappedInternal instanceof RefreshHeaderComponent && this.wrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
             wrappedInternal.getComponentView().setScaleY(-1);
-        } else if (this instanceof HeaderComponentWrapper && mWrappedInternal instanceof RefreshFooterComponent && mWrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
+        } else if (this instanceof HeaderComponentWrapper && this.wrappedInternal instanceof RefreshFooterComponent && this.wrappedInternal.getSpinnerBehavior() == RefreshSpinnerStyle.MATCH_LAYOUT) {
             wrappedInternal.getComponentView().setScaleY(-1);
         }
     }
 
-    protected InternalAbstract(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    protected RefreshInternalAbstract(@NonNull View wrapped) {
+        this(wrapped, wrapped instanceof RefreshComponent ? (RefreshComponent) wrapped : null);
     }
 
     @Override
@@ -61,62 +57,71 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
         return true;
     }
 
-    @NonNull
-    public View getComponentView() {
-        return mWrappedView == null ? this : mWrappedView;
+    protected RefreshInternalAbstract(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
-    @Override
-    public int onAnimationFinish(@NonNull SmartRefreshLayout refreshLayout, boolean success) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            return mWrappedInternal.onAnimationFinish(refreshLayout, success);
-        }
-        return 0;
+    @NonNull
+    public View getComponentView() {
+        return wrappedView == null ? this : wrappedView;
     }
 
     @Override
     public void applyPrimaryColors(@ColorInt int ... colors) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            mWrappedInternal.applyPrimaryColors(colors);
+        if (wrappedInternal != null && wrappedInternal != this) {
+            wrappedInternal.applyPrimaryColors(colors);
         }
+    }
+
+    @Override
+    public int onAnimationFinish(@NonNull SmartRefreshLayout refreshLayout, boolean success) {
+        if (wrappedInternal != null && wrappedInternal != this) {
+            return wrappedInternal.onAnimationFinish(refreshLayout, success);
+        }
+        return 0;
     }
 
     @NonNull
     @Override
     public RefreshSpinnerStyle getSpinnerBehavior() {
-        if (mSpinnerStyle != null) {
-            return mSpinnerStyle;
+        if (spinnerStyle != null) {
+            return spinnerStyle;
         }
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            return mWrappedInternal.getSpinnerBehavior();
+        if (wrappedInternal != null && wrappedInternal != this) {
+            return wrappedInternal.getSpinnerBehavior();
         }
-        if (mWrappedView != null) {
-            ViewGroup.LayoutParams params = mWrappedView.getLayoutParams();
+        if (wrappedView != null) {
+            ViewGroup.LayoutParams params = wrappedView.getLayoutParams();
             if (params instanceof com.example.documenpro.ui.customviews.smartrefresh.SmartRefreshLayout.LayoutParams) {
-                mSpinnerStyle = ((com.example.documenpro.ui.customviews.smartrefresh.SmartRefreshLayout.LayoutParams) params).spinnerStyle;
-                if (mSpinnerStyle != null) {
-                    return mSpinnerStyle;
+                spinnerStyle = ((com.example.documenpro.ui.customviews.smartrefresh.SmartRefreshLayout.LayoutParams) params).spinnerStyle;
+                if (spinnerStyle != null) {
+                    return spinnerStyle;
                 }
             }
             if (params != null) {
                 if (params.height == 0 || params.height == MATCH_PARENT) {
                     for (RefreshSpinnerStyle style : RefreshSpinnerStyle.STYLES) {
                         if (style.scale) {
-                            return mSpinnerStyle = style;
+                            return spinnerStyle = style;
                         }
                     }
                 }
             }
         }
-        return mSpinnerStyle = RefreshSpinnerStyle.TRANSLATE;
+        return spinnerStyle = RefreshSpinnerStyle.TRANSLATE;
+    }
+
+    @Override
+    public boolean isHorizontalDragSupported() {
+        return wrappedInternal != null && wrappedInternal != this && wrappedInternal.isHorizontalDragSupported();
     }
 
     @Override
     public void onComponentInitialized(@NonNull RefreshManager kernel, int height, int maxDragHeight) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            mWrappedInternal.onComponentInitialized(kernel, height, maxDragHeight);
-        } else if (mWrappedView != null) {
-            ViewGroup.LayoutParams params = mWrappedView.getLayoutParams();
+        if (wrappedInternal != null && wrappedInternal != this) {
+            wrappedInternal.onComponentInitialized(kernel, height, maxDragHeight);
+        } else if (wrappedView != null) {
+            ViewGroup.LayoutParams params = wrappedView.getLayoutParams();
             if (params instanceof com.example.documenpro.ui.customviews.smartrefresh.SmartRefreshLayout.LayoutParams) {
                 kernel.requestDrawBackground(this, ((com.example.documenpro.ui.customviews.smartrefresh.SmartRefreshLayout.LayoutParams) params).backgroundColor);
             }
@@ -124,49 +129,44 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
     }
 
     @Override
-    public boolean isHorizontalDragSupported() {
-        return mWrappedInternal != null && mWrappedInternal != this && mWrappedInternal.isHorizontalDragSupported();
+    public void onDragging(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
+        if (wrappedInternal != null && wrappedInternal != this) {
+            wrappedInternal.onDragging(isDragging, percent, offset, height, maxDragHeight);
+        }
     }
 
     @Override
     public void onHorizontalDragging(float percentX, int offsetX, int offsetMax) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            mWrappedInternal.onHorizontalDragging(percentX, offsetX, offsetMax);
-        }
-    }
-
-    @Override
-    public void onDragging(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            mWrappedInternal.onDragging(isDragging, percent, offset, height, maxDragHeight);
-        }
-    }
-
-    @Override
-    public void onDragReleased(@NonNull SmartRefreshLayout refreshLayout, int height, int maxDragHeight) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            mWrappedInternal.onDragReleased(refreshLayout, height, maxDragHeight);
+        if (wrappedInternal != null && wrappedInternal != this) {
+            wrappedInternal.onHorizontalDragging(percentX, offsetX, offsetMax);
         }
     }
 
     @Override
     public void onAnimationStart(@NonNull SmartRefreshLayout refreshLayout, int height, int maxDragHeight) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            mWrappedInternal.onAnimationStart(refreshLayout, height, maxDragHeight);
+        if (wrappedInternal != null && wrappedInternal != this) {
+            wrappedInternal.onAnimationStart(refreshLayout, height, maxDragHeight);
+        }
+    }
+
+    @Override
+    public void onDragReleased(@NonNull SmartRefreshLayout refreshLayout, int height, int maxDragHeight) {
+        if (wrappedInternal != null && wrappedInternal != this) {
+            wrappedInternal.onDragReleased(refreshLayout, height, maxDragHeight);
         }
     }
 
     @Override
     public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
-        if (mWrappedInternal != null && mWrappedInternal != this) {
-            if (this instanceof FooterComponentWrapper && mWrappedInternal instanceof RefreshHeaderComponent) {
+        if (wrappedInternal != null && wrappedInternal != this) {
+            if (this instanceof FooterComponentWrapper && wrappedInternal instanceof RefreshHeaderComponent) {
                 if (oldState.isFooterState) {
                     oldState = oldState.convertToHeaderState();
                 }
                 if (newState.isFooterState) {
                     newState = newState.convertToHeaderState();
                 }
-            } else if (this instanceof HeaderComponentWrapper && mWrappedInternal instanceof RefreshFooterComponent) {
+            } else if (this instanceof HeaderComponentWrapper && wrappedInternal instanceof RefreshFooterComponent) {
                 if (oldState.isHeaderState) {
                     oldState = oldState.convertToFooterState();
                 }
@@ -174,7 +174,7 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
                     newState = newState.convertToFooterState();
                 }
             }
-            final OnStateChangedListener listener = mWrappedInternal;
+            final OnStateChangedListener listener = wrappedInternal;
             if (listener != null) {
                 listener.onStateChanged(refreshLayout, oldState, newState);
             }
@@ -183,6 +183,6 @@ public abstract class InternalAbstract extends RelativeLayout implements Refresh
 
     @SuppressLint("RestrictedApi")
     public boolean setNoMoreDataAvailable(boolean noMoreData) {
-        return mWrappedInternal instanceof RefreshFooterComponent && ((RefreshFooterComponent) mWrappedInternal).setNoMoreDataAvailable(noMoreData);
+        return wrappedInternal instanceof RefreshFooterComponent && ((RefreshFooterComponent) wrappedInternal).setNoMoreDataAvailable(noMoreData);
     }
 }

@@ -14,13 +14,13 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterCompo
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.ArrowDrawable;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalClassics;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.ProgressDrawable;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshArrowDrawable;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshClassicComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshProgressDrawable;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
-public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFooterView> implements RefreshFooterComponent {
+public class ClassicRefreshFooterView extends RefreshClassicComponent<ClassicRefreshFooterView> implements RefreshFooterComponent {
 
     public static String REFRESH_FOOTER_TEXT_PULLING = null;
     public static String REFRESH_FOOTER_TEXT_RELEASE = null;
@@ -49,10 +49,10 @@ public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFoo
         View.inflate(context, R.layout.srl_classics_footer, this);
 
         final View thisView = this;
-        final View arrowView = mArrowView = thisView.findViewById(R.id.srl_classics_arrow);
-        final View progressView = mProgressView = thisView.findViewById(R.id.srl_classics_progress);
+        final View arrowView = this.arrowView = thisView.findViewById(R.id.srl_classics_arrow);
+        final View progressView = this.progressView = thisView.findViewById(R.id.srl_classics_progress);
 
-        mTitleText = thisView.findViewById(R.id.srl_classics_title);
+        titleTextView = thisView.findViewById(R.id.srl_classics_title);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ClassicsFooter);
 
@@ -71,34 +71,34 @@ public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFoo
         lpProgress.width = ta.getLayoutDimension(R.styleable.ClassicsFooter_srlDrawableSize, lpProgress.width);
         lpProgress.height = ta.getLayoutDimension(R.styleable.ClassicsFooter_srlDrawableSize, lpProgress.height);
 
-        mFinishDuration = ta.getInt(R.styleable.ClassicsFooter_srlFinishDuration, mFinishDuration);
-        mSpinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.ClassicsFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
+        finishAnimationDuration = ta.getInt(R.styleable.ClassicsFooter_srlFinishDuration, finishAnimationDuration);
+        spinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.ClassicsFooter_srlClassicsSpinnerStyle, spinnerStyle.ordinal)];
 
         if (ta.hasValue(R.styleable.ClassicsFooter_srlDrawableArrow)) {
-            mArrowView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsFooter_srlDrawableArrow));
-        } else if (mArrowView.getDrawable() == null) {
-            mArrowDrawable = new ArrowDrawable();
-            mArrowDrawable.setColor(0xff666666);
-            mArrowView.setImageDrawable(mArrowDrawable);
+            this.arrowView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsFooter_srlDrawableArrow));
+        } else if (this.arrowView.getDrawable() == null) {
+            arrowDrawable = new RefreshArrowDrawable();
+            arrowDrawable.setPaintColor(0xff666666);
+            this.arrowView.setImageDrawable(arrowDrawable);
         }
 
         if (ta.hasValue(R.styleable.ClassicsFooter_srlDrawableProgress)) {
-            mProgressView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsFooter_srlDrawableProgress));
-        } else if (mProgressView.getDrawable() == null) {
-            mProgressDrawable = new ProgressDrawable();
-            mProgressDrawable.setColor(0xff666666);
-            mProgressView.setImageDrawable(mProgressDrawable);
+            this.progressView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsFooter_srlDrawableProgress));
+        } else if (this.progressView.getDrawable() == null) {
+            progressDrawable = new RefreshProgressDrawable();
+            progressDrawable.setPaintColor(0xff666666);
+            this.progressView.setImageDrawable(progressDrawable);
         }
 
         if (ta.hasValue(R.styleable.ClassicsFooter_srlTextSizeTitle)) {
-            mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlTextSizeTitle, SmartUtil.dp2px(16)));
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlTextSizeTitle, SmartUtil.dp2px(16)));
         }
 
         if (ta.hasValue(R.styleable.ClassicsFooter_srlPrimaryColor)) {
-            super.setPrimaryColor(ta.getColor(R.styleable.ClassicsFooter_srlPrimaryColor, 0));
+            super.applyPrimaryColor(ta.getColor(R.styleable.ClassicsFooter_srlPrimaryColor, 0));
         }
         if (ta.hasValue(R.styleable.ClassicsFooter_srlAccentColor)) {
-            super.setAccentColor(ta.getColor(R.styleable.ClassicsFooter_srlAccentColor, 0));
+            super.applyAccentColor(ta.getColor(R.styleable.ClassicsFooter_srlAccentColor, 0));
         }
 
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextPulling)){
@@ -154,7 +154,7 @@ public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFoo
         ta.recycle();
 
         progressView.animate().setInterpolator(null);
-        mTitleText.setText(thisView.isInEditMode() ? textLoading : textPulling);
+        titleTextView.setText(thisView.isInEditMode() ? textLoading : textPulling);
 
         if (thisView.isInEditMode()) {
             arrowView.setVisibility(GONE);
@@ -168,8 +168,8 @@ public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFoo
 
         super.onAnimationFinish(layout, success);
         if (!noMoreDataAvailable) {
-            mTitleText.setText(success ? textFinish : textFailed);
-            return mFinishDuration;
+            titleTextView.setText(success ? textFinish : textFailed);
+            return finishAnimationDuration;
         }
         return 0;
     }
@@ -178,12 +178,12 @@ public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFoo
     public boolean setNoMoreDataAvailable(boolean noMoreData) {
         if (noMoreDataAvailable != noMoreData) {
             noMoreDataAvailable = noMoreData;
-            final View arrowView = mArrowView;
+            final View arrowView = this.arrowView;
             if (noMoreData) {
-                mTitleText.setText(textNoMoreData);
+                titleTextView.setText(textNoMoreData);
                 arrowView.setVisibility(GONE);
             } else {
-                mTitleText.setText(textPulling);
+                titleTextView.setText(textPulling);
                 arrowView.setVisibility(VISIBLE);
             }
         }
@@ -192,33 +192,33 @@ public class ClassicRefreshFooterView extends InternalClassics<ClassicRefreshFoo
 
     @Override@Deprecated
     public void applyPrimaryColors(@ColorInt int ... colors) {
-        if (mSpinnerStyle == RefreshSpinnerStyle.FIXED_BEHIND) {
+        if (spinnerStyle == RefreshSpinnerStyle.FIXED_BEHIND) {
             super.applyPrimaryColors(colors);
         }
     }
 
     @Override
     public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
-        final View arrowView = mArrowView;
+        final View arrowView = this.arrowView;
         if (!noMoreDataAvailable) {
             switch (newState) {
                 case IDLE:
                     arrowView.setVisibility(VISIBLE);
                 case PullUpToLoad:
-                    mTitleText.setText(textPulling);
+                    titleTextView.setText(textPulling);
                     arrowView.animate().rotation(180);
                     break;
                 case Loading:
                 case LoadReleased:
                     arrowView.setVisibility(GONE);
-                    mTitleText.setText(textLoading);
+                    titleTextView.setText(textLoading);
                     break;
                 case ReleaseToLoad:
-                    mTitleText.setText(textRelease);
+                    titleTextView.setText(textRelease);
                     arrowView.animate().rotation(0);
                     break;
                 case REFRESHING:
-                    mTitleText.setText(textRefreshing);
+                    titleTextView.setText(textRefreshing);
                     arrowView.setVisibility(GONE);
                     break;
             }

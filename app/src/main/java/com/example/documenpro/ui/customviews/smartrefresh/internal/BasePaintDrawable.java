@@ -6,33 +6,32 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
 
-public abstract class PaintDrawable extends Drawable {
+public abstract class BasePaintDrawable extends Drawable {
 
-    protected Paint mPaint = new Paint();
+    protected Paint paint = new Paint();
 
-    protected PaintDrawable() {
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(0xffaaaaaa);
+    protected BasePaintDrawable() {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setAntiAlias(true);
+        paint.setColor(0xffaaaaaa);
     }
 
-    public void setColor(int color) {
-        mPaint.setColor(color);
+    public void setPaintColor(int color) {
+        paint.setColor(color);
     }
 
     @Override
     public void setAlpha(int alpha) {
-        mPaint.setAlpha(alpha);
+        paint.setAlpha(alpha);
     }
 
     @Override
     public void setColorFilter(ColorFilter cf) {
-        mPaint.setColorFilter(cf);
+        paint.setColorFilter(cf);
     }
 
     @Override
     public int getOpacity() {
         return PixelFormat.TRANSLUCENT;
     }
-
 }

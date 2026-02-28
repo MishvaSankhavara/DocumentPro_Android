@@ -18,11 +18,11 @@ import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
-public class PlaceholderRefreshHeader extends InternalAbstract implements RefreshHeaderComponent {
+public class PlaceholderRefreshHeader extends RefreshInternalAbstract implements RefreshHeaderComponent {
 
     protected RefreshManager refreshKernel;
 

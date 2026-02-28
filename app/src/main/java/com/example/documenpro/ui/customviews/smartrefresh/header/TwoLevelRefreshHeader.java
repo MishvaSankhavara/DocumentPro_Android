@@ -20,12 +20,12 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.listener.OnStateChangedListener;
 
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-public class TwoLevelRefreshHeader extends InternalAbstract implements RefreshHeaderComponent/*, NestedScrollingParent*/ {
+public class TwoLevelRefreshHeader extends RefreshInternalAbstract implements RefreshHeaderComponent/*, NestedScrollingParent*/ {
 
     protected int spinner;
     protected float percent = 0;
@@ -50,7 +50,7 @@ public class TwoLevelRefreshHeader extends InternalAbstract implements RefreshHe
     public TwoLevelRefreshHeader(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs, 0);
 
-        mSpinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
+        spinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TwoLevelHeader);
         maxRate = ta.getFloat(R.styleable.TwoLevelHeader_srlMaxRage, maxRate);
         floorRate = ta.getFloat(R.styleable.TwoLevelHeader_srlFloorRage, floorRate);
@@ -74,7 +74,7 @@ public class TwoLevelRefreshHeader extends InternalAbstract implements RefreshHe
             View childAt = thisGroup.getChildAt(i);
             if (childAt instanceof RefreshHeaderComponent) {
                 refreshHeader = (RefreshHeaderComponent) childAt;
-                mWrappedInternal = (RefreshComponent) childAt;
+                wrappedInternal = (RefreshComponent) childAt;
                 thisGroup.bringChildToFront(childAt);
                 break;
             }
@@ -84,13 +84,13 @@ public class TwoLevelRefreshHeader extends InternalAbstract implements RefreshHe
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mSpinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
+        spinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mSpinnerStyle = RefreshSpinnerStyle.MATCH_LAYOUT;
+        spinnerStyle = RefreshSpinnerStyle.MATCH_LAYOUT;
         if (refreshHeader == null) {
             final View thisView = this;
             setHeaderComponent(new ClassicRefreshHeaderView(thisView.getContext()));
@@ -246,7 +246,7 @@ public class TwoLevelRefreshHeader extends InternalAbstract implements RefreshHe
                 thisGroup.addView(refreshHeader.getComponentView(), thisGroup.getChildCount(), lp);
             }
             this.refreshHeader = header;
-            this.mWrappedInternal = header;
+            this.wrappedInternal = header;
         }
         return this;
     }

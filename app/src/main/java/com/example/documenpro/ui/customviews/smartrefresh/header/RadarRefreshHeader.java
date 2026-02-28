@@ -24,10 +24,10 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderCompo
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
-public class RadarRefreshHeader extends InternalAbstract implements RefreshHeaderComponent {
+public class RadarRefreshHeader extends RefreshInternalAbstract implements RefreshHeaderComponent {
 
     protected int accentColor;
     protected int primaryColor;
@@ -63,7 +63,7 @@ public class RadarRefreshHeader extends InternalAbstract implements RefreshHeade
     public RadarRefreshHeader(Context context, AttributeSet attrs) {
         super(context, attrs,0);
 
-        mSpinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
+        spinnerStyle = RefreshSpinnerStyle.FIXED_BEHIND;
         final View thisView = this;
 
         wavePath = new Path();

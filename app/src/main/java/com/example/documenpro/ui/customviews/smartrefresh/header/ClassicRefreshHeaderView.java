@@ -23,9 +23,9 @@ import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshHeaderCompo
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshLayoutState;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.ArrowDrawable;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalClassics;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.ProgressDrawable;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshArrowDrawable;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshClassicComponent;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshProgressDrawable;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 import java.text.DateFormat;
@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHeaderView> implements RefreshHeaderComponent {
+public class ClassicRefreshHeaderView extends RefreshClassicComponent<ClassicRefreshHeaderView> implements RefreshHeaderComponent {
 
     public static final int VIEW_ID_LAST_UPDATE_TEXT = R.id.srl_classics_update;
 
@@ -74,11 +74,11 @@ public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHea
         View.inflate(context, R.layout.srl_classics_header, this);
 
         final View thisView = this;
-        final View arrowView = mArrowView = thisView.findViewById(R.id.srl_classics_arrow);
+        final View arrowView = this.arrowView = thisView.findViewById(R.id.srl_classics_arrow);
         final View updateView = lastUpdateText = thisView.findViewById(R.id.srl_classics_update);
-        final View progressView = mProgressView = thisView.findViewById(R.id.srl_classics_progress);
+        final View progressView = this.progressView = thisView.findViewById(R.id.srl_classics_progress);
 
-        mTitleText = thisView.findViewById(R.id.srl_classics_title);
+        titleTextView = thisView.findViewById(R.id.srl_classics_title);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ClassicsHeader);
 
@@ -99,28 +99,28 @@ public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHea
         lpProgress.width = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableSize, lpProgress.width);
         lpProgress.height = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableSize, lpProgress.height);
 
-        mFinishDuration = ta.getInt(R.styleable.ClassicsHeader_srlFinishDuration, mFinishDuration);
+        finishAnimationDuration = ta.getInt(R.styleable.ClassicsHeader_srlFinishDuration, finishAnimationDuration);
         enableLastTime = ta.getBoolean(R.styleable.ClassicsHeader_srlEnableLastTime, enableLastTime);
-        mSpinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.ClassicsHeader_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
+        spinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.ClassicsHeader_srlClassicsSpinnerStyle, spinnerStyle.ordinal)];
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlDrawableArrow)) {
-            mArrowView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsHeader_srlDrawableArrow));
-        } else if (mArrowView.getDrawable() == null) {
-            mArrowDrawable = new ArrowDrawable();
-            mArrowDrawable.setColor(getResources().getColor(R.color.colorSolidText));
-            mArrowView.setImageDrawable(mArrowDrawable);
+            this.arrowView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsHeader_srlDrawableArrow));
+        } else if (this.arrowView.getDrawable() == null) {
+            arrowDrawable = new RefreshArrowDrawable();
+            arrowDrawable.setPaintColor(getResources().getColor(R.color.colorSolidText));
+            this.arrowView.setImageDrawable(arrowDrawable);
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlDrawableProgress)) {
-            mProgressView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsHeader_srlDrawableProgress));
-        } else if (mProgressView.getDrawable() == null) {
-            mProgressDrawable = new ProgressDrawable();
-            mProgressDrawable.setColor(getResources().getColor(R.color.colorSolidText));
-            mProgressView.setImageDrawable(mProgressDrawable);
+            this.progressView.setImageDrawable(ta.getDrawable(R.styleable.ClassicsHeader_srlDrawableProgress));
+        } else if (this.progressView.getDrawable() == null) {
+            progressDrawable = new RefreshProgressDrawable();
+            progressDrawable.setPaintColor(getResources().getColor(R.color.colorSolidText));
+            this.progressView.setImageDrawable(progressDrawable);
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextSizeTitle)) {
-            mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextSizeTitle, SmartUtil.dp2px(16)));
+            titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_srlTextSizeTitle, SmartUtil.dp2px(16)));
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextSizeTime)) {
@@ -128,10 +128,10 @@ public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHea
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlPrimaryColor)) {
-            super.setPrimaryColor(ta.getColor(R.styleable.ClassicsHeader_srlPrimaryColor, 0));
+            super.applyPrimaryColor(ta.getColor(R.styleable.ClassicsHeader_srlPrimaryColor, 0));
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlAccentColor)) {
-            setAccentColor(ta.getColor(R.styleable.ClassicsHeader_srlAccentColor, 0));
+            applyAccentColor(ta.getColor(R.styleable.ClassicsHeader_srlAccentColor, 0));
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextPulling)) {
@@ -196,7 +196,7 @@ public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHea
 
         progressView.animate().setInterpolator(null);
         updateView.setVisibility(enableLastTime ? VISIBLE : GONE);
-        mTitleText.setText(thisView.isInEditMode() ? textRefreshing : textPulling);
+        titleTextView.setText(thisView.isInEditMode() ? textRefreshing : textPulling);
 
         if (thisView.isInEditMode()) {
             arrowView.setVisibility(GONE);
@@ -226,45 +226,45 @@ public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHea
     @Override
     public int onAnimationFinish(@NonNull SmartRefreshLayout layout, boolean success) {
         if (success) {
-            mTitleText.setText(textFinish);
+            titleTextView.setText(textFinish);
             if (lastTime != null) {
                 updateLastRefreshTime(new Date());
             }
         } else {
-            mTitleText.setText(textFailed);
+            titleTextView.setText(textFailed);
         }
         return super.onAnimationFinish(layout, success);
     }
 
     @Override
     public void onStateChanged(@NonNull SmartRefreshLayout refreshLayout, @NonNull RefreshLayoutState oldState, @NonNull RefreshLayoutState newState) {
-        final View arrowView = mArrowView;
+        final View arrowView = this.arrowView;
         final View updateView = lastUpdateText;
         switch (newState) {
             case IDLE:
                 updateView.setVisibility(enableLastTime ? VISIBLE : GONE);
             case PULL_DOWN_TO_REFRESH:
-                mTitleText.setText(textPulling);
+                titleTextView.setText(textPulling);
                 arrowView.setVisibility(VISIBLE);
                 arrowView.animate().rotation(0);
                 break;
             case REFRESHING:
             case REFRESH_RELEASED:
-                mTitleText.setText(textRefreshing);
+                titleTextView.setText(textRefreshing);
                 arrowView.setVisibility(GONE);
                 break;
             case RELEASE_TO_REFRESH:
-                mTitleText.setText(textRelease);
+                titleTextView.setText(textRelease);
                 arrowView.animate().rotation(180);
                 break;
             case RELEASE_TO_TWO_LEVEL:
-                mTitleText.setText(textSecondary);
+                titleTextView.setText(textSecondary);
                 arrowView.animate().rotation(0);
                 break;
             case Loading:
                 arrowView.setVisibility(GONE);
                 updateView.setVisibility(enableLastTime ? INVISIBLE : GONE);
-                mTitleText.setText(textLoading);
+                titleTextView.setText(textLoading);
                 break;
         }
     }
@@ -296,15 +296,15 @@ public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHea
         final View updateView = lastUpdateText;
         enableLastTime = enable;
         updateView.setVisibility(enable ? VISIBLE : GONE);
-        if (mRefreshKernel != null) {
-            mRefreshKernel.requestRemeasureHeight(this);
+        if (refreshKernel != null) {
+            refreshKernel.requestRemeasureHeight(this);
         }
         return this;
     }
 
-    public ClassicRefreshHeaderView setAccentColor(@ColorInt int accentColor) {
+    public ClassicRefreshHeaderView applyAccentColor(@ColorInt int accentColor) {
         lastUpdateText.setTextColor(accentColor & 0x00ffffff | 0xcc000000);
-        return super.setAccentColor(accentColor);
+        return super.applyAccentColor(accentColor);
     }
 
     public ClassicRefreshHeaderView setLastUpdateMarginTop(float dp) {
@@ -317,8 +317,8 @@ public class ClassicRefreshHeaderView extends InternalClassics<ClassicRefreshHea
 
     public ClassicRefreshHeaderView setLastUpdateTextSize(float size) {
         lastUpdateText.setTextSize(size);
-        if (mRefreshKernel != null) {
-            mRefreshKernel.requestRemeasureHeight(this);
+        if (refreshKernel != null) {
+            refreshKernel.requestRemeasureHeight(this);
         }
         return this;
     }

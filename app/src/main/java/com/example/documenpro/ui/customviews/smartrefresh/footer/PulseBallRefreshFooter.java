@@ -19,10 +19,10 @@ import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import com.example.documenpro.ui.customviews.smartrefresh.constant.RefreshSpinnerStyle;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
-public class PulseBallRefreshFooter extends InternalAbstract implements RefreshFooterComponent {
+public class PulseBallRefreshFooter extends RefreshInternalAbstract implements RefreshFooterComponent {
 
     protected boolean isNormalColorManuallySet;
     protected boolean isAnimationColorManuallySet;
@@ -55,8 +55,8 @@ public class PulseBallRefreshFooter extends InternalAbstract implements RefreshF
         circlePaint.setStyle(Paint.Style.FILL);
         circlePaint.setAntiAlias(true);
 
-        mSpinnerStyle = RefreshSpinnerStyle.TRANSLATE;
-        mSpinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.BallPulseFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal)];
+        spinnerStyle = RefreshSpinnerStyle.TRANSLATE;
+        spinnerStyle = RefreshSpinnerStyle.STYLES[ta.getInt(R.styleable.BallPulseFooter_srlClassicsSpinnerStyle, spinnerStyle.ordinal)];
 
         if (ta.hasValue(R.styleable.BallPulseFooter_srlNormalColor)) {
             setNormalColor(ta.getColor(R.styleable.BallPulseFooter_srlNormalColor, 0));
@@ -165,7 +165,7 @@ public class PulseBallRefreshFooter extends InternalAbstract implements RefreshF
     }
 
     public PulseBallRefreshFooter setSpinnerStyle(RefreshSpinnerStyle mSpinnerStyle) {
-        this.mSpinnerStyle = mSpinnerStyle;
+        this.spinnerStyle = mSpinnerStyle;
         return this;
     }
 }

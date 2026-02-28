@@ -18,12 +18,12 @@ import com.example.documenpro.R;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshFooterComponent;
 import com.example.documenpro.ui.customviews.smartrefresh.api.RefreshManager;
 import com.example.documenpro.ui.customviews.smartrefresh.api.SmartRefreshLayout;
-import com.example.documenpro.ui.customviews.smartrefresh.internal.InternalAbstract;
+import com.example.documenpro.ui.customviews.smartrefresh.internal.RefreshInternalAbstract;
 import com.example.documenpro.ui.customviews.smartrefresh.util.SmartUtil;
 
 
 @SuppressWarnings("unused")
-public class PlaceholderFalsifyFooter extends InternalAbstract implements RefreshFooterComponent {
+public class PlaceholderFalsifyFooter extends RefreshInternalAbstract implements RefreshFooterComponent {
 
     private RefreshManager refreshManager;
 
