@@ -11,11 +11,11 @@ import com.example.documenpro.clickListener.PasswordClickListener;
 import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.ui.dialog.ConfirmDialog;
-import com.example.documenpro.ui.dialog.FileProtectedDialog;
-import com.example.documenpro.ui.dialog.InformationDialog;
-import com.example.documenpro.ui.dialog.LanguageDialog;
-import com.example.documenpro.ui.dialog.RemovePasswordDialog;
+import com.example.documenpro.ui.dialog.ActionConfirmDialog;
+import com.example.documenpro.ui.dialog.ProtectedFileDialog;
+import com.example.documenpro.ui.dialog.DocumentInfoDialog;
+import com.example.documenpro.ui.dialog.LanguageSelectionDialog;
+import com.example.documenpro.ui.dialog.RemovePdfPasswordDialog;
 import com.example.documenpro.ui.dialog.RenameDialog;
 import com.example.documenpro.ui.dialog.SetPasswordDialog;
 
@@ -37,7 +37,7 @@ public class DialogUtils {
         if (mContext == null) {
             return;
         }
-        LanguageDialog informationDialog = new LanguageDialog(mContext);
+        LanguageSelectionDialog informationDialog = new LanguageSelectionDialog(mContext);
         Window window = informationDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -50,7 +50,7 @@ public class DialogUtils {
         if (mContext == null) {
             return;
         }
-        RemovePasswordDialog renameDialog = new RemovePasswordDialog(mContext, pdfModel, listener);
+        RemovePdfPasswordDialog renameDialog = new RemovePdfPasswordDialog(mContext, pdfModel, listener);
         Window window = renameDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -63,7 +63,7 @@ public class DialogUtils {
         if (mContext == null) {
             return;
         }
-        FileProtectedDialog dialog = new FileProtectedDialog(mContext, idTvDes);
+        ProtectedFileDialog dialog = new ProtectedFileDialog(mContext, idTvDes);
         Window window = dialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -89,7 +89,7 @@ public class DialogUtils {
         if (mContext == null) {
             return;
         }
-        InformationDialog informationDialog = new InformationDialog(mContext, document);
+        DocumentInfoDialog informationDialog = new DocumentInfoDialog(mContext, document);
         Window window = informationDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -102,7 +102,7 @@ public class DialogUtils {
         if (mContext == null) {
             return;
         }
-        ConfirmDialog dialog = new ConfirmDialog(mContext, typeConfirm, listener);
+        ActionConfirmDialog dialog = new ActionConfirmDialog(mContext, typeConfirm, listener);
         Window window = dialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

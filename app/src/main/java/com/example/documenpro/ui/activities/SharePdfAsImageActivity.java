@@ -38,7 +38,7 @@ import com.example.documenpro.clickListener.OnThumbnailClickListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.model_reader.PDFPageModel;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
-import com.example.documenpro.ui.dialog.ConvertDialog;
+import com.example.documenpro.ui.dialog.PdfToImageConvertDialog;
 import com.example.documenpro.utils.Utils;
 import com.shockwave.pdfium.PdfDocument;
 import com.shockwave.pdfium.PdfiumCore;
@@ -127,7 +127,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                     }
                 } else if (selectedToolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
 
-                    ConvertDialog dialog = new ConvertDialog(SharePdfAsImageActivity.this, thumbnailAdapter.getSelected_PdfPreview());
+                    PdfToImageConvertDialog dialog = new PdfToImageConvertDialog(SharePdfAsImageActivity.this, thumbnailAdapter.getSelected_PdfPreview());
                     Window window4 = dialog.getWindow();
                     assert window4 != null;
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

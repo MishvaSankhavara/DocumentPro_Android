@@ -11,17 +11,17 @@ import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.utils.Utils;
 
 
-public class RateDialog extends Dialog {
-    Context mContext;
+public class AppRateDialog extends Dialog {
+    Context context;
 
-    public RateDialog(@NonNull Context context) {
+    public AppRateDialog(@NonNull Context context) {
         super(context);
-        this.mContext = context;
+        this.context = context;
         setContentView(R.layout.dialog_rate);
         findViewById(R.id.tv_bt_negative).setOnClickListener(v -> {
             dismiss();
-            Utils.rateApp(mContext);
-            SharedPreferenceUtils.getInstance(mContext).setBoolean(GlobalConstant.RATE_APP, false);
+            Utils.rateApp(this.context);
+            SharedPreferenceUtils.getInstance(this.context).setBoolean(GlobalConstant.RATE_APP, false);
         });
     }
 }

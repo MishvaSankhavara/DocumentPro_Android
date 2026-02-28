@@ -64,8 +64,8 @@ import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
 import com.example.documenpro.ui.customviews.BottomButtonView;
 import com.example.documenpro.ui.customviews.EditBtn;
-import com.example.documenpro.ui.dialog.GoPageDialog;
-import com.example.documenpro.ui.dialog.LoadingDialog;
+import com.example.documenpro.ui.dialog.GoToPageDialog;
+import com.example.documenpro.ui.dialog.AppLoadingDialog;
 import com.example.documenpro.clickListener.GoToPageDialogListener;
 import com.example.documenpro.utils.Utils;
 
@@ -163,7 +163,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     private Boolean e;
     private SOFileState mSOFileState;
     private SOFileDatabase mSoFileDatabase;
-    private LoadingDialog mProgressDialog;
+    private AppLoadingDialog mProgressDialog;
     private DocView mDocView;
     private DocListPagesView mDocListPageViews;
     private String k;
@@ -545,7 +545,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     private void showProgressDialog() {
-        this.mProgressDialog = new LoadingDialog(this.getContext());
+        this.mProgressDialog = new AppLoadingDialog(this.getContext());
         Window window5 = this.mProgressDialog.getWindow();
         assert window5 != null;
         mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -554,7 +554,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     private void dismissProgressDialog() {
-        LoadingDialog var1 = this.mProgressDialog;
+        AppLoadingDialog var1 = this.mProgressDialog;
         try {
             if (var1 != null && var1.isShowing()) {
                 var1.dismiss();
@@ -833,7 +833,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         this.tvPageNumber.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                GoPageDialog dialog = new GoPageDialog(getContext(), new GoToPageDialogListener() {
+                GoToPageDialog dialog = new GoToPageDialog(getContext(), new GoToPageDialogListener() {
                     @Override
                     public void onPageNum(int pageNumber) {
                         goToPage(pageNumber);

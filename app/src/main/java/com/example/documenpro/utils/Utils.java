@@ -68,11 +68,11 @@ import com.example.documenpro.ui.activities.DocumentListActivity;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.SplashScreenActivity;
 import com.example.documenpro.ui.activities.ViewOfficeActivity;
-import com.example.documenpro.ui.dialog.ConfirmDialog;
-import com.example.documenpro.ui.dialog.LoadingDialog;
+import com.example.documenpro.ui.dialog.ActionConfirmDialog;
+import com.example.documenpro.ui.dialog.AppLoadingDialog;
 import com.example.documenpro.ui.dialog.MoreDialog;
-import com.example.documenpro.ui.dialog.PermissionDialog;
-import com.example.documenpro.ui.dialog.RateDialog;
+import com.example.documenpro.ui.dialog.RequestPermissionDialog;
+import com.example.documenpro.ui.dialog.AppRateDialog;
 import com.example.documenpro.ui.dialog.SortByDialog;
 import com.shockwave.pdfium.PdfPasswordException;
 import com.shockwave.pdfium.PdfiumCore;
@@ -429,7 +429,7 @@ public class Utils {
         if (mContext == null) {
             return;
         }
-        ConfirmDialog dialog = new ConfirmDialog(mContext, typeConfirm, listener);
+        ActionConfirmDialog dialog = new ActionConfirmDialog(mContext, typeConfirm, listener);
         Window window = dialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -973,7 +973,7 @@ public class Utils {
         if (mContext == null) {
             return;
         }
-        RateDialog rateDialog = new RateDialog(mContext);
+        AppRateDialog rateDialog = new AppRateDialog(mContext);
         Window window = rateDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -986,7 +986,7 @@ public class Utils {
         if (mContext == null) {
             return;
         }
-        PermissionDialog permissionDialog = new PermissionDialog(mContext);
+        RequestPermissionDialog permissionDialog = new RequestPermissionDialog(mContext);
         Window window = permissionDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -1030,7 +1030,7 @@ public class Utils {
         if (mContext == null) {
             return;
         }
-        LoadingDialog loadingDialog = new LoadingDialog(mContext);
+        AppLoadingDialog loadingDialog = new AppLoadingDialog(mContext);
         Window window = loadingDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

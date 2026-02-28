@@ -15,37 +15,36 @@ import com.example.documenpro.R;
 import com.example.documenpro.clickListener.GoToPageDialogListener;
 import com.example.documenpro.utils.Utils;
 
-public class GoPageDialog extends Dialog {
-    private final GoToPageDialogListener listener;
+public class GoToPageDialog extends Dialog {
+    private final GoToPageDialogListener goToPageListener;
     TextView tvRangePage;
-    ConstraintLayout rootView;
-    EditText edtPage;
-    TextView tvOk;
-    TextView tvCancel;
+    ConstraintLayout dialogRootLayout;
+    EditText pageNumberInput;
+    TextView confirmButton;
+    TextView cancelButton;
 
     @SuppressLint("SetTextI18n")
-    public GoPageDialog(@NonNull Context context, GoToPageDialogListener mListener, int pageCount) {
+    public GoToPageDialog(@NonNull Context context, GoToPageDialogListener mListener, int totalPageCount) {
         super(context);
         setContentView(R.layout.dialog_go_page);
-        this.listener = mListener;
-        rootView = findViewById(R.id.rootLayout);
-//        tvRangePage = findViewById(R.id.tvPageSize);
-        edtPage = findViewById(R.id.et_name);
-        tvOk = findViewById(R.id.tv_bt_positive);
-        tvCancel = findViewById(R.id.tv_bt_negative);
-        edtPage.setHint("(1-" + pageCount + ")");
-        tvCancel.setOnClickListener(v -> dismiss());
-        tvOk.setOnClickListener(v -> {
-            String obj = edtPage.getText().toString();
-            if (isValidPageNumber(obj, pageCount)) {
+        this.goToPageListener = mListener;
+        dialogRootLayout = findViewById(R.id.rootLayout);
+        pageNumberInput = findViewById(R.id.et_name);
+        confirmButton = findViewById(R.id.tv_bt_positive);
+        cancelButton = findViewById(R.id.tv_bt_negative);
+        pageNumberInput.setHint("(1-" + totalPageCount + ")");
+        cancelButton.setOnClickListener(v -> dismiss());
+        confirmButton.setOnClickListener(v -> {
+            String enteredPageNumber = pageNumberInput.getText().toString();
+            if (isValidPageNumber(enteredPageNumber, totalPageCount)) {
                 dismiss();
-                if (listener != null) {
-                    listener.onPageNum(Integer.parseInt(obj) - 1);
+                if (goToPageListener != null) {
+                    goToPageListener.onPageNum(Integer.parseInt(enteredPageNumber) - 1);
                 }
 
             } else {
-                edtPage.setError(context.getString(R.string.invalid_page_number));
-                ObjectAnimator objectAnimator = Utils.startAnim(rootView);
+                pageNumberInput.setError(context.getString(R.string.invalid_page_number));
+                ObjectAnimator objectAnimator = Utils.startAnim(dialogRootLayout);
                 objectAnimator.start();
             }
         });

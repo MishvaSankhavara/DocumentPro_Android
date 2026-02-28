@@ -22,26 +22,26 @@ import java.io.File;
 
 public class MoreDialog extends Dialog implements View.OnClickListener {
 
-    DocumentModel mDocument;
-    Activity mContext;
-    boolean mIsRecent;
-    MoreClickListener mListener;
+    DocumentModel documentModel;
+    Activity activity;
+    boolean isRecentFile;
+    MoreClickListener optionsListener;
 
     public MoreDialog(@NonNull Activity context, DocumentModel document, boolean isRecent, MoreClickListener listener) {
         super(context);
-        this.mDocument = document;
-        this.mContext = context;
-        this.mIsRecent = isRecent;
-        this.mListener = listener;
+        this.documentModel = document;
+        this.activity = context;
+        this.isRecentFile = isRecent;
+        this.optionsListener = listener;
         setContentView(R.layout.dialog_more);
         TextView tvName = findViewById(R.id.tv_name);
         TextView tvFileDate = findViewById(R.id.tvFileDate);
         TextView tvFileSize = findViewById(R.id.tvFileSize);
         AppCompatImageView imgIcon = findViewById(R.id.iv_icon);
-        tvName.setText(mDocument.getFileName_DocModel());
-        imgIcon.setImageResource(mDocument.getSrcImage_DocModel());
-        tvFileDate.setText(Utils.formatDateToHumanReadable(mDocument.getLastModified_DocModel()));
-        tvFileSize.setText(Formatter.formatFileSize(mContext, mDocument.getLength_DocModel()));
+        tvName.setText(documentModel.getFileName_DocModel());
+        imgIcon.setImageResource(documentModel.getSrcImage_DocModel());
+        tvFileDate.setText(Utils.formatDateToHumanReadable(documentModel.getLastModified_DocModel()));
+        tvFileSize.setText(Formatter.formatFileSize(activity, documentModel.getLength_DocModel()));
         if (isRecent) {
             findViewById(R.id.ll_remove_from_recent).setVisibility(View.VISIBLE);
         } else {
@@ -59,40 +59,40 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         int idView = v.getId();
         if (idView == R.id.ll_rename) {
-            DialogUtils.showRenameDialog(mContext, mDocument.getFileName_DocModel(), new RenameDialogClickListener() {
+            DialogUtils.showRenameDialog(activity, documentModel.getFileName_DocModel(), new RenameDialogClickListener() {
                 @Override
                 public void onRenameDialogListener(String newName) {
-                    if (mListener != null) {
-                        mListener.onRenameListener(newName);
+                    if (optionsListener != null) {
+                        optionsListener.onRenameListener(newName);
                     }
                 }
             });
             dismiss();
         } else if (idView == R.id.ll_share) {
-            Utils.shareFile(mContext, new File(mDocument.getFileUri_DocModel()));
+            Utils.shareFile(activity, new File(documentModel.getFileUri_DocModel()));
             dismiss();
         } else if (idView == R.id.ll_info) {
-            DialogUtils.showInformationDialog(mContext, mDocument);
+            DialogUtils.showInformationDialog(activity, documentModel);
             dismiss();
         } else if (idView == R.id.ll_create_shortcut) {
-            Utils.createShortcut(mContext, mDocument);
+            Utils.createShortcut(activity, documentModel);
             dismiss();
         } else if (idView == R.id.ll_remove_from_recent) {
-            DialogUtils.showConfirmDialog(mContext, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
+            DialogUtils.showConfirmDialog(activity, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
-                    if (mListener != null) {
-                        mListener.onRemoveListener();
+                    if (optionsListener != null) {
+                        optionsListener.onRemoveListener();
                     }
                 }
             });
             dismiss();
         } else if (idView == R.id.ll_delete) {
-            DialogUtils.showConfirmDialog(mContext, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
+            DialogUtils.showConfirmDialog(activity, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
-                    if (mListener != null) {
-                        mListener.onDeleteListener();
+                    if (optionsListener != null) {
+                        optionsListener.onDeleteListener();
                     }
                 }
             });

@@ -7,15 +7,15 @@ import androidx.annotation.NonNull;
 
 import com.example.documenpro.R;
 
-public class LoadingDialog extends Dialog {
-    public LoadingDialog(@NonNull Context context) {
+public class AppLoadingDialog extends Dialog {
+    public AppLoadingDialog(@NonNull Context context) {
         super(context);
         setContentView(R.layout.dialog_loading);
         setCanceledOnTouchOutside(false);
         setCancelable(false);
     }
 
-    public LoadingDialog(@NonNull Context context, int themeResId) {
+    public AppLoadingDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
 }

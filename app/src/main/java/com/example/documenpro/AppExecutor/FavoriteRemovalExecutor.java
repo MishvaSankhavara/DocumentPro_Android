@@ -9,7 +9,7 @@ import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.SelectDocumentActivity;
-import com.example.documenpro.ui.dialog.ProgressDialog;
+import com.example.documenpro.ui.dialog.FileProgressDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 public class FavoriteRemovalExecutor {
 
     private final Executor executor_removeFav = Executors.newSingleThreadExecutor();
-    private ProgressDialog dialog_removeFav;
+    private FileProgressDialog dialog_removeFav;
     private final WeakReference<SelectDocumentActivity> weakReference_removeFav;
 
     private void updateUI_removeFav() {
@@ -46,14 +46,14 @@ public class FavoriteRemovalExecutor {
 
     private void updateProgress_removeFav(int progress_removeFav) {
         if (dialog_removeFav != null && dialog_removeFav.isShowing()) {
-            dialog_removeFav.setProgress(progress_removeFav);
-            dialog_removeFav.setTvPercent(progress_removeFav + "%");
+            dialog_removeFav.updateProgress(progress_removeFav);
+            dialog_removeFav.setPercentText(progress_removeFav + "%");
         }
     }
 
     private void showProgressDialog_removeFav() {
-        dialog_removeFav = new ProgressDialog(weakReference_removeFav.get());
-        dialog_removeFav.setTvTittle(weakReference_removeFav.get().getString(R.string.str_action_removing));
+        dialog_removeFav = new FileProgressDialog(weakReference_removeFav.get());
+        dialog_removeFav.setTitleText(weakReference_removeFav.get().getString(R.string.str_action_removing));
 
         if (dialog_removeFav.getWindow() != null) {
             dialog_removeFav.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

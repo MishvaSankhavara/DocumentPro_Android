@@ -5,8 +5,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-public class PasswordDialog extends Dialog {
-    public PasswordDialog(@NonNull Context context) {
+public class DocumentPasswordDialog extends Dialog {
+    public DocumentPasswordDialog(@NonNull Context context) {
         super(context);
     }
 }

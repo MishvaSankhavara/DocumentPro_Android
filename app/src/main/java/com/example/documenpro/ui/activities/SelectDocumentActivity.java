@@ -41,7 +41,7 @@ import com.example.documenpro.clickListener.OnItemSelectListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
-import com.example.documenpro.ui.dialog.ProgressDialog;
+import com.example.documenpro.ui.dialog.FileProgressDialog;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
 
@@ -312,7 +312,7 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
 
     public static class DeleteMultiFile extends AsyncTask<Void, Integer, Void> {
         WeakReference<SelectDocumentActivity> weakReference;
-        ProgressDialog dialog;
+        FileProgressDialog dialog;
         int progress;
 
         public DeleteMultiFile(SelectDocumentActivity activity) {
@@ -324,8 +324,8 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
         protected void onPreExecute() {
             super.onPreExecute();
             progress = 0;
-            dialog = new ProgressDialog(weakReference.get());
-            dialog.setTvTittle(weakReference.get().getString(R.string.str_action_deleting));
+            dialog = new FileProgressDialog(weakReference.get());
+            dialog.setTitleText(weakReference.get().getString(R.string.str_action_deleting));
             Window window5 = dialog.getWindow();
             assert window5 != null;
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -398,14 +398,14 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             int number = values[0];
-            dialog.setProgress(number);
-            dialog.setTvPercent(number + "%");
+            dialog.updateProgress(number);
+            dialog.setPercentText(number + "%");
         }
     }
 
     public static class RemoveRecent extends AsyncTask<Void, Integer, Void> {
         WeakReference<SelectDocumentActivity> weakReference;
-        ProgressDialog dialog;
+        FileProgressDialog dialog;
         int progress;
 
         public RemoveRecent(SelectDocumentActivity activity) {
@@ -417,8 +417,8 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
         protected void onPreExecute() {
             super.onPreExecute();
             progress = 0;
-            dialog = new ProgressDialog(weakReference.get());
-            dialog.setTvTittle(weakReference.get().getString(R.string.str_action_removing));
+            dialog = new FileProgressDialog(weakReference.get());
+            dialog.setTitleText(weakReference.get().getString(R.string.str_action_removing));
             Window window6 = dialog.getWindow();
             assert window6 != null;
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -464,8 +464,8 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             int number = values[0];
-            dialog.setProgress(number);
-            dialog.setTvPercent(number + "%");
+            dialog.updateProgress(number);
+            dialog.setPercentText(number + "%");
         }
     }
 
