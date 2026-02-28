@@ -146,7 +146,7 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
                     itemView.findViewById(R.id.lock_line);
 
             rootView_MergeFileSelection =
-                    itemView.findViewById(R.id.root);
+                    itemView.findViewById(R.id.cl_dialog_root);
 
             tvName_MergeFileSelection =
                     itemView.findViewById(R.id.tv_name);

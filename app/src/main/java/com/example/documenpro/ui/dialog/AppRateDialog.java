@@ -18,7 +18,7 @@ public class AppRateDialog extends Dialog {
         super(context);
         this.context = context;
         setContentView(R.layout.dialog_rate);
-        findViewById(R.id.tv_bt_negative).setOnClickListener(v -> {
+        findViewById(R.id.btn_cancel).setOnClickListener(v -> {
             dismiss();
             Utils.rateApp(this.context);
             SharedPreferenceUtils.getInstance(this.context).setBoolean(GlobalConstant.RATE_APP, false);

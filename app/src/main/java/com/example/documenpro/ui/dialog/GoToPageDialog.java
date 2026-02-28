@@ -30,8 +30,8 @@ public class GoToPageDialog extends Dialog {
         this.goToPageListener = mListener;
         dialogRootLayout = findViewById(R.id.rootLayout);
         pageNumberInput = findViewById(R.id.et_name);
-        confirmButton = findViewById(R.id.tv_bt_positive);
-        cancelButton = findViewById(R.id.tv_bt_negative);
+        confirmButton = findViewById(R.id.btn_confirm);
+        cancelButton = findViewById(R.id.btn_cancel);
         pageNumberInput.setHint("(1-" + totalPageCount + ")");
         cancelButton.setOnClickListener(v -> dismiss());
         confirmButton.setOnClickListener(v -> {

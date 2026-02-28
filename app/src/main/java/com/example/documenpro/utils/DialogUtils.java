@@ -16,15 +16,15 @@ import com.example.documenpro.ui.dialog.ProtectedFileDialog;
 import com.example.documenpro.ui.dialog.DocumentInfoDialog;
 import com.example.documenpro.ui.dialog.LanguageSelectionDialog;
 import com.example.documenpro.ui.dialog.RemovePdfPasswordDialog;
-import com.example.documenpro.ui.dialog.RenameDialog;
-import com.example.documenpro.ui.dialog.SetPasswordDialog;
+import com.example.documenpro.ui.dialog.FileRenameDialog;
+import com.example.documenpro.ui.dialog.PasswordSetupDialog;
 
 public class DialogUtils {
     public static void showSetPasswordDialog(Activity mContext, PasswordClickListener listener) {
         if (mContext == null) {
             return;
         }
-        SetPasswordDialog renameDialog = new SetPasswordDialog(mContext, listener);
+        PasswordSetupDialog renameDialog = new PasswordSetupDialog(mContext, listener);
         Window window = renameDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -76,7 +76,7 @@ public class DialogUtils {
         if (mContext == null) {
             return;
         }
-        RenameDialog renameDialog = new RenameDialog(mContext, oldName, listener);
+        FileRenameDialog renameDialog = new FileRenameDialog(mContext, oldName, listener);
         Window window = renameDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

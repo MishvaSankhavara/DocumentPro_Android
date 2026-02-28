@@ -73,7 +73,7 @@ import com.example.documenpro.ui.dialog.AppLoadingDialog;
 import com.example.documenpro.ui.dialog.MoreDialog;
 import com.example.documenpro.ui.dialog.RequestPermissionDialog;
 import com.example.documenpro.ui.dialog.AppRateDialog;
-import com.example.documenpro.ui.dialog.SortByDialog;
+import com.example.documenpro.ui.dialog.SortOptionsDialog;
 import com.shockwave.pdfium.PdfPasswordException;
 import com.shockwave.pdfium.PdfiumCore;
 import com.tom_roush.pdfbox.pdmodel.PDDocument;
@@ -1013,7 +1013,7 @@ public class Utils {
         if (mContext == null) {
             return;
         }
-        SortByDialog moreDialog = new SortByDialog(mContext, listener);
+        SortOptionsDialog moreDialog = new SortOptionsDialog(mContext, listener);
         Window window = moreDialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

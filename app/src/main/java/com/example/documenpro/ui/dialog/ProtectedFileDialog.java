@@ -14,7 +14,7 @@ public class ProtectedFileDialog extends Dialog {
         setContentView(R.layout.dialog_not_print);
         AppCompatTextView tvDescription = findViewById(R.id.tv_content);
         tvDescription.setText(titleTextResId);
-        findViewById(R.id.tv_bt_ok).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_confirm_sort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

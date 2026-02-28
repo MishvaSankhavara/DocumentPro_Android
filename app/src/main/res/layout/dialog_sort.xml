@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/rg_sort_options"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitleDialog">
 
             <RadioButton
-                android:id="@+id/rbTimeOld"
+                android:id="@+id/rb_date_oldest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -55,7 +55,7 @@
                 android:theme="@style/CustomBottomSheetDialogTheme" />
 
             <RadioButton
-                android:id="@+id/rbTimeNew"
+                android:id="@+id/rb_date_newest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -71,7 +71,7 @@
                 android:theme="@style/CustomBottomSheetDialogTheme" />
 
             <RadioButton
-                android:id="@+id/rbAZ"
+                android:id="@+id/rb_name_az"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/bg_radio"
@@ -86,7 +86,7 @@
                 android:theme="@style/CustomBottomSheetDialogTheme" />
 
             <RadioButton
-                android:id="@+id/rbZA"
+                android:id="@+id/rb_name_za"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/bg_radio"
@@ -100,7 +100,7 @@
                 android:theme="@style/CustomBottomSheetDialogTheme" />
 
             <RadioButton
-                android:id="@+id/rbLargest"
+                android:id="@+id/rb_size_largest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/bg_radio"
@@ -114,7 +114,7 @@
                 android:theme="@style/CustomBottomSheetDialogTheme" />
 
             <RadioButton
-                android:id="@+id/rbMinimum"
+                android:id="@+id/rb_size_smallest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/bg_radio"
@@ -129,7 +129,7 @@
         </RadioGroup>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_bt_ok"
+            android:id="@+id/btn_confirm_sort"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginStart="24dp"
@@ -143,13 +143,13 @@
             android:textAllCaps="true"
             android:textColor="#ffffff"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup" />
+            app:layout_constraintTop_toBottomOf="@id/rg_sort_options" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bt_ok" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_confirm_sort" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_bt_negative"
+        android:id="@+id/btn_cancel"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="24dp"
@@ -38,13 +38,13 @@
         android:text="@string/str_action_cancel"
         android:textColor="@color/colorTextNagativeButton"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_bt_positive"
+        app:layout_constraintEnd_toStartOf="@+id/btn_confirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:textAllCaps="true" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_bt_positive"
+        android:id="@+id/btn_confirm"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="12dp"
@@ -56,8 +56,8 @@
         android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_bt_negative"
-        app:layout_constraintTop_toTopOf="@+id/tv_bt_negative"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+        app:layout_constraintTop_toTopOf="@+id/btn_cancel"
         app:textAllCaps="true" />
 
     <include
@@ -72,6 +72,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bt_positive"
+        app:layout_constraintTop_toBottomOf="@+id/btn_confirm"
         app:layout_goneMarginTop="24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

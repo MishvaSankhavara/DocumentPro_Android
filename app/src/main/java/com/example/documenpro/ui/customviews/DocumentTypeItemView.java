@@ -24,7 +24,7 @@ public class DocumentTypeItemView extends LinearLayout {
     public DocumentTypeItemView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.item_document_type, this, true);
-        countTextView = findViewById(R.id.tv_hint);
+        countTextView = findViewById(R.id.tv_dialog_description);
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FileTypeItem);
             int iconResId = typedArray.getResourceId(R.styleable.FileTypeItem_imgFileType, R.drawable.ic_document_all);

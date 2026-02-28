@@ -29,7 +29,7 @@ public class DocumentInfoDialog extends Dialog {
         filePathText.setText(document.getFileUri_DocModel());
         fileSizeText.setText(Formatter.formatFileSize(context, document.getLength_DocModel()));
         lastModifiedText.setText(Utils.formatDateToHumanReadable(document.getLastModified_DocModel()));
-        findViewById(R.id.tv_bt_ok).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_confirm_sort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

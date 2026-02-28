@@ -85,8 +85,8 @@ public class ActionConfirmDialog extends Dialog {
 
     private void initializeViews() {
         tvTitle = findViewById(R.id.tv_title);
-        tvMessage = findViewById(R.id.tv_hint);
-        btnCancel = findViewById(R.id.tv_bt_negative);
-        btnConfirm = findViewById(R.id.tv_bt_positive);
+        tvMessage = findViewById(R.id.tv_dialog_description);
+        btnCancel = findViewById(R.id.btn_cancel);
+        btnConfirm = findViewById(R.id.btn_confirm);
     }
 }

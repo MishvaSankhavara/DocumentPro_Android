@@ -35,7 +35,7 @@ import com.example.documenpro.docHelper.ItemTouchCallback;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.OnDragStartListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.ui.dialog.RenameDialog;
+import com.example.documenpro.ui.dialog.FileRenameDialog;
 import com.example.documenpro.utils.DialogUtils;
 
 import java.util.ArrayList;
@@ -153,7 +153,7 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
 
         mergeButtonText.setOnClickListener(view -> {
             String sb2 = "Merged" + System.currentTimeMillis();
-            RenameDialog dialog = new RenameDialog(ReorderMergePdfActivity.this, sb2, nameFile -> {
+            FileRenameDialog dialog = new FileRenameDialog(ReorderMergePdfActivity.this, sb2, nameFile -> {
                 Intent intent = new Intent(ReorderMergePdfActivity.this, ProcessingTaskActivity.class);
                 intent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_MERGE);
                 intent.putExtra(GlobalConstant.MERGE_PDF_FILE_NAME, nameFile);

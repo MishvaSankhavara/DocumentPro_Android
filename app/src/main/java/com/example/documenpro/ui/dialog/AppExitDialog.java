@@ -14,7 +14,7 @@ public class AppExitDialog extends Dialog {
         super(context);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_exit, null);
         setContentView(view);
-        findViewById(R.id.tv_bt_positive).setOnClickListener(v -> context.finish());
-        findViewById(R.id.tv_bt_negative).setOnClickListener(v -> dismiss());
+        findViewById(R.id.btn_confirm).setOnClickListener(v -> context.finish());
+        findViewById(R.id.btn_cancel).setOnClickListener(v -> dismiss());
     }
 }

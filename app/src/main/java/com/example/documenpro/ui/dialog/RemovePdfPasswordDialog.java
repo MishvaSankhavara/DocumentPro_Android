@@ -47,17 +47,17 @@ public class RemovePdfPasswordDialog extends Dialog {
         this.passwordClickListener = listener;
         this.pdfReaderModel = pdfModel;
         titleTextView = findViewById(R.id.tv_title);
-        descriptionTextView = findViewById(R.id.tv_hint);
-        errorTextView = findViewById(R.id.tvError);
+        descriptionTextView = findViewById(R.id.tv_dialog_description);
+        errorTextView = findViewById(R.id.tv_error_message);
         titleTextView.setText(R.string.dialog_remove_password_tittle);
         descriptionTextView.setText(R.string.dialog_remove_password_des);
         errorTextView.setText(R.string.dialog_password_invalid);
-        dialogRootLayout = findViewById(R.id.root);
-        passwordInputField = findViewById(R.id.et_password);
-        errorContainer = findViewById(R.id.ll_error_tip);
+        dialogRootLayout = findViewById(R.id.cl_dialog_root);
+        passwordInputField = findViewById(R.id.et_password_input);
+        errorContainer = findViewById(R.id.ll_error_container);
         this.passwordInputField.setInputType(128);
         this.passwordInputField.setTransformationMethod(new PasswordTransformationMethod());
-        togglePasswordVisibilityButton = findViewById(R.id.iv_visible);
+        togglePasswordVisibilityButton = findViewById(R.id.iv_toggle_password_visibility);
         togglePasswordVisibilityButton.setOnClickListener(view -> {
             int i;
             boolean z = !isPasswordVisible;
@@ -75,8 +75,8 @@ public class RemovePdfPasswordDialog extends Dialog {
                 passwordInputField.setSelection(text.toString().length());
             }
         });
-        findViewById(R.id.tv_bt_negative).setOnClickListener(view -> dismiss());
-        findViewById(R.id.tv_bt_positive).setOnClickListener(view -> {
+        findViewById(R.id.btn_cancel).setOnClickListener(view -> dismiss());
+        findViewById(R.id.btn_confirm).setOnClickListener(view -> {
             PDDocument pdDocument;
             if (passwordInputField.getText() != null && passwordInputField.getText().length() > 0) {
                 try {
