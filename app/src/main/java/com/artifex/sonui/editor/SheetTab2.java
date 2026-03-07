@@ -63,7 +63,7 @@ public class SheetTab2 extends LinearLayout {
             Paint var2 = new Paint();
             var2.setColor(ContextCompat.getColor(this.getContext(), R.color.editor_excel_sheet_tab_highlight_color));
             var2.setStyle(Paint.Style.STROKE);
-            var2.setStrokeWidth((float) Utilities.convertDpToPixel((float) this.getContext().getResources().getInteger(R.integer.sodk_editor_selected_page_border_width)));
+            var2.setStrokeWidth((float) Utilities.convertDpToPixel((float) this.getContext().getResources().getInteger(R.integer.editor_selected_page_border_width)));
             var1.drawRect(new Rect(0, 0, this.getWidth(), this.getHeight()), var2);
         }
 

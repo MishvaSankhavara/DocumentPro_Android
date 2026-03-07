@@ -1011,7 +1011,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                 }
                             });
                             if (NUIDocView.this.usePagesView()) {
-                                float var2 = (float) NUIDocView.this.getResources().getInteger(R.integer.sodk_editor_pagelist_width_percentage) / 100.0F;
+                                float var2 = (float) NUIDocView.this.getResources().getInteger(R.integer.editor_pagelist_width_percentage) / 100.0F;
                                 NUIDocView.this.mDocListPageViews.setScale(var2);
                             }
                         } else {

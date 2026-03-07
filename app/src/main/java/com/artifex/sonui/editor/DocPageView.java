@@ -92,7 +92,7 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
         this.y = var4;
         this.setSelectedBorderColor(ContextCompat.getColor(this.getContext(), R.color.editor_selected_page_border_color));
         var4.setStyle(Style.STROKE);
-        var4.setStrokeWidth((float) Utilities.convertDpToPixel((float) var1.getResources().getInteger(R.integer.sodk_editor_selected_page_border_width)));
+        var4.setStrokeWidth((float) Utilities.convertDpToPixel((float) var1.getResources().getInteger(R.integer.editor_selected_page_border_width)));
         if (F == null) {
             Paint var3 = new Paint();
             F = var3;
