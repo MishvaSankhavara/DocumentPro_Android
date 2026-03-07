@@ -319,27 +319,27 @@
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="toolbar">@style/Toolbar.Zhihu</item>
-        <item name="album.dropdown.title.color">@color/zhihu_album_dropdown_title_text</item>
-        <item name="album.dropdown.count.color">@color/zhihu_album_dropdown_count_text</item>
+        <item name="album.dropdown.title.color">@color/app_light_album_dropdown_title_text</item>
+        <item name="album.dropdown.count.color">@color/app_light_album_dropdown_count_text</item>
         <item name="album.element.color">@android:color/white</item>
-        <item name="album.thumbnail.placeholder">@color/zhihu_album_dropdown_thumbnail_placeholder</item>
+        <item name="album.thumbnail.placeholder">@color/app_light_album_thumbnail_placeholder</item>
         <item name="album.emptyView">@drawable/ic_empty_pdf</item>
-        <item name="album.emptyView.textColor">@color/zhihu_album_empty_view</item>
-        <item name="item.placeholder">@color/zhihu_item_placeholder</item>
-        <item name="item.checkCircle.backgroundColor">@color/zhihu_item_checkCircle_backgroundColor</item>
-        <item name="item.checkCircle.borderColor">@color/zhihu_item_checkCircle_borderColor</item>
-        <item name="page.bg">@color/zhihu_page_bg</item>
-        <item name="bottomToolbar.bg">@color/zhihu_bottom_toolbar_bg</item>
+        <item name="album.emptyView.textColor">@color/app_light_album_empty_view</item>
+        <item name="item.placeholder">@color/app_light_item_placeholder</item>
+        <item name="item.checkCircle.backgroundColor">@color/app_light_item_check_circle_background</item>
+        <item name="item.checkCircle.borderColor">@color/app_light_item_check_circle_border</item>
+        <item name="page.bg">@color/app_light_page_background</item>
+        <item name="bottomToolbar.bg">@color/app_light_bottom_toolbar_background</item>
         <item name="bottomToolbar.preview.textColor">@color/preview_bottom_toolbar</item>
         <item name="bottomToolbar.apply.textColor">@color/apply_bottom_toolbar</item>
         <item name="preview.bottomToolbar.back.textColor">
-            @color/zhihu_preview_bottom_toolbar_back_text
+            @color/app_light_preview_toolbar_back_text
         </item>
         <item name="preview.bottomToolbar.apply.textColor">
             @color/apply_preview_bottom_toolbar
         </item>
         <item name="listPopupWindowStyle">@style/Popup.Zhihu</item>
-        <item name="capture.textColor">@color/zhihu_capture</item>
+        <item name="capture.textColor">@color/app_light_capture_icon</item>
     </style>
 
     <style name="Toolbar.Zhihu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -347,7 +347,7 @@
     </style>
 
     <style name="Popup.Zhihu" parent="Widget.AppCompat.Light.ListPopupWindow">
-        <item name="android:popupBackground">@color/zhihu_album_popup_bg</item>
+        <item name="android:popupBackground">@color/app_light_album_popup_background</item>
     </style>
 
     //===================================== Theme Dracula ==========================================
