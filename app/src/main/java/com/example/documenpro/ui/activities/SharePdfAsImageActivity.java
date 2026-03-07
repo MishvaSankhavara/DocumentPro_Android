@@ -187,7 +187,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         MenuInflater inflater = getMenuInflater();
         this.optionsMenu = menu;
 
-        inflater.inflate(R.menu.menu_activity_select, menu);
+        inflater.inflate(R.menu.menu_act_select, menu);
         return true;
     }
 

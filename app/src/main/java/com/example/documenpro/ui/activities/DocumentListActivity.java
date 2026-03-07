@@ -142,7 +142,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_list_file_menu, menu);
+        inflater.inflate(R.menu.activity_file_list_menu, menu);
         return true;
     }
 

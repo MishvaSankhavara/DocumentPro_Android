@@ -79,7 +79,7 @@
             app:layout_constraintBottom_toTopOf="@id/my_template_banner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/menu_main_bottom" />
+            app:menu="@menu/main_bottom_menu" />
         <FrameLayout
             android:id="@+id/my_template_banner"
             android:layout_width="match_parent"

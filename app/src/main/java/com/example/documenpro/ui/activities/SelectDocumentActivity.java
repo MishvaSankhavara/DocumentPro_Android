@@ -243,7 +243,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         this.optionsMenu = menu;
-        inflater.inflate(R.menu.menu_activity_select, menu);
+        inflater.inflate(R.menu.menu_act_select, menu);
         return true;
     }
 
