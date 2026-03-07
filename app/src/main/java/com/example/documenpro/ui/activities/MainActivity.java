@@ -41,9 +41,9 @@ import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch;
-import com.example.documenpro.ui.fragments.FilesFragment;
-import com.example.documenpro.ui.fragments.SettingFragment;
-import com.example.documenpro.ui.fragments.ToolsFragment;
+import com.example.documenpro.ui.fragments.FragmentFiles;
+import com.example.documenpro.ui.fragments.FragmentSetting;
+import com.example.documenpro.ui.fragments.FragmentTools;
 import com.example.documenpro.utils.AdsUtils;
 import com.example.documenpro.utils.DialogUtils;
 import com.example.documenpro.utils.Utils;
@@ -145,9 +145,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupViewPager() {
         PagerViewAdapter viewPagerAdapter = new PagerViewAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFrag(new FilesFragment(this), "Home");
-        viewPagerAdapter.addFrag(new ToolsFragment(this), "Files");
-        viewPagerAdapter.addFrag(new SettingFragment(this), "Settings");
+        viewPagerAdapter.addFrag(new FragmentFiles(this), "Home");
+        viewPagerAdapter.addFrag(new FragmentTools(this), "Files");
+        viewPagerAdapter.addFrag(new FragmentSetting(this), "Settings");
 
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(this);

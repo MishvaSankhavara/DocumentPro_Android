@@ -23,12 +23,12 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
-import com.example.documenpro.ui.fragments.search.AllFileFragment;
-import com.example.documenpro.ui.fragments.search.ExcelFragment;
-import com.example.documenpro.ui.fragments.search.PdfFragment;
-import com.example.documenpro.ui.fragments.search.PptFragment;
-import com.example.documenpro.ui.fragments.search.TxtFragment;
-import com.example.documenpro.ui.fragments.search.WordFragment;
+import com.example.documenpro.ui.fragments.search.FragmentAllFile;
+import com.example.documenpro.ui.fragments.search.FragmentExcel;
+import com.example.documenpro.ui.fragments.search.FragmentPdf;
+import com.example.documenpro.ui.fragments.search.FragmentPpt;
+import com.example.documenpro.ui.fragments.search.FragmentTxt;
+import com.example.documenpro.ui.fragments.search.FragmentWord;
 import com.example.documenpro.viewmodel.SearchViewModel;
 
 import java.util.Objects;
@@ -119,12 +119,12 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
         ViewPager viewPager = findViewById(R.id.vp_content);
         findViewById(R.id.tv_back).setOnClickListener(view -> finish());
         PagerViewAdapter adapter = new PagerViewAdapter(getSupportFragmentManager());
-        adapter.addFrag(new AllFileFragment(this), getResources().getString(R.string.document_all));
-        adapter.addFrag(new ExcelFragment(this), getResources().getString(R.string.document_excel));
-        adapter.addFrag(new PdfFragment(this), getResources().getString(R.string.document_pdf));
-        adapter.addFrag(new WordFragment(this), getResources().getString(R.string.document_word));
-        adapter.addFrag(new PptFragment(this), getResources().getString(R.string.document_ppt));
-        adapter.addFrag(new TxtFragment(this), getResources().getString(R.string.document_txt));
+        adapter.addFrag(new FragmentAllFile(this), getResources().getString(R.string.document_all));
+        adapter.addFrag(new FragmentExcel(this), getResources().getString(R.string.document_excel));
+        adapter.addFrag(new FragmentPdf(this), getResources().getString(R.string.document_pdf));
+        adapter.addFrag(new FragmentWord(this), getResources().getString(R.string.document_word));
+        adapter.addFrag(new FragmentPpt(this), getResources().getString(R.string.document_ppt));
+        adapter.addFrag(new FragmentTxt(this), getResources().getString(R.string.document_txt));
 
 
         viewPager.setAdapter(adapter);

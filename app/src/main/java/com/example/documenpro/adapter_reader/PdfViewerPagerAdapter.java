@@ -6,12 +6,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.docpro.scanner.result.ResultViewerActivity;
-import com.example.documenpro.ui.fragments.yourpdf.CompressFragment;
-import com.example.documenpro.ui.fragments.yourpdf.ImageFragment;
-import com.example.documenpro.ui.fragments.yourpdf.ImageToPdfFragment;
-import com.example.documenpro.ui.fragments.yourpdf.LockFragment;
-import com.example.documenpro.ui.fragments.yourpdf.MergeFragment;
-import com.example.documenpro.ui.fragments.yourpdf.SplitFragment;
+import com.example.documenpro.ui.fragments.yourpdf.FragmentCompress;
+import com.example.documenpro.ui.fragments.yourpdf.FragmentImage;
+import com.example.documenpro.ui.fragments.yourpdf.FragmentImageToPdf;
+import com.example.documenpro.ui.fragments.yourpdf.FragmentLock;
+import com.example.documenpro.ui.fragments.yourpdf.FragmentMerge;
+import com.example.documenpro.ui.fragments.yourpdf.FragmentSplit;
 
 public class PdfViewerPagerAdapter extends FragmentStateAdapter {
 
@@ -37,23 +37,23 @@ public class PdfViewerPagerAdapter extends FragmentStateAdapter {
         switch (position_PdfViewerPager) {
 
             case 5:
-                return new ImageFragment(mActivity_PdfViewerPager);
+                return new FragmentImage(mActivity_PdfViewerPager);
 
             case 4:
-                return new LockFragment(mActivity_PdfViewerPager);
+                return new FragmentLock(mActivity_PdfViewerPager);
 
             case 3:
-                return new ImageToPdfFragment(mActivity_PdfViewerPager);
+                return new FragmentImageToPdf(mActivity_PdfViewerPager);
 
             case 2:
-                return new MergeFragment(mActivity_PdfViewerPager);
+                return new FragmentMerge(mActivity_PdfViewerPager);
 
             case 1:
-                return new SplitFragment(mActivity_PdfViewerPager);
+                return new FragmentSplit(mActivity_PdfViewerPager);
 
             case 0:
             default:
-                return new CompressFragment(mActivity_PdfViewerPager);
+                return new FragmentCompress(mActivity_PdfViewerPager);
         }
     }
 }
