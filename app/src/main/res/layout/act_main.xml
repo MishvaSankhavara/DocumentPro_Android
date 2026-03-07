@@ -74,7 +74,7 @@
             app:itemTextColor="@color/main_menu"
             app:layout_constraintTop_toBottomOf="@id/divider"
             app:labelVisibilityMode="labeled"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+            app:layout_behavior="@string/hide_bottom_on_scroll"
             app:layout_constraintBaseline_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="@id/my_template_banner"
             app:layout_constraintEnd_toEndOf="parent"

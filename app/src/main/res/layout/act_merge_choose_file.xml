@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
         android:includeFontPadding="false"
-        android:text="@string/str_no_files_yet"
+        android:text="@string/no_files_yet"
         android:textColor="@color/colorSolidText"
         android:textSize="18sp"
         android:visibility="gone"
@@ -89,7 +89,7 @@
             android:fontFamily="@font/semibold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/str_action_continue"
+            android:text="@string/action_continue"
             android:textAllCaps="true"
             android:textColor="@color/app_white"
             android:textSize="18sp" />

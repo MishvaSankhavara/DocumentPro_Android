@@ -53,7 +53,7 @@ public class FavoriteRemovalExecutor {
 
     private void showProgressDialog_removeFav() {
         dialog_removeFav = new FileProgressDialog(weakReference_removeFav.get());
-        dialog_removeFav.setTitleText(weakReference_removeFav.get().getString(R.string.str_action_removing));
+        dialog_removeFav.setTitleText(weakReference_removeFav.get().getString(R.string.action_removing));
 
         if (dialog_removeFav.getWindow() != null) {
             dialog_removeFav.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

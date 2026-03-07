@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/sodk_editor_fx_button"
-            android:text="@string/sodk_editor_fx"
+            android:text="@string/editor_fx"
             android:textColor="@color/editor_fx_textcolor"
             android:textSize="15sp"
             android:textStyle="italic" />

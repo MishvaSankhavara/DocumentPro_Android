@@ -68,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             );
             closeDb_DatabaseHelper();
         } catch (Exception e) {
-            Toast.makeText(this.context_DatabaseHelper, R.string.str_action_failed, Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context_DatabaseHelper, R.string.action_failed, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }

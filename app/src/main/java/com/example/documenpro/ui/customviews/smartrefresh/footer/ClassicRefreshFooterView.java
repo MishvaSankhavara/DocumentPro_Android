@@ -106,49 +106,49 @@ public class ClassicRefreshFooterView extends RefreshClassicComponent<ClassicRef
         } else if(REFRESH_FOOTER_TEXT_PULLING != null) {
             textPulling = REFRESH_FOOTER_TEXT_PULLING;
         } else {
-            textPulling = context.getString(R.string.srl_footer_pulling);
+            textPulling = context.getString(R.string.footer_pulling);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextRelease)){
             textRelease = ta.getString(R.styleable.ClassicsFooter_srlTextRelease);
         } else if(REFRESH_FOOTER_TEXT_RELEASE != null) {
             textRelease = REFRESH_FOOTER_TEXT_RELEASE;
         } else {
-            textRelease = context.getString(R.string.srl_footer_release);
+            textRelease = context.getString(R.string.footer_release);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextLoading)){
             textLoading = ta.getString(R.styleable.ClassicsFooter_srlTextLoading);
         } else if(REFRESH_FOOTER_TEXT_LOADING != null) {
             textLoading = REFRESH_FOOTER_TEXT_LOADING;
         } else {
-            textLoading = context.getString(R.string.srl_footer_loading);
+            textLoading = context.getString(R.string.footer_loading);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextRefreshing)){
             textRefreshing = ta.getString(R.styleable.ClassicsFooter_srlTextRefreshing);
         } else if(REFRESH_FOOTER_TEXT_REFRESHING != null) {
             textRefreshing = REFRESH_FOOTER_TEXT_REFRESHING;
         } else {
-            textRefreshing = context.getString(R.string.srl_footer_refreshing);
+            textRefreshing = context.getString(R.string.footer_refreshing);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextFinish)){
             textFinish = ta.getString(R.styleable.ClassicsFooter_srlTextFinish);
         } else if(REFRESH_FOOTER_TEXT_FINISH != null) {
             textFinish = REFRESH_FOOTER_TEXT_FINISH;
         } else {
-            textFinish = context.getString(R.string.srl_footer_finish);
+            textFinish = context.getString(R.string.footer_finish);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextFailed)){
             textFailed = ta.getString(R.styleable.ClassicsFooter_srlTextFailed);
         } else if(REFRESH_FOOTER_TEXT_FAILED != null) {
             textFailed = REFRESH_FOOTER_TEXT_FAILED;
         } else {
-            textFailed = context.getString(R.string.srl_footer_failed);
+            textFailed = context.getString(R.string.footer_failed);
         }
         if(ta.hasValue(R.styleable.ClassicsFooter_srlTextNothing)){
             textNoMoreData = ta.getString(R.styleable.ClassicsFooter_srlTextNothing);
         } else if(REFRESH_FOOTER_TEXT_NOTHING != null) {
             textNoMoreData = REFRESH_FOOTER_TEXT_NOTHING;
         } else {
-            textNoMoreData = context.getString(R.string.srl_footer_nothing);
+            textNoMoreData = context.getString(R.string.footer_nothing);
         }
 
         ta.recycle();

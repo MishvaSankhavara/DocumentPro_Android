@@ -81,7 +81,7 @@
             android:name=".ui.activities.ViewOfficeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:exported="true"
-            android:label="@string/sodk_app_name"
+            android:label="@string/name_app"
             android:launchMode="singleTask"
             android:theme="@style/ListFileTheme"
             android:windowSoftInputMode="adjustResize">

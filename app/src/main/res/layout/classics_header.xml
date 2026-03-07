@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/medium"
             android:maxLines="1"
-            android:text="@string/srl_header_pulling"
+            android:text="@string/header_pulling"
             android:textColor="@color/colorSolidText"
             android:textSize="15sp" />
 
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
             android:maxLines="1"
-            android:text="@string/srl_header_update"
+            android:text="@string/header_update"
             android:textColor="@color/colorSolidText"
             android:textSize="12sp" />
     </LinearLayout>

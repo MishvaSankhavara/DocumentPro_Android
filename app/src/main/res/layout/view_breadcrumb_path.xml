@@ -17,7 +17,7 @@
                 android:id="@+id/storage_icon"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:contentDescription="@string/sodk_editor_go_up"
+                android:contentDescription="@string/editor_go_up"
                 android:padding="@dimen/_5sdp"
                 android:src="@drawable/th_btn_green" />
 

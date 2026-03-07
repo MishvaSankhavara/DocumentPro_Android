@@ -49,9 +49,9 @@ public class ChoosePathActivity extends BaseActivity {
         fileBrowser.a(this, var4);
         AppCompatTextView tvSave = this.findViewById(R.id.save_button);
         if (b == 3) {
-            var4 = getString(R.string.sodk_editor_copy);
+            var4 = getString(R.string.editor_copy);
         } else {
-            var4 = getString(R.string.sodk_editor_save);
+            var4 = getString(R.string.editor_save);
         }
 
         tvSave.setText(var4);

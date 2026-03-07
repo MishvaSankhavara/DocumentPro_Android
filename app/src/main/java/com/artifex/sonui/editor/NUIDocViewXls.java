@@ -298,11 +298,11 @@ public class NUIDocViewXls extends NUIDocView {
                         SheetTab2 mSheetTab2 = (SheetTab2) var1;
                         String mSheetTabName = mSheetTab2.getText();
                         final int mSheetTab2SheetNumber = mSheetTab2.getSheetNumber();
-                        String var4 = NUIDocViewXls.this.getContext().getString(R.string.sodk_editor_delete_worksheet_q);
-                        String var5 = NUIDocViewXls.this.getContext().getString(R.string.sodk_editor_do_you_want_to_delete_the_sheet) +
+                        String var4 = NUIDocViewXls.this.getContext().getString(R.string.editor_delete_worksheet);
+                        String var5 = NUIDocViewXls.this.getContext().getString(R.string.editor_delete_sheet_confirm) +
                                 mSheetTabName +
                                 "\" ?";
-                        Utilities.yesNoMessage(mActivity, var4, var5, NUIDocViewXls.this.getContext().getString(R.string.sodk_editor_yes), NUIDocViewXls.this.getContext().getString(R.string.sodk_editor_no), new Runnable() {
+                        Utilities.yesNoMessage(mActivity, var4, var5, NUIDocViewXls.this.getContext().getString(R.string.editor_yes), NUIDocViewXls.this.getContext().getString(R.string.editor_no), new Runnable() {
                             public void run() {
                                 NUIDocViewXls.this.H = true;
                                 NUIDocViewXls.this.getDoc().clearSelection();
@@ -452,7 +452,7 @@ public class NUIDocViewXls extends NUIDocView {
     }
 
     protected String getPageNumberText() {
-        return String.format(this.getContext().getString(R.string.sodk_editor_sheet_d_of_d), this.getCurrentSheet() + 1, this.getPageCount());
+        return String.format(this.getContext().getString(R.string.editor_sheet_d_of_d), this.getCurrentSheet() + 1, this.getPageCount());
     }
 
 

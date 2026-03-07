@@ -139,56 +139,56 @@ public class ClassicRefreshHeaderView extends RefreshClassicComponent<ClassicRef
         } else if (DEFAULT_TEXT_PULLING != null) {
             textPulling = DEFAULT_TEXT_PULLING;
         } else {
-            textPulling = context.getString(R.string.srl_header_pulling);
+            textPulling = context.getString(R.string.header_pulling);
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextLoading)) {
             textLoading = ta.getString(R.styleable.ClassicsHeader_srlTextLoading);
         } else if (DEFAULT_TEXT_LOADING != null) {
             textLoading = DEFAULT_TEXT_LOADING;
         } else {
-            textLoading = context.getString(R.string.srl_header_loading);
+            textLoading = context.getString(R.string.header_loading);
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextRelease)) {
             textRelease = ta.getString(R.styleable.ClassicsHeader_srlTextRelease);
         } else if (DEFAULT_TEXT_RELEASE != null) {
             textRelease = DEFAULT_TEXT_RELEASE;
         } else {
-            textRelease = context.getString(R.string.srl_header_release);
+            textRelease = context.getString(R.string.header_release);
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextFinish)) {
             textFinish = ta.getString(R.styleable.ClassicsHeader_srlTextFinish);
         } else if (DEFAULT_TEXT_FINISH != null) {
             textFinish = DEFAULT_TEXT_FINISH;
         } else {
-            textFinish = context.getString(R.string.srl_header_finish);
+            textFinish = context.getString(R.string.header_finish);
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextFailed)) {
             textFailed = ta.getString(R.styleable.ClassicsHeader_srlTextFailed);
         } else if (DEFAULT_TEXT_FAILED != null) {
             textFailed = DEFAULT_TEXT_FAILED;
         } else {
-            textFailed = context.getString(R.string.srl_header_failed);
+            textFailed = context.getString(R.string.header_failed);
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextSecondary)) {
             textSecondary = ta.getString(R.styleable.ClassicsHeader_srlTextSecondary);
         } else if (DEFAULT_TEXT_SECONDARY != null) {
             textSecondary = DEFAULT_TEXT_SECONDARY;
         } else {
-            textSecondary = context.getString(R.string.srl_header_secondary);
+            textSecondary = context.getString(R.string.header_secondary);
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextRefreshing)) {
             textRefreshing = ta.getString(R.styleable.ClassicsHeader_srlTextRefreshing);
         } else if (DEFAULT_TEXT_REFRESHING != null) {
             textRefreshing = DEFAULT_TEXT_REFRESHING;
         } else {
-            textRefreshing = context.getString(R.string.srl_header_refreshing);
+            textRefreshing = context.getString(R.string.header_refreshing);
         }
         if (ta.hasValue(R.styleable.ClassicsHeader_srlTextUpdate)) {
             textUpdate = ta.getString(R.styleable.ClassicsHeader_srlTextUpdate);
         } else if (DEFAULT_TEXT_UPDATE != null) {
             textUpdate = DEFAULT_TEXT_UPDATE;
         } else {
-            textUpdate = context.getString(R.string.srl_header_update);
+            textUpdate = context.getString(R.string.header_update);
         }
         lastUpdateFormat = new SimpleDateFormat(textUpdate, Locale.getDefault());
 

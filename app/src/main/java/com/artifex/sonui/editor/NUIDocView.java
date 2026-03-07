@@ -571,7 +571,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
             this.m = new p() {
                 public void a() {
                     NUIDocView.this.v();
-                    Utilities.yesNoMessage((Activity) NUIDocView.this.getContext(), NUIDocView.this.getResources().getString(R.string.sodk_editor_no_more_found), NUIDocView.this.getResources().getString(R.string.sodk_editor_keep_searching), NUIDocView.this.getResources().getString(R.string.sodk_editor_str_continue), NUIDocView.this.getResources().getString(R.string.sodk_editor_stop), new Runnable() {
+                    Utilities.yesNoMessage((Activity) NUIDocView.this.getContext(), NUIDocView.this.getResources().getString(R.string.editor_no_more_found), NUIDocView.this.getResources().getString(R.string.editor_keep_searching), NUIDocView.this.getResources().getString(R.string.editor_continue), NUIDocView.this.getResources().getString(R.string.editor_stop), new Runnable() {
                         public void run() {
                             (new Handler()).post(new Runnable() {
                                 public void run() {
@@ -718,11 +718,11 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         NUIDocView var3 = NUIDocView.this;
                         var3.progressDialog = new ProgressDialog(var3.getContext(), R.style.sodk_editor_alert_dialog_style);
                         ProgressDialog var4 = NUIDocView.this.progressDialog;
-                        String var2 = NUIDocView.this.getResources().getString(R.string.sodk_editor_searching) +
+                        String var2 = NUIDocView.this.getResources().getString(R.string.editor_searching) +
                                 "...";
                         var4.setMessage(var2);
                         NUIDocView.this.progressDialog.setCancelable(false);
-                        NUIDocView.this.progressDialog.setButton(-2, NUIDocView.this.getResources().getString(R.string.sodk_editor_cancel), new DialogInterface.OnClickListener() {
+                        NUIDocView.this.progressDialog.setButton(-2, NUIDocView.this.getResources().getString(R.string.editor_cancel), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface var1, int var2) {
                                 NUIDocView.this.getDoc().cancelSearch();
                             }
@@ -991,7 +991,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                         NUIDocView.this.dismissProgressDialog();
                                         if (!NUIDocView.this.mSession.isCancelled() || var1 != 6) {
                                             String var3 = Utilities.getOpenErrorDescription(NUIDocView.this.getContext(), var1);
-                                            Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.sodk_editor_error), var3);
+                                            Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.editor_error), var3);
                                         }
                                     }
 
@@ -1053,7 +1053,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                                 NUIDocView.this.dismissProgressDialog();
                                                 if (!NUIDocView.this.mSession.isCancelled() || var1 != 6) {
                                                     String var3 = Utilities.getOpenErrorDescription(NUIDocView.this.getContext(), var1);
-                                                    Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.sodk_editor_error), var3);
+                                                    Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.editor_error), var3);
                                                 }
 
                                             }
@@ -1081,14 +1081,14 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                     if (var3 != null && var3.equalsIgnoreCase("content")) {
                                         String var7 = com.artifex.solib.a.b(NUIDocView.this.getContext(), var6);
                                         if (var7.equals("---fileOpen")) {
-                                            Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.sodk_editor_content_error), NUIDocView.this.getContext().getString(R.string.sodk_editor_error_opening_from_other_app));
+                                            Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.editor_content_error), NUIDocView.this.getContext().getString(R.string.editor_error_opening_from_other_app));
                                             return;
                                         }
 
                                         if (var7.startsWith("---")) {
-                                            String var4 = NUIDocView.this.getResources().getString(R.string.sodk_editor_cant_create_temp_file);
-                                            var3 = NUIDocView.this.getContext().getString(R.string.sodk_editor_content_error);
-                                            String var11 = NUIDocView.this.getContext().getString(R.string.sodk_editor_error_opening_from_other_app) +
+                                            String var4 = NUIDocView.this.getResources().getString(R.string.editor_cant_create_temp_file);
+                                            var3 = NUIDocView.this.getContext().getString(R.string.editor_content_error);
+                                            String var11 = NUIDocView.this.getContext().getString(R.string.editor_error_opening_from_other_app) +
                                                     ": \n\n" +
                                                     var4;
                                             Utilities.showMessage(var9, var3, var11);
@@ -1102,7 +1102,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                     } else {
                                         NUIDocView.this.l = var6.getPath();
                                         if (NUIDocView.this.l == null) {
-                                            Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.sodk_editor_invalid_file_name), NUIDocView.this.getContext().getString(R.string.sodk_editor_error_opening_from_other_app));
+                                            Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.editor_invalid_file_name), NUIDocView.this.getContext().getString(R.string.editor_error_opening_from_other_app));
                                             String var8 = " Uri has no path: " +
                                                     var6;
                                             Log.e("NUIDocView", var8);
@@ -1150,7 +1150,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                                 NUIDocView.this.dismissProgressDialog();
                                                 if (!NUIDocView.this.mSession.isCancelled() || var1 != 6) {
                                                     String var3 = Utilities.getOpenErrorDescription(NUIDocView.this.getContext(), var1);
-                                                    Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.sodk_editor_error), var3);
+                                                    Utilities.showMessage(var9, NUIDocView.this.getContext().getString(R.string.editor_error), var3);
                                                 }
 
                                             }
@@ -1425,7 +1425,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
 
     public void doInsertImage(String var1) {
         if (!com.artifex.solib.a.b(var1)) {
-            Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.sodk_editor_insert_image_gone_title), this.getContext().getString(R.string.sodk_editor_insert_image_gone_body));
+            Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.insert_image_gone_title), this.getContext().getString(R.string.insert_image_gone_body));
         } else {
             String var2 = Utilities.preInsertImage(this.getContext(), var1);
             this.getDoc().d(var2);
@@ -1621,8 +1621,8 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                     });
                                 }
                             } else {
-                                String var3 = String.format(NUIDocView.this.activity().getString(R.string.sodk_editor_error_saving_document_code), var2);
-                                Utilities.showMessage(NUIDocView.this.activity(), NUIDocView.this.activity().getString(R.string.sodk_editor_error), var3);
+                                String var3 = String.format(NUIDocView.this.activity().getString(R.string.error_saving_document), var2);
+                                Utilities.showMessage(NUIDocView.this.activity(), NUIDocView.this.activity().getString(R.string.editor_error), var3);
                             }
 
                         }
@@ -1665,7 +1665,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                     getDoc().clearSelection();
                     this.mSession.getDoc().setCurrentEdit(currentEdit - 1);
                 } else {
-                    Toast.makeText(getContext(), getContext().getString(R.string.toast_no_undo), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getContext().getString(R.string.toast_no_undo_available), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Log.e(NUIDocView.class.getName(), "doc is null");
@@ -1809,7 +1809,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
             if (this.documentHasBeenModified()) {
                 this.activity().runOnUiThread(new Runnable() {
                     public void run() {
-                        int var2 = R.string.sodk_editor_save;
+                        int var2 = R.string.editor_save;
                         if (NUIDocView.this.k != null) {
                             int var3 = NUIDocView.this.getContext().getResources().getIdentifier("secure_save_upper", "string", NUIDocView.this.getContext().getPackageName());
 //                            var2 = var1;
@@ -1817,8 +1817,8 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                 var2 = var3;
                             }
                         }
-                        (new Builder(NUIDocView.this.activity(), R.style.sodk_editor_alert_dialog_style)).setTitle(R.string.sodk_editor_document_has_been_modified)
-                                .setMessage(R.string.sodk_editor_would_you_like_to_save_your_changes).setCancelable(false)
+                        (new Builder(NUIDocView.this.activity(), R.style.sodk_editor_alert_dialog_style)).setTitle(R.string.editor_document_modified)
+                                .setMessage(R.string.editor_save_or_discard).setCancelable(false)
                                 .setPositiveButton(var2, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface var1, int var2) {
                                         var1.dismiss();
@@ -1846,8 +1846,8 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                                                 }
                                                             } else {
                                                                 NUIDocView.this.mSOFileState.closeFile();
-                                                                String var3 = String.format(NUIDocView.this.activity().getString(R.string.sodk_editor_error_saving_document_code), var2);
-                                                                Utilities.showMessage(NUIDocView.this.activity(), NUIDocView.this.activity().getString(R.string.sodk_editor_error), var3);
+                                                                String var3 = String.format(NUIDocView.this.activity().getString(R.string.error_saving_document), var2);
+                                                                Utilities.showMessage(NUIDocView.this.activity(), NUIDocView.this.activity().getString(R.string.editor_error), var3);
                                                             }
 
                                                         }
@@ -1860,14 +1860,14 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                             }
                                         });
                                     }
-                                }).setNegativeButton(R.string.sodk_editor_discard, new DialogInterface.OnClickListener() {
+                                }).setNegativeButton(R.string.app_sodk_editor_discard, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface var1, int var2) {
                                         var1.dismiss();
                                         NUIDocView.this.mSOFileState.closeFile();
                                         NUIDocView.this.e = Boolean.FALSE;
                                         NUIDocView.this.prefinish();
                                     }
-                                }).setNeutralButton(R.string.sodk_editor_continue_editing, new DialogInterface.OnClickListener() {
+                                }).setNeutralButton(R.string.editor_continue_editing, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface var1, int var2) {
                                         var1.dismiss();
                                     }
@@ -2945,7 +2945,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
 
             if (this.mSession != null) {
                 final ProgressDialog progressDialog1 = new ProgressDialog(this.getContext(), R.style.sodk_editor_alert_dialog_style);
-                progressDialog1.setMessage(this.getContext().getString(R.string.sodk_editor_wait));
+                progressDialog1.setMessage(this.getContext().getString(R.string.editor_wait));
                 progressDialog1.setCancelable(false);
                 progressDialog1.setIndeterminate(true);
                 progressDialog1.getWindow().clearFlags(2);

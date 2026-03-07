@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
-        android:text="@string/str_action_deleting"
+        android:text="@string/action_deleting"
         android:textColor="@color/app_primary_text"
         android:textDirection="ltr"
         android:textSize="18sp"

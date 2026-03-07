@@ -53,7 +53,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_70sdp"
         android:fontFamily="@font/medium"
-        android:text="@string/all_reader1_splash"
+        android:text="@string/splash_tagline"
         android:textColor="@color/dark_color_100_748090"
         android:textSize="13sp"
         app:layout_constraintBottom_toTopOf="@id/my_template_banner"

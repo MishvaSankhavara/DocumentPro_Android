@@ -2,16 +2,16 @@
 <resources>
     <string name="app_name">Document Reader</string>
 
-    <string name="str_action_remove">引っ越し</string>
-    <string name="str_action_shortcut">ショートカット</string>
+    <string name="action_move_out">引っ越し</string>
+    <string name="action_create_shortcut">ショートカット</string>
 
-    <string name="str_action_go_to_set">セットに移動</string>
+    <string name="action_go_to_settings">セットに移動</string>
 
-    <string name="str_action_select">選択する</string>
-    <string name="str_action_sort">選別</string>
+    <string name="select_item">選択する</string>
+    <string name="sort_items">選別</string>
 
-    <string name="str_action_print">印刷する</string>
-    <string name="menu_thumbnail">サムネイル</string>
+    <string name="print_document">印刷する</string>
+    <string name="menu_view_thumbnail">サムネイル</string>
 
     <string name="navigation_privacy_policy">プライバシーポリシー</string>
     <string name="navigation_language">言語</string>
@@ -20,201 +20,201 @@
     <string name="navigation_rate_us">私たちを評価してください</string>
     <string name="document_all">全て</string>
     <string name="tittle_toolbar_all">すべてのファイル</string>
-    <string name="tittle_toolbar_excel">Excelファイル</string>
+    <string name="title_toolbar_excel">Excelファイル</string>
     <string name="tittle_toolbar_pdf">PDFファイル</string>
-    <string name="tittle_toolbar_ppt">PowerPoint ファイル</string>
+    <string name="title_toolbar_powerpoint">PowerPoint ファイル</string>
     <string name="tittle_toolbar_word">Wordファイル</string>
 
-    <string name="toast_no_permission">許可が必要です!</string>
-    <string name="toast_no_file_manager">利用可能なファイルマネージャーがありません</string>
+    <string name="toast_permission_required">許可が必要です!</string>
+    <string name="toast_no_file_manager_available">利用可能なファイルマネージャーがありません</string>
 
-    <string name="str_files">%1$s ファイル</string>
+    <string name="label_file_count">%1$s ファイル</string>
 
     <string name="dialog_rate_content">私たちはあなたに良い経験を提供するよう努めています。5つ星を与えていただければ幸いです。</string>
-    <string name="dialog_rate_5_start">5つ星</string>
+    <string name="dialog_rate_five_star">5つ星</string>
 
-    <string name="gallery_last_modified">最終更新日</string>
-    <string name="last_viewed">最後に閲覧した</string>
-    <string name="info">情報</string>
-    <string name="name">名前</string>
-    <string name="size">サイズ</string>
-    <string name="path">パス</string>
+    <string name="info_last_modified">最終更新日</string>
+    <string name="info_last_viewed">最後に閲覧した</string>
+    <string name="info_label">情報</string>
+    <string name="info_name">名前</string>
+    <string name="info_size">サイズ</string>
+    <string name="info_path">パス</string>
 
-    <string name="all_reader1_splash">オールインワンのドキュメント リーダー</string>
+    <string name="splash_tagline">オールインワンのドキュメント リーダー</string>
     <string name="sort_by">並べ替え</string>
-    <string name="date_created_old">日付: 昇順</string>
-    <string name="date_created_new">日付: 降順</string>
-    <string name="name_a_to_z">名前: A to Z</string>
-    <string name="name_z_to_a">名前: Z to A</string>
-    <string name="file_size_largest">ファイルサイズ: 昇順</string>
-    <string name="file_size_minimum">ファイルサイズ: 降順</string>
-    <string name="str_action_loading">読み込み中…</string>
-    <string name="enter_passwrod_to_open">パスワードを入力して開きます</string>
+    <string name="sort_date_ascending">日付: 昇順</string>
+    <string name="sort_date_descending">日付: 降順</string>
+    <string name="sort_name_atoz">名前: A to Z</string>
+    <string name="sort_name_ztoa">名前: Z to A</string>
+    <string name="sort_size_ascending">ファイルサイズ: 昇順</string>
+    <string name="sort_size_descending">ファイルサイズ: 降順</string>
+    <string name="action_loading">読み込み中…</string>
+    <string name="dialog_enter_password">パスワードを入力して開きます</string>
+    <string name="dialog_enter_password_field">パスワードを入力する</string>
+    <string name="editor_background">背景</string>
+    <string name="article_loading_title"/>
+    <string name="action_duplicate">重複</string>
+    <string name="toast_no_undo_available">使用できる元に戻す操作はありません。</string>
+    <string name="editor_no_more_found">もう見つかりません</string>
+    <string name="editor_keep_searching">探し続ける？</string>
+    <string name="editor_continue">続く</string>
+    <string name="editor_stop">停止</string>
+    <string name="action_rotate">回転</string>
+    <string name="action_edit">編集</string>
+    <string name="error_saving_document">ドキュメントの保存中にエラーが発生しました: SOError=%d</string>
+    <string name="editor_error">エラー</string>
+    <string name="editor_document_modified">未保存の変更があります</string>
+    <string name="editor_save_or_discard">変更を保存しますか、それとも変更を破棄しますか?</string>
+    <string name="editor_continue_editing">編集を続ける</string>
+    <string name="editor_xfa_body">このドキュメントには、Office Editor でサポートされていない XML フォーム Office が含まれています。 XFA は、2015 年に PDF 2.0 仕様がリリースされたときに非推奨になりました。PDF の作成者は、サポートされている AcroForms を使用するように PDF を変換できます。必要に応じて、IT 管理者に連絡して支援を求めてください。</string>
+    <string name="editor_redact_confirm_save">この文書には、まだ適用されていない墨消しマークが含まれています。これらのマークに関連付けられたコンテンツは、適用されるまで引き続き存在します。続行してもよろしいですか?</string>
+    <string name="editor_yes">オフィス</string>
+    <string name="editor_no">いいえ</string>
+    <string name="editor_delete_worksheet">ワークシートを削除しますか?</string>
+    <string name="editor_delete_sheet_confirm">シートを削除しますか?」</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="action_delete">消去</string>
+    <string name="action_clear_all">すべてクリア</string>
+    <string name="action_open">開ける</string>
+    <string name="action_allow">許可する</string>
+    <string name="action_failed">失敗した</string>
+    <string name="action_ok">わかりました</string>
+    <string name="action_cancel">キャンセル</string>
+    <string name="action_share">共有</string>
+    <string name="action_okay">わかった</string>
+    <string name="action_dismiss">却下する</string>
+    <string name="action_searching">検索中…</string>
+    <string name="action_save">保存</string>
+    <string name="action_alert">アラート</string>
+    <string name="splash_des">いつでもどこでも PDF を読んで編集できます</string>
+    <string name="all_pdf">すべてPDF</string>
+    <string name="app_recent">最近の</string>
+    <string name="app_favorite">お気に入り</string>
+    <string name="action_quit">やめる</string>
+    <string name="action_apply">適用する</string>
+    <string name="action_yes">はい</string>
+    <string name="action_no">いいえ</string>
+    <string name="action_more">もっと</string>
+    <string name="action_compressor">コンプレッサー</string>
+    <string name="action_remove_ads">広告を削除</string>
+    <string name="action_sponsored">スポンサー付き</string>
+    <string name="action_remove_favorite">お気に入りを削除</string>
+    <string name="move_out">引っ越し</string>
+    <string name="share_via_photo">写真で共有</string>
+    <string name="view_image">ビューファイル</string>
+    <string name="action_view_pdf">PDFを見る</string>
+    <string name="action_rename">名前の変更</string>
+    <string name="action_start">始める</string>
+    <string name="action_search">検索</string>
+    <string name="action_setting">設定</string>
+    <string name="action_continue">続く</string>
+    <string name="go_to_set">セットに移動</string>
+    <string name="tools">ツール</string>
+    <string name="no_files_yet">まだファイルがありません</string>
+    <string name="action_go">行く</string>
+    <string name="feed_back_app">フィードバック PDF リーダー アプリ</string>
+    <string name="pdf_created_toolbar">作成した</string>
+    <string name="import_pdf">PDFをインポート</string>
+    <string name="select_all">すべて選択</string>
+    <string name="tool_pdf_pro">ツール PDF Pro</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="help">ヘルプ</string>
+    <string name="file_manager">ファイルマネージャー</string>
+    <string name="keep_screen_on">画面をオンのままにする</string>
+    <string name="app_display">画面</string>
+    <string name="app_theme">アプリのテーマ</string>
+    <string name="change_language_title">言語オプション</string>
+    <string name="search_hint">検索…</string>
+    <string name="pwd_error">間違ったパスワード</string>
+    <string name="password">パスワード</string>
+    <string name="password_des">パスワードを入力するとPDFが開きます</string>
     <string name="enter_password">パスワードを入力する</string>
-    <string name="sodk_editor_background">背景</string>
-    <string name="zs_view_article_loading_title"/>
-    <string name="str_action_duplicate">重複</string>
-    <string name="toast_no_undo">使用できる元に戻す操作はありません。</string>
-    <string name="sodk_editor_no_more_found">もう見つかりません</string>
-    <string name="sodk_editor_keep_searching">探し続ける？</string>
-    <string name="sodk_editor_str_continue">続く</string>
-    <string name="sodk_editor_stop">停止</string>
-    <string name="str_action_rotate">回転</string>
-    <string name="str_action_edit">編集</string>
-    <string name="sodk_editor_error_saving_document_code">ドキュメントの保存中にエラーが発生しました: SOError=%d</string>
-    <string name="sodk_editor_error">エラー</string>
-    <string name="sodk_editor_document_has_been_modified">未保存の変更があります</string>
-    <string name="sodk_editor_would_you_like_to_save_your_changes">変更を保存しますか、それとも変更を破棄しますか?</string>
-    <string name="sodk_editor_continue_editing">編集を続ける</string>
-    <string name="sodk_editor_xfa_body">このドキュメントには、Office Editor でサポートされていない XML フォーム Office が含まれています。 XFA は、2015 年に PDF 2.0 仕様がリリースされたときに非推奨になりました。PDF の作成者は、サポートされている AcroForms を使用するように PDF を変換できます。必要に応じて、IT 管理者に連絡して支援を求めてください。</string>
-    <string name="sodk_editor_redact_confirm_save">この文書には、まだ適用されていない墨消しマークが含まれています。これらのマークに関連付けられたコンテンツは、適用されるまで引き続き存在します。続行してもよろしいですか?</string>
-    <string name="sodk_editor_yes">オフィス</string>
-    <string name="sodk_editor_no">いいえ</string>
-    <string name="sodk_editor_delete_worksheet_q">ワークシートを削除しますか?</string>
-    <string name="sodk_editor_do_you_want_to_delete_the_sheet">シートを削除しますか?」</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <string name="str_action_delete">消去</string>
-    <string name="str_action_clear_all">すべてクリア</string>
-    <string name="str_action_open">開ける</string>
-    <string name="str_action_allow">許可する</string>
-    <string name="str_action_failed">失敗した</string>
-    <string name="str_action_ok">わかりました</string>
-    <string name="str_action_cancel">キャンセル</string>
-    <string name="str_action_share">共有</string>
-    <string name="str_action_okay">わかった</string>
-    <string name="str_action_dismiss">却下する</string>
-    <string name="str_action_searching">検索中…</string>
-    <string name="str_action_save">保存</string>
-    <string name="str_action_alert">アラート</string>
-    <string name="str_splash_des">いつでもどこでも PDF を読んで編集できます</string>
-    <string name="str_all_pdf">すべてPDF</string>
-    <string name="str_recent">最近の</string>
-    <string name="str_favorite">お気に入り</string>
-    <string name="str_action_quit">やめる</string>
-    <string name="str_action_apply">適用する</string>
-    <string name="str_action_yes">はい</string>
-    <string name="str_action_no">いいえ</string>
-    <string name="str_more">もっと</string>
-    <string name="str_action_compressor">コンプレッサー</string>
-    <string name="str_remove_ads">広告を削除</string>
-    <string name="str_sponsored">スポンサー付き</string>
-    <string name="str_remove_favorite">お気に入りを削除</string>
-    <string name="str_move_out">引っ越し</string>
-    <string name="str_share_via_photo">写真で共有</string>
-    <string name="str_view_image">ビューファイル</string>
-    <string name="str_action_view_pdf">PDFを見る</string>
-    <string name="str_action_rename">名前の変更</string>
-    <string name="str_action_start">始める</string>
-    <string name="str_action_search">検索</string>
-    <string name="str_action_setting">設定</string>
-    <string name="str_action_continue">続く</string>
-    <string name="str_go_to_set">セットに移動</string>
-    <string name="str_tools">ツール</string>
-    <string name="str_no_files_yet">まだファイルがありません</string>
-    <string name="str_action_go">行く</string>
-    <string name="str_feed_back_app">フィードバック PDF リーダー アプリ</string>
-    <string name="str_pdf_created_toolbar">作成した</string>
-    <string name="str_import_pdf">PDFをインポート</string>
-    <string name="str_select_all">すべて選択</string>
-    <string name="str_tool_pdf_pro">ツール PDF Pro</string>
-    <string name="str_privacy_policy">プライバシーポリシー</string>
-    <string name="str_help">ヘルプ</string>
-    <string name="str_file_manager">ファイルマネージャー</string>
-    <string name="str_keep_screen_on">画面をオンのままにする</string>
-    <string name="str_display">画面</string>
-    <string name="str_app_theme">アプリのテーマ</string>
-    <string name="str_change_language_title">言語オプション</string>
-    <string name="str_search_hint">検索…</string>
-    <string name="str_pwd_error">間違ったパスワード</string>
-    <string name="str_password">パスワード</string>
-    <string name="str_password_des">パスワードを入力するとPDFが開きます</string>
-    <string name="str_enter_password">パスワードを入力する</string>
-    <string name="str_set_password">パスワードを設定してください</string>
-    <string name="str_set_password_des">PDFを保護するためのパスワードを設定します</string>
+    <string name="set_password">パスワードを設定してください</string>
+    <string name="app_password_des">PDFを保護するためのパスワードを設定します</string>
     <string name="toast_please_set_password">パスワードを設定してください！</string>
     <string name="unlocking">ロックを解除中…</string>
     <string name="unlocked_successfully">無事にロック解除されました！</string>
-    <string name="invalid_page_number">無効なページ番号です</string>
-    <string name="cannot_open_file_Path">ファイルを開けません: %1$s</string>
-    <string name="cannot_open_buffer">バッファを開けません</string>
-    <string name="fill_out_text_field">テキストフィールドに記入します</string>
-    <string name="choose_value">値を選択してください</string>
-    <string name="str_shortcut">ショートカット</string>
-    <string name="str_request_new_feature">新しい機能をリクエストする</string>
-    <string name="str_explore_tag_new">新しい</string>
-    <string name="str_setting_faq">よくある質問</string>
+    <string name="error_invalid_page_number">無効なページ番号です</string>
+    <string name="error_cannot_open_file_path">ファイルを開けません: %1$s</string>
+    <string name="error_cannot_open_buffer">バッファを開けません</string>
+    <string name="prompt_fill_text_field">テキストフィールドに記入します</string>
+    <string name="prompt_choose_value">値を選択してください</string>
+    <string name="action_shortcut">ショートカット</string>
+    <string name="action_request_new_feature">新しい機能をリクエストする</string>
+    <string name="label_new_tag">新しい</string>
+    <string name="settings_faq">よくある質問</string>
     <string name="version">バージョン</string>
-    <string name="go_to_page">ページに移動</string>
-    <string name="too_many_pages_loading">ページが多すぎます。読み込み中…</string>
-    <string name="already_in_use">この名前は既に使用されています。</string>
-    <string name="srl_content_empty">SmartRefreshLayout のコンテンツ ビューは空です。 XMLレイアウトファイルに追加するのを忘れていませんか?</string>
-    <string name="srl_header_pulling">プルダウンして更新</string>
-    <string name="srl_header_release">リリースしてリフレッシュ</string>
-    <string name="srl_header_refreshing">爽やか…</string>
-    <string name="srl_header_loading">読み込みを待ちます…</string>
-    <string name="srl_header_finish">更新成功</string>
-    <string name="srl_header_failed">更新に失敗しました</string>
-    <string name="srl_header_secondary">2階へ解放</string>
-    <string name="srl_footer_pulling">さらにロードするには引き上げてください</string>
-    <string name="srl_footer_release">放してさらにロードする</string>
-    <string name="srl_footer_loading">読み込み中…</string>
-    <string name="srl_footer_refreshing">更新を待ちます…</string>
-    <string name="srl_footer_finish">ロード成功</string>
-    <string name="srl_footer_failed">ロードに失敗しました</string>
-    <string name="srl_footer_nothing">これ以上データはありません</string>
-    <string name="str_theme_dark">暗い</string>
-    <string name="str_theme_light">ライト</string>
-    <string name="str_action_move_fav">お気に入りを削除</string>
+    <string name="action_go_to_page">ページに移動</string>
+    <string name="error_too_many_pages_loading">ページが多すぎます。読み込み中…</string>
+    <string name="error_name_already_in_use">この名前は既に使用されています。</string>
+    <string name="content_empty">SmartRefreshLayout のコンテンツ ビューは空です。 XMLレイアウトファイルに追加するのを忘れていませんか?</string>
+    <string name="header_pulling">プルダウンして更新</string>
+    <string name="header_release">リリースしてリフレッシュ</string>
+    <string name="header_refreshing">爽やか…</string>
+    <string name="header_loading">読み込みを待ちます…</string>
+    <string name="header_finish">更新成功</string>
+    <string name="header_failed">更新に失敗しました</string>
+    <string name="header_secondary">2階へ解放</string>
+    <string name="footer_pulling">さらにロードするには引き上げてください</string>
+    <string name="footer_release">放してさらにロードする</string>
+    <string name="footer_loading">読み込み中…</string>
+    <string name="footer_refreshing">更新を待ちます…</string>
+    <string name="footer_finish">ロード成功</string>
+    <string name="footer_failed">ロードに失敗しました</string>
+    <string name="footer_nothing">これ以上データはありません</string>
+    <string name="theme_dark">暗い</string>
+    <string name="theme_light">ライト</string>
+    <string name="action_move_fav">お気に入りを削除</string>
     <string name="create_shortcut">ショートカットを作成</string>
     <string name="not_supported">サポートされていません</string>
-    <string name="str_action_deleting">削除しています…</string>
-    <string name="str_action_removing">削除中…</string>
-    <string name="toast_need_permission">許可が必要です!</string>
-    <string name="all_reader2_search_files_hint">ファイルを検索…</string>
-    <string name="str_please_wait">お待ちください…</string>
-    <string name="tool_tittle_your_pdf">あなたの PDF</string>
-    <string name="tool_tittle_merge">PDFを結合</string>
+    <string name="action_deleting">削除しています…</string>
+    <string name="action_removing">削除中…</string>
+    <string name="toast_required_permission">許可が必要です!</string>
+    <string name="hint_search_files">ファイルを検索…</string>
+    <string name="message_please_wait">お待ちください…</string>
+    <string name="tool_title_your_pdf">あなたの PDF</string>
+    <string name="tool_title_split_pdf">PDFを結合</string>
     <string name="tool_tittle_print">印刷する</string>
     <string name="tool_tittle_split">PDFの分割</string>
-    <string name="tool_tittle_compress">PDFを圧縮する</string>
+    <string name="tool_title_compress_pdf">PDFを圧縮する</string>
     <string name="tool_tittle_share_as_photo">写真として共有</string>
     <string name="tool_tittle_image_to_pdf">画像をPDFに変換</string>
-    <string name="tool_tittle_browse">PDFを参照</string>
+    <string name="tool_title_browse_pdf">PDFを参照</string>
     <string name="tool_tittle_pdf_to_image">画像として保存</string>
     <string name="tool_tittle_lock_pdf">PDFをロックする</string>
     <string name="tool_tittle_unlock_pdf">PDFのロックを解除する</string>
-    <string name="tool_des_browse">デバイス上のさまざまなフォルダーからファイルを選択できます</string>
-    <string name="tool_des_merge">複数の PDF ファイルを選択して、数秒で結合します。</string>
-    <string name="tool_des_print">携帯電話から PDF ファイルをすばやく印刷します。</string>
-    <string name="tool_des_split">PDF ファイルをページ範囲ごとに分割するか、すべての PDF ページを複数の PDF ファイルに抽出します。</string>
-    <string name="tool_des_compress">ニーズに合わせて PDF ファイルを圧縮してサイズを縮小します。</string>
-    <string name="tool_des_image_to_pdf">画像 (jpg、jpeg、png など) を PDF ファイルに変換します</string>
-    <string name="tool_des_pdf_to_image">PDF ドキュメントの指定したページを画像としてエクスポートします</string>
-    <string name="tool_des_lock_pdf">パスワードを設定して PDF 文書を保護する</string>
-    <string name="tool_des_your_pdf">作成したすべての PDF を表示する</string>
-    <string name="tool_des_un_lock_pdf">PDF のパスワード セキュリティを削除し、PDF を自由に使用できるようにします</string>
+    <string name="tool_description_browse">デバイス上のさまざまなフォルダーからファイルを選択できます</string>
+    <string name="tool_description_merge">複数の PDF ファイルを選択して、数秒で結合します。</string>
+    <string name="tool_description_print">携帯電話から PDF ファイルをすばやく印刷します。</string>
+    <string name="tool_description_split">PDF ファイルをページ範囲ごとに分割するか、すべての PDF ページを複数の PDF ファイルに抽出します。</string>
+    <string name="tool_description_compress">ニーズに合わせて PDF ファイルを圧縮してサイズを縮小します。</string>
+    <string name="tool_description_image_to_pdf">画像 (jpg、jpeg、png など) を PDF ファイルに変換します</string>
+    <string name="tool_description_pdf_to_image">PDF ドキュメントの指定したページを画像としてエクスポートします</string>
+    <string name="tool_description_lock_pdf">パスワードを設定して PDF 文書を保護する</string>
+    <string name="tool_description_your_pdf">作成したすべての PDF を表示する</string>
+    <string name="tool_description_unlock_pdf">PDF のパスワード セキュリティを削除し、PDF を自由に使用できるようにします</string>
     <string name="toast_maximum_file_share">一度に50ファイルまで共有可能！</string>
-    <string name="str_share_via">共有方法</string>
-    <string name="dialog_permission_required_title">許可が必要です</string>
-    <string name="dialog_permission_required_des">デバイス上でドキュメントを読んだり編集するには、PDF Reader がすべてのファイルにアクセスできるようにしてください。</string>
-    <string name="dialog_permission_required_allow_access">すべてのファイルを管理するためのアクセスを許可する</string>
-    <string name="dialog_password_invalid">無効なパスワード</string>
-    <string name="dialog_password_title">パスワードを入力する</string>
-    <string name="dialog_set_password_title">パスワードを設定してください</string>
-    <string name="dialog_remove_password_tittle">パスワードを削除する</string>
-    <string name="dialog_remove_password_des">ファイルは保護されなくなります</string>
+    <string name="share_via">共有方法</string>
+    <string name="dialog_permission_title">許可が必要です</string>
+    <string name="dialog_permission_description">デバイス上でドキュメントを読んだり編集するには、PDF Reader がすべてのファイルにアクセスできるようにしてください。</string>
+    <string name="dialog_allow_access">すべてのファイルを管理するためのアクセスを許可する</string>
+    <string name="dialog_invalid_password">無効なパスワード</string>
+    <string name="dialog_enter_password_app">パスワードを入力する</string>
+    <string name="dialog_set_password">パスワードを設定してください</string>
+    <string name="dialog_remove_password_title">パスワードを削除する</string>
+    <string name="dialog_remove_password_description">ファイルは保護されなくなります</string>
     <string name="dialog_password_body">開くにはパスワードを入力する必要があります。</string>
     <string name="dialog_password_hint">パスワード</string>
     <string name="dialog_delete_body">本当に削除してもよろしいですか?この操作は元に戻せません</string>

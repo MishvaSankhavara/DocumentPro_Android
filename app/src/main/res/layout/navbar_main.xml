@@ -91,7 +91,7 @@
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/bold"
                 android:gravity="start|center_vertical|center_horizontal|center|start"
-                android:text="@string/str_action_share"
+                android:text="@string/action_share"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="14sp"

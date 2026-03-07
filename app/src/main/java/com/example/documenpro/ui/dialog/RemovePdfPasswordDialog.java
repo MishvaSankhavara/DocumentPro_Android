@@ -49,9 +49,9 @@ public class RemovePdfPasswordDialog extends Dialog {
         titleTextView = findViewById(R.id.tv_title);
         descriptionTextView = findViewById(R.id.tv_dialog_description);
         errorTextView = findViewById(R.id.tv_error_message);
-        titleTextView.setText(R.string.dialog_remove_password_tittle);
-        descriptionTextView.setText(R.string.dialog_remove_password_des);
-        errorTextView.setText(R.string.dialog_password_invalid);
+        titleTextView.setText(R.string.dialog_remove_password_title);
+        descriptionTextView.setText(R.string.dialog_remove_password_description);
+        errorTextView.setText(R.string.dialog_invalid_password);
         dialogRootLayout = findViewById(R.id.cl_dialog_root);
         passwordInputField = findViewById(R.id.et_password_input);
         errorContainer = findViewById(R.id.ll_error_container);

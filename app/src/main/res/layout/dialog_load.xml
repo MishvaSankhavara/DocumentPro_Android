@@ -17,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/medium"
         android:gravity="center"
-        android:text="@string/str_action_loading"
+        android:text="@string/action_loading"
         android:textColor="@color/app_primary_text"
         android:textSize="16sp" />
 

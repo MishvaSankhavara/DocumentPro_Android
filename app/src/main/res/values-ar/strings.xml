@@ -2,16 +2,16 @@
 <resources>
     <string name="app_name">Document Reader</string>
 
-    <string name="str_action_remove">تحرك للخارج</string>
-    <string name="str_action_shortcut">الاختصار</string>
+    <string name="action_move_out">تحرك للخارج</string>
+    <string name="action_create_shortcut">الاختصار</string>
 
-    <string name="str_action_go_to_set">اذهب إلى المجموعة</string>
+    <string name="action_go_to_settings">اذهب إلى المجموعة</string>
 
-    <string name="str_action_select">يختار</string>
-    <string name="str_action_sort">نوع</string>
+    <string name="select_item">يختار</string>
+    <string name="sort_items">نوع</string>
 
-    <string name="str_action_print">مطبعة</string>
-    <string name="menu_thumbnail">ظفري</string>
+    <string name="print_document">مطبعة</string>
+    <string name="menu_view_thumbnail">ظفري</string>
 
     <string name="navigation_privacy_policy">سياسة الخصوصية</string>
     <string name="navigation_language">لغة</string>
@@ -20,212 +20,212 @@
     <string name="navigation_rate_us">قيمنا</string>
     <string name="document_all">الجميع</string>
     <string name="tittle_toolbar_all">كل الملفات</string>
-    <string name="tittle_toolbar_excel">ملفات اكسل</string>
+    <string name="title_toolbar_excel">ملفات اكسل</string>
     <string name="tittle_toolbar_pdf">ملفات بي دي اف</string>
-    <string name="tittle_toolbar_ppt">ملفات باور بوينت</string>
+    <string name="title_toolbar_powerpoint">ملفات باور بوينت</string>
     <string name="tittle_toolbar_word">ملفات الوورد</string>
 
-    <string name="toast_no_permission">بحاجة إلى إذن!</string>
-    <string name="toast_no_file_manager">لا يوجد مدير ملفات متاح</string>
+    <string name="toast_permission_required">بحاجة إلى إذن!</string>
+    <string name="toast_no_file_manager_available">لا يوجد مدير ملفات متاح</string>
 
-    <string name="str_files">%1$s ملفات</string>
+    <string name="label_file_count">%1$s ملفات</string>
 
     <string name="dialog_rate_content">لقد حاولنا أن نقدم لك تجربة جيدة. وسنكون ممتنين لو تفضلت بمنحنا 5 نجوم</string>
-    <string name="dialog_rate_5_start">5 نجوم</string>
+    <string name="dialog_rate_five_star">5 نجوم</string>
 
-    <string name="gallery_last_modified">آخر تعديل</string>
-    <string name="last_viewed">ينظر الماضي</string>
-    <string name="info">معلومات</string>
-    <string name="name">اسم</string>
-    <string name="size">مقاس</string>
-    <string name="path">طريق</string>
+    <string name="info_last_modified">آخر تعديل</string>
+    <string name="info_last_viewed">ينظر الماضي</string>
+    <string name="info_label">معلومات</string>
+    <string name="info_name">اسم</string>
+    <string name="info_size">مقاس</string>
+    <string name="info_path">طريق</string>
 
-    <string name="all_reader1_splash">قارئ المستندات الكل في واحد</string>
+    <string name="splash_tagline">قارئ المستندات الكل في واحد</string>
     <string name="sort_by">ترتيب حسب</string>
-    <string name="date_created_old">التاريخ: تصاعدي</string>
-    <string name="date_created_new">التاريخ: تنازلي</string>
-    <string name="name_a_to_z">الاسم: من الألف إلى الياء</string>
-    <string name="name_z_to_a">الاسم: ي إلى أ</string>
-    <string name="file_size_largest">حجم الملف: تصاعدي</string>
-    <string name="file_size_minimum">حجم الملف: تنازلي</string>
-    <string name="str_action_loading">تحميل…</string>
-    <string name="enter_passwrod_to_open">أدخل كلمة المرور لفتح</string>
+    <string name="sort_date_ascending">التاريخ: تصاعدي</string>
+    <string name="sort_date_descending">التاريخ: تنازلي</string>
+    <string name="sort_name_atoz">الاسم: من الألف إلى الياء</string>
+    <string name="sort_name_ztoa">الاسم: ي إلى أ</string>
+    <string name="sort_size_ascending">حجم الملف: تصاعدي</string>
+    <string name="sort_size_descending">حجم الملف: تنازلي</string>
+    <string name="action_loading">تحميل…</string>
+    <string name="dialog_enter_password">أدخل كلمة المرور لفتح</string>
+    <string name="dialog_enter_password_field">أدخل كلمة المرور</string>
+    <string name="editor_background">خلفية</string>
+    <string name="article_loading_title" />
+    <string name="action_duplicate">ينسخ</string>
+    <string name="toast_no_undo_available">لا توجد عمليات تراجع متاحة.</string>
+    <string name="editor_no_more_found">لم يتم العثور على المزيد</string>
+    <string name="editor_keep_searching">مواصلة البحث؟</string>
+    <string name="editor_continue">يكمل</string>
+    <string name="editor_stop">قف</string>
+    <string name="action_rotate">استدارة</string>
+    <string name="action_edit">يحرر</string>
+    <string name="error_saving_document">حدث خطأ أثناء حفظ المستند: SOError=%d</string>
+    <string name="editor_error">خطأ</string>
+    <string name="editor_document_modified">هناك تغييرات غير محفوظة</string>
+    <string name="editor_save_or_discard">هل تريد حفظ التغييرات أو تجاهل التغييرات؟</string>
+    <string name="editor_continue_editing">الاستمرار في التعديل</string>
+    <string name="editor_xfa_body">يحتوي هذا المستند على XML Forms Office غير المدعوم بواسطة Office Editor. تم إهمال XFA عندما تم إصدار مواصفات PDF 2.0 في عام 2015. يمكن لمنشئ ملف PDF تحويله لاستخدام AcroForms المدعومة. إذا كان ذلك مناسبًا، فيرجى الاتصال بمسؤول تكنولوجيا المعلومات لديك للحصول على المساعدة.</string>
+    <string name="editor_redact_confirm_save">يحتوي هذا المستند على علامات تنقيح لم يتم تطبيقها بعد. سيظل أي محتوى مرتبط بهذه العلامات موجودًا حتى يتم تطبيقها. هل أنت متأكد أنك تريد الاستمرار؟</string>
+    <string name="editor_yes">مكتب</string>
+    <string name="editor_no">لا</string>
+    <string name="editor_delete_worksheet">هل تريد حذف ورقة العمل؟</string>
+    <string name="editor_delete_sheet_confirm">هل تريد حذف الورقة \"</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="action_delete">يمسح</string>
+    <string name="action_clear_all">امسح الكل</string>
+    <string name="action_open">يفتح</string>
+    <string name="action_allow">يسمح</string>
+    <string name="action_failed">فشل</string>
+    <string name="action_ok">نعم</string>
+    <string name="action_cancel">يلغي</string>
+    <string name="action_share">يشارك</string>
+    <string name="action_okay">تمام</string>
+    <string name="action_dismiss">رفض</string>
+    <string name="action_searching">يبحث…</string>
+    <string name="action_save">يحفظ</string>
+    <string name="action_alert">يُحذًِر</string>
+    <string name="splash_des">قراءة وتحرير ملفات PDF في أي وقت وفي أي مكان</string>
+    <string name="all_pdf">جميع قوات الدفاع الشعبي</string>
+    <string name="app_recent">مؤخرًا</string>
+    <string name="app_favorite">المفضلة</string>
+    <string name="action_quit">يترك</string>
+    <string name="action_apply">يتقدم</string>
+    <string name="action_yes">نعم</string>
+    <string name="action_no">لا</string>
+    <string name="action_more">أكثر</string>
+    <string name="action_compressor">ضاغط</string>
+    <string name="action_remove_ads">ازالة الاعلانات</string>
+    <string name="action_sponsored">برعاية</string>
+    <string name="action_remove_favorite">إزالة المفضلة</string>
+    <string name="move_out">تحرك للخارج</string>
+    <string name="share_via_photo">شارك عبر الصورة</string>
+    <string name="view_image">عرض الملفات</string>
+    <string name="action_view_pdf">عرض قوات الدفاع الشعبي</string>
+    <string name="action_rename">إعادة تسمية</string>
+    <string name="action_start">يبدأ</string>
+    <string name="action_search">يبحث</string>
+    <string name="action_setting">إعدادات</string>
+    <string name="action_continue">يكمل</string>
+    <string name="go_to_set">اذهب إلى المجموعة</string>
+    <string name="tools">أدوات</string>
+    <string name="no_files_yet">لا توجد ملفات حتى الآن</string>
+    <string name="action_go">يذهب</string>
+    <string name="feed_back_app">تطبيق FeedBack لقارئ PDF</string>
+    <string name="pdf_created_toolbar">مخلوق</string>
+    <string name="import_pdf">استيراد قوات الدفاع الشعبي</string>
+    <string name="select_all">اختر الكل</string>
+    <string name="tool_pdf_pro">أداة PDF برو</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="help">يساعد</string>
+    <string name="file_manager">مدير الملفات</string>
+    <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
+    <string name="app_display">عرض</string>
+    <string name="app_theme">موضوع التطبيق</string>
+    <string name="change_language_title">خيارات اللغة</string>
+    <string name="search_hint">يبحث…</string>
+    <string name="pwd_error">كلمة مرور خاطئة</string>
+    <string name="password">كلمة المرور</string>
+    <string name="password_des">أدخل كلمة المرور لفتح ملف PDF</string>
     <string name="enter_password">أدخل كلمة المرور</string>
-    <string name="sodk_editor_background">خلفية</string>
-    <string name="zs_view_article_loading_title" />
-    <string name="str_action_duplicate">ينسخ</string>
-    <string name="toast_no_undo">لا توجد عمليات تراجع متاحة.</string>
-    <string name="sodk_editor_no_more_found">لم يتم العثور على المزيد</string>
-    <string name="sodk_editor_keep_searching">مواصلة البحث؟</string>
-    <string name="sodk_editor_str_continue">يكمل</string>
-    <string name="sodk_editor_stop">قف</string>
-    <string name="str_action_rotate">استدارة</string>
-    <string name="str_action_edit">يحرر</string>
-    <string name="sodk_editor_error_saving_document_code">حدث خطأ أثناء حفظ المستند: SOError=%d</string>
-    <string name="sodk_editor_error">خطأ</string>
-    <string name="sodk_editor_document_has_been_modified">هناك تغييرات غير محفوظة</string>
-    <string name="sodk_editor_would_you_like_to_save_your_changes">هل تريد حفظ التغييرات أو تجاهل التغييرات؟</string>
-    <string name="sodk_editor_continue_editing">الاستمرار في التعديل</string>
-    <string name="sodk_editor_xfa_body">يحتوي هذا المستند على XML Forms Office غير المدعوم بواسطة Office Editor. تم إهمال XFA عندما تم إصدار مواصفات PDF 2.0 في عام 2015. يمكن لمنشئ ملف PDF تحويله لاستخدام AcroForms المدعومة. إذا كان ذلك مناسبًا، فيرجى الاتصال بمسؤول تكنولوجيا المعلومات لديك للحصول على المساعدة.</string>
-    <string name="sodk_editor_redact_confirm_save">يحتوي هذا المستند على علامات تنقيح لم يتم تطبيقها بعد. سيظل أي محتوى مرتبط بهذه العلامات موجودًا حتى يتم تطبيقها. هل أنت متأكد أنك تريد الاستمرار؟</string>
-    <string name="sodk_editor_yes">مكتب</string>
-    <string name="sodk_editor_no">لا</string>
-    <string name="sodk_editor_delete_worksheet_q">هل تريد حذف ورقة العمل؟</string>
-    <string name="sodk_editor_do_you_want_to_delete_the_sheet">هل تريد حذف الورقة \"</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <string name="str_action_delete">يمسح</string>
-    <string name="str_action_clear_all">امسح الكل</string>
-    <string name="str_action_open">يفتح</string>
-    <string name="str_action_allow">يسمح</string>
-    <string name="str_action_failed">فشل</string>
-    <string name="str_action_ok">نعم</string>
-    <string name="str_action_cancel">يلغي</string>
-    <string name="str_action_share">يشارك</string>
-    <string name="str_action_okay">تمام</string>
-    <string name="str_action_dismiss">رفض</string>
-    <string name="str_action_searching">يبحث…</string>
-    <string name="str_action_save">يحفظ</string>
-    <string name="str_action_alert">يُحذًِر</string>
-    <string name="str_splash_des">قراءة وتحرير ملفات PDF في أي وقت وفي أي مكان</string>
-    <string name="str_all_pdf">جميع قوات الدفاع الشعبي</string>
-    <string name="str_recent">مؤخرًا</string>
-    <string name="str_favorite">المفضلة</string>
-    <string name="str_action_quit">يترك</string>
-    <string name="str_action_apply">يتقدم</string>
-    <string name="str_action_yes">نعم</string>
-    <string name="str_action_no">لا</string>
-    <string name="str_more">أكثر</string>
-    <string name="str_action_compressor">ضاغط</string>
-    <string name="str_remove_ads">ازالة الاعلانات</string>
-    <string name="str_sponsored">برعاية</string>
-    <string name="str_remove_favorite">إزالة المفضلة</string>
-    <string name="str_move_out">تحرك للخارج</string>
-    <string name="str_share_via_photo">شارك عبر الصورة</string>
-    <string name="str_view_image">عرض الملفات</string>
-    <string name="str_action_view_pdf">عرض قوات الدفاع الشعبي</string>
-    <string name="str_action_rename">إعادة تسمية</string>
-    <string name="str_action_start">يبدأ</string>
-    <string name="str_action_search">يبحث</string>
-    <string name="str_action_setting">إعدادات</string>
-    <string name="str_action_continue">يكمل</string>
-    <string name="str_go_to_set">اذهب إلى المجموعة</string>
-    <string name="str_tools">أدوات</string>
-    <string name="str_no_files_yet">لا توجد ملفات حتى الآن</string>
-    <string name="str_action_go">يذهب</string>
-    <string name="str_feed_back_app">تطبيق FeedBack لقارئ PDF</string>
-    <string name="str_pdf_created_toolbar">مخلوق</string>
-    <string name="str_import_pdf">استيراد قوات الدفاع الشعبي</string>
-    <string name="str_select_all">اختر الكل</string>
-    <string name="str_tool_pdf_pro">أداة PDF برو</string>
-    <string name="str_privacy_policy">سياسة الخصوصية</string>
-    <string name="str_help">يساعد</string>
-    <string name="str_file_manager">مدير الملفات</string>
-    <string name="str_keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
-    <string name="str_display">عرض</string>
-    <string name="str_app_theme">موضوع التطبيق</string>
-    <string name="str_change_language_title">خيارات اللغة</string>
-    <string name="str_search_hint">يبحث…</string>
-    <string name="str_pwd_error">كلمة مرور خاطئة</string>
-    <string name="str_password">كلمة المرور</string>
-    <string name="str_password_des">أدخل كلمة المرور لفتح ملف PDF</string>
-    <string name="str_enter_password">أدخل كلمة المرور</string>
-    <string name="str_set_password">ضبط كلمة السر</string>
-    <string name="str_set_password_des">قم بتعيين كلمة المرور لحماية ملف PDF</string>
+    <string name="set_password">ضبط كلمة السر</string>
+    <string name="app_password_des">قم بتعيين كلمة المرور لحماية ملف PDF</string>
     <string name="toast_please_set_password">الرجاء تعيين كلمة المرور!</string>
     <string name="unlocking">فتح…</string>
     <string name="unlocked_successfully">تم إلغاء القفل بنجاح!</string>
-    <string name="invalid_page_number">رقم الصفحة غير صالح</string>
-    <string name="cannot_open_file_Path">لا يمكن فتح الملف: %1$s</string>
-    <string name="cannot_open_buffer">لا يمكن فتح المخزن المؤقت</string>
-    <string name="fill_out_text_field">املأ حقل النص</string>
-    <string name="choose_value">اختر القيمة</string>
-    <string name="str_shortcut">الاختصار</string>
-    <string name="str_request_new_feature">اطلب ميزة جديدة</string>
-    <string name="str_explore_tag_new">جديد</string>
-    <string name="str_setting_faq">التعليمات</string>
+    <string name="error_invalid_page_number">رقم الصفحة غير صالح</string>
+    <string name="error_cannot_open_file_path">لا يمكن فتح الملف: %1$s</string>
+    <string name="error_cannot_open_buffer">لا يمكن فتح المخزن المؤقت</string>
+    <string name="prompt_fill_text_field">املأ حقل النص</string>
+    <string name="prompt_choose_value">اختر القيمة</string>
+    <string name="action_shortcut">الاختصار</string>
+    <string name="action_request_new_feature">اطلب ميزة جديدة</string>
+    <string name="label_new_tag">جديد</string>
+    <string name="settings_faq">التعليمات</string>
     <string name="version">إصدار</string>
-    <string name="go_to_page">انتقل إلى صفحة</string>
-    <string name="too_many_pages_loading">هناك عدد كبير جدًا من الصفحات، جارٍ التحميل…</string>
-    <string name="already_in_use">هذا الاسم قيد الاستخدام بالفعل.</string>
-    <string name="srl_content_empty">عرض المحتوى في SmartRefreshLayout فارغ. هل نسيت إضافته في ملف تخطيط XML؟</string>
-    <string name="srl_header_pulling">للتحديث اسحب للأسفل</string>
-    <string name="srl_header_release">الافراج عن التحديث</string>
-    <string name="srl_header_refreshing">منعش…</string>
-    <string name="srl_header_loading">انتظر التحميل…</string>
-    <string name="srl_header_finish">تحديث النجاح</string>
-    <string name="srl_header_failed">فشل التحديث</string>
-    <string name="srl_header_secondary">الافراج عن الطابق الثاني</string>
-    <string name="srl_footer_pulling">اسحب لأعلى لتحميل المزيد</string>
-    <string name="srl_footer_release">الافراج لتحميل المزيد</string>
-    <string name="srl_footer_loading">تحميل…</string>
-    <string name="srl_footer_refreshing">انتظر التحديث…</string>
-    <string name="srl_footer_finish">نجاح التحميل</string>
-    <string name="srl_footer_failed">فشل التحميل</string>
-    <string name="srl_footer_nothing">لا مزيد من البيانات</string>
-    <string name="str_theme_dark">مظلم</string>
-    <string name="str_theme_light">ضوء</string>
-    <string name="str_action_move_fav">إزالة المفضلة</string>
+    <string name="action_go_to_page">انتقل إلى صفحة</string>
+    <string name="error_too_many_pages_loading">هناك عدد كبير جدًا من الصفحات، جارٍ التحميل…</string>
+    <string name="error_name_already_in_use">هذا الاسم قيد الاستخدام بالفعل.</string>
+    <string name="content_empty">عرض المحتوى في SmartRefreshLayout فارغ. هل نسيت إضافته في ملف تخطيط XML؟</string>
+    <string name="header_pulling">للتحديث اسحب للأسفل</string>
+    <string name="header_release">الافراج عن التحديث</string>
+    <string name="header_refreshing">منعش…</string>
+    <string name="header_loading">انتظر التحميل…</string>
+    <string name="header_finish">تحديث النجاح</string>
+    <string name="header_failed">فشل التحديث</string>
+    <string name="header_secondary">الافراج عن الطابق الثاني</string>
+    <string name="footer_pulling">اسحب لأعلى لتحميل المزيد</string>
+    <string name="footer_release">الافراج لتحميل المزيد</string>
+    <string name="footer_loading">تحميل…</string>
+    <string name="footer_refreshing">انتظر التحديث…</string>
+    <string name="footer_finish">نجاح التحميل</string>
+    <string name="footer_failed">فشل التحميل</string>
+    <string name="footer_nothing">لا مزيد من البيانات</string>
+    <string name="theme_dark">مظلم</string>
+    <string name="theme_light">ضوء</string>
+    <string name="action_move_fav">إزالة المفضلة</string>
     <string name="create_shortcut">انشاء اختصار</string>
     <string name="not_supported">غير معتمد</string>
-    <string name="str_action_deleting">جارٍ الحذف…</string>
-    <string name="str_action_removing">جارٍ الإزالة…</string>
-    <string name="toast_need_permission">بحاجة إلى إذن!</string>
-    <string name="all_reader2_search_files_hint">البحث عن الملفات…</string>
-    <string name="str_please_wait">انتظر من فضلك…</string>
-    <string name="tool_tittle_your_pdf">قوات الدفاع الشعبي الخاصة بك</string>
-    <string name="tool_tittle_merge">دمج قوات الدفاع الشعبي</string>
+    <string name="action_deleting">جارٍ الحذف…</string>
+    <string name="action_removing">جارٍ الإزالة…</string>
+    <string name="toast_required_permission">بحاجة إلى إذن!</string>
+    <string name="hint_search_files">البحث عن الملفات…</string>
+    <string name="message_please_wait">انتظر من فضلك…</string>
+    <string name="tool_title_your_pdf">قوات الدفاع الشعبي الخاصة بك</string>
+    <string name="tool_title_split_pdf">دمج قوات الدفاع الشعبي</string>
     <string name="tool_tittle_print">مطبعة</string>
     <string name="tool_tittle_split">تقسيم قوات الدفاع الشعبي</string>
-    <string name="tool_tittle_compress">ضغط قوات الدفاع الشعبي</string>
+    <string name="tool_title_compress_pdf">ضغط قوات الدفاع الشعبي</string>
     <string name="tool_tittle_share_as_photo">شارك كصورة</string>
     <string name="tool_tittle_image_to_pdf">الصورة إلى PDF</string>
-    <string name="tool_tittle_browse">تصفح قوات الدفاع الشعبي</string>
+    <string name="tool_title_browse_pdf">تصفح قوات الدفاع الشعبي</string>
     <string name="tool_tittle_pdf_to_image">حفظ كصورة</string>
     <string name="tool_tittle_lock_pdf">قفل قوات الدفاع الشعبي</string>
     <string name="tool_tittle_unlock_pdf">فتح ملف PDF</string>
-    <string name="tool_des_browse">يمكنك تحديد الملفات من مجلدات مختلفة على أجهزتك</string>
-    <string name="tool_des_merge">حدد ملفات PDF متعددة وادمجها في ثوانٍ.</string>
-    <string name="tool_des_print">اطبع ملفات PDF بسرعة من هاتفك.</string>
-    <string name="tool_des_split">قم بتقسيم ملف PDF حسب نطاقات الصفحات أو قم باستخراج جميع صفحات PDF إلى ملفات PDF متعددة.</string>
-    <string name="tool_des_compress">ضغط ملفات PDF لتقليل حجمها لتلبية احتياجاتك.</string>
-    <string name="tool_des_image_to_pdf">تحويل الصور (jpg، jpeg، png، إلخ) إلى ملفات PDF</string>
-    <string name="tool_des_pdf_to_image">قم بتصدير الصفحات المحددة من مستند PDF كصور</string>
-    <string name="tool_des_lock_pdf">حماية مستندات PDF عن طريق تعيين كلمة مرور</string>
-    <string name="tool_des_your_pdf">عرض كل ملفات PDF التي تم إنشاؤها</string>
-    <string name="tool_des_un_lock_pdf">قم بإزالة كلمة مرور PDF، مما يمنحك حرية استخدام ملفات PDF الخاصة بك كما تريد</string>
+    <string name="tool_description_browse">يمكنك تحديد الملفات من مجلدات مختلفة على أجهزتك</string>
+    <string name="tool_description_merge">حدد ملفات PDF متعددة وادمجها في ثوانٍ.</string>
+    <string name="tool_description_print">اطبع ملفات PDF بسرعة من هاتفك.</string>
+    <string name="tool_description_split">قم بتقسيم ملف PDF حسب نطاقات الصفحات أو قم باستخراج جميع صفحات PDF إلى ملفات PDF متعددة.</string>
+    <string name="tool_description_compress">ضغط ملفات PDF لتقليل حجمها لتلبية احتياجاتك.</string>
+    <string name="tool_description_image_to_pdf">تحويل الصور (jpg، jpeg، png، إلخ) إلى ملفات PDF</string>
+    <string name="tool_description_pdf_to_image">قم بتصدير الصفحات المحددة من مستند PDF كصور</string>
+    <string name="tool_description_lock_pdf">حماية مستندات PDF عن طريق تعيين كلمة مرور</string>
+    <string name="tool_description_your_pdf">عرض كل ملفات PDF التي تم إنشاؤها</string>
+    <string name="tool_description_unlock_pdf">قم بإزالة كلمة مرور PDF، مما يمنحك حرية استخدام ملفات PDF الخاصة بك كما تريد</string>
     <string name="toast_maximum_file_share">يمكنك مشاركة 50 ملف مرة واحدة!</string>
-    <string name="str_share_via">شارك عبر</string>
-    <string name="dialog_permission_required_title">الإذن مطلوب</string>
-    <string name="dialog_permission_required_des">لقراءة المستندات وتحريرها على جهازك، يرجى السماح لقارئ PDF بالوصول إلى جميع ملفاتك.</string>
-    <string name="dialog_permission_required_allow_access">السماح بالوصول لإدارة كافة الملفات</string>
-    <string name="dialog_password_invalid">رمز مرور خاطئ</string>
-    <string name="dialog_password_title">أدخل كلمة المرور</string>
-    <string name="dialog_set_password_title">ضبط كلمة السر</string>
-    <string name="dialog_remove_password_tittle">إزالة كلمة المرور</string>
-    <string name="dialog_remove_password_des">لن يكون الملف محميًا بعد الآن</string>
+    <string name="share_via">شارك عبر</string>
+    <string name="dialog_permission_title">الإذن مطلوب</string>
+    <string name="dialog_permission_description">لقراءة المستندات وتحريرها على جهازك، يرجى السماح لقارئ PDF بالوصول إلى جميع ملفاتك.</string>
+    <string name="dialog_allow_access">السماح بالوصول لإدارة كافة الملفات</string>
+    <string name="dialog_invalid_password">رمز مرور خاطئ</string>
+    <string name="dialog_enter_password_app">أدخل كلمة المرور</string>
+    <string name="dialog_set_password">ضبط كلمة السر</string>
+    <string name="dialog_remove_password_title">إزالة كلمة المرور</string>
+    <string name="dialog_remove_password_description">لن يكون الملف محميًا بعد الآن</string>
     <string name="dialog_password_body">تحتاج إلى إدخال كلمة المرور لفتحه.</string>
     <string name="dialog_password_hint">كلمة المرور</string>
     <string name="dialog_delete_body">هل أنت متأكد أنك تريد الحذف؟ لا يمكن التراجع عن هذا الإجراء</string>

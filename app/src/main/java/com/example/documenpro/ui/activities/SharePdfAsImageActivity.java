@@ -89,7 +89,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
 
             selectedToolType = intent.getIntExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, 1);
             if (selectedToolType == AppGlobalConstants.TOOL_ID_SHARE_PDF_AS_PHOTO) {
-                continueActionText.setText(R.string.str_action_share);
+                continueActionText.setText(R.string.action_share);
             } else if (selectedToolType == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
                 continueActionText.setText(R.string.tool_tittle_pdf_to_image);
             }
@@ -118,7 +118,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                         }
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-                        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.str_share_via_photo));
+                        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_via_photo));
                         intent.setType("image/jpeg");
                         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, arrayList);
                         startActivity(intent);

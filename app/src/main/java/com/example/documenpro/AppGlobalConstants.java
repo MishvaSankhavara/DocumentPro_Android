@@ -178,9 +178,9 @@ public class AppGlobalConstants {
 
     public static ArrayList<ToolsModel> setToolsList() {
         ArrayList<ToolsModel> arrayList = new ArrayList<>();
-        arrayList.add(new ToolsModel(R.string.tool_tittle_your_pdf, R.drawable.ic_tools_your_pdf, AppGlobalConstants.TOOL_YOUR_PDF, 12));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_merge, R.drawable.ic_tools_merge, AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO, 12));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_compress, R.drawable.ic_tools_compress, AppGlobalConstants.TOOL_ID_COMPRESS, 12));
+        arrayList.add(new ToolsModel(R.string.tool_title_your_pdf, R.drawable.ic_tools_your_pdf, AppGlobalConstants.TOOL_YOUR_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_title_split_pdf, R.drawable.ic_tools_merge, AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO, 12));
+        arrayList.add(new ToolsModel(R.string.tool_title_compress_pdf, R.drawable.ic_tools_compress, AppGlobalConstants.TOOL_ID_COMPRESS, 12));
         arrayList.add(new ToolsModel(R.string.tool_tittle_split, R.drawable.ic_tools_split, AppGlobalConstants.TOOL_ID_SPLIT, 0));
 //        arrayList.add(new Tools(R.string.tool_tittle_browse, R.drawable.ic_tools_browse_pdf, GlobalConstant.TOOL_BROWSE_PDF, 12));
         arrayList.add(new ToolsModel(R.string.tool_tittle_print, R.drawable.ic_tools_print, AppGlobalConstants.TOOL_ID_PRINT, 12));

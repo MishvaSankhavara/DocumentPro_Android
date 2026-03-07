@@ -387,7 +387,7 @@ public class Utils {
 
     public static CharSequence setToolBarPdfCreated(Context mContext) {
         SpannableString first = new SpannableString("PDF");
-        SpannableString second = new SpannableString(mContext.getString(R.string.str_pdf_created_toolbar));
+        SpannableString second = new SpannableString(mContext.getString(R.string.pdf_created_toolbar));
         SpannableString empty = new SpannableString(" ");
         first.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.colorAccent)), 0, first.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         second.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.colorTextPrimary)), 0, second.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -739,7 +739,7 @@ public class Utils {
     public static void feedbackApp(Activity context) {
         try {
             Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + AppGlobalConstants.FEEDBACK_EMAIL));
-            intent3.putExtra(Intent.EXTRA_SUBJECT, context.getResources().getString(R.string.str_feed_back_app));
+            intent3.putExtra(Intent.EXTRA_SUBJECT, context.getResources().getString(R.string.feed_back_app));
             intent3.putExtra(Intent.EXTRA_TEXT, "");
             context.startActivity(intent3);
         } catch (ActivityNotFoundException ignored) {

@@ -211,7 +211,7 @@
             android:layout_marginRight="72dp"
             android:background="@drawable/bg_btn_positive"
             android:gravity="center"
-            android:text="@string/str_action_share"
+            android:text="@string/action_share"
             android:textColor="@color/app_white"
             android:textSize="18sp"
             app:textAllCaps="true" />
@@ -226,7 +226,7 @@
             android:layout_marginRight="72dp"
             android:background="@drawable/ip_bg_open_btn"
             android:gravity="center"
-            android:text="@string/str_action_open"
+            android:text="@string/action_open"
             android:textColor="@color/ip_color_main_red"
             android:textSize="18sp"
             app:textAllCaps="true" />

@@ -43,8 +43,8 @@ public class PasswordSetupDialog extends Dialog {
         tv_dialog_title = findViewById(R.id.tv_title);
         tvDescription = findViewById(R.id.tv_dialog_description);
         tvErrorMessage = findViewById(R.id.tv_error_message);
-        tv_dialog_title.setText(R.string.str_set_password);
-        tvDescription.setText(R.string.str_set_password_des);
+        tv_dialog_title.setText(R.string.set_password);
+        tvDescription.setText(R.string.app_password_des);
         tvErrorMessage.setText(R.string.toast_please_set_password);
         clDialogRoot = findViewById(R.id.cl_dialog_root);
         etPassword = findViewById(R.id.et_password_input);

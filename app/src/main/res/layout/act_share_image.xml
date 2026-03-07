@@ -64,7 +64,7 @@
             android:fontFamily="@font/semibold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/str_action_share"
+            android:text="@string/action_share"
             android:textAllCaps="true"
             android:textColor="@color/app_white"
             android:textSize="18sp" />

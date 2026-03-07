@@ -38,7 +38,7 @@ public class IncapableDialog extends DialogFragment {
         if (!TextUtils.isEmpty(message)) {
             builder.setMessage(message);
         }
-        builder.setPositiveButton(R.string.str_action_ok, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.action_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

@@ -50,7 +50,7 @@ public class FileBrowser extends RelativeLayout {
         final com.artifex.sonui.f var6 = (f) this.g.getItem(var3);
         if (var6 != null) {
             if (var6.a.isCloud() && !AppFile.i()) {
-                Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.sodk_editor_connection_error_title), this.getContext().getString(R.string.sodk_editor_connection_error_body));
+                Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.editor_connection_error_title), this.getContext().getString(R.string.editor_connection_error_body));
                 return;
             }
 
@@ -112,10 +112,10 @@ public class FileBrowser extends RelativeLayout {
         this.btnSave = this.findViewById(R.id.save_button);
         ArrayList<AppFile> var1 = new ArrayList<>();
         this.a = var1;
-        var1.add(new b(com.artifex.solib.a.b(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.sodk_editor_my_documents)));
+        var1.add(new b(com.artifex.solib.a.b(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.editor_my_documents)));
         if (com.artifex.solib.a.d(this.getContext())) {
-            this.a.add(new b(Utilities.getDownloadDirectory(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.sodk_editor_download)));
-            this.a.add(new b(Utilities.getRootDirectory(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.sodk_editor_all)));
+            this.a.add(new b(Utilities.getDownloadDirectory(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.editor_download)));
+            this.a.add(new b(Utilities.getRootDirectory(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.editor_all)));
             String var2 = Utilities.getSDCardPath(this.getContext());
             if (var2 != null) {
                 this.a.add(new b(var2, "SD Card"));
@@ -154,7 +154,7 @@ public class FileBrowser extends RelativeLayout {
     private void d() {
         LinearLayout var1 = this.findViewById(R.id.names_bar);
         var1.removeAllViews();
-        this.a(null, this.getResources().getString(R.string.sodk_editor_storage), var1);
+        this.a(null, this.getResources().getString(R.string.editor_storage), var1);
 
         for (AppFile var3 : this.b) {
             var1.addView(LayoutInflater.from(this.getContext()).inflate(R.layout.breadcrumb_slash, (ViewGroup) null));

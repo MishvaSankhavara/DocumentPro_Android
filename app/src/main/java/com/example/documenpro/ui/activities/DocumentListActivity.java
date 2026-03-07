@@ -113,7 +113,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
         selectedFileType = AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES;
         if (fileType == AppGlobalConstants.FILE_TYPE_EXCEL) {
             colorCode = R.color.app_excel_list_bg;
-            title = R.string.tittle_toolbar_excel;
+            title = R.string.title_toolbar_excel;
             selectedFileType = AppGlobalConstants.QUERY_EXCEL_FILES;
         } else if (fileType == AppGlobalConstants.FILE_TYPE_PDF) {
             colorCode = R.color.app_pdf_list_bg;
@@ -121,7 +121,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
             title = R.string.tittle_toolbar_pdf;
         } else if (fileType == AppGlobalConstants.FILE_TYPE_PPT) {
             colorCode = R.color.app_ppt_list_bg;
-            title = R.string.tittle_toolbar_ppt;
+            title = R.string.title_toolbar_powerpoint;
             selectedFileType = AppGlobalConstants.QUERY_PPT_FILES;
         } else if (fileType == AppGlobalConstants.FILE_TYPE_WORD) {
             colorCode = R.color.app_word_list_bg;
@@ -161,7 +161,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
 
         } else if (idView == R.id.item_sort) {
             if (documentListAdapter.getItemCount() == 0) {
-                Toast.makeText(DocumentListActivity.this, R.string.str_no_files_yet, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DocumentListActivity.this, R.string.no_files_yet, Toast.LENGTH_SHORT).show();
             } else {
                 Utils.showSortDialog(DocumentListActivity.this, this);
             }

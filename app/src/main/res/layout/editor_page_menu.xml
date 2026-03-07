@@ -29,5 +29,5 @@
         style="@style/sodk_editor_page_menu_item_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/str_action_duplicate" />
+        android:text="@string/action_duplicate" />
 </LinearLayout>

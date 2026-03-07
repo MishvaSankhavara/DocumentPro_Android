@@ -43,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/semibold"
             android:gravity="center"
-            android:text="@string/str_no_files_yet"
+            android:text="@string/no_files_yet"
             android:textColor="@color/colorTextPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_empty"

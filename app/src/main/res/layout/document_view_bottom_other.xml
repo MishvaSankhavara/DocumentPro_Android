@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         app:Image="@drawable/ic_flip_black"
-        app:Name="@string/str_action_rotate" />
+        app:Name="@string/action_rotate" />
 
     <com.example.documenpro.ui.customviews.BottomButtonView
         android:id="@+id/btnSearchTab"
@@ -33,7 +33,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         app:Image="@drawable/ic_print"
-        app:Name="@string/str_action_print" />
+        app:Name="@string/print_document" />
 
 
 </LinearLayout>

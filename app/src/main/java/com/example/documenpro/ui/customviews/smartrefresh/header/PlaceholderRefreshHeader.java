@@ -50,7 +50,7 @@ public class PlaceholderRefreshHeader extends RefreshInternalAbstract implements
             canvas.drawRect(d, d, thisView.getWidth() - d, thisView.getBottom() - d, paint);
 
             TextView textView = new TextView(context);
-            textView.setText(context.getString(R.string.srl_component_falsify, getClass().getSimpleName(), SmartViewUtil.pxToDp(thisView.getHeight())));
+            textView.setText(context.getString(R.string.component_falsify, getClass().getSimpleName(), SmartViewUtil.pxToDp(thisView.getHeight())));
             textView.setTextColor(0xcccccccc);
             textView.setGravity(Gravity.CENTER);
             //noinspection UnnecessaryLocalVariable

@@ -75,7 +75,7 @@
             android:fontFamily="@font/semibold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/str_action_allow"
+            android:text="@string/action_allow"
             android:textAllCaps="true"
             android:textColor="@color/app_white"
             android:textSize="18sp"

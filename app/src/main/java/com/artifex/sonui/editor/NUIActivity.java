@@ -208,7 +208,7 @@ public class NUIActivity extends BaseActivity {
     public void onNewIntent(final Intent var1) {
         ConfigOptions.a();
         if (this.isDocModified()) {
-            Utilities.yesNoMessage(this, this.getString(R.string.sodk_editor_new_intent_title), this.getString(R.string.sodk_editor_new_intent_body), this.getString(R.string.sodk_editor_new_intent_yes_button), this.getString(R.string.sodk_editor_new_intent_no_button), new Runnable() {
+            Utilities.yesNoMessage(this, this.getString(R.string.new_intent_title), this.getString(R.string.new_intent_body), this.getString(R.string.new_intent_yes_button), this.getString(R.string.new_intent_no_button), new Runnable() {
                 public void run() {
                     if (NUIActivity.this.mNUIView != null) {
                         NUIActivity.this.mNUIView.endDocSession(true);

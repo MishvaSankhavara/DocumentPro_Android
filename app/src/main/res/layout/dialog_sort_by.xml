@@ -49,7 +49,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
-                android:text="@string/date_created_old"
+                android:text="@string/sort_date_ascending"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp"
                 android:theme="@style/CustomBottomSheetDialogTheme" />
@@ -65,7 +65,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
-                android:text="@string/date_created_new"
+                android:text="@string/sort_date_descending"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp"
                 android:theme="@style/CustomBottomSheetDialogTheme" />
@@ -80,7 +80,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
-                android:text="@string/name_a_to_z"
+                android:text="@string/sort_name_atoz"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp"
                 android:theme="@style/CustomBottomSheetDialogTheme" />
@@ -94,7 +94,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
-                android:text="@string/name_z_to_a"
+                android:text="@string/sort_name_ztoa"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp"
                 android:theme="@style/CustomBottomSheetDialogTheme" />
@@ -108,7 +108,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
-                android:text="@string/file_size_largest"
+                android:text="@string/sort_size_ascending"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp"
                 android:theme="@style/CustomBottomSheetDialogTheme" />
@@ -122,7 +122,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
-                android:text="@string/file_size_minimum"
+                android:text="@string/sort_size_descending"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="16sp"
                 android:theme="@style/CustomBottomSheetDialogTheme" />
@@ -139,7 +139,7 @@
             android:fontFamily="@font/medium"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/str_action_ok"
+            android:text="@string/action_ok"
             android:textAllCaps="true"
             android:textColor="#ffffff"
             android:textSize="18sp"

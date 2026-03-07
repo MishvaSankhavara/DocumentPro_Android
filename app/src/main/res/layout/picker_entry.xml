@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:gravity="center"
-                    android:text="@string/sodk_editor_delete"
+                    android:text="@string/editor_delete"
                     android:textColor="@color/preview_button_textcolor"
                     android:textSize="11.0sp" />
             </LinearLayout>
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:gravity="center"
-                    android:text="@string/sodk_editor_copy"
+                    android:text="@string/editor_copy"
                     android:textColor="@color/preview_button_textcolor"
                     android:textSize="11.0sp" />
             </LinearLayout>
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:gravity="center"
-                    android:text="@string/sodk_editor_rename"
+                    android:text="@string/editor_rename"
                     android:textColor="@color/preview_button_textcolor"
                     android:textSize="11.0sp" />
             </LinearLayout>
@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:gravity="center"
-                    android:text="@string/sodk_editor_share"
+                    android:text="@string/editor_share"
                     android:textColor="@color/preview_button_textcolor"
                     android:textSize="11.0sp" />
             </LinearLayout>

@@ -70,7 +70,7 @@ public class OnBoardActivity extends AppCompatActivity {
             if (position == 2) {
                 AppCompatTextView appCompatTextView = activity.nextButtonText;
                 if (appCompatTextView != null) {
-                    appCompatTextView.setText(R.string.str_action_start);
+                    appCompatTextView.setText(R.string.action_start);
                 }
             } else {
                 AppCompatTextView appCompatTextView2 = activity.nextButtonText;

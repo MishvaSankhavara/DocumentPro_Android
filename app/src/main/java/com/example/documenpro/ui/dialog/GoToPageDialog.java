@@ -43,7 +43,7 @@ public class GoToPageDialog extends Dialog {
                 }
 
             } else {
-                pageNumberInput.setError(context.getString(R.string.invalid_page_number));
+                pageNumberInput.setError(context.getString(R.string.error_invalid_page_number));
                 ObjectAnimator objectAnimator = Utils.startAnim(dialogRootLayout);
                 objectAnimator.start();
             }

@@ -52,7 +52,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/bold"
         android:includeFontPadding="false"
-        android:text="@string/str_no_files_yet"
+        android:text="@string/no_files_yet"
         android:textColor="@color/colorSolidText"
         android:textSize="18sp"
         android:visibility="gone"

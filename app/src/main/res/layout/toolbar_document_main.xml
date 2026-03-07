@@ -87,7 +87,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="8dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/str_action_print"
+            android:contentDescription="@string/print_document"
             android:padding="4dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_print"

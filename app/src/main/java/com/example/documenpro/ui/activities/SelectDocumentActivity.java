@@ -170,7 +170,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
             moveButtonLayout.setVisibility(View.VISIBLE);
             documentList = DatabaseHelper.getInstance(this).getStarredDocuments_DatabaseHelper();
             moveIconImageView.setImageResource(R.drawable.ic_un_bookmark);
-            moveTextView.setText(getResources().getString(R.string.str_remove_favorite));
+            moveTextView.setText(getResources().getString(R.string.action_remove_favorite));
         } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_RECENT) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
 
@@ -179,7 +179,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
             moveButtonLayout.setVisibility(View.VISIBLE);
             documentList = DatabaseHelper.getInstance(this).getRecentDocuments_DatabaseHelper();
             moveIconImageView.setImageResource(R.drawable.ic_remove);
-            moveTextView.setText(R.string.str_move_out);
+            moveTextView.setText(R.string.move_out);
         }
         filePickerAdapter = new FilePickerAdapter(this, documentList, this);
 
@@ -200,7 +200,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
                     }
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.str_share_via));
+                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_via));
                     intent.setType("application/pdf");
                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, arrayList);
                     startActivity(intent);
@@ -325,7 +325,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
             super.onPreExecute();
             progress = 0;
             dialog = new FileProgressDialog(weakReference.get());
-            dialog.setTitleText(weakReference.get().getString(R.string.str_action_deleting));
+            dialog.setTitleText(weakReference.get().getString(R.string.action_deleting));
             Window window5 = dialog.getWindow();
             assert window5 != null;
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -418,7 +418,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
             super.onPreExecute();
             progress = 0;
             dialog = new FileProgressDialog(weakReference.get());
-            dialog.setTitleText(weakReference.get().getString(R.string.str_action_removing));
+            dialog.setTitleText(weakReference.get().getString(R.string.action_removing));
             Window window6 = dialog.getWindow();
             assert window6 != null;
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

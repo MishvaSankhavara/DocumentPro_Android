@@ -3,16 +3,16 @@
     <string name="app_name">Document Reader</string>
 
 
-    <string name="str_action_remove">Vystěhovat se</string>
-    <string name="str_action_shortcut">Zkratka</string>
+    <string name="action_move_out">Vystěhovat se</string>
+    <string name="action_create_shortcut">Zkratka</string>
 
-    <string name="str_action_go_to_set">Přejít na sadu</string>
+    <string name="action_go_to_settings">Přejít na sadu</string>
 
-    <string name="str_action_select">Vybrat</string>
-    <string name="str_action_sort">Seřadit</string>
+    <string name="select_item">Vybrat</string>
+    <string name="sort_items">Seřadit</string>
 
-    <string name="str_action_print">Tisk</string>
-    <string name="menu_thumbnail">Náhled</string>
+    <string name="print_document">Tisk</string>
+    <string name="menu_view_thumbnail">Náhled</string>
 
     <string name="navigation_privacy_policy">Zásady ochrany osobních údajů</string>
     <string name="navigation_language">Jazyk</string>
@@ -21,204 +21,204 @@
     <string name="navigation_rate_us">Ohodnoťte nás</string>
     <string name="document_all">Všechno</string>
     <string name="tittle_toolbar_all">Všechny soubory</string>
-    <string name="tittle_toolbar_excel">Soubory Excel</string>
+    <string name="title_toolbar_excel">Soubory Excel</string>
     <string name="tittle_toolbar_pdf">Soubory PDF</string>
-    <string name="tittle_toolbar_ppt">Soubory PowerPoint</string>
+    <string name="title_toolbar_powerpoint">Soubory PowerPoint</string>
     <string name="tittle_toolbar_word">Soubory aplikace Word</string>
 
 
-    <string name="toast_no_permission">Potřebujete povolení!</string>
-    <string name="toast_no_file_manager">Není k dispozici žádný správce souborů</string>
+    <string name="toast_permission_required">Potřebujete povolení!</string>
+    <string name="toast_no_file_manager_available">Není k dispozici žádný správce souborů</string>
 
-    <string name="str_files">Soubory: %1$s</string>
+    <string name="label_file_count">Soubory: %1$s</string>
 
     <string name="dialog_rate_content">Snažíme se vám poskytnout dobrou zkušenost. Ocenili bychom, kdybyste nám dali 5 hvězdiček</string>
-    <string name="dialog_rate_5_start">5 hvězdiček</string>
+    <string name="dialog_rate_five_star">5 hvězdiček</string>
 
-    <string name="gallery_last_modified">Naposledy změněno</string>
-    <string name="last_viewed">Naposledy zhlédnuto</string>
-    <string name="info">Info</string>
-    <string name="name">název</string>
-    <string name="size">Velikost</string>
-    <string name="path">Cesta</string>
+    <string name="info_last_modified">Naposledy změněno</string>
+    <string name="info_last_viewed">Naposledy zhlédnuto</string>
+    <string name="info_label">Info</string>
+    <string name="info_name">název</string>
+    <string name="info_size">Velikost</string>
+    <string name="info_path">Cesta</string>
 
-    <string name="all_reader1_splash">Vaše čtečka dokumentů vše v jednom</string>
+    <string name="splash_tagline">Vaše čtečka dokumentů vše v jednom</string>
     <string name="sort_by">Seřazeno podle</string>
-    <string name="date_created_old">Datum: vzestupně</string>
-    <string name="date_created_new">Datum: Sestupně</string>
-    <string name="name_a_to_z">Jméno: A až Z</string>
-    <string name="name_z_to_a">Jméno: Z až A</string>
-    <string name="file_size_largest">Velikost souboru: Vzestupně</string>
-    <string name="file_size_minimum">Velikost souboru: Sestupně</string>
-    <string name="str_action_loading">Načítání…</string>
-    <string name="enter_passwrod_to_open">Zadejte heslo pro otevření</string>
+    <string name="sort_date_ascending">Datum: vzestupně</string>
+    <string name="sort_date_descending">Datum: Sestupně</string>
+    <string name="sort_name_atoz">Jméno: A až Z</string>
+    <string name="sort_name_ztoa">Jméno: Z až A</string>
+    <string name="sort_size_ascending">Velikost souboru: Vzestupně</string>
+    <string name="sort_size_descending">Velikost souboru: Sestupně</string>
+    <string name="action_loading">Načítání…</string>
+    <string name="dialog_enter_password">Zadejte heslo pro otevření</string>
+    <string name="dialog_enter_password_field">Zadejte heslo</string>
+    <string name="editor_background">Pozadí</string>
+    <string name="article_loading_title" />
+    <string name="action_duplicate">Duplikát</string>
+    <string name="toast_no_undo_available">Nejsou k dispozici žádné operace Zpět.</string>
+    <string name="editor_no_more_found">Více nenalezeno</string>
+    <string name="editor_keep_searching">Pokračuj v hledání?</string>
+    <string name="editor_continue">Pokračovat</string>
+    <string name="editor_stop">Stop</string>
+    <string name="action_rotate">Točit se</string>
+    <string name="action_edit">Upravit</string>
+    <string name="error_saving_document">Chyba při ukládání dokumentu: SOError=%d</string>
+    <string name="editor_error">Chyba</string>
+    <string name="editor_document_modified">Existují neuložené změny</string>
+    <string name="editor_save_or_discard">Uložit změny nebo změny zahodit?</string>
+    <string name="editor_continue_editing">Pokračujte v úpravách</string>
+    <string name="editor_xfa_body">Tento dokument obsahuje XML Forms Office, který Office Editor nepodporuje. XFA bylo zavrženo, když byla v roce 2015 vydána specifikace PDF 2.0. Tvůrce PDF jej může převést tak, aby používal AcroForms, které jsou podporovány. Pokud je to vhodné, požádejte o pomoc svého správce IT.</string>
+    <string name="editor_redact_confirm_save">Tento dokument obsahuje značky redakce, které ještě nebyly použity. Veškerý obsah spojený s těmito značkami bude stále přítomen, dokud nebudou použity. Jste si jistý, že chcete pokračovat?</string>
+    <string name="editor_yes">Kancelář</string>
+    <string name="editor_no">Ne</string>
+    <string name="editor_delete_worksheet">Smazat sešit?</string>
+    <string name="editor_delete_sheet_confirm">Chcete smazat list \"</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="action_delete">Vymazat</string>
+    <string name="action_clear_all">Vymazat vše</string>
+    <string name="action_open">OTEVŘENO</string>
+    <string name="action_allow">Dovolit</string>
+    <string name="action_failed">Nepodařilo se</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">zrušení</string>
+    <string name="action_share">Podíl</string>
+    <string name="action_okay">dobře</string>
+    <string name="action_dismiss">Zavrhnout</string>
+    <string name="action_searching">Vyhledávání…</string>
+    <string name="action_save">Uložit</string>
+    <string name="action_alert">Upozornění</string>
+    <string name="splash_des">Čtěte a upravujte PDF kdykoli a kdekoli</string>
+    <string name="all_pdf">Všechny PDF</string>
+    <string name="app_recent">Nedávné</string>
+    <string name="app_favorite">Oblíbené</string>
+    <string name="action_quit">Přestat</string>
+    <string name="action_apply">Aplikovat</string>
+    <string name="action_yes">Ano</string>
+    <string name="action_no">Ne</string>
+    <string name="action_more">Více</string>
+    <string name="action_compressor">Kompresor</string>
+    <string name="action_remove_ads">Odebrat reklamy</string>
+    <string name="action_sponsored">Sponzorováno</string>
+    <string name="action_remove_favorite">Odebrat oblíbené</string>
+    <string name="move_out">Vystěhovat se</string>
+    <string name="share_via_photo">Sdílejte prostřednictvím fotografie</string>
+    <string name="view_image">Zobrazit soubory</string>
+    <string name="action_view_pdf">Zobrazit PDF</string>
+    <string name="action_rename">Přejmenovat</string>
+    <string name="action_start">Start</string>
+    <string name="action_search">Vyhledávání</string>
+    <string name="action_setting">Nastavení</string>
+    <string name="action_continue">Pokračovat</string>
+    <string name="go_to_set">Přejít na sadu</string>
+    <string name="tools">Nástroje</string>
+    <string name="no_files_yet">Zatím žádné soubory</string>
+    <string name="action_go">Jít</string>
+    <string name="feed_back_app">Aplikace FeedBack PDF Reader</string>
+    <string name="pdf_created_toolbar">Vytvořeno</string>
+    <string name="import_pdf">Importovat PDF</string>
+    <string name="select_all">Vybrat vše</string>
+    <string name="tool_pdf_pro">Nástroj PDF Pro</string>
+    <string name="privacy_policy">Zásady ochrany osobních údajů</string>
+    <string name="help">Pomoc</string>
+    <string name="file_manager">Správce souborů</string>
+    <string name="keep_screen_on">Nechte obrazovku zapnutou</string>
+    <string name="app_display">Zobrazit</string>
+    <string name="app_theme">Téma aplikace</string>
+    <string name="change_language_title">Jazykové možnosti</string>
+    <string name="search_hint">Vyhledávání…</string>
+    <string name="pwd_error">Špatné heslo</string>
+    <string name="password">Heslo</string>
+    <string name="password_des">Zadejte heslo pro otevření PDF</string>
     <string name="enter_password">Zadejte heslo</string>
-    <string name="sodk_editor_background">Pozadí</string>
-    <string name="zs_view_article_loading_title" />
-    <string name="str_action_duplicate">Duplikát</string>
-    <string name="toast_no_undo">Nejsou k dispozici žádné operace Zpět.</string>
-    <string name="sodk_editor_no_more_found">Více nenalezeno</string>
-    <string name="sodk_editor_keep_searching">Pokračuj v hledání?</string>
-    <string name="sodk_editor_str_continue">Pokračovat</string>
-    <string name="sodk_editor_stop">Stop</string>
-    <string name="str_action_rotate">Točit se</string>
-    <string name="str_action_edit">Upravit</string>
-    <string name="sodk_editor_error_saving_document_code">Chyba při ukládání dokumentu: SOError=%d</string>
-    <string name="sodk_editor_error">Chyba</string>
-    <string name="sodk_editor_document_has_been_modified">Existují neuložené změny</string>
-    <string name="sodk_editor_would_you_like_to_save_your_changes">Uložit změny nebo změny zahodit?</string>
-    <string name="sodk_editor_continue_editing">Pokračujte v úpravách</string>
-    <string name="sodk_editor_xfa_body">Tento dokument obsahuje XML Forms Office, který Office Editor nepodporuje. XFA bylo zavrženo, když byla v roce 2015 vydána specifikace PDF 2.0. Tvůrce PDF jej může převést tak, aby používal AcroForms, které jsou podporovány. Pokud je to vhodné, požádejte o pomoc svého správce IT.</string>
-    <string name="sodk_editor_redact_confirm_save">Tento dokument obsahuje značky redakce, které ještě nebyly použity. Veškerý obsah spojený s těmito značkami bude stále přítomen, dokud nebudou použity. Jste si jistý, že chcete pokračovat?</string>
-    <string name="sodk_editor_yes">Kancelář</string>
-    <string name="sodk_editor_no">Ne</string>
-    <string name="sodk_editor_delete_worksheet_q">Smazat sešit?</string>
-    <string name="sodk_editor_do_you_want_to_delete_the_sheet">Chcete smazat list \"</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <string name="str_action_delete">Vymazat</string>
-    <string name="str_action_clear_all">Vymazat vše</string>
-    <string name="str_action_open">OTEVŘENO</string>
-    <string name="str_action_allow">Dovolit</string>
-    <string name="str_action_failed">Nepodařilo se</string>
-    <string name="str_action_ok">OK</string>
-    <string name="str_action_cancel">zrušení</string>
-    <string name="str_action_share">Podíl</string>
-    <string name="str_action_okay">dobře</string>
-    <string name="str_action_dismiss">Zavrhnout</string>
-    <string name="str_action_searching">Vyhledávání…</string>
-    <string name="str_action_save">Uložit</string>
-    <string name="str_action_alert">Upozornění</string>
-    <string name="str_splash_des">Čtěte a upravujte PDF kdykoli a kdekoli</string>
-    <string name="str_all_pdf">Všechny PDF</string>
-    <string name="str_recent">Nedávné</string>
-    <string name="str_favorite">Oblíbené</string>
-    <string name="str_action_quit">Přestat</string>
-    <string name="str_action_apply">Aplikovat</string>
-    <string name="str_action_yes">Ano</string>
-    <string name="str_action_no">Ne</string>
-    <string name="str_more">Více</string>
-    <string name="str_action_compressor">Kompresor</string>
-    <string name="str_remove_ads">Odebrat reklamy</string>
-    <string name="str_sponsored">Sponzorováno</string>
-    <string name="str_remove_favorite">Odebrat oblíbené</string>
-    <string name="str_move_out">Vystěhovat se</string>
-    <string name="str_share_via_photo">Sdílejte prostřednictvím fotografie</string>
-    <string name="str_view_image">Zobrazit soubory</string>
-    <string name="str_action_view_pdf">Zobrazit PDF</string>
-    <string name="str_action_rename">Přejmenovat</string>
-    <string name="str_action_start">Start</string>
-    <string name="str_action_search">Vyhledávání</string>
-    <string name="str_action_setting">Nastavení</string>
-    <string name="str_action_continue">Pokračovat</string>
-    <string name="str_go_to_set">Přejít na sadu</string>
-    <string name="str_tools">Nástroje</string>
-    <string name="str_no_files_yet">Zatím žádné soubory</string>
-    <string name="str_action_go">Jít</string>
-    <string name="str_feed_back_app">Aplikace FeedBack PDF Reader</string>
-    <string name="str_pdf_created_toolbar">Vytvořeno</string>
-    <string name="str_import_pdf">Importovat PDF</string>
-    <string name="str_select_all">Vybrat vše</string>
-    <string name="str_tool_pdf_pro">Nástroj PDF Pro</string>
-    <string name="str_privacy_policy">Zásady ochrany osobních údajů</string>
-    <string name="str_help">Pomoc</string>
-    <string name="str_file_manager">Správce souborů</string>
-    <string name="str_keep_screen_on">Nechte obrazovku zapnutou</string>
-    <string name="str_display">Zobrazit</string>
-    <string name="str_app_theme">Téma aplikace</string>
-    <string name="str_change_language_title">Jazykové možnosti</string>
-    <string name="str_search_hint">Vyhledávání…</string>
-    <string name="str_pwd_error">Špatné heslo</string>
-    <string name="str_password">Heslo</string>
-    <string name="str_password_des">Zadejte heslo pro otevření PDF</string>
-    <string name="str_enter_password">Zadejte heslo</string>
-    <string name="str_set_password">Nastavit heslo</string>
-    <string name="str_set_password_des">Nastavte heslo pro ochranu PDF</string>
+    <string name="set_password">Nastavit heslo</string>
+    <string name="app_password_des">Nastavte heslo pro ochranu PDF</string>
     <string name="toast_please_set_password">Prosím, nastavte heslo!</string>
     <string name="unlocking">Odemykání…</string>
     <string name="unlocked_successfully">Úspěšně odemčeno!</string>
-    <string name="invalid_page_number">Neplatné číslo stránky</string>
-    <string name="cannot_open_file_Path">Nelze otevřít soubor: %1$s</string>
-    <string name="cannot_open_buffer">Nelze otevřít vyrovnávací paměť</string>
-    <string name="fill_out_text_field">Vyplňte textové pole</string>
-    <string name="choose_value">Vyberte hodnotu</string>
-    <string name="str_shortcut">Zkratka</string>
-    <string name="str_request_new_feature">Požádejte o novou funkci</string>
-    <string name="str_explore_tag_new">Nový</string>
-    <string name="str_setting_faq">FAQ</string>
+    <string name="error_invalid_page_number">Neplatné číslo stránky</string>
+    <string name="error_cannot_open_file_path">Nelze otevřít soubor: %1$s</string>
+    <string name="error_cannot_open_buffer">Nelze otevřít vyrovnávací paměť</string>
+    <string name="prompt_fill_text_field">Vyplňte textové pole</string>
+    <string name="prompt_choose_value">Vyberte hodnotu</string>
+    <string name="action_shortcut">Zkratka</string>
+    <string name="action_request_new_feature">Požádejte o novou funkci</string>
+    <string name="label_new_tag">Nový</string>
+    <string name="settings_faq">FAQ</string>
     <string name="version">Verze</string>
-    <string name="go_to_page">Jdi na stránku</string>
-    <string name="too_many_pages_loading">Příliš mnoho stránek, načítání…</string>
-    <string name="already_in_use">Toto jméno je již používáno.</string>
-    <string name="srl_content_empty">Zobrazení obsahu v SmartRefreshLayout je prázdné. Zapomněli jste jej přidat do souboru rozvržení xml?</string>
-    <string name="srl_header_pulling">Zatažením dolů obnovíte</string>
-    <string name="srl_header_release">Uvolněte pro obnovení</string>
-    <string name="srl_header_refreshing">Osvěžující…</string>
-    <string name="srl_header_loading">Čekat na načítání…</string>
-    <string name="srl_header_finish">Obnovit úspěch</string>
-    <string name="srl_header_failed">Obnovení se nezdařilo</string>
-    <string name="srl_header_secondary">Uvolněte do druhého patra</string>
-    <string name="srl_footer_pulling">Zatáhněte nahoru a načtěte více</string>
-    <string name="srl_footer_release">Uvolněte pro načtení více</string>
-    <string name="srl_footer_loading">Načítání…</string>
-    <string name="srl_footer_refreshing">Počkejte na osvěžení…</string>
-    <string name="srl_footer_finish">Úspěšné načítání</string>
-    <string name="srl_footer_failed">Načtení se nezdařilo</string>
-    <string name="srl_footer_nothing">Žádná další data</string>
-    <string name="str_theme_dark">Temný</string>
-    <string name="str_theme_light">Světlo</string>
-    <string name="str_action_move_fav">Odebrat oblíbené</string>
+    <string name="action_go_to_page">Jdi na stránku</string>
+    <string name="error_too_many_pages_loading">Příliš mnoho stránek, načítání…</string>
+    <string name="error_name_already_in_use">Toto jméno je již používáno.</string>
+    <string name="content_empty">Zobrazení obsahu v SmartRefreshLayout je prázdné. Zapomněli jste jej přidat do souboru rozvržení xml?</string>
+    <string name="header_pulling">Zatažením dolů obnovíte</string>
+    <string name="header_release">Uvolněte pro obnovení</string>
+    <string name="header_refreshing">Osvěžující…</string>
+    <string name="header_loading">Čekat na načítání…</string>
+    <string name="header_finish">Obnovit úspěch</string>
+    <string name="header_failed">Obnovení se nezdařilo</string>
+    <string name="header_secondary">Uvolněte do druhého patra</string>
+    <string name="footer_pulling">Zatáhněte nahoru a načtěte více</string>
+    <string name="footer_release">Uvolněte pro načtení více</string>
+    <string name="footer_loading">Načítání…</string>
+    <string name="footer_refreshing">Počkejte na osvěžení…</string>
+    <string name="footer_finish">Úspěšné načítání</string>
+    <string name="footer_failed">Načtení se nezdařilo</string>
+    <string name="footer_nothing">Žádná další data</string>
+    <string name="theme_dark">Temný</string>
+    <string name="theme_light">Světlo</string>
+    <string name="action_move_fav">Odebrat oblíbené</string>
     <string name="create_shortcut">Vytvořit zástupce</string>
     <string name="not_supported">Není podporováno</string>
-    <string name="str_action_deleting">Mazání…</string>
-    <string name="str_action_removing">Odebírání…</string>
-    <string name="toast_need_permission">Potřebujete povolení!</string>
-    <string name="all_reader2_search_files_hint">Hledat soubory…</string>
-    <string name="str_please_wait">Prosím, čekejte…</string>
-    <string name="tool_tittle_your_pdf">Vaše PDF</string>
-    <string name="tool_tittle_merge">Sloučit PDF</string>
+    <string name="action_deleting">Mazání…</string>
+    <string name="action_removing">Odebírání…</string>
+    <string name="toast_required_permission">Potřebujete povolení!</string>
+    <string name="hint_search_files">Hledat soubory…</string>
+    <string name="message_please_wait">Prosím, čekejte…</string>
+    <string name="tool_title_your_pdf">Vaše PDF</string>
+    <string name="tool_title_split_pdf">Sloučit PDF</string>
     <string name="tool_tittle_print">Tisk</string>
     <string name="tool_tittle_split">Rozdělit PDF</string>
-    <string name="tool_tittle_compress">Komprimovat PDF</string>
+    <string name="tool_title_compress_pdf">Komprimovat PDF</string>
     <string name="tool_tittle_share_as_photo">Sdílet jako fotografii</string>
     <string name="tool_tittle_image_to_pdf">Obrázek do PDF</string>
-    <string name="tool_tittle_browse">Procházet PDF</string>
+    <string name="tool_title_browse_pdf">Procházet PDF</string>
     <string name="tool_tittle_pdf_to_image">Uložit jako obrázek</string>
     <string name="tool_tittle_lock_pdf">Zamknout PDF</string>
     <string name="tool_tittle_unlock_pdf">Odemknout PDF</string>
-    <string name="tool_des_browse">Na svých zařízeních můžete vybírat soubory z různých složek</string>
-    <string name="tool_des_merge">Vyberte více souborů PDF a sloučte je během několika sekund.</string>
-    <string name="tool_des_print">Tiskněte soubory PDF rychle z telefonu.</string>
-    <string name="tool_des_split">Rozdělte soubor PDF podle rozsahů stránek nebo extrahujte všechny stránky PDF do více souborů PDF.</string>
-    <string name="tool_des_compress">Komprimujte soubory PDF a zmenšete jejich velikost, aby vyhovovaly vašim potřebám.</string>
-    <string name="tool_des_image_to_pdf">Převeďte obrázky (jpg, jpeg, png atd.) do souborů PDF</string>
-    <string name="tool_des_pdf_to_image">Exportujte určené stránky dokumentu PDF jako obrázky</string>
-    <string name="tool_des_lock_pdf">Chraňte dokumenty PDF nastavením hesla</string>
-    <string name="tool_des_your_pdf">Zobrazit všechny vaše vytvořené PDF</string>
-    <string name="tool_des_un_lock_pdf">Odstraňte zabezpečení heslem PDF, abyste měli svobodu používat soubory PDF, jak chcete</string>
+    <string name="tool_description_browse">Na svých zařízeních můžete vybírat soubory z různých složek</string>
+    <string name="tool_description_merge">Vyberte více souborů PDF a sloučte je během několika sekund.</string>
+    <string name="tool_description_print">Tiskněte soubory PDF rychle z telefonu.</string>
+    <string name="tool_description_split">Rozdělte soubor PDF podle rozsahů stránek nebo extrahujte všechny stránky PDF do více souborů PDF.</string>
+    <string name="tool_description_compress">Komprimujte soubory PDF a zmenšete jejich velikost, aby vyhovovaly vašim potřebám.</string>
+    <string name="tool_description_image_to_pdf">Převeďte obrázky (jpg, jpeg, png atd.) do souborů PDF</string>
+    <string name="tool_description_pdf_to_image">Exportujte určené stránky dokumentu PDF jako obrázky</string>
+    <string name="tool_description_lock_pdf">Chraňte dokumenty PDF nastavením hesla</string>
+    <string name="tool_description_your_pdf">Zobrazit všechny vaše vytvořené PDF</string>
+    <string name="tool_description_unlock_pdf">Odstraňte zabezpečení heslem PDF, abyste měli svobodu používat soubory PDF, jak chcete</string>
     <string name="toast_maximum_file_share">Můžete sdílet 50 souborů jednou!</string>
-    <string name="str_share_via">Sdílet přes</string>
-    <string name="dialog_permission_required_title">Je vyžadováno povolení</string>
-    <string name="dialog_permission_required_des">Chcete-li číst a upravovat dokumenty na svém zařízení, povolte aplikaci PDF Reader přístup ke všem vašim souborům.</string>
-    <string name="dialog_permission_required_allow_access">Povolit přístup ke správě všech souborů</string>
-    <string name="dialog_password_invalid">Neplatné heslo</string>
-    <string name="dialog_password_title">Zadejte heslo</string>
-    <string name="dialog_set_password_title">Nastavit heslo</string>
-    <string name="dialog_remove_password_tittle">Odebrat heslo</string>
-    <string name="dialog_remove_password_des">Soubor již nebude chráněn</string>
+    <string name="share_via">Sdílet přes</string>
+    <string name="dialog_permission_title">Je vyžadováno povolení</string>
+    <string name="dialog_permission_description">Chcete-li číst a upravovat dokumenty na svém zařízení, povolte aplikaci PDF Reader přístup ke všem vašim souborům.</string>
+    <string name="dialog_allow_access">Povolit přístup ke správě všech souborů</string>
+    <string name="dialog_invalid_password">Neplatné heslo</string>
+    <string name="dialog_enter_password_app">Zadejte heslo</string>
+    <string name="dialog_set_password">Nastavit heslo</string>
+    <string name="dialog_remove_password_title">Odebrat heslo</string>
+    <string name="dialog_remove_password_description">Soubor již nebude chráněn</string>
     <string name="dialog_password_body">Chcete-li jej otevřít, musíte zadat heslo.</string>
     <string name="dialog_password_hint">Heslo</string>
     <string name="dialog_delete_body">Opravdu chcete smazat? Tuto akci nelze vrátit zpět</string>

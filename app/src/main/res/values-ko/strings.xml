@@ -2,16 +2,16 @@
 <resources>
     <string name="app_name">Document Reader</string>
 
-    <string name="str_action_remove">퇴거</string>
-    <string name="str_action_shortcut">지름길</string>
+    <string name="action_move_out">퇴거</string>
+    <string name="action_create_shortcut">지름길</string>
 
-    <string name="str_action_go_to_set">세트로 이동</string>
+    <string name="action_go_to_settings">세트로 이동</string>
 
-    <string name="str_action_select">선택하다</string>
-    <string name="str_action_sort">종류</string>
+    <string name="select_item">선택하다</string>
+    <string name="sort_items">종류</string>
 
-    <string name="str_action_print">인쇄</string>
-    <string name="menu_thumbnail">썸네일</string>
+    <string name="print_document">인쇄</string>
+    <string name="menu_view_thumbnail">썸네일</string>
 
     <string name="navigation_privacy_policy">개인 정보 정책</string>
     <string name="navigation_language">언어</string>
@@ -20,204 +20,204 @@
     <string name="navigation_rate_us">우리를 평가해 주세요</string>
     <string name="document_all">모두</string>
     <string name="tittle_toolbar_all">모든 파일</string>
-    <string name="tittle_toolbar_excel">엑셀 파일</string>
+    <string name="title_toolbar_excel">엑셀 파일</string>
     <string name="tittle_toolbar_pdf">PDF 파일</string>
-    <string name="tittle_toolbar_ppt">파워포인트 파일</string>
+    <string name="title_toolbar_powerpoint">파워포인트 파일</string>
     <string name="tittle_toolbar_word">워드 파일</string>
 
-    <string name="toast_no_permission">허가가 필요합니다!</string>
-    <string name="toast_no_file_manager">사용 가능한 파일 관리자가 없습니다.</string>
+    <string name="toast_permission_required">허가가 필요합니다!</string>
+    <string name="toast_no_file_manager_available">사용 가능한 파일 관리자가 없습니다.</string>
 
-    <string name="str_files">%1$s 파일</string>
+    <string name="label_file_count">%1$s 파일</string>
 
     <string name="dialog_rate_content">우리는 당신에게 좋은 경험을 제공하기 위해 노력해 왔습니다. 별 5개를 주시면 감사하겠습니다.</string>
-    <string name="dialog_rate_5_start">별 5개</string>
+    <string name="dialog_rate_five_star">별 5개</string>
 
-    <string name="gallery_last_modified">최종 수정됨</string>
-    <string name="last_viewed">마지막으로 본</string>
-    <string name="info">정보</string>
-    <string name="name">이름</string>
-    <string name="size">크기</string>
-    <string name="path">길</string>
+    <string name="info_last_modified">최종 수정됨</string>
+    <string name="info_last_viewed">마지막으로 본</string>
+    <string name="info_label">정보</string>
+    <string name="info_name">이름</string>
+    <string name="info_size">크기</string>
+    <string name="info_path">길</string>
 
-    <string name="all_reader1_splash">올인원 문서 리더기</string>
+    <string name="splash_tagline">올인원 문서 리더기</string>
     <string name="sort_by">정렬 기준</string>
-    <string name="date_created_old">날짜: 오름차순</string>
-    <string name="date_created_new">날짜: 내림차순</string>
-    <string name="name_a_to_z">이름: A부터 Z까지</string>
-    <string name="name_z_to_a">이름: Z부터 A까지</string>
-    <string name="file_size_largest">파일 크기: 오름차순</string>
-    <string name="file_size_minimum">파일 크기: 내림차순</string>
-    <string name="str_action_loading">로드 중…</string>
-    <string name="enter_passwrod_to_open">열려면 비밀번호를 입력하세요</string>
+    <string name="sort_date_ascending">날짜: 오름차순</string>
+    <string name="sort_date_descending">날짜: 내림차순</string>
+    <string name="sort_name_atoz">이름: A부터 Z까지</string>
+    <string name="sort_name_ztoa">이름: Z부터 A까지</string>
+    <string name="sort_size_ascending">파일 크기: 오름차순</string>
+    <string name="sort_size_descending">파일 크기: 내림차순</string>
+    <string name="action_loading">로드 중…</string>
+    <string name="dialog_enter_password">열려면 비밀번호를 입력하세요</string>
+    <string name="dialog_enter_password_field">암호를 입력</string>
+    <string name="editor_background">배경</string>
+    <string name="article_loading_title"/>
+    <string name="action_duplicate">복제하다</string>
+    <string name="toast_no_undo_available">실행 취소 작업을 사용할 수 없습니다.</string>
+    <string name="editor_no_more_found">더 이상 찾을 수 없습니다.</string>
+    <string name="editor_keep_searching">계속 검색하시겠습니까?</string>
+    <string name="editor_continue">계속하다</string>
+    <string name="editor_stop">멈추다</string>
+    <string name="action_rotate">회전</string>
+    <string name="action_edit">편집하다</string>
+    <string name="error_saving_document">문서 저장 오류: SOError=%d</string>
+    <string name="editor_error">오류</string>
+    <string name="editor_document_modified">저장되지 않은 변경사항이 있습니다.</string>
+    <string name="editor_save_or_discard">변경사항을 저장하시겠습니까, 아니면 삭제하시겠습니까?</string>
+    <string name="editor_continue_editing">계속 편집</string>
+    <string name="editor_xfa_body">이 문서에는 Office 편집기에서 지원하지 않는 XML Forms Office가 포함되어 있습니다. XFA는 2015년에 PDF 2.0 사양이 출시되었을 때 더 이상 사용되지 않습니다. PDF 작성자는 지원되는 AcroForms를 사용하도록 변환할 수 있습니다. 해당하는 경우 IT 관리자에게 도움을 요청하세요.</string>
+    <string name="editor_redact_confirm_save">이 문서에는 아직 적용되지 않은 교정 표시가 포함되어 있습니다. 이러한 마크와 관련된 모든 콘텐츠는 적용될 때까지 계속 존재합니다. 너 정말 계속하고 싶니?</string>
+    <string name="editor_yes">사무실</string>
+    <string name="editor_no">아니요</string>
+    <string name="editor_delete_worksheet">워크시트를 삭제하시겠습니까?</string>
+    <string name="editor_delete_sheet_confirm">시트를 삭제하시겠습니까?</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="action_delete">삭제</string>
+    <string name="action_clear_all">모두 지우기</string>
+    <string name="action_open">열려 있는</string>
+    <string name="action_allow">허용하다</string>
+    <string name="action_failed">실패한</string>
+    <string name="action_ok">좋아요</string>
+    <string name="action_cancel">취소</string>
+    <string name="action_share">공유하다</string>
+    <string name="action_okay">좋아요</string>
+    <string name="action_dismiss">해고하다</string>
+    <string name="action_searching">수색…</string>
+    <string name="action_save">구하다</string>
+    <string name="action_alert">알리다</string>
+    <string name="splash_des">언제 어디서나 PDF 읽기 및 편집</string>
+    <string name="all_pdf">모든 PDF</string>
+    <string name="app_recent">최근의</string>
+    <string name="app_favorite">즐겨찾기</string>
+    <string name="action_quit">그만두다</string>
+    <string name="action_apply">적용하다</string>
+    <string name="action_yes">예</string>
+    <string name="action_no">아니요</string>
+    <string name="action_more">더</string>
+    <string name="action_compressor">압축기</string>
+    <string name="action_remove_ads">광고를 제거하다</string>
+    <string name="action_sponsored">후원</string>
+    <string name="action_remove_favorite">즐겨찾기 제거</string>
+    <string name="move_out">퇴거</string>
+    <string name="share_via_photo">사진을 통해 공유</string>
+    <string name="view_image">파일 보기</string>
+    <string name="action_view_pdf">PDF 보기</string>
+    <string name="action_rename">이름 바꾸기</string>
+    <string name="action_start">시작</string>
+    <string name="action_search">찾다</string>
+    <string name="action_setting">설정</string>
+    <string name="action_continue">계속하다</string>
+    <string name="go_to_set">세트로 이동</string>
+    <string name="tools">도구</string>
+    <string name="no_files_yet">아직 파일이 없습니다</string>
+    <string name="action_go">가다</string>
+    <string name="feed_back_app">피드백 PDF 리더 앱</string>
+    <string name="pdf_created_toolbar">만들어진</string>
+    <string name="import_pdf">PDF 가져오기</string>
+    <string name="select_all">모두 선택</string>
+    <string name="tool_pdf_pro">도구 PDF 프로</string>
+    <string name="privacy_policy">개인 정보 정책</string>
+    <string name="help">돕다</string>
+    <string name="file_manager">파일 관리자</string>
+    <string name="keep_screen_on">화면을 계속 켜두세요</string>
+    <string name="app_display">표시하다</string>
+    <string name="app_theme">앱 테마</string>
+    <string name="change_language_title">언어 옵션</string>
+    <string name="search_hint">찾다…</string>
+    <string name="pwd_error">잘못된 비밀번호</string>
+    <string name="password">비밀번호</string>
+    <string name="password_des">PDF를 열려면 비밀번호를 입력하세요</string>
     <string name="enter_password">암호를 입력</string>
-    <string name="sodk_editor_background">배경</string>
-    <string name="zs_view_article_loading_title"/>
-    <string name="str_action_duplicate">복제하다</string>
-    <string name="toast_no_undo">실행 취소 작업을 사용할 수 없습니다.</string>
-    <string name="sodk_editor_no_more_found">더 이상 찾을 수 없습니다.</string>
-    <string name="sodk_editor_keep_searching">계속 검색하시겠습니까?</string>
-    <string name="sodk_editor_str_continue">계속하다</string>
-    <string name="sodk_editor_stop">멈추다</string>
-    <string name="str_action_rotate">회전</string>
-    <string name="str_action_edit">편집하다</string>
-    <string name="sodk_editor_error_saving_document_code">문서 저장 오류: SOError=%d</string>
-    <string name="sodk_editor_error">오류</string>
-    <string name="sodk_editor_document_has_been_modified">저장되지 않은 변경사항이 있습니다.</string>
-    <string name="sodk_editor_would_you_like_to_save_your_changes">변경사항을 저장하시겠습니까, 아니면 삭제하시겠습니까?</string>
-    <string name="sodk_editor_continue_editing">계속 편집</string>
-    <string name="sodk_editor_xfa_body">이 문서에는 Office 편집기에서 지원하지 않는 XML Forms Office가 포함되어 있습니다. XFA는 2015년에 PDF 2.0 사양이 출시되었을 때 더 이상 사용되지 않습니다. PDF 작성자는 지원되는 AcroForms를 사용하도록 변환할 수 있습니다. 해당하는 경우 IT 관리자에게 도움을 요청하세요.</string>
-    <string name="sodk_editor_redact_confirm_save">이 문서에는 아직 적용되지 않은 교정 표시가 포함되어 있습니다. 이러한 마크와 관련된 모든 콘텐츠는 적용될 때까지 계속 존재합니다. 너 정말 계속하고 싶니?</string>
-    <string name="sodk_editor_yes">사무실</string>
-    <string name="sodk_editor_no">아니요</string>
-    <string name="sodk_editor_delete_worksheet_q">워크시트를 삭제하시겠습니까?</string>
-    <string name="sodk_editor_do_you_want_to_delete_the_sheet">시트를 삭제하시겠습니까?</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <string name="str_action_delete">삭제</string>
-    <string name="str_action_clear_all">모두 지우기</string>
-    <string name="str_action_open">열려 있는</string>
-    <string name="str_action_allow">허용하다</string>
-    <string name="str_action_failed">실패한</string>
-    <string name="str_action_ok">좋아요</string>
-    <string name="str_action_cancel">취소</string>
-    <string name="str_action_share">공유하다</string>
-    <string name="str_action_okay">좋아요</string>
-    <string name="str_action_dismiss">해고하다</string>
-    <string name="str_action_searching">수색…</string>
-    <string name="str_action_save">구하다</string>
-    <string name="str_action_alert">알리다</string>
-    <string name="str_splash_des">언제 어디서나 PDF 읽기 및 편집</string>
-    <string name="str_all_pdf">모든 PDF</string>
-    <string name="str_recent">최근의</string>
-    <string name="str_favorite">즐겨찾기</string>
-    <string name="str_action_quit">그만두다</string>
-    <string name="str_action_apply">적용하다</string>
-    <string name="str_action_yes">예</string>
-    <string name="str_action_no">아니요</string>
-    <string name="str_more">더</string>
-    <string name="str_action_compressor">압축기</string>
-    <string name="str_remove_ads">광고를 제거하다</string>
-    <string name="str_sponsored">후원</string>
-    <string name="str_remove_favorite">즐겨찾기 제거</string>
-    <string name="str_move_out">퇴거</string>
-    <string name="str_share_via_photo">사진을 통해 공유</string>
-    <string name="str_view_image">파일 보기</string>
-    <string name="str_action_view_pdf">PDF 보기</string>
-    <string name="str_action_rename">이름 바꾸기</string>
-    <string name="str_action_start">시작</string>
-    <string name="str_action_search">찾다</string>
-    <string name="str_action_setting">설정</string>
-    <string name="str_action_continue">계속하다</string>
-    <string name="str_go_to_set">세트로 이동</string>
-    <string name="str_tools">도구</string>
-    <string name="str_no_files_yet">아직 파일이 없습니다</string>
-    <string name="str_action_go">가다</string>
-    <string name="str_feed_back_app">피드백 PDF 리더 앱</string>
-    <string name="str_pdf_created_toolbar">만들어진</string>
-    <string name="str_import_pdf">PDF 가져오기</string>
-    <string name="str_select_all">모두 선택</string>
-    <string name="str_tool_pdf_pro">도구 PDF 프로</string>
-    <string name="str_privacy_policy">개인 정보 정책</string>
-    <string name="str_help">돕다</string>
-    <string name="str_file_manager">파일 관리자</string>
-    <string name="str_keep_screen_on">화면을 계속 켜두세요</string>
-    <string name="str_display">표시하다</string>
-    <string name="str_app_theme">앱 테마</string>
-    <string name="str_change_language_title">언어 옵션</string>
-    <string name="str_search_hint">찾다…</string>
-    <string name="str_pwd_error">잘못된 비밀번호</string>
-    <string name="str_password">비밀번호</string>
-    <string name="str_password_des">PDF를 열려면 비밀번호를 입력하세요</string>
-    <string name="str_enter_password">암호를 입력</string>
-    <string name="str_set_password">암호를 설정하세요</string>
-    <string name="str_set_password_des">PDF를 보호하기 위해 비밀번호를 설정하세요</string>
+    <string name="set_password">암호를 설정하세요</string>
+    <string name="app_password_des">PDF를 보호하기 위해 비밀번호를 설정하세요</string>
     <string name="toast_please_set_password">비밀번호를 설정해주세요!</string>
     <string name="unlocking">잠금 해제 중…</string>
     <string name="unlocked_successfully">성공적으로 잠금 해제되었습니다!</string>
-    <string name="invalid_page_number">잘못된 페이지 번호</string>
-    <string name="cannot_open_file_Path">파일을 열 수 없습니다: %1$s</string>
-    <string name="cannot_open_buffer">버퍼를 열 수 없습니다</string>
-    <string name="fill_out_text_field">텍스트 필드 작성</string>
-    <string name="choose_value">값 선택</string>
-    <string name="str_shortcut">지름길</string>
-    <string name="str_request_new_feature">새로운 기능 요청</string>
-    <string name="str_explore_tag_new">새로운</string>
-    <string name="str_setting_faq">자주하는 질문</string>
+    <string name="error_invalid_page_number">잘못된 페이지 번호</string>
+    <string name="error_cannot_open_file_path">파일을 열 수 없습니다: %1$s</string>
+    <string name="error_cannot_open_buffer">버퍼를 열 수 없습니다</string>
+    <string name="prompt_fill_text_field">텍스트 필드 작성</string>
+    <string name="prompt_choose_value">값 선택</string>
+    <string name="action_shortcut">지름길</string>
+    <string name="action_request_new_feature">새로운 기능 요청</string>
+    <string name="label_new_tag">새로운</string>
+    <string name="settings_faq">자주하는 질문</string>
     <string name="version">버전</string>
-    <string name="go_to_page">페이지로 이동</string>
-    <string name="too_many_pages_loading">페이지가 너무 많습니다. 로드 중…</string>
-    <string name="already_in_use">이 이름은 이미 사용 중입니다.</string>
-    <string name="srl_content_empty">SmartRefreshLayout의 콘텐츠 보기가 비어 있습니다. XML 레이아웃 파일에 추가하는 것을 잊으셨나요?</string>
-    <string name="srl_header_pulling">아래로 당겨 새로 고침</string>
-    <string name="srl_header_release">새로 고침하려면 릴리스</string>
-    <string name="srl_header_refreshing">상쾌하다…</string>
-    <string name="srl_header_loading">로드 대기 중…</string>
-    <string name="srl_header_finish">새로고침 성공</string>
-    <string name="srl_header_failed">새로고침 실패</string>
-    <string name="srl_header_secondary">2층으로 출시</string>
-    <string name="srl_footer_pulling">더 많은 것을 로드하려면 위로 당기세요</string>
-    <string name="srl_footer_release">더 많은 것을 로드하려면 놓으십시오.</string>
-    <string name="srl_footer_loading">로드 중…</string>
-    <string name="srl_footer_refreshing">새로 고침을 기다립니다…</string>
-    <string name="srl_footer_finish">로드 성공</string>
-    <string name="srl_footer_failed">로드 실패</string>
-    <string name="srl_footer_nothing">더 이상 데이터가 없습니다</string>
-    <string name="str_theme_dark">어두운</string>
-    <string name="str_theme_light">빛</string>
-    <string name="str_action_move_fav">즐겨찾기 제거</string>
+    <string name="action_go_to_page">페이지로 이동</string>
+    <string name="error_too_many_pages_loading">페이지가 너무 많습니다. 로드 중…</string>
+    <string name="error_name_already_in_use">이 이름은 이미 사용 중입니다.</string>
+    <string name="content_empty">SmartRefreshLayout의 콘텐츠 보기가 비어 있습니다. XML 레이아웃 파일에 추가하는 것을 잊으셨나요?</string>
+    <string name="header_pulling">아래로 당겨 새로 고침</string>
+    <string name="header_release">새로 고침하려면 릴리스</string>
+    <string name="header_refreshing">상쾌하다…</string>
+    <string name="header_loading">로드 대기 중…</string>
+    <string name="header_finish">새로고침 성공</string>
+    <string name="header_failed">새로고침 실패</string>
+    <string name="header_secondary">2층으로 출시</string>
+    <string name="footer_pulling">더 많은 것을 로드하려면 위로 당기세요</string>
+    <string name="footer_release">더 많은 것을 로드하려면 놓으십시오.</string>
+    <string name="footer_loading">로드 중…</string>
+    <string name="footer_refreshing">새로 고침을 기다립니다…</string>
+    <string name="footer_finish">로드 성공</string>
+    <string name="footer_failed">로드 실패</string>
+    <string name="footer_nothing">더 이상 데이터가 없습니다</string>
+    <string name="theme_dark">어두운</string>
+    <string name="theme_light">빛</string>
+    <string name="action_move_fav">즐겨찾기 제거</string>
     <string name="create_shortcut">바로가기 만들기</string>
     <string name="not_supported">지원되지 않음</string>
-    <string name="str_action_deleting">삭제 중…</string>
-    <string name="str_action_removing">풀이…</string>
-    <string name="toast_need_permission">허가가 필요합니다!</string>
-    <string name="all_reader2_search_files_hint">파일 검색…</string>
-    <string name="str_please_wait">기다리세요…</string>
-    <string name="tool_tittle_your_pdf">귀하의 PDF</string>
-    <string name="tool_tittle_merge">PDF 병합</string>
+    <string name="action_deleting">삭제 중…</string>
+    <string name="action_removing">풀이…</string>
+    <string name="toast_required_permission">허가가 필요합니다!</string>
+    <string name="hint_search_files">파일 검색…</string>
+    <string name="message_please_wait">기다리세요…</string>
+    <string name="tool_title_your_pdf">귀하의 PDF</string>
+    <string name="tool_title_split_pdf">PDF 병합</string>
     <string name="tool_tittle_print">인쇄</string>
     <string name="tool_tittle_split">PDF 분할</string>
-    <string name="tool_tittle_compress">PDF 압축</string>
+    <string name="tool_title_compress_pdf">PDF 압축</string>
     <string name="tool_tittle_share_as_photo">사진으로 공유</string>
     <string name="tool_tittle_image_to_pdf">이미지를 PDF로</string>
-    <string name="tool_tittle_browse">PDF 찾아보기</string>
+    <string name="tool_title_browse_pdf">PDF 찾아보기</string>
     <string name="tool_tittle_pdf_to_image">이미지로 저장</string>
     <string name="tool_tittle_lock_pdf">PDF 잠금</string>
     <string name="tool_tittle_unlock_pdf">PDF 잠금해제</string>
-    <string name="tool_des_browse">장치의 다른 폴더에서 파일을 선택할 수 있습니다</string>
-    <string name="tool_des_merge">여러 PDF 파일을 선택하고 몇 초 안에 병합하세요.</string>
-    <string name="tool_des_print">휴대폰에서 PDF 파일을 빠르게 인쇄하세요.</string>
-    <string name="tool_des_split">PDF 파일을 페이지 범위별로 분할하거나 모든 PDF 페이지를 여러 PDF 파일로 추출합니다.</string>
-    <string name="tool_des_compress">PDF 파일을 압축하여 필요에 맞게 크기를 줄이세요.</string>
-    <string name="tool_des_image_to_pdf">이미지(jpg, jpeg, png 등)를 PDF 파일로 변환</string>
-    <string name="tool_des_pdf_to_image">PDF 문서의 지정된 페이지를 이미지로 내보내기</string>
-    <string name="tool_des_lock_pdf">비밀번호를 설정하여 PDF 문서를 보호하세요</string>
-    <string name="tool_des_your_pdf">생성된 모든 PDF 표시</string>
-    <string name="tool_des_un_lock_pdf">PDF 비밀번호 보안을 제거하여 PDF를 원하는 대로 자유롭게 사용할 수 있습니다.</string>
+    <string name="tool_description_browse">장치의 다른 폴더에서 파일을 선택할 수 있습니다</string>
+    <string name="tool_description_merge">여러 PDF 파일을 선택하고 몇 초 안에 병합하세요.</string>
+    <string name="tool_description_print">휴대폰에서 PDF 파일을 빠르게 인쇄하세요.</string>
+    <string name="tool_description_split">PDF 파일을 페이지 범위별로 분할하거나 모든 PDF 페이지를 여러 PDF 파일로 추출합니다.</string>
+    <string name="tool_description_compress">PDF 파일을 압축하여 필요에 맞게 크기를 줄이세요.</string>
+    <string name="tool_description_image_to_pdf">이미지(jpg, jpeg, png 등)를 PDF 파일로 변환</string>
+    <string name="tool_description_pdf_to_image">PDF 문서의 지정된 페이지를 이미지로 내보내기</string>
+    <string name="tool_description_lock_pdf">비밀번호를 설정하여 PDF 문서를 보호하세요</string>
+    <string name="tool_description_your_pdf">생성된 모든 PDF 표시</string>
+    <string name="tool_description_unlock_pdf">PDF 비밀번호 보안을 제거하여 PDF를 원하는 대로 자유롭게 사용할 수 있습니다.</string>
     <string name="toast_maximum_file_share">1회에 50개의 파일을 공유할 수 있습니다!</string>
-    <string name="str_share_via">다음을 통해 공유</string>
-    <string name="dialog_permission_required_title">권한 필요</string>
-    <string name="dialog_permission_required_des">장치에서 문서를 읽고 편집하려면 PDF Reader가 모든 파일에 액세스하도록 허용하십시오.</string>
-    <string name="dialog_permission_required_allow_access">모든 파일을 관리하려면 액세스를 허용하세요.</string>
-    <string name="dialog_password_invalid">유효하지 않은 비밀번호</string>
-    <string name="dialog_password_title">암호를 입력</string>
-    <string name="dialog_set_password_title">암호를 설정하세요</string>
-    <string name="dialog_remove_password_tittle">비밀번호 삭제</string>
-    <string name="dialog_remove_password_des">파일이 더 이상 보호되지 않습니다.</string>
+    <string name="share_via">다음을 통해 공유</string>
+    <string name="dialog_permission_title">권한 필요</string>
+    <string name="dialog_permission_description">장치에서 문서를 읽고 편집하려면 PDF Reader가 모든 파일에 액세스하도록 허용하십시오.</string>
+    <string name="dialog_allow_access">모든 파일을 관리하려면 액세스를 허용하세요.</string>
+    <string name="dialog_invalid_password">유효하지 않은 비밀번호</string>
+    <string name="dialog_enter_password_app">암호를 입력</string>
+    <string name="dialog_set_password">암호를 설정하세요</string>
+    <string name="dialog_remove_password_title">비밀번호 삭제</string>
+    <string name="dialog_remove_password_description">파일이 더 이상 보호되지 않습니다.</string>
     <string name="dialog_password_body">비밀번호를 입력해야 열 수 있습니다.</string>
     <string name="dialog_password_hint">비밀번호</string>
     <string name="dialog_delete_body">삭제하시겠습니까? 이 작업은 취소할 수 없습니다.</string>

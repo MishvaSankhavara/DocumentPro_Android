@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/sodk_editor_toc_link"
-            android:text="@string/sodk_editor_cancel"
+            android:text="@string/editor_cancel"
             android:textColor="@color/app_word_list_bg"
             android:textSize="@dimen/_13sdp" />
     </RelativeLayout>

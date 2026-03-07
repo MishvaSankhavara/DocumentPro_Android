@@ -157,7 +157,7 @@ public class NUIDocViewPdf extends NUIDocView {
                 boolean var2 = this.getDoc().x();
                 boolean var3 = this.getDoc().y();
                 if (var2 && !var3) {
-                    Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.sodk_editor_xfa_title), this.getContext().getString(R.string.sodk_editor_xfa_body));
+                    Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.editor_xfa_title), this.getContext().getString(R.string.editor_xfa_body));
                 }
             }
         }
@@ -309,7 +309,7 @@ public class NUIDocViewPdf extends NUIDocView {
                 String var1;
                 if (this.mPageCount <= 0) {
                     var1 = Utilities.getOpenErrorDescription(this.getContext(), 17);
-                    Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.sodk_editor_error), var1);
+                    Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.editor_error), var1);
                 } else {
                     this.mAdapter.setCount(this.mPageCount);
                     this.layoutNow();
@@ -412,7 +412,7 @@ public class NUIDocViewPdf extends NUIDocView {
             }
 
         } else {
-            Utilities.yesNoMessage((Activity) this.getContext(), "", this.getContext().getString(R.string.sodk_editor_redact_confirm_save), this.getContext().getString(R.string.sodk_editor_yes), this.getContext().getString(R.string.sodk_editor_no), new Runnable() {
+            Utilities.yesNoMessage((Activity) this.getContext(), "", this.getContext().getString(R.string.editor_redact_confirm_save), this.getContext().getString(R.string.editor_yes), this.getContext().getString(R.string.editor_no), new Runnable() {
                 public void run() {
                     if (var1 != null) {
                         var1.run();

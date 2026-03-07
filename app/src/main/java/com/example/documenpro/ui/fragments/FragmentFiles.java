@@ -118,8 +118,8 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         ViewPager viewPager = view.findViewById(R.id.vp_content);
         PagerViewAdapter adapter = new PagerViewAdapter(activityContext.getSupportFragmentManager());
-        adapter.addFrag(new Fragment2Recent(activityContext), getResources().getString(R.string.str_recent));
-        adapter.addFrag(new Fragment2Favorite(activityContext), getResources().getString(R.string.str_favorite));
+        adapter.addFrag(new Fragment2Recent(activityContext), getResources().getString(R.string.app_recent));
+        adapter.addFrag(new Fragment2Favorite(activityContext), getResources().getString(R.string.app_favorite));
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
@@ -186,11 +186,11 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             activityContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    txtButton.setTvCount(getResources().getString(R.string.str_files, String.valueOf(txtFile.size())));
-                    pdfButton.setTvCount(getResources().getString(R.string.str_files, String.valueOf(pdfFile.size())));
-                    excelButton.setTvCount(getResources().getString(R.string.str_files, String.valueOf(excelFile.size())));
-                    wordButton.setTvCount(getResources().getString(R.string.str_files, String.valueOf(wordFile.size())));
-                    pptButton.setTvCount(getResources().getString(R.string.str_files, String.valueOf(pptFile.size())));
+                    txtButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(txtFile.size())));
+                    pdfButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(pdfFile.size())));
+                    excelButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(excelFile.size())));
+                    wordButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(wordFile.size())));
+                    pptButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(pptFile.size())));
 
                 }
             });
@@ -224,7 +224,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         if (Utils.checkPermission(activityContext)) {
             Utils.openListFileActivity(activityContext, allFileType);
         } else {
-            Toast.makeText(activityContext, getResources().getString(R.string.toast_no_permission), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required), Toast.LENGTH_SHORT).show();
         }
     }
 

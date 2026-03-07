@@ -356,7 +356,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
                 errorView.setTextColor(0xffff6600);
                 errorView.setGravity(Gravity.CENTER);
                 errorView.setTextSize(20);
-                errorView.setText(R.string.srl_content_empty);
+                errorView.setText(R.string.content_empty);
                 super.addView(errorView, 0, new LayoutParams(MATCH_PARENT, MATCH_PARENT));
                 contentHandler = new RefreshContentContainer(errorView);
                 contentHandler.getContentView().setPadding(padding, padding, padding, padding);
@@ -406,7 +406,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
         for (int i = 0, len = super.getChildCount(); i < len; i++) {
             View child = super.getChildAt(i);
 
-            if (child.getVisibility() == GONE || child.getTag(R.string.srl_component_falsify) == child) {
+            if (child.getVisibility() == GONE || child.getTag(R.string.component_falsify) == child) {
                 continue;
             }
 
@@ -540,7 +540,7 @@ public class SmartRefreshLayout extends ViewGroup implements com.example.documen
         for (int i = 0, len = super.getChildCount(); i < len; i++) {
             View child = super.getChildAt(i);
 
-            if (child.getVisibility() == GONE || child.getTag(R.string.srl_component_falsify) == child) {
+            if (child.getVisibility() == GONE || child.getTag(R.string.component_falsify) == child) {
                 continue;
             }
 
