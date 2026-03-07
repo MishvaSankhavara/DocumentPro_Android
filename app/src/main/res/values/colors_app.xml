@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_dark_primary">#263237</color>
+    <color name="app_dark_primary_dark">#1D282C</color>
+
+    <color name="app_album_popup_background">#34474E</color>
+    <color name="app_album_dropdown_title_text">#DEFFFFFF</color>
+    <color name="app_album_dropdown_count_text">#89FFFFFF</color>
+    <color name="app_album_thumbnail_placeholder">#455A64</color>
+    <color name="app_album_empty_view">#4DFFFFFF</color>
+
+    <color name="app_item_placeholder">#37474F</color>
+    <color name="app_item_check_circle_background">#263237</color>
+    <color name="dracula_item_checkCircle_borderColor">#FFFFFF</color>
+    <color name="app_capture_icon">#FFFFFF</color>
+
+    <color name="app_page_background_dark">#232E32</color>
+    <color name="app_bottom_toolbar_background">#34474E</color>
+
+    <color name="app_toolbar_preview_text">#DEFFFFFF</color>
+    <color name="app_toolbar_preview_text_disabled">#4DFFFFFF</color>
+    <color name="app_toolbar_apply_text">#03A9F4</color>
+    <color name="app_toolbar_apply_text_disabled">#4D03A9F4</color>
+
+    <color name="app_preview_toolbar_back_text">#FFFFFF</color>
+    <color name="app_preview_toolbar_apply_text">#03A9F4</color>
+    <color name="app_preview_toolbar_apply_text_disabled">#4D03A9F4</color>
+</resources>
