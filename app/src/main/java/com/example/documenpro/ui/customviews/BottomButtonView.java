@@ -18,7 +18,7 @@ public class BottomButtonView extends LinearLayout {
     }
     public BottomButtonView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.layout_bottom_button, this, true);
+        LayoutInflater.from(context).inflate(R.layout.layout_button_bottom, this, true);
         if (attrs != null) {
             TypedArray obtainStyledArray = null;
             try {

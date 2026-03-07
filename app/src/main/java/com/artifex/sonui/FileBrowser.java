@@ -19,14 +19,10 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.artifex.sonui.AppFile;
 import com.artifex.sonui.AppFile.CloudPermissionChecked;
-import com.artifex.sonui.b;
-import com.artifex.sonui.e;
 import com.artifex.sonui.editor.BaseActivity;
 import com.artifex.sonui.editor.SOEditText;
 import com.artifex.sonui.editor.Utilities;
-import com.artifex.sonui.f;
 import com.example.documenpro.R;
 
 import java.util.ArrayList;
@@ -77,7 +73,7 @@ public class FileBrowser extends RelativeLayout {
     }
 
     private void a(AppFile var1, String var2, LinearLayout var3) {
-        Button var4 = (Button) LayoutInflater.from(this.getContext()).inflate(R.layout.sodk_breadcrumb_button, null);
+        Button var4 = (Button) LayoutInflater.from(this.getContext()).inflate(R.layout.breadcrumb_button, null);
         if (var2 == null) {
             var2 = var1.b();
         }
@@ -161,7 +157,7 @@ public class FileBrowser extends RelativeLayout {
         this.a(null, this.getResources().getString(R.string.sodk_editor_storage), var1);
 
         for (AppFile var3 : this.b) {
-            var1.addView(LayoutInflater.from(this.getContext()).inflate(R.layout.sodk_breadcrumb_slash, (ViewGroup) null));
+            var1.addView(LayoutInflater.from(this.getContext()).inflate(R.layout.breadcrumb_slash, (ViewGroup) null));
             this.a(var3, null, var1);
         }
 

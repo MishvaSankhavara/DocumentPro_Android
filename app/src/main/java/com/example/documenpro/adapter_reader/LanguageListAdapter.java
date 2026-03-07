@@ -58,7 +58,7 @@ public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapte
                                          int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_language_activity,
+                .inflate(R.layout.item_language_act,
                         parent,
                         false);
         return new ViewHolder(view);

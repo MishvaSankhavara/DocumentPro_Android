@@ -54,7 +54,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.activity_list_file);
+        setContentView(R.layout.act_list_file);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cl_main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

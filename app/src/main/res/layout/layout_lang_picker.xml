@@ -64,11 +64,11 @@
         app:layout_constraintBottom_toTopOf="@id/frame_ad_locale"
         app:layout_constraintTop_toBottomOf="@+id/txt_locale_selection_title"
         app:layout_goneMarginBottom="0dp"
-        tools:listitem="@layout/item_language_activity" />
+        tools:listitem="@layout/item_language_act" />
 
     <include
         android:id="@+id/frame_ad_locale"
-        layout="@layout/ad_native_container_banner_1"
+        layout="@layout/ad_native_container_banner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"

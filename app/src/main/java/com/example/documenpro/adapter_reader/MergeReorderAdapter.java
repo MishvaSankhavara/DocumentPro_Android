@@ -82,7 +82,7 @@ public class MergeReorderAdapter extends RecyclerView.Adapter<MergeReorderAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pdf_merge, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_merge_pdf, parent, false));
     }
 
     public MergeReorderAdapter(ReorderMergePdfActivity mActivity, OnDragStartListener mDragStartListener, ArrayList<PDFReaderModel> pdfModels, OnRemovePdfItemListener listener) {

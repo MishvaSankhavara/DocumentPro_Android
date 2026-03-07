@@ -83,7 +83,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <include layout="@layout/ad_container_banner" />
+        <include layout="@layout/banner_ad_container" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

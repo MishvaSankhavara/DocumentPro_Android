@@ -69,7 +69,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_files, container, false);
+        View view = inflater.inflate(R.layout.frag_files, container, false);
         initViews(view);
         initAction(view);
         checkPermission();

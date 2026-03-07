@@ -14,7 +14,7 @@ public class SortOptionsDialog extends Dialog {
 
     public SortOptionsDialog(@NonNull Context context, SortingListener sortingListener) {
         super(context);
-        setContentView(R.layout.dialog_sort);
+        setContentView(R.layout.dialog_sort_by);
         rgSortOptions = findViewById(R.id.rg_sort_options);
         findViewById(R.id.btn_confirm_sort).setOnClickListener(v -> {
             int selectedOptionId = rgSortOptions.getCheckedRadioButtonId();

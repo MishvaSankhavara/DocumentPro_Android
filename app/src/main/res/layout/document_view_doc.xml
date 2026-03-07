@@ -18,11 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/toolbar_main" />
+        <include layout="@layout/toolbar_document_main" />
 
         <include layout="@layout/toolbar_search" />
 
-        <include layout="@layout/toolbar_edit" />
+        <include layout="@layout/toolbar_document_edit" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -136,7 +136,7 @@
                 android:layout_marginBottom="14dp" />
 
             <include
-                layout="@layout/layout_search_button"
+                layout="@layout/layout_button_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -176,7 +176,7 @@
         app:layout_constraintEnd_toStartOf="parent">
 
         <include
-            layout="@layout/document_view_doc_bottom"
+            layout="@layout/dialog_document_bottom_view"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:visibility="visible"
@@ -185,7 +185,7 @@
             app:layout_constraintEnd_toStartOf="parent" />
 
         <include
-            layout="@layout/document_view_doc_bottom_edit"
+            layout="@layout/document_bottom_view_doc_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -203,7 +203,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <include layout="@layout/ad_native_container_banner_2" />
+        <include layout="@layout/ad_native_container_banner2" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

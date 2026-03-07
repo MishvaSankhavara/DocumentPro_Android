@@ -73,7 +73,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.activity_share_image);
+        setContentView(R.layout.act_share_image);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

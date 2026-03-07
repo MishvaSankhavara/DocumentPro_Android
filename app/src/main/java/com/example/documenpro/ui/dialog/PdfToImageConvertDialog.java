@@ -34,7 +34,7 @@ public class PdfToImageConvertDialog extends Dialog {
         super(context);
         this.activityContext = context;
         this.pdfPageList = arrayList;
-        setContentView(R.layout.dialog_pdf_to_photo);
+        setContentView(R.layout.dialog_pdf_export_image);
         setCanceledOnTouchOutside(false);
         setCancelable(false);
         initializeViews();

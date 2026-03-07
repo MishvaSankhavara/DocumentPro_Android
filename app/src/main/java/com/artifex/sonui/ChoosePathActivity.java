@@ -43,7 +43,7 @@ public class ChoosePathActivity extends BaseActivity {
 
     protected void onCreate(Bundle var1) {
         super.onCreate(var1);
-        this.setContentView(R.layout.sodk_choose_path);
+        this.setContentView(R.layout.choose_path);
         String var4 = c;
         final FileBrowser fileBrowser = this.findViewById(R.id.file_browser);
         fileBrowser.a(this, var4);

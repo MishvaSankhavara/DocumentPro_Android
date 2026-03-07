@@ -83,7 +83,7 @@ public class MatisseActivity extends AppCompatActivity implements
 
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.activity_matisse);
+        setContentView(R.layout.act_matisse);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

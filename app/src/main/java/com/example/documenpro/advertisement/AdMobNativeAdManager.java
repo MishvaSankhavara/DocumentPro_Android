@@ -49,7 +49,7 @@ public class AdMobNativeAdManager {
             @SuppressLint("InflateParams")
             NativeAdView adView =
                     (NativeAdView) mActivity_AdMob.getLayoutInflater()
-                            .inflate(R.layout.ad_native_admob_banner_3, null);
+                            .inflate(R.layout.ad_native_admob_banner3, null);
 
             populateUnifiedNativeAdBanner_AdMob(nativeAd, adView);
 
@@ -95,7 +95,7 @@ public class AdMobNativeAdManager {
             @SuppressLint("InflateParams")
             NativeAdView adView =
                     (NativeAdView) mActivity_AdMob.getLayoutInflater()
-                            .inflate(R.layout.ad_native_admob_banner_2, null);
+                            .inflate(R.layout.ad_native_admob_banner2, null);
 
             populateUnifiedNativeAdBanner_AdMob(nativeAd, adView);
 
@@ -141,7 +141,7 @@ public class AdMobNativeAdManager {
             @SuppressLint("InflateParams")
             NativeAdView adView =
                     (NativeAdView) mActivity_AdMob.getLayoutInflater()
-                            .inflate(R.layout.ad_native_admob_banner_1, null);
+                            .inflate(R.layout.ad_native_admob_banner1, null);
 
             populateUnifiedNativeAdBanner_AdMob(nativeAd, adView);
 

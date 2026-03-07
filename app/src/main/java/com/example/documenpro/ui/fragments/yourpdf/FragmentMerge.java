@@ -47,7 +47,7 @@ public class FragmentMerge extends Fragment implements OnPdfTapListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_created_pdf, container, false);
+        View view = inflater.inflate(R.layout.frag_created_pdf, container, false);
         initViews(view);
         new LoadMergedPdfFilesTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         return view;

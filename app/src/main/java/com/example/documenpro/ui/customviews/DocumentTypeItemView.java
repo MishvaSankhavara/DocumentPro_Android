@@ -23,7 +23,7 @@ public class DocumentTypeItemView extends LinearLayout {
 
     public DocumentTypeItemView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.item_document_type, this, true);
+        LayoutInflater.from(context).inflate(R.layout.item_type_document, this, true);
         countTextView = findViewById(R.id.tv_dialog_description);
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FileTypeItem);

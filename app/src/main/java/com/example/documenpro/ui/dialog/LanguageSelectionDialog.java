@@ -27,7 +27,7 @@ public class LanguageSelectionDialog extends Dialog {
 
     public LanguageSelectionDialog(@NonNull Context context) {
         super(context);
-        setContentView(R.layout.dialog_language);
+        setContentView(R.layout.dialog_select_language);
         this.context = context;
         selectedLanguageIndex = PreferenceUtils.getInstance(this.context).getInt(AppGlobalConstants.PREF_LANGUAGE_NUMBER, 0);
         languageRecyclerView = findViewById(R.id.rcv_list);

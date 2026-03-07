@@ -46,7 +46,7 @@ public class ClassicRefreshFooterView extends RefreshClassicComponent<ClassicRef
     public ClassicRefreshFooterView(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
 
-        View.inflate(context, R.layout.srl_classics_footer, this);
+        View.inflate(context, R.layout.footer_refresh_classic, this);
 
         final View thisView = this;
         final View arrowView = this.arrowView = thisView.findViewById(R.id.srl_classics_arrow);

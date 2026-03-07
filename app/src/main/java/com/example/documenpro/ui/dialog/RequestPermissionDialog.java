@@ -14,7 +14,7 @@ public class RequestPermissionDialog extends Dialog {
     public RequestPermissionDialog(@NonNull Activity context) {
         super(context);
         this.context = context;
-        setContentView(R.layout.dialog_request_permission);
+        setContentView(R.layout.dialog_req_permission);
 
         findViewById(R.id.tv_ok).setOnClickListener(v -> {
             Utils.askPermission(this.context);

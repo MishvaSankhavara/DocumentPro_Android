@@ -25,7 +25,7 @@ public class FileRenameDialog extends Dialog {
     private final TextView tvErrorMessage;
     public FileRenameDialog(@NonNull Context context, String oldName, RenameDialogClickListener mListener) {
         super(context);
-        setContentView(R.layout.dialog_file_name);
+        setContentView(R.layout.dialog_file_name_input);
         this.renameListener = mListener;
         dialogRootLayout = findViewById(R.id.cl_dialog_root);
         layoutErrorContainer = findViewById(R.id.ll_error_container);

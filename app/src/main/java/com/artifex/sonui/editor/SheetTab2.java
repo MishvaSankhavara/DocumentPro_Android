@@ -22,7 +22,7 @@ public class SheetTab2 extends LinearLayout {
 
     public SheetTab2(Context var1) {
         super(var1);
-        LayoutInflater.from(var1).inflate(R.layout.sodk_editor_sheet_tab, this);
+        LayoutInflater.from(var1).inflate(R.layout.editor_sheet_tab, this);
     }
 
     public SheetTab2(Context var1, AttributeSet var2) {

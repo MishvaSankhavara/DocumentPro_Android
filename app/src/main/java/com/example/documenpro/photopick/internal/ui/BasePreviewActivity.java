@@ -63,7 +63,7 @@ public abstract class BasePreviewActivity extends AppCompatActivity implements V
             finish();
             return;
         }
-        setContentView(R.layout.activity_media_preview);
+        setContentView(R.layout.act_media_preview);
         mSpec = SelectionSpec.getInstance();
         if (mSpec.needOrientationRestriction()) {
             setRequestedOrientation(mSpec.orientation);

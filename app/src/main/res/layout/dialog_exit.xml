@@ -61,7 +61,7 @@
         app:textAllCaps="true" />
 
     <include
-        layout="@layout/ad_native_container_big"
+        layout="@layout/ad_native_big_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

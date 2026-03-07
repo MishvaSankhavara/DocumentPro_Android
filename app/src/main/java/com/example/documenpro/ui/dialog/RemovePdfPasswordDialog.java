@@ -43,7 +43,7 @@ public class RemovePdfPasswordDialog extends Dialog {
 
     public RemovePdfPasswordDialog(@NonNull Context context, PDFReaderModel pdfModel, PasswordClickListener listener) {
         super(context);
-        setContentView(R.layout.dialog_enter_password_2);
+        setContentView(R.layout.dialog_password_input2);
         this.passwordClickListener = listener;
         this.pdfReaderModel = pdfModel;
         titleTextView = findViewById(R.id.tv_title);

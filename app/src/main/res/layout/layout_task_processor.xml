@@ -8,11 +8,11 @@
 
     <include
         android:id="@+id/inc_task_progress"
-        layout="@layout/layout_tools_operate_01"
+        layout="@layout/layout_tools_operate01"
         android:visibility="visible" />
 
     <include
         android:id="@+id/inc_task_completion"
-        layout="@layout/layout_tools_operate_02"
+        layout="@layout/layout_tools_operate02"
         android:visibility="invisible" />
 </FrameLayout>

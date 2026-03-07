@@ -26,7 +26,7 @@ public class GoToPageDialog extends Dialog {
     @SuppressLint("SetTextI18n")
     public GoToPageDialog(@NonNull Context context, GoToPageDialogListener mListener, int totalPageCount) {
         super(context);
-        setContentView(R.layout.dialog_go_page);
+        setContentView(R.layout.dialog_jump_go_page);
         this.goToPageListener = mListener;
         dialogRootLayout = findViewById(R.id.rootLayout);
         pageNumberInput = findViewById(R.id.et_name);

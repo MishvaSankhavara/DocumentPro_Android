@@ -47,7 +47,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.act_splash);
         bannerAdContainer = findViewById(R.id.my_template_banner);
 
         // TextView tvAppName = findViewById(R.id.tvNameApp);

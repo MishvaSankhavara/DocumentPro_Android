@@ -46,7 +46,7 @@ public class FragmentWord extends Fragment implements DocClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View view = inflater.inflate(R.layout.frag_recyclerview, container, false);
         initViews(view);
         searchViewModel = new ViewModelProvider(requireActivity()).get(ViewModelSearch.class);
         listFile();

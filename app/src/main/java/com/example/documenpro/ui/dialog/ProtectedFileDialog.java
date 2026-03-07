@@ -11,7 +11,7 @@ import com.example.documenpro.R;
 public class ProtectedFileDialog extends Dialog {
     public ProtectedFileDialog(@NonNull Context context, int titleTextResId) {
         super(context);
-        setContentView(R.layout.dialog_not_print);
+        setContentView(R.layout.dialog_not_print_error);
         AppCompatTextView tvDescription = findViewById(R.id.tv_content);
         tvDescription.setText(titleTextResId);
         findViewById(R.id.btn_confirm_sort).setOnClickListener(new View.OnClickListener() {

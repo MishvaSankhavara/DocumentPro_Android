@@ -52,7 +52,7 @@ public class MediaSorterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.lyt_sorter_media);
+        setContentView(R.layout.layout_sorter_media);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lay_main_container), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

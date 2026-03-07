@@ -10,7 +10,7 @@ import com.example.documenpro.R;
 public class AppLoadingDialog extends Dialog {
     public AppLoadingDialog(@NonNull Context context) {
         super(context);
-        setContentView(R.layout.dialog_loading);
+        setContentView(R.layout.dialog_load);
         setCanceledOnTouchOutside(false);
         setCancelable(false);
     }

@@ -26,7 +26,7 @@
                 android:layout_height="match_parent" />
         </com.example.documenpro.ui.customviews.AspectRatioLayout>
 
-        <include layout="@layout/view_ad_attribute" />
+        <include layout="@layout/ad_view_attribute" />
 
         <RelativeLayout
             android:id="@+id/rl_icon_name"

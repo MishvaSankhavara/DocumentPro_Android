@@ -17,7 +17,7 @@ public class AppRateDialog extends Dialog {
     public AppRateDialog(@NonNull Context context) {
         super(context);
         this.context = context;
-        setContentView(R.layout.dialog_rate);
+        setContentView(R.layout.dialog_rate_app);
         findViewById(R.id.btn_cancel).setOnClickListener(v -> {
             dismiss();
             Utils.rateApp(this.context);

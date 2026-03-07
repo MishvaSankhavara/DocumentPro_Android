@@ -110,6 +110,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/ad_native_container_banner_3" />
+        <include layout="@layout/ad_native_container_banner3" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -85,7 +85,7 @@ public class OnBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_on_board);
+        setContentView(R.layout.act_on_board);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -112,9 +112,9 @@ public class OnBoardActivity extends AppCompatActivity {
         this.nextButtonText = findViewById(R.id.next_start_tv);
         LayoutInflater from = LayoutInflater.from(this);
 
-        this.viewGuide1 = from.inflate(R.layout.layout_on_board_1, null);
-        this.viewGuide2 = from.inflate(R.layout.layout_on_board_2, null);
-        this.viewGuide3 = from.inflate(R.layout.layout_on_board_3, null);
+        this.viewGuide1 = from.inflate(R.layout.layout_on_boarding1, null);
+        this.viewGuide2 = from.inflate(R.layout.layout_on_boarding2, null);
+        this.viewGuide3 = from.inflate(R.layout.layout_on_boarding3, null);
         this.indicator1 = findViewById(R.id.v_indicator1);
         this.indicator2 = findViewById(R.id.v_indicator2);
         this.indicator3 = findViewById(R.id.v_indicator3);

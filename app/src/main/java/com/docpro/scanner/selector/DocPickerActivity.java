@@ -67,7 +67,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.lyt_picker_doc);
+        setContentView(R.layout.layout_picker_doc);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lay_picker_root), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

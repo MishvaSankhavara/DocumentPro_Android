@@ -479,7 +479,7 @@
 
     <include
         android:id="@+id/ad_container"
-        layout="@layout/ad_container_big_7"
+        layout="@layout/ad_container_big7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"

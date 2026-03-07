@@ -23,7 +23,7 @@ public class EditBtn extends ConstraintLayout {
 
     public EditBtn(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.layout_edit_buton, this, true);
+        LayoutInflater.from(context).inflate(R.layout.layout_edit_button, this, true);
         if (attrs != null) {
             backgroundView = findViewById(R.id.viewBg);
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.EditBtn);

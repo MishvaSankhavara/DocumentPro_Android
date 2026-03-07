@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_text_wrapper">
 
-        <include layout="@layout/sodk_breadcrumb" />
+        <include layout="@layout/view_breadcrumb_path" />
     </LinearLayout>
 
     <RelativeLayout

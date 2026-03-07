@@ -71,7 +71,7 @@ public class ClassicRefreshHeaderView extends RefreshClassicComponent<ClassicRef
     public ClassicRefreshHeaderView(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
 
-        View.inflate(context, R.layout.srl_classics_header, this);
+        View.inflate(context, R.layout.classics_header, this);
 
         final View thisView = this;
         final View arrowView = this.arrowView = thisView.findViewById(R.id.srl_classics_arrow);

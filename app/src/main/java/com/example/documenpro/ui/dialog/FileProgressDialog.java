@@ -16,7 +16,7 @@ public class FileProgressDialog extends Dialog {
 
     public FileProgressDialog(@NonNull Context context) {
         super(context);
-        setContentView(R.layout.dialog_progress);
+        setContentView(R.layout.dialog_loading_progress);
         percentTextView = findViewById(R.id.tvPercent);
         titleTextView = findViewById(R.id.tvTitle);
         progressBarView = findViewById(R.id.progress_bar);

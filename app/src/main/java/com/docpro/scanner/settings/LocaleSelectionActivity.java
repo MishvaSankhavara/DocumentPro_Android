@@ -37,7 +37,7 @@ public class LocaleSelectionActivity extends ActivityBase {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.lyt_lang_picker);
+        setContentView(R.layout.layout_lang_picker);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lay_locale_picker_root), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

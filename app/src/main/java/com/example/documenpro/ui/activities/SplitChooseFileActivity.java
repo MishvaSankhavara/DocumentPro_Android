@@ -69,7 +69,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        setContentView(R.layout.activity_split_choose_file);
+        setContentView(R.layout.act_split_choose_file);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

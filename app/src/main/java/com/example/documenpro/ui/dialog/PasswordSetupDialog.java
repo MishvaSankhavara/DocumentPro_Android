@@ -37,7 +37,7 @@ public class PasswordSetupDialog extends Dialog {
 
     public PasswordSetupDialog(@NonNull Context context, PasswordClickListener listener) {
         super(context);
-        setContentView(R.layout.dialog_enter_password_2);
+        setContentView(R.layout.dialog_password_input2);
 
         this.passwordClickListener = listener;
         tv_dialog_title = findViewById(R.id.tv_title);

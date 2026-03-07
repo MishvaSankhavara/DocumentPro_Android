@@ -64,7 +64,7 @@
 
         <include layout="@layout/toolbar_search" />
 
-        <include layout="@layout/toolbar_edit" />
+        <include layout="@layout/toolbar_document_edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -160,7 +160,7 @@
             android:visibility="gone" />
 
         <include
-            layout="@layout/layout_search_button"
+            layout="@layout/layout_button_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -192,7 +192,7 @@
 
         <include
             android:id="@+id/bottom_view"
-            layout="@layout/document_view_other_bottom"
+            layout="@layout/document_view_bottom_other"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -209,7 +209,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <include layout="@layout/ad_native_container_banner_2" />
+        <include layout="@layout/ad_native_container_banner2" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

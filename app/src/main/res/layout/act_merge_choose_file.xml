@@ -110,7 +110,7 @@
 
     <include
         android:id="@+id/ad_container"
-        layout="@layout/ad_native_container_banner_1"
+        layout="@layout/ad_native_container_banner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"

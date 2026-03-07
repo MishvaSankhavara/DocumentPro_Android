@@ -105,7 +105,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_document_select, parent, false);
+                .inflate(R.layout.item_select_document, parent, false);
         return new ViewHolder(view);
     }
 

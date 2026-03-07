@@ -182,7 +182,7 @@ public class NUIDocViewXls extends NUIDocView {
             boolean var5 = false;
             if (var4 > var2) {
                 if (this.mConfigOptions.c()) {
-                    Button var9 = (Button) this.activity().getLayoutInflater().inflate(R.layout.sodk_editor_sheet_tab_plus, llSheetBar, false);
+                    Button var9 = (Button) this.activity().getLayoutInflater().inflate(R.layout.editor_sheet_tab_plus, llSheetBar, false);
                     var9.setText("+");
                     var9.setOnClickListener(new OnClickListener() {
                         public void onClick(View var1) {
@@ -448,7 +448,7 @@ public class NUIDocViewXls extends NUIDocView {
     }
 
     protected int getLayoutId() {
-        return R.layout.document_view_excel;
+        return R.layout.dialog_document_bottom_view_edit;
     }
 
     protected String getPageNumberText() {
@@ -482,7 +482,7 @@ public class NUIDocViewXls extends NUIDocView {
 
     public void onClickFunctionButton(View var1) {
         Utilities.hideKeyboard(this.getContext());
-        View var2 = inflate(this.getContext(), R.layout.sodk_editor_formula_categories, null);
+        View var2 = inflate(this.getContext(), R.layout.editor_formula_categories, null);
         GridView var3 = var2.findViewById(R.id.grid);
         final ChooseFormulaCategoryAdapter var4 = new ChooseFormulaCategoryAdapter(this.activity());
         var3.setAdapter(var4);

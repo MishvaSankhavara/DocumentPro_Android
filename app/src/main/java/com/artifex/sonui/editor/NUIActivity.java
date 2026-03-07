@@ -8,14 +8,8 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 
 import com.artifex.solib.ConfigOptions;
-import com.artifex.sonui.editor.NUIView;
 import com.artifex.sonui.editor.NUIView.OnDoneListener;
-import com.artifex.sonui.editor.PrintHelperPdf;
-import com.artifex.sonui.editor.SODocSession;
 import com.artifex.sonui.editor.SODocSession.SODocSessionLoadListenerCustom;
-import com.artifex.sonui.editor.SOFileDatabase;
-import com.artifex.sonui.editor.SOFileState;
-import com.artifex.sonui.editor.Utilities;
 import com.example.documenpro.R;
 
 public class NUIActivity extends BaseActivity {
@@ -86,7 +80,7 @@ public class NUIActivity extends BaseActivity {
         boolean z3 = false;
         boolean z4 = extras != null && extras.getBoolean("SESSION", false);
         SODocSession sODocSession = a;
-        setContentView(R.layout.sodk_editor_doc_view_activity);
+        setContentView(R.layout.editor_doc_view_activity);
         NUIView nUIView = findViewById(R.id.doc_view);
         nUIActivity.mNUIView = nUIView;
         nUIView.setOnDoneListener(new OnDoneListener() {

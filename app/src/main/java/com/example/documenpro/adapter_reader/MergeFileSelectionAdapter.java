@@ -122,7 +122,7 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                          int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_pdf_select, parent, false);
+                .inflate(R.layout.item_select_pdf, parent, false);
         return new ViewHolder(view);
     }
 

@@ -52,7 +52,7 @@ public class AlbumMediaAdapter extends RecyclerViewCursorAdapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_CAPTURE) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.photo_capture_item, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.capture_photo_item, parent, false);
             CaptureViewHolder holder = new CaptureViewHolder(v);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -76,7 +76,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lyt_task_processor);
+        setContentView(R.layout.layout_task_processor);
         bindViews();
         processIntentTask();
     }

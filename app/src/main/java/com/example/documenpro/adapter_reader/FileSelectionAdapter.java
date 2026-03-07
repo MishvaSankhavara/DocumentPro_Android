@@ -96,7 +96,7 @@ public class FileSelectionAdapter extends RecyclerView.Adapter<FileSelectionAdap
                                          int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_pdf_list,
+                .inflate(R.layout.item_list_pdf,
                         parent,
                         false);
         return new ViewHolder(view);

@@ -21,7 +21,7 @@ public class ActionConfirmDialog extends Dialog {
 
     public ActionConfirmDialog(@NonNull Context context, int mTypeDialog, OnConfirmClickListener listener) {
         super(context);
-        setContentView(R.layout.dialog_confirm);
+        setContentView(R.layout.dialog_confirmation);
         this.confirmListener = listener;
         this.dialogType = mTypeDialog;
         initializeViews();
