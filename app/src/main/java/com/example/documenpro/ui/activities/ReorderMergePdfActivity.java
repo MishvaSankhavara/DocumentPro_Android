@@ -36,7 +36,7 @@ import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.OnDragStartListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.ui.dialog.FileRenameDialog;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -87,7 +87,7 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
     @Override
     public void onBackPressed() {
 
-        DialogUtils.showConfirmDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_MERGE, new OnConfirmClickListener() {
+        DialogManagerUtils.showConfirmationDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_MERGE, new OnConfirmClickListener() {
             @Override
             public void onConfirmClickListener() {
                 finish();

@@ -11,7 +11,7 @@ import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.MyApplication;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
-import com.example.documenpro.utils.ImageUtils;
+import com.example.documenpro.utils.ImageProcessorUtils;
 import com.example.documenpro.utils.Utils;
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader;
 import com.tom_roush.pdfbox.pdmodel.PDDocument;
@@ -67,7 +67,7 @@ public class ImageToPdfConverter {
 
                     String path_ImageToPdfConverter = arrayListPhoto_ImageToPdfConverter.get(i);
 
-                    Bitmap rotateBitmap_ImageToPdfConverter = ImageUtils.rotateImageBitmap(ImageUtils.getInstant().getPdfCompressedBitmap(path_ImageToPdfConverter), new ExifInterface(path_ImageToPdfConverter).getAttributeInt("Orientation", 0));
+                    Bitmap rotateBitmap_ImageToPdfConverter = ImageProcessorUtils.rotateBitmapImage(ImageProcessorUtils.getInstant().getCompressedBitmapPDF(path_ImageToPdfConverter), new ExifInterface(path_ImageToPdfConverter).getAttributeInt("Orientation", 0));
 
                     float width_ImageToPdfConverter = (float) rotateBitmap_ImageToPdfConverter.getWidth();
                     float height_ImageToPdfConverter = (float) rotateBitmap_ImageToPdfConverter.getHeight();

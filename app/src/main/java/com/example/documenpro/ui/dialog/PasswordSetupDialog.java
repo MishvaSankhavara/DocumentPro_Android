@@ -77,7 +77,7 @@ public class PasswordSetupDialog extends Dialog {
                     dismiss();
                 }
             } else {
-                ObjectAnimator objectAnimator = ViewUtils.startAnim(clDialogRoot);
+                ObjectAnimator objectAnimator = ViewUtils.shakeAnimation(clDialogRoot);
                 objectAnimator.start();
                 llErrorContainer.setVisibility(View.VISIBLE);
             }

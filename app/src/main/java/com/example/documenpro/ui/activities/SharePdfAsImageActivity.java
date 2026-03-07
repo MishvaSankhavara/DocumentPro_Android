@@ -165,7 +165,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         super.onDestroy();
         File dir = new File(this.tempPdfImageDirectory);
 
-        Utils.deletePdfFiles(this.tempPdfImageDirectory);
+        Utils.deleteFilesRecursively(this.tempPdfImageDirectory);
         String sb = "Deleting temp dir " +
                 this.tempPdfImageDirectory;
         Log.d(this.logTag, sb);
@@ -313,7 +313,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
             super.onPostExecute(unused);
             if (weakReference.get() != null) {
                 weakReference.get().thumbnailAdapter = new PdfPreviewThumbnailAdapter(weakReference.get(), weakReference.get().pdfPageList, weakReference.get());
-                int i = Utils.isTablet(weakReference.get()) ? 6 : 3;
+                int i = Utils.isTabletDevice(weakReference.get()) ? 6 : 3;
                 weakReference.get().pdfPageRecyclerView.setLayoutManager(new GridLayoutManager(weakReference.get(), i, RecyclerView.VERTICAL, false));
                 weakReference.get().loadingAnimationView.setVisibility(View.GONE);
                 weakReference.get().pdfPageRecyclerView.setAdapter(weakReference.get().thumbnailAdapter);

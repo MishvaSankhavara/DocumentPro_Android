@@ -21,7 +21,7 @@ import com.example.documenpro.MyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
-import com.example.documenpro.utils.ImageUtils;
+import com.example.documenpro.utils.ImageProcessorUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
@@ -98,7 +98,7 @@ public class FileCompressionExecutor {
 
                         if (pdfObject2_FileCompression != null && pdfObject2_FileCompression.toString().equals(PdfName.IMAGE.toString())) {
                             try {
-                                Bitmap compressedBitmap_FileCompression = ImageUtils.getInstant().getPdfCompressedBitmap(new PdfImageObject(prStream_FileCompression).getImageAsBytes());
+                                Bitmap compressedBitmap_FileCompression = ImageProcessorUtils.getInstant().getCompressedBitmapPDF(new PdfImageObject(prStream_FileCompression).getImageAsBytes());
 
                                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 

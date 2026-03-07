@@ -33,7 +33,7 @@ import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.model_reader.PhotoModel;
 import com.example.documenpro.photopick.Matisse;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.util.ArrayList;
@@ -172,7 +172,7 @@ public class MediaSorterActivity extends AppCompatActivity {
                 }
 
                 String defaultFileName = "Photo2PDF" + System.currentTimeMillis();
-                DialogUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName, new RenameDialogClickListener() {
+                DialogManagerUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName, new RenameDialogClickListener() {
                     @Override
                     public void onRenameDialogListener(String newChosenName) {
                         String finalOutName = newChosenName + System.currentTimeMillis();

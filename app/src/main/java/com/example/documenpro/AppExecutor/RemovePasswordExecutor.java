@@ -46,7 +46,7 @@ public class RemovePasswordExecutor {
                 publishProgress_removePW(i);
             }
 
-            PDFReaderModel pdfModelNew = Utils.removePassWordPDF(mPdfModel_removePW, mPassword_removePW);
+            PDFReaderModel pdfModelNew = Utils.unlockPdfFile(mPdfModel_removePW, mPassword_removePW);
 
             File file = new File(mPdfModel_removePW.getFileUri_PDFModel());
             Log.i("THANGPDFLOG", mPdfModel_removePW.getFileUri_PDFModel());

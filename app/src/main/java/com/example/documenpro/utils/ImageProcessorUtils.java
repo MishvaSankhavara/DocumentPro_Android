@@ -14,16 +14,16 @@ import androidx.annotation.Keep;
 import java.io.ByteArrayOutputStream;
 
 @Keep
-public class ImageUtils {
-    public static ImageUtils imageUtils;
+public class ImageProcessorUtils {
+    public static ImageProcessorUtils imageUtils;
 
-    public static ImageUtils getInstant() {
+    public static ImageProcessorUtils getInstant() {
         if (imageUtils == null) {
-            imageUtils = new ImageUtils();
+            imageUtils = new ImageProcessorUtils();
         }
         return imageUtils;
     }
-    public static Bitmap rotateImageBitmap(Bitmap bitmap, int i) {
+    public static Bitmap rotateBitmapImage(Bitmap bitmap, int i) {
         Matrix matrix = new Matrix();
         switch (i) {
             case 1:
@@ -65,7 +65,7 @@ public class ImageUtils {
         }
     }
 
-    public Bitmap getPdfCompressedBitmap(String str) {
+    public Bitmap getCompressedBitmapPDF(String str) {
         Bitmap bitmap;
         Bitmap bitmap2;
         Options options = new Options();
@@ -88,7 +88,7 @@ public class ImageUtils {
                 i2 = (int) 1080.0f;
             }
         }
-        options.inSampleSize = calculatePdfSampleSize(options, i2, i);
+        options.inSampleSize = calculateSampleSizePdf(options, i2, i);
         options.inJustDecodeBounds = false;
         options.inDither = false;
         options.inPurgeable = true;
@@ -123,7 +123,7 @@ public class ImageUtils {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 
-    public Bitmap getPdfCompressedBitmap(byte[] bArr) {
+    public Bitmap getCompressedBitmapPDF(byte[] bArr) {
         Bitmap bitmap;
         Bitmap bitmap2;
         Options options = new Options();
@@ -146,7 +146,7 @@ public class ImageUtils {
                 i2 = (int) 1080.0f;
             }
         }
-        options.inSampleSize = calculatePdfSampleSize(options, i2, i);
+        options.inSampleSize = calculateSampleSizePdf(options, i2, i);
         options.inJustDecodeBounds = false;
         options.inDither = false;
         options.inPurgeable = true;
@@ -178,7 +178,7 @@ public class ImageUtils {
         return bitmap2;
     }
 
-    private int calculatePdfSampleSize(Options options, int i, int i2) {
+    private int calculateSampleSizePdf(Options options, int i, int i2) {
         int i3;
         int i4 = options.outHeight;
         int i5 = options.outWidth;
@@ -196,6 +196,4 @@ public class ImageUtils {
         }
         return i3;
     }
-
-
 }

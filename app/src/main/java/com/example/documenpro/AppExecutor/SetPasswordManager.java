@@ -48,7 +48,7 @@ public class SetPasswordManager {
                 publishProgress_setPW(i);
             }
 
-            boolean isSetPassword = Utils.setPassPDF(mPdfModel_setPW.getAbsolutePath_PDFModel(), mPdfModel_setPW.getName_PDFModel(), mPassword_setPW);
+            boolean isSetPassword = Utils.encryptPdfFile(mPdfModel_setPW.getAbsolutePath_PDFModel(), mPdfModel_setPW.getName_PDFModel(), mPassword_setPW);
 
             if (isSetPassword) {
 

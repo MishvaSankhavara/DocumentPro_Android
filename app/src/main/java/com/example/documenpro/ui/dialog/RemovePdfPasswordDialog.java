@@ -87,12 +87,12 @@ public class RemovePdfPasswordDialog extends Dialog {
                         dismiss();
                     }
                 } catch (Exception e) {
-                    ObjectAnimator objectAnimator = ViewUtils.startAnim(dialogRootLayout);
+                    ObjectAnimator objectAnimator = ViewUtils.shakeAnimation(dialogRootLayout);
                     objectAnimator.start();
                     errorContainer.setVisibility(View.VISIBLE);
                 }
             } else {
-                ObjectAnimator objectAnimator = ViewUtils.startAnim(dialogRootLayout);
+                ObjectAnimator objectAnimator = ViewUtils.shakeAnimation(dialogRootLayout);
                 objectAnimator.start();
                 errorTextView.setText(R.string.toast_please_set_password);
             }

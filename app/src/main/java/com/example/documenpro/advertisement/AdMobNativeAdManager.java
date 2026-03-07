@@ -8,18 +8,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdView;
-import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
-import com.example.documenpro.utils.AdsUtils;
+import com.example.documenpro.utils.AdUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +37,7 @@ public class AdMobNativeAdManager {
         }
 
         AdLoader.Builder builder_AdMob =
-                new AdLoader.Builder(mActivity_AdMob, AdsUtils.ADMOB_ID_NATIVE_TEST);
+                new AdLoader.Builder(mActivity_AdMob, AdUtils.AD_UNIT_ID_NATIVE_TEST);
 
         builder_AdMob.forNativeAd(nativeAd -> {
 
@@ -87,7 +83,7 @@ public class AdMobNativeAdManager {
         }
 
         AdLoader.Builder builder =
-                new AdLoader.Builder(mActivity_AdMob, AdsUtils.ADMOB_ID_NATIVE_TEST);
+                new AdLoader.Builder(mActivity_AdMob, AdUtils.AD_UNIT_ID_NATIVE_TEST);
 
         builder.forNativeAd(nativeAd -> {
 
@@ -133,7 +129,7 @@ public class AdMobNativeAdManager {
         }
 
         AdLoader.Builder builder =
-                new AdLoader.Builder(mActivity_AdMob, AdsUtils.ADMOB_ID_NATIVE_TEST);
+                new AdLoader.Builder(mActivity_AdMob, AdUtils.AD_UNIT_ID_NATIVE_TEST);
 
         builder.forNativeAd(nativeAd -> {
 

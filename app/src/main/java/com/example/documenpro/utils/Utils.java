@@ -101,14 +101,12 @@ public class Utils {
                 fileName = file.getName();
             }
         }
-
         return fileName;
-
     }
 
-    public static void copyFile(Context mContext, Uri source, String destination) {
-        try (InputStream in = mContext.getContentResolver().openInputStream(source);
-             OutputStream out = new FileOutputStream(destination)) {
+    public static void copyFile(Context context, Uri sourceUri, String destinationPath) {
+        try (InputStream in = context.getContentResolver().openInputStream(sourceUri);
+             OutputStream out = new FileOutputStream(destinationPath)) {
 
             byte[] buffer = new byte[1024];
             int len;
@@ -120,11 +118,11 @@ public class Utils {
         }
     }
 
-    public static boolean isTablet(Context context) {
+    public static boolean isTabletDevice(Context context) {
         return context.getResources().getBoolean(R.bool.isTablet);
     }
 
-    public static void deletePdfFiles(String str) {
+    public static void deleteFilesRecursively(String str) {
         File file = new File(str);
         if (file.exists() && file.isDirectory()) {
             StringBuilder sb = new StringBuilder();
@@ -139,7 +137,7 @@ public class Utils {
         }
     }
 
-    public static PDFReaderModel removePassWordPDF(PDFReaderModel pdfModel, String password) {
+    public static PDFReaderModel unlockPdfFile(PDFReaderModel pdfModel, String password) {
         try {
             String path = GlobalConstant.RootDirectoryLock;
             File file2 = new File(path);
@@ -149,10 +147,6 @@ public class Utils {
             String filePathNeW = path + "Unlock_" + pdfModel.getName_PDFModel();
 
             PDDocument document = PDDocument.load(new File(pdfModel.getAbsolutePath_PDFModel()), password);
-
-
-//            AccessPermission ap = document.getCurrentAccessPermission();
-//            if (ap.isOwnerPermission()) {
             document.setAllSecurityToBeRemoved(true);
             document.save(filePathNeW);
 
@@ -171,7 +165,7 @@ public class Utils {
         }
     }
 
-    public static boolean setPassPDF(String srcFile, String fileNameNew, String password) {
+    public static boolean encryptPdfFile(String srcFile, String fileNameNew, String password) {
 
         byte[] USER = password.getBytes();
         byte[] OWNER = "Hi".getBytes();
@@ -231,32 +225,22 @@ public class Utils {
         PdfRenderer renderer = null;
         PdfRenderer.Page page = null;
         try {
-            // Check if the file exists and is readable
             if (!pdfFile.exists() || !pdfFile.canRead()) {
                 throw new IOException("File does not exist or cannot be read.");
             }
 
-            // Open the PDF file in read-only mode
             fileDescriptor = ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY);
 
-            // Create a PdfRenderer to render the PDF
             renderer = new PdfRenderer(fileDescriptor);
 
-            // Check if the PDF has at least one page
             if (renderer.getPageCount() <= 0) {
                 throw new IllegalArgumentException("PDF has no pages.");
             }
-
-            // Open the first page of the PDF
             page = renderer.openPage(0);
-
-            // Create a Bitmap with the size of the first page
             Bitmap bitmap = Bitmap.createBitmap(page.getWidth(), page.getHeight(), Bitmap.Config.ARGB_8888);
 
-            // Render the page to the Bitmap
             page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
 
-            // Display the rendered Bitmap on the ImageView
             imageView.setImageBitmap(bitmap);
 
         } catch (IOException | IllegalArgumentException e) {

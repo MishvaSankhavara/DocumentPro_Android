@@ -15,7 +15,7 @@ import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.RenameDialogClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -59,7 +59,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         int idView = v.getId();
         if (idView == R.id.ll_rename) {
-            DialogUtils.showRenameDialog(activity, documentModel.getFileName_DocModel(), new RenameDialogClickListener() {
+            DialogManagerUtils.showRenameDialog(activity, documentModel.getFileName_DocModel(), new RenameDialogClickListener() {
                 @Override
                 public void onRenameDialogListener(String newName) {
                     if (optionsListener != null) {
@@ -72,13 +72,13 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
             Utils.shareFile(activity, new File(documentModel.getFileUri_DocModel()));
             dismiss();
         } else if (idView == R.id.ll_info) {
-            DialogUtils.showInformationDialog(activity, documentModel);
+            DialogManagerUtils.showInfoDialog(activity, documentModel);
             dismiss();
         } else if (idView == R.id.ll_create_shortcut) {
             Utils.createShortcut(activity, documentModel);
             dismiss();
         } else if (idView == R.id.ll_remove_from_recent) {
-            DialogUtils.showConfirmDialog(activity, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
+            DialogManagerUtils.showConfirmationDialog(activity, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
                     if (optionsListener != null) {
@@ -88,7 +88,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
             });
             dismiss();
         } else if (idView == R.id.ll_delete) {
-            DialogUtils.showConfirmDialog(activity, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
+            DialogManagerUtils.showConfirmationDialog(activity, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
                     if (optionsListener != null) {

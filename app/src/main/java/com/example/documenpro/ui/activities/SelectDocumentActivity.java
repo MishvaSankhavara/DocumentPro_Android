@@ -42,7 +42,7 @@ import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.ui.dialog.FileProgressDialog;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -213,14 +213,14 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
             }
         } else if (idView == R.id.ll_remove) {
             if (selectedFileType == GlobalConstant.RECENT_FILE_TYPE) {
-                DialogUtils.showConfirmDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
+                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
                     @Override
                     public void onConfirmClickListener() {
                         new RemoveRecent(SelectDocumentActivity.this).execute();
                     }
                 });
             } else if (selectedFileType == GlobalConstant.FAV_FILE_TYPE) {
-                DialogUtils.showConfirmDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_FAV, new OnConfirmClickListener() {
+                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_FAV, new OnConfirmClickListener() {
                     @Override
                     public void onConfirmClickListener() {
                         FavoriteRemovalExecutor removeFavoriteExecutor = new FavoriteRemovalExecutor(SelectDocumentActivity.this);
@@ -229,7 +229,7 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
                 });
             }
         } else if (idView == R.id.ll_delete) {
-            DialogUtils.showConfirmDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
+            DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
                     new DeleteMultiFile(SelectDocumentActivity.this).execute();

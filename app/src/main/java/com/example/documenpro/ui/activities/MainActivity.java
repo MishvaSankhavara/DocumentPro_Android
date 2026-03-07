@@ -44,8 +44,8 @@ import com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch;
 import com.example.documenpro.ui.fragments.FragmentFiles;
 import com.example.documenpro.ui.fragments.FragmentSetting;
 import com.example.documenpro.ui.fragments.FragmentTools;
-import com.example.documenpro.utils.AdsUtils;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.AdUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bannerAdView = new AdView(this);
         bannerAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
 
-        AdSize adSize = AdsUtils.getAdSize(MainActivity.this, adContainer);
+        AdSize adSize = AdUtils.calculateAdaptiveAdSize(MainActivity.this, adContainer);
         bannerAdView.setAdSize(adSize);
 
         Bundle extras = new Bundle();
@@ -262,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Utils.chooseFileManager(MainActivity.this);
             mainDrawerLayout.closeDrawers();
         } else if (idView == R.id.cl_language_options) {
-            DialogUtils.showLanguageDialog(this);
+            DialogManagerUtils.showLanguageSelection(this);
         } else if (idView == R.id.cl_feedback) {
             Utils.feedbackApp(MainActivity.this);
             mainDrawerLayout.closeDrawers();

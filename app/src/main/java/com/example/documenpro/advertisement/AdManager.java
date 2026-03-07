@@ -11,7 +11,7 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.example.documenpro.utils.AdsUtils;
+import com.example.documenpro.utils.AdUtils;
 
 public class AdManager {
 
@@ -39,7 +39,7 @@ public class AdManager {
         if (mInterstitialAd_AdManager == null) {
             InterstitialAd.load(
                     mContext_AdManager,
-                    AdsUtils.ADMOB_ID_FULL_TEST,
+                    AdUtils.AD_UNIT_ID_INTERSTITIAL_TEST,
                     new AdRequest.Builder().build(),
                     new InterAdLoadCallBack_AdManager(mContext_AdManager)
             );

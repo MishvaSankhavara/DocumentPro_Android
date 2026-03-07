@@ -26,7 +26,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdConsentManager;
-import com.example.documenpro.utils.AdsUtils;
+import com.example.documenpro.utils.AdUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.util.Arrays;
@@ -185,7 +185,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void loadBannerAd() {
         bannerAdView = new AdView(this);
-        bannerAdView.setAdUnitId(AdsUtils.ADMOB_ID_BANNER_TM);
+        bannerAdView.setAdUnitId(AdUtils.ADMOB_ID_BANNER_TM);
 
         AdSize adSize = Utils.getAdSize(SplashScreenActivity.this, bannerAdContainer);
         bannerAdView.setAdSize(adSize);

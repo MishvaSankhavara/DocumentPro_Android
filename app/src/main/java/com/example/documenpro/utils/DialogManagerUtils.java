@@ -19,8 +19,8 @@ import com.example.documenpro.ui.dialog.RemovePdfPasswordDialog;
 import com.example.documenpro.ui.dialog.FileRenameDialog;
 import com.example.documenpro.ui.dialog.PasswordSetupDialog;
 
-public class DialogUtils {
-    public static void showSetPasswordDialog(Activity mContext, PasswordClickListener listener) {
+public class DialogManagerUtils {
+    public static void showPasswordSetup(Activity mContext, PasswordClickListener listener) {
         if (mContext == null) {
             return;
         }
@@ -33,20 +33,7 @@ public class DialogUtils {
         renameDialog.show();
     }
 
-    public static void showLanguageDialog(Context mContext) {
-        if (mContext == null) {
-            return;
-        }
-        LanguageSelectionDialog informationDialog = new LanguageSelectionDialog(mContext);
-        Window window = informationDialog.getWindow();
-        if (window != null) {
-            window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-        informationDialog.show();
-    }
-
-    public static void showRemovePasswordDialog(Activity mContext, PDFReaderModel pdfModel, PasswordClickListener listener) {
+    public static void showPdfPasswordRemoval(Activity mContext, PDFReaderModel pdfModel, PasswordClickListener listener) {
         if (mContext == null) {
             return;
         }
@@ -59,7 +46,20 @@ public class DialogUtils {
         renameDialog.show();
     }
 
-    public static void showFileProtectedDialog(Activity mContext, int idTvDes) {
+    public static void showLanguageSelection(Context mContext) {
+        if (mContext == null) {
+            return;
+        }
+        LanguageSelectionDialog informationDialog = new LanguageSelectionDialog(mContext);
+        Window window = informationDialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        informationDialog.show();
+    }
+
+    public static void showProtectedFileDialog(Activity mContext, int idTvDes) {
         if (mContext == null) {
             return;
         }
@@ -70,6 +70,19 @@ public class DialogUtils {
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
         dialog.show();
+    }
+
+    public static void showInfoDialog(Activity mContext, DocumentModel document) {
+        if (mContext == null) {
+            return;
+        }
+        DocumentInfoDialog informationDialog = new DocumentInfoDialog(mContext, document);
+        Window window = informationDialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        informationDialog.show();
     }
 
     public static void showRenameDialog(Activity mContext, String oldName, RenameDialogClickListener listener) {
@@ -85,20 +98,7 @@ public class DialogUtils {
         renameDialog.show();
     }
 
-    public static void showInformationDialog(Activity mContext, DocumentModel document) {
-        if (mContext == null) {
-            return;
-        }
-        DocumentInfoDialog informationDialog = new DocumentInfoDialog(mContext, document);
-        Window window = informationDialog.getWindow();
-        if (window != null) {
-            window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-        informationDialog.show();
-    }
-
-    public static void showConfirmDialog(Activity mContext, int typeConfirm, OnConfirmClickListener listener) {
+    public static void showConfirmationDialog(Activity mContext, int typeConfirm, OnConfirmClickListener listener) {
         if (mContext == null) {
             return;
         }

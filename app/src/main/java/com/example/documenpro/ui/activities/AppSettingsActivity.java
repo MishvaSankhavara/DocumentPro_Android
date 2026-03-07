@@ -19,7 +19,7 @@ import com.example.documenpro.BuildConfig;
 import com.example.documenpro.GlobalConstant;
 import com.example.documenpro.R;
 import com.example.documenpro.SharedPreferenceUtils;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.util.Objects;
@@ -95,7 +95,7 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
         } else if (idView == R.id.cl_share_app) {
             Utils.shareApp(this);
         } else if (idView == R.id.cl_language_options) {
-            DialogUtils.showLanguageDialog(AppSettingsActivity.this);
+            DialogManagerUtils.showLanguageSelection(AppSettingsActivity.this);
         } else if (idView == R.id.cl_faq) {
 
         } else if (idView == R.id.cl_request) {

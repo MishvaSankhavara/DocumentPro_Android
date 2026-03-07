@@ -37,7 +37,7 @@ import com.example.documenpro.clickListener.OnThumbnailClickListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.example.documenpro.model_reader.PDFPageModel;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 import com.shockwave.pdfium.PdfDocument;
 import com.shockwave.pdfium.PdfiumCore;
@@ -145,7 +145,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
             @Override
             public void onClick(View view) {
                 String nameFile = "Split-" + System.currentTimeMillis();
-                DialogUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile, new RenameDialogClickListener() {
+                DialogManagerUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile, new RenameDialogClickListener() {
                     @Override
                     public void onRenameDialogListener(String newName) {
                         MyApplication.getInstance().setArraylistSplit(pdfThumbnailAdapter.getPageNumbers_PdfPreview());
@@ -167,7 +167,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
         super.onDestroy();
         File dir = new File(this.tempPdfImagesDirectory);
 
-        Utils.deletePdfFiles(this.tempPdfImagesDirectory);
+        Utils.deleteFilesRecursively(this.tempPdfImagesDirectory);
         String sb = "Deleting temp dir " +
                 this.tempPdfImagesDirectory;
     }
@@ -301,7 +301,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
             if (weakReference.get() != null) {
                 weakReference.get().pdfThumbnailAdapter = new PdfPreviewThumbnailAdapter(weakReference.get(),
                         weakReference.get().pdfPageList, weakReference.get());
-                int i = Utils.isTablet(weakReference.get()) ? 6 : 2;
+                int i = Utils.isTabletDevice(weakReference.get()) ? 6 : 2;
                 weakReference.get().pdfPagesRecyclerView
                         .setLayoutManager(new GridLayoutManager(weakReference.get(), i, RecyclerView.VERTICAL, false));
                 weakReference.get().loadingAnimationView.setVisibility(View.GONE);

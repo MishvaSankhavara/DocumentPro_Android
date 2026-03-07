@@ -24,7 +24,7 @@ import com.hjq.language.MultiLanguages;
 import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.advertisement.AdConsentManager;
 import com.example.documenpro.model_reader.PDFReaderModel;
-import com.example.documenpro.utils.AdsUtils;
+import com.example.documenpro.utils.AdUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -228,7 +228,7 @@ public class MyApplication extends Application implements Application.ActivityLi
             isLoadingAd = true;
             AdRequest request = new AdRequest.Builder().build();
             AppOpenAd.load(
-                    context, AdsUtils.ADMOB_ID_OPEN_TEST,
+                    context, AdUtils.AD_UNIT_ID_OPEN_APP_TEST,
                     request,
                     new AppOpenAd.AppOpenAdLoadCallback() {
                         /**

@@ -34,8 +34,8 @@ import com.example.documenpro.ui.activities.SharePdfAsImageActivity;
 import com.example.documenpro.ui.activities.SplitChooseFileActivity;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
-import com.example.documenpro.utils.AdsUtils;
-import com.example.documenpro.utils.DialogUtils;
+import com.example.documenpro.utils.AdUtils;
+import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -145,13 +145,13 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
 
         if (operationMode == GlobalConstant.TOOL_PRINT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_print_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_print_toast);
             } else {
                 PdfPrintUtils.printPdf_Utils(this, Uri.fromFile(new File(pdfModel_listener.getAbsolutePath_PDFModel())));
             }
         } else if (operationMode == GlobalConstant.TOOL_COMPRESS) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_compress_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_compress_toast);
             } else {
                 Intent taskIntent = new Intent(this, ProcessingTaskActivity.class);
                 taskIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_COMPRESS);
@@ -161,7 +161,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             }
         } else if (operationMode == GlobalConstant.TOOL_SPLIT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_split_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_split_toast);
             } else {
                 Intent splitIntent = new Intent(this, SplitChooseFileActivity.class);
                 splitIntent.putExtra(GlobalConstant.PDF_MODEL_SEND, pdfModel_listener);
@@ -170,7 +170,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             }
         } else if (operationMode == GlobalConstant.TOOL_PDF_TO_PHOTO) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_convert_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_convert_toast);
             } else {
                 Intent convertIntent = new Intent(this, SharePdfAsImageActivity.class);
                 convertIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_PDF_TO_PHOTO);
@@ -180,9 +180,9 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             }
         } else if (operationMode == GlobalConstant.TOOL_LOCK_PDF) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogUtils.showFileProtectedDialog(DocPickerActivity.this, R.string.unable_convert_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_convert_toast);
             } else {
-                DialogUtils.showSetPasswordDialog(this, new PasswordClickListener() {
+                DialogManagerUtils.showPasswordSetup(this, new PasswordClickListener() {
                     @Override
                     public void onOkClickListener(String pass) {
                         Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
@@ -196,7 +196,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                 });
             }
         } else if (operationMode == GlobalConstant.TOOL_UNLOCK_PDF) {
-            DialogUtils.showRemovePasswordDialog(this, pdfModel_listener, new PasswordClickListener() {
+            DialogManagerUtils.showPdfPasswordRemoval(this, pdfModel_listener, new PasswordClickListener() {
                 @Override
                 public void onOkClickListener(String pass) {
                     Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
@@ -213,9 +213,9 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
 
     private void initBannerAds() {
         bannerAdView = new AdView(this);
-        bannerAdView.setAdUnitId(AdsUtils.ADMOB_ID_BANNER_TEST);
+        bannerAdView.setAdUnitId(AdUtils.AD_UNIT_ID_BANNER_TEST);
 
-        AdSize optimizedSize = AdsUtils.getAdSize(DocPickerActivity.this, adFrame);
+        AdSize optimizedSize = AdUtils.calculateAdaptiveAdSize(DocPickerActivity.this, adFrame);
         bannerAdView.setAdSize(optimizedSize);
 
         Bundle adExtras = new Bundle();
