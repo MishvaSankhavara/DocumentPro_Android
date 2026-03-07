@@ -33,8 +33,8 @@ import com.example.documenpro.utils.Utils;
 
 public class FragmentTools extends Fragment {
 
-    private Activity activityContext;
     ToolsModel selectedTool;
+    private Activity activityContext;
 
     public FragmentTools() {
     }
@@ -126,7 +126,6 @@ public class FragmentTools extends Fragment {
             intentLock.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_UNLOCK_PDF);
             startActivity(intentLock);
         }
-
     }
 
     @Override
