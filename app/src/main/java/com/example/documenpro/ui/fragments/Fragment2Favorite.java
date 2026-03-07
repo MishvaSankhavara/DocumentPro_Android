@@ -23,7 +23,7 @@ import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
-import com.example.documenpro.viewmodel.FavoriteDataSingleton;
+import com.example.documenpro.viewmodel.DataSingletonFavorite;
 
 import java.util.ArrayList;
 
@@ -48,7 +48,7 @@ public class Fragment2Favorite extends Fragment implements DocClickListener {
         View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         initViews(view);
 
-        FavoriteDataSingleton.getInstance().getFavoriteLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<DocumentModel>>() {
+        DataSingletonFavorite.getInstance().getFavoriteDocumentsLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<DocumentModel>>() {
             @Override
             public void onChanged(ArrayList<DocumentModel> documents) {
 

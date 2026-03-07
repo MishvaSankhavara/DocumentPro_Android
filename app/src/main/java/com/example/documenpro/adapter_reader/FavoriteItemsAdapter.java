@@ -27,8 +27,8 @@ import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.utils.Utils;
-import com.example.documenpro.viewmodel.FavoriteDataSingleton;
-import com.example.documenpro.viewmodel.RecentDataSingleton;
+import com.example.documenpro.viewmodel.DataSingletonFavorite;
+import com.example.documenpro.viewmodel.DataSingletonRecent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -115,8 +115,8 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                                             document.getFileUri_DocModel(),
                                             replaceName);
 
-                                    RecentDataSingleton.getInstance()
-                                            .addRecentDocument(document);
+                                    DataSingletonRecent.getInstance()
+                                            .addToRecent(document);
                                 }
 
                                 databaseHelper_FavoriteItems.updateStaredDocument_DatabaseHelper(
@@ -175,8 +175,8 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                                         databaseHelper_FavoriteItems.removeStaredDocument_DatabaseHelper(
                                                 document.getFileUri_DocModel());
 
-                                        FavoriteDataSingleton.getInstance()
-                                                .removeFavoriteDocument(document);
+                                        DataSingletonFavorite.getInstance()
+                                                .removeFromFavorites(document);
                                     }
 
                                     if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(
@@ -247,8 +247,8 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
             }
 
             if (databaseHelper_FavoriteItems.isRecent_DatabaseHelper(document.getFileUri_DocModel())) {
-                RecentDataSingleton.getInstance()
-                        .addRecentDocument(document);
+                DataSingletonRecent.getInstance()
+                        .addToRecent(document);
             }
         });
     }

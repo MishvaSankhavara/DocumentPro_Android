@@ -21,7 +21,7 @@ import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
-import com.example.documenpro.viewmodel.SearchViewModel;
+import com.example.documenpro.viewmodel.ViewModelSearch;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
 public class FragmentTxt extends Fragment implements DocClickListener {
 
     private Activity activityContext;
-    private SearchViewModel searchViewModel;
+    private ViewModelSearch searchViewModel;
     private EmptyStateRecyclerView txtRecyclerView;
     private ProgressBar loadingProgressBar;
     private FileListAdapter txtAdapter;
@@ -49,7 +49,7 @@ public class FragmentTxt extends Fragment implements DocClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         initViews(view);
-        searchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
+        searchViewModel = new ViewModelProvider(requireActivity()).get(ViewModelSearch.class);
         listFile();
         return view;
     }
@@ -87,7 +87,7 @@ public class FragmentTxt extends Fragment implements DocClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        searchViewModel.getQuery().observe(requireActivity(), s -> Utils.searchDocument(s, arrayList, txtAdapter));
+        searchViewModel.getSearchQueryLiveData().observe(requireActivity(), s -> Utils.searchDocument(s, arrayList, txtAdapter));
     }
     @Override
     public void onAttach(@NonNull Context context) {

@@ -23,7 +23,7 @@ import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
 import com.example.documenpro.utils.Utils;
-import com.example.documenpro.viewmodel.RecentDataSingleton;
+import com.example.documenpro.viewmodel.DataSingletonRecent;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class Fragment2Recent extends Fragment implements DocClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         initViews(view);
-        RecentDataSingleton.getInstance().getRecentLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<DocumentModel>>() {
+        DataSingletonRecent.getInstance().getRecentDocumentsLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<DocumentModel>>() {
             @Override
             public void onChanged(ArrayList<DocumentModel> documents) {
                 recentFilesAdapter = new RecentFilesAdapter(activityContext, Fragment2Recent.this);

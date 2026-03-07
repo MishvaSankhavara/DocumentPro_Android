@@ -27,7 +27,7 @@ import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.utils.Utils;
-import com.example.documenpro.viewmodel.FavoriteDataSingleton;
+import com.example.documenpro.viewmodel.DataSingletonFavorite;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
                             databaseHelper_RecentFiles.updateStaredDocument_DatabaseHelper(document.getFileUri_DocModel(), replaceName);
 
-                            FavoriteDataSingleton.getInstance().addFavoriteDocument(document);
+                            DataSingletonFavorite.getInstance().addToFavorites(document);
                         }
 
                         databaseHelper_RecentFiles.updateHistory_DatabaseHelper(document.getFileUri_DocModel(), replaceName);
@@ -145,7 +145,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
                             databaseHelper_RecentFiles.removeStaredDocument_DatabaseHelper(document.getFileUri_DocModel());
 
-                            FavoriteDataSingleton.getInstance().removeFavoriteDocument(document);
+                            DataSingletonFavorite.getInstance().removeFromFavorites(document);
                         }
 
                         if (databaseHelper_RecentFiles.isRecent_DatabaseHelper(document.getFileUri_DocModel())) {
@@ -195,13 +195,13 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
                 databaseHelper_RecentFiles.removeStaredDocument_DatabaseHelper(document.getFileUri_DocModel());
 
-                FavoriteDataSingleton.getInstance().removeFavoriteDocument(document);
+                DataSingletonFavorite.getInstance().removeFromFavorites(document);
 
             } else {
 
                 databaseHelper_RecentFiles.addStaredDocument_DatabaseHelper(document.getFileUri_DocModel());
 
-                FavoriteDataSingleton.getInstance().addFavoriteDocument(document);
+                DataSingletonFavorite.getInstance().addToFavorites(document);
 
                 holder.imgFavorite_RecentFiles.playAnimation();
 

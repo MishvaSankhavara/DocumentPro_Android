@@ -29,7 +29,7 @@ import com.example.documenpro.ui.fragments.search.FragmentPdf;
 import com.example.documenpro.ui.fragments.search.FragmentPpt;
 import com.example.documenpro.ui.fragments.search.FragmentTxt;
 import com.example.documenpro.ui.fragments.search.FragmentWord;
-import com.example.documenpro.viewmodel.SearchViewModel;
+import com.example.documenpro.viewmodel.ViewModelSearch;
 
 import java.util.Objects;
 
@@ -39,7 +39,7 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
     private TabLayout searchTabLayout;
     private AppCompatEditText searchEditText;
     private AppCompatImageView clearSearchButton;
-    private SearchViewModel searchViewModel;
+    private ViewModelSearch searchViewModel;
     private int selectedFileType = GlobalConstant.ALL_FILE_TYPE;
 
     @Override
@@ -60,7 +60,7 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
         initViews();
         AdMobNativeAdManager.showNativeBanner3_AdMob(this, null);
         applyToolbarTheme(selectedFileType);
-        searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        searchViewModel = new ViewModelProvider(this).get(ViewModelSearch.class);
     }
 
     private void applyToolbarTheme(int fileType) {
@@ -144,7 +144,7 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() > 0) {
                     clearSearchButton.setVisibility(View.VISIBLE);
-                    searchViewModel.setQuery(charSequence.toString());
+                    searchViewModel.setSearchQueryLiveData(charSequence.toString());
                 } else if (charSequence.length() == 0) {
                     clearSearchButton.setVisibility(View.GONE);
                 }
