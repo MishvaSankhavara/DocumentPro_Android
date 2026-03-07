@@ -24,7 +24,7 @@
             android:fontFamily="@font/medium"
             android:gravity="center"
             android:paddingHorizontal="21dp"
-            android:textColor="@color/ss_bottom_sheet_text"
+            android:textColor="@color/bottom_sheet_text_ss"
             android:textSize="14sp" />
 
         <android.supportv1.v4.widget.Space
