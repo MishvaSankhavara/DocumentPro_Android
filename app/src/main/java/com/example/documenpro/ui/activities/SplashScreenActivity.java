@@ -20,10 +20,10 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.ump.FormError;
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdConsentManager;
 import com.example.documenpro.utils.AdUtils;
@@ -90,7 +90,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         // Set your test devices.
         MobileAds.setRequestConfiguration(
                 new RequestConfiguration.Builder()
-                        .setTestDeviceIds(Arrays.asList(GlobalConstant.TEST_DEVICE_HASHED_ID))
+                        .setTestDeviceIds(Arrays.asList(AppGlobalConstants.TEST_DEVICE_HASHED_ID))
                         .build());
 
         new Thread(
@@ -114,9 +114,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                 remainingSeconds = 0;
 
                 Application application = getApplication();
-                ((MyApplication) application).showAdIfAvailable(
+                ((DocumentMyApplication) application).showAppOpenAdIfAvailable(
                         SplashScreenActivity.this,
-                        new MyApplication.OnShowAdCompleteListener() {
+                        new DocumentMyApplication.AppOpenAdListener() {
                             @Override
                             public void onShowAdComplete() {
                                 // Check if the consent form is currently on screen before moving to the
@@ -137,14 +137,14 @@ public class SplashScreenActivity extends AppCompatActivity {
             Uri uri = getIntent().getData();
             Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
             if (uri != null) {
-                intent.putExtra(GlobalConstant.KEY_DATA_FROM_OUTSIDE, uri.toString());
+                intent.putExtra(AppGlobalConstants.EXTRA_DATA_FROM_OUTSIDE, uri.toString());
             } else {
                 Log.e("Thang123", "URI is null");
             }
             startActivity(intent);
             finish();
         } else {
-            if (!SharedPreferenceUtils.getInstance(SplashScreenActivity.this).getBoolean(GlobalConstant.LANGUAGE_SET,
+            if (!PreferenceUtils.getInstance(SplashScreenActivity.this).getBoolean(AppGlobalConstants.PREF_LANGUAGE_SET,
                     false)) {
                 navigationCase = 1;
                 startActivity(new Intent(SplashScreenActivity.this, LocaleSelectionActivity.class));
@@ -173,7 +173,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     Uri uri = getIntent().getData();
                     Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                     if (uri != null) {
-                        intent.putExtra(GlobalConstant.KEY_DATA_FROM_OUTSIDE, uri.toString());
+                        intent.putExtra(AppGlobalConstants.EXTRA_DATA_FROM_OUTSIDE, uri.toString());
                     } else {
                         Log.e("Thang123", "URI is null");
                     }

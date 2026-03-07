@@ -31,7 +31,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
 import com.example.documenpro.clickListener.OnThumbnailClickListener;
@@ -85,12 +85,12 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         initializeViews();
         Intent intent = getIntent();
         if (intent != null) {
-            selectedPdfModel = (PDFReaderModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+            selectedPdfModel = (PDFReaderModel) intent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
 
-            selectedToolType = intent.getIntExtra(GlobalConstant.TOOL_TYPE, 1);
-            if (selectedToolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
+            selectedToolType = intent.getIntExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, 1);
+            if (selectedToolType == AppGlobalConstants.TOOL_ID_SHARE_PDF_AS_PHOTO) {
                 continueActionText.setText(R.string.str_action_share);
-            } else if (selectedToolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
+            } else if (selectedToolType == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
                 continueActionText.setText(R.string.tool_tittle_pdf_to_image);
             }
             pdfFileName = selectedPdfModel.getName_PDFModel();
@@ -110,7 +110,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         continueActionText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (selectedToolType == GlobalConstant.TOOL_SHARE_PDF_AS_PHOTO) {
+                if (selectedToolType == AppGlobalConstants.TOOL_ID_SHARE_PDF_AS_PHOTO) {
                     if (thumbnailAdapter.getSelected_PdfPreview().size() < 50) {
                         ArrayList<Uri> arrayList = new ArrayList<>();
                         for (int i = 0; i < thumbnailAdapter.getSelected_PdfPreview().size(); i++) {
@@ -125,7 +125,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                     } else {
                         Toast.makeText(context, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT).show();
                     }
-                } else if (selectedToolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
+                } else if (selectedToolType == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
 
                     PdfToImageConvertDialog dialog = new PdfToImageConvertDialog(SharePdfAsImageActivity.this, thumbnailAdapter.getSelected_PdfPreview());
                     Window window4 = dialog.getWindow();

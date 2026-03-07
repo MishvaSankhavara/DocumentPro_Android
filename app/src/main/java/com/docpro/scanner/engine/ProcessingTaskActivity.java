@@ -12,8 +12,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.AppExecutor.FileCompressionExecutor;
 import com.example.documenpro.AppExecutor.PdfMergeManager;
@@ -84,48 +84,48 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     private void processIntentTask() {
         Intent taskIntent = getIntent();
         if (taskIntent != null) {
-            int taskId = taskIntent.getIntExtra(GlobalConstant.TOOL_TYPE, 1);
-            if (taskId == GlobalConstant.TOOL_COMPRESS) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+            int taskId = taskIntent.getIntExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, 1);
+            if (taskId == AppGlobalConstants.TOOL_ID_COMPRESS) {
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
                 if (model != null) {
                     coreCompressExecutor = new FileCompressionExecutor(this, model.getAbsolutePath_PDFModel());
                     coreCompressExecutor.executeTask_FileCompression();
                 }
-            } else if (taskId == GlobalConstant.TOOL_MERGE) {
-                String name = taskIntent.getStringExtra(GlobalConstant.MERGE_PDF_FILE_NAME);
-                ArrayList<PDFReaderModel> models = MyApplication.getInstance().getArrayListMerge();
+            } else if (taskId == AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO) {
+                String name = taskIntent.getStringExtra(AppGlobalConstants.MERGE_PDF_FILE);
+                ArrayList<PDFReaderModel> models = DocumentMyApplication.getInstance().getMergedPdfList();
                 ArrayList<String> filePaths = new ArrayList<>();
                 for (int i = 0; i < models.size(); i++) {
                     filePaths.add(models.get(i).getAbsolutePath_PDFModel());
                 }
                 coreMergeExecutor = new PdfMergeManager(this, filePaths, name);
                 coreMergeExecutor.executeTask_PdfMergeManager();
-            } else if (taskId == GlobalConstant.TOOL_SPLIT) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+            } else if (taskId == AppGlobalConstants.TOOL_ID_SPLIT) {
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
                 if (model != null) {
-                    String name = taskIntent.getStringExtra(GlobalConstant.PDF_FILE_NAME);
+                    String name = taskIntent.getStringExtra(AppGlobalConstants.EXTRA_PDF_FILE_NAME);
                     coreSplitExecutor = new SplitDocExecutor(this, name,
-                            MyApplication.getInstance().getArrayListSplit(), model.getAbsolutePath_PDFModel());
+                            DocumentMyApplication.getInstance().getArrayListSplit(), model.getAbsolutePath_PDFModel());
                     coreSplitExecutor.executeTask_SplitDoc();
                 }
-            } else if (taskId == GlobalConstant.TOOL_LOCK_PDF) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
-                String pass = taskIntent.getStringExtra(GlobalConstant.PDF_SET_PASSWORD);
+            } else if (taskId == AppGlobalConstants.TOOL_ID_LOCK_PDF) {
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
+                String pass = taskIntent.getStringExtra(AppGlobalConstants.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
                     coreLockExecutor = new SetPasswordManager(ProcessingTaskActivity.this, pass, model);
                     coreLockExecutor.executeTask_setPW();
                 }
-            } else if (taskId == GlobalConstant.TOOL_UNLOCK_PDF) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
-                String pass = taskIntent.getStringExtra(GlobalConstant.PDF_SET_PASSWORD);
+            } else if (taskId == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {
+                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
+                String pass = taskIntent.getStringExtra(AppGlobalConstants.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
                     coreUnlockExecutor = new RemovePasswordExecutor(ProcessingTaskActivity.this, pass, model);
                     coreUnlockExecutor.executeTask_removePW();
                 }
-            } else if (taskId == GlobalConstant.TOOL_PHOTO_TO_PDF) {
-                String name = taskIntent.getStringExtra(GlobalConstant.PHOTO_2_PDF_FILE_NAME);
+            } else if (taskId == AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF) {
+                String name = taskIntent.getStringExtra(AppGlobalConstants.PHOTO_TO_PDF_FILE_NAME);
                 corePhotoToPdfExecutor = new ImageToPdfConverter(this, name,
-                        MyApplication.getInstance().getSelectedImages());
+                        DocumentMyApplication.getInstance().getSplitIndices());
                 corePhotoToPdfExecutor.executeTask_ImageToPdfConverter();
             }
         }

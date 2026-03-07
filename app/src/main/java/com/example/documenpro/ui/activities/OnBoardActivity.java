@@ -20,9 +20,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.OnboardingScreenAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
@@ -145,7 +145,7 @@ public class OnBoardActivity extends AppCompatActivity {
                 } else if (previousPagePosition == 1) {
                     onboardingViewPager.setCurrentItem(2);
                 } else {
-                    SharedPreferenceUtils.getInstance(OnBoardActivity.this).setBoolean(GlobalConstant.GUIDE_SET, true);
+                    PreferenceUtils.getInstance(OnBoardActivity.this).setBoolean(AppGlobalConstants.PREF_GUIDE_COMPLETED, true);
 
 
                     AdManager.showAds_AdManager(OnBoardActivity.this, new OnAdDismissedListener() {

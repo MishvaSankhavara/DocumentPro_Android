@@ -20,7 +20,7 @@ import com.artifex.solib.ConfigOptions;
 import com.artifex.solib.SOSelectionLimits;
 import com.artifex.solib.c;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
 import com.example.documenpro.ui.customviews.EditBtn;
@@ -87,7 +87,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
         tvSize = this.findViewById(R.id.sizeTv);
 
-        ColorSelectionAdapter adapter = new ColorSelectionAdapter(GlobalConstant.getColorDrawList(), 3, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
+        ColorSelectionAdapter adapter = new ColorSelectionAdapter(AppGlobalConstants.getColorDrawList(), 3, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
             @Override
             public void onColorChanged(String var1) {
                 DocPdfView var2 = NUIDocViewPdf.this.getPdfDocView();

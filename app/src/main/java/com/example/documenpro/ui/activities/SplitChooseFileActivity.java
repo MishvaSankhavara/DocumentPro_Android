@@ -27,8 +27,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PdfPreviewThumbnailAdapter;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
@@ -80,7 +80,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
         initializeViews();
         Intent intent = getIntent();
         if (intent != null) {
-            selectedPdfModel = (PDFReaderModel) intent.getSerializableExtra(GlobalConstant.PDF_MODEL_SEND);
+            selectedPdfModel = (PDFReaderModel) intent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
             if (selectedPdfModel != null) {
                 pdfFileName = selectedPdfModel.getName_PDFModel();
                 String pdfSavedFile = selectedPdfModel.getAbsolutePath_PDFModel();
@@ -93,7 +93,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     private void setupToolbar() {
         topToolbar = findViewById(R.id.toolbar);
         topToolbar.setTitle(
-                getString(R.string.x_selected, String.valueOf(MyApplication.getInstance().getArrayListSplit().size())));
+                getString(R.string.x_selected, String.valueOf(DocumentMyApplication.getInstance().getArrayListSplit().size())));
         setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -148,11 +148,11 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
                 DialogManagerUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile, new RenameDialogClickListener() {
                     @Override
                     public void onRenameDialogListener(String newName) {
-                        MyApplication.getInstance().setArraylistSplit(pdfThumbnailAdapter.getPageNumbers_PdfPreview());
+                        DocumentMyApplication.getInstance().updateSplitIndices(pdfThumbnailAdapter.getPageNumbers_PdfPreview());
                         Intent intent = new Intent(SplitChooseFileActivity.this, ProcessingTaskActivity.class);
-                        intent.putExtra(GlobalConstant.PDF_FILE_NAME, newName);
-                        intent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_SPLIT);
-                        intent.putExtra(GlobalConstant.PDF_MODEL_SEND, selectedPdfModel);
+                        intent.putExtra(AppGlobalConstants.EXTRA_PDF_FILE_NAME, newName);
+                        intent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_SPLIT);
+                        intent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, selectedPdfModel);
                         startActivity(intent);
                         finish();
                     }
@@ -175,7 +175,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     @Override
     public void onBackPressed() {
 
-        Utils.showConfirmDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_SPLIT, new OnConfirmClickListener() {
+        Utils.showConfirmDialog(this, AppGlobalConstants.DIALOG_CONFIRM_EXIT_SPLIT, new OnConfirmClickListener() {
             @Override
             public void onConfirmClickListener() {
                 finish();

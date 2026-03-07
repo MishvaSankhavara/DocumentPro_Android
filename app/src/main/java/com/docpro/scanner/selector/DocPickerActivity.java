@@ -23,7 +23,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileSelectionAdapter;
 import com.example.documenpro.docHelper.PdfPrintUtils;
@@ -85,7 +85,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
     private void extractIntentData() {
         Intent intent = getIntent();
         if (intent != null) {
-            operationMode = intent.getIntExtra(GlobalConstant.TOOL_TYPE, 1);
+            operationMode = intent.getIntExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, 1);
         }
     }
 
@@ -120,7 +120,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
         asyncExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                if (operationMode == GlobalConstant.TOOL_UNLOCK_PDF) {
+                if (operationMode == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {
                     docList = Utils.getLockPDF(DocPickerActivity.this);
                 } else {
                     docList = Utils.getUnLockPDF(DocPickerActivity.this);
@@ -143,42 +143,42 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
         this.selectedPosition = position;
         this.selectedDoc = pdfModel_listener;
 
-        if (operationMode == GlobalConstant.TOOL_PRINT) {
+        if (operationMode == AppGlobalConstants.TOOL_ID_PRINT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_print_toast);
             } else {
                 PdfPrintUtils.printPdf_Utils(this, Uri.fromFile(new File(pdfModel_listener.getAbsolutePath_PDFModel())));
             }
-        } else if (operationMode == GlobalConstant.TOOL_COMPRESS) {
+        } else if (operationMode == AppGlobalConstants.TOOL_ID_COMPRESS) {
             if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_compress_toast);
             } else {
                 Intent taskIntent = new Intent(this, ProcessingTaskActivity.class);
-                taskIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_COMPRESS);
-                taskIntent.putExtra(GlobalConstant.PDF_MODEL_SEND, pdfModel_listener);
+                taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_COMPRESS);
+                taskIntent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, pdfModel_listener);
                 startActivity(taskIntent);
                 finish();
             }
-        } else if (operationMode == GlobalConstant.TOOL_SPLIT) {
+        } else if (operationMode == AppGlobalConstants.TOOL_ID_SPLIT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_split_toast);
             } else {
                 Intent splitIntent = new Intent(this, SplitChooseFileActivity.class);
-                splitIntent.putExtra(GlobalConstant.PDF_MODEL_SEND, pdfModel_listener);
+                splitIntent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, pdfModel_listener);
                 startActivity(splitIntent);
                 finish();
             }
-        } else if (operationMode == GlobalConstant.TOOL_PDF_TO_PHOTO) {
+        } else if (operationMode == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
             if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_convert_toast);
             } else {
                 Intent convertIntent = new Intent(this, SharePdfAsImageActivity.class);
-                convertIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_PDF_TO_PHOTO);
-                convertIntent.putExtra(GlobalConstant.PDF_MODEL_SEND, pdfModel_listener);
+                convertIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_PDF_TO_PHOTO);
+                convertIntent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, pdfModel_listener);
                 startActivity(convertIntent);
                 finish();
             }
-        } else if (operationMode == GlobalConstant.TOOL_LOCK_PDF) {
+        } else if (operationMode == AppGlobalConstants.TOOL_ID_LOCK_PDF) {
             if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_convert_toast);
             } else {
@@ -186,23 +186,23 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                     @Override
                     public void onOkClickListener(String pass) {
                         Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
-                        taskIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_LOCK_PDF);
-                        taskIntent.putExtra(GlobalConstant.PDF_MODEL_SEND, pdfModel_listener);
-                        taskIntent.putExtra(GlobalConstant.PDF_SET_PASSWORD, pass);
+                        taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_LOCK_PDF);
+                        taskIntent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, pdfModel_listener);
+                        taskIntent.putExtra(AppGlobalConstants.PDF_SET_PASSWORD, pass);
                         startActivity(taskIntent);
                         finish();
                     }
 
                 });
             }
-        } else if (operationMode == GlobalConstant.TOOL_UNLOCK_PDF) {
+        } else if (operationMode == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {
             DialogManagerUtils.showPdfPasswordRemoval(this, pdfModel_listener, new PasswordClickListener() {
                 @Override
                 public void onOkClickListener(String pass) {
                     Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
-                    taskIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_UNLOCK_PDF);
-                    taskIntent.putExtra(GlobalConstant.PDF_MODEL_SEND, pdfModel_listener);
-                    taskIntent.putExtra(GlobalConstant.PDF_SET_PASSWORD, pass);
+                    taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_UNLOCK_PDF);
+                    taskIntent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, pdfModel_listener);
+                    taskIntent.putExtra(AppGlobalConstants.PDF_SET_PASSWORD, pass);
                     startActivity(taskIntent);
                     finish();
                 }

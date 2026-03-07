@@ -1,8 +1,8 @@
 package com.example.documenpro.utils;
 
 import static android.os.Build.VERSION.SDK_INT;
-import static com.example.documenpro.GlobalConstant.REQUEST_MANAGE_ALL_FILES_PERMISSION;
-import static com.example.documenpro.GlobalConstant.REQUEST_STORAGE_PERMISSION;
+import static com.example.documenpro.AppGlobalConstants.REQUEST_CODE_MANAGE_ALL_FILES;
+import static com.example.documenpro.AppGlobalConstants.REQUEST_CODE_STORAGE_PERMISSION;
 
 import android.Manifest;
 import android.animation.Keyframe;
@@ -52,9 +52,9 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
@@ -139,7 +139,7 @@ public class Utils {
 
     public static PDFReaderModel unlockPdfFile(PDFReaderModel pdfModel, String password) {
         try {
-            String path = GlobalConstant.RootDirectoryLock;
+            String path = AppGlobalConstants.DIRECTORY_LOCKED_PDF;
             File file2 = new File(path);
             if (!file2.exists()) {
                 file2.mkdirs();
@@ -169,7 +169,7 @@ public class Utils {
 
         byte[] USER = password.getBytes();
         byte[] OWNER = "Hi".getBytes();
-        String path = GlobalConstant.RootDirectoryLock;
+        String path = AppGlobalConstants.DIRECTORY_LOCKED_PDF;
         File file2 = new File(path);
         if (!file2.exists()) {
             file2.mkdirs();
@@ -283,7 +283,7 @@ public class Utils {
         } else {
             collection = MediaStore.Files.getContentUri("external");
         }
-        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, GlobalConstant.COUNT_PDF_FILE, null, sortOrder)) {
+        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, AppGlobalConstants.QUERY_PDF_FILES, null, sortOrder)) {
             assert cursor != null;
 
             if (cursor.moveToFirst()) {
@@ -335,7 +335,7 @@ public class Utils {
         } else {
             collection = MediaStore.Files.getContentUri("external");
         }
-        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, GlobalConstant.COUNT_PDF_FILE, null, sortOrder)) {
+        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, AppGlobalConstants.QUERY_PDF_FILES, null, sortOrder)) {
             assert cursor != null;
 
             if (cursor.moveToFirst()) {
@@ -371,7 +371,7 @@ public class Utils {
 
     public static boolean checkHavePassword(Context context, Uri uri) {
         try {
-            new PdfiumCore(context).newDocument(context.getContentResolver().openFileDescriptor(uri, GlobalConstant.STYLE_ROMAN_LOWER));
+            new PdfiumCore(context).newDocument(context.getContentResolver().openFileDescriptor(uri, AppGlobalConstants.STYLE_ROMAN_LOWER));
             return false;
         } catch (PdfPasswordException e) {
             return true;
@@ -424,25 +424,25 @@ public class Utils {
     }
 
     public static void backWithAds(Activity mContext, int number) {
-        int numberAds = SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.ADS_COUNT_BACK, 1);
-        if (countAds(mContext, GlobalConstant.ADS_COUNT_BACK, number)) {
+        int numberAds = PreferenceUtils.getInstance(mContext).getInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, 1);
+        if (countAds(mContext, AppGlobalConstants.PREF_ADS_COUNT_BACK, number)) {
             AdManager.showAds_AdManager(mContext, new OnAdDismissedListener() {
                 @Override
                 public void OnAdDismissedListener() {
-                    SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.ADS_COUNT_BACK, numberAds + 1);
+                    PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, numberAds + 1);
                     mContext.finish();
                 }
             });
-            SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.ADS_COUNT_BACK, numberAds + 1);
+            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, numberAds + 1);
 
         } else {
-            SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.ADS_COUNT_BACK, numberAds + 1);
+            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, numberAds + 1);
             mContext.finish();
         }
     }
 
     public static boolean countAds(Context mContext, String adsType, int numberAds) {
-        return SharedPreferenceUtils.getInstance(mContext).getInt(adsType, 2) % numberAds == 0;
+        return PreferenceUtils.getInstance(mContext).getInt(adsType, 2) % numberAds == 0;
     }
 
     public static String getFileNameFromUri(Uri contentUri, ContentResolver contentResolver) {
@@ -553,7 +553,7 @@ public class Utils {
     }
 
     public static void openFileWithAds(Activity mContext, DocumentModel document, int number) {
-        int numberAds = SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.ADS_COUNT, 1);
+        int numberAds = PreferenceUtils.getInstance(mContext).getInt(AppGlobalConstants.PREF_ADS_COUNT, 1);
         if (countAds(mContext, number)) {
             AdManager.showAds_AdManager(mContext, new OnAdDismissedListener() {
                 @Override
@@ -562,16 +562,16 @@ public class Utils {
                 }
 
             });
-            SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.ADS_COUNT, numberAds + 1);
+            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT, numberAds + 1);
         } else {
-            SharedPreferenceUtils.getInstance(mContext).setInt(GlobalConstant.ADS_COUNT, numberAds + 1);
+            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT, numberAds + 1);
             openFile(mContext, document);
         }
 
     }
 
     public static boolean countAds(Context mContext, int numberAds) {
-        return SharedPreferenceUtils.getInstance(mContext).getInt(GlobalConstant.ADS_COUNT, 2) % numberAds == 0;
+        return PreferenceUtils.getInstance(mContext).getInt(AppGlobalConstants.PREF_ADS_COUNT, 2) % numberAds == 0;
     }
 
     public static void openFile(Activity mContext, DocumentModel document) {
@@ -584,8 +584,8 @@ public class Utils {
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
             intent.setAction("android.intent.action.VIEW");
             intent.setData(fromFile);
-            intent.putExtra(GlobalConstant.KEY_SELECTED_FILE_URI, file.getAbsolutePath());
-            intent.putExtra(GlobalConstant.KEY_SELECTED_FILE_NAME, file.getName());
+            intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, file.getAbsolutePath());
+            intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, file.getName());
             intent.putExtra("STARTED_FROM_EXPLORER", true);
             intent.putExtra("START_PAGE", 0);
             mContext.startActivity(intent);
@@ -602,8 +602,8 @@ public class Utils {
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
             intent.setAction("android.intent.action.VIEW");
             intent.setData(fromFile);
-            intent.putExtra(GlobalConstant.KEY_SELECTED_FILE_URI, file.getAbsolutePath());
-            intent.putExtra(GlobalConstant.KEY_SELECTED_FILE_NAME, file.getName());
+            intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, file.getAbsolutePath());
+            intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, file.getName());
             intent.putExtra("STARTED_FROM_EXPLORER", true);
             intent.putExtra("START_PAGE", 0);
             mContext.startActivity(intent);
@@ -724,7 +724,7 @@ public class Utils {
         };
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        activity.startActivityForResult(intent, GlobalConstant.REQUEST_CODE_PICK_FILE);
+        activity.startActivityForResult(intent, AppGlobalConstants.REQUEST_CODE_FILE_PICKER);
     }
 
     public static boolean checkPermission(Context mContext) {
@@ -738,7 +738,7 @@ public class Utils {
 
     public static void feedbackApp(Activity context) {
         try {
-            Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + GlobalConstant.EMAIL_FEEDBACK));
+            Intent intent3 = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + AppGlobalConstants.FEEDBACK_EMAIL));
             intent3.putExtra(Intent.EXTRA_SUBJECT, context.getResources().getString(R.string.str_feed_back_app));
             intent3.putExtra(Intent.EXTRA_TEXT, "");
             context.startActivity(intent3);
@@ -768,17 +768,17 @@ public class Utils {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.addCategory("android.intent.category.DEFAULT");
                 intent.setData(Uri.parse(String.format("package:%s", mContext.getApplicationContext().getPackageName())));
-                mContext.startActivityForResult(intent, REQUEST_MANAGE_ALL_FILES_PERMISSION);
+                mContext.startActivityForResult(intent, REQUEST_CODE_MANAGE_ALL_FILES);
 
             } catch (Exception e) {
                 Intent intent = new Intent();
                 intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                mContext.startActivityForResult(intent, REQUEST_MANAGE_ALL_FILES_PERMISSION);
+                mContext.startActivityForResult(intent, REQUEST_CODE_MANAGE_ALL_FILES);
             }
         } else {
             if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 // Yêu cầu quyền truy cập lưu trữ
-                ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+                ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
             }
             //below android 11
 //            Dexter.withContext(mContext).withPermissions(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
@@ -1025,7 +1025,7 @@ public class Utils {
 
     public static void openListFileActivity(MainActivity mainActivity, int i) {
         Intent intent = new Intent(mainActivity, DocumentListActivity.class);
-        intent.putExtra(GlobalConstant.FILE_TYPE, i);
+        intent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, i);
         mainActivity.startActivity(intent);
 
     }
@@ -1043,7 +1043,7 @@ public class Utils {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-        SharedPreferenceUtils.getInstance(mContext).setBoolean(GlobalConstant.NIGHT_MODE_KEY, isDark);
+        PreferenceUtils.getInstance(mContext).setBoolean(AppGlobalConstants.PREF_NIGHT_MODE, isDark);
     }
 
     public static void createShortcut(Context mContext, DocumentModel document) {

@@ -9,8 +9,8 @@ import android.view.View;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
@@ -55,7 +55,7 @@ public class SplitDocExecutor {
                 PdfReader pr_SplitDoc = new PdfReader(pdfPath_SplitDoc);
                 Document doc_SplitDoc = new Document();
 
-                String splitPdfDocumentDir_SplitDoc = GlobalConstant.RootDirectorySplit;
+                String splitPdfDocumentDir_SplitDoc = AppGlobalConstants.DIRECTORY_SPLIT_PDF;
 
                 File file2_SplitDoc = new File(splitPdfDocumentDir_SplitDoc);
 
@@ -83,7 +83,7 @@ public class SplitDocExecutor {
 
                 doc_SplitDoc.close();
 
-                MediaScannerConnection.scanFile(MyApplication.getInstance(), new String[]{generatedPDFPath_SplitDoc}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{generatedPDFPath_SplitDoc}, new String[]{"application/pdf"}, null);
 
                 weakReference_SplitDoc.get().runOnUiThread(() -> {
 

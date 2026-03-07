@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
@@ -78,7 +78,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
             Utils.createShortcut(activity, documentModel);
             dismiss();
         } else if (idView == R.id.ll_remove_from_recent) {
-            DialogManagerUtils.showConfirmationDialog(activity, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
+            DialogManagerUtils.showConfirmationDialog(activity, AppGlobalConstants.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
                     if (optionsListener != null) {
@@ -88,7 +88,7 @@ public class MoreDialog extends Dialog implements View.OnClickListener {
             });
             dismiss();
         } else if (idView == R.id.ll_delete) {
-            DialogManagerUtils.showConfirmationDialog(activity, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
+            DialogManagerUtils.showConfirmationDialog(activity, AppGlobalConstants.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
                     if (optionsListener != null) {

@@ -22,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.PhotoSelectionAdapter;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.clickListener.OnRemovePhotoListener;
@@ -91,7 +91,7 @@ public class MediaSorterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Utils.showConfirmDialog(this, GlobalConstant.DIALOG_CONFIRM_EXIT_PHOTO_2_PDF, new OnConfirmClickListener() {
+        Utils.showConfirmDialog(this, AppGlobalConstants.DIALOG_CONFIRM_EXIT_PHOTO_TO_PDF, new OnConfirmClickListener() {
             @Override
             public void onConfirmClickListener() {
                 finish();
@@ -104,7 +104,7 @@ public class MediaSorterActivity extends AppCompatActivity {
 
         containerTips = findViewById(R.id.container_sorting_tips);
 
-        if (SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.PHOTO_ORDER_TIP, false)) {
+        if (PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PHOTO_ORDER_TIP, false)) {
             containerTips.setVisibility(View.GONE);
         }
 
@@ -117,8 +117,8 @@ public class MediaSorterActivity extends AppCompatActivity {
                             public void onAnimationEnd(Animator animation) {
                                 super.onAnimationEnd(animation);
                                 containerTips.setVisibility(View.GONE);
-                                SharedPreferenceUtils.getInstance(MediaSorterActivity.this)
-                                        .setBoolean(GlobalConstant.PHOTO_ORDER_TIP, true);
+                                PreferenceUtils.getInstance(MediaSorterActivity.this)
+                                        .setBoolean(AppGlobalConstants.PHOTO_ORDER_TIP, true);
                             }
                         });
             }
@@ -176,10 +176,10 @@ public class MediaSorterActivity extends AppCompatActivity {
                     @Override
                     public void onRenameDialogListener(String newChosenName) {
                         String finalOutName = newChosenName + System.currentTimeMillis();
-                        MyApplication.getInstance().setSelectedImages(mediaPaths);
+                        DocumentMyApplication.getInstance().updateSelectedImages(mediaPaths);
                         Intent taskIntent = new Intent(MediaSorterActivity.this, ProcessingTaskActivity.class);
-                        taskIntent.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_PHOTO_TO_PDF);
-                        taskIntent.putExtra(GlobalConstant.PHOTO_2_PDF_FILE_NAME, finalOutName);
+                        taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF);
+                        taskIntent.putExtra(AppGlobalConstants.PHOTO_TO_PDF_FILE_NAME, finalOutName);
                         startActivity(taskIntent);
                         finish();
                     }

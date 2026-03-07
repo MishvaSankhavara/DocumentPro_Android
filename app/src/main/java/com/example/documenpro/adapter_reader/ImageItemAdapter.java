@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
 import com.example.documenpro.utils.Utils;
@@ -52,7 +52,7 @@ public class ImageItemAdapter extends RecyclerView.Adapter<ImageItemAdapter.View
         holder.btnDelete_ImageItem.setOnClickListener(view ->
                 Utils.showConfirmDialog(
                         mContext_ImageItem,
-                        GlobalConstant.DIALOG_CONFIRM_DELETE,
+                        AppGlobalConstants.DIALOG_CONFIRM_DELETE,
                         new OnConfirmClickListener() {
                             @Override
                             public void onConfirmClickListener() {

@@ -7,9 +7,9 @@ import android.widget.ImageView;
 import androidx.core.content.ContextCompat;
 
 import com.artifex.sonui.AppNUIActivity;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.utils.Utils;
 
 public class ViewOfficeActivity extends AppNUIActivity {
@@ -24,14 +24,14 @@ public class ViewOfficeActivity extends AppNUIActivity {
             ImageView backButton = findViewById(R.id.img_back);
             if (backButton != null)
                 backButton.setOnClickListener(view -> finish());
-            if (SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.RATE_APP, true)) {
+            if (PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.ACTION_RATE_APP, true)) {
                 Utils.showRateDialog(this);
             }
             Intent intent = getIntent();
 
             String selectedFilePath;
             if (intent.getData() != null && intent.getData().getPath() != null && !intent.getData().getPath().isEmpty()) {
-                selectedFilePath = intent.getStringExtra(GlobalConstant.KEY_SELECTED_FILE_URI);
+                selectedFilePath = intent.getStringExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
                 if (selectedFilePath != null)
                     openedFileExtension = selectedFilePath.substring(selectedFilePath.lastIndexOf("."));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.bg_tittle));

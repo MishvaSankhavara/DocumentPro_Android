@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.OnToolTapListener;
 import com.example.documenpro.model_reader.ToolsModel;
@@ -61,7 +61,7 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
 
     public DocumentToolAdapter(Context mContext, OnToolTapListener listener) {
         this.mContext_DocumentTool = mContext;
-        this.arrayList_DocumentTool = GlobalConstant.setToolsList();
+        this.arrayList_DocumentTool = AppGlobalConstants.setToolsList();
         this.listener_DocumentTool = listener;
     }
 

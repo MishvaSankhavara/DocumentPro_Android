@@ -16,9 +16,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.documenpro.BuildConfig;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
@@ -66,7 +66,7 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
     private void loadSettingsData() {
         appVersionTextView.setText(BuildConfig.VERSION_NAME);
 
-        languageTextView.setText(SharedPreferenceUtils.getInstance(this).getString(GlobalConstant.LANGUAGE_NAME, "English"));
+        languageTextView.setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
     }
 
     private void initializeViews() {
@@ -104,7 +104,7 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
             Utils.feedbackApp(this);
         } else if (idView == R.id.cl_privacy_policy) {
             try {
-                String url = GlobalConstant.PRIVACY_URL;
+                String url = AppGlobalConstants.PRIVACY_POLICY_URL;
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

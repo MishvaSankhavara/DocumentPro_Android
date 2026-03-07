@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.model_reader.PDFPageModel;
 import com.docpro.scanner.result.ResultViewerActivity;
@@ -88,7 +88,7 @@ public class PdfToImageConvertDialog extends Dialog {
                 }
             });
 
-            File pathFolder = new File(GlobalConstant.RootDirectoryImage);
+            File pathFolder = new File(AppGlobalConstants.DIRECTORY_IMAGES);
             if (!pathFolder.exists()) {
                 pathFolder.mkdirs();
             }
@@ -111,7 +111,7 @@ public class PdfToImageConvertDialog extends Dialog {
 
             weakReference.get().btnViewImages.setOnClickListener(view -> {
                 Intent intent = new Intent(weakReference.get().activityContext, ResultViewerActivity.class);
-                intent.putExtra(GlobalConstant.FROM_SAVE_IMAGE, 5);
+                intent.putExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 5);
                 weakReference.get().activityContext.startActivity(intent);
                 weakReference.get().dismiss();
                 weakReference.get().activityContext.finish();

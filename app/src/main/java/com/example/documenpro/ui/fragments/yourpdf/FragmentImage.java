@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.ImageItemAdapter;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
@@ -82,7 +82,7 @@ public class FragmentImage extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            File[] files = GlobalConstant.RootDirectoryImageSaved.listFiles();
+            File[] files = AppGlobalConstants.DIRECTORY_SAVED_IMAGES.listFiles();
             if (files != null) {
                 Collections.addAll(weakReference.get().arrayList, files);
                 weakReference.get().adapter = new ImageItemAdapter(weakReference.get().activityContext, weakReference.get().arrayList);

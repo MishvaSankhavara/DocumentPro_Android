@@ -34,9 +34,9 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v.setPadding(0, 0, 0, systemBars.bottom); // chỉ padding bottom
             return insets;
         });
-        navigationAdClickCount = SharedPreferenceUtils.getInstance(this).getInt(GlobalConstant.NAVIGATION_CLICK_COUNT, 0);
+        navigationAdClickCount = PreferenceUtils.getInstance(this).getInt(AppGlobalConstants.NAVIGATION_CLICK_COUNT, 0);
         setupToolbar();
         initializeViews();
         initializeData();
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
-                SharedPreferenceUtils.getInstance(MainActivity.this).setInt(GlobalConstant.NAVIGATION_CLICK_COUNT, navigationAdClickCount);
+                PreferenceUtils.getInstance(MainActivity.this).setInt(AppGlobalConstants.NAVIGATION_CLICK_COUNT, navigationAdClickCount);
 
                 return true;
             }
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeData() {
-        dayNightSwitch.setNightMode(SharedPreferenceUtils.getInstance(this).getBoolean(GlobalConstant.NIGHT_MODE_KEY, false));
+        dayNightSwitch.setNightMode(PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
         dayNightSwitch.setSwitchListener(is_night -> {
             startActivity(new Intent(MainActivity.this, SplashScreenActivity.class));
             finish();
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mainToolbar.setNavigationOnClickListener(view -> mainDrawerLayout.openDrawer(GravityCompat.START));
 
-        languageTextView.setText(SharedPreferenceUtils.getInstance(this).getString(GlobalConstant.LANGUAGE_NAME, "English"));
+        languageTextView.setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
         appVersionTextView.setText("Version: " + BuildConfig.VERSION_NAME);
     }
 
@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GlobalConstant.REQUEST_CODE_PICK_FILE) {
+        if (requestCode == AppGlobalConstants.REQUEST_CODE_FILE_PICKER) {
             if (resultCode == RESULT_OK && data != null) {
                 Uri selectedUri = data.getData();
                 new ImportFileTask(this, selectedUri).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

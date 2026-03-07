@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.language.MultiLanguages;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.LanguagePickerDialogAdapter;
 import com.example.documenpro.model_reader.LanguageModel;
 import com.example.documenpro.ui.activities.SplashScreenActivity;
@@ -29,20 +29,20 @@ public class LanguageSelectionDialog extends Dialog {
         super(context);
         setContentView(R.layout.dialog_language);
         this.context = context;
-        selectedLanguageIndex = SharedPreferenceUtils.getInstance(this.context).getInt(GlobalConstant.LANGUAGE_KEY_NUMBER, 0);
+        selectedLanguageIndex = PreferenceUtils.getInstance(this.context).getInt(AppGlobalConstants.PREF_LANGUAGE_NUMBER, 0);
         languageRecyclerView = findViewById(R.id.rcv_list);
-        final ArrayList<LanguageModel> arrayList = GlobalConstant.createArrayLanguage();
+        final ArrayList<LanguageModel> arrayList = AppGlobalConstants.createArrayLanguage();
         adalanguageAdapterter = new LanguagePickerDialogAdapter(getContext(), lang -> selectedLanguageIndex = lang);
         languageRecyclerView.setLayoutManager(new LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false));
         languageRecyclerView.setAdapter(adalanguageAdapterter);
         findViewById(R.id.tv_ok).setOnClickListener(view1 -> {
-            SharedPreferenceUtils.getInstance(this.context).setBoolean(GlobalConstant.LANGUAGE_SET, true);
-            SharedPreferenceUtils.getInstance(this.context).setString(GlobalConstant.LANGUAGE_NAME, GlobalConstant.createArrayLanguage().get(selectedLanguageIndex).getNameLanguage_LanModel());
-            SharedPreferenceUtils.getInstance(this.context).setString(GlobalConstant.LANGUAGE_KEY, GlobalConstant.createArrayLanguage().get(selectedLanguageIndex).getKeyLanguage_LanModel());
-            SharedPreferenceUtils.getInstance(this.context).setInt(GlobalConstant.LANGUAGE_KEY_NUMBER, selectedLanguageIndex);
+            PreferenceUtils.getInstance(this.context).setBoolean(AppGlobalConstants.PREF_LANGUAGE_SET, true);
+            PreferenceUtils.getInstance(this.context).setString(AppGlobalConstants.PREF_LANGUAGE_NAME, AppGlobalConstants.createArrayLanguage().get(selectedLanguageIndex).getNameLanguage_LanModel());
+            PreferenceUtils.getInstance(this.context).setString(AppGlobalConstants.PREF_LANGUAGE_KEY, AppGlobalConstants.createArrayLanguage().get(selectedLanguageIndex).getKeyLanguage_LanModel());
+            PreferenceUtils.getInstance(this.context).setInt(AppGlobalConstants.PREF_LANGUAGE_NUMBER, selectedLanguageIndex);
             Intent refresh = new Intent(this.context, SplashScreenActivity.class);
             refresh.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            MultiLanguages.setAppLanguage(context, new Locale(GlobalConstant.createArrayLanguage().get(selectedLanguageIndex).getKeyLanguage_LanModel()));
+            MultiLanguages.setAppLanguage(context, new Locale(AppGlobalConstants.createArrayLanguage().get(selectedLanguageIndex).getKeyLanguage_LanModel()));
 
             this.context.startActivity(refresh);
             dismiss();

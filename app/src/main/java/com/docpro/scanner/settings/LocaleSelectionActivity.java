@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.language.MultiLanguages;
-import com.example.documenpro.BaseActivity;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.ActivityBase;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.LanguageListAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
@@ -26,7 +26,7 @@ import com.example.documenpro.ui.activities.OnBoardActivity;
 
 import java.util.Locale;
 
-public class LocaleSelectionActivity extends BaseActivity {
+public class LocaleSelectionActivity extends ActivityBase {
 
     private RecyclerView rcvLocales;
     private LanguageListAdapter localeAdapter;
@@ -64,18 +64,18 @@ public class LocaleSelectionActivity extends BaseActivity {
                 AdManager.showAds_AdManager(LocaleSelectionActivity.this, new OnAdDismissedListener() {
                     @Override
                     public void OnAdDismissedListener() {
-                        SharedPreferenceUtils utils = SharedPreferenceUtils.getInstance(LocaleSelectionActivity.this);
-                        utils.setBoolean(GlobalConstant.LANGUAGE_SET, true);
-                        utils.setString(GlobalConstant.LANGUAGE_NAME,
-                                GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getNameLanguage_LanModel());
-                        utils.setString(GlobalConstant.LANGUAGE_KEY,
-                                GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel());
-                        utils.setInt(GlobalConstant.LANGUAGE_KEY_NUMBER, selectedLocaleIndex);
+                        PreferenceUtils utils = PreferenceUtils.getInstance(LocaleSelectionActivity.this);
+                        utils.setBoolean(AppGlobalConstants.PREF_LANGUAGE_SET, true);
+                        utils.setString(AppGlobalConstants.PREF_LANGUAGE_NAME,
+                                AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex).getNameLanguage_LanModel());
+                        utils.setString(AppGlobalConstants.PREF_LANGUAGE_KEY,
+                                AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel());
+                        utils.setInt(AppGlobalConstants.PREF_LANGUAGE_NUMBER, selectedLocaleIndex);
 
                         Intent restartIntent = new Intent(LocaleSelectionActivity.this, OnBoardActivity.class);
                         restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                        String key = GlobalConstant.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel();
+                        String key = AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel();
                         MultiLanguages.setAppLanguage(context, new Locale(key));
 
                         startActivity(restartIntent);

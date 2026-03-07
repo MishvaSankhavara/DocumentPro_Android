@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.database.OnDataUpdatedEvent;
 import com.example.documenpro.database.DatabaseHelper;
@@ -289,7 +289,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                                         position,
                                                         originalData_FileListAdapter2.size());
                                             } catch (IndexOutOfBoundsException e) {
-                                                Log.e(GlobalConstant.TAG_LOG,
+                                                Log.e(AppGlobalConstants.DOC_APP_FATAL,
                                                         "Error message",
                                                         e);
                                             }

@@ -1,8 +1,8 @@
 package com.example.documenpro.ui.fragments;
 
 import static android.app.Activity.RESULT_OK;
-import static com.example.documenpro.GlobalConstant.REQUEST_MANAGE_ALL_FILES_PERMISSION;
-import static com.example.documenpro.GlobalConstant.REQUEST_STORAGE_PERMISSION;
+import static com.example.documenpro.AppGlobalConstants.REQUEST_CODE_MANAGE_ALL_FILES;
+import static com.example.documenpro.AppGlobalConstants.REQUEST_CODE_STORAGE_PERMISSION;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.model_reader.DocumentModel;
@@ -89,7 +89,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     private void getData() {
         Intent intentData = activityContext.getIntent();
         if (intentData != null) {
-            String st = intentData.getStringExtra(GlobalConstant.KEY_DATA_FROM_OUTSIDE);
+            String st = intentData.getStringExtra(AppGlobalConstants.EXTRA_DATA_FROM_OUTSIDE);
             if (st != null) {
                 Uri uri = Uri.parse(st);
 
@@ -144,7 +144,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_MANAGE_ALL_FILES_PERMISSION) {
+        if (requestCode == REQUEST_CODE_MANAGE_ALL_FILES) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
                     permissionContainer.setVisibility(View.GONE);
@@ -154,7 +154,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
                 }
             }
         }
-        if (requestCode == GlobalConstant.REQUEST_CODE_PICK_FILE) {
+        if (requestCode == AppGlobalConstants.REQUEST_CODE_FILE_PICKER) {
             if (resultCode == RESULT_OK && data != null) {
                 Uri selectedUri = data.getData();
                 new SendIncomingDataTask(activityContext, selectedUri).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -166,7 +166,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_STORAGE_PERMISSION) {
+        if (requestCode == REQUEST_CODE_STORAGE_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 permissionContainer.setVisibility(View.GONE);
                 countFiles();
@@ -178,11 +178,11 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
     private void countFiles() {
         executor.execute(() -> {
-            txtFile = Utils.countFile(activityContext, GlobalConstant.COUNT_TXT_FILE);
-            excelFile = Utils.countFile(activityContext, GlobalConstant.COUNT_EXCEL_FILE);
-            pdfFile = Utils.countFile(activityContext, GlobalConstant.COUNT_PDF_FILE);
-            wordFile = Utils.countFile(activityContext, GlobalConstant.COUNT_WORD_FILE);
-            pptFile = Utils.countFile(activityContext, GlobalConstant.COUNT_PPT_FILE);
+            txtFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_TEXT_FILES);
+            excelFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_EXCEL_FILES);
+            pdfFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_PDF_FILES);
+            wordFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_WORD_FILES);
+            pptFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_PPT_FILES);
             activityContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -248,23 +248,23 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         } else if (idView == R.id.btnSelect) {
             if (selectedTabPosition == 0) {
                 Intent intentAll = new Intent(activityContext, SelectDocumentActivity.class);
-                intentAll.putExtra(GlobalConstant.FILE_TYPE, GlobalConstant.RECENT_FILE_TYPE);
+                intentAll.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_RECENT);
                 startActivity(intentAll);
             } else if (selectedTabPosition == 1) {
                 Intent intentRecent = new Intent(activityContext, SelectDocumentActivity.class);
-                intentRecent.putExtra(GlobalConstant.FILE_TYPE, GlobalConstant.FAV_FILE_TYPE);
+                intentRecent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_FAVORITE);
                 startActivity(intentRecent);
             }
         } else if (idView == R.id.btnTXT) {
-            openFileList(GlobalConstant.TXT_FILE_TYPE);
+            openFileList(AppGlobalConstants.FILE_TYPE_TEXT);
         } else if (idView == R.id.btnPdf) {
-            openFileList(GlobalConstant.PDF_FILE_TYPE);
+            openFileList(AppGlobalConstants.FILE_TYPE_PDF);
         } else if (idView == R.id.btnExcel) {
-            openFileList(GlobalConstant.EXCEL_FILE_TYPE);
+            openFileList(AppGlobalConstants.FILE_TYPE_EXCEL);
         } else if (idView == R.id.btnWord) {
-            openFileList(GlobalConstant.WORD_FILE_TYPE);
+            openFileList(AppGlobalConstants.FILE_TYPE_WORD);
         } else if (idView == R.id.btnPpt) {
-            openFileList(GlobalConstant.PPT_FILE_TYPE);
+            openFileList(AppGlobalConstants.FILE_TYPE_PPT);
         }
     }
 

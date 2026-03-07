@@ -15,7 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PdfViewerPagerAdapter;
 import com.example.documenpro.utils.Utils;
@@ -45,7 +45,7 @@ public class ResultViewerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            int targetPos = intent.getIntExtra(GlobalConstant.FROM_SAVE_IMAGE, 0);
+            int targetPos = intent.getIntExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 0);
             contentPager.setCurrentItem(targetPos);
         }
     }

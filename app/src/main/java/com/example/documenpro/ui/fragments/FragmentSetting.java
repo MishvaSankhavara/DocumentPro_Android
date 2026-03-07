@@ -17,9 +17,9 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.documenpro.BuildConfig;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.utils.Utils;
 
 public class FragmentSetting extends Fragment implements View.OnClickListener {
@@ -52,7 +52,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
         versionTextView.setText(BuildConfig.VERSION_NAME);
 
         languageTextView.setText(
-                SharedPreferenceUtils.getInstance(activityContext).getString(GlobalConstant.LANGUAGE_NAME, "English"));
+                PreferenceUtils.getInstance(activityContext).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
 
     }
 
@@ -101,7 +101,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
             Utils.feedbackApp(activityContext);
         } else if (idView == R.id.cl_privacy_policy) {
             try {
-                String url = GlobalConstant.PRIVACY_URL;
+                String url = AppGlobalConstants.PRIVACY_POLICY_URL;
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

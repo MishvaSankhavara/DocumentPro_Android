@@ -57,7 +57,7 @@ import com.artifex.solib.p;
 import com.artifex.sonui.editor.NUIView.OnDoneListener;
 import com.artifex.sonui.editor.SODocSession.SODocSessionLoadListener;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.ui.activities.ViewOfficeActivity;
 import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
@@ -1213,7 +1213,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         recyclerBgColor.setLayoutManager(layoutManager1);
         recyclerBgColor.setHasFixedSize(true);
 
-        ColorSelectionAdapter adapterBgColor = new ColorSelectionAdapter(GlobalConstant.getColorBgList(), 0, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
+        ColorSelectionAdapter adapterBgColor = new ColorSelectionAdapter(AppGlobalConstants.getColorBgList(), 0, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
             @Override
             public void onColorChanged(String var1) {
                 if (var1.equals("transparent")) {
@@ -1233,7 +1233,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerTextColor.setLayoutManager(layoutManager2);
         recyclerTextColor.setHasFixedSize(true);
-        ColorSelectionAdapter adapterTextColor = new ColorSelectionAdapter(GlobalConstant.getColorTextList(), 0, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
+        ColorSelectionAdapter adapterTextColor = new ColorSelectionAdapter(AppGlobalConstants.getColorTextList(), 0, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
             @Override
             public void onColorChanged(String var1) {
                 NUIDocView.this.mSession.getDoc().setSelectionFontColor(var1);

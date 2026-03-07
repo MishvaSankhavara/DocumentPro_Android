@@ -5,9 +5,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.utils.Utils;
 
 
@@ -21,7 +21,7 @@ public class AppRateDialog extends Dialog {
         findViewById(R.id.btn_cancel).setOnClickListener(v -> {
             dismiss();
             Utils.rateApp(this.context);
-            SharedPreferenceUtils.getInstance(this.context).setBoolean(GlobalConstant.RATE_APP, false);
+            PreferenceUtils.getInstance(this.context).setBoolean(AppGlobalConstants.ACTION_RATE_APP, false);
         });
     }
 }

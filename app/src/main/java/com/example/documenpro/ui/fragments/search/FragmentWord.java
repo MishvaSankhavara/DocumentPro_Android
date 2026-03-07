@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.clickListener.DocClickListener;
@@ -63,7 +63,7 @@ public class FragmentWord extends Fragment implements DocClickListener {
             @Override
             public void run() {
 
-                arrayList = Utils.countFile(activityContext, GlobalConstant.COUNT_WORD_FILE);
+                arrayList = Utils.countFile(activityContext, AppGlobalConstants.QUERY_WORD_FILES);
 
                 activityContext.runOnUiThread(new Runnable() {
                     @Override

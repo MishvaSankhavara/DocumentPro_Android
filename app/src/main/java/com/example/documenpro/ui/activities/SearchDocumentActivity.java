@@ -18,8 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.example.documenpro.BaseActivity;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.ActivityBase;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
@@ -33,14 +33,14 @@ import com.example.documenpro.viewmodel.ViewModelSearch;
 
 import java.util.Objects;
 
-public class SearchDocumentActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+public class SearchDocumentActivity extends ActivityBase implements ViewPager.OnPageChangeListener {
     private ConstraintLayout mainContainer;
     private ConstraintLayout toolbarContainer;
     private TabLayout searchTabLayout;
     private AppCompatEditText searchEditText;
     private AppCompatImageView clearSearchButton;
     private ViewModelSearch searchViewModel;
-    private int selectedFileType = GlobalConstant.ALL_FILE_TYPE;
+    private int selectedFileType = AppGlobalConstants.FILE_TYPE_ALL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
         });
         Intent intent = getIntent();
         if (intent != null) {
-            selectedFileType = intent.getIntExtra(GlobalConstant.FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
+            selectedFileType = intent.getIntExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_ALL);
         }
         initViews();
         AdMobNativeAdManager.showNativeBanner3_AdMob(this, null);
@@ -65,21 +65,21 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
 
     private void applyToolbarTheme(int fileType) {
         switch (fileType) {
-            case GlobalConstant.ALL_FILE_TYPE:
+            case AppGlobalConstants.FILE_TYPE_ALL:
                 toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
 
                 searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
                 break;
-            case GlobalConstant.PDF_FILE_TYPE:
+            case AppGlobalConstants.FILE_TYPE_PDF:
                 toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
 
                 searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.pdf_file_list_bg));
                 break;
-            case GlobalConstant.WORD_FILE_TYPE:
+            case AppGlobalConstants.FILE_TYPE_WORD:
                 toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
 
@@ -87,21 +87,21 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.word_file_list_bg));
 
                 break;
-            case GlobalConstant.EXCEL_FILE_TYPE:
+            case AppGlobalConstants.FILE_TYPE_EXCEL:
                 toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
 
                 searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.excel_file_list_bg));
                 break;
-            case GlobalConstant.PPT_FILE_TYPE:
+            case AppGlobalConstants.FILE_TYPE_PPT:
                 toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
 
                 searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.ppt_file_list_bg));
                 break;
-            case GlobalConstant.TXT_FILE_TYPE:
+            case AppGlobalConstants.FILE_TYPE_TEXT:
                 toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
                 searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
@@ -163,21 +163,21 @@ public class SearchDocumentActivity extends BaseActivity implements ViewPager.On
     public void onPageSelected(int position) {
         switch (position) {
             case 0:
-                applyToolbarTheme(GlobalConstant.ALL_FILE_TYPE);
+                applyToolbarTheme(AppGlobalConstants.FILE_TYPE_ALL);
                 break;
             case 1:
-                applyToolbarTheme(GlobalConstant.EXCEL_FILE_TYPE);
+                applyToolbarTheme(AppGlobalConstants.FILE_TYPE_EXCEL);
                 break;
             case 2:
-                applyToolbarTheme(GlobalConstant.PDF_FILE_TYPE);
+                applyToolbarTheme(AppGlobalConstants.FILE_TYPE_PDF);
                 break;
             case 3:
-                applyToolbarTheme(GlobalConstant.WORD_FILE_TYPE);
+                applyToolbarTheme(AppGlobalConstants.FILE_TYPE_WORD);
                 break;
             case 4:
-                applyToolbarTheme(GlobalConstant.PPT_FILE_TYPE);
+                applyToolbarTheme(AppGlobalConstants.FILE_TYPE_PPT);
             case 5:
-                applyToolbarTheme(GlobalConstant.TXT_FILE_TYPE);
+                applyToolbarTheme(AppGlobalConstants.FILE_TYPE_TEXT);
                 break;
         }
     }

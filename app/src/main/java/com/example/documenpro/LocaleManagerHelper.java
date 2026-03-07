@@ -8,9 +8,9 @@ import android.os.LocaleList;
 
 import java.util.Locale;
 
-public class LocaleHelper {
-    public static Context setLocale(Context context, String language) {
-        Locale locale = new Locale(language);
+public class LocaleManagerHelper {
+    public static Context applyLocale(Context context, String languageCode) {
+        Locale locale = new Locale(languageCode);
         Locale.setDefault(locale);
 
         Resources resources = context.getResources();
@@ -29,7 +29,7 @@ public class LocaleHelper {
         }
     }
 
-    public static Context onAttach(Context context) {
-        return setLocale(context, SharedPreferenceUtils.getInstance(context).getString(GlobalConstant.LANGUAGE_KEY, "en"));
+    public static Context attachLocale(Context context) {
+        return applyLocale(context, PreferenceUtils.getInstance(context).getString(AppGlobalConstants.PREF_LANGUAGE_KEY, "en"));
     }
 }

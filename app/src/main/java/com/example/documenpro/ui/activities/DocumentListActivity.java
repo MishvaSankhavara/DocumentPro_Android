@@ -1,6 +1,6 @@
 package com.example.documenpro.ui.activities;
 
-import static com.example.documenpro.GlobalConstant.FILE_TYPE;
+import static com.example.documenpro.AppGlobalConstants.EXTRA_FILE_TYPE;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,8 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.documenpro.BaseActivity;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.ActivityBase;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.advertisement.AdManager;
@@ -38,7 +38,7 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class DocumentListActivity extends BaseActivity implements DocClickListener, SortingListener {
+public class DocumentListActivity extends ActivityBase implements DocClickListener, SortingListener {
     private Toolbar topToolbar;
     private ConstraintLayout mainContainerLayout;
     private EmptyStateRecyclerView documentRecyclerView;
@@ -61,7 +61,7 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
             return insets;
         });
         if (getIntent() != null) {
-            fileType = getIntent().getIntExtra(FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
+            fileType = getIntent().getIntExtra(EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_ALL);
         }
         initializeViews();
         AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
@@ -110,27 +110,27 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
     private void applyToolbarTheme(int fileType) {
         int colorCode = R.color.all_file_list_bg;
         int title = R.string.tittle_toolbar_all;
-        selectedFileType = GlobalConstant.COUNT_ALL_FILE;
-        if (fileType == GlobalConstant.EXCEL_FILE_TYPE) {
+        selectedFileType = AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES;
+        if (fileType == AppGlobalConstants.FILE_TYPE_EXCEL) {
             colorCode = R.color.excel_file_list_bg;
             title = R.string.tittle_toolbar_excel;
-            selectedFileType = GlobalConstant.COUNT_EXCEL_FILE;
-        } else if (fileType == GlobalConstant.PDF_FILE_TYPE) {
+            selectedFileType = AppGlobalConstants.QUERY_EXCEL_FILES;
+        } else if (fileType == AppGlobalConstants.FILE_TYPE_PDF) {
             colorCode = R.color.pdf_file_list_bg;
-            selectedFileType = GlobalConstant.COUNT_PDF_FILE;
+            selectedFileType = AppGlobalConstants.QUERY_PDF_FILES;
             title = R.string.tittle_toolbar_pdf;
-        } else if (fileType == GlobalConstant.PPT_FILE_TYPE) {
+        } else if (fileType == AppGlobalConstants.FILE_TYPE_PPT) {
             colorCode = R.color.ppt_file_list_bg;
             title = R.string.tittle_toolbar_ppt;
-            selectedFileType = GlobalConstant.COUNT_PPT_FILE;
-        } else if (fileType == GlobalConstant.WORD_FILE_TYPE) {
+            selectedFileType = AppGlobalConstants.QUERY_PPT_FILES;
+        } else if (fileType == AppGlobalConstants.FILE_TYPE_WORD) {
             colorCode = R.color.word_file_list_bg;
             title = R.string.tittle_toolbar_word;
-            selectedFileType = GlobalConstant.COUNT_WORD_FILE;
-        } else if (fileType == GlobalConstant.TXT_FILE_TYPE) {
+            selectedFileType = AppGlobalConstants.QUERY_WORD_FILES;
+        } else if (fileType == AppGlobalConstants.FILE_TYPE_TEXT) {
             colorCode = R.color.txt_file_list_bg;
             title = R.string.tittle_toolbar_txt;
-            selectedFileType = GlobalConstant.COUNT_TXT_FILE;
+            selectedFileType = AppGlobalConstants.QUERY_TEXT_FILES;
         }
 
         topToolbar.setBackgroundColor(ContextCompat.getColor(this, colorCode));
@@ -155,7 +155,7 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
         } else if (idView == R.id.item_search) {
 
             Intent intent = new Intent(DocumentListActivity.this, SearchDocumentActivity.class);
-            intent.putExtra(GlobalConstant.FILE_TYPE, fileType);
+            intent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, fileType);
             startActivity(intent);
             finish();
 
@@ -168,7 +168,7 @@ public class DocumentListActivity extends BaseActivity implements DocClickListen
         } else if (idView == R.id.item_multi_select) {
 
             Intent intent = new Intent(DocumentListActivity.this, SelectDocumentActivity.class);
-            intent.putExtra(GlobalConstant.FILE_TYPE, fileType);
+            intent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, fileType);
             startActivity(intent);
             finish();
         }

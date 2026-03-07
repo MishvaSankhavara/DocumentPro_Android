@@ -3,9 +3,9 @@ package com.artifex.sonui;
 import android.content.Context;
 
 import com.artifex.solib.ConfigOptions;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.DocumentMyApplication;
 
-public class MainApp extends MyApplication {
+public class MainApp extends DocumentMyApplication {
     private static Context context;
 
     public MainApp() {

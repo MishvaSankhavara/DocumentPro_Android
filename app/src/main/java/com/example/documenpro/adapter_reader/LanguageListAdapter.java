@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
-import com.example.documenpro.SharedPreferenceUtils;
+import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.clickListener.LanguageClickListener;
 import com.example.documenpro.model_reader.LanguageModel;
 
@@ -30,10 +30,10 @@ public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapte
                                LanguageClickListener mListener) {
         this.mContext_LanguageList = mContext;
         this.languages_LanguageList =
-                GlobalConstant.createArrayLanguage();
+                AppGlobalConstants.createArrayLanguage();
         this.selectedItem_LanguageList =
-                SharedPreferenceUtils.getInstance(mContext)
-                        .getInt(GlobalConstant.LANGUAGE_KEY_NUMBER, 0);
+                PreferenceUtils.getInstance(mContext)
+                        .getInt(AppGlobalConstants.PREF_LANGUAGE_NUMBER, 0);
         this.listener_LanguageList = mListener;
     }
 

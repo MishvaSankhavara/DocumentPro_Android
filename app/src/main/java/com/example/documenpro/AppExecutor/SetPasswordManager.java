@@ -6,8 +6,8 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.view.View;
 
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
@@ -53,7 +53,7 @@ public class SetPasswordManager {
             if (isSetPassword) {
 
                 PDFReaderModel pdfModel_setPW = new PDFReaderModel();
-                String path_setPW = GlobalConstant.RootDirectoryLock;
+                String path_setPW = AppGlobalConstants.DIRECTORY_LOCKED_PDF;
                 String filePathNeW_setPW = path_setPW + "Locked" + mPdfModel_setPW.getName_PDFModel();
 
                 final File file = new File(filePathNeW_setPW);
@@ -66,7 +66,7 @@ public class SetPasswordManager {
                 pdfModel_setPW.setLastModified_PDFModel(file.lastModified());
                 pdfModel_setPW.setDirectory_PDFModel(file.isDirectory());
 
-                MediaScannerConnection.scanFile(MyApplication.getInstance(), new String[]{pdfModel_setPW.getAbsolutePath_PDFModel()}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{pdfModel_setPW.getAbsolutePath_PDFModel()}, new String[]{"application/pdf"}, null);
 
                 weakReference_setPW.get().runOnUiThread(() -> {
 

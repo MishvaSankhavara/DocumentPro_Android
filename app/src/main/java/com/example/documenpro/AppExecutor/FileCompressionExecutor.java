@@ -16,8 +16,8 @@ import com.itextpdf.text.pdf.PdfObject;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.parser.PdfImageObject;
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
@@ -71,7 +71,7 @@ public class FileCompressionExecutor {
             uncompressedFileLength_FileCompression = file.length();
             uncompressedFileSize_FileCompression = Formatter.formatShortFileSize(weakReference_FileCompression.get(), uncompressedFileLength_FileCompression);
 
-            allPdfDocumentDir_FileCompression = GlobalConstant.RootDirectoryCompress;
+            allPdfDocumentDir_FileCompression = AppGlobalConstants.DIRECTORY_COMPRESSED_PDF;
             compressedPDF_FileCompression = allPdfDocumentDir_FileCompression + Utils.removeFileExtension(strPdfName) + "-Compressed.pdf";
 
             File file2 = new File(allPdfDocumentDir_FileCompression);
@@ -146,7 +146,7 @@ public class FileCompressionExecutor {
 
                 reducedPercent_FileCompression = (100 - ((int) ((compressedFileLength_FileCompression * 100) / uncompressedFileLength_FileCompression))) + "%";
 
-                MediaScannerConnection.scanFile(MyApplication.getInstance(), new String[]{compressedPDF_FileCompression}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{compressedPDF_FileCompression}, new String[]{"application/pdf"}, null);
 
                 if (!isEncrypted_FileCompression) {
 
@@ -192,7 +192,7 @@ public class FileCompressionExecutor {
                 }
 
             } catch (Exception e) {
-                Log.e(GlobalConstant.TAG_LOG, "Error message", e);
+                Log.e(AppGlobalConstants.DOC_APP_FATAL, "Error message", e);
             }
         });
     }

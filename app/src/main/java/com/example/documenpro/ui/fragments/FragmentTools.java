@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.ViewItemDecoration;
 import com.example.documenpro.adapter_reader.DocumentToolAdapter;
@@ -76,29 +76,29 @@ public class FragmentTools extends Fragment {
     }
 
     private void executeTool(int toolType) {
-        if (toolType == GlobalConstant.TOOL_YOUR_PDF) {
+        if (toolType == AppGlobalConstants.TOOL_YOUR_PDF) {
             startActivity(new Intent(activityContext, ResultViewerActivity.class));
-        } else if (toolType == GlobalConstant.TOOL_MERGE) {
+        } else if (toolType == AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO) {
             startActivity(new Intent(activityContext, MergeSelectFileActivity.class));
-            MyApplication.getInstance().clearArrayListMerge();
-        } else if (toolType == GlobalConstant.TOOL_COMPRESS) {
+            DocumentMyApplication.getInstance().clearArrayListMerge();
+        } else if (toolType == AppGlobalConstants.TOOL_ID_COMPRESS) {
 
             Intent intentCompress = new Intent(activityContext, DocPickerActivity.class);
-            intentCompress.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_COMPRESS);
+            intentCompress.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_COMPRESS);
             startActivity(intentCompress);
 
-        } else if (toolType == GlobalConstant.TOOL_SPLIT) {
+        } else if (toolType == AppGlobalConstants.TOOL_ID_SPLIT) {
             Intent intentSplit = new Intent(activityContext, DocPickerActivity.class);
-            intentSplit.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_SPLIT);
+            intentSplit.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_SPLIT);
             startActivity(intentSplit);
-            MyApplication.getInstance().clearArrayListSplit();
-        } else if (toolType == GlobalConstant.TOOL_BROWSE_PDF) {
+            DocumentMyApplication.getInstance().clearArrayListSplit();
+        } else if (toolType == AppGlobalConstants.TOOL_ID_BROWSE_PDF) {
             Utils.chooseFileManager(activityContext);
-        } else if (toolType == GlobalConstant.TOOL_PRINT) {
+        } else if (toolType == AppGlobalConstants.TOOL_ID_PRINT) {
             Intent intentPrint = new Intent(activityContext, DocPickerActivity.class);
-            intentPrint.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_PRINT);
+            intentPrint.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_PRINT);
             startActivity(intentPrint);
-        } else if (toolType == GlobalConstant.TOOL_PHOTO_TO_PDF) {
+        } else if (toolType == AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF) {
             Matisse.from(activityContext)
                     .choose(MimeType.ofImage(), false)
                     .countable(true)
@@ -111,19 +111,19 @@ public class FragmentTools extends Fragment {
                     .showPreview(false) // Default is `true`
                     .forResult(11);
 
-        } else if (toolType == GlobalConstant.TOOL_PDF_TO_PHOTO) {
+        } else if (toolType == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
             Intent intentPDF = new Intent(activityContext, DocPickerActivity.class);
-            intentPDF.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_PDF_TO_PHOTO);
+            intentPDF.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_PDF_TO_PHOTO);
             startActivity(intentPDF);
-        } else if (toolType == GlobalConstant.TOOL_LOCK_PDF) {
+        } else if (toolType == AppGlobalConstants.TOOL_ID_LOCK_PDF) {
 
             Intent intentLock = new Intent(activityContext, DocPickerActivity.class);
-            intentLock.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_LOCK_PDF);
+            intentLock.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_LOCK_PDF);
             startActivity(intentLock);
 
-        } else if (toolType == GlobalConstant.TOOL_UNLOCK_PDF) {
+        } else if (toolType == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {
             Intent intentLock = new Intent(activityContext, DocPickerActivity.class);
-            intentLock.putExtra(GlobalConstant.TOOL_TYPE, GlobalConstant.TOOL_UNLOCK_PDF);
+            intentLock.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_UNLOCK_PDF);
             startActivity(intentLock);
         }
     }

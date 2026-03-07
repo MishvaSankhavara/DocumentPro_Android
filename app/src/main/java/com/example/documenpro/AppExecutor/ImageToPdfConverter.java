@@ -7,8 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
-import com.example.documenpro.GlobalConstant;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.utils.ImageProcessorUtils;
@@ -51,7 +51,7 @@ public class ImageToPdfConverter {
     public void executeTask_ImageToPdfConverter() {
         executor_ImageToPdfConverter.execute(() -> {
             try {
-                String allPdfDocuments = GlobalConstant.RootDirectoryImage2Pdf;
+                String allPdfDocuments = AppGlobalConstants.DIRECTORY_IMAGE_TO_PDF;
                 File file = new File(allPdfDocuments);
                 generatedPDFPath_ImageToPdfConverter = allPdfDocuments + newFileName_ImageToPdfConverter + ".pdf";
 
@@ -91,7 +91,7 @@ public class ImageToPdfConverter {
                 pDDocument.save(generatedPDFPath_ImageToPdfConverter);
                 pDDocument.close();
 
-                MediaScannerConnection.scanFile(MyApplication.getInstance(), new String[]{generatedPDFPath_ImageToPdfConverter}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{generatedPDFPath_ImageToPdfConverter}, new String[]{"application/pdf"}, null);
 
             } catch (Exception e) {
                 e.printStackTrace();

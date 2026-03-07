@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.documenpro.MyApplication;
+import com.example.documenpro.DocumentMyApplication;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.MergeFileSelectionAdapter;
 import com.example.documenpro.model_reader.PDFReaderModel;
@@ -105,7 +105,7 @@ public class MergeSelectFileActivity extends AppCompatActivity {
         });
 
         continueButtonText.setOnClickListener(view -> {
-            MyApplication.getInstance().setMergePdfList(pdfSelectionAdapter.getSelected_MergeFileSelection());
+            DocumentMyApplication.getInstance().updateMergedPdfList(pdfSelectionAdapter.getSelected_MergeFileSelection());
             Intent intent = new Intent(MergeSelectFileActivity.this, ReorderMergePdfActivity.class);
             startActivity(intent);
             finish();

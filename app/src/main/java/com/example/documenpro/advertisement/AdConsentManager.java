@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.google.android.ump.ConsentDebugSettings;
-import com.google.android.ump.ConsentForm.OnConsentFormDismissedListener;
 import com.google.android.ump.ConsentInformation;
 import com.google.android.ump.ConsentRequestParameters;
 import com.google.android.ump.FormError;
 import com.google.android.ump.UserMessagingPlatform;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 
 public final class AdConsentManager {
 
@@ -18,7 +17,7 @@ public final class AdConsentManager {
 
     public void gatherConsent_AdConsentManager(Activity activity, OnConsentGatheringCompleteListener onConsentGatheringCompleteListener) {
 
-        ConsentDebugSettings debugSettings = new ConsentDebugSettings.Builder(activity).addTestDeviceHashedId(GlobalConstant.TEST_DEVICE_HASHED_ID).build();
+        ConsentDebugSettings debugSettings = new ConsentDebugSettings.Builder(activity).addTestDeviceHashedId(AppGlobalConstants.TEST_DEVICE_HASHED_ID).build();
 
         ConsentRequestParameters params = new ConsentRequestParameters.Builder().build();
 

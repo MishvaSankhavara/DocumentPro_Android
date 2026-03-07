@@ -30,8 +30,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.documenpro.BaseActivity;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.ActivityBase;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
 import com.example.documenpro.advertisement.AdMobNativeAdManager;
@@ -50,7 +50,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SelectDocumentActivity extends BaseActivity implements View.OnClickListener, OnItemSelectListener {
+public class SelectDocumentActivity extends ActivityBase implements View.OnClickListener, OnItemSelectListener {
     public EmptyStateRecyclerView documentRecyclerView;
     public FilePickerAdapter filePickerAdapter;
     public Toolbar topToolbar;
@@ -100,7 +100,7 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
     private void readIntentData() {
         Intent intent = getIntent();
         if (intent != null) {
-            selectedFileType = getIntent().getIntExtra(GlobalConstant.FILE_TYPE, GlobalConstant.ALL_FILE_TYPE);
+            selectedFileType = getIntent().getIntExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_ALL);
         }
 
     }
@@ -127,42 +127,42 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         documentRecyclerView.setLayoutManager(layoutManager);
         documentRecyclerView.setEmptyView(findViewById(R.id.tv_empty_title));
-        if (selectedFileType == GlobalConstant.ALL_FILE_TYPE) {
+        if (selectedFileType == AppGlobalConstants.FILE_TYPE_ALL) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
             getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
-            documentList = Utils.countFile(this, GlobalConstant.COUNT_ALL_FILE);
-        } else if (selectedFileType == GlobalConstant.EXCEL_FILE_TYPE) {
+            documentList = Utils.countFile(this, AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES);
+        } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_EXCEL) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
 
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
             getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.excel_file_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
-            documentList = Utils.countFile(this, GlobalConstant.COUNT_EXCEL_FILE);
-        } else if (selectedFileType == GlobalConstant.PDF_FILE_TYPE) {
+            documentList = Utils.countFile(this, AppGlobalConstants.QUERY_EXCEL_FILES);
+        } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_PDF) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
 
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
             getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.pdf_file_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
-            documentList = Utils.countFile(this, GlobalConstant.COUNT_PDF_FILE);
-        } else if (selectedFileType == GlobalConstant.PPT_FILE_TYPE) {
+            documentList = Utils.countFile(this, AppGlobalConstants.QUERY_PDF_FILES);
+        } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_PPT) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
 
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
             getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.ppt_file_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
-            documentList = Utils.countFile(this, GlobalConstant.COUNT_PPT_FILE);
-        } else if (selectedFileType == GlobalConstant.WORD_FILE_TYPE) {
+            documentList = Utils.countFile(this, AppGlobalConstants.QUERY_PPT_FILES);
+        } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_WORD) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
 
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
             getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.word_file_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
-            documentList = Utils.countFile(this, GlobalConstant.COUNT_WORD_FILE);
+            documentList = Utils.countFile(this, AppGlobalConstants.QUERY_WORD_FILES);
 
-        } else if (selectedFileType == GlobalConstant.FAV_FILE_TYPE) {
+        } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_FAVORITE) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
 
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
@@ -171,7 +171,7 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
             documentList = DatabaseHelper.getInstance(this).getStarredDocuments_DatabaseHelper();
             moveIconImageView.setImageResource(R.drawable.ic_un_bookmark);
             moveTextView.setText(getResources().getString(R.string.str_remove_favorite));
-        } else if (selectedFileType == GlobalConstant.RECENT_FILE_TYPE) {
+        } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_RECENT) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
 
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
@@ -212,15 +212,15 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
                 Toast.makeText(this, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT).show();
             }
         } else if (idView == R.id.ll_remove) {
-            if (selectedFileType == GlobalConstant.RECENT_FILE_TYPE) {
-                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
+            if (selectedFileType == AppGlobalConstants.FILE_TYPE_RECENT) {
+                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, AppGlobalConstants.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
                     @Override
                     public void onConfirmClickListener() {
                         new RemoveRecent(SelectDocumentActivity.this).execute();
                     }
                 });
-            } else if (selectedFileType == GlobalConstant.FAV_FILE_TYPE) {
-                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_REMOVE_FAV, new OnConfirmClickListener() {
+            } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_FAVORITE) {
+                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, AppGlobalConstants.DIALOG_CONFIRM_REMOVE_FAVORITE, new OnConfirmClickListener() {
                     @Override
                     public void onConfirmClickListener() {
                         FavoriteRemovalExecutor removeFavoriteExecutor = new FavoriteRemovalExecutor(SelectDocumentActivity.this);
@@ -229,7 +229,7 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
                 });
             }
         } else if (idView == R.id.ll_delete) {
-            DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, GlobalConstant.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
+            DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, AppGlobalConstants.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
                 @Override
                 public void onConfirmClickListener() {
                     new DeleteMultiFile(SelectDocumentActivity.this).execute();
@@ -362,25 +362,25 @@ public class SelectDocumentActivity extends BaseActivity implements View.OnClick
             super.onPostExecute(unused);
             dialog.dismiss();
 
-            if (weakReference.get().selectedFileType == GlobalConstant.ALL_FILE_TYPE) {
+            if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_ALL) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), GlobalConstant.COUNT_ALL_FILE);
-            } else if (weakReference.get().selectedFileType == GlobalConstant.EXCEL_FILE_TYPE) {
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), GlobalConstant.COUNT_EXCEL_FILE);
-            } else if (weakReference.get().selectedFileType == GlobalConstant.PDF_FILE_TYPE) {
+                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES);
+            } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_EXCEL) {
+                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_EXCEL_FILES);
+            } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_PDF) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), GlobalConstant.COUNT_PDF_FILE);
-            } else if (weakReference.get().selectedFileType == GlobalConstant.PPT_FILE_TYPE) {
+                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_PDF_FILES);
+            } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_PPT) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), GlobalConstant.COUNT_PPT_FILE);
-            } else if (weakReference.get().selectedFileType == GlobalConstant.WORD_FILE_TYPE) {
+                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_PPT_FILES);
+            } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_WORD) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), GlobalConstant.COUNT_WORD_FILE);
+                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_WORD_FILES);
 
-            } else if (weakReference.get().selectedFileType == GlobalConstant.FAV_FILE_TYPE) {
+            } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_FAVORITE) {
                 weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get()).getStarredDocuments_DatabaseHelper();
 
-            } else if (weakReference.get().selectedFileType == GlobalConstant.RECENT_FILE_TYPE) {
+            } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_RECENT) {
                 weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get()).getRecentDocuments_DatabaseHelper();
             }
 

@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.documenpro.GlobalConstant;
+import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.CompactFileListAdapter;
 import com.example.documenpro.clickListener.OnPdfTapListener;
@@ -89,7 +89,7 @@ public class FragmentLock extends Fragment implements OnPdfTapListener {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            this.weakReference.get().arrayList = Utils.getCreatedPdf(GlobalConstant.RootDirectoryLockSaved);
+            this.weakReference.get().arrayList = Utils.getCreatedPdf(AppGlobalConstants.DIRECTORY_LOCKED_PDF_FILE);
             return null;
         }
 
