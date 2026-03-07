@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<vector android:tint="@color/sodk_editor_icon_tint" android:height="24.0dip" android:width="24.0dip" android:viewportWidth="50.0" android:viewportHeight="50.0"
+<vector android:tint="@color/editor_icon_tint" android:height="24.0dip" android:width="24.0dip" android:viewportWidth="50.0" android:viewportHeight="50.0"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="#ff333333" android:pathData="M29.74,43.96L5.97,43.96L5.97,6.04L44.03,6.04L44.03,19.03L42.66,19.03L42.66,7.41L7.34,7.41L7.34,42.59L29.74,42.59L29.74,43.96Z" />
     <path android:fillColor="#ff333333" android:pathData="M36.99,7.41L12.86,7.41L12.86,18.49C12.86,18.73 13.06,18.93 13.31,18.93L36.54,18.93C36.79,18.93 36.99,18.74 36.99,18.49L36.99,7.41ZM38.36,6.04L38.36,18.49C38.36,19.49 37.55,20.31 36.54,20.31L13.31,20.31C12.3,20.31 11.49,19.49 11.49,18.49L11.49,6.04L38.36,6.04" />

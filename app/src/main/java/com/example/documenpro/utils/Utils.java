@@ -615,8 +615,8 @@ public class Utils {
     public static CharSequence setAppName(Context mContext) {
         SpannableString first = new SpannableString("Document");
         SpannableString second = new SpannableString(" Read");
-        first.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.colorPrimaryText)), 0, first.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        second.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.ppt_file_list_bg)), 0, second.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        first.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.app_primary_text)), 0, first.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        second.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.app_ppt_list_bg)), 0, second.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return TextUtils.concat(first, second);
     }
 

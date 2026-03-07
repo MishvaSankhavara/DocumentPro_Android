@@ -18,7 +18,7 @@
         android:fontFamily="@font/medium"
         android:gravity="center"
         android:text="@string/str_action_loading"
-        android:textColor="@color/colorPrimaryText"
+        android:textColor="@color/app_primary_text"
         android:textSize="16sp" />
 
     <com.example.documenpro.ui.customviews.HorizontalProgressBar

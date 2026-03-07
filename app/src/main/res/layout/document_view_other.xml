@@ -39,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_return_white"
-                app:tint="@color/white" />
+                app:tint="@color/app_white" />
 
             <TextView
                 android:id="@+id/tvTittle"
@@ -52,7 +52,7 @@
                 android:gravity="start"
                 android:includeFontPadding="false"
                 android:maxLines="1"
-                android:textColor="@color/white"
+                android:textColor="@color/app_white"
                 android:textSize="16sp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +79,7 @@
             android:id="@+id/doc_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
+            android:background="@color/app_colorWhite"
             android:orientation="vertical"
             android:visibility="gone" />
 
@@ -87,7 +87,7 @@
             android:id="@+id/doc_note_editor"
             android:layout_width="@dimen/sodk_editor_note_editor_width"
             android:layout_height="wrap_content"
-            android:background="@color/sodk_editor_pdf_note_color"
+            android:background="@color/editor_pdf_note_color"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -147,7 +147,7 @@
             android:paddingEnd="2dp"
             android:paddingBottom="2dp"
             android:src="@drawable/baseline_fullscreen_24"
-            android:tint="@color/white" />
+            android:tint="@color/app_white" />
 
         <include
             layout="@layout/layout_undo_redo"

@@ -108,27 +108,27 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
     }
 
     private void applyToolbarTheme(int fileType) {
-        int colorCode = R.color.all_file_list_bg;
+        int colorCode = R.color.app_all_list_bg;
         int title = R.string.tittle_toolbar_all;
         selectedFileType = AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES;
         if (fileType == AppGlobalConstants.FILE_TYPE_EXCEL) {
-            colorCode = R.color.excel_file_list_bg;
+            colorCode = R.color.app_excel_list_bg;
             title = R.string.tittle_toolbar_excel;
             selectedFileType = AppGlobalConstants.QUERY_EXCEL_FILES;
         } else if (fileType == AppGlobalConstants.FILE_TYPE_PDF) {
-            colorCode = R.color.pdf_file_list_bg;
+            colorCode = R.color.app_pdf_list_bg;
             selectedFileType = AppGlobalConstants.QUERY_PDF_FILES;
             title = R.string.tittle_toolbar_pdf;
         } else if (fileType == AppGlobalConstants.FILE_TYPE_PPT) {
-            colorCode = R.color.ppt_file_list_bg;
+            colorCode = R.color.app_ppt_list_bg;
             title = R.string.tittle_toolbar_ppt;
             selectedFileType = AppGlobalConstants.QUERY_PPT_FILES;
         } else if (fileType == AppGlobalConstants.FILE_TYPE_WORD) {
-            colorCode = R.color.word_file_list_bg;
+            colorCode = R.color.app_word_list_bg;
             title = R.string.tittle_toolbar_word;
             selectedFileType = AppGlobalConstants.QUERY_WORD_FILES;
         } else if (fileType == AppGlobalConstants.FILE_TYPE_TEXT) {
-            colorCode = R.color.txt_file_list_bg;
+            colorCode = R.color.app_txt_list_bg;
             title = R.string.tittle_toolbar_txt;
             selectedFileType = AppGlobalConstants.QUERY_TEXT_FILES;
         }

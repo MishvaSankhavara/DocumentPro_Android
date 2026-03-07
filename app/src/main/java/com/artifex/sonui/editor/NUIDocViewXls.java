@@ -444,7 +444,7 @@ public class NUIDocViewXls extends NUIDocView {
     }
 
     public int getBorderColor() {
-        return ContextCompat.getColor(this.getContext(), R.color.sodk_editor_header_xls_color);
+        return ContextCompat.getColor(this.getContext(), R.color.editor_header_xls_color);
     }
 
     protected int getLayoutId() {

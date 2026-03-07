@@ -5,5 +5,5 @@
     android:background="@drawable/sodk_editor_sheet_tab_plus"
     android:minWidth="0.0dip"
     android:minHeight="0.0dip"
-    android:textColor="@color/sodk_editor_excel_sheet_tab_plus_color"
+    android:textColor="@color/editor_excel_sheet_tab_plus_color"
     android:textSize="24sp" />

@@ -100,7 +100,7 @@
             android:paddingEnd="10dp"
             android:text="@string/button_apply"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/app_white"
             android:textSize="16sp" />
     </RelativeLayout>
 </RelativeLayout>

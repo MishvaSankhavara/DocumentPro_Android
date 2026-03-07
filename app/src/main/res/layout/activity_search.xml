@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/ppt_file_list_bg"
+    android:background="@color/app_ppt_list_bg"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,7 +12,7 @@
         android:id="@+id/cl_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ppt_file_list_bg"
+        android:background="@color/app_ppt_list_bg"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -31,7 +31,7 @@
             android:paddingEnd="38dp"
             android:paddingBottom="11dp"
             android:textAlignment="viewStart"
-            android:textColor="@color/white"
+            android:textColor="@color/app_white"
             android:textColorHint="#99ffffff"
             android:textCursorDrawable="@null"
             android:textSize="13sp"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:scaleType="center"
-            android:tint="@color/white"
+            android:tint="@color/app_white"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/et_search_text"
             app:layout_constraintEnd_toEndOf="@+id/et_search_text"
@@ -64,7 +64,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/str_action_cancel"
-            android:textColor="@color/white"
+            android:textColor="@color/app_white"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,16 +76,16 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ppt_file_list_bg"
+        android:background="@color/app_ppt_list_bg"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/cl_toolbar"
         app:tabGravity="fill"
         app:tabIndicator="@drawable/shape_tab_item_indicator"
-        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorColor="@color/app_white"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="4dp"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/white"
+        app:tabSelectedTextColor="@color/app_white"
         app:tabTextAppearance="@style/SearchPageTabItemText"
         app:tabTextColor="#99ffffff" />
 
@@ -94,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
-        android:background="@color/bg_main"
+        android:background="@color/app_background"
         app:layout_constraintBottom_toTopOf="@id/adcontainer"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout"
         app:layout_constraintVertical_bias="0.0"

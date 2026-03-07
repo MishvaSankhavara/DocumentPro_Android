@@ -53,7 +53,7 @@
         android:paddingTop="2dp"
         android:paddingEnd="6dp"
         android:paddingBottom="2dp"
-        android:textColor="@color/white"
+        android:textColor="@color/app_white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/center_fl"
         app:layout_constraintStart_toStartOf="@+id/center_fl" />

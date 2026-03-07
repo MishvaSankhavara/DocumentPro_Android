@@ -79,7 +79,7 @@
                 android:paddingEnd="2dp"
                 android:paddingBottom="2dp"
                 android:src="@drawable/baseline_fullscreen_24"
-                android:tint="@color/white" />
+                android:tint="@color/app_white" />
 
             <include
                 layout="@layout/layout_undo_redo"

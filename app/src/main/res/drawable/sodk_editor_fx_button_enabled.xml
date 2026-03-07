@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke
         android:width="@dimen/_1sdp"
-        android:color="@color/sodk_editor_fx_box_enabled_stroke" />
-    <solid android:color="@color/sodk_editor_fx_box_enabled_fill" />
+        android:color="@color/editor_fx_box_enabled_stroke" />
+    <solid android:color="@color/editor_fx_box_enabled_fill" />
     <padding
         android:bottom="@dimen/_3sdp"
         android:left="24.0dip"

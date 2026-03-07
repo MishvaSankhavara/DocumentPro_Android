@@ -27,7 +27,7 @@
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         android:text="@string/guide_title_3"
-        android:textColor="@color/white"
+        android:textColor="@color/app_white"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/subtitle_tv3"
         app:layout_constraintStart_toStartOf="@+id/subtitle_tv3" />
@@ -43,7 +43,7 @@
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         android:text="@string/guide_des_3"
-        android:textColor="@color/white"
+        android:textColor="@color/app_white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

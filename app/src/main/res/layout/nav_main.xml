@@ -313,7 +313,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/navigation_dark_mode"
                 android:textAlignment="viewStart"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/app_primary_text"
                 android:textSize="14sp" />
 
             <Space

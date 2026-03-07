@@ -63,7 +63,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:padding="15dp"
-        android:tint="@color/white"
+        android:tint="@color/app_white"
         android:src="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="@id/bottomBg"
         app:layout_constraintEnd_toStartOf="@id/btnDelete"
@@ -79,7 +79,7 @@
         app:layout_constraintBottom_toBottomOf="@id/bottomBg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/bottomBg"
-        app:tint="@color/white" />
+        app:tint="@color/app_white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

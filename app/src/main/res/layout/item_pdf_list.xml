@@ -69,7 +69,7 @@
                 android:fontFamily="@font/semibold"
                 android:maxLines="1"
                 android:text="Privacy policy.docx"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/app_primary_text"
                 android:textSize="14sp" />
 
             <RelativeLayout
@@ -84,7 +84,7 @@
                     android:fontFamily="@font/semibold"
                     android:maxLines="1"
                     android:text="24-09-2018"
-                    android:textColor="@color/colorNormalText"
+                    android:textColor="@color/app_normal_text"
                     android:textSize="12sp" />
 
                 <ImageView
@@ -107,7 +107,7 @@
                     android:fontFamily="@font/semibold"
                     android:maxLines="1"
                     android:text="24KB"
-                    android:textColor="@color/colorNormalText"
+                    android:textColor="@color/app_normal_text"
                     android:textSize="12sp" />
             </RelativeLayout>
         </LinearLayout>
@@ -141,7 +141,7 @@
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:scaleType="centerInside"
-        android:tint="@color/colorPrimaryText"
+        android:tint="@color/app_primary_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

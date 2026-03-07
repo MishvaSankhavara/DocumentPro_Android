@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/app_white" />
 
     <View
         android:layout_width="match_parent"
@@ -130,7 +130,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/str_action_share"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/app_primary_text"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_share" />
@@ -164,7 +164,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/str_action_move_fav"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/app_primary_text"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_share" />
@@ -199,7 +199,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/str_action_delete"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/app_primary_text"
             android:textSize="12sp"
 
             app:layout_constraintBottom_toBottomOf="parent"

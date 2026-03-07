@@ -9,7 +9,7 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/sodk_editor_toc_bg_color"
+        android:background="@color/editor_toc_bg_color"
         android:orientation="horizontal">
 
         <com.artifex.sonui.editor.SOTextView
@@ -28,7 +28,7 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/sodk_editor_toc_link"
             android:text="@string/sodk_editor_cancel"
-            android:textColor="@color/word_file_list_bg"
+            android:textColor="@color/app_word_list_bg"
             android:textSize="@dimen/_13sdp" />
     </RelativeLayout>
 
@@ -36,6 +36,6 @@
         android:id="@+id/List"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/sodk_editor_toc_divider_color"
+        android:divider="@color/editor_toc_divider_color"
         android:dividerHeight="@dimen/_1sdp" />
 </LinearLayout>

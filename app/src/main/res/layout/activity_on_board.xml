@@ -61,7 +61,7 @@
             android:fontFamily="@font/bold"
             android:includeFontPadding="false"
             android:text="@string/str_next"
-            android:textColor="@color/white"
+            android:textColor="@color/app_white"
             android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatImageView

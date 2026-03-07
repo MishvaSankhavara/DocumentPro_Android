@@ -11,7 +11,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_5sdp"
-        android:background="@color/colorWhite" />
+        android:background="@color/app_colorWhite" />
 
     <com.artifex.sonui.editor.SOTextView
         android:id="@+id/value"
@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/_7sdp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/app_colorWhite"
         android:textSize="24.0dip" />
 </LinearLayout>

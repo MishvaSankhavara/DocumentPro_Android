@@ -79,7 +79,7 @@ public class NUIDocViewOther extends NUIDocView {
     }
 
     public int getBorderColor() {
-        return ContextCompat.getColor(this.getContext(), R.color.sodk_editor_selected_page_border_color);
+        return ContextCompat.getColor(this.getContext(), R.color.editor_selected_page_border_color);
     }
 
     protected int getLayoutId() {

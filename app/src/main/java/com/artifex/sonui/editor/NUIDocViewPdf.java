@@ -191,7 +191,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
 
     public int getBorderColor() {
-        return ContextCompat.getColor(this.getContext(), R.color.sodk_editor_header_pdf_color);
+        return ContextCompat.getColor(this.getContext(), R.color.editor_header_pdf_color);
     }
 
     public InputView getInputView() {

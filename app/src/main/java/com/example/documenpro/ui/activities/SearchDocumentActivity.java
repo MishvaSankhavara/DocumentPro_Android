@@ -66,46 +66,46 @@ public class SearchDocumentActivity extends ActivityBase implements ViewPager.On
     private void applyToolbarTheme(int fileType) {
         switch (fileType) {
             case AppGlobalConstants.FILE_TYPE_ALL:
-                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
-                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
 
-                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
+                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_all_list_bg));
                 break;
             case AppGlobalConstants.FILE_TYPE_PDF:
-                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
-                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_pdf_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_pdf_list_bg));
 
-                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.pdf_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_pdf_list_bg));
+                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_pdf_list_bg));
                 break;
             case AppGlobalConstants.FILE_TYPE_WORD:
-                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
-                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_word_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_word_list_bg));
 
-                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.word_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_word_list_bg));
+                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_word_list_bg));
 
                 break;
             case AppGlobalConstants.FILE_TYPE_EXCEL:
-                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
-                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_excel_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_excel_list_bg));
 
-                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.excel_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_excel_list_bg));
+                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_excel_list_bg));
                 break;
             case AppGlobalConstants.FILE_TYPE_PPT:
-                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
-                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_ppt_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_ppt_list_bg));
 
-                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.ppt_file_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_ppt_list_bg));
+                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_ppt_list_bg));
                 break;
             case AppGlobalConstants.FILE_TYPE_TEXT:
-                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
-                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
-                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.txt_file_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.txt_file_list_bg));
+                toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_txt_list_bg));
+                mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_txt_list_bg));
+                searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_txt_list_bg));
+                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_txt_list_bg));
                 break;
         }
     }

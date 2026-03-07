@@ -128,54 +128,54 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
         documentRecyclerView.setLayoutManager(layoutManager);
         documentRecyclerView.setEmptyView(findViewById(R.id.tv_empty_title));
         if (selectedFileType == AppGlobalConstants.FILE_TYPE_ALL) {
-            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
-            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
+            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
+            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_all_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
             documentList = Utils.countFile(this, AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES);
         } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_EXCEL) {
-            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
+            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_excel_list_bg));
 
-            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.excel_file_list_bg));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.excel_file_list_bg));
+            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_excel_list_bg));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_excel_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
             documentList = Utils.countFile(this, AppGlobalConstants.QUERY_EXCEL_FILES);
         } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_PDF) {
-            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
+            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_pdf_list_bg));
 
-            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.pdf_file_list_bg));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.pdf_file_list_bg));
+            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_pdf_list_bg));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_pdf_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
             documentList = Utils.countFile(this, AppGlobalConstants.QUERY_PDF_FILES);
         } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_PPT) {
-            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
+            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_ppt_list_bg));
 
-            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.ppt_file_list_bg));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.ppt_file_list_bg));
+            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_ppt_list_bg));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_ppt_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
             documentList = Utils.countFile(this, AppGlobalConstants.QUERY_PPT_FILES);
         } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_WORD) {
-            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
+            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_word_list_bg));
 
-            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.word_file_list_bg));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.word_file_list_bg));
+            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_word_list_bg));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_word_list_bg));
             moveButtonLayout.setVisibility(View.GONE);
             documentList = Utils.countFile(this, AppGlobalConstants.QUERY_WORD_FILES);
 
         } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_FAVORITE) {
-            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
+            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
 
-            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
+            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_all_list_bg));
             moveButtonLayout.setVisibility(View.VISIBLE);
             documentList = DatabaseHelper.getInstance(this).getStarredDocuments_DatabaseHelper();
             moveIconImageView.setImageResource(R.drawable.ic_un_bookmark);
             moveTextView.setText(getResources().getString(R.string.str_remove_favorite));
         } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_RECENT) {
-            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
+            mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
 
-            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.all_file_list_bg));
-            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.all_file_list_bg));
+            topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
+            getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_all_list_bg));
             moveButtonLayout.setVisibility(View.VISIBLE);
             documentList = DatabaseHelper.getInstance(this).getRecentDocuments_DatabaseHelper();
             moveIconImageView.setImageResource(R.drawable.ic_remove);
@@ -256,13 +256,13 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
         moveButtonLayout.setFocusable(onOff);
 
         if (onOff) {
-            shareIconImageView.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimaryText));
-            moveIconImageView.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimaryText));
-            deleteIconImageView.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimaryText));
+            shareIconImageView.setColorFilter(ContextCompat.getColor(this, R.color.app_primary_text));
+            moveIconImageView.setColorFilter(ContextCompat.getColor(this, R.color.app_primary_text));
+            deleteIconImageView.setColorFilter(ContextCompat.getColor(this, R.color.app_primary_text));
 
-            shareTextView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryText));
-            moveTextView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryText));
-            deleteTextView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryText));
+            shareTextView.setTextColor(ContextCompat.getColor(this, R.color.app_primary_text));
+            moveTextView.setTextColor(ContextCompat.getColor(this, R.color.app_primary_text));
+            deleteTextView.setTextColor(ContextCompat.getColor(this, R.color.app_primary_text));
 
         } else {
             shareIconImageView.setColorFilter(ContextCompat.getColor(this, R.color.color_disable_button));

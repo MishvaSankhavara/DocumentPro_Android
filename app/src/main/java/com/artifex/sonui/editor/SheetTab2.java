@@ -13,8 +13,6 @@ import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
 
-import com.artifex.sonui.editor.SOTextView;
-import com.artifex.sonui.editor.Utilities;
 import com.example.documenpro.R;
 
 public class SheetTab2 extends LinearLayout {
@@ -63,7 +61,7 @@ public class SheetTab2 extends LinearLayout {
         super.onDraw(var1);
         if (this.c) {
             Paint var2 = new Paint();
-            var2.setColor(ContextCompat.getColor(this.getContext(), R.color.sodk_editor_excel_sheet_tab_highlight_color));
+            var2.setColor(ContextCompat.getColor(this.getContext(), R.color.editor_excel_sheet_tab_highlight_color));
             var2.setStyle(Paint.Style.STROKE);
             var2.setStrokeWidth((float) Utilities.convertDpToPixel((float) this.getContext().getResources().getInteger(R.integer.sodk_editor_selected_page_border_width)));
             var1.drawRect(new Rect(0, 0, this.getWidth(), this.getHeight()), var2);

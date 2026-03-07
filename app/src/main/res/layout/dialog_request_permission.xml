@@ -79,7 +79,7 @@
                 android:fontFamily="@font/medium"
                 android:gravity="start"
                 android:text="@string/turn_on_permission_guide"
-                android:textColor="@color/colorNormalText"
+                android:textColor="@color/app_normal_text"
                 android:textSize="13sp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -148,7 +148,7 @@
             android:includeFontPadding="false"
             android:text="@string/str_action_allow"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/app_white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -165,6 +165,6 @@
         android:src="@drawable/ic_close_new"
         app:layout_constraintEnd_toEndOf="@+id/layout"
         app:layout_constraintTop_toTopOf="@+id/layout"
-        app:tint="@color/text_light"
+        app:tint="@color/app_text_light"
         tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

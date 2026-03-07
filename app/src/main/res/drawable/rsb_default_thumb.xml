@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape android:shape="oval"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/rsbColorThumbDefault"/>
+    <solid android:color="@color/app_thumb_default"/>
     <stroke android:width="1dp"
-        android:color="@color/rsbColorThumbBorder"/>
+        android:color="@color/app_thumb_border"/>
 </shape>

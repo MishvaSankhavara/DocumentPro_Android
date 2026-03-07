@@ -3,8 +3,8 @@
     android:id="@android:id/text1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/sodk_editor_menu_popup_background_color"
+    android:background="@color/editor_menu_popup_background_color"
     android:gravity="center_vertical"
     android:padding="@dimen/_5sdp"
-    android:textColor="@color/colorWord_2392FF"
+    android:textColor="@color/app_colorWord_2392FF"
     android:textSize="@dimen/_13sdp" />

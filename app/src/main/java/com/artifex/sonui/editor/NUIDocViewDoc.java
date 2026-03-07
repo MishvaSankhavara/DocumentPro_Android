@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.artifex.solib.SODoc;
-import com.artifex.sonui.editor.DocView;
 import com.example.documenpro.R;
 
 public class NUIDocViewDoc extends NUIDocView {
@@ -29,7 +28,7 @@ public class NUIDocViewDoc extends NUIDocView {
     private void a() {
     }
     public int getBorderColor() {
-        return ContextCompat.getColor(this.getContext(), R.color.sodk_editor_header_doc_color);
+        return ContextCompat.getColor(this.getContext(), R.color.editor_header_doc_color);
     }
 
     protected int getLayoutId() {

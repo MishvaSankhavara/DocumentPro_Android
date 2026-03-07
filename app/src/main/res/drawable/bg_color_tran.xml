@@ -3,7 +3,7 @@
     <item>
         <shape>
             <corners android:radius="8dp" />
-            <solid android:color="@color/white" />
+            <solid android:color="@color/app_white" />
         </shape>
     </item>
     <item>
@@ -11,7 +11,7 @@
             <shape android:shape="line">
                 <stroke
                     android:width="@dimen/_3sdp"
-                    android:color="@color/sodk_editor_palette_red" />
+                    android:color="@color/editor_palette_red" />
             </shape>
         </rotate>
     </item>

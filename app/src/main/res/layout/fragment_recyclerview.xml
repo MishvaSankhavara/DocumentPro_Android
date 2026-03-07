@@ -46,7 +46,7 @@
             android:fontFamily="@font/bold"
             android:gravity="center"
             android:text="@string/str_no_files_yet"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/app_primary_text"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_empty"
             app:layout_constraintStart_toStartOf="@+id/iv_empty"

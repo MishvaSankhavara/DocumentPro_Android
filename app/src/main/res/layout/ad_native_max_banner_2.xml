@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:visibility="visible"
-        app:cardBackgroundColor="@color/bg_main"
+        app:cardBackgroundColor="@color/app_background"
         app:cardElevation="0dp">
 
 
@@ -69,7 +69,7 @@
                             android:gravity="center"
                             android:padding="1dp"
                             android:text="AD"
-                            android:textColor="@color/white"
+                            android:textColor="@color/app_white"
                             android:textSize="6sp"
                             android:textStyle="bold" />
 
@@ -98,7 +98,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="4sp"
-                    app:cardBackgroundColor="@color/red"
+                    app:cardBackgroundColor="@color/app_red"
                     app:cardCornerRadius="15dp">
 
                     <Button

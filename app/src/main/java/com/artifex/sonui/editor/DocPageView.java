@@ -29,11 +29,6 @@ import com.artifex.solib.SOPageListener;
 import com.artifex.solib.SORender;
 import com.artifex.solib.SOSelectionLimits;
 import com.artifex.solib.o;
-import com.artifex.sonui.editor.AnimatableView;
-import com.artifex.sonui.editor.DocListPagesView;
-import com.artifex.sonui.editor.DocView;
-import com.artifex.sonui.editor.SODataLeakHandlers;
-import com.artifex.sonui.editor.Utilities;
 import com.example.documenpro.R;
 
 public class DocPageView extends View implements SOPageListener, AnimatableView {
@@ -90,12 +85,12 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
         var4.setColor(this.t);
         var4 = new Paint();
         this.z = var4;
-        var4.setColor(ContextCompat.getColor(this.getContext(), R.color.sodk_editor_page_border_color));
+        var4.setColor(ContextCompat.getColor(this.getContext(), R.color.editor_page_border_color));
         var4.setStyle(Style.STROKE);
         var4.setStrokeWidth((float) Utilities.convertDpToPixel(2.0F));
         var4 = new Paint();
         this.y = var4;
-        this.setSelectedBorderColor(ContextCompat.getColor(this.getContext(), R.color.sodk_editor_selected_page_border_color));
+        this.setSelectedBorderColor(ContextCompat.getColor(this.getContext(), R.color.editor_selected_page_border_color));
         var4.setStyle(Style.STROKE);
         var4.setStrokeWidth((float) Utilities.convertDpToPixel((float) var1.getResources().getInteger(R.integer.sodk_editor_selected_page_border_width)));
         if (F == null) {

@@ -11,5 +11,5 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_5sdp"
-        android:background="@color/sodk_editor_dotted_line_bg_color" />
+        android:background="@color/editor_dotted_line_bg_color" />
 </LinearLayout>

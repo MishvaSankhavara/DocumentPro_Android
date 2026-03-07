@@ -70,7 +70,7 @@
         android:fontFamily="@font/bold"
         android:gravity="center"
         android:text="@string/dialog_rate_action"
-        android:textColor="@color/white"
+        android:textColor="@color/app_white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

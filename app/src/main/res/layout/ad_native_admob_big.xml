@@ -72,7 +72,7 @@
                         android:fontFamily="@font/medium"
                         android:maxLines="2"
                         android:text="afd"
-                        android:textColor="@color/colorPrimaryText" />
+                        android:textColor="@color/app_primary_text" />
 
                     <FrameLayout
                         android:id="@+id/v_options"
@@ -93,7 +93,7 @@
                     android:fontFamily="@font/medium"
                     android:maxLines="3"
                     android:text="sfdds"
-                    android:textColor="@color/colorNormalText" />
+                    android:textColor="@color/app_normal_text" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -106,7 +106,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_button_action_round_10"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/app_white"
             android:textSize="15sp" />
     </RelativeLayout>
 

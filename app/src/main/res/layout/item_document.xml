@@ -118,7 +118,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginEnd="3dp"
-        android:background="@color/line_bg"
+        android:background="@color/app_divider_two"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/iv_more"
         app:layout_constraintStart_toStartOf="@+id/tv_name" />

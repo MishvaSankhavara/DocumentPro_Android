@@ -78,7 +78,7 @@
                         android:fontFamily="@font/bold"
                         android:gravity="center"
                         android:text="Ad"
-                        android:textColor="@color/white"
+                        android:textColor="@color/app_white"
                         android:textSize="10sp" />
                 </LinearLayout>
             </LinearLayout>

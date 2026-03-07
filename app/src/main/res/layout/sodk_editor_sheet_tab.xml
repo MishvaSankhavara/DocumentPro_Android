@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/sodk_editor_transparent"
+            android:background="@color/editor_transparent"
             android:clickable="false"
             android:fontFamily="@font/medium"
             android:gravity="center"
@@ -36,12 +36,12 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:background="@color/sodk_editor_transparent"
+            android:background="@color/editor_transparent"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:scaleType="center"
             android:src="@drawable/ic_close"
-            app:tint="@color/white" />
+            app:tint="@color/app_white" />
     </LinearLayout>
 </merge>

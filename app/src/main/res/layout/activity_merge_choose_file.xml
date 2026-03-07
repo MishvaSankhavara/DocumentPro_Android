@@ -91,7 +91,7 @@
             android:includeFontPadding="false"
             android:text="@string/str_action_continue"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/app_white"
             android:textSize="18sp" />
     </FrameLayout>
 

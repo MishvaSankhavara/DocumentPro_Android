@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="app_black">#FF000000</color>
+    <color name="app_white">#FFFFFFFF</color>
 
     <color name="colorAccent">#0b61da</color>
     <color name="bg_title">#141515</color>
@@ -20,7 +20,7 @@
     <color name="colorProgressBg">#444953</color>
     <color name="ip_color_convert_bg">#27282d</color>
     <color name="colorEtTint">#78869d</color>
-    <color name="bg_main">#141515</color>
+    <color name="app_background">#141515</color>
 
     <color name="colorIcon">#FFFFFFFF</color>
     <color name="colorOnPrimary">#141515</color>
@@ -45,7 +45,7 @@
     <color name="colorTextPrimary">#FFFFFFFF</color>
     <color name="colorTextSecondary">#9798a2</color>
 
-    <color name="colorPrimaryText">#FFFFFFFF</color>
+    <color name="app_primary_text">#FFFFFFFF</color>
     <color name="text_main_color">#FFFFFFFF</color>
 
 </resources>
