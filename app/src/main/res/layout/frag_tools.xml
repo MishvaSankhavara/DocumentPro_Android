@@ -11,7 +11,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="17dp"
         android:layout_marginBottom="7dp"
-        android:fontFamily="@font/semibold"
+        android:fontFamily="@font/roboto_semibold"
         android:text="@string/label_pdf_tools"
         android:textColor="@color/colorTextPrimary"
         android:textSize="16sp"

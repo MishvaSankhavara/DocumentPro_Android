@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:drawablePadding="8dp"
-        android:fontFamily="@font/medium"
+        android:fontFamily="@font/roboto_medium"
         android:gravity="center"
         android:text="@string/label_camera"
         android:textColor="@color/colorTextPrimary"

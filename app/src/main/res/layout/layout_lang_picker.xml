@@ -21,7 +21,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/medium"
+        android:fontFamily="@font/roboto_medium"
         android:gravity="center_vertical"
         android:text="@string/toolbar_title_choose_language"
         android:textColor="@color/app_white"

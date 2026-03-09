@@ -70,7 +70,7 @@
                     android:id="@+id/doc_note_editor_author"
                     style="@style/sodk_editor_note_editor_textview_style"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bold"
+                    android:fontFamily="@font/roboto_bold"
                     android:text=""
                     android:textSize="24.0sp" />
 
@@ -78,7 +78,7 @@
                     android:id="@+id/doc_note_editor_date"
                     style="@style/sodk_editor_note_editor_textview_style"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/roboto_medium"
                     android:text=""
                     android:textSize="13sp" />
 
@@ -86,7 +86,7 @@
                     android:id="@+id/doc_note_editor_text"
                     style="@style/sodk_editor_note_editor_textview_style"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/roboto_medium"
                     android:gravity="top"
                     android:imeOptions="flagNoFullscreen"
                     android:minLines="6"

@@ -75,7 +75,7 @@
                         android:layout_height="14dp"
                         android:layout_marginTop="0dp"
                         android:background="@drawable/gnt_rounded_corners_shape"
-                        android:fontFamily="@font/bold"
+                        android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
                         android:text="Ad"
                         android:textColor="@color/app_white"

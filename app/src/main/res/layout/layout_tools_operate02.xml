@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ellipsize="end"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:maxLines="3"
             android:paddingLeft="48dp"

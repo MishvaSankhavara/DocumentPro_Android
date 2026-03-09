@@ -7,7 +7,7 @@
     </declare-styleable>
     <style name="SearchPageTabItemText">
         <item name="android:textSize">15sp</item>
-        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="textAllCaps">false</item>
     </style>
     <attr name="arfl_ratioHeight" format="integer" />

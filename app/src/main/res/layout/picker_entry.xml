@@ -19,7 +19,7 @@
             android:id="@id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
+            android:fontFamily="@font/roboto_regular"
             android:paddingStart="@dimen/_15sdp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"

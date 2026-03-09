@@ -61,7 +61,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_merge_chooser_continue"
             android:enabled="false"
-            android:fontFamily="@font/semibold"
+            android:fontFamily="@font/roboto_semibold"
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/action_share"

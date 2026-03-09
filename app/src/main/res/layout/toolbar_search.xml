@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="?attr/actionBarItemBackground"
-        android:fontFamily="@font/bold"
+        android:fontFamily="@font/roboto_bold"
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"

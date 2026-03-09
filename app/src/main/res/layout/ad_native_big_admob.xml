@@ -69,7 +69,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/v_options"
                         android:ellipsize="end"
-                        android:fontFamily="@font/medium"
+                        android:fontFamily="@font/roboto_medium"
                         android:maxLines="2"
                         android:text="afd"
                         android:textColor="@color/app_primary_text" />
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/roboto_medium"
                     android:maxLines="3"
                     android:text="sfdds"
                     android:textColor="@color/app_normal_text" />

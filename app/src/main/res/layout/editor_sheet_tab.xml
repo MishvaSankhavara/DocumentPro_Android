@@ -21,7 +21,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/editor_transparent"
             android:clickable="false"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:paddingHorizontal="21dp"
             android:textColor="@color/bottom_sheet_text_ss"
