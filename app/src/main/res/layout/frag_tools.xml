@@ -12,7 +12,7 @@
         android:layout_marginTop="17dp"
         android:layout_marginBottom="7dp"
         android:fontFamily="@font/semibold"
-        android:text="@string/str_pdf_tools"
+        android:text="@string/label_pdf_tools"
         android:textColor="@color/colorTextPrimary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

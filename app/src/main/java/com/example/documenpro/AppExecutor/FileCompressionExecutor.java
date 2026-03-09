@@ -62,7 +62,7 @@ public class FileCompressionExecutor {
     public void executeTask_FileCompression() {
         executor_FileCompression.execute(() -> {
             weakReference_FileCompression.get().runOnUiThread(() -> {
-                weakReference_FileCompression.get().tvTool.setText(weakReference_FileCompression.get().getResources().getString(R.string.compressing));
+                weakReference_FileCompression.get().tvTool.setText(weakReference_FileCompression.get().getResources().getString(R.string.message_compressing));
                 weakReference_FileCompression.get().tvPercent.setText("0");
             });
 
@@ -165,7 +165,7 @@ public class FileCompressionExecutor {
                             weakReference_FileCompression.get().tvPdfName.setText(file1.getName());
                             weakReference_FileCompression.get().tvPdfPath.setText(compressedPDF_FileCompression);
 
-                            String sb2 = weakReference_FileCompression.get().getResources().getString(R.string.reduced_from) + " " + uncompressedFileSize_FileCompression + " " + weakReference_FileCompression.get().getResources().getString(R.string.to) + " " + compressedFileSize_FileCompression;
+                            String sb2 = weakReference_FileCompression.get().getResources().getString(R.string.label_reduced_from) + " " + uncompressedFileSize_FileCompression + " " + weakReference_FileCompression.get().getResources().getString(R.string.to) + " " + compressedFileSize_FileCompression;
 
                             weakReference_FileCompression.get().tvResult.setText(sb2);
 

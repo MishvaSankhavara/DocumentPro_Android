@@ -23,7 +23,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/medium"
         android:gravity="center_vertical"
-        android:text="@string/toolbar_tittle_choose_language"
+        android:text="@string/toolbar_title_choose_language"
         android:textColor="@color/app_white"
         android:textSize="20sp"
         android:textStyle="bold"

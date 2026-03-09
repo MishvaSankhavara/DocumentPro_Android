@@ -243,7 +243,7 @@ public class CompactFileListAdapter extends RecyclerView.Adapter<CompactFileList
                                     } else {
                                         Toast.makeText(
                                                 mContext_FileListAdapter2,
-                                                R.string.dialog_rename_fail,
+                                                R.string.dialog_rename_failed,
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }

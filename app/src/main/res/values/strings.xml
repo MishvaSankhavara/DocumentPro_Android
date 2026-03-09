@@ -813,104 +813,99 @@
     <string name="dialog_set_password">Set password</string>
     <string name="dialog_remove_password_title"> Remove password</string>
     <string name="dialog_remove_password_description">The file will no longer be protected</string>
+    <string name="dialog_password_message">You need to enter the password to open it.</string>
+    <string name="dialog_password_input_hint">Password</string>
+    <string name="dialog_delete_message">Are you sure want to delete? This action cannot be undone</string>
+    <string name="dialog_info_storage_path">Storage path</string>
+    <string name="dialog_info_last_modified">Last modified</string>
+    <string name="dialog_file_name_title">Set file Name</string>
+    <string name="dialog_rename_dialog_title">Rename</string>
+    <string name="dialog_clear_confirm_title">Are you sure?</string>
+    <string name="dialog_favorite_remove">Move out of Favorite</string>
 
+    <string name="dialog_clear_recent_message">Recent list will be clear!</string>
+    <string name="dialog_clear_favorite_message">Favorite list will be clear!</string>
+    <string name="dialog_merge_exit_title">Quit merging?</string>
+    <string name="dialog_merge_exit_message">The changes will not be saved. Are your sure you want to quit?</string>
+    <string name="dialog_convert_exit_title">Quit converting?</string>
+    <string name="dialog_split_exit_title">Quit splitting?</string>
+    <string name="dialog_remove_recent_title">Move out of recent</string>
+    <string name="dialog_remove_message">Are you sure you want to move the file(s) out of this folder?</string>
+    <string name="dialog_jump_page_title">Jump to page</string>
+    <string name="dialog_jump_page_hint">Enter page number</string>
+    <string name="dialog_invalid_page_number">Invalid page number</string>
+    <string name="dialog_rename_same_name_error">Same Name</string>
+    <string name="dialog_rename_failed">Failed to rename file</string>
+    <string name="dialog_rename_invalid_characters">Invalid characters (@, #, $…)</string>
+    <string name="dialog_rate_middle_message">The best we can get~</string>
+    <string name="dialog_rate_button">Rate</string>
+    <string name="dialog_rate_subtitle">Your 5-star rating is our best gift!</string>
+    <string name="dialog_rate_description">Your approval helps spread the word and grow our product!</string>
 
-
-
-
-    <string name="dialog_password_body">You need to enter the password to open it.</string>
-    <string name="dialog_password_hint">Password</string>
-    <string name="dialog_delete_body">Are you sure want to delete? This action cannot be undone</string>
-    <string name="dialog_infor_path">Storage path</string>
-    <string name="dialog_infor_last_modified">Last modified</string>
-    <string name="dialog_file_name_tittle">Set file Name</string>
-    <string name="dialog_rename_title">Rename</string>
-    <string name="dialog_clear_tittle">Are you sure?</string>
-    <string name="dialog_move_fav">Move out of Favorite</string>
-
-    <string name="dialog_clear_body_1">Recent list will be clear!</string>
-    <string name="dialog_clear_body_2">Favorite list will be clear!</string>
-    <string name="dialog_merge_exit_tittle">Quit merging?</string>
-    <string name="dialog_merge_content">The changes will not be saved. Are your sure you want to quit?</string>
-    <string name="dialog_convert_exit_tittle">Quit converting?</string>
-    <string name="dialog_split_exit_tittle">Quit splitting?</string>
-    <string name="dialog_remove_title">Move out of recent</string>
-    <string name="dialog_remove_body">Are you sure you want to move the file(s) out of this folder?</string>
-    <string name="dialog_go_page_title">Jump to page</string>
-    <string name="dialog_go_page_body_hint">Enter page number</string>
-    <string name="dialog_go_page_invalid_page_number">Invalid page number</string>
-    <string name="dialog_rename_error">Same Name</string>
-    <string name="dialog_rename_fail">Failed to rename file</string>
-    <string name="dialog_rename_error_2">Invalid characters (@, #, $…)</string>
-    <string name="dialog_rate_middle_tip">The best we can get~</string>
-    <string name="dialog_rate_action">Rate</string>
-    <string name="dialog_rate_tip">Your 5-star rating is our best gift!</string>
-    <string name="dialog_rate_message">Your approval helps spread the word and grow our product!</string>
-
-    <string name="dialog_rate_tip_4_5_star">Yay!</string>
-    <string name="dialog_rate_tip_4_5_message">Thanks for your support!</string>
-    <string name="dialog_rate_tip_3_star">Oops…</string>
-    <string name="dialog_rate_tip_3_messege">Seems like you got some problems while using our app.</string>
-    <string name="dialog_exit_tittle">Do you want to exit ?</string>
+    <string name="dialog_rate_success_title">Yay!</string>
+    <string name="dialog_rate_success_message">Thanks for your support!</string>
+    <string name="dialog_rate_issue_title">Oops…</string>
+    <string name="dialog_rate_issue_message">Seems like you got some problems while using our app.</string>
+    <string name="dialog_exit_title">Do you want to exit ?</string>
     <string name="dialog_sort_title">Sort By</string>
-    <string name="dialog_sort_by_name">Name</string>
-    <string name="dialog_sort_by_date">Last modified</string>
-    <string name="dialog_sort_by_size">File Size</string>
-    <string name="dialog_sort_order">Order</string>
-    <string name="dialog_sort_ascending">Ascending</string>
-    <string name="dialog_sort_descending">Descending</string>
-    <string name="turn_on_permission_guide">* Go to set -&gt; Click Permissions -&gt; Turn on Storage permission</string>
-    <string name="tittle_save_dialog">"Save Document</string>
-    <string name="content_save_dialog">Document has changes. Save them?</string>
+    <string name="dialog_sort_option_name">Name</string>
+    <string name="dialog_sort_option_date">Last modified</string>
+    <string name="dialog_sort_option_size">File Size</string>
+    <string name="dialog_sort_order_title">Order</string>
+    <string name="dialog_sort_order_ascending">Ascending</string>
+    <string name="dialog_sort_order_descending">Descending</string>
+    <string name="permission_storage_enable_guide">* Go to set -&gt; Click Permissions -&gt; Turn on Storage permission</string>
+    <string name="dialog_save_document_title">"Save Document</string>
+    <string name="dialog_save_document_message">Document has changes. Save them?</string>
 
-    <string name="dialog_sort_date_new_old">From new to old</string>
-    <string name="dialog_sort_date_old_new">From old to new</string>
-    <string name="dialog_sort_a_z" translatable="false">A-Z</string>
-    <string name="dialog_sort_z_a" translatable="false">Z-A</string>
-    <string name="dialog_sort_large_small">From large to small</string>
-    <string name="dialog_sort_small_large">From small to large</string>
+    <string name="dialog_sort_date_new_to_old">From new to old</string>
+    <string name="dialog_sort_date_old_to_new">From old to new</string>
+    <string name="dialog_sort_alphabet_a_to_z" translatable="false">A-Z</string>
+    <string name="dialog_sort_alphabet_z_to_a" translatable="false">Z-A</string>
+    <string name="dialog_sort_size_large_to_small">From large to small</string>
+    <string name="dialog_sort_size_small_to_large">From small to large</string>
 
-    <string name="dialog_tittle_exporting">Exporting images…</string>
-    <string name="str_general">General</string>
+    <string name="dialog_exporting_images_title">Exporting images…</string>
+    <string name="label_general">General</string>
 
     //ToolBar Tittle
-    <string name="toolbar_tittle_choose_file">Select a file</string>
-    <string name="toolbar_tittle_choose_language">Choose Language</string>
-    <string name="recent_files_appear_here">Your recently viewed files will appear here</string>
-    
-    <string name="share_app_tittle">My application name</string>
-    <string name="share_action">Choose one</string>
-    <string name="share_message">Let me recommend you this application</string>
-    <string name="no_permissions">No permissions</string>
-    <string name="recovery_authorization_to_all_files">Permission is required to access all files</string>
-    <string name="remove_from_recent">Remove From Recent</string>
-    <string name="toggle_reflow_mode">Toggle reflow mode</string>
-    <string name="text_not_found">Text not found</string>
-    <string name="no_further_occurrences_found">No further occurrences found</string>
-    <string name="cannot_open_document_Reason">Cannot open document: %1$s</string>
-    <string name="cannot_open_document">Cannot open document</string>
-    <string name="document_has_changes_save_them_">Document has changes. Save them?</string>
-    <string name="print_failed">Print failed</string>
-    <string name="toast_error_share_file">Error sharing file</string>
-    <string name="share_file_using">Share File using</string>
-    <string name="img_add_to_favorites">Add files to Favorites for quick access</string>
+    <string name="toolbar_title_select_file">Select a file</string>
+    <string name="toolbar_title_choose_language">Choose Language</string>
+    <string name="message_recent_files_empty">Your recently viewed files will appear here</string>
+
+    <string name="share_app_title">My application name</string>
+    <string name="share_choose_option">Choose one</string>
+    <string name="share_recommend_message">Let me recommend you this application</string>
+    <string name="permission_none">No permissions</string>
+    <string name="permission_all_files_required">Permission is required to access all files</string>
+    <string name="action_remove_from_recent">Remove From Recent</string>
+    <string name="action_toggle_reflow_mode">Toggle reflow mode</string>
+    <string name="message_text_not_found">Text not found</string>
+    <string name="message_no_more_occurrences">No further occurrences found</string>
+    <string name="error_cannot_open_document_reason">Cannot open document: %1$s</string>
+    <string name="error_cannot_open_document">Cannot open document</string>
+    <string name="dialog_save_changes_message">Document has changes. Save them?</string>
+    <string name="error_print_failed">Print failed</string>
+    <string name="toast_share_file_error">Error sharing file</string>
+    <string name="share_file_using_title">Share File using</string>
+    <string name="message_add_files_to_favorites">Add files to Favorites for quick access</string>
 
     // them sau
-    <string name="mupdf_title">MuPDF</string>
-    <string name="no_media_warning">Storage media not present</string>
-    <string name="no_media_hint">Sharing the storage media with a PC can make it inaccessible</string>
-    <string name="cancel">Cancel</string>
-    <string name="search_backwards">Search backwards</string>
-    <string name="search_forwards">Search forwards</string>
-    <string name="search_document">Search document</string>
-    <string name="picker_title_App_Ver_Dir" translatable="false">%1$s %2$s: %3$s</string>
-    <string name="outline_title">Table of Contents</string>
-    <string name="searching_">Searching&#8230;</string>
-    <string name="toggle_links">Highlight and enable links</string>
-    <string name="select">Select</string>
-    <string name="search">Search</string>
+    <string name="library_mupdf_title">MuPDF</string>
+    <string name="warning_no_storage_media">Storage media not present</string>
+    <string name="hint_storage_media_pc_inaccessible">Sharing the storage media with a PC can make it inaccessible</string>
+    <string name="action_cancel_app">Cancel</string>
+    <string name="action_search_backwards">Search backwards</string>
+    <string name="action_search_forwards">Search forwards</string>
+    <string name="action_search_document">Search document</string>
+    <string name="picker_title_app_version_directory" translatable="false">%1$s %2$s: %3$s</string>
+    <string name="outline_table_of_contents">Table of Contents</string>
+    <string name="message_searching">Searching&#8230;</string>
+    <string name="action_toggle_links">Highlight and enable links</string>
+    <string name="action_select">Select</string>
+    <string name="action_search_app">Search</string>
     <string name="copy">Copy</string>
-    <string name="strike_out">Strike-out</string>
+    <string name="action_strike_out">Strike-out</string>
     <string name="delete">Delete</string>
     <string name="highlight">Highlight</string>
     <string name="underline">Underline</string>
@@ -922,93 +917,93 @@
     <string name="parent_directory">[Up one level]</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="entering_reflow_mode">Entering reflow mode</string>
-    <string name="leaving_reflow_mode">Leaving reflow mode</string>
+    <string name="message_entering_reflow_mode">Entering reflow mode</string>
+    <string name="message_leaving_reflow_mode">Leaving reflow mode</string>
     <string name="select_text">Select text</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
-    <string name="no_text_selected">No text selected</string>
+    <string name="message_copied_to_clipboard">Copied to clipboard</string>
+    <string name="message_no_text_selected">No text selected</string>
     <string name="draw_annotation">Draw annotation</string>
-    <string name="nothing_to_save">Nothing to save</string>
-    <string name="toast_cant_compress_low_memory">Can\'t compress. Low memory!</string>
+    <string name="message_nothing_to_save">Nothing to save</string>
+    <string name="toast_compress_low_memory">Can\'t compress. Low memory!</string>
     <string name="to">to</string>
-    <string name="reduced_from">Reduced from</string>
+    <string name="label_reduced_from">Reduced from</string>
     <string name="okay">Okay</string>
-    <string name="copy_text_to_the_clipboard">Copy text to the clipboard</string>
+    <string name="action_copy_text_to_clipboard">Copy text to the clipboard</string>
     <string name="more">More</string>
     <string name="accept">Accept</string>
     <string name="copy_text">copy text</string>
-    <string name="compressing">Compressing</string>
-    <string name="compressed">Compressed</string>
+    <string name="message_compressing">Compressing</string>
+    <string name="message_compressed">Compressed</string>
     <string name="toast_file_protected_unprotect">The file is protected, please unprotect</string>
-    <string name="pdf_detail_text" translatable="false">%1$s   %2$s</string>
+    <string name="pdf_detail_format" translatable="false">%1$s   %2$s</string>
 
-    <string name="open_failed">Unable to open the document</string>
-    <string name="helpPutSign">Double-tap where you want to place your signature</string>
-    <string name="noSignOnPdfTitle">Warning</string>
-    <string name="noSignOnPdf">The document has not been signed. Please, double-tap where you want to place your signature</string>
+    <string name="error_open_document_failed">Unable to open the document</string>
+    <string name="hint_place_signature">Double-tap where you want to place your signature</string>
+    <string name="dialog_signature_warning_title">Warning</string>
+    <string name="dialog_signature_warning_message">The document has not been signed. Please, double-tap where you want to place your signature</string>
     <string name="OkKey">OK</string>
-    <string name="toast_exit_app">Press back again to exit</string>
-    <string name="more_features_coming_soon">More features coming soon</string>
-    <string name="x_selected">%s Selected</string>
+    <string name="toast_press_back_to_exit">Press back again to exit</string>
+    <string name="message_more_features_coming_soon">More features coming soon</string>
+    <string name="label_items_selected">%s Selected</string>
     <string name="str_action_done">Done</string>
-    <string name="select_area_to_delete">Select area to delete</string>
-    <string name="unable_print_toast">This file is password protected and cannot be printed.</string>
-    <string name="unable_compress_toast">This file is password protected and cannot be compressed.</string>
-    <string name="unable_split_toast">This file is password protected and cannot be split.</string>
-    <string name="unable_convert_toast">This file is password protected and cannot be converted.</string>
-    <string name="locking">Locking…</string>
-    <string name="toast_file_password">File is now password protected!</string>
-    <string name="utils_share_txt">Hey view/download this image</string>
+    <string name="hint_select_area_to_delete">Select area to delete</string>
+    <string name="toast_print_password_protected">This file is password protected and cannot be printed.</string>
+    <string name="toast_compress_password_protected">This file is password protected and cannot be compressed.</string>
+    <string name="toast_split_password_protected">This file is password protected and cannot be split.</string>
+    <string name="toast_convert_password_protected">This file is password protected and cannot be converted.</string>
+    <string name="message_locking">Locking…</string>
+    <string name="toast_file_password_protected">File is now password protected!</string>
+    <string name="share_image_message">Hey view/download this image</string>
 
-    <string name="album_name_all">All Media</string>
-    <string name="button_preview">Preview</string>
-    <string name="button_apply_default">Apply</string>
-    <string name="button_apply">Apply(%1$d)</string>
-    <string name="button_back">Back</string>
-    <string name="photo_grid_capture">Camera</string>
-    <string name="empty_text">No media yet</string>
-    <string name="error_over_count_default">You have reached max selectable</string>
-    <string name="error_over_count" translatable="false">You can only select up to %1$d media files</string>
-    <string name="error_under_quality">Under quality</string>
-    <string name="error_over_quality">Over quality</string>
-    <string name="error_file_type">Unsupported file type</string>
-    <string name="error_type_conflict">Can\'t select images and videos at the same time</string>
-    <string name="error_no_video_activity">No App found supporting video preview</string>
-    <string name="error_over_original_size" translatable="false">Can\'t select the images larger than %1$d MB</string>
-    <string name="error_over_original_count" translatable="false">%1$d images over %2$d MB. Original will be unchecked</string>
+    <string name="album_all_media">All Media</string>
+    <string name="action_button_preview">Preview</string>
+    <string name="action_button_apply_default">Apply</string>
+    <string name="action_button_apply">Apply(%1$d)</string>
+    <string name="action_button_back">Back</string>
+    <string name="label_camera">Camera</string>
+    <string name="message_no_media">No media yet</string>
+    <string name="error_max_selection_reached">You have reached max selectable</string>
+    <string name="error_selection_limit" translatable="false">You can only select up to %1$d media files</string>
+    <string name="error_quality_too_low">Under quality</string>
+    <string name="error_quality_too_high">Over quality</string>
+    <string name="error_unsupported_file_type">Unsupported file type</string>
+    <string name="error_media_type_conflict">Can\'t select images and videos at the same time</string>
+    <string name="error_no_video_preview_app">No App found supporting video preview</string>
+    <string name="error_images_over_size_limit" translatable="false">Can\'t select the images larger than %1$d MB</string>
+    <string name="action_original" translatable="false">%1$d images over %2$d MB. Original will be unchecked</string>
     <string name="button_original">Original</string>
-    <string name="long_press_to_manual_sorting">Long press to sort manually</string>
-    <string name="toast_cannot_print_malformed_pdf">Cannot print a malformed PDF file</string>
-    <string name="toast_cant_print_password_protected_pdf">Cannot print a password protected PDF file</string>
-    <string name="toast_device_does_not_support_printing">Your device does not support printing</string>
-    <string name="toast_cannot_print_unknown_error">Cannot print PDF file, Unknown error has occurred</string>
-    <string name="merge_x">Merge (%s)</string>
-    <string name="percent_sign" translatable="false">%</string>
-    <string name="converting">Converting…</string>
-    <string name="file_merging">Merging…</string>
+    <string name="hint_long_press_manual_sort">Long press to sort manually</string>
+    <string name="toast_print_malformed_pdf">Cannot print a malformed PDF file</string>
+    <string name="toast_print_password_protected_pdf">Cannot print a password protected PDF file</string>
+    <string name="toast_print_not_supported">Your device does not support printing</string>
+    <string name="toast_print_unknown_error">Cannot print PDF file, Unknown error has occurred</string>
+    <string name="action_merge_count">Merge (%s)</string>
+    <string name="symbol_percent" translatable="false">%</string>
+    <string name="message_converting">Converting…</string>
+    <string name="message_merging_files">Merging…</string>
     <string name="toast_merge_failed">Failed to merge. One or more files are corrupt or password protected</string>
-    <string name="toast_failed_low_memory">Failed! low memory</string>
-    <string name="file_splitting">Splitting…</string>
-    <string name="pdf_files_created_appear_here">Your pdf created files will appear here</string>
-    <string name="utils_share_image_via">Share File via…</string>
-    <string name="x_percent_sign" translatable="false">%1$s </string>
-    <string name="save_image_progress">Image %1$s of %2$s</string>
+    <string name="toast_low_memory_error">Failed! low memory</string>
+    <string name="message_splitting_files">Splitting…</string>
+    <string name="message_created_pdfs_empty">Your pdf created files will appear here</string>
+    <string name="share_file_via">Share File via…</string>
+    <string name="format_percent_value" translatable="false">%1$s </string>
+    <string name="message_save_image_progress">Image %1$s of %2$s</string>
 
-    <string name="percent_complete" translatable="false">%d%%</string>
+    <string name="format_percent_complete" translatable="false">%d%%</string>
     <string name="str_action_convert">Convert</string>
-    <string name="toolbar_title_image_to_pdf">Convert image to PDF</string>
+    <string name="toolbar_title_convert_image_to_pdf">Convert image to PDF</string>
 
 
-    <string name="guide_title_1">Organize \nYour PDF</string>
-    <string name="guide_title_2">Powerful \nPDF Editor</string>
-    <string name="guide_title_3">PDF \nRead &amp; Edit </string>
+    <string name="onboarding_title_organize_pdf">Organize \nYour PDF</string>
+    <string name="onboarding_title_pdf_editor">Powerful \nPDF Editor</string>
+    <string name="onboarding_title_pdf_read_edit">PDF \nRead &amp; Edit </string>
 
-    <string name="guide_des_1">Smart and efficient file management</string>
-    <string name="guide_des_2">Various PDF tools</string>
-    <string name="guide_des_3">Highlight, draw, underline , stroke text</string>
-    <string name="title_question_exit">Are you satisfied with PDF Reader?</string>
-    <string name="message_question_exit">If you have a trouble when reading files, click to feedback to us</string>
-    <string name="btn_exit">Tap here to exit app</string>
-    <string name="str_next" translatable="false">Next</string>
-    <string name="str_pdf_tools" translatable="false">PDF Tools</string>
+    <string name="onboarding_description_file_management">Smart and efficient file management</string>
+    <string name="onboarding_description_pdf_tools">Various PDF tools</string>
+    <string name="onboarding_description_pdf_edit_features">Highlight, draw, underline , stroke text</string>
+    <string name="dialog_exit_feedback_title">Are you satisfied with PDF Reader?</string>
+    <string name="dialog_exit_feedback_message">If you have a trouble when reading files, click to feedback to us</string>
+    <string name="action_exit_app">Tap here to exit app</string>
+    <string name="action_next" translatable="false">Next</string>
+    <string name="label_pdf_tools" translatable="false">PDF Tools</string>
 </resources>

@@ -145,13 +145,13 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
 
         if (operationMode == AppGlobalConstants.TOOL_ID_PRINT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_print_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.toast_print_password_protected);
             } else {
                 PdfPrintUtils.printPdf_Utils(this, Uri.fromFile(new File(pdfModel_listener.getAbsolutePath_PDFModel())));
             }
         } else if (operationMode == AppGlobalConstants.TOOL_ID_COMPRESS) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_compress_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.toast_compress_password_protected);
             } else {
                 Intent taskIntent = new Intent(this, ProcessingTaskActivity.class);
                 taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_COMPRESS);
@@ -161,7 +161,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             }
         } else if (operationMode == AppGlobalConstants.TOOL_ID_SPLIT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_split_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.toast_split_password_protected);
             } else {
                 Intent splitIntent = new Intent(this, SplitChooseFileActivity.class);
                 splitIntent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, pdfModel_listener);
@@ -170,7 +170,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             }
         } else if (operationMode == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_convert_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.toast_convert_password_protected);
             } else {
                 Intent convertIntent = new Intent(this, SharePdfAsImageActivity.class);
                 convertIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_PDF_TO_PHOTO);
@@ -180,7 +180,7 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             }
         } else if (operationMode == AppGlobalConstants.TOOL_ID_LOCK_PDF) {
             if (pdfModel_listener.isProtected_PDFModel()) {
-                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.unable_convert_toast);
+                DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this, R.string.toast_convert_password_protected);
             } else {
                 DialogManagerUtils.showPasswordSetup(this, new PasswordClickListener() {
                     @Override

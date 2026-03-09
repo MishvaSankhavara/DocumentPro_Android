@@ -128,7 +128,7 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
 
         mergeButtonText = findViewById(R.id.tv_continue);
         mergeButtonText.setEnabled(true);
-        mergeButtonText.setText(getResources().getString(R.string.merge_x,
+        mergeButtonText.setText(getResources().getString(R.string.action_merge_count,
                 String.valueOf(DocumentMyApplication.getInstance().getMergedPdfList().size())));
         mergePdfList = DocumentMyApplication.getInstance().getMergedPdfList();
 
@@ -136,7 +136,7 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
             mergePdfList.remove(mPosition);
             mergeReorderAdapter.notifyItemRemoved(mPosition);
             saveMergePdfList();
-            mergeButtonText.setText(getString(R.string.merge_x,
+            mergeButtonText.setText(getString(R.string.action_merge_count,
                     String.valueOf(DocumentMyApplication.getInstance().getMergedPdfList().size())));
             if (DocumentMyApplication.getInstance().getMergedPdfList().size() < 2) {
                 mergeButtonText.setEnabled(false);

@@ -34,7 +34,7 @@
         android:fontFamily="@font/medium"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="2dp"
-        android:text="@string/dialog_delete_body"
+        android:text="@string/dialog_delete_message"
         android:textColor="@color/app_normal_text"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

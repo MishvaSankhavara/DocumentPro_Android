@@ -153,10 +153,10 @@ public class SelectedItemCollection {
     public IncapableCause isAcceptable(Item item) {
         if (maxSelectableReached()) {
             int maxSelectable = currentMaxSelectable();
-            String cause = mContext.getString(R.string.error_over_count, maxSelectable);
+            String cause = mContext.getString(R.string.error_selection_limit, maxSelectable);
             return new IncapableCause(cause);
         } else if (typeConflict(item)) {
-            return new IncapableCause(mContext.getString(R.string.error_type_conflict));
+            return new IncapableCause(mContext.getString(R.string.error_media_type_conflict));
         }
 
         return PhotoMetadataUtils.isAcceptable(mContext, item);

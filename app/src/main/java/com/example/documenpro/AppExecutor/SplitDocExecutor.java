@@ -46,7 +46,7 @@ public class SplitDocExecutor {
         executor_SplitDoc.execute(() -> {
 
             weakReference_SplitDoc.get().runOnUiThread(() -> {
-                weakReference_SplitDoc.get().tvTool.setText(weakReference_SplitDoc.get().getResources().getString(R.string.file_splitting));
+                weakReference_SplitDoc.get().tvTool.setText(weakReference_SplitDoc.get().getResources().getString(R.string.message_splitting_files));
                 weakReference_SplitDoc.get().tvPercent.setText("0");
             });
 

@@ -66,7 +66,7 @@ public class FragmentFavorite extends Fragment implements DocClickListener {
         favoriteRecyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
         emptyDescriptionText = view.findViewById(R.id.tv_empty_desc);
         loadingProgressBar = view.findViewById(R.id.loadingView);
-        emptyDescriptionText.setText(activityContext.getResources().getString(R.string.img_add_to_favorites));
+        emptyDescriptionText.setText(activityContext.getResources().getString(R.string.message_add_files_to_favorites));
         favoriteAdapter = new FavoriteItemsAdapter(activityContext, this);
         favoriteRecyclerView.setAdapter(favoriteAdapter);
         loadingProgressBar.setVisibility(View.GONE);

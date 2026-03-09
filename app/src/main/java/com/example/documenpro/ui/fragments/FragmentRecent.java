@@ -63,7 +63,7 @@ public class FragmentRecent extends Fragment implements DocClickListener {
         recentRecyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
         emptyDescriptionText = view.findViewById(R.id.tv_empty_desc);
         loadingProgressBar = view.findViewById(R.id.loadingView);
-        emptyDescriptionText.setText(activityContext.getResources().getString(R.string.recent_files_appear_here));
+        emptyDescriptionText.setText(activityContext.getResources().getString(R.string.message_recent_files_empty));
         recentFilesAdapter = new RecentFilesAdapter(activityContext, this);
         recentRecyclerView.setAdapter(recentFilesAdapter);
         loadingProgressBar.setVisibility(View.GONE);

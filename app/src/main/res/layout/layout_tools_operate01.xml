@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/semibold"
         android:maxLines="1"
-        android:text="@string/percent_sign"
+        android:text="@string/symbol_percent"
         android:textColor="@color/colorSolidText"
         android:textSize="35sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/operateProgressTv"

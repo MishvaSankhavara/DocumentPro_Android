@@ -154,7 +154,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                     optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                     activeButtonEnabled(true);
                 }
-                topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
+                topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -174,7 +174,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
     private void setupToolbar() {
         topToolbar = findViewById(R.id.toolbar);
 
-        topToolbar.setTitle(getString(R.string.x_selected, "0"));
+        topToolbar.setTitle(getString(R.string.label_items_selected, "0"));
         setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -204,7 +204,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
     @Override
     public void onChoosePdfSplitListener() {
         updateContinueButtonState();
-        topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
+        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
         if (thumbnailAdapter.getSelected_PdfPreview().size() == pdfPageList.size()) {
             optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
             thumbnailAdapter.isSelectedAll_PdfPreview = true;
@@ -276,7 +276,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                             } catch (OutOfMemoryError e2) {
                                 e = e2;
                                 fileOutputStream = fileOutputStream2;
-                                Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG).show();
+                                Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_low_memory_error), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                                 weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                                 fileOutputStream.close();
@@ -286,7 +286,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                             fileOutputStream = fileOutputStream2;
                             i = pageCount;
                             str = sb5;
-                            Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG).show();
+                            Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_low_memory_error), Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                             weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                             fileOutputStream.close();

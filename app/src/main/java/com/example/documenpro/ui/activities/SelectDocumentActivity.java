@@ -89,7 +89,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
 
     private void initToolbar() {
         topToolbar = findViewById(R.id.toolbar);
-        topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(0)));
+        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(0)));
         setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -290,7 +290,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
                 optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                 updateActionButtonsState(true);
             }
-            topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
+            topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
 
         }
 
@@ -300,7 +300,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
     @Override
     public void onItemSelected() {
         updateActionButtonsState(!filePickerAdapter.getSelected_FilePicker().isEmpty());
-        topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
+        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
         if (filePickerAdapter.getSelected_FilePicker().size() == documentList.size()) {
             optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
             filePickerAdapter.isSelectedAll_FilePicker = true;
@@ -389,7 +389,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
             weakReference.get().documentRecyclerView.setAdapter(weakReference.get().filePickerAdapter);
 
             weakReference.get().updateActionButtonsState(!weakReference.get().filePickerAdapter.getSelected_FilePicker().isEmpty());
-            weakReference.get().topToolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
+            weakReference.get().topToolbar.setTitle(weakReference.get().getString(R.string.label_items_selected, String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
 
 
         }
@@ -456,7 +456,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
                 weakReference.get().filePickerAdapter = new FilePickerAdapter(weakReference.get(), weakReference.get().documentList, weakReference.get());
                 weakReference.get().documentRecyclerView.setAdapter(weakReference.get().filePickerAdapter);
                 weakReference.get().updateActionButtonsState(!weakReference.get().filePickerAdapter.getSelected_FilePicker().isEmpty());
-                weakReference.get().topToolbar.setTitle(weakReference.get().getString(R.string.x_selected, String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
+                weakReference.get().topToolbar.setTitle(weakReference.get().getString(R.string.label_items_selected, String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
             }
         }
 

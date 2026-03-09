@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/str_general"
+                android:text="@string/label_general"
                 android:textColor="@color/gray"
                 android:textSize="12sp" />
 
@@ -141,7 +141,7 @@
                     android:layout_marginStart="56dp"
                     android:layout_marginEnd="20dp"
                     android:gravity="left|center_vertical|center_horizontal|center|start"
-                    android:text="@string/dialog_rate_action"
+                    android:text="@string/dialog_rate_button"
                     android:textAlignment="viewStart"
                     android:textColor="@color/colorTextPrimary"
                     android:textSize="14sp"

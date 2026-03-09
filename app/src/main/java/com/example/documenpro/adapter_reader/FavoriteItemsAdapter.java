@@ -148,7 +148,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                             } else {
                                 Toast.makeText(
                                         mContext_FavoriteItems,
-                                        R.string.dialog_rename_fail,
+                                        R.string.dialog_rename_failed,
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

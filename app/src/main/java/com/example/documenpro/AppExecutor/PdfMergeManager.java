@@ -51,7 +51,7 @@ public class PdfMergeManager {
         executor_PdfMergeManager.execute(() -> {
 
             weakReference_PdfMergeManager.get().runOnUiThread(() -> {
-                weakReference_PdfMergeManager.get().tvTool.setText(weakReference_PdfMergeManager.get().getResources().getString(R.string.file_merging));
+                weakReference_PdfMergeManager.get().tvTool.setText(weakReference_PdfMergeManager.get().getResources().getString(R.string.message_merging_files));
                 weakReference_PdfMergeManager.get().tvPercent.setText("0");
 
                 for (int i = 0; i < pdfPaths_PdfMergeManager.size(); i++) {

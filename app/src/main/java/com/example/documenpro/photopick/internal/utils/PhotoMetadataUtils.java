@@ -105,7 +105,7 @@ public final class PhotoMetadataUtils {
 
     public static IncapableCause isAcceptable(Context context, Item item) {
         if (!isSelectableType(context, item)) {
-            return new IncapableCause(context.getString(R.string.error_file_type));
+            return new IncapableCause(context.getString(R.string.error_unsupported_file_type));
         }
 
         if (SelectionSpec.getInstance().filters != null) {

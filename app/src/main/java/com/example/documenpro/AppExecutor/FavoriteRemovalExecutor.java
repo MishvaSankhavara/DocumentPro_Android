@@ -34,7 +34,7 @@ public class FavoriteRemovalExecutor {
 
             weakReference_removeFav.get().updateActionButtonsState(weakReference_removeFav.get().filePickerAdapter.getSelected_FilePicker().size() > 0);
 
-            weakReference_removeFav.get().topToolbar.setTitle(weakReference_removeFav.get().getString(R.string.x_selected, String.valueOf(weakReference_removeFav.get().filePickerAdapter.getSelected_FilePicker().size())));
+            weakReference_removeFav.get().topToolbar.setTitle(weakReference_removeFav.get().getString(R.string.label_items_selected, String.valueOf(weakReference_removeFav.get().filePickerAdapter.getSelected_FilePicker().size())));
         }
     }
 

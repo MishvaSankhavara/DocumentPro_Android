@@ -216,13 +216,13 @@ public class MatisseActivity extends AppCompatActivity implements
         int selectedCount = mSelectedCollection.count();
         if (selectedCount == 0) {
             mButtonApply.setEnabled(false);
-            mButtonApply.setText(getString(R.string.button_apply_default));
+            mButtonApply.setText(getString(R.string.action_button_apply_default));
         } else if (selectedCount == 1 && mSpec.singleSelectionModeEnabled()) {
-            mButtonApply.setText(R.string.button_apply_default);
+            mButtonApply.setText(R.string.action_button_apply_default);
             mButtonApply.setEnabled(true);
         } else {
             mButtonApply.setEnabled(true);
-            mButtonApply.setText(getString(R.string.button_apply, selectedCount));
+            mButtonApply.setText(getString(R.string.action_button_apply, selectedCount));
         }
 
     }

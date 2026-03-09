@@ -81,7 +81,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="12dp"
                 android:gravity="center"
-                android:text="@string/select"
+                android:text="@string/action_select"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -98,7 +98,7 @@
             android:minWidth="100dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="@string/button_apply"
+            android:text="@string/action_button_apply"
             android:textAllCaps="false"
             android:textColor="@color/app_white"
             android:textSize="16sp" />

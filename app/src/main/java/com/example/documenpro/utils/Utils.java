@@ -398,12 +398,12 @@ public class Utils {
     public static void shareImage(Context context, String filePath) {
         try {
             Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.utils_share_txt));
+            intent.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.share_image_message));
             String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), filePath, "", null);
             Uri screenshotUri = Uri.parse(path);
             intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
             intent.setType("image/*");
-            context.startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.utils_share_image_via)));
+            context.startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.share_file_via)));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -752,11 +752,11 @@ public class Utils {
             i.setType("text/plain");
             Resources res = context.getResources();
 
-            i.putExtra(Intent.EXTRA_SUBJECT, res.getString(R.string.share_app_tittle));
+            i.putExtra(Intent.EXTRA_SUBJECT, res.getString(R.string.share_app_title));
             String appUrl = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
-            String shareMessage = res.getString(R.string.share_message) + "\n" + appUrl;
+            String shareMessage = res.getString(R.string.share_recommend_message) + "\n" + appUrl;
             i.putExtra(Intent.EXTRA_TEXT, shareMessage);
-            context.startActivity(Intent.createChooser(i, res.getString(R.string.share_action)));
+            context.startActivity(Intent.createChooser(i, res.getString(R.string.share_choose_option)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1097,13 +1097,13 @@ public class Utils {
                         // Thêm cờ để tạo một task mới và xóa các task cũ khi chia sẻ hoàn tất
                         shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         // Khởi chạy Intent để chia sẻ
-                        mContext.startActivity(Intent.createChooser(shareIntent, mContext.getString(R.string.share_file_using)));
+                        mContext.startActivity(Intent.createChooser(shareIntent, mContext.getString(R.string.share_file_using_title)));
                     });
 
         } catch (Exception e) {
             e.printStackTrace();
             // Xử lý ngoại lệ hoặc hiển thị thông báo lỗi cho người dùng
-            Toast.makeText(mContext, mContext.getString(R.string.toast_error_share_file), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, mContext.getString(R.string.toast_share_file_error), Toast.LENGTH_SHORT).show();
         }
     }
 

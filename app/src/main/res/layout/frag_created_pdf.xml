@@ -57,7 +57,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/regular"
             android:gravity="center"
-            android:text="@string/pdf_files_created_appear_here"
+            android:text="@string/message_created_pdfs_empty"
             android:textColor="@color/colorTextSecondary"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_title"

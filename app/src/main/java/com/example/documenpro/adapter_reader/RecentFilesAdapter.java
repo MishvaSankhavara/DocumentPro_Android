@@ -128,7 +128,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
                         }
 
                     } else {
-                        Toast.makeText(mContext_RecentFiles, R.string.dialog_rename_fail, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext_RecentFiles, R.string.dialog_rename_failed, Toast.LENGTH_SHORT).show();
                     }
                 }
 

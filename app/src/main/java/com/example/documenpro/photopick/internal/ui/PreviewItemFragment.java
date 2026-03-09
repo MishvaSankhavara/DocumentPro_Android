@@ -61,7 +61,7 @@ public class PreviewItemFragment extends Fragment {
                     try {
                         startActivity(intent);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(getContext(), R.string.error_no_video_activity, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.error_no_video_preview_app, Toast.LENGTH_SHORT).show();
                     }
                 }
             });

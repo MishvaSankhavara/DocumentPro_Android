@@ -209,7 +209,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                     } else {
                                         Toast.makeText(
                                                 mContext_FileList,
-                                                R.string.dialog_rename_fail,
+                                                R.string.dialog_rename_failed,
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }

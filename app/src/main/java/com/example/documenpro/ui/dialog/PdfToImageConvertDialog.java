@@ -128,10 +128,10 @@ public class PdfToImageConvertDialog extends Dialog {
             super.onProgressUpdate(values);
             int i3 = ((int) (((float) values[0]) * 100.0f)) / weakReference.get().pdfPageList.size();
             weakReference.get().tvDescription
-                    .setText(weakReference.get().activityContext.getResources().getString(R.string.save_image_progress,
+                    .setText(weakReference.get().activityContext.getResources().getString(R.string.message_save_image_progress,
                             String.valueOf(values[0]), String.valueOf(weakReference.get().pdfPageList.size())));
             weakReference.get().tvProgressPercent.setText(
-                    weakReference.get().activityContext.getResources().getString(R.string.x_percent_sign, String.valueOf(i3)));
+                    weakReference.get().activityContext.getResources().getString(R.string.format_percent_value, String.valueOf(i3)));
             weakReference.get().progressBarView.setProgress(values[0]);
 
         }

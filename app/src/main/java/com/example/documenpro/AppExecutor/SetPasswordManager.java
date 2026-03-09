@@ -39,7 +39,7 @@ public class SetPasswordManager {
         executor_setPW.execute(() -> {
 
             weakReference_setPW.get().runOnUiThread(() -> {
-                weakReference_setPW.get().tvTool.setText(weakReference_setPW.get().getResources().getString(R.string.locking));
+                weakReference_setPW.get().tvTool.setText(weakReference_setPW.get().getResources().getString(R.string.message_locking));
                 weakReference_setPW.get().tvPercent.setText("0");
             });
 

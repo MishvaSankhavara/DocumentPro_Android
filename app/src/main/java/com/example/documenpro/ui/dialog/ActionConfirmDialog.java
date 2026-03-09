@@ -39,43 +39,43 @@ public class ActionConfirmDialog extends Dialog {
     private void setupDialogContent() {
         if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_DELETE) {
             tvTitle.setText(R.string.action_delete);
-            tvMessage.setText(R.string.dialog_delete_body);
+            tvMessage.setText(R.string.dialog_delete_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_delete);
         } else if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_REMOVE_RECENT) {
-            tvTitle.setText(R.string.dialog_remove_title);
-            tvMessage.setText(R.string.dialog_remove_body);
+            tvTitle.setText(R.string.dialog_remove_recent_title);
+            tvMessage.setText(R.string.dialog_remove_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_yes);
         } else if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_REMOVE_FAVORITE) {
-            tvTitle.setText(R.string.dialog_move_fav);
-            tvMessage.setText(R.string.dialog_remove_body);
+            tvTitle.setText(R.string.dialog_favorite_remove);
+            tvMessage.setText(R.string.dialog_remove_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_yes);
 
         }else if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_EXIT_MERGE) {
-            tvTitle.setText(R.string.dialog_merge_exit_tittle);
-            tvMessage.setText(R.string.dialog_merge_content);
+            tvTitle.setText(R.string.dialog_merge_exit_title);
+            tvMessage.setText(R.string.dialog_merge_exit_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_quit);
         }else if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_EXIT_SPLIT) {
-            tvTitle.setText(R.string.dialog_split_exit_tittle);
-            tvMessage.setText(R.string.dialog_merge_content);
+            tvTitle.setText(R.string.dialog_split_exit_title);
+            tvMessage.setText(R.string.dialog_merge_exit_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_quit);
         }else if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_EXIT_PHOTO_TO_PDF) {
-            tvTitle.setText(R.string.dialog_convert_exit_tittle);
-            tvMessage.setText(R.string.dialog_merge_content);
+            tvTitle.setText(R.string.dialog_convert_exit_title);
+            tvMessage.setText(R.string.dialog_merge_exit_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_quit);
         }else if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_CLEAR_RECENT) {
-            tvTitle.setText(R.string.dialog_clear_tittle);
-            tvMessage.setText(R.string.dialog_clear_body_1);
+            tvTitle.setText(R.string.dialog_clear_confirm_title);
+            tvMessage.setText(R.string.dialog_clear_recent_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_clear_all);
         } else if (dialogType == AppGlobalConstants.DIALOG_CONFIRM_CLEAR_FAV) {
-            tvTitle.setText(R.string.dialog_clear_tittle);
-            tvMessage.setText(R.string.dialog_clear_body_2);
+            tvTitle.setText(R.string.dialog_clear_confirm_title);
+            tvMessage.setText(R.string.dialog_clear_favorite_message);
             btnCancel.setText(R.string.action_cancel);
             btnConfirm.setText(R.string.action_clear_all);
         }

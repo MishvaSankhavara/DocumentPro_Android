@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/medium"
             android:includeFontPadding="false"
-            android:text="@string/long_press_to_manual_sorting"
+            android:text="@string/hint_long_press_manual_sort"
             android:textColor="@color/colorTextSecondary"
             android:textSize="14sp" />
 
@@ -108,7 +108,7 @@
             android:fontFamily="@font/semibold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/merge_x"
+            android:text="@string/action_merge_count"
             android:textAllCaps="true"
             android:textColor="@color/app_white"
             android:textSize="18sp" />

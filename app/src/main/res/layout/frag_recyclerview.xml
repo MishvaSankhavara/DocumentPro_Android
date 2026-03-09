@@ -59,7 +59,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/regular"
             android:gravity="center"
-            android:text="@string/recent_files_appear_here"
+            android:text="@string/message_recent_files_empty"
             android:textColor="@color/colorTextSecondary"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_title"

@@ -37,7 +37,7 @@ public class FileRenameDialog extends Dialog {
         findViewById(R.id.btn_confirm).setOnClickListener(view -> {
             if (TextUtils.equals(oldName, etFileName.getText().toString())) {
                 layoutErrorContainer.setVisibility(View.VISIBLE);
-                tvErrorMessage.setText(context.getString(R.string.dialog_rename_error));
+                tvErrorMessage.setText(context.getString(R.string.dialog_rename_same_name_error));
                 ObjectAnimator objectAnimator = Utils.startAnim(dialogRootLayout);
                 objectAnimator.start();
             } else if (Utils.isFileNameValid(etFileName.getText().toString())) {
@@ -49,7 +49,7 @@ public class FileRenameDialog extends Dialog {
                 ObjectAnimator objectAnimator = Utils.startAnim(dialogRootLayout);
                 objectAnimator.start();
                 layoutErrorContainer.setVisibility(View.VISIBLE);
-                tvErrorMessage.setText(context.getString(R.string.dialog_rename_error_2));
+                tvErrorMessage.setText(context.getString(R.string.dialog_rename_invalid_characters));
             }
         });
     }

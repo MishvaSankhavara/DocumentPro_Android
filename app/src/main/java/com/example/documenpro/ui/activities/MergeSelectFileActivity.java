@@ -57,7 +57,7 @@ public class MergeSelectFileActivity extends AppCompatActivity {
     private void initToolBar() {
         mergeToolbar = findViewById(R.id.toolbar);
 
-        mergeToolbar.setTitle(getString(R.string.x_selected, "0"));
+        mergeToolbar.setTitle(getString(R.string.label_items_selected, "0"));
         setSupportActionBar(mergeToolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -96,7 +96,7 @@ public class MergeSelectFileActivity extends AppCompatActivity {
                         continueButtonText.setClickable(false);
                         continueButtonText.setFocusable(false);
                     }
-                    mergeToolbar.setTitle(getString(R.string.x_selected, String.valueOf(pdfSelectionAdapter.getSelected_MergeFileSelection().size())));
+                    mergeToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(pdfSelectionAdapter.getSelected_MergeFileSelection().size())));
                 });
                 recyclerView.setAdapter(pdfSelectionAdapter);
                 loadingAnimation.setVisibility(View.GONE);

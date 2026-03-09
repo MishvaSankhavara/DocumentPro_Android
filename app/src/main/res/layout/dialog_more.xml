@@ -258,7 +258,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:gravity="start"
-                android:text="@string/remove_from_recent"
+                android:text="@string/action_remove_from_recent"
                 android:textAlignment="viewStart"
                 android:textColor="@color/text_main_color"
                 android:textSize="14sp" />

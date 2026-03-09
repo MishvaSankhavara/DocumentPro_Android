@@ -43,7 +43,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="@string/str_next"
+            android:text="@string/action_next"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"
             app:drawableRightCompat="@drawable/ic_arrow_drop_down"
@@ -113,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text="@string/select"
+                        android:text="@string/action_select"
                         android:textColor="@color/colorTextPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -157,7 +157,7 @@
             android:layout_gravity="center"
             android:drawablePadding="8dp"
             android:gravity="center"
-            android:text="@string/empty_text"
+            android:text="@string/message_no_media"
             android:textColor="?attr/album.emptyView.textColor"
             android:textSize="16sp"
             app:drawableTopCompat="?attr/album.emptyView" />

@@ -93,7 +93,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     private void setupToolbar() {
         topToolbar = findViewById(R.id.toolbar);
         topToolbar.setTitle(
-                getString(R.string.x_selected, String.valueOf(DocumentMyApplication.getInstance().getArrayListSplit().size())));
+                getString(R.string.label_items_selected, String.valueOf(DocumentMyApplication.getInstance().getArrayListSplit().size())));
         setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -124,7 +124,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
                     optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                     setContinueButtonEnabled(true);
                 }
-                topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
+                topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -187,7 +187,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     @Override
     public void onChoosePdfSplitListener() {
         setContinueButtonEnabled(!pdfThumbnailAdapter.getSelected_PdfPreview().isEmpty());
-        topToolbar.setTitle(getString(R.string.x_selected, String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
+        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
         if (pdfThumbnailAdapter.getSelected_PdfPreview().size() == pdfPageList.size()) {
             optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
             pdfThumbnailAdapter.isSelectedAll_PdfPreview = true;
@@ -261,7 +261,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
                                 e = e2;
                                 fileOutputStream = fileOutputStream2;
                                 Toast.makeText(weakReference.get(),
-                                        weakReference.get().getString(R.string.toast_failed_low_memory),
+                                        weakReference.get().getString(R.string.toast_low_memory_error),
                                         Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                                 weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
@@ -273,7 +273,7 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
                             i = pageCount;
                             str = sb5;
                             Toast.makeText(weakReference.get(),
-                                    weakReference.get().getString(R.string.toast_failed_low_memory), Toast.LENGTH_LONG)
+                                    weakReference.get().getString(R.string.toast_low_memory_error), Toast.LENGTH_LONG)
                                     .show();
                             e.printStackTrace();
                             weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
