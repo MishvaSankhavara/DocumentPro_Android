@@ -12,7 +12,7 @@
         android:id="@+id/ll_pdf_edit_bottom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_pdf_edit_toolbar"
+        android:background="@drawable/shape_pdf_edit_toolbar_bg"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -95,14 +95,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:ImageEdt="@drawable/ic_preview_highlight" />
+                app:ImageEdt="@drawable/ic_highlight_preview" />
 
             <com.example.documenpro.ui.customviews.EditBtn
                 android:id="@+id/btnDrawNew"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:ImageEdt="@drawable/ic_preview_draw" />
+                app:ImageEdt="@drawable/ic_draw_preview" />
 
             <com.example.documenpro.ui.customviews.EditBtn
                 android:id="@+id/btnDelete"

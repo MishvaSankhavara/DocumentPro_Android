@@ -44,7 +44,7 @@
         <View
             android:layout_width="50.0dip"
             android:layout_height="match_parent"
-            android:background="@drawable/sodk_control_gradient" />
+            android:background="@drawable/control_gradient" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_menu_share" />
+                    android:src="@drawable/ic_share_menu" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_menu_share" />
+                    android:src="@drawable/ic_share_menu" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_menu_share" />
+                    android:src="@drawable/ic_share_menu" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_menu_share" />
+                    android:src="@drawable/ic_share_menu" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"

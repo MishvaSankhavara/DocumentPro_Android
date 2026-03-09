@@ -109,13 +109,13 @@ public class SheetTab2 extends LinearLayout {
             this.getNameView().setSelected(var1);
             this.getXView().setSelected(var1);
             if (var1) {
-                this.setBackgroundResource(R.drawable.sodk_editor_sheet_tab_selected);
+                this.setBackgroundResource(R.drawable.editor_sheet_tab_selected);
                 if (a) {
                     var1 = true;
                     break label13;
                 }
             } else {
-                this.setBackgroundResource(R.drawable.sodk_editor_sheet_tab);
+                this.setBackgroundResource(R.drawable.editor_sheet_tab);
             }
 
             var1 = false;

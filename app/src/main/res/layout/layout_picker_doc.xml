@@ -56,7 +56,7 @@
         android:textColor="@color/colorSolidText"
         android:textSize="18sp"
         android:visibility="gone"
-        app:drawableTopCompat="@drawable/ic_no_file_found"
+        app:drawableTopCompat="@drawable/ic_no_file"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

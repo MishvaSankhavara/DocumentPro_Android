@@ -13,7 +13,7 @@
         android:id="@+id/viewBg"
         android:layout_width="50dp"
         android:layout_height="38dp"
-        android:background="@drawable/bg_button_selected"
+        android:background="@drawable/bg_btn_selected"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,5 +28,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_preview_highlight" />
+        app:srcCompat="@drawable/ic_highlight_preview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

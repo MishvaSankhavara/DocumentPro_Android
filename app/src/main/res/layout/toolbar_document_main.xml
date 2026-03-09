@@ -61,7 +61,7 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/sodk_editor_icon_save_pdf"
+            android:src="@drawable/editor_icon_save_pdf"
             android:visibility="visible"
             app:tint="@color/app_white" />
 
@@ -75,7 +75,7 @@
             android:contentDescription="@string/save"
             android:padding="4dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/baseline_save_24"
+            android:src="@drawable/ic_save"
             android:visibility="visible"
             app:tint="@color/app_white" />
 

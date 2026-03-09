@@ -27,7 +27,7 @@ public class DocumentTypeItemView extends LinearLayout {
         countTextView = findViewById(R.id.tv_dialog_description);
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FileTypeItem);
-            int iconResId = typedArray.getResourceId(R.styleable.FileTypeItem_imgFileType, R.drawable.ic_document_all);
+            int iconResId = typedArray.getResourceId(R.styleable.FileTypeItem_imgFileType, R.drawable.ic_document);
             if (iconResId > 0) {
                 ((AppCompatImageView) findViewById(R.id.iv_icon)).setImageResource(iconResId);
             }

@@ -224,9 +224,9 @@ public class OnBoardActivity extends AppCompatActivity {
         if (view != null) {
             Resources resources = getResources();
             if (selected) {
-                idResource = R.drawable.shape_red_radius_46;
+                idResource = R.drawable.shape_red_radius;
             } else {
-                idResource = R.drawable.shape_gray_radius_46;
+                idResource = R.drawable.shape_gray_radius;
             }
             view.setBackground(ResourcesCompat.getDrawable(resources, idResource, null));
             ViewGroup.LayoutParams layoutParams = view.getLayoutParams();

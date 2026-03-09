@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="78dp"
 
-    android:background="@drawable/ripple_select_item">
+    android:background="@drawable/ripple_item_select">
 
     <View
         android:id="@+id/select_bg_view"
@@ -138,7 +138,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="9dp"
-        android:button="@drawable/background_checkbox_list"
+        android:button="@drawable/background_list_checkbox"
         android:padding="3dp"
         android:scaleType="fitXY"
         android:visibility="visible"

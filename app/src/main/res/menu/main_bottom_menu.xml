@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_files"
-        android:icon="@drawable/ic_main_files_n"
+        android:icon="@drawable/ic_main_files"
         android:title="Files" />
     <item
         android:id="@+id/navigation_tools"
-        android:icon="@drawable/home_ic_more"
+        android:icon="@drawable/ic_home_more"
         android:title="Tools" />
     <item
         android:id="@+id/navigation_settings"

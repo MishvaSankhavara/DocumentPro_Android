@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_ads"
+    android:background="@drawable/bg_ads_color_negative"
     android:padding="2dp"
     android:paddingStart="8dp"
     android:paddingEnd="8dp">
@@ -104,7 +104,7 @@
             android:layout_below="@+id/rl_icon_name"
             android:layout_gravity="end"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_button_action_round_10"
+            android:background="@drawable/bg_button_accent_button_rounded"
             android:gravity="center"
             android:textColor="@color/app_white"
             android:textSize="15sp" />

@@ -45,7 +45,7 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:gravity">left|center_horizontal|clip_horizontal</item>
         <item name="android:layout_gravity">left</item>
-        <item name="android:background">@drawable/ads_icon</item>
+        <item name="android:background">@drawable/ads_icon_blue_custom</item>
         <item name="android:paddingLeft">3dp</item>
         <item name="android:paddingRight">6dp</item>
         <item name="android:paddingBottom">1dp</item>
@@ -201,7 +201,7 @@
     </style>
 
     <style name="sodk_dialog_panel_border" parent="@style/sodk_dialog_panel">
-        <item name="android:background">@drawable/sodk_dialog_border</item>
+        <item name="android:background">@drawable/dialog_border</item>
     </style>
 
     <style name="sodk_dialog_button">
@@ -235,7 +235,7 @@
     </style>
 
     <style name="sodk_editor_page_menu_style">
-        <item name="android:background">@drawable/sodk_editor_page_menu</item>
+        <item name="android:background">@drawable/editor_page_menu</item>
         <item name="android:padding">@dimen/_5sdp</item>
     </style>
 
@@ -323,7 +323,7 @@
         <item name="album.dropdown.count.color">@color/app_light_album_dropdown_count_text</item>
         <item name="album.element.color">@android:color/white</item>
         <item name="album.thumbnail.placeholder">@color/app_light_album_thumbnail_placeholder</item>
-        <item name="album.emptyView">@drawable/ic_empty_pdf</item>
+        <item name="album.emptyView">@drawable/ic_pdf_empty</item>
         <item name="album.emptyView.textColor">@color/app_light_album_empty_view</item>
         <item name="item.placeholder">@color/app_light_item_placeholder</item>
         <item name="item.checkCircle.backgroundColor">@color/app_light_item_check_circle_background</item>
@@ -362,7 +362,7 @@
         <item name="album.thumbnail.placeholder">
             @color/app_album_thumbnail_placeholder
         </item>
-        <item name="album.emptyView">@drawable/ic_empty_pdf</item>
+        <item name="album.emptyView">@drawable/ic_pdf_empty</item>
         <item name="album.emptyView.textColor">@color/app_album_empty_view</item>
         <item name="item.placeholder">@color/app_item_placeholder</item>
         <item name="item.checkCircle.backgroundColor">

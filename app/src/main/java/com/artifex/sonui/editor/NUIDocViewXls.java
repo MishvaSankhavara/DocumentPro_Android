@@ -115,7 +115,7 @@ public class NUIDocViewXls extends NUIDocView {
 
     private void b(String var1) {
         final ListPopupWindow var2 = new ListPopupWindow(this.activity());
-        var2.setBackgroundDrawable(ContextCompat.getDrawable(this.activity(), R.drawable.sodk_editor_formula_popup));
+        var2.setBackgroundDrawable(ContextCompat.getDrawable(this.activity(), R.drawable.editor_formula_popup));
         var2.setModal(true);
         var2.setAnchorView(this.btnFx);
         var2.setHorizontalOffset(30);

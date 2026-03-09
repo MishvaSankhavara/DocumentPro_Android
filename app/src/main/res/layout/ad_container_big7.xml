@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ad_bg_root">
+    android:background="@drawable/ad_bg_root_solid_with_border">
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/frLoadingAdsBig7"
@@ -25,7 +25,7 @@
                 android:layout_height="130dp"
                 android:padding="20dp"
                 android:layout_margin="0dp"
-                android:src="@drawable/ic_photo_ad_empty"
+                android:src="@drawable/ic_empty_photo_ad"
                 android:layout_marginTop="20dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/ad_unit"
@@ -88,7 +88,7 @@
                                 android:layout_marginStart="0dp"
                                 android:layout_marginTop="0dp"
                                 android:layout_marginEnd="8dp"
-                                android:background="@drawable/ad_bg_choice_2"
+                                android:background="@drawable/ad_bg_choice2"
                                 android:gravity="center"
                                 android:text="AD"
                                 android:textColor="@color/gnt_gray"
@@ -123,7 +123,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ad_bg_action_loading" />
+                    android:background="@drawable/ad_bg_loading" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,7 +5,7 @@
     android:id="@+id/cl_dialog_root"
     android:layout_width="match_parent"
     android:layout_height="78dp"
-    android:background="@drawable/ripple_select_item">
+    android:background="@drawable/ripple_item_select">
 
     <View
         android:id="@+id/select_bg_view"
@@ -145,7 +145,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_operate_remove_pdf"
+        app:srcCompat="@drawable/ic_pdf_operate_remove"
         app:tint="@color/colorNormalTint" />
 
 

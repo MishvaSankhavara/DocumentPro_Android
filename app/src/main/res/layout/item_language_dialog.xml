@@ -13,7 +13,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
-        android:src="@drawable/flag_ar"
+        android:src="@drawable/flag_saudi_arabia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,5 +39,5 @@
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
-        app:srcCompat="@drawable/ic_not_choice" />
+        app:srcCompat="@drawable/ic_no_choice" />
 </LinearLayout>

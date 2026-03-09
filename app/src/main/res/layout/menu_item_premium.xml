@@ -9,4 +9,4 @@
     android:padding="6dp"
     android:scaleType="center"
     android:contentDescription="Premium Features"
-    app:srcCompat="@drawable/ic_crown_premium" />
+    app:srcCompat="@drawable/ic_premium_crown" />

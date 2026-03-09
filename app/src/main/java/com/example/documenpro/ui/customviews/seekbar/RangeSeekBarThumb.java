@@ -114,7 +114,7 @@ public class RangeSeekBarThumb {
         indicatorPaddingTop = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_top, 0);
         indicatorPaddingBottom = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_padding_bottom, 0);
         indicatorArrowSize = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_indicator_arrow_size, 0);
-        thumbDrawableId = t.getResourceId(R.styleable.RangeSeekBar_rsb_thumb_drawable, R.drawable.rsb_default_thumb);
+        thumbDrawableId = t.getResourceId(R.styleable.RangeSeekBar_rsb_thumb_drawable, R.drawable.rsb_thumb_default);
         thumbInactivatedDrawableId = t.getResourceId(R.styleable.RangeSeekBar_rsb_thumb_inactivated_drawable, 0);
         thumbWidth = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_thumb_width, SeekBarUtils.dpToPx(getContext(), 26));
         thumbHeight = (int) t.getDimension(R.styleable.RangeSeekBar_rsb_thumb_height, SeekBarUtils.dpToPx(getContext(), 26));

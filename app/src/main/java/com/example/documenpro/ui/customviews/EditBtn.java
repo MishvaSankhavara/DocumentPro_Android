@@ -27,7 +27,7 @@ public class EditBtn extends ConstraintLayout {
         if (attrs != null) {
             backgroundView = findViewById(R.id.viewBg);
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.EditBtn);
-            int iconResId = typedArray.getResourceId(R.styleable.EditBtn_ImageEdt, R.drawable.ic_preview_highlight);
+            int iconResId = typedArray.getResourceId(R.styleable.EditBtn_ImageEdt, R.drawable.ic_highlight_preview);
             if (iconResId > 0) {
                 ((ImageView) findViewById(R.id.imgEdit)).setImageResource(iconResId);
             }

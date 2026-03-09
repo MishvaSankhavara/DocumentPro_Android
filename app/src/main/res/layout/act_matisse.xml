@@ -46,7 +46,7 @@
             android:text="@string/action_next"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"
-            app:drawableRightCompat="@drawable/ic_arrow_drop_down"
+            app:drawableRightCompat="@drawable/ic_drop_down_arrow"
             app:drawableTint="@color/colorTextPrimary" />
     </RelativeLayout>
 
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/main_nav_bar_bg">
+            android:background="@drawable/main_bg_nav_bar">
 
 
             <LinearLayout
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/bg_import_enable"
+                    android:background="@drawable/bg_accent_import_enable_"
                     android:gravity="center"
                     android:minWidth="100dp"
                     android:paddingStart="10dp"

@@ -15,7 +15,7 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_home_search_clear"
+        app:srcCompat="@drawable/ic_search_clear_home"
         app:tint="@color/colorEtTint" />
 
     <androidx.appcompat.widget.AppCompatTextView

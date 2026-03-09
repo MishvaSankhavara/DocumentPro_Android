@@ -47,10 +47,10 @@ public class ColorSelectionAdapter extends RecyclerView.Adapter<ColorSelectionAd
 
         if (colorModel.isWhite_ColorModel()) {
             holder.imgChoose_ColorSelection.setImageResource(
-                    R.drawable.ic_color_choosed_main);
+                    R.drawable.ic_choosed_color);
         } else {
             holder.imgChoose_ColorSelection.setImageResource(
-                    R.drawable.ic_color_choosed);
+                    R.drawable.ic_choosed_color);
         }
 
         holder.viewBg_ColorSelection.setBackgroundResource(

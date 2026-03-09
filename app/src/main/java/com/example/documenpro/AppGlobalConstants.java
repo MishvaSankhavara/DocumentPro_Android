@@ -126,53 +126,53 @@ public class AppGlobalConstants {
 
     public static ArrayList<LanguageModel> createArrayLanguage() {
         ArrayList<LanguageModel> arrayList = new ArrayList<>();
-        arrayList.add(new LanguageModel("en", "English", R.drawable.flag_en));
-        arrayList.add(new LanguageModel("vi", "Tiếng Việt", R.drawable.flag_vi));
-        arrayList.add(new LanguageModel("de", "Deutsch", R.drawable.flag_de));
-        arrayList.add(new LanguageModel("in", "Indonesia", R.drawable.flag_in));
-        arrayList.add(new LanguageModel("it", "Italiano", R.drawable.flag_it));
-        arrayList.add(new LanguageModel("ja", "日本語", R.drawable.flag_ja));
-        arrayList.add(new LanguageModel("ko", "한국어", R.drawable.flag_ko));
-        arrayList.add(new LanguageModel("pt", "Português", R.drawable.flag_pt));
-        arrayList.add(new LanguageModel("ru", "Русский", R.drawable.flag_ru));
-        arrayList.add(new LanguageModel("ar", "عربي", R.drawable.flag_ar));
-        arrayList.add(new LanguageModel("cs", "čeština", R.drawable.flag_cs));
-        arrayList.add(new LanguageModel("es", "Español", R.drawable.flag_es));
-        arrayList.add(new LanguageModel("hi", "हिंदी", R.drawable.flag_hi));
-        arrayList.add(new LanguageModel("pl", "Język polski", R.drawable.flag_pl));
-        arrayList.add(new LanguageModel("ro", "Română", R.drawable.flag_ro));
-        arrayList.add(new LanguageModel("sv", "Svenska", R.drawable.flag_sv));
-        arrayList.add(new LanguageModel("th", "แบบไทย", R.drawable.flag_th));
+        arrayList.add(new LanguageModel("en", "English", R.drawable.flag_united_kingdom));
+        arrayList.add(new LanguageModel("vi", "Tiếng Việt", R.drawable.flag_vietnam));
+        arrayList.add(new LanguageModel("de", "Deutsch", R.drawable.flag_germany));
+        arrayList.add(new LanguageModel("in", "Indonesia", R.drawable.flag_indonesia));
+        arrayList.add(new LanguageModel("it", "Italiano", R.drawable.flag_italy));
+        arrayList.add(new LanguageModel("ja", "日本語", R.drawable.flag_japan));
+        arrayList.add(new LanguageModel("ko", "한국어", R.drawable.flag_korea));
+        arrayList.add(new LanguageModel("pt", "Português", R.drawable.flag_portugal));
+        arrayList.add(new LanguageModel("ru", "Русский", R.drawable.flag_russia));
+        arrayList.add(new LanguageModel("ar", "عربي", R.drawable.flag_saudi_arabia));
+        arrayList.add(new LanguageModel("cs", "čeština", R.drawable.flag_czech_republic));
+        arrayList.add(new LanguageModel("es", "Español", R.drawable.flag_spain));
+        arrayList.add(new LanguageModel("hi", "हिंदी", R.drawable.flag_india));
+        arrayList.add(new LanguageModel("pl", "Język polski", R.drawable.flag_poland));
+        arrayList.add(new LanguageModel("ro", "Română", R.drawable.flag_romania));
+        arrayList.add(new LanguageModel("sv", "Svenska", R.drawable.flag_sweden));
+        arrayList.add(new LanguageModel("th", "แบบไทย", R.drawable.flag_thailand));
         return arrayList;
     }
 
     public static ArrayList<CodeColorModel> getColorTextList() {
         ArrayList<CodeColorModel> arrayList = new ArrayList<>();
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_1, "#000000", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_2, "#ffffff", true));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_3, "#888888", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_4, "#fe0000", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_5, "#00f402", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_6, "#1f20fb", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_7, "#ff00aa", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_8, "#00effe", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_9, "#ff5c02", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_10, "#ffc44e", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color1, "#000000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color2, "#ffffff", true));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color3, "#888888", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color4, "#fe0000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color5, "#00f402", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color6, "#1f20fb", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color7, "#ff00aa", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color8, "#00effe", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color9, "#ff5c02", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color10, "#ffc44e", false));
         return arrayList;
     }
 
     public static ArrayList<CodeColorModel> getColorDrawList() {
         ArrayList<CodeColorModel> arrayList = new ArrayList<>();
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_1, "#000000", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_2, "#ffffff", true));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_3, "#888888", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_4, "#fe0000", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_5, "#00f402", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_6, "#1f20fb", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_7, "#ff00aa", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_8, "#00effe", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_9, "#ff5c02", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_10, "#ffc44e", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color1, "#000000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color2, "#ffffff", true));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color3, "#888888", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color4, "#fe0000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color5, "#00f402", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color6, "#1f20fb", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color7, "#ff00aa", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color8, "#00effe", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color9, "#ff5c02", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color10, "#ffc44e", false));
         return arrayList;
     }
 
@@ -194,17 +194,17 @@ public class AppGlobalConstants {
     public static ArrayList<CodeColorModel> getColorBgList() {
 
         ArrayList<CodeColorModel> arrayList = new ArrayList<>();
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_tran, "transparent", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_1, "#000000", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_2, "#ffffff", true));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_3, "#888888", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_4, "#fe0000", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_5, "#00f402", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_6, "#1f20fb", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_7, "#ff00aa", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_8, "#00effe", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_9, "#ff5c02", false));
-        arrayList.add(new CodeColorModel(R.drawable.bg_color_10, "#ffc44e", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_tran_color, "transparent", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color1, "#000000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color2, "#ffffff", true));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color3, "#888888", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color4, "#fe0000", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color5, "#00f402", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color6, "#1f20fb", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color7, "#ff00aa", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color8, "#00effe", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color9, "#ff5c02", false));
+        arrayList.add(new CodeColorModel(R.drawable.bg_color10, "#ffc44e", false));
         return arrayList;
     }
 }

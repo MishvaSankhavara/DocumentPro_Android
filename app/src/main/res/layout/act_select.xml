@@ -49,7 +49,7 @@
         android:textColor="@color/colorSolidText"
         android:textSize="18sp"
         android:visibility="gone"
-        app:drawableTopCompat="@drawable/ic_no_file_found"
+        app:drawableTopCompat="@drawable/ic_no_file"
         app:layout_constraintBottom_toTopOf="@id/adcontainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tv_share"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu_share"
+            app:srcCompat="@drawable/ic_share_menu"
             app:tint="@color/colorTextPrimary" />
 
         <androidx.appcompat.widget.AppCompatTextView

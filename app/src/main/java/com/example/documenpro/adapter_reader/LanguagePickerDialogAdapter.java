@@ -61,7 +61,7 @@ public class LanguagePickerDialogAdapter extends RecyclerView.Adapter<LanguagePi
                     .setImageResource(R.drawable.ic_choice);
         } else {
             holder.imgChoice_LanguagePickerDialog
-                    .setImageResource(R.drawable.ic_not_choice);
+                    .setImageResource(R.drawable.ic_no_choice);
         }
 
         holder.itemView.setOnClickListener(view -> {

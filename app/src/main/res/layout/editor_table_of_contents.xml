@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_radius_8dp">
+    android:background="@drawable/bg_radius">
 
     <RelativeLayout
         android:id="@+id/title_bar"
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/sodk_editor_toc_link"
+            android:background="@drawable/editor_toc_link"
             android:text="@string/editor_cancel"
             android:textColor="@color/app_word_list_bg"
             android:textSize="@dimen/_13sdp" />

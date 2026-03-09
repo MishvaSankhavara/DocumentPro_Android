@@ -19,7 +19,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:contentDescription="@string/editor_go_up"
                 android:padding="@dimen/_5sdp"
-                android:src="@drawable/th_btn_green" />
+                android:src="@drawable/btn_green" />
 
             <LinearLayout
                 android:id="@+id/names_bar"

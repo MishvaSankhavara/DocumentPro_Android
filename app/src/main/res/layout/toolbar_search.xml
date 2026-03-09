@@ -16,7 +16,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:background="@drawable/shape_bg_search_ed_ppt"
+        android:background="@drawable/shape_search_ed_ppt_bg"
         android:gravity="start"
         android:hint="@string/hint_search_files"
         android:inputType="text"

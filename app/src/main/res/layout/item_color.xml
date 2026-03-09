@@ -15,14 +15,14 @@
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_gravity="center"
-        android:background="@drawable/bg_color_1" />
+        android:background="@drawable/bg_color1" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/choose_color_iv1"
         android:layout_width="19dp"
         android:layout_height="20dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_color_choosed"
+        android:src="@drawable/ic_choosed_color"
         android:visibility="gone" />
 
 </FrameLayout>

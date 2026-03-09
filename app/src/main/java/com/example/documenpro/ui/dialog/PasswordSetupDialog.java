@@ -58,10 +58,10 @@ public class PasswordSetupDialog extends Dialog {
             isPasswordVisible = z;
             if (z) {
                 etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                i = R.drawable.pdf_ic_pwd_show;
+                i = R.drawable.ic_pdf_pwd_show;
             } else {
                 etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                i = R.drawable.pdf_ic_pwd_hide;
+                i = R.drawable.ic_pdf_pwd_hide;
             }
             ivTogglePasswordVisibility.setImageResource(i);
             Editable text = etPassword.getText();

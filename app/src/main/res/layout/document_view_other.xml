@@ -124,7 +124,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="13dp"
             android:layout_marginTop="14dp"
-            android:background="@drawable/shape_bg_page_num"
+            android:background="@drawable/shape_page_num_bg"
             android:gravity="center"
             android:paddingStart="12dp"
             android:paddingTop="6dp"
@@ -141,12 +141,12 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="13dp"
             android:layout_marginBottom="14dp"
-            android:background="@drawable/shape_bg_page_num"
+            android:background="@drawable/shape_page_num_bg"
             android:paddingStart="2dp"
             android:paddingTop="2dp"
             android:paddingEnd="2dp"
             android:paddingBottom="2dp"
-            android:src="@drawable/baseline_fullscreen_24"
+            android:src="@drawable/fullscreen"
             android:tint="@color/app_white" />
 
         <include
@@ -180,7 +180,7 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@id/ll_ad"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bg_home_tab" />
+        app:srcCompat="@drawable/bg_tab_home" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_container"

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/sodk_editor_alignment"
+    android:background="@drawable/editor_alignment"
     android:orientation="vertical"
     android:padding="0.0dip">
 
@@ -27,20 +27,20 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_top_left" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_top_left" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_top" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_top" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_top_right" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_top_right" />
             </LinearLayout>
 
             <LinearLayout
@@ -52,20 +52,20 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_left" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_left" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_center" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_center" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_right" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_right" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,20 +77,20 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_bottom_left" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_bottom_left" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_bottom" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_bottom" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_grid_alignment_button"
-                    android:src="@drawable/sodk_editor_icon_align_bottom_right" />
+                    android:background="@drawable/editor_grid_alignment_button"
+                    android:src="@drawable/editor_icon_align_bottom_right" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

@@ -51,7 +51,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1 "
                             android:visibility="gone"
-                            app:imgFileType="@drawable/ic_document_all"
+                            app:imgFileType="@drawable/ic_document"
                             app:nameFileType="@string/document_all" />
 
                         <com.example.documenpro.ui.customviews.DocumentTypeItemView

@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
                     android:layout_marginEnd="44dp"
-                    android:background="@drawable/shape_bg_new_tag"
+                    android:background="@drawable/shape_new_tag_bg"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:text="@string/label_new_tag"
@@ -271,7 +271,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/tv_faq"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_settings_faq"
+                    app:srcCompat="@drawable/ic_faq_settings"
                     app:tint="@color/tint_settings_icon_unselected" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -300,7 +300,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:background="@drawable/shape_bg_new_tag"
+                    android:background="@drawable/shape_new_tag_bg"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:text="@string/label_new_tag"
@@ -328,7 +328,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/tv_request"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_settings_request_feature"
+                    app:srcCompat="@drawable/ic_settings_reques"
                     app:tint="@color/tint_settings_icon_unselected" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -357,7 +357,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:background="@drawable/shape_bg_new_tag"
+                    android:background="@drawable/shape_new_tag_bg"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:text="@string/label_new_tag"

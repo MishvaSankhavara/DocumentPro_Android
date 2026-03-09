@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_pdf_edit_toolbar"
+        android:background="@drawable/shape_pdf_edit_toolbar_bg"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -100,25 +100,25 @@
                     android:id="@+id/btn_text_size_down"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/baseline_text_decrease_24" />
+                    app:ImageEdt="@drawable/text_decrease" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_size_up"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/baseline_text_increase_24" />
+                    app:ImageEdt="@drawable/text_increase" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/baseline_format_bold_24" />
+                    app:ImageEdt="@drawable/format_bold" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_italic"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/baseline_format_italic_24" />
+                    app:ImageEdt="@drawable/format_italic" />
 
 
                 <com.example.documenpro.ui.customviews.EditBtn
@@ -131,19 +131,19 @@
                     android:id="@+id/btn_text_color"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/sodk_editor_icon_text_color" />
+                    app:ImageEdt="@drawable/editor_icon_text_color" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_striketrough"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/ic_preview_strikethrough" />
+                    app:ImageEdt="@drawable/ic_strikethrough_preview" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_bg"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/ic_preview_highlight" />
+                    app:ImageEdt="@drawable/ic_highlight_preview" />
 
                 <!--                <com.example.documenpro.ui.customviews.EditBtn-->
                 <!--                    android:id="@+id/btn_align_options"-->
@@ -155,7 +155,7 @@
                     android:id="@+id/btn_cut"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/sodk_editor_icon_cut" />
+                    app:ImageEdt="@drawable/editor_icon_cut" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_copy"
@@ -167,7 +167,7 @@
                     android:id="@+id/btn_paste"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:ImageEdt="@drawable/baseline_content_paste_24" />
+                    app:ImageEdt="@drawable/content_paste" />
             </LinearLayout>
         </HorizontalScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

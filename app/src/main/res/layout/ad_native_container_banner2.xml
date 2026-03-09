@@ -55,7 +55,7 @@
                         android:layout_width="15dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:background="@drawable/bg_ad_text"
+                        android:background="@drawable/bg_text"
                         android:gravity="center"
                         android:padding="1dp"
                         android:text="AD"

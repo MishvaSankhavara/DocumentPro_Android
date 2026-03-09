@@ -64,10 +64,10 @@ public class RemovePdfPasswordDialog extends Dialog {
             isPasswordVisible = z;
             if (z) {
                 passwordInputField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                i = R.drawable.pdf_ic_pwd_show;
+                i = R.drawable.ic_pdf_pwd_show;
             } else {
                 passwordInputField.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                i = R.drawable.pdf_ic_pwd_hide;
+                i = R.drawable.ic_pdf_pwd_hide;
             }
             togglePasswordVisibilityButton.setImageResource(i);
             Editable text = passwordInputField.getText();

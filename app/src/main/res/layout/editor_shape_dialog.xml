@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/sodk_editor_shape"
+    android:background="@drawable/editor_shape"
     android:orientation="vertical"
     android:padding="0.0dip">
 
@@ -31,46 +31,46 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_diamond"
+                    android:src="@drawable/editor_icon_shape_diamond"
                     android:tag="diamond" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_speech_bubble1"
+                    android:src="@drawable/editor_icon_shape_speech_bubble1"
                     android:tag="speech1" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_speech_bubble2"
+                    android:src="@drawable/editor_icon_shape_speech_bubble2"
                     android:tag="speech2" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_pentagon"
+                    android:src="@drawable/editor_icon_shape_pentagon"
                     android:tag="pentagon" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_star"
+                    android:src="@drawable/editor_icon_shape_star"
                     android:tag="star" />
             </LinearLayout>
 
@@ -83,46 +83,46 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_circle"
+                    android:src="@drawable/editor_icon_shape_circle"
                     android:tag="circle" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_triangle1"
+                    android:src="@drawable/editor_icon_shape_triangle1"
                     android:tag="triangle1" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_triangle2"
+                    android:src="@drawable/editor_icon_shape_triangle2"
                     android:tag="triangle2" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_arrow1"
+                    android:src="@drawable/editor_icon_shape_arrow1"
                     android:tag="arrow1" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_arrow2"
+                    android:src="@drawable/editor_icon_shape_arrow2"
                     android:tag="arrow2" />
             </LinearLayout>
 
@@ -135,46 +135,46 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_textbox"
+                    android:src="@drawable/editor_icon_shape_textbox"
                     android:tag="text" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_line"
+                    android:src="@drawable/editor_icon_shape_line"
                     android:tag="line" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_line_arrow"
+                    android:src="@drawable/editor_icon_shape_line_arrow"
                     android:tag="arrow-line" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_square"
+                    android:src="@drawable/editor_icon_shape_square"
                     android:tag="square" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sodk_editor_shape_button"
+                    android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/sodk_editor_icon_shape_rounded_square"
+                    android:src="@drawable/editor_icon_shape_rounded_square"
                     android:tag="rounded-square" />
             </LinearLayout>
         </LinearLayout>

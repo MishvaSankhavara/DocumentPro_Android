@@ -143,10 +143,10 @@ public class FileBrowser extends RelativeLayout {
         Log.d(FileBrowser.class.getSimpleName(), "c: " + i.getText());
 
         if (var3 && c != null) {
-            btnSave.setBackgroundResource(R.drawable.bg_button_action_round_10);
+            btnSave.setBackgroundResource(R.drawable.bg_button_accent_button_rounded);
             this.btnSave.setEnabled(true);
         } else {
-            btnSave.setBackgroundResource(R.drawable.bg_button_nagative);
+            btnSave.setBackgroundResource(R.drawable.bg_btn_nagative);
             this.btnSave.setEnabled(false);
         }
     }

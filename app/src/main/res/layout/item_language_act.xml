@@ -6,7 +6,7 @@
     android:layout_marginStart="10dp"
     android:layout_marginTop="6dp"
     android:layout_marginEnd="10dp"
-    android:background="@drawable/bg_dialog"
+    android:background="@drawable/bg_dialog_rounded"
     android:gravity="center_vertical"
     android:paddingTop="14dp"
     android:paddingBottom="14dp">
@@ -16,7 +16,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
-        android:src="@drawable/flag_ar"
+        android:src="@drawable/flag_saudi_arabia"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,5 +46,5 @@
         android:layout_marginEnd="20dp"
         android:clickable="false"
         android:focusable="false"
-        app:srcCompat="@drawable/ic_not_choice" />
+        app:srcCompat="@drawable/ic_no_choice" />
 </LinearLayout>

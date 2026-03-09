@@ -14,7 +14,7 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_home_search_clear"
+        app:srcCompat="@drawable/ic_search_clear_home"
         app:tint="@color/colorEtTint" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -108,7 +108,7 @@
         android:id="@+id/bodyBg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/ip_bg_convert_success_body"
+        android:background="@drawable/ip_bg_convert_success_message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +139,7 @@
                     android:id="@+id/previewImg"
                     android:layout_width="80dp"
                     android:layout_height="94dp"
-                    android:background="@drawable/ip_shape_item_edge_conner_8"
+                    android:background="@drawable/ip_shape_edge_conner_item"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_pdf_no" />
             </androidx.cardview.widget.CardView>
@@ -148,7 +148,7 @@
                 android:id="@+id/bg_imgthumbnail"
                 android:layout_width="80dp"
                 android:layout_height="94dp"
-                android:background="@drawable/ip_shape_item_edge_conner_6_2" />
+                android:background="@drawable/ip_shape_item_edge_conner" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/indexTv"
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/ip_bg_convert_index"
+                android:background="@drawable/ip_bg_indexx_convert"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:textColor="@color/app_white"
@@ -209,7 +209,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="72dp"
             android:layout_marginRight="72dp"
-            android:background="@drawable/bg_btn_positive"
+            android:background="@drawable/bg_positive_btn"
             android:gravity="center"
             android:text="@string/action_share"
             android:textColor="@color/app_white"
@@ -224,7 +224,7 @@
             android:layout_marginLeft="72dp"
             android:layout_marginTop="14dp"
             android:layout_marginRight="72dp"
-            android:background="@drawable/ip_bg_open_btn"
+            android:background="@drawable/ip_bg_btn_open"
             android:gravity="center"
             android:text="@string/action_open"
             android:textColor="@color/ip_color_main_red"

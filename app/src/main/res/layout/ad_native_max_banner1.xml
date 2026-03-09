@@ -41,7 +41,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_ad_text"
+                    android:background="@drawable/bg_text"
                     android:paddingStart="2dp"
                     android:paddingEnd="2dp"
                     android:text="AD"
@@ -90,7 +90,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/bg_btn_action_ads"
+            android:background="@drawable/bg_ads_btn_action"
             android:gravity="center"
             android:textAlignment="center"
             android:textAllCaps="false"

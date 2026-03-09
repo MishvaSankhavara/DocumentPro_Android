@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
-        app:tabIndicator="@drawable/shape_tab_item_indicator"
+        app:tabIndicator="@drawable/shape_tab__indicator_item"
         app:tabIndicatorColor="@color/app_text_blue"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="3dp"

@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:background="@drawable/bg_dialog"
+        android:background="@drawable/bg_dialog_rounded"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +165,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/bg_button_action_round_8"
+            android:background="@drawable/bg_button_action_round"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:includeFontPadding="false"

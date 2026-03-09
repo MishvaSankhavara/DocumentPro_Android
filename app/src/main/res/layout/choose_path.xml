@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_300sdp"
         android:layout_gravity="center"
-        android:background="@drawable/bg_dialog_save_file"
+        android:background="@drawable/bg_dialog_file_save"
         android:gravity="center"
         android:orientation="vertical">
 

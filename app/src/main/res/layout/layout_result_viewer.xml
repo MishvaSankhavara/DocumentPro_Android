@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_result_viewer"
         app:tabGravity="fill"
-        app:tabIndicator="@drawable/shape_tab_item_indicator"
+        app:tabIndicator="@drawable/shape_tab__indicator_item"
         app:tabIndicatorColor="@color/colorTextPrimary"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="3dp"

@@ -124,7 +124,7 @@ public class LanguageListAdapter extends RecyclerView.Adapter<LanguageListAdapte
                         .into(imgChoice_LanguageList);
             } else {
                 Glide.with(mContext_LanguageList)
-                        .load(R.drawable.ic_not_choice)
+                        .load(R.drawable.ic_no_choice)
                         .into(imgChoice_LanguageList);
             }
         }

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="24dp"
 
-    android:background="@drawable/bg_dialog"
+    android:background="@drawable/bg_dialog_rounded"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -41,7 +41,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_btn_positive"
+        android:background="@drawable/bg_positive_btn"
         android:gravity="center"
         android:text="@string/action_ok"
         android:textColor="#ffffff"

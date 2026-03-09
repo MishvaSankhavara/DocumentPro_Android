@@ -80,7 +80,7 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
                 pdfModel.isChecked_PDFModel()
                         ? ResourcesCompat.getDrawable(
                         mContextMergeFileSelection.getResources(),
-                        R.drawable.bg_selected,
+                        R.drawable.bg_selection,
                         null)
                         : ResourcesCompat.getDrawable(
                         mContextMergeFileSelection.getResources(),
@@ -102,7 +102,7 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
                         pdfModel.isChecked_PDFModel()
                                 ? ResourcesCompat.getDrawable(
                                 mContextMergeFileSelection.getResources(),
-                                R.drawable.bg_selected,
+                                R.drawable.bg_selection,
                                 null)
                                 : ResourcesCompat.getDrawable(
                                 mContextMergeFileSelection.getResources(),

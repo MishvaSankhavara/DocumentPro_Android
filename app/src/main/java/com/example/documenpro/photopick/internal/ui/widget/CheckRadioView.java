@@ -42,11 +42,11 @@ public class CheckRadioView extends AppCompatImageView {
 
     public void setChecked(boolean enable) {
         if (enable) {
-            setImageResource(R.drawable.ic_preview_radio_on);
+            setImageResource(R.drawable.ic_radio_on_preview);
             mDrawable = getDrawable();
             mDrawable.setColorFilter(mSelectedColor, PorterDuff.Mode.SRC_IN);
         } else {
-            setImageResource(R.drawable.ic_preview_radio_off);
+            setImageResource(R.drawable.ic_radio_off_preview);
             mDrawable = getDrawable();
             mDrawable.setColorFilter(mUnSelectUdColor, PorterDuff.Mode.SRC_IN);
         }
