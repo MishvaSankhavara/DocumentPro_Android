@@ -42,6 +42,6 @@
             android:gravity="center"
             android:scaleType="center"
             android:src="@drawable/ic_close"
-            app:tint="@color/app_white" />
+            app:tint="@color/white" />
     </LinearLayout>
 </merge>

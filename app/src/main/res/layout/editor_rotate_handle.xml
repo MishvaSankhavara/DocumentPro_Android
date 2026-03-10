@@ -9,5 +9,5 @@
         android:padding="@dimen/_10sdp"
         android:scaleX="0.8"
         android:scaleY="0.8"
-        android:src="@color/app_white" />
+        android:src="@color/white" />
 </RelativeLayout>

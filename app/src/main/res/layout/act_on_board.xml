@@ -61,7 +61,7 @@
             android:fontFamily="@font/roboto_bold"
             android:includeFontPadding="false"
             android:text="@string/action_next"
-            android:textColor="@color/app_white"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatImageView

@@ -39,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_return_white"
-                app:tint="@color/app_white" />
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/tvTittle"
@@ -52,7 +52,7 @@
                 android:gravity="start"
                 android:includeFontPadding="false"
                 android:maxLines="1"
-                android:textColor="@color/app_white"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -147,7 +147,7 @@
             android:paddingEnd="2dp"
             android:paddingBottom="2dp"
             android:src="@drawable/fullscreen"
-            android:tint="@color/app_white" />
+            android:tint="@color/white" />
 
         <include
             layout="@layout/layout_undo_redo"

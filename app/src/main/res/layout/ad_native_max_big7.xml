@@ -21,7 +21,7 @@
         android:id="@+id/ad_unit"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="@color/app_white"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="12dp"

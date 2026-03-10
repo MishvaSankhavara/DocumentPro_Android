@@ -106,7 +106,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_button_accent_button_rounded"
             android:gravity="center"
-            android:textColor="@color/app_white"
+            android:textColor="@color/white"
             android:textSize="15sp" />
     </RelativeLayout>
 

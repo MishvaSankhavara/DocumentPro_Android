@@ -106,7 +106,7 @@
         android:gravity="center"
         android:text="@string/action_cancel"
         android:textAllCaps="false"
-        android:textColor="@color/app_black"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/save_button"

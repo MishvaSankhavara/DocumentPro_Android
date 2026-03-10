@@ -24,7 +24,7 @@
         android:fontFamily="@font/roboto_medium"
         android:gravity="center_vertical"
         android:text="@string/toolbar_title_choose_language"
-        android:textColor="@color/app_white"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

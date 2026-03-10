@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_close_dialog"
-        app:tint="@color/app_white" />
+        app:tint="@color/white" />
 
     <View
         android:id="@+id/v_bg_edit_done"
@@ -40,7 +40,7 @@
         android:paddingTop="6dp"
         android:paddingEnd="38dp"
         android:paddingBottom="6dp"
-        android:textColor="@color/app_white"
+        android:textColor="@color/white"
         android:textSize="17sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

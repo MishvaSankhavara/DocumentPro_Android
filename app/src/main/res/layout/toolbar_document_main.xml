@@ -11,8 +11,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="6dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="6dp"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_return_white"
-        app:tint="@color/app_white" />
+        app:tint="@color/black_light" />
 
 
     <TextView
@@ -36,7 +36,7 @@
         android:gravity="start"
         android:includeFontPadding="false"
         android:maxLines="1"
-        android:textColor="@color/app_white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ll_more"
@@ -63,7 +63,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/editor_icon_save_pdf"
             android:visibility="visible"
-            app:tint="@color/app_white" />
+            app:tint="@color/black" />
 
         <ImageView
             android:id="@+id/btnSave"
@@ -77,7 +77,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_save"
             android:visibility="visible"
-            app:tint="@color/app_white" />
+            app:tint="@color/black" />
 
         <ImageView
             android:id="@+id/btnPrint"
@@ -92,7 +92,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_print"
             android:visibility="gone"
-            app:tint="@color/app_white" />
+            app:tint="@color/white" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

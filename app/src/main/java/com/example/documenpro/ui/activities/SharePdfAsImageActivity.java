@@ -54,6 +54,8 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
     private AppCompatTextView continueActionText;
     private LottieAnimationView loadingAnimationView;
     private Toolbar topToolbar;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
     private EmptyStateRecyclerView pdfPageRecyclerView;
     private PdfPreviewThumbnailAdapter thumbnailAdapter;
     private final ArrayList<PDFPageModel> pdfPageList = new ArrayList<>();
@@ -100,7 +102,6 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
 
         }
 
-
     }
 
     private void initializeViews() {
@@ -114,7 +115,10 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                     if (thumbnailAdapter.getSelected_PdfPreview().size() < 50) {
                         ArrayList<Uri> arrayList = new ArrayList<>();
                         for (int i = 0; i < thumbnailAdapter.getSelected_PdfPreview().size(); i++) {
-                            arrayList.add(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", new File(Objects.requireNonNull(thumbnailAdapter.getSelected_PdfPreview().get(i).getThumbnailUri_PDFPageModel().getPath()))));
+                            arrayList.add(FileProvider.getUriForFile(context,
+                                    context.getApplicationContext().getPackageName() + ".provider",
+                                    new File(Objects.requireNonNull(thumbnailAdapter.getSelected_PdfPreview().get(i)
+                                            .getThumbnailUri_PDFPageModel().getPath()))));
                         }
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -123,11 +127,13 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, arrayList);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(context, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT)
+                                .show();
                     }
                 } else if (selectedToolType == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
 
-                    PdfToImageConvertDialog dialog = new PdfToImageConvertDialog(SharePdfAsImageActivity.this, thumbnailAdapter.getSelected_PdfPreview());
+                    PdfToImageConvertDialog dialog = new PdfToImageConvertDialog(SharePdfAsImageActivity.this,
+                            thumbnailAdapter.getSelected_PdfPreview());
                     Window window4 = dialog.getWindow();
                     assert window4 != null;
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -154,7 +160,8 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                     optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                     activeButtonEnabled(true);
                 }
-                topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
+                tvToolbarName.setText(getString(R.string.label_items_selected,
+                        String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -173,12 +180,17 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
 
     private void setupToolbar() {
         topToolbar = findViewById(R.id.toolbar);
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
 
-        topToolbar.setTitle(getString(R.string.label_items_selected, "0"));
+        ivBack.setOnClickListener(v -> onBackPressed());
+
+        tvToolbarName.setText(getString(R.string.label_items_selected, "0"));
         setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -204,7 +216,8 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
     @Override
     public void onChoosePdfSplitListener() {
         updateContinueButtonState();
-        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
+        tvToolbarName.setText(getString(R.string.label_items_selected,
+                String.valueOf(thumbnailAdapter.getSelected_PdfPreview().size())));
         if (thumbnailAdapter.getSelected_PdfPreview().size() == pdfPageList.size()) {
             optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
             thumbnailAdapter.isSelectedAll_PdfPreview = true;
@@ -235,7 +248,8 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
             try {
                 if (!isCancelled()) {
 
-                    PdfDocument newDocument = pdfiumCore.newDocument(weakReference.get().getContentResolver().openFileDescriptor(parse, PDPageLabelRange.STYLE_ROMAN_LOWER));
+                    PdfDocument newDocument = pdfiumCore.newDocument(weakReference.get().getContentResolver()
+                            .openFileDescriptor(parse, PDPageLabelRange.STYLE_ROMAN_LOWER));
                     int pageCount = pdfiumCore.getPageCount(newDocument);
                     String sb2 = "Total number of pages " +
                             pageCount;
@@ -263,11 +277,13 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                         int pageHeightPoint = pdfiumCore.getPageHeightPoint(newDocument, i2);
                         OutOfMemoryError e;
                         try {
-                            Bitmap createBitmap = Bitmap.createBitmap(pageWidthPoint, pageHeightPoint, Bitmap.Config.ARGB_8888);
+                            Bitmap createBitmap = Bitmap.createBitmap(pageWidthPoint, pageHeightPoint,
+                                    Bitmap.Config.ARGB_8888);
                             i = pageCount;
                             str = sb5;
                             try {
-                                pdfiumCore.renderPageBitmap(newDocument, createBitmap, i2, 0, 0, pageWidthPoint, pageHeightPoint, true);
+                                pdfiumCore.renderPageBitmap(newDocument, createBitmap, i2, 0, 0, pageWidthPoint,
+                                        pageHeightPoint, true);
                                 fileOutputStream = fileOutputStream2;
                                 try {
                                     createBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
@@ -276,7 +292,9 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                             } catch (OutOfMemoryError e2) {
                                 e = e2;
                                 fileOutputStream = fileOutputStream2;
-                                Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_low_memory_error), Toast.LENGTH_LONG).show();
+                                Toast.makeText(weakReference.get(),
+                                        weakReference.get().getString(R.string.toast_low_memory_error),
+                                        Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                                 weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                                 fileOutputStream.close();
@@ -286,7 +304,9 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                             fileOutputStream = fileOutputStream2;
                             i = pageCount;
                             str = sb5;
-                            Toast.makeText(weakReference.get(), weakReference.get().getString(R.string.toast_low_memory_error), Toast.LENGTH_LONG).show();
+                            Toast.makeText(weakReference.get(),
+                                    weakReference.get().getString(R.string.toast_low_memory_error), Toast.LENGTH_LONG)
+                                    .show();
                             e.printStackTrace();
                             weakReference.get().pdfPageList.add(new PDFPageModel(i3, Uri.fromFile(new File(str))));
                             fileOutputStream.close();
@@ -300,7 +320,6 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                     return null;
                 }
 
-
             } catch (Exception e4) {
                 e4.printStackTrace();
                 return null;
@@ -312,9 +331,11 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             if (weakReference.get() != null) {
-                weakReference.get().thumbnailAdapter = new PdfPreviewThumbnailAdapter(weakReference.get(), weakReference.get().pdfPageList, weakReference.get());
+                weakReference.get().thumbnailAdapter = new PdfPreviewThumbnailAdapter(weakReference.get(),
+                        weakReference.get().pdfPageList, weakReference.get());
                 int i = Utils.isTabletDevice(weakReference.get()) ? 6 : 3;
-                weakReference.get().pdfPageRecyclerView.setLayoutManager(new GridLayoutManager(weakReference.get(), i, RecyclerView.VERTICAL, false));
+                weakReference.get().pdfPageRecyclerView
+                        .setLayoutManager(new GridLayoutManager(weakReference.get(), i, RecyclerView.VERTICAL, false));
                 weakReference.get().loadingAnimationView.setVisibility(View.GONE);
                 weakReference.get().pdfPageRecyclerView.setAdapter(weakReference.get().thumbnailAdapter);
                 weakReference.get().isLoadCompleted = true;

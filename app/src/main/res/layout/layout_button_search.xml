@@ -17,6 +17,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="6dp"
         android:scaleType="fitCenter"
+        android:tint="@color/white"
         app:srcCompat="@drawable/ic_return" />
 
     <View
@@ -34,6 +35,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="6dp"
         android:scaleType="fitCenter"
+        android:tint="@color/white"
         app:srcCompat="@drawable/ic_return_rtl" />
 </LinearLayout>
 

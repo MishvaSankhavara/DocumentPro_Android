@@ -77,7 +77,7 @@
             android:includeFontPadding="false"
             android:text="@string/action_allow"
             android:textAllCaps="true"
-            android:textColor="@color/app_white"
+            android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

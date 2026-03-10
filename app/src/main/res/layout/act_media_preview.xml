@@ -29,9 +29,9 @@
             android:layout_centerVertical="true"
             android:padding="6dp"
             android:rotation="180"
+            android:tint="@color/black"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_return_rtl"
-            android:tint="@color/colorIcon" />
+            android:src="@drawable/ic_return_rtl" />
 
         <TextView
             android:id="@+id/tvNumberPhoto"
@@ -100,7 +100,7 @@
             android:paddingEnd="10dp"
             android:text="@string/action_button_apply"
             android:textAllCaps="false"
-            android:textColor="@color/app_white"
+            android:textColor="@color/white"
             android:textSize="16sp" />
     </RelativeLayout>
 </RelativeLayout>

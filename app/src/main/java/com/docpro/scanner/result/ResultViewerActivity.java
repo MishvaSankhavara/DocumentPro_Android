@@ -28,6 +28,8 @@ public class ResultViewerActivity extends AppCompatActivity {
     // Aliases for compatibility
     public TabLayout tabLayout;
     public ViewPager2 viewPager;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +54,17 @@ public class ResultViewerActivity extends AppCompatActivity {
 
     private void setupHeader() {
         Toolbar headerToolbar = findViewById(R.id.toolbar_result_viewer);
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
+
+        ivBack.setOnClickListener(v -> finish());
+
         setSupportActionBar(headerToolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-            getSupportActionBar().setTitle(Utils.setToolBarPdfCreated(this));
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            tvToolbarName.setText(Utils.setToolBarPdfCreated(this));
         }
     }
 

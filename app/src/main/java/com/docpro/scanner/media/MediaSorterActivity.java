@@ -46,6 +46,8 @@ public class MediaSorterActivity extends AppCompatActivity {
     private ArrayList<PhotoModel> photoCollection;
 
     private LinearLayout containerTips;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +76,17 @@ public class MediaSorterActivity extends AppCompatActivity {
 
     private void setupToolbar() {
         Toolbar headerToolbar = findViewById(R.id.toolbar_media_sorter);
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
+
+        ivBack.setOnClickListener(v -> onBackPressed());
+        tvToolbarName.setText(R.string.toolbar_title_convert_image_to_pdf);
+
         setSupportActionBar(headerToolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -91,13 +100,14 @@ public class MediaSorterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Utils.showConfirmDialog(this, AppGlobalConstants.DIALOG_CONFIRM_EXIT_PHOTO_TO_PDF, new OnConfirmClickListener() {
-            @Override
-            public void onConfirmClickListener() {
-                finish();
-            }
+        Utils.showConfirmDialog(this, AppGlobalConstants.DIALOG_CONFIRM_EXIT_PHOTO_TO_PDF,
+                new OnConfirmClickListener() {
+                    @Override
+                    public void onConfirmClickListener() {
+                        finish();
+                    }
 
-        });
+                });
     }
 
     private void setupMediaViews() {
@@ -137,18 +147,19 @@ public class MediaSorterActivity extends AppCompatActivity {
         dragDropManager.setDraggingItemScale(1.3f);
         dragDropManager.setDraggingItemRotation(15.0f);
 
-        final PhotoSelectionAdapter internalAdapter = new PhotoSelectionAdapter(this, photoCollection, new OnRemovePhotoListener() {
-            @Override
-            public void onRemoveListener(int position) {
-                photoCollection.remove(position);
-                mediaListAdapter.notifyItemRemoved(position);
-                mediaListAdapter.notifyDataSetChanged();
+        final PhotoSelectionAdapter internalAdapter = new PhotoSelectionAdapter(this, photoCollection,
+                new OnRemovePhotoListener() {
+                    @Override
+                    public void onRemoveListener(int position) {
+                        photoCollection.remove(position);
+                        mediaListAdapter.notifyItemRemoved(position);
+                        mediaListAdapter.notifyDataSetChanged();
 
-                if (photoCollection.isEmpty()) {
-                    finish();
-                }
-            }
-        });
+                        if (photoCollection.isEmpty()) {
+                            finish();
+                        }
+                    }
+                });
 
         mediaListAdapter = internalAdapter;
         RecyclerView.Adapter wrappedMediaAdapter = dragDropManager.createWrappedAdapter(internalAdapter);
@@ -172,19 +183,21 @@ public class MediaSorterActivity extends AppCompatActivity {
                 }
 
                 String defaultFileName = "Photo2PDF" + System.currentTimeMillis();
-                DialogManagerUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName, new RenameDialogClickListener() {
-                    @Override
-                    public void onRenameDialogListener(String newChosenName) {
-                        String finalOutName = newChosenName + System.currentTimeMillis();
-                        DocumentMyApplication.getInstance().updateSelectedImages(mediaPaths);
-                        Intent taskIntent = new Intent(MediaSorterActivity.this, ProcessingTaskActivity.class);
-                        taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF);
-                        taskIntent.putExtra(AppGlobalConstants.PHOTO_TO_PDF_FILE_NAME, finalOutName);
-                        startActivity(taskIntent);
-                        finish();
-                    }
+                DialogManagerUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName,
+                        new RenameDialogClickListener() {
+                            @Override
+                            public void onRenameDialogListener(String newChosenName) {
+                                String finalOutName = newChosenName + System.currentTimeMillis();
+                                DocumentMyApplication.getInstance().updateSelectedImages(mediaPaths);
+                                Intent taskIntent = new Intent(MediaSorterActivity.this, ProcessingTaskActivity.class);
+                                taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE,
+                                        AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF);
+                                taskIntent.putExtra(AppGlobalConstants.PHOTO_TO_PDF_FILE_NAME, finalOutName);
+                                startActivity(taskIntent);
+                                finish();
+                            }
 
-                });
+                        });
             }
         });
     }

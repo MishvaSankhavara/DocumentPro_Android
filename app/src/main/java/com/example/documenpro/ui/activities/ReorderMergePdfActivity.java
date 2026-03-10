@@ -47,6 +47,8 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
     private AppCompatTextView mergeButtonText;
 
     private LinearLayout tipsLayout;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +68,18 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
     }
 
     private void initToolBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_merge_reorder);
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
+
+        ivBack.setOnClickListener(v -> onBackPressed());
+
+        tvToolbarName.setText(R.string.tool_tittle_merge);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
     }
@@ -87,13 +96,14 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
     @Override
     public void onBackPressed() {
 
-        DialogManagerUtils.showConfirmationDialog(this, AppGlobalConstants.DIALOG_CONFIRM_EXIT_MERGE, new OnConfirmClickListener() {
-            @Override
-            public void onConfirmClickListener() {
-                finish();
-            }
+        DialogManagerUtils.showConfirmationDialog(this, AppGlobalConstants.DIALOG_CONFIRM_EXIT_MERGE,
+                new OnConfirmClickListener() {
+                    @Override
+                    public void onConfirmClickListener() {
+                        finish();
+                    }
 
-        });
+                });
 
     }
 

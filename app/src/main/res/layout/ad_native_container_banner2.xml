@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:maxHeight="70dp"
     android:visibility="gone"
-    app:cardBackgroundColor="@color/app_white"
+    app:cardBackgroundColor="@color/white"
     app:cardElevation="0dp">
 
     <LinearLayout
@@ -59,7 +59,7 @@
                         android:gravity="center"
                         android:padding="1dp"
                         android:text="AD"
-                        android:textColor="@color/app_white"
+                        android:textColor="@color/white"
                         android:textSize="6sp"
                         android:textStyle="bold" />
 

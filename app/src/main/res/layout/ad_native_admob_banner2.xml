@@ -72,7 +72,7 @@
                             android:gravity="center"
                             android:padding="1dp"
                             android:text="AD"
-                            android:textColor="@color/app_white"
+                            android:textColor="@color/white"
                             android:textSize="6sp"
                             android:textStyle="bold" />
 

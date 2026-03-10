@@ -159,7 +159,7 @@
                 android:background="@drawable/ip_bg_indexx_convert"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
-                android:textColor="@color/app_white"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
         </FrameLayout>
 
@@ -212,7 +212,7 @@
             android:background="@drawable/bg_positive_btn"
             android:gravity="center"
             android:text="@string/action_share"
-            android:textColor="@color/app_white"
+            android:textColor="@color/white"
             android:textSize="18sp"
             app:textAllCaps="true" />
 

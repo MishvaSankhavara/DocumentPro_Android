@@ -64,7 +64,7 @@
         android:paddingBottom="3dp"
         android:text="@string/go_to_set"
         android:textAllCaps="false"
-        android:textColor="@color/app_white"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:autoSizeMaxTextSize="16sp"

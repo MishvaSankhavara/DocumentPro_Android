@@ -68,6 +68,8 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
     private int selectedFileType;
 
     private AppCompatTextView deleteTextView;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,18 +91,25 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
 
     private void initToolbar() {
         topToolbar = findViewById(R.id.toolbar);
-        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(0)));
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
+
+        ivBack.setOnClickListener(v -> finish());
+        tvToolbarName.setText(getString(R.string.label_items_selected, String.valueOf(0)));
+
         setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
     private void readIntentData() {
         Intent intent = getIntent();
         if (intent != null) {
-            selectedFileType = getIntent().getIntExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_ALL);
+            selectedFileType = getIntent().getIntExtra(AppGlobalConstants.EXTRA_FILE_TYPE,
+                    AppGlobalConstants.FILE_TYPE_ALL);
         }
 
     }
@@ -119,7 +128,6 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
         shareIconImageView = findViewById(R.id.iv_share);
         moveIconImageView = findViewById(R.id.iv_remove);
         deleteIconImageView = findViewById(R.id.iv_delete);
-
 
         ProgressBar progressBar = findViewById(R.id.loadingView);
         documentRecyclerView = findViewById(R.id.rcv_select_file_list);
@@ -196,7 +204,9 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
                 try {
                     ArrayList<Uri> arrayList = new ArrayList<>();
                     for (int i = 0; i < filePickerAdapter.getSelected_FilePicker().size(); i++) {
-                        arrayList.add(FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", new File(filePickerAdapter.getSelected_FilePicker().get(i).getFileUri_DocModel())));
+                        arrayList.add(FileProvider.getUriForFile(this,
+                                getApplicationContext().getPackageName() + ".provider",
+                                new File(filePickerAdapter.getSelected_FilePicker().get(i).getFileUri_DocModel())));
                     }
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_SEND_MULTIPLE);
@@ -213,28 +223,32 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
             }
         } else if (idView == R.id.ll_remove) {
             if (selectedFileType == AppGlobalConstants.FILE_TYPE_RECENT) {
-                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, AppGlobalConstants.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
-                    @Override
-                    public void onConfirmClickListener() {
-                        new RemoveRecent(SelectDocumentActivity.this).execute();
-                    }
-                });
+                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this,
+                        AppGlobalConstants.DIALOG_CONFIRM_REMOVE_RECENT, new OnConfirmClickListener() {
+                            @Override
+                            public void onConfirmClickListener() {
+                                new RemoveRecent(SelectDocumentActivity.this).execute();
+                            }
+                        });
             } else if (selectedFileType == AppGlobalConstants.FILE_TYPE_FAVORITE) {
-                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, AppGlobalConstants.DIALOG_CONFIRM_REMOVE_FAVORITE, new OnConfirmClickListener() {
-                    @Override
-                    public void onConfirmClickListener() {
-                        FavoriteRemovalExecutor removeFavoriteExecutor = new FavoriteRemovalExecutor(SelectDocumentActivity.this);
-                        removeFavoriteExecutor.executeTask_removeFav();
-                    }
-                });
+                DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this,
+                        AppGlobalConstants.DIALOG_CONFIRM_REMOVE_FAVORITE, new OnConfirmClickListener() {
+                            @Override
+                            public void onConfirmClickListener() {
+                                FavoriteRemovalExecutor removeFavoriteExecutor = new FavoriteRemovalExecutor(
+                                        SelectDocumentActivity.this);
+                                removeFavoriteExecutor.executeTask_removeFav();
+                            }
+                        });
             }
         } else if (idView == R.id.ll_delete) {
-            DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this, AppGlobalConstants.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
-                @Override
-                public void onConfirmClickListener() {
-                    new DeleteMultiFile(SelectDocumentActivity.this).execute();
-                }
-            });
+            DialogManagerUtils.showConfirmationDialog(SelectDocumentActivity.this,
+                    AppGlobalConstants.DIALOG_CONFIRM_DELETE, new OnConfirmClickListener() {
+                        @Override
+                        public void onConfirmClickListener() {
+                            new DeleteMultiFile(SelectDocumentActivity.this).execute();
+                        }
+                    });
         }
 
     }
@@ -290,7 +304,8 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
                 optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                 updateActionButtonsState(true);
             }
-            topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
+            tvToolbarName.setText(getString(R.string.label_items_selected,
+                    String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
 
         }
 
@@ -300,7 +315,8 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
     @Override
     public void onItemSelected() {
         updateActionButtonsState(!filePickerAdapter.getSelected_FilePicker().isEmpty());
-        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
+        tvToolbarName.setText(getString(R.string.label_items_selected,
+                String.valueOf(filePickerAdapter.getSelected_FilePicker().size())));
         if (filePickerAdapter.getSelected_FilePicker().size() == documentList.size()) {
             optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
             filePickerAdapter.isSelectedAll_FilePicker = true;
@@ -340,13 +356,18 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
                 DocumentModel pdfModel = arrayList1.get(i);
                 File file = new File(pdfModel.getFileUri_DocModel());
                 file.delete();
-                MediaScannerConnection.scanFile(weakReference.get(), new String[]{pdfModel.getFileUri_DocModel()}, null, null);
-                if (DatabaseHelper.getInstance(weakReference.get()).isStared_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
-                    DatabaseHelper.getInstance(weakReference.get()).removeStaredDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
+                MediaScannerConnection.scanFile(weakReference.get(), new String[] { pdfModel.getFileUri_DocModel() },
+                        null, null);
+                if (DatabaseHelper.getInstance(weakReference.get())
+                        .isStared_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
+                    DatabaseHelper.getInstance(weakReference.get())
+                            .removeStaredDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
 
                 }
-                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
-                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
+                if (DatabaseHelper.getInstance(weakReference.get())
+                        .isRecent_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
+                    DatabaseHelper.getInstance(weakReference.get())
+                            .removeRecentDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
 
                 }
             }
@@ -364,33 +385,41 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
 
             if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_ALL) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES);
+                weakReference.get().documentList = Utils.countFile(weakReference.get(),
+                        AppGlobalConstants.QUERY_ALL_DOCUMENT_FILES);
             } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_EXCEL) {
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_EXCEL_FILES);
+                weakReference.get().documentList = Utils.countFile(weakReference.get(),
+                        AppGlobalConstants.QUERY_EXCEL_FILES);
             } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_PDF) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_PDF_FILES);
+                weakReference.get().documentList = Utils.countFile(weakReference.get(),
+                        AppGlobalConstants.QUERY_PDF_FILES);
             } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_PPT) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_PPT_FILES);
+                weakReference.get().documentList = Utils.countFile(weakReference.get(),
+                        AppGlobalConstants.QUERY_PPT_FILES);
             } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_WORD) {
 
-                weakReference.get().documentList = Utils.countFile(weakReference.get(), AppGlobalConstants.QUERY_WORD_FILES);
+                weakReference.get().documentList = Utils.countFile(weakReference.get(),
+                        AppGlobalConstants.QUERY_WORD_FILES);
 
             } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_FAVORITE) {
-                weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get()).getStarredDocuments_DatabaseHelper();
+                weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get())
+                        .getStarredDocuments_DatabaseHelper();
 
             } else if (weakReference.get().selectedFileType == AppGlobalConstants.FILE_TYPE_RECENT) {
-                weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get()).getRecentDocuments_DatabaseHelper();
+                weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get())
+                        .getRecentDocuments_DatabaseHelper();
             }
 
-
-            weakReference.get().filePickerAdapter = new FilePickerAdapter(weakReference.get(), weakReference.get().documentList, weakReference.get());
+            weakReference.get().filePickerAdapter = new FilePickerAdapter(weakReference.get(),
+                    weakReference.get().documentList, weakReference.get());
             weakReference.get().documentRecyclerView.setAdapter(weakReference.get().filePickerAdapter);
 
-            weakReference.get().updateActionButtonsState(!weakReference.get().filePickerAdapter.getSelected_FilePicker().isEmpty());
-            weakReference.get().topToolbar.setTitle(weakReference.get().getString(R.string.label_items_selected, String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
-
+            weakReference.get().updateActionButtonsState(
+                    !weakReference.get().filePickerAdapter.getSelected_FilePicker().isEmpty());
+            weakReference.get().tvToolbarName.setText(weakReference.get().getString(R.string.label_items_selected,
+                    String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
 
         }
 
@@ -431,8 +460,10 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
             ArrayList<DocumentModel> arrayListRemove = weakReference.get().filePickerAdapter.getSelected_FilePicker();
             for (int i = 0; i < arrayListRemove.size(); i++) {
                 DocumentModel pdfModel = arrayListRemove.get(i);
-                if (DatabaseHelper.getInstance(weakReference.get()).isRecent_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
-                    DatabaseHelper.getInstance(weakReference.get()).removeRecentDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
+                if (DatabaseHelper.getInstance(weakReference.get())
+                        .isRecent_DatabaseHelper(pdfModel.getFileUri_DocModel())) {
+                    DatabaseHelper.getInstance(weakReference.get())
+                            .removeRecentDocument_DatabaseHelper(pdfModel.getFileUri_DocModel());
                 }
             }
             for (int i = 0; i < 100; i++) {
@@ -444,19 +475,22 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
         }
 
         @Override
-        protected void
-        onPostExecute(Void unused) {
+        protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             dialog.dismiss();
-            this.weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get()).getRecentDocuments_DatabaseHelper();
+            this.weakReference.get().documentList = DatabaseHelper.getInstance(weakReference.get())
+                    .getRecentDocuments_DatabaseHelper();
 
             if (weakReference.get().documentList.isEmpty()) {
                 weakReference.get().finish();
             } else {
-                weakReference.get().filePickerAdapter = new FilePickerAdapter(weakReference.get(), weakReference.get().documentList, weakReference.get());
+                weakReference.get().filePickerAdapter = new FilePickerAdapter(weakReference.get(),
+                        weakReference.get().documentList, weakReference.get());
                 weakReference.get().documentRecyclerView.setAdapter(weakReference.get().filePickerAdapter);
-                weakReference.get().updateActionButtonsState(!weakReference.get().filePickerAdapter.getSelected_FilePicker().isEmpty());
-                weakReference.get().topToolbar.setTitle(weakReference.get().getString(R.string.label_items_selected, String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
+                weakReference.get().updateActionButtonsState(
+                        !weakReference.get().filePickerAdapter.getSelected_FilePicker().isEmpty());
+                weakReference.get().tvToolbarName.setText(weakReference.get().getString(R.string.label_items_selected,
+                        String.valueOf(weakReference.get().filePickerAdapter.getSelected_FilePicker().size())));
             }
         }
 

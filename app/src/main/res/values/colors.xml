@@ -6,8 +6,8 @@
     <color name="app_teal_200">#FF03DAC5</color>
     <color name="app_teal_700">#FF018786</color>
 
-    <color name="app_black">#FF000000</color>
-    <color name="app_white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
     <color name="app_main_color">#0b61da</color>
     <color name="app_text_gray">#89909c</color>
     <color name="app_text_blue">#0b61da</color>
@@ -273,7 +273,7 @@
     <color name="editor_listwheel_choser_btn_textcolor">@color/editor_palette_ltgrey
     </color>
     <color name="editor_main_bg_color">@color/editor_palette_silver_2</color>
-    <color name="editor_menu_popup_background_color">@color/app_white</color>
+    <color name="editor_menu_popup_background_color">@color/white</color>
     <color name="editor_menu_popup_border_colo">@color/app_word_list_bg</color>
     <color name="editor_menu_popup_text_color">@color/editor_palette_white</color>
     <color name="editor_note_bg">@color/editor_palette_columbia_blue</color>

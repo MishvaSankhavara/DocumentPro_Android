@@ -62,6 +62,8 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     private String tempPdfImagesDirectory;
     private String pdfTempFolderName;
     private boolean isLoadingFinished = false;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
     private Menu optionsMenu;
 
     @Override
@@ -92,12 +94,19 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
 
     private void setupToolbar() {
         topToolbar = findViewById(R.id.toolbar);
-        topToolbar.setTitle(
-                getString(R.string.label_items_selected, String.valueOf(DocumentMyApplication.getInstance().getArrayListSplit().size())));
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
+
+        ivBack.setOnClickListener(v -> onBackPressed());
+
+        tvToolbarName.setText(
+                getString(R.string.label_items_selected,
+                        String.valueOf(DocumentMyApplication.getInstance().getArrayListSplit().size())));
         setSupportActionBar(topToolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -124,7 +133,8 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
                     optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
                     setContinueButtonEnabled(true);
                 }
-                topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
+                tvToolbarName.setText(getString(R.string.label_items_selected,
+                        String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
             }
         }
         return super.onOptionsItemSelected(item);
@@ -145,18 +155,20 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
             @Override
             public void onClick(View view) {
                 String nameFile = "Split-" + System.currentTimeMillis();
-                DialogManagerUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile, new RenameDialogClickListener() {
-                    @Override
-                    public void onRenameDialogListener(String newName) {
-                        DocumentMyApplication.getInstance().updateSplitIndices(pdfThumbnailAdapter.getPageNumbers_PdfPreview());
-                        Intent intent = new Intent(SplitChooseFileActivity.this, ProcessingTaskActivity.class);
-                        intent.putExtra(AppGlobalConstants.EXTRA_PDF_FILE_NAME, newName);
-                        intent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_SPLIT);
-                        intent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, selectedPdfModel);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+                DialogManagerUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile,
+                        new RenameDialogClickListener() {
+                            @Override
+                            public void onRenameDialogListener(String newName) {
+                                DocumentMyApplication.getInstance()
+                                        .updateSplitIndices(pdfThumbnailAdapter.getPageNumbers_PdfPreview());
+                                Intent intent = new Intent(SplitChooseFileActivity.this, ProcessingTaskActivity.class);
+                                intent.putExtra(AppGlobalConstants.EXTRA_PDF_FILE_NAME, newName);
+                                intent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_SPLIT);
+                                intent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, selectedPdfModel);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
             }
         });
 
@@ -187,7 +199,8 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
     @Override
     public void onChoosePdfSplitListener() {
         setContinueButtonEnabled(!pdfThumbnailAdapter.getSelected_PdfPreview().isEmpty());
-        topToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
+        tvToolbarName.setText(getString(R.string.label_items_selected,
+                String.valueOf(pdfThumbnailAdapter.getSelected_PdfPreview().size())));
         if (pdfThumbnailAdapter.getSelected_PdfPreview().size() == pdfPageList.size()) {
             optionsMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_unselect_all));
             pdfThumbnailAdapter.isSelectedAll_PdfPreview = true;

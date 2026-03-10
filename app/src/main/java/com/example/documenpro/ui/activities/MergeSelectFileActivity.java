@@ -33,6 +33,8 @@ public class MergeSelectFileActivity extends AppCompatActivity {
     private AppCompatTextView continueButtonText;
     private MergeFileSelectionAdapter pdfSelectionAdapter;
     private Toolbar mergeToolbar;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
 
     private ArrayList<PDFReaderModel> availablePdfList;
 
@@ -49,19 +51,24 @@ public class MergeSelectFileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-//        NativeAdsAdmob.showNativeBanner1(this, null);
+        // NativeAdsAdmob.showNativeBanner1(this, null);
         initToolBar();
         initViews();
     }
 
     private void initToolBar() {
         mergeToolbar = findViewById(R.id.toolbar);
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
 
-        mergeToolbar.setTitle(getString(R.string.label_items_selected, "0"));
+        ivBack.setOnClickListener(v -> finish());
+
+        tvToolbarName.setText(getString(R.string.label_items_selected, "0"));
         setSupportActionBar(mergeToolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -86,26 +93,31 @@ public class MergeSelectFileActivity extends AppCompatActivity {
         backgroundExecutor.execute(() -> {
             availablePdfList = Utils.getUnLockPDF(MergeSelectFileActivity.this);
             runOnUiThread(() -> {
-                pdfSelectionAdapter = new MergeFileSelectionAdapter(MergeSelectFileActivity.this, availablePdfList, position -> {
-                    if (pdfSelectionAdapter.getSelected_MergeFileSelection().size() > 1) {
-                        continueButtonText.setEnabled(true);
-                        continueButtonText.setClickable(true);
-                        continueButtonText.setFocusable(true);
-                    } else {
-                        continueButtonText.setEnabled(false);
-                        continueButtonText.setClickable(false);
-                        continueButtonText.setFocusable(false);
-                    }
-                    mergeToolbar.setTitle(getString(R.string.label_items_selected, String.valueOf(pdfSelectionAdapter.getSelected_MergeFileSelection().size())));
-                });
+                pdfSelectionAdapter = new MergeFileSelectionAdapter(MergeSelectFileActivity.this, availablePdfList,
+                        position -> {
+                            if (pdfSelectionAdapter.getSelected_MergeFileSelection().size() > 1) {
+                                continueButtonText.setEnabled(true);
+                                continueButtonText.setClickable(true);
+                                continueButtonText.setFocusable(true);
+                            } else {
+                                continueButtonText.setEnabled(false);
+                                continueButtonText.setClickable(false);
+                                continueButtonText.setFocusable(false);
+                            }
+                            tvToolbarName.setText(getString(R.string.label_items_selected,
+                                    String.valueOf(pdfSelectionAdapter.getSelected_MergeFileSelection().size())));
+                        });
                 recyclerView.setAdapter(pdfSelectionAdapter);
                 loadingAnimation.setVisibility(View.GONE);
                 continueButtonContainer.setVisibility(View.VISIBLE);
             });
         });
 
-        continueButtonText.setOnClickListener(view -> {
-            DocumentMyApplication.getInstance().updateMergedPdfList(pdfSelectionAdapter.getSelected_MergeFileSelection());
+        continueButtonText.setOnClickListener(view ->
+
+        {
+            DocumentMyApplication.getInstance()
+                    .updateMergedPdfList(pdfSelectionAdapter.getSelected_MergeFileSelection());
             Intent intent = new Intent(MergeSelectFileActivity.this, ReorderMergePdfActivity.class);
             startActivity(intent);
             finish();

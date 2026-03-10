@@ -184,7 +184,7 @@
                 android:paddingEnd="2dp"
                 android:paddingBottom="2dp"
                 android:src="@drawable/fullscreen"
-                android:tint="@color/app_white" />
+                android:tint="@color/white" />
 
             <LinearLayout
                 android:id="@+id/doUndoLayout"

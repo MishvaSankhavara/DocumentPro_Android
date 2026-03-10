@@ -12,5 +12,4 @@
         android:clipToPadding="false"
         android:paddingTop="@dimen/media_grid_spacing"
         android:paddingBottom="@dimen/media_grid_spacing" />
-
 </FrameLayout>

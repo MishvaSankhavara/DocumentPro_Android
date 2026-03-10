@@ -52,14 +52,15 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar mainToolbar;
     private TextView toolbarTitleTextView;
     public BottomNavigationView bottomNavigationView;
     DrawerLayout mainDrawerLayout;
     private ViewPager viewPager;
-    AppCompatImageView ivToolsImage;
+    AppCompatImageView ivSidebar;
     AppCompatImageView filesIconImageView;
     TextView toolsTextView;
     TextView filesTextView;
@@ -100,36 +101,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupViewPager();
         loadBannerAd();
         initializeListeners();
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int idMenu = menuItem.getItemId();
-                if (idMenu == R.id.navigation_files) {
-                    viewPager.setCurrentItem(0);
-                } else if (idMenu == R.id.navigation_tools) {
-                    viewPager.setCurrentItem(1);
-                } else if (idMenu == R.id.navigation_settings) {
-                    viewPager.setCurrentItem(2);
-                }
-                // Tăng số lần click
-                navigationAdClickCount++;
-                if (navigationAdClickCount % 3 == 0) {
-                    AdManager.showAds_AdManager(MainActivity.this, new OnAdDismissedListener() {
-                        @Override
-                        public void OnAdDismissedListener() {
-
+        bottomNavigationView
+                .setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        int idMenu = menuItem.getItemId();
+                        if (idMenu == R.id.navigation_files) {
+                            viewPager.setCurrentItem(0);
+                        } else if (idMenu == R.id.navigation_tools) {
+                            viewPager.setCurrentItem(1);
+                        } else if (idMenu == R.id.navigation_settings) {
+                            viewPager.setCurrentItem(2);
                         }
-                    });
-                }
-                PreferenceUtils.getInstance(MainActivity.this).setInt(AppGlobalConstants.NAVIGATION_CLICK_COUNT, navigationAdClickCount);
+                        // Tăng số lần click
+                        navigationAdClickCount++;
+                        if (navigationAdClickCount % 3 == 0) {
+                            AdManager.showAds_AdManager(MainActivity.this, new OnAdDismissedListener() {
+                                @Override
+                                public void OnAdDismissedListener() {
 
-                return true;
-            }
-        });
+                                }
+                            });
+                        }
+                        PreferenceUtils.getInstance(MainActivity.this).setInt(AppGlobalConstants.NAVIGATION_CLICK_COUNT,
+                                navigationAdClickCount);
+
+                        return true;
+                    }
+                });
     }
 
     private void initializeData() {
-        dayNightSwitch.setNightMode(PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
+        dayNightSwitch
+                .setNightMode(PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
         dayNightSwitch.setSwitchListener(is_night -> {
             startActivity(new Intent(MainActivity.this, SplashScreenActivity.class));
             finish();
@@ -138,9 +142,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeListeners() {
-//        btnFiles.setOnClickListener(this);
-//        btnTools.setOnClickListener(this);
-//        findViewById(R.id.pdf_act_main_select_image).setOnClickListener(this);
+        // btnFiles.setOnClickListener(this);
+        // btnTools.setOnClickListener(this);
+        // findViewById(R.id.pdf_act_main_select_image).setOnClickListener(this);
     }
 
     private void setupViewPager() {
@@ -159,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainToolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(mainToolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setDisplayShowHomeEnabled(false);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
@@ -169,13 +173,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         appVersionTextView = findViewById(R.id.tv_app_version);
         bottomNavigationView = findViewById(R.id.bottom_nav);
         adContainer = findViewById(R.id.my_template_banner);
-//        btnTools = findViewById(R.id.cly_tab_tools);
-//        btnFiles = findViewById(R.id.cly_tab_files);
-//        tvTools = findViewById(R.id.tv_tab_tools);
-//        tvFile = findViewById(R.id.tv_tab_files);
-//        ivTools = findViewById(R.id.iv_tab_tools);
-//        ivFiles = findViewById(R.id.iv_tab_files);
+        // btnTools = findViewById(R.id.cly_tab_tools);
+        // btnFiles = findViewById(R.id.cly_tab_files);
+        // tvTools = findViewById(R.id.tv_tab_tools);
+        // tvFile = findViewById(R.id.tv_tab_files);
+        // ivTools = findViewById(R.id.iv_tab_tools);
+        // ivFiles = findViewById(R.id.iv_tab_files);
         viewPager = findViewById(R.id.viewpager_main);
+        ivSidebar = findViewById(R.id.iv_sidebar);
+        AppCompatImageView ivSearch = findViewById(R.id.iv_search);
+        ivSearch.setOnClickListener(this);
+
         toolbarTitleTextView = findViewById(R.id.tv_name);
         mainDrawerLayout = findViewById(R.id.activity_main_drawer);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -192,9 +200,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         languageTextView = navigationView.findViewById(R.id.tv_language_hint);
 
-        mainToolbar.setNavigationOnClickListener(view -> mainDrawerLayout.openDrawer(GravityCompat.START));
+        ivSidebar.setOnClickListener(view -> mainDrawerLayout.openDrawer(GravityCompat.START));
 
-        languageTextView.setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
+        languageTextView
+                .setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
         appVersionTextView.setText("Version: " + BuildConfig.VERSION_NAME);
     }
 
@@ -245,13 +254,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int idView = v.getId();
-//        if (idView == R.id.cly_tab_files) {
-//            viewPager.setCurrentItem(0);
-//        } else if (idView == R.id.cly_tab_tools) {
-//            viewPager.setCurrentItem(1);
-//        }else if (idView==R.id.pdf_act_main_select_image){
-//            Toast.makeText(this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
-//        }
+        // if (idView == R.id.cly_tab_files) {
+        // viewPager.setCurrentItem(0);
+        // } else if (idView == R.id.cly_tab_tools) {
+        // viewPager.setCurrentItem(1);
+        // }else if (idView==R.id.pdf_act_main_select_image){
+        // Toast.makeText(this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
+        // }
         if (idView == R.id.cl_share_app) {
             Utils.shareApp(MainActivity.this);
             mainDrawerLayout.closeDrawers();
@@ -288,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 toolbarTitleTextView.setText(R.string.app_name);
                 if (getSupportActionBar() != null) {
-                    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+                    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
 
                 }
                 break;
@@ -305,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
                 }
 
-//                tvToolbar.setText(R.string.pdf_tools);
+                // tvToolbar.setText(R.string.pdf_tools);
                 break;
         }
     }
@@ -344,7 +353,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected Void doInBackground(Void... voids) {
             String filename = Utils.getFileNameFromUri(intentData, weakReference.get().getContentResolver());
-            File pathFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/DocumentReader/");
+            File pathFolder = new File(
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/DocumentReader/");
             if (!pathFolder.exists()) {
                 pathFolder.mkdirs();
             }

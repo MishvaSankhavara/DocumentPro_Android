@@ -35,7 +35,7 @@
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         android:text="@string/onboarding_title_organize_pdf"
-        android:textColor="@color/app_white"
+        android:textColor="@color/white"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/subtitle_tv"
         app:layout_constraintStart_toStartOf="@+id/subtitle_tv" />
@@ -51,7 +51,7 @@
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         android:text="@string/onboarding_description_file_management"
-        android:textColor="@color/app_white"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

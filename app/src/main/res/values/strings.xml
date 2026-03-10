@@ -517,6 +517,7 @@
     <string name="pro_popup_button" translatable="false">UPGRADE OPTIONS</string>
     <string name="pro_popup_message" translatable="false">Track Changes and enhanced Password Protection capabilities are features of Office Editor PRO</string>
     <string name="pro_popup_title" translatable="false">PRO FEATURE</string>
+    <string name="settings_title">Settings</string>
     <string name="app_settings" translatable="false">Settings</string>
     <string name="app_sis" translatable="false">Blackberry Intelligent Security</string>
     <string name="support_change_email" translatable="false">Change Email Address</string>
@@ -781,6 +782,7 @@
 
     // Tool Type
     <string name="tool_title_your_pdf">Your PDF</string>
+    <string name="tool_tittle_merge">Merge PDF</string>
     <string name="tool_title_split_pdf">Merge PDF</string>
     <string name="tool_tittle_print">Print</string>
     <string name="tool_tittle_split">Split PDF</string>

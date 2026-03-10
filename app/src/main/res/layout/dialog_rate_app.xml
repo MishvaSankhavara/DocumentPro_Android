@@ -70,7 +70,7 @@
         android:fontFamily="@font/roboto_bold"
         android:gravity="center"
         android:text="@string/dialog_rate_button"
-        android:textColor="@color/app_white"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

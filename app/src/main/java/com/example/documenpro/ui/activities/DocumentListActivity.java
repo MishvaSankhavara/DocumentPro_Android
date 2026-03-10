@@ -45,6 +45,8 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
     private LottieAnimationView loadingAnimationView;
     private FileListAdapter documentListAdapter;
     private ArrayList<DocumentModel> documentList;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
     private String selectedFileType;
     private int fileType;
     private final Executor executor = Executors.newSingleThreadExecutor();
@@ -77,7 +79,8 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        documentListAdapter = new FileListAdapter(DocumentListActivity.this, documentList, DocumentListActivity.this);
+                        documentListAdapter = new FileListAdapter(DocumentListActivity.this, documentList,
+                                DocumentListActivity.this);
                         documentRecyclerView.setAdapter(documentListAdapter);
                         documentRecyclerView.setVisibility(View.VISIBLE);
                         loadingAnimationView.setVisibility(View.GONE);
@@ -89,8 +92,8 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
 
     private void setUpToolbar() {
         setSupportActionBar(topToolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         applyToolbarTheme(fileType);
     }
@@ -100,6 +103,11 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
         documentRecyclerView = findViewById(R.id.recycler);
         loadingAnimationView = findViewById(R.id.loadingView);
         topToolbar = findViewById(R.id.toolbar_list_file);
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
+
+        ivBack.setOnClickListener(v -> finish());
+
         documentRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         documentRecyclerView.setLayoutManager(layoutManager);
@@ -136,7 +144,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
         topToolbar.setBackgroundColor(ContextCompat.getColor(this, colorCode));
         getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), colorCode));
         mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, colorCode));
-        topToolbar.setTitle(getResources().getString(title));
+        tvToolbarName.setText(getResources().getString(title));
     }
 
     @Override
@@ -177,10 +185,10 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
 
     @Override
     public void onDocClick(DocumentModel document) {
-//        Utils.openFile(this, document);
+        // Utils.openFile(this, document);
         AdManager.showAds_AdManager(this, () -> Utils.openFile(this, document));
 
-//        Utils.openFileWithAds(this, document, 2);
+        // Utils.openFileWithAds(this, document, 2);
     }
 
     @Override

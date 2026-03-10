@@ -13,7 +13,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="11dp"
-        android:tint="@color/app_white"
+        android:tint="@color/white"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:srcCompat="@drawable/ic_flip_black" />
 
@@ -27,7 +27,7 @@
         android:gravity="center"
         android:lines="1"
         android:text="@string/rotate"
-        android:textColor="@color/app_white"
+        android:textColor="@color/white"
         android:textSize="11sp" />
 
 </LinearLayout>

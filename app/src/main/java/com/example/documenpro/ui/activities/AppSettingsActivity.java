@@ -28,6 +28,8 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
     private AppCompatTextView languageTextView;
 
     private AppCompatTextView appVersionTextView;
+    private android.widget.ImageView ivBack;
+    private android.widget.TextView tvToolbarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +56,26 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar_settings);
+        Toolbar toolbar = findViewById(R.id.settings_main_toolbar);
+        ivBack = findViewById(R.id.iv_back);
+        tvToolbarName = findViewById(R.id.tv_name);
+
+        ivBack.setOnClickListener(v -> finish());
+        tvToolbarName.setText(R.string.settings_title);
+
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
     private void loadSettingsData() {
         appVersionTextView.setText(BuildConfig.VERSION_NAME);
 
-        languageTextView.setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
+        languageTextView
+                .setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
     }
 
     private void initializeViews() {

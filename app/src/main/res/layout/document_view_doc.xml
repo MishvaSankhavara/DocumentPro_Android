@@ -124,7 +124,7 @@
                 android:paddingEnd="2dp"
                 android:paddingBottom="2dp"
                 android:src="@drawable/fullscreen"
-                android:tint="@color/app_white" />
+                android:tint="@color/white" />
 
             <include
                 layout="@layout/layout_undo_redo"

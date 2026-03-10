@@ -5,18 +5,44 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:fitsSystemWindows="true">
+    android:background="@color/colorPrimaryDark">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_merge_reorder"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/bg_title"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Merge PDF" />
+        app:navigationIcon="@null"
+        app:title=""
+        app:titleTextColor="@color/white">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|center_vertical"
+            android:padding="8dp"
+            android:src="@drawable/ic_return" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:lines="1"
+            android:text="@string/tool_tittle_merge"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+    </androidx.appcompat.widget.Toolbar>
     <View
         android:id="@+id/tab_line"
         android:layout_width="match_parent"
@@ -25,7 +51,7 @@
         android:background="@color/colorPrimaryDim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_merge_reorder" />
     <LinearLayout
         android:id="@+id/tipsLl"
         android:layout_width="0dp"
@@ -110,7 +136,7 @@
             android:includeFontPadding="false"
             android:text="@string/action_merge_count"
             android:textAllCaps="true"
-            android:textColor="@color/app_white"
+            android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
 
