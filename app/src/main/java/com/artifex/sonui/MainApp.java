@@ -39,9 +39,8 @@ public class MainApp extends DocumentMyApplication {
     }
 
     public void onCreate() {
+        context = this;
         this.a();
         super.onCreate();
-        context = this;
-
     }
 }

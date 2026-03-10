@@ -61,7 +61,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/app_background"
+        android:background="@drawable/bg_top_radius_solid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_list_file" />
 
@@ -69,6 +69,7 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingTop="8dp"
         android:clipToPadding="false"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/ad_container"
@@ -77,22 +78,34 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_list_file"
         tools:ignore="RtlSymmetry" />
 
-
-    <TextView
+    <LinearLayout
         android:id="@+id/empty_layout"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:fontFamily="@font/roboto_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_radius"
+        android:padding="32dp"
         android:gravity="center"
-        android:text="@string/no_files_yet"
-        android:textSize="16sp"
         android:visibility="gone"
-        app:drawableTopCompat="@drawable/ic_no_file"
         app:layout_constraintBottom_toTopOf="@id/ad_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_list_file" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_list_file">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_no_file" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/no_files_yet"
+            android:textColor="@color/app_text_gray"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadingView"

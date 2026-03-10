@@ -29,6 +29,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
     private AppCompatTextView languageTextView;
 
     private AppCompatTextView versionTextView;
+    private com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch swDarkMode;
 
     public FragmentSetting() {
     }
@@ -52,8 +53,18 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
         versionTextView.setText(BuildConfig.VERSION_NAME);
 
         languageTextView.setText(
-                PreferenceUtils.getInstance(activityContext).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
+                PreferenceUtils.getInstance(activityContext).getString(AppGlobalConstants.PREF_LANGUAGE_NAME,
+                        "English"));
 
+        if (swDarkMode != null) {
+            swDarkMode.setNightMode(
+                    PreferenceUtils.getInstance(activityContext).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
+            swDarkMode.setSwitchListener(is_night -> {
+                PreferenceUtils.getInstance(activityContext).setBoolean(AppGlobalConstants.PREF_NIGHT_MODE, is_night);
+                Utils.setTheme(activityContext.getApplication(), is_night);
+                activityContext.recreate();
+            });
+        }
     }
 
     private void initListener(View view) {
@@ -65,12 +76,14 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.cl_request).setOnClickListener(this);
         view.findViewById(R.id.cl_feedback).setOnClickListener(this);
         view.findViewById(R.id.cl_privacy_policy).setOnClickListener(this);
+        view.findViewById(R.id.cl_dark_mode).setOnClickListener(this);
 
     }
 
     private void initViews(View view) {
         languageTextView = view.findViewById(R.id.tv_language_hint);
         versionTextView = view.findViewById(R.id.tv_version);
+        swDarkMode = view.findViewById(R.id.sw_dark_mode);
     }
 
     @Override
@@ -85,7 +98,11 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int idView = v.getId();
         if (idView == R.id.cl_file_manage) {
-
+            Utils.chooseFileManager(activityContext);
+        } else if (idView == R.id.cl_dark_mode) {
+            if (swDarkMode != null) {
+                swDarkMode.setNightMode(!swDarkMode.isNightMode());
+            }
         } else if (idView == R.id.cl_rate_app) {
             Utils.showRateDialog(activityContext);
         } else if (idView == R.id.cl_share_app) {

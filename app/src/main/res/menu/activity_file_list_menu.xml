@@ -10,11 +10,12 @@
         android:id="@+id/item_multi_select"
         android:icon="@drawable/ic_select"
         android:title="@string/select_item"
+        app:iconTint="@color/white"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/item_sort"
         android:icon="@drawable/ic_sort"
         android:title="@string/sort_items"
+        app:iconTint="@color/white"
         app:showAsAction="ifRoom" />
-
 </menu>

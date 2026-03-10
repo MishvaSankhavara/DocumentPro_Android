@@ -39,8 +39,7 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
         int padding = (int) (toolType.getPadding_toolModel() * scale + 0.5f);
 
         holder.tvTool_DocumentTool.setText(
-                mContext_DocumentTool.getResources().getString(toolType.getNameTool_toolModel())
-        );
+                mContext_DocumentTool.getResources().getString(toolType.getNameTool_toolModel()));
 
         holder.imgTool_DocumentTool.setPadding(padding, padding, padding, padding);
         holder.imgTool_DocumentTool.setImageResource(toolType.getIcRes_toolModel());
@@ -59,9 +58,9 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
         return new ViewHolder(view);
     }
 
-    public DocumentToolAdapter(Context mContext, OnToolTapListener listener) {
+    public DocumentToolAdapter(Context mContext, ArrayList<ToolsModel> list, OnToolTapListener listener) {
         this.mContext_DocumentTool = mContext;
-        this.arrayList_DocumentTool = AppGlobalConstants.setToolsList();
+        this.arrayList_DocumentTool = list;
         this.listener_DocumentTool = listener;
     }
 

@@ -2,6 +2,7 @@ package com.example.documenpro.ui.fragments;
 
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.docpro.scanner.selector.DocPickerActivity;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -54,12 +55,40 @@ public class FragmentTools extends Fragment {
     }
 
     private void initViews(View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.tools_rv);
+        ArrayList<ToolsModel> allTools = AppGlobalConstants.setToolsList();
+
+        ArrayList<ToolsModel> pdfToolsList = new ArrayList<>();
+        ArrayList<ToolsModel> securityToolsList = new ArrayList<>();
+        ArrayList<ToolsModel> convertEditorList = new ArrayList<>();
+
+        for (ToolsModel tool : allTools) {
+            int type = tool.getToolType_toolModel();
+            if (type == AppGlobalConstants.TOOL_YOUR_PDF ||
+                    type == AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO ||
+                    type == AppGlobalConstants.TOOL_ID_COMPRESS ||
+                    type == AppGlobalConstants.TOOL_ID_SPLIT ||
+                    type == AppGlobalConstants.TOOL_ID_PRINT) {
+                pdfToolsList.add(tool);
+            } else if (type == AppGlobalConstants.TOOL_ID_LOCK_PDF ||
+                    type == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {
+                securityToolsList.add(tool);
+            } else if (type == AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF ||
+                    type == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
+                convertEditorList.add(tool);
+            }
+        }
+
+        setupRecyclerView(view.findViewById(R.id.rv_pdf_tools), pdfToolsList);
+        setupRecyclerView(view.findViewById(R.id.rv_security), securityToolsList);
+        setupRecyclerView(view.findViewById(R.id.rv_convert_editor), convertEditorList);
+    }
+
+    private void setupRecyclerView(RecyclerView recyclerView, ArrayList<ToolsModel> toolsList) {
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen._1sdp);
         recyclerView.addItemDecoration(new ViewItemDecoration(spacingInPixels));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(activityContext, 4, RecyclerView.VERTICAL, false));
-        DocumentToolAdapter adapter = new DocumentToolAdapter(activityContext, new OnToolTapListener() {
+        DocumentToolAdapter adapter = new DocumentToolAdapter(activityContext, toolsList, new OnToolTapListener() {
             @Override
             public void onToolTap(ToolsModel toolType) {
                 selectedTool = toolType;

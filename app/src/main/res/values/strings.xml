@@ -711,7 +711,12 @@
     <string name="view_image">View files</string>
 
     <string name="go_to_set">Go to set</string>
-    <string name="tools">Tools</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="search_documents">Search documents...</string>
+    <string name="label_pdf_tools">PDF Tools</string>
+    <string name="label_security">Security</string>
+    <string name="label_convert_editor">Convert &amp; Editor</string>
+    <string name="label_tools">Tools</string>
     <string name="no_files_yet">No files yet</string>
     <string name="feed_back_app">FeedBack PDF Reader app</string>
     <string name="pdf_created_toolbar"> Created</string>
@@ -1007,5 +1012,4 @@
     <string name="dialog_exit_feedback_message">If you have a trouble when reading files, click to feedback to us</string>
     <string name="action_exit_app">Tap here to exit app</string>
     <string name="action_next" translatable="false">Next</string>
-    <string name="label_pdf_tools" translatable="false">PDF Tools</string>
 </resources>

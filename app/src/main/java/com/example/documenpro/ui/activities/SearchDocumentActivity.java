@@ -84,7 +84,8 @@ public class SearchDocumentActivity extends ActivityBase implements ViewPager.On
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_word_list_bg));
 
                 searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_word_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_word_list_bg));
+                getWindow()
+                        .setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_word_list_bg));
 
                 break;
             case AppGlobalConstants.FILE_TYPE_EXCEL:
@@ -92,7 +93,8 @@ public class SearchDocumentActivity extends ActivityBase implements ViewPager.On
                 mainContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_excel_list_bg));
 
                 searchTabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_excel_list_bg));
-                getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_excel_list_bg));
+                getWindow()
+                        .setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.app_excel_list_bg));
                 break;
             case AppGlobalConstants.FILE_TYPE_PPT:
                 toolbarContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.app_ppt_list_bg));
@@ -126,7 +128,6 @@ public class SearchDocumentActivity extends ActivityBase implements ViewPager.On
         adapter.addFrag(new FragmentPpt(this), getResources().getString(R.string.document_ppt));
         adapter.addFrag(new FragmentTxt(this), getResources().getString(R.string.document_txt));
 
-
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(6);
         searchTabLayout.setupWithViewPager(viewPager);
@@ -144,10 +145,10 @@ public class SearchDocumentActivity extends ActivityBase implements ViewPager.On
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() > 0) {
                     clearSearchButton.setVisibility(View.VISIBLE);
-                    searchViewModel.setSearchQueryLiveData(charSequence.toString());
-                } else if (charSequence.length() == 0) {
+                } else {
                     clearSearchButton.setVisibility(View.GONE);
                 }
+                searchViewModel.setSearchQueryLiveData(charSequence.toString());
             }
 
             @Override

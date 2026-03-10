@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="isTablet">false</bool>
+
+    <!-- sodk resources -->
+    <bool name="sodk_is_phone">true</bool>
+    <bool name="sodk_is_tablet">false</bool>
 </resources>

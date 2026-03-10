@@ -56,6 +56,7 @@ import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.FileListAdapter;
+import com.example.documenpro.adapter_reader.MergeFileSelectionAdapter;
 import com.example.documenpro.advertisement.OnAdDismissedListener;
 import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.database.DatabaseHelper;
@@ -106,7 +107,7 @@ public class Utils {
 
     public static void copyFile(Context context, Uri sourceUri, String destinationPath) {
         try (InputStream in = context.getContentResolver().openInputStream(sourceUri);
-             OutputStream out = new FileOutputStream(destinationPath)) {
+                OutputStream out = new FileOutputStream(destinationPath)) {
 
             byte[] buffer = new byte[1024];
             int len;
@@ -179,7 +180,8 @@ public class Utils {
         try {
             PdfReader reader = new PdfReader(srcFile);
             PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePathNeW));
-            stamper.setEncryption(USER, OWNER, PdfWriter.ALLOW_PRINTING, PdfWriter.ENCRYPTION_AES_128 | PdfWriter.DO_NOT_ENCRYPT_METADATA);
+            stamper.setEncryption(USER, OWNER, PdfWriter.ALLOW_PRINTING,
+                    PdfWriter.ENCRYPTION_AES_128 | PdfWriter.DO_NOT_ENCRYPT_METADATA);
             stamper.close();
             reader.close();
             return true;
@@ -192,7 +194,8 @@ public class Utils {
         String fileSeparator = System.getProperty("file.separator");
         if (fileSeparator == null) {
             fileSeparator = "/";
-            // You can replace "/" with "\\" if you're specifically targeting Windows environments.
+            // You can replace "/" with "\\" if you're specifically targeting Windows
+            // environments.
         }
         int lastIndexOf = str.lastIndexOf(fileSeparator);
         if (lastIndexOf != -1) {
@@ -268,7 +271,7 @@ public class Utils {
     public static ArrayList<PDFReaderModel> getUnLockPDF(Context mContext) {
         ArrayList<PDFReaderModel> pdfList = new ArrayList<>();
         Uri collection;
-        final String[] projection = new String[]{
+        final String[] projection = new String[] {
                 MediaStore.Files.FileColumns.DISPLAY_NAME,
                 MediaStore.Files.FileColumns.DATE_ADDED,
                 MediaStore.Files.FileColumns.DATA,
@@ -276,14 +279,16 @@ public class Utils {
         };
         final String sortOrder = MediaStore.Files.FileColumns.DATE_ADDED + " DESC";
 
-//        final String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("doc");
+        // final String mimeType =
+        // MimeTypeMap.getSingleton().getMimeTypeFromExtension("doc");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             collection = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL);
         } else {
             collection = MediaStore.Files.getContentUri("external");
         }
-        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, AppGlobalConstants.QUERY_PDF_FILES, null, sortOrder)) {
+        try (Cursor cursor = mContext.getContentResolver().query(collection, projection,
+                AppGlobalConstants.QUERY_PDF_FILES, null, sortOrder)) {
             assert cursor != null;
 
             if (cursor.moveToFirst()) {
@@ -292,7 +297,7 @@ public class Utils {
                 do {
                     String file_path = cursor.getString(columnData);
                     String file_name = cursor.getString(columnName);
-                    //you can get your pdf files
+                    // you can get your pdf files
                     final File file = new File(file_path);
                     if (file_name == null) {
                         break;
@@ -304,7 +309,7 @@ public class Utils {
                             fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
                             fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
                             fileHolderModel.setProtected_PDFModel(false);
-//                        fileHolderModel.setUrlThumbnail(Utils.generateThumbnailPdf(mContext, file));
+                            // fileHolderModel.setUrlThumbnail(Utils.generateThumbnailPdf(mContext, file));
                             fileHolderModel.setLength_PDFModel(file.length());
                             fileHolderModel.setLastModified_PDFModel(file.lastModified());
                             fileHolderModel.setDirectory_PDFModel(file.isDirectory());
@@ -320,7 +325,7 @@ public class Utils {
     public static ArrayList<PDFReaderModel> getLockPDF(Context mContext) {
         ArrayList<PDFReaderModel> pdfList = new ArrayList<>();
         Uri collection;
-        final String[] projection = new String[]{
+        final String[] projection = new String[] {
                 MediaStore.Files.FileColumns.DISPLAY_NAME,
                 MediaStore.Files.FileColumns.DATE_ADDED,
                 MediaStore.Files.FileColumns.DATA,
@@ -328,14 +333,16 @@ public class Utils {
         };
         final String sortOrder = MediaStore.Files.FileColumns.DATE_ADDED + " DESC";
 
-//        final String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("doc");
+        // final String mimeType =
+        // MimeTypeMap.getSingleton().getMimeTypeFromExtension("doc");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             collection = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL);
         } else {
             collection = MediaStore.Files.getContentUri("external");
         }
-        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, AppGlobalConstants.QUERY_PDF_FILES, null, sortOrder)) {
+        try (Cursor cursor = mContext.getContentResolver().query(collection, projection,
+                AppGlobalConstants.QUERY_PDF_FILES, null, sortOrder)) {
             assert cursor != null;
 
             if (cursor.moveToFirst()) {
@@ -344,7 +351,7 @@ public class Utils {
                 do {
                     String file_path = cursor.getString(columnData);
                     String file_name = cursor.getString(columnName);
-                    //you can get your pdf files
+                    // you can get your pdf files
                     final File file = new File(file_path);
                     if (file_name == null) {
                         break;
@@ -356,7 +363,7 @@ public class Utils {
                             fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
                             fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
                             fileHolderModel.setProtected_PDFModel(true);
-//                        fileHolderModel.setUrlThumbnail(Utils.generateThumbnailPdf(mContext, file));
+                            // fileHolderModel.setUrlThumbnail(Utils.generateThumbnailPdf(mContext, file));
                             fileHolderModel.setLength_PDFModel(file.length());
                             fileHolderModel.setLastModified_PDFModel(file.lastModified());
                             fileHolderModel.setDirectory_PDFModel(file.isDirectory());
@@ -371,12 +378,14 @@ public class Utils {
 
     public static boolean checkHavePassword(Context context, Uri uri) {
         try {
-            new PdfiumCore(context).newDocument(context.getContentResolver().openFileDescriptor(uri, AppGlobalConstants.STYLE_ROMAN_LOWER));
+            new PdfiumCore(context).newDocument(
+                    context.getContentResolver().openFileDescriptor(uri, AppGlobalConstants.STYLE_ROMAN_LOWER));
             return false;
         } catch (PdfPasswordException e) {
             return true;
         } catch (IOException e2) {
-//            Toast.makeText(context, R.string.toast_cannot_print_malformed_pdf, Toast.LENGTH_LONG).show();
+            // Toast.makeText(context, R.string.toast_cannot_print_malformed_pdf,
+            // Toast.LENGTH_LONG).show();
             e2.printStackTrace();
             return true;
         } catch (UnsatisfiedLinkError error) {
@@ -389,8 +398,10 @@ public class Utils {
         SpannableString first = new SpannableString("PDF");
         SpannableString second = new SpannableString(mContext.getString(R.string.pdf_created_toolbar));
         SpannableString empty = new SpannableString(" ");
-        first.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.colorAccent)), 0, first.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        second.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.colorTextPrimary)), 0, second.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        first.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.colorAccent)), 0, first.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        second.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.colorTextPrimary)), 0,
+                second.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return TextUtils.concat(first, empty, second);
 
     }
@@ -403,7 +414,8 @@ public class Utils {
             Uri screenshotUri = Uri.parse(path);
             intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
             intent.setType("image/*");
-            context.startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.share_file_via)));
+            context.startActivity(
+                    Intent.createChooser(intent, context.getResources().getString(R.string.share_file_via)));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -448,7 +460,7 @@ public class Utils {
     public static String getFileNameFromUri(Uri contentUri, ContentResolver contentResolver) {
         try {
             String filePath;
-            String[] filePathColumn = {MediaStore.MediaColumns.DISPLAY_NAME};
+            String[] filePathColumn = { MediaStore.MediaColumns.DISPLAY_NAME };
             Cursor cursor = contentResolver.query(contentUri, filePathColumn, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
@@ -456,7 +468,7 @@ public class Utils {
                 cursor.close();
                 return filePath;
             }
-//            cursor.moveToFirst();
+            // cursor.moveToFirst();
         } catch (SecurityException | CursorIndexOutOfBoundsException e) {
             e.printStackTrace();
             return null;
@@ -471,7 +483,6 @@ public class Utils {
             windowMetrics = context.getWindowManager().getCurrentWindowMetrics();
         }
         Rect bounds = null;
-
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
             bounds = windowMetrics.getBounds();
@@ -524,8 +535,19 @@ public class Utils {
             if (documentModel.getFileName_DocModel().toLowerCase().contains(string.toLowerCase())) {
                 arrayList.add(documentModel);
             }
-            adapter.filter(arrayList);
         }
+        adapter.filter(arrayList);
+    }
+
+    public static void searchPDFReaderModel(String string, ArrayList<PDFReaderModel> itemList,
+            MergeFileSelectionAdapter adapter) {
+        ArrayList<PDFReaderModel> arrayList = new ArrayList<>();
+        for (PDFReaderModel model : itemList) {
+            if (model.getName_PDFModel().toLowerCase().contains(string.toLowerCase())) {
+                arrayList.add(model);
+            }
+        }
+        adapter.filter(arrayList);
     }
 
     public static ArrayList<PDFReaderModel> getCreatedPdf(File directory) {
@@ -546,9 +568,7 @@ public class Utils {
             }
         }
 
-
         return pdfList;
-
 
     }
 
@@ -578,7 +598,7 @@ public class Utils {
         try {
             File file = new File(document.getFileUri_DocModel());
 
-//            File file = new File(fileHolderModel.getAbsolutePath());
+            // File file = new File(fileHolderModel.getAbsolutePath());
             DatabaseHelper.getInstance(mContext).addRecentDocument_DatabaseHelper(file.getAbsolutePath());
             Uri fromFile = Uri.fromFile(file);
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
@@ -596,7 +616,7 @@ public class Utils {
 
     public static void openFile(Activity mContext, File file) {
         try {
-//            File file = new File(fileHolderModel.getAbsolutePath());
+            // File file = new File(fileHolderModel.getAbsolutePath());
             DatabaseHelper.getInstance(mContext).addRecentDocument_DatabaseHelper(file.getAbsolutePath());
             Uri fromFile = Uri.fromFile(file);
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
@@ -615,8 +635,10 @@ public class Utils {
     public static CharSequence setAppName(Context mContext) {
         SpannableString first = new SpannableString("Document");
         SpannableString second = new SpannableString(" Read");
-        first.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.app_primary_text)), 0, first.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        second.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.app_ppt_list_bg)), 0, second.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        first.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.app_primary_text)), 0,
+                first.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        second.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.app_ppt_list_bg)), 0,
+                second.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return TextUtils.concat(first, second);
     }
 
@@ -626,7 +648,12 @@ public class Utils {
         float f = (float) (-dimensionPixelOffset);
 
         float f2 = (float) dimensionPixelOffset;
-        return ObjectAnimator.ofPropertyValuesHolder(view, PropertyValuesHolder.ofKeyframe(View.TRANSLATION_X, Keyframe.ofFloat(0.0f, 0.0f), Keyframe.ofFloat(0.1f, f), Keyframe.ofFloat(0.26f, f2), Keyframe.ofFloat(0.42f, f), Keyframe.ofFloat(0.58f, f2), Keyframe.ofFloat(0.74f, f), Keyframe.ofFloat(0.9f, f2), Keyframe.ofFloat(1.0f, 0.0f))).setDuration(500);
+        return ObjectAnimator.ofPropertyValuesHolder(view,
+                PropertyValuesHolder.ofKeyframe(View.TRANSLATION_X, Keyframe.ofFloat(0.0f, 0.0f),
+                        Keyframe.ofFloat(0.1f, f), Keyframe.ofFloat(0.26f, f2), Keyframe.ofFloat(0.42f, f),
+                        Keyframe.ofFloat(0.58f, f2), Keyframe.ofFloat(0.74f, f), Keyframe.ofFloat(0.9f, f2),
+                        Keyframe.ofFloat(1.0f, 0.0f)))
+                .setDuration(500);
     }
 
     public static String removeExtension(String str) {
@@ -659,7 +686,7 @@ public class Utils {
     public static ArrayList<DocumentModel> countFile(Context mContext, String whereClause) {
         ArrayList<DocumentModel> arrayList = new ArrayList<>();
         Uri collection;
-        final String[] projection = new String[]{
+        final String[] projection = new String[] {
                 MediaStore.Files.FileColumns.DISPLAY_NAME,
                 MediaStore.Files.FileColumns.DATE_ADDED,
                 MediaStore.Files.FileColumns.DATA,
@@ -667,14 +694,16 @@ public class Utils {
         };
         final String sortOrder = MediaStore.Files.FileColumns.DATE_ADDED + " DESC";
 
-//        final String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("doc");
+        // final String mimeType =
+        // MimeTypeMap.getSingleton().getMimeTypeFromExtension("doc");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             collection = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL);
         } else {
             collection = MediaStore.Files.getContentUri("external");
         }
-        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, whereClause, null, sortOrder)) {
+        try (Cursor cursor = mContext.getContentResolver().query(collection, projection, whereClause, null,
+                sortOrder)) {
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     int columnData = cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA);
@@ -683,7 +712,7 @@ public class Utils {
                         String file_path = cursor.getString(columnData);
                         String file_name = cursor.getString(columnName);
 
-                        //you can get your pdf files
+                        // you can get your pdf files
                         final File file = new File(file_path);
                         if (file_name == null) {
                             break;
@@ -715,7 +744,8 @@ public class Utils {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
         String[] mimetypes = {
-                "application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/pdf", "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 "application/vnd.ms-powerpoint",
                 "application/vnd.openxmlformats-officedocument.presentationml.presentation",
                 "application/vnd.ms-excel",
@@ -731,8 +761,10 @@ public class Utils {
         if (SDK_INT >= Build.VERSION_CODES.R) {
             return Environment.isExternalStorageManager();
         } else {
-            return !(ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                    && ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
+            return !(ContextCompat.checkSelfPermission(mContext,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    && ContextCompat.checkSelfPermission(mContext,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
         }
     }
 
@@ -767,7 +799,8 @@ public class Utils {
             try {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.addCategory("android.intent.category.DEFAULT");
-                intent.setData(Uri.parse(String.format("package:%s", mContext.getApplicationContext().getPackageName())));
+                intent.setData(
+                        Uri.parse(String.format("package:%s", mContext.getApplicationContext().getPackageName())));
                 mContext.startActivityForResult(intent, REQUEST_CODE_MANAGE_ALL_FILES);
 
             } catch (Exception e) {
@@ -776,21 +809,26 @@ public class Utils {
                 mContext.startActivityForResult(intent, REQUEST_CODE_MANAGE_ALL_FILES);
             }
         } else {
-            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(mContext,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 // Yêu cầu quyền truy cập lưu trữ
-                ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+                ActivityCompat.requestPermissions(mContext, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                        REQUEST_CODE_STORAGE_PERMISSION);
             }
-            //below android 11
-//            Dexter.withContext(mContext).withPermissions(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
-//                @Override
-//                public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-//                }
-//
-//                @Override
-//                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-//
-//                }
-//            }).onSameThread().check();
+            // below android 11
+            // Dexter.withContext(mContext).withPermissions(READ_EXTERNAL_STORAGE,
+            // WRITE_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
+            // @Override
+            // public void onPermissionsChecked(MultiplePermissionsReport
+            // multiplePermissionsReport) {
+            // }
+            //
+            // @Override
+            // public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list,
+            // PermissionToken permissionToken) {
+            //
+            // }
+            // }).onSameThread().check();
         }
     }
 
@@ -952,7 +990,6 @@ public class Utils {
         return R.drawable.ic_type_word;
     }
 
-
     public static void showRateDialog(Activity mContext) {
         if (mContext == null) {
             return;
@@ -979,8 +1016,8 @@ public class Utils {
         permissionDialog.show();
     }
 
-
-    public static void showMoreDialog(Activity mContext, DocumentModel mDocument, boolean isRecent, MoreClickListener moreListener) {
+    public static void showMoreDialog(Activity mContext, DocumentModel mDocument, boolean isRecent,
+            MoreClickListener moreListener) {
         if (mContext == null) {
             return;
         }
@@ -1030,12 +1067,12 @@ public class Utils {
 
     }
 
-    //    public static void openListFileActivity(MainActivity mainActivity, int i) {
-//        Intent intent = new Intent(mainActivity, ListFileActivity.class);
-//        intent.putExtra(GlobalConstant.FILE_TYPE, i);
-//        mainActivity.startActivity(intent);
-//
-//    }
+    // public static void openListFileActivity(MainActivity mainActivity, int i) {
+    // Intent intent = new Intent(mainActivity, ListFileActivity.class);
+    // intent.putExtra(GlobalConstant.FILE_TYPE, i);
+    // mainActivity.startActivity(intent);
+    //
+    // }
     public static void setTheme(Context mContext, boolean isDark) {
         if (isDark) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -1047,7 +1084,8 @@ public class Utils {
     }
 
     public static void createShortcut(Context mContext, DocumentModel document) {
-        Intent launchIntentForPackage = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());
+        Intent launchIntentForPackage = mContext.getPackageManager()
+                .getLaunchIntentForPackage(mContext.getPackageName());
         if (launchIntentForPackage == null) {
             // Xử lý trường hợp không tìm thấy intent khởi chạy
             return;
@@ -1056,7 +1094,8 @@ public class Utils {
             Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
             intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntentForPackage);
             intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, document.getFileName_DocModel());
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(mContext, document.getSrcImage_DocModel()));
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                    Intent.ShortcutIconResource.fromContext(mContext, document.getSrcImage_DocModel()));
             intent.putExtra("duplicate", true);
             mContext.sendBroadcast(intent);
         } else {
@@ -1082,11 +1121,10 @@ public class Utils {
         }
     }
 
-
     public static void shareFile(Context mContext, File docFile) {
         try {
             // Quét tệp để có URI
-            MediaScannerConnection.scanFile(mContext, new String[]{docFile.getPath()}, null,
+            MediaScannerConnection.scanFile(mContext, new String[] { docFile.getPath() }, null,
                     (path, uri) -> {
                         // Tạo Intent chia sẻ
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -1097,7 +1135,8 @@ public class Utils {
                         // Thêm cờ để tạo một task mới và xóa các task cũ khi chia sẻ hoàn tất
                         shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         // Khởi chạy Intent để chia sẻ
-                        mContext.startActivity(Intent.createChooser(shareIntent, mContext.getString(R.string.share_file_using_title)));
+                        mContext.startActivity(
+                                Intent.createChooser(shareIntent, mContext.getString(R.string.share_file_using_title)));
                     });
 
         } catch (Exception e) {
@@ -1169,4 +1208,3 @@ public class Utils {
         }
     }
 }
-

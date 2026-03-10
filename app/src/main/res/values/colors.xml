@@ -29,6 +29,12 @@
     <color name="app_pdf_list_bg">#fff02013</color>
     <color name="app_ppt_list_bg">#fffd6124</color>
     <color name="app_all_list_bg">#0b61da</color>
+    
+    <color name="tint_pdf">#1Af02013</color>
+    <color name="tint_word">#1A0c70fc</color>
+    <color name="tint_excel">#1A00bf59</color>
+    <color name="tint_ppt">#1Afd6124</color>
+    <color name="tint_txt">#1A5e6c95</color>
 
     <color name="bg_tittle">#27282d</color>
     <color name="app_status_word">#333F93</color>

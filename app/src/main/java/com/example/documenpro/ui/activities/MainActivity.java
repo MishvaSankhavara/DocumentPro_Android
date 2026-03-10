@@ -21,10 +21,8 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
-import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.documenpro.BuildConfig;
@@ -52,15 +50,12 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener,
-        NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private Toolbar mainToolbar;
     private TextView toolbarTitleTextView;
     public BottomNavigationView bottomNavigationView;
-    DrawerLayout mainDrawerLayout;
     private ViewPager viewPager;
-    AppCompatImageView ivSidebar;
     AppCompatImageView filesIconImageView;
     TextView toolsTextView;
     TextView filesTextView;
@@ -71,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ThemeToggleSwitch dayNightSwitch;
     private AdView bannerAdView;
     private FrameLayout adContainer;
-    private TextView appVersionTextView;
     private int navigationAdClickCount = 0;
+    private AppCompatImageView ivSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,13 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeData() {
-        dayNightSwitch
-                .setNightMode(PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
-        dayNightSwitch.setSwitchListener(is_night -> {
-            startActivity(new Intent(MainActivity.this, SplashScreenActivity.class));
-            finish();
-            Utils.setTheme(getApplication(), is_night);
-        });
     }
 
     private void initializeListeners() {
@@ -167,44 +155,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getSupportActionBar().setDisplayShowHomeEnabled(false);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+        mainToolbar.setVisibility(View.GONE);
     }
 
     private void initializeViews() {
-        appVersionTextView = findViewById(R.id.tv_app_version);
         bottomNavigationView = findViewById(R.id.bottom_nav);
         adContainer = findViewById(R.id.my_template_banner);
-        // btnTools = findViewById(R.id.cly_tab_tools);
-        // btnFiles = findViewById(R.id.cly_tab_files);
-        // tvTools = findViewById(R.id.tv_tab_tools);
-        // tvFile = findViewById(R.id.tv_tab_files);
-        // ivTools = findViewById(R.id.iv_tab_tools);
-        // ivFiles = findViewById(R.id.iv_tab_files);
         viewPager = findViewById(R.id.viewpager_main);
-        ivSidebar = findViewById(R.id.iv_sidebar);
-        AppCompatImageView ivSearch = findViewById(R.id.iv_search);
+        ivSearch = findViewById(R.id.iv_search);
         ivSearch.setOnClickListener(this);
 
         toolbarTitleTextView = findViewById(R.id.tv_name);
-        mainDrawerLayout = findViewById(R.id.activity_main_drawer);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.findViewById(R.id.cl_share_app).setOnClickListener(this);
-        navigationView.findViewById(R.id.cl_rate_us).setOnClickListener(this);
-        navigationView.findViewById(R.id.cl_file_manage).setOnClickListener(this);
-        navigationView.findViewById(R.id.cl_language_options).setOnClickListener(this);
-        navigationView.findViewById(R.id.cl_feedback).setOnClickListener(this);
-        navigationView.findViewById(R.id.cl_privacy_policy).setOnClickListener(this);
-        navigationView.findViewById(R.id.nav_dark_mode).setOnClickListener(this);
-
-        dayNightSwitch = navigationView.findViewById(R.id.nav_dark_mode_switch);
-
-        languageTextView = navigationView.findViewById(R.id.tv_language_hint);
-
-        ivSidebar.setOnClickListener(view -> mainDrawerLayout.openDrawer(GravityCompat.START));
-
-        languageTextView
-                .setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
-        appVersionTextView.setText("Version: " + BuildConfig.VERSION_NAME);
     }
 
     private void loadBannerAd() {
@@ -217,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle extras = new Bundle();
         extras.putString("collapsible", "bottom");
         AdRequest adRequest = new AdRequest.Builder()
-
                 .build();
         bannerAdView.setAdListener(new AdListener() {
             @Override
@@ -254,32 +214,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int idView = v.getId();
-        // if (idView == R.id.cly_tab_files) {
-        // viewPager.setCurrentItem(0);
-        // } else if (idView == R.id.cly_tab_tools) {
-        // viewPager.setCurrentItem(1);
-        // }else if (idView==R.id.pdf_act_main_select_image){
-        // Toast.makeText(this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
-        // }
-        if (idView == R.id.cl_share_app) {
-            Utils.shareApp(MainActivity.this);
-            mainDrawerLayout.closeDrawers();
-        } else if (idView == R.id.cl_rate_us) {
-            Utils.showRateDialog(MainActivity.this);
-            mainDrawerLayout.closeDrawers();
-        } else if (idView == R.id.cl_file_manage) {
-            Utils.chooseFileManager(MainActivity.this);
-            mainDrawerLayout.closeDrawers();
-        } else if (idView == R.id.cl_language_options) {
-            DialogManagerUtils.showLanguageSelection(this);
-        } else if (idView == R.id.cl_feedback) {
-            Utils.feedbackApp(MainActivity.this);
-            mainDrawerLayout.closeDrawers();
-        } else if (idView == R.id.cl_privacy_policy) {
-
-        } else if (idView == R.id.nav_dark_mode) {
-            dayNightSwitch.setNightMode(!dayNightSwitch.isNightMode());
-
+        if (idView == R.id.iv_search) {
+            if (Utils.checkPermission(this)) {
+                Intent intentSearch = new Intent(this, SearchDocumentActivity.class);
+                startActivity(intentSearch);
+            } else {
+                Toast.makeText(this, "Need Permission!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -295,7 +236,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 0:
                 bottomNavigationView.getMenu().findItem(R.id.navigation_files).setChecked(true);
 
-                toolbarTitleTextView.setText(R.string.app_name);
+                mainToolbar.setVisibility(View.GONE);
+                toolbarTitleTextView.setVisibility(View.GONE);
+                ivSearch.setVisibility(View.GONE);
                 if (getSupportActionBar() != null) {
                     Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
 
@@ -303,6 +246,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 1:
                 bottomNavigationView.getMenu().findItem(R.id.navigation_tools).setChecked(true);
+                mainToolbar.setVisibility(View.VISIBLE);
+                toolbarTitleTextView.setVisibility(View.VISIBLE);
+                toolbarTitleTextView.setText(R.string.label_tools);
+                ivSearch.setVisibility(View.VISIBLE);
 
                 if (getSupportActionBar() != null) {
                     Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
@@ -310,6 +257,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 2:
                 bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
+                mainToolbar.setVisibility(View.VISIBLE);
+                toolbarTitleTextView.setVisibility(View.VISIBLE);
+                toolbarTitleTextView.setText(R.string.action_setting);
+                ivSearch.setVisibility(View.GONE);
+
                 if (getSupportActionBar() != null) {
                     Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
                 }
@@ -322,11 +274,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onPageScrollStateChanged(int state) {
 
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
     }
 
     @Override

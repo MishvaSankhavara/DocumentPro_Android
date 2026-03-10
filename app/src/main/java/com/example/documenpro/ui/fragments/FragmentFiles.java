@@ -68,7 +68,8 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_files, container, false);
         initViews(view);
         initAction(view);
@@ -84,6 +85,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         wordButton.setOnClickListener(this);
         excelButton.setOnClickListener(this);
         pptButton.setOnClickListener(this);
+        view.findViewById(R.id.cv_search_bar).setOnClickListener(this);
     }
 
     private void getData() {
@@ -95,7 +97,8 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
                 try {
                     if (uri.getScheme() != null) {
-                        new SendIncomingDataTask(activityContext, uri).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        new SendIncomingDataTask(activityContext, uri)
+                                .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     } else {
                         if (uri.getPath() != null) {
                             File file = new File(uri.getPath());
@@ -157,14 +160,16 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         if (requestCode == AppGlobalConstants.REQUEST_CODE_FILE_PICKER) {
             if (resultCode == RESULT_OK && data != null) {
                 Uri selectedUri = data.getData();
-                new SendIncomingDataTask(activityContext, selectedUri).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                new SendIncomingDataTask(activityContext, selectedUri)
+                        .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
             }
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_STORAGE_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -186,11 +191,16 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             activityContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    txtButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(txtFile.size())));
-                    pdfButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(pdfFile.size())));
-                    excelButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(excelFile.size())));
-                    wordButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(wordFile.size())));
-                    pptButton.setTvCount(getResources().getString(R.string.label_file_count, String.valueOf(pptFile.size())));
+                    txtButton.setTvCount(
+                            getResources().getString(R.string.label_file_count, String.valueOf(txtFile.size())));
+                    pdfButton.setTvCount(
+                            getResources().getString(R.string.label_file_count, String.valueOf(pdfFile.size())));
+                    excelButton.setTvCount(
+                            getResources().getString(R.string.label_file_count, String.valueOf(excelFile.size())));
+                    wordButton.setTvCount(
+                            getResources().getString(R.string.label_file_count, String.valueOf(wordFile.size())));
+                    pptButton.setTvCount(
+                            getResources().getString(R.string.label_file_count, String.valueOf(pptFile.size())));
 
                 }
             });
@@ -224,14 +234,15 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         if (Utils.checkPermission(activityContext)) {
             Utils.openListFileActivity(activityContext, allFileType);
         } else {
-            Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
     private void checkPermission() {
         if (Utils.checkPermission(activityContext)) {
             permissionContainer.setVisibility(View.GONE);
-            //LoadFile
+            // LoadFile
             countFiles();
         } else {
             Utils.showPermissionDialog(activityContext);
@@ -265,6 +276,15 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             openFileList(AppGlobalConstants.FILE_TYPE_WORD);
         } else if (idView == R.id.btnPpt) {
             openFileList(AppGlobalConstants.FILE_TYPE_PPT);
+        } else if (idView == R.id.cv_search_bar) {
+            if (Utils.checkPermission(activityContext)) {
+                Intent intentSearch = new Intent(activityContext,
+                        com.example.documenpro.ui.activities.SearchDocumentActivity.class);
+                startActivity(intentSearch);
+            } else {
+                Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -272,7 +292,6 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         WeakReference<MainActivity> weakReference;
         Intent intent;
         Uri intentData;
-
 
         public SendIncomingDataTask(MainActivity activity, Uri uri) {
             this.weakReference = new WeakReference<>(activity);
@@ -282,7 +301,8 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         @Override
         protected Void doInBackground(Void... voids) {
             String filename = Utils.getFileNameFromUri(intentData, weakReference.get().getContentResolver());
-            File pathFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/DocumentReader/");
+            File pathFolder = new File(
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/DocumentReader/");
             if (!pathFolder.exists()) {
                 pathFolder.mkdirs();
             }

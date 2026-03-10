@@ -30,6 +30,7 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
     private AppCompatTextView appVersionTextView;
     private android.widget.ImageView ivBack;
     private android.widget.TextView tvToolbarName;
+    private com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch swDarkMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +77,24 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
 
         languageTextView
                 .setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
+
+        swDarkMode
+                .setNightMode(PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
+        swDarkMode.setSwitchListener(is_night -> {
+            PreferenceUtils.getInstance(AppSettingsActivity.this).setBoolean(AppGlobalConstants.PREF_NIGHT_MODE,
+                    is_night);
+            Utils.setTheme(getApplication(), is_night);
+            Intent intent = new Intent(AppSettingsActivity.this, AppSettingsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void initializeViews() {
         languageTextView = findViewById(R.id.tv_language_hint);
         appVersionTextView = findViewById(R.id.tv_version);
+        swDarkMode = findViewById(R.id.sw_dark_mode);
     }
 
     private void initializeListeners() {
@@ -92,13 +106,14 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.cl_request).setOnClickListener(this);
         findViewById(R.id.cl_feedback).setOnClickListener(this);
         findViewById(R.id.cl_privacy_policy).setOnClickListener(this);
+        findViewById(R.id.cl_dark_mode).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         int idView = v.getId();
         if (idView == R.id.cl_file_manage) {
-
+            Utils.chooseFileManager(this);
         } else if (idView == R.id.cl_rate_app) {
             Utils.showRateDialog(this);
         } else if (idView == R.id.cl_share_app) {
@@ -111,6 +126,8 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
 
         } else if (idView == R.id.cl_feedback) {
             Utils.feedbackApp(this);
+        } else if (idView == R.id.cl_dark_mode) {
+            swDarkMode.setNightMode(!swDarkMode.isNightMode());
         } else if (idView == R.id.cl_privacy_policy) {
             try {
                 String url = AppGlobalConstants.PRIVACY_POLICY_URL;

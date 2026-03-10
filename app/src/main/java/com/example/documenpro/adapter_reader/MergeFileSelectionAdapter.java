@@ -26,12 +26,12 @@ import java.util.ArrayList;
 public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSelectionAdapter.ViewHolder> {
 
     private final MergeSelectListener mListenerMergeFileSelection;
-    private final ArrayList<PDFReaderModel> originalDataMergeFileSelection;
+    private ArrayList<PDFReaderModel> originalDataMergeFileSelection;
     private final Context mContextMergeFileSelection;
 
     public MergeFileSelectionAdapter(Context mContext,
-                                     ArrayList<PDFReaderModel> originalData,
-                                     MergeSelectListener listener) {
+            ArrayList<PDFReaderModel> originalData,
+            MergeSelectListener listener) {
         this.mContextMergeFileSelection = mContext;
         this.originalDataMergeFileSelection = originalData;
         this.mListenerMergeFileSelection = listener;
@@ -45,6 +45,11 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
             }
         }
         return selected;
+    }
+
+    public void filter(ArrayList<PDFReaderModel> list) {
+        this.originalDataMergeFileSelection = list;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -79,14 +84,13 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
         holder.rootView_MergeFileSelection.setBackground(
                 pdfModel.isChecked_PDFModel()
                         ? ResourcesCompat.getDrawable(
-                        mContextMergeFileSelection.getResources(),
-                        R.drawable.bg_selection,
-                        null)
+                                mContextMergeFileSelection.getResources(),
+                                R.drawable.bg_selection,
+                                null)
                         : ResourcesCompat.getDrawable(
-                        mContextMergeFileSelection.getResources(),
-                        R.drawable.bg_transparent,
-                        null)
-        );
+                                mContextMergeFileSelection.getResources(),
+                                R.drawable.bg_transparent,
+                                null));
 
         holder.cbSelect_MergeFileSelection.setClickable(false);
         holder.cbSelect_MergeFileSelection.setFocusable(false);
@@ -101,14 +105,13 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
                 holder.rootView_MergeFileSelection.setBackground(
                         pdfModel.isChecked_PDFModel()
                                 ? ResourcesCompat.getDrawable(
-                                mContextMergeFileSelection.getResources(),
-                                R.drawable.bg_selection,
-                                null)
+                                        mContextMergeFileSelection.getResources(),
+                                        R.drawable.bg_selection,
+                                        null)
                                 : ResourcesCompat.getDrawable(
-                                mContextMergeFileSelection.getResources(),
-                                R.drawable.bg_transparent,
-                                null)
-                );
+                                        mContextMergeFileSelection.getResources(),
+                                        R.drawable.bg_transparent,
+                                        null));
 
                 if (mListenerMergeFileSelection != null) {
                     mListenerMergeFileSelection.onMergeSelect(holder.getAdapterPosition());
@@ -120,7 +123,7 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                         int viewType) {
+            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_select_pdf, parent, false);
         return new ViewHolder(view);
@@ -139,26 +142,19 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivLock_MergeFileSelection =
-                    itemView.findViewById(R.id.iv_lock);
+            ivLock_MergeFileSelection = itemView.findViewById(R.id.iv_lock);
 
-            lock_line_MergeFileSelection =
-                    itemView.findViewById(R.id.lock_line);
+            lock_line_MergeFileSelection = itemView.findViewById(R.id.lock_line);
 
-            rootView_MergeFileSelection =
-                    itemView.findViewById(R.id.cl_dialog_root);
+            rootView_MergeFileSelection = itemView.findViewById(R.id.cl_dialog_root);
 
-            tvName_MergeFileSelection =
-                    itemView.findViewById(R.id.tv_name);
+            tvName_MergeFileSelection = itemView.findViewById(R.id.tv_name);
 
-            tvDate_MergeFileSelection =
-                    itemView.findViewById(R.id.tvFileDate);
+            tvDate_MergeFileSelection = itemView.findViewById(R.id.tvFileDate);
 
-            tvFileSize_MergeFileSelection =
-                    itemView.findViewById(R.id.tvFileSize);
+            tvFileSize_MergeFileSelection = itemView.findViewById(R.id.tvFileSize);
 
-            cbSelect_MergeFileSelection =
-                    itemView.findViewById(R.id.iv_select);
+            cbSelect_MergeFileSelection = itemView.findViewById(R.id.iv_select);
         }
     }
 }

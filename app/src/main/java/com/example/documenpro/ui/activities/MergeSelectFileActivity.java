@@ -113,6 +113,31 @@ public class MergeSelectFileActivity extends AppCompatActivity {
             });
         });
 
+        androidx.appcompat.widget.AppCompatEditText etSearch = findViewById(R.id.et_search);
+        android.widget.ImageView ivClearSearch = findViewById(R.id.iv_clear_search);
+
+        etSearch.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0) {
+                    ivClearSearch.setVisibility(View.VISIBLE);
+                } else {
+                    ivClearSearch.setVisibility(View.GONE);
+                }
+                Utils.searchPDFReaderModel(s.toString(), availablePdfList, pdfSelectionAdapter);
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {
+            }
+        });
+
+        ivClearSearch.setOnClickListener(v -> etSearch.setText(""));
+
         continueButtonText.setOnClickListener(view ->
 
         {

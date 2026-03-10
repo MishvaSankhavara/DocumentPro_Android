@@ -4,6 +4,8 @@
     <declare-styleable name="FileTypeItem">
         <attr name="imgFileType" format="reference" />
         <attr name="nameFileType" format="string" />
+        <attr name="cornerRadiusFileType" format="dimension"/>
+        <attr name="backgroundColorFileType" format="color" />
     </declare-styleable>
     <style name="SearchPageTabItemText">
         <item name="android:textSize">15sp</item>
