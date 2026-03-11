@@ -161,7 +161,6 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
         if (idView == android.R.id.home) {
             finish();
         } else if (idView == R.id.item_search) {
-
             Intent intent = new Intent(DocumentListActivity.this, SearchDocumentActivity.class);
             intent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, fileType);
             startActivity(intent);
@@ -187,8 +186,6 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
     public void onDocClick(DocumentModel document) {
         // Utils.openFile(this, document);
         AdManager.showAds_AdManager(this, () -> Utils.openFile(this, document));
-
-        // Utils.openFileWithAds(this, document, 2);
     }
 
     @Override

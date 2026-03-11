@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/bg_tittle"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,11 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <include layout="@layout/toolbar_document_main" />
-
         <include layout="@layout/toolbar_search" />
-
         <include layout="@layout/toolbar_document_edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -78,7 +75,7 @@
                 android:paddingEnd="2dp"
                 android:paddingBottom="2dp"
                 android:src="@drawable/fullscreen"
-                android:tint="@color/white" />
+                android:tint="@color/black"  />
 
             <include
                 layout="@layout/layout_undo_redo"

@@ -57,10 +57,7 @@ public class ChoosePathActivity extends BaseActivity {
         tvSave.setText(var4);
         tvSave.setOnClickListener(new OnClickListener() {
             public void onClick(View var1) {
-                Utilities.hideKeyboard(ChoosePathActivity.this);
-                ChoosePathActivity.d = true;
-                ChoosePathActivity.this.finish();
-                ChoosePathActivity.a.a(fileBrowser);
+                ChoosePathActivity.this.completeSave(fileBrowser);
             }
         });
 
@@ -69,7 +66,7 @@ public class ChoosePathActivity extends BaseActivity {
                 Utilities.hideKeyboard(ChoosePathActivity.this);
                 ChoosePathActivity.d = true;
                 ChoosePathActivity.this.finish();
-                if (a!=null){
+                if (a != null) {
                     ChoosePathActivity.a.a();
                 }
             }
@@ -79,10 +76,7 @@ public class ChoosePathActivity extends BaseActivity {
         var5.setOnKeyListener(new OnKeyListener() {
             public boolean onKey(View var1, int var2x, KeyEvent var3) {
                 if (var3.getAction() == 0 && var2x == 66) {
-                    Utilities.hideKeyboard(ChoosePathActivity.this);
-                    ChoosePathActivity.d = true;
-                    ChoosePathActivity.this.finish();
-                    ChoosePathActivity.a.a(fileBrowser);
+                    ChoosePathActivity.this.completeSave(fileBrowser);
                     return true;
                 } else {
                     return false;
@@ -94,10 +88,7 @@ public class ChoosePathActivity extends BaseActivity {
             public boolean onEditorAction(SOEditText var1, int var2x, KeyEvent var3) {
                 boolean var4 = true;
                 if (var2x == 6) {
-                    Utilities.hideKeyboard(ChoosePathActivity.this);
-                    ChoosePathActivity.d = true;
-                    ChoosePathActivity.this.finish();
-                    ChoosePathActivity.a.a(fileBrowser);
+                    ChoosePathActivity.this.completeSave(fileBrowser);
                 } else {
                     var4 = false;
                 }
@@ -105,6 +96,12 @@ public class ChoosePathActivity extends BaseActivity {
                 return var4;
             }
         });
+    }
+
+    private void completeSave(final FileBrowser fileBrowser) {
+        Utilities.hideKeyboard(this);
+        d = true;
+        a.a(fileBrowser);
     }
 
     public interface a {

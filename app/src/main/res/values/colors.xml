@@ -920,4 +920,6 @@
     <color name="switch_thumb_material_light">#FF808080</color>
     <color name="switch_thumb_normal_material_dark">#FF808080</color>
     <color name="switch_thumb_normal_material_light">#FF808080</color>
+    <color name="sodk_so_ui_doc_list_highlight">#0288D1</color>
+    <color name="sodk_so_ui_doc_list_unhighlight">@android:color/transparent</color>
 </resources>

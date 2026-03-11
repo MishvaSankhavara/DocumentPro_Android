@@ -223,7 +223,10 @@
         <item name="android:textColor">@color/editor_palette_black</item>
         <item name="android:background">@color/editor_palette_white</item>
     </style>
-    <style name="ActivityDialog" parent="Theme.AppCompat.Light.Dialog" />
+    <style name="ActivityDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
     <style name="ActivityFullScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>

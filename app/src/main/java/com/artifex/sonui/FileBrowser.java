@@ -50,7 +50,9 @@ public class FileBrowser extends RelativeLayout {
         final com.artifex.sonui.f var6 = (f) this.g.getItem(var3);
         if (var6 != null) {
             if (var6.a.isCloud() && !AppFile.i()) {
-                Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.editor_connection_error_title), this.getContext().getString(R.string.editor_connection_error_body));
+                Utilities.showMessage((Activity) this.getContext(),
+                        this.getContext().getString(R.string.editor_connection_error_title),
+                        this.getContext().getString(R.string.editor_connection_error_body));
                 return;
             }
 
@@ -112,21 +114,24 @@ public class FileBrowser extends RelativeLayout {
         this.btnSave = this.findViewById(R.id.save_button);
         ArrayList<AppFile> var1 = new ArrayList<>();
         this.a = var1;
-        var1.add(new b(com.artifex.solib.a.b(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.editor_my_documents)));
+        var1.add(new b(com.artifex.solib.a.b(this.getContext()).getAbsolutePath(),
+                this.getResources().getString(R.string.editor_my_documents)));
         if (com.artifex.solib.a.d(this.getContext())) {
-            this.a.add(new b(Utilities.getDownloadDirectory(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.editor_download)));
-            this.a.add(new b(Utilities.getRootDirectory(this.getContext()).getAbsolutePath(), this.getResources().getString(R.string.editor_all)));
+            this.a.add(new b(Utilities.getDownloadDirectory(this.getContext()).getAbsolutePath(),
+                    this.getResources().getString(R.string.editor_download)));
+            this.a.add(new b(Utilities.getRootDirectory(this.getContext()).getAbsolutePath(),
+                    this.getResources().getString(R.string.editor_all)));
             String var2 = Utilities.getSDCardPath(this.getContext());
             if (var2 != null) {
                 this.a.add(new b(var2, "SD Card"));
             }
         }
 
-//        AppFile var3 = com.artifex.sonui.c.a("root", "Google Drive", true, true);
-//
-//        var3 = com.artifex.sonui.c.b("0", "Box", true, true);
-//
-//        var3 = com.artifex.sonui.c.c("/", "Dropbox", true, true);
+        // AppFile var3 = com.artifex.sonui.c.a("root", "Google Drive", true, true);
+        //
+        // var3 = com.artifex.sonui.c.b("0", "Box", true, true);
+        //
+        // var3 = com.artifex.sonui.c.c("/", "Dropbox", true, true);
 
         c = null;
     }
@@ -136,8 +141,7 @@ public class FileBrowser extends RelativeLayout {
         boolean var2;
         var2 = c != null;
 
-
-        var1.setEnabled(var2);
+        var1.setEnabled(true);
         boolean var3;
         var3 = this.i.getText().toString().trim().length() > 0;
         Log.d(FileBrowser.class.getSimpleName(), "c: " + i.getText());
@@ -224,6 +228,7 @@ public class FileBrowser extends RelativeLayout {
 
                     FileBrowser.this.findViewById(var2).setVisibility(VISIBLE);
                     FileBrowser.this.g.a();
+                    FileBrowser.this.d();
                     FileBrowser.this.h = FileBrowser.c.enumerateDir(new AppFile.EnumerateListener() {
                         public void a(ArrayList<AppFile> arrayList) {
                             if (arrayList != null) {

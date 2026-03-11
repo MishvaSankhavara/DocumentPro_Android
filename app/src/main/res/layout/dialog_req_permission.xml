@@ -159,8 +159,8 @@
 
     <ImageView
         android:id="@+id/ivCancel"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:padding="4dp"
         android:src="@drawable/ic_close_new"
         app:layout_constraintEnd_toEndOf="@+id/layout"

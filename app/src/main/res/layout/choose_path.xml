@@ -9,15 +9,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_300sdp"
-        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
         android:background="@drawable/bg_dialog_file_save"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="Document Reader"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <com.artifex.sonui.FileBrowser
             android:id="@+id/file_browser"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="@dimen/_320sdp"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 </LinearLayout>
