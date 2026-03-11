@@ -4,27 +4,28 @@
     android:id="@+id/doUndoLayout"
     android:layout_width="wrap_content"
     android:layout_height="34dp"
-    android:background="@drawable/shape_pdf_edit_draw_back_bg"
+    android:background="@drawable/shape_undo_redo_bg"
+    android:elevation="4dp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:visibility="visible">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_undo"
-
         android:layout_width="39dp"
         android:layout_height="34dp"
         android:paddingStart="9dp"
         android:paddingTop="5dp"
         android:paddingEnd="6dp"
         android:paddingBottom="5dp"
-        app:srcCompat="@drawable/ic_draw_back" />
+        app:srcCompat="@drawable/ic_draw_back"
+        app:tint="@color/black" />
 
     <View
         android:id="@+id/v_undo_line"
         android:layout_width="@dimen/dp_1"
         android:layout_height="16dp"
-        android:background="#4dffffff" />
+        android:background="#1A000000" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_redo"
@@ -34,6 +35,7 @@
         android:paddingTop="5dp"
         android:paddingEnd="9dp"
         android:paddingBottom="5dp"
-        app:srcCompat="@drawable/ic_draw_go" />
+        app:srcCompat="@drawable/ic_draw_go"
+        app:tint="@color/black" />
 </LinearLayout>
 

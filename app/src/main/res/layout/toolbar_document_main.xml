@@ -4,6 +4,8 @@
     android:id="@+id/toolbar_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:elevation="4dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_return_white"
-        app:tint="@color/black_light" />
+        app:tint="@color/black" />
 
 
     <TextView
@@ -92,7 +94,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_print"
             android:visibility="gone"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

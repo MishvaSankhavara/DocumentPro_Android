@@ -2,18 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
     android:animateLayoutChanges="true"
-    android:background="@color/bg_tittle"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-
-        android:background="@color/bg_tittle"
+        android:background="@color/white"
+        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -102,12 +100,13 @@
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="14dp"
                 android:background="@drawable/shape_page_num_bg"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:paddingStart="12dp"
                 android:paddingTop="6dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="7dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:visibility="visible" />
 
@@ -173,7 +172,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/ll_ad"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <include
             layout="@layout/dialog_document_bottom_view"
@@ -182,7 +181,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <include
             layout="@layout/document_bottom_view_doc_edit"
@@ -191,7 +190,7 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
