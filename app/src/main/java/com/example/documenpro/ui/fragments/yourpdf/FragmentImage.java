@@ -24,6 +24,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+
 public class FragmentImage extends Fragment {
     private Activity activityContext;
     private LottieAnimationView loadingAnimationView;
@@ -40,7 +41,8 @@ public class FragmentImage extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_created_pdf, container, false);
         initViews(view);
         new LoadImagesTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -51,11 +53,9 @@ public class FragmentImage extends Fragment {
         loadingAnimationView = view.findViewById(R.id.loadingView);
         imageRecyclerView = view.findViewById(R.id.recycler);
         imageRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(activityContext, 2, RecyclerView.VERTICAL, false);
-        imageRecyclerView.setLayoutManager(mLayoutManager);
+        imageRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false));
         imageRecyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
         arrayList = new ArrayList<>();
-
     }
 
     @Override
@@ -76,8 +76,13 @@ public class FragmentImage extends Fragment {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            weakReference.get().imageRecyclerView.setAdapter(weakReference.get().adapter);
-            weakReference.get().loadingAnimationView.setVisibility(View.GONE);
+            FragmentImage f = weakReference.get();
+            if (f == null || !f.isAdded())
+                return;
+            if (f.adapter != null) {
+                f.imageRecyclerView.setAdapter(f.adapter);
+            }
+            f.loadingAnimationView.setVisibility(View.GONE);
         }
 
         @Override
@@ -85,7 +90,8 @@ public class FragmentImage extends Fragment {
             File[] files = AppGlobalConstants.DIRECTORY_SAVED_IMAGES.listFiles();
             if (files != null) {
                 Collections.addAll(weakReference.get().arrayList, files);
-                weakReference.get().adapter = new ImageItemAdapter(weakReference.get().activityContext, weakReference.get().arrayList);
+                weakReference.get().adapter = new ImageItemAdapter(weakReference.get().activityContext,
+                        weakReference.get().arrayList);
             }
             return null;
         }

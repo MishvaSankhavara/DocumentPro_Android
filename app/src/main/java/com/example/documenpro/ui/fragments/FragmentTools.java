@@ -87,15 +87,15 @@ public class FragmentTools extends Fragment {
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen._1sdp);
         recyclerView.addItemDecoration(new ViewItemDecoration(spacingInPixels));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(activityContext, 4, RecyclerView.VERTICAL, false));
-        DocumentToolAdapter adapter = new DocumentToolAdapter(activityContext, toolsList, new OnToolTapListener() {
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 4, RecyclerView.VERTICAL, false));
+        DocumentToolAdapter adapter = new DocumentToolAdapter(requireActivity(), toolsList, new OnToolTapListener() {
             @Override
             public void onToolTap(ToolsModel toolType) {
                 selectedTool = toolType;
-
+                if (activityContext == null)
+                    return;
                 if (Utils.checkPermission(activityContext)) {
                     executeTool(selectedTool.getToolType_toolModel());
-
                 } else {
                     Utils.showPermissionDialog(activityContext);
                 }

@@ -55,14 +55,11 @@ public class FragmentSplit extends Fragment implements OnPdfTapListener {
 
     private void initViews(View view) {
         loadingAnimationView = view.findViewById(R.id.loadingView);
-
         splitPdfRecyclerView = view.findViewById(R.id.recycler);
         splitPdfRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(activityContext);
-        splitPdfRecyclerView.setLayoutManager(layoutManager);
+        splitPdfRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         splitPdfRecyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
         arrayList = new ArrayList<>();
-
     }
 
     @Override
@@ -96,10 +93,12 @@ public class FragmentSplit extends Fragment implements OnPdfTapListener {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            weakReference.get().splitPdfAdapter = new CompactFileListAdapter(weakReference.get().activityContext,
-                    weakReference.get().arrayList, weakReference.get());
-            weakReference.get().splitPdfRecyclerView.setAdapter(weakReference.get().splitPdfAdapter);
-            weakReference.get().loadingAnimationView.setVisibility(View.GONE);
+            FragmentSplit f = weakReference.get();
+            if (f == null || !f.isAdded() || f.activityContext == null)
+                return;
+            f.splitPdfAdapter = new CompactFileListAdapter(f.activityContext, f.arrayList, f);
+            f.splitPdfRecyclerView.setAdapter(f.splitPdfAdapter);
+            f.loadingAnimationView.setVisibility(View.GONE);
         }
     }
 }

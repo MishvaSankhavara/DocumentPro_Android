@@ -32,6 +32,7 @@ public class FragmentImageToPdf extends Fragment implements OnPdfTapListener {
     private EmptyStateRecyclerView pdfRecyclerView;
     private CompactFileListAdapter adapter;
     private ArrayList<PDFReaderModel> arrayList;
+
     public FragmentImageToPdf() {
     }
 
@@ -52,11 +53,9 @@ public class FragmentImageToPdf extends Fragment implements OnPdfTapListener {
 
     private void initViews(View view) {
         loadingAnimationView = view.findViewById(R.id.loadingView);
-
         pdfRecyclerView = view.findViewById(R.id.recycler);
         pdfRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(activityContext);
-        pdfRecyclerView.setLayoutManager(layoutManager);
+        pdfRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         pdfRecyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
         arrayList = new ArrayList<>();
     }
@@ -93,10 +92,12 @@ public class FragmentImageToPdf extends Fragment implements OnPdfTapListener {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            weakReference.get().adapter = new CompactFileListAdapter(weakReference.get().activityContext,
-                    weakReference.get().arrayList, weakReference.get());
-            weakReference.get().pdfRecyclerView.setAdapter(weakReference.get().adapter);
-            weakReference.get().loadingAnimationView.setVisibility(View.GONE);
+            FragmentImageToPdf f = weakReference.get();
+            if (f == null || !f.isAdded() || f.activityContext == null)
+                return;
+            f.adapter = new CompactFileListAdapter(f.activityContext, f.arrayList, f);
+            f.pdfRecyclerView.setAdapter(f.adapter);
+            f.loadingAnimationView.setVisibility(View.GONE);
         }
     }
 }

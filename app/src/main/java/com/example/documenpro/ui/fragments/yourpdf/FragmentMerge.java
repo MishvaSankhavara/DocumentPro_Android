@@ -55,14 +55,11 @@ public class FragmentMerge extends Fragment implements OnPdfTapListener {
 
     private void initViews(View view) {
         loadingAnimationView = view.findViewById(R.id.loadingView);
-
         mergedPdfRecyclerView = view.findViewById(R.id.recycler);
         mergedPdfRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(activityContext);
-        mergedPdfRecyclerView.setLayoutManager(layoutManager);
+        mergedPdfRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         mergedPdfRecyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
         arrayList = new ArrayList<>();
-
     }
 
     @Override
@@ -98,10 +95,12 @@ public class FragmentMerge extends Fragment implements OnPdfTapListener {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            weakReference.get().mergedPdfAdapter = new CompactFileListAdapter(weakReference.get().activityContext,
-                    weakReference.get().arrayList, weakReference.get());
-            weakReference.get().mergedPdfRecyclerView.setAdapter(weakReference.get().mergedPdfAdapter);
-            weakReference.get().loadingAnimationView.setVisibility(View.GONE);
+            FragmentMerge f = weakReference.get();
+            if (f == null || !f.isAdded() || f.activityContext == null)
+                return;
+            f.mergedPdfAdapter = new CompactFileListAdapter(f.activityContext, f.arrayList, f);
+            f.mergedPdfRecyclerView.setAdapter(f.mergedPdfAdapter);
+            f.loadingAnimationView.setVisibility(View.GONE);
         }
     }
 }

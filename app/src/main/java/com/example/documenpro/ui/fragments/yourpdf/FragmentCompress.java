@@ -56,14 +56,11 @@ public class FragmentCompress extends Fragment implements OnPdfTapListener {
 
     private void initViews(View view) {
         loadingAnimationView = view.findViewById(R.id.loadingView);
-
         recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(activityContext);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
         arrayList = new ArrayList<>();
-
     }
 
     @Override
@@ -97,10 +94,12 @@ public class FragmentCompress extends Fragment implements OnPdfTapListener {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            weakReference.get().compressedPdfAdapter = new CompactFileListAdapter(weakReference.get().activityContext,
-                    weakReference.get().arrayList, weakReference.get());
-            weakReference.get().recyclerView.setAdapter(weakReference.get().compressedPdfAdapter);
-            weakReference.get().loadingAnimationView.setVisibility(View.GONE);
+            FragmentCompress f = weakReference.get();
+            if (f == null || !f.isAdded() || f.activityContext == null)
+                return;
+            f.compressedPdfAdapter = new CompactFileListAdapter(f.activityContext, f.arrayList, f);
+            f.recyclerView.setAdapter(f.compressedPdfAdapter);
+            f.loadingAnimationView.setVisibility(View.GONE);
         }
     }
 
