@@ -150,6 +150,37 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_file_list_menu, menu);
+
+        // Wire click listeners for custom action layouts (they bypass
+        // onOptionsItemSelected)
+        View searchView = menu.findItem(R.id.item_search).getActionView();
+        if (searchView != null)
+            searchView.setOnClickListener(v -> {
+                Intent intent = new Intent(DocumentListActivity.this, SearchDocumentActivity.class);
+                intent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, fileType);
+                startActivity(intent);
+                finish();
+            });
+
+        View multiSelectView = menu.findItem(R.id.item_multi_select).getActionView();
+        if (multiSelectView != null)
+            multiSelectView.setOnClickListener(v -> {
+                Intent intent = new Intent(DocumentListActivity.this, SelectDocumentActivity.class);
+                intent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, fileType);
+                startActivity(intent);
+                finish();
+            });
+
+        View sortView = menu.findItem(R.id.item_sort).getActionView();
+        if (sortView != null)
+            sortView.setOnClickListener(v -> {
+                if (documentListAdapter != null && documentListAdapter.getItemCount() == 0) {
+                    Toast.makeText(DocumentListActivity.this, R.string.no_files_yet, Toast.LENGTH_SHORT).show();
+                } else {
+                    Utils.showSortDialog(DocumentListActivity.this, DocumentListActivity.this);
+                }
+            });
+
         return true;
     }
 

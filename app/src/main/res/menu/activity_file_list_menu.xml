@@ -3,19 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/item_search"
-        android:icon="@drawable/ic_search_white"
         android:title="@string/action_search"
-        app:showAsAction="ifRoom" />
+        app:actionLayout="@layout/menu_icon_search"
+        app:showAsAction="always" />
     <item
         android:id="@+id/item_multi_select"
-        android:icon="@drawable/ic_select"
         android:title="@string/select_item"
-        app:iconTint="@color/white"
-        app:showAsAction="ifRoom" />
+        app:actionLayout="@layout/menu_icon_multi_select"
+        app:showAsAction="always" />
     <item
         android:id="@+id/item_sort"
-        android:icon="@drawable/ic_sort"
         android:title="@string/sort_items"
-        app:iconTint="@color/white"
-        app:showAsAction="ifRoom" />
+        app:actionLayout="@layout/menu_icon_sort"
+        app:showAsAction="always" />
 </menu>
