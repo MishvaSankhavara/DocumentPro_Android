@@ -35,10 +35,12 @@
         <item name="android:textSize">17sp</item>
     </style>
     <style name="ListFileTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_return_white</item>
-
     </style>
     <style name="AppTheme.Ads">
         <item name="android:textSize">11sp</item>

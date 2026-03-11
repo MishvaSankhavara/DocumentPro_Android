@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_result_viewer"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/white"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
@@ -29,11 +29,11 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="8dp"
-                android:src="@drawable/ic_return_white"
-                android:tint="@color/black"
+                android:src="@drawable/ic_return"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/app_text_black" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
@@ -46,7 +46,7 @@
                 android:gravity="center"
                 android:lines="1"
                 android:text="@string/app_name"
-                android:textColor="@color/black"
+                android:textColor="@color/app_text_black"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,30 +60,21 @@
         android:id="@+id/tabs_result_categories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/white"
         android:paddingStart="6dp"
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_result_viewer"
         app:tabGravity="fill"
-        app:tabIndicator="@drawable/shape_tab__indicator_item"
-        app:tabIndicatorColor="@color/colorTextPrimary"
+        app:tabIndicatorColor="@color/app_main_color"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="3dp"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabSelectedTextColor="@color/app_main_color"
         app:tabTextAppearance="@style/SearchPageTabItemText"
-        app:tabTextColor="@color/text_color_no_selected" />
-
-    <View
-        android:id="@+id/shadow_result_top"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:background="@drawable/shape_shadow_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs_result_categories" />
+        app:tabTextColor="@color/app_text_gray" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_result_content"

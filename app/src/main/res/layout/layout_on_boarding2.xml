@@ -5,46 +5,44 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg2" />
-
-    <View
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/new_guide_card_gradient_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title_tv2" />
+        android:scaleType="centerInside"
+        android:src="@drawable/bg2"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title_tv2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/roboto_bold"
-        android:paddingHorizontal="18dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:text="@string/onboarding_title_pdf_editor"
-        android:textColor="@color/white"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/subtitle_tv2"
-        app:layout_constraintStart_toStartOf="@+id/subtitle_tv2" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/subtitle_tv2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:fontFamily="@font/roboto_medium"
-        android:includeFontPadding="false"
-        android:paddingHorizontal="18dp"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:text="@string/onboarding_description_pdf_tools"
-        android:textColor="@color/white"
-        android:textSize="16sp"
+        android:layout_height="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/iv_bg">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="@string/onboarding_title_pdf_editor"
+            android:textColor="@color/app_text_black"
+            android:textSize="28sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtitle_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="@string/onboarding_description_pdf_tools"
+            android:textColor="@color/app_text_gray"
+            android:textSize="15sp" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

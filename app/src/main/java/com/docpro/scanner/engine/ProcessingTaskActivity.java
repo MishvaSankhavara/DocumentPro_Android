@@ -86,12 +86,13 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         if (taskIntent != null) {
             int taskId = taskIntent.getIntExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, 1);
             if (taskId == AppGlobalConstants.TOOL_ID_COMPRESS) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
+                PDFReaderModel model = (PDFReaderModel) taskIntent
+                        .getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
                 if (model != null) {
                     coreCompressExecutor = new FileCompressionExecutor(this, model.getAbsolutePath_PDFModel());
                     coreCompressExecutor.executeTask_FileCompression();
                 }
-            } else if (taskId == AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO) {
+            } else if (taskId == AppGlobalConstants.TOOL_ID_MERGE) {
                 String name = taskIntent.getStringExtra(AppGlobalConstants.MERGE_PDF_FILE);
                 ArrayList<PDFReaderModel> models = DocumentMyApplication.getInstance().getMergedPdfList();
                 ArrayList<String> filePaths = new ArrayList<>();
@@ -101,7 +102,8 @@ public class ProcessingTaskActivity extends AppCompatActivity {
                 coreMergeExecutor = new PdfMergeManager(this, filePaths, name);
                 coreMergeExecutor.executeTask_PdfMergeManager();
             } else if (taskId == AppGlobalConstants.TOOL_ID_SPLIT) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
+                PDFReaderModel model = (PDFReaderModel) taskIntent
+                        .getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
                 if (model != null) {
                     String name = taskIntent.getStringExtra(AppGlobalConstants.EXTRA_PDF_FILE_NAME);
                     coreSplitExecutor = new SplitDocExecutor(this, name,
@@ -109,14 +111,16 @@ public class ProcessingTaskActivity extends AppCompatActivity {
                     coreSplitExecutor.executeTask_SplitDoc();
                 }
             } else if (taskId == AppGlobalConstants.TOOL_ID_LOCK_PDF) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
+                PDFReaderModel model = (PDFReaderModel) taskIntent
+                        .getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
                 String pass = taskIntent.getStringExtra(AppGlobalConstants.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
                     coreLockExecutor = new SetPasswordManager(ProcessingTaskActivity.this, pass, model);
                     coreLockExecutor.executeTask_setPW();
                 }
             } else if (taskId == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {
-                PDFReaderModel model = (PDFReaderModel) taskIntent.getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
+                PDFReaderModel model = (PDFReaderModel) taskIntent
+                        .getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
                 String pass = taskIntent.getStringExtra(AppGlobalConstants.PDF_SET_PASSWORD);
                 if (model != null && pass != null) {
                     coreUnlockExecutor = new RemovePasswordExecutor(ProcessingTaskActivity.this, pass, model);
@@ -170,12 +174,12 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         btnOpenResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File targetFile = new File(finalPdfResult.getAbsolutePath_PDFModel());
+                File targetFile = new File(pdfModelFinal.getAbsolutePath_PDFModel());
                 Utils.openFile(ProcessingTaskActivity.this, targetFile);
             }
         });
         btnShareResult.setOnClickListener(
-                v -> Utils.shareFile(ProcessingTaskActivity.this, new File(finalPdfResult.getFileUri_PDFModel())));
+                v -> Utils.shareFile(ProcessingTaskActivity.this, new File(pdfModelFinal.getFileUri_PDFModel())));
     }
 
     @Override

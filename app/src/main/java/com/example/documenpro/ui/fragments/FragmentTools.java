@@ -64,7 +64,7 @@ public class FragmentTools extends Fragment {
         for (ToolsModel tool : allTools) {
             int type = tool.getToolType_toolModel();
             if (type == AppGlobalConstants.TOOL_YOUR_PDF ||
-                    type == AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO ||
+                    type == AppGlobalConstants.TOOL_ID_MERGE ||
                     type == AppGlobalConstants.TOOL_ID_COMPRESS ||
                     type == AppGlobalConstants.TOOL_ID_SPLIT ||
                     type == AppGlobalConstants.TOOL_ID_PRINT) {
@@ -107,7 +107,7 @@ public class FragmentTools extends Fragment {
     private void executeTool(int toolType) {
         if (toolType == AppGlobalConstants.TOOL_YOUR_PDF) {
             startActivity(new Intent(activityContext, ResultViewerActivity.class));
-        } else if (toolType == AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO) {
+        } else if (toolType == AppGlobalConstants.TOOL_ID_MERGE) {
             startActivity(new Intent(activityContext, MergeSelectFileActivity.class));
             DocumentMyApplication.getInstance().clearArrayListMerge();
         } else if (toolType == AppGlobalConstants.TOOL_ID_COMPRESS) {

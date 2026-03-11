@@ -365,6 +365,27 @@
     <color name="editor_slideshow_bg">@color/editor_palette_black</color>
     <color name="editor_tab_stroke">@color/editor_palette_white</color>
     <color name="sodk_editor_text_highlight_color">@color/editor_palette_maya_blue</color>
+
+    <!-- Artifex PDF Library Internal Colors (Added to fix ResourceNotFoundException) -->
+    <color name="sodk_editor_doc_background">@color/editor_palette_grey</color>
+    <color name="sodk_editor_header_pdf_color">@color/app_pdf_list_bg</color>
+    <color name="sodk_editor_header_color">@color/editor_palette_silver_1</color>
+    <color name="sodk_editor_header_color_selected">@color/editor_toolbar</color>
+    <color name="sodk_editor_page_border_color">@color/editor_palette_grey_2</color>
+    <color name="sodk_editor_selected_page_border_color">@color/editor_palette_orange</color>
+    <color name="sodk_editor_main_bg_color">@color/editor_palette_silver_2</color>
+    <color name="sodk_editor_pdf_pages_bg">@color/editor_palette_black</color>
+    <color name="sodk_editor_transparent">#00000000</color>
+    <color name="sodk_editor_transparent_01">#01000000</color>
+    <color name="sodk_editor_header_doc_color">@color/app_word_list_bg</color>
+    <color name="sodk_editor_header_xls_color">@color/app_excel_list_bg</color>
+    <color name="sodk_editor_header_ppt_color">@color/app_pdf_list_bg</color>
+    <color name="sodk_wheel_item_bg">@color/white</color>
+    <color name="sodk_wheel_item_highlight">@color/app_material_grey_100</color>
+    <color name="sodk_editor_menu_popup_background_color">@color/white</color>
+    <color name="sodk_editor_header_text_color">@color/editor_palette_white</color>
+    <color name="sodk_editor_header_text_color_selected">@color/editor_palette_black</color>
+
     <color name="editor_toc_bg_color">@color/editor_palette_white</color>
     <color name="editor_toc_cancel_textcolor">@color/editor_palette_slate_blue</color>
     <color name="editor_toc_divider_color">@color/editor_palette_grey_5</color>

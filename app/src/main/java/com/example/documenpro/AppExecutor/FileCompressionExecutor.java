@@ -39,7 +39,7 @@ public class FileCompressionExecutor {
     private String reducedPercent_FileCompression;
     private final String pdfPath_FileCompression;
     private boolean isEncrypted_FileCompression = false;
-    private int compressionQuality_FileCompression;
+    private int compressionQuality_FileCompression = 80;
     private String compressedPDF_FileCompression;
     private String compressedFileSize_FileCompression;
     private Long compressedFileLength_FileCompression;
@@ -62,17 +62,20 @@ public class FileCompressionExecutor {
     public void executeTask_FileCompression() {
         executor_FileCompression.execute(() -> {
             weakReference_FileCompression.get().runOnUiThread(() -> {
-                weakReference_FileCompression.get().tvTool.setText(weakReference_FileCompression.get().getResources().getString(R.string.message_compressing));
+                weakReference_FileCompression.get().tvTool.setText(
+                        weakReference_FileCompression.get().getResources().getString(R.string.message_compressing));
                 weakReference_FileCompression.get().tvPercent.setText("0");
             });
 
             File file = new File(pdfPath_FileCompression);
             String strPdfName = file.getName();
             uncompressedFileLength_FileCompression = file.length();
-            uncompressedFileSize_FileCompression = Formatter.formatShortFileSize(weakReference_FileCompression.get(), uncompressedFileLength_FileCompression);
+            uncompressedFileSize_FileCompression = Formatter.formatShortFileSize(weakReference_FileCompression.get(),
+                    uncompressedFileLength_FileCompression);
 
             allPdfDocumentDir_FileCompression = AppGlobalConstants.DIRECTORY_COMPRESSED_PDF;
-            compressedPDF_FileCompression = allPdfDocumentDir_FileCompression + Utils.removeFileExtension(strPdfName) + "-Compressed.pdf";
+            compressedPDF_FileCompression = allPdfDocumentDir_FileCompression + Utils.removeFileExtension(strPdfName)
+                    + "-Compressed.pdf";
 
             File file2 = new File(allPdfDocumentDir_FileCompression);
             if (!file2.exists()) {
@@ -96,13 +99,17 @@ public class FileCompressionExecutor {
                         PRStream prStream_FileCompression = (PRStream) pdfObject;
                         PdfObject pdfObject2_FileCompression = prStream_FileCompression.get(PdfName.SUBTYPE);
 
-                        if (pdfObject2_FileCompression != null && pdfObject2_FileCompression.toString().equals(PdfName.IMAGE.toString())) {
+                        if (pdfObject2_FileCompression != null
+                                && pdfObject2_FileCompression.toString().equals(PdfName.IMAGE.toString())) {
                             try {
-                                Bitmap compressedBitmap_FileCompression = ImageProcessorUtils.getInstant().getCompressedBitmapPDF(new PdfImageObject(prStream_FileCompression).getImageAsBytes());
+                                Bitmap compressedBitmap_FileCompression = ImageProcessorUtils.getInstant()
+                                        .getCompressedBitmapPDF(
+                                                new PdfImageObject(prStream_FileCompression).getImageAsBytes());
 
                                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-                                compressedBitmap_FileCompression.compress(Bitmap.CompressFormat.JPEG, compressionQuality_FileCompression, byteArrayOutputStream);
+                                compressedBitmap_FileCompression.compress(Bitmap.CompressFormat.JPEG,
+                                        compressionQuality_FileCompression, byteArrayOutputStream);
 
                                 prStream_FileCompression.setData(byteArrayOutputStream.toByteArray(), false, 9);
 
@@ -116,8 +123,10 @@ public class FileCompressionExecutor {
                                 prStream_FileCompression.put(PdfName.TYPE, PdfName.XOBJECT);
                                 prStream_FileCompression.put(PdfName.SUBTYPE, PdfName.IMAGE);
                                 prStream_FileCompression.put(PdfName.FILTER, PdfName.DCTDECODE);
-                                prStream_FileCompression.put(PdfName.WIDTH, new PdfNumber(compressedBitmap_FileCompression.getWidth()));
-                                prStream_FileCompression.put(PdfName.HEIGHT, new PdfNumber(compressedBitmap_FileCompression.getHeight()));
+                                prStream_FileCompression.put(PdfName.WIDTH,
+                                        new PdfNumber(compressedBitmap_FileCompression.getWidth()));
+                                prStream_FileCompression.put(PdfName.HEIGHT,
+                                        new PdfNumber(compressedBitmap_FileCompression.getHeight()));
                                 prStream_FileCompression.put(PdfName.BITSPERCOMPONENT, new PdfNumber(8));
                                 prStream_FileCompression.put(PdfName.COLORSPACE, PdfName.DEVICERGB);
 
@@ -135,18 +144,22 @@ public class FileCompressionExecutor {
                 }
 
                 pdfReader_FileCompression.removeUnusedObjects();
-                PdfStamper pdfStamper = new PdfStamper(pdfReader_FileCompression, new FileOutputStream(compressedPDF_FileCompression));
+                PdfStamper pdfStamper = new PdfStamper(pdfReader_FileCompression,
+                        new FileOutputStream(compressedPDF_FileCompression));
 
                 pdfStamper.setFullCompression();
                 pdfStamper.close();
 
                 compressedFileLength_FileCompression = new File(compressedPDF_FileCompression).length();
 
-                compressedFileSize_FileCompression = Formatter.formatShortFileSize(weakReference_FileCompression.get(), compressedFileLength_FileCompression);
+                compressedFileSize_FileCompression = Formatter.formatShortFileSize(weakReference_FileCompression.get(),
+                        compressedFileLength_FileCompression);
 
-                reducedPercent_FileCompression = (100 - ((int) ((compressedFileLength_FileCompression * 100) / uncompressedFileLength_FileCompression))) + "%";
+                reducedPercent_FileCompression = (100 - ((int) ((compressedFileLength_FileCompression * 100)
+                        / uncompressedFileLength_FileCompression))) + "%";
 
-                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{compressedPDF_FileCompression}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(),
+                        new String[] { compressedPDF_FileCompression }, new String[] { "application/pdf" }, null);
 
                 if (!isEncrypted_FileCompression) {
 
@@ -165,7 +178,10 @@ public class FileCompressionExecutor {
                             weakReference_FileCompression.get().tvPdfName.setText(file1.getName());
                             weakReference_FileCompression.get().tvPdfPath.setText(compressedPDF_FileCompression);
 
-                            String sb2 = weakReference_FileCompression.get().getResources().getString(R.string.label_reduced_from) + " " + uncompressedFileSize_FileCompression + " " + weakReference_FileCompression.get().getResources().getString(R.string.to) + " " + compressedFileSize_FileCompression;
+                            String sb2 = weakReference_FileCompression.get().getResources()
+                                    .getString(R.string.label_reduced_from) + " " + uncompressedFileSize_FileCompression
+                                    + " " + weakReference_FileCompression.get().getResources().getString(R.string.to)
+                                    + " " + compressedFileSize_FileCompression;
 
                             weakReference_FileCompression.get().tvResult.setText(sb2);
 
@@ -180,15 +196,18 @@ public class FileCompressionExecutor {
 
                             weakReference_FileCompression.get().pdfModelFinal = fileHolderModel_FileCompression;
 
-                            Utils.displayPDFThumbnail(weakReference_FileCompression.get(), file1, weakReference_FileCompression.get().imgThumbnail);
+                            Utils.displayPDFThumbnail(weakReference_FileCompression.get(), file1,
+                                    weakReference_FileCompression.get().imgThumbnail);
 
-                            weakReference_FileCompression.get().tvPageNumber.setText(String.valueOf(Utils.getPageCountPDF(file1)));
+                            weakReference_FileCompression.get().tvPageNumber
+                                    .setText(String.valueOf(Utils.getPageCountPDF(file1)));
                         });
                     }
 
                 } else {
                     weakReference_FileCompression.get().finish();
-                    Toast.makeText(weakReference_FileCompression.get(), R.string.toast_file_protected_unprotect, Toast.LENGTH_LONG).show();
+                    Toast.makeText(weakReference_FileCompression.get(), R.string.toast_file_protected_unprotect,
+                            Toast.LENGTH_LONG).show();
                 }
 
             } catch (Exception e) {
@@ -207,7 +226,8 @@ public class FileCompressionExecutor {
 
         this.pdfPath_FileCompression = string_FileCompression;
 
-        this.weakReference_FileCompression.get().btnClose.setOnClickListener(v -> weakReference_FileCompression.get().finish());
+        this.weakReference_FileCompression.get().btnClose
+                .setOnClickListener(v -> weakReference_FileCompression.get().finish());
 
         this.weakReference_FileCompression.get().btnStopExecutor.setOnClickListener(v -> {
             executor_FileCompression.shutdownNow();

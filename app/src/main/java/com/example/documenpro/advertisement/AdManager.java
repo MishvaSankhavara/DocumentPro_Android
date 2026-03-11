@@ -41,8 +41,7 @@ public class AdManager {
                     mContext_AdManager,
                     AdUtils.AD_UNIT_ID_INTERSTITIAL_TEST,
                     new AdRequest.Builder().build(),
-                    new InterAdLoadCallBack_AdManager(mContext_AdManager)
-            );
+                    new InterAdLoadCallBack_AdManager(mContext_AdManager));
         }
     }
 
@@ -72,12 +71,13 @@ public class AdManager {
                 AdManager.mInterstitialAd_AdManager = null;
 
                 if (AdManager.mListener_AdManager != null) {
-                    AdManager.mListener_AdManager.OnAdDismissedListener();
+                    OnAdDismissedListener listener = AdManager.mListener_AdManager;
+                    AdManager.mListener_AdManager = null;
+                    listener.OnAdDismissedListener();
                 }
 
                 AdManager.loadAds_AdManager(
-                        InterAdLoadCallBack_AdManager.this.mContext_AdManager
-                );
+                        InterAdLoadCallBack_AdManager.this.mContext_AdManager);
             }
 
             @Override
@@ -86,12 +86,13 @@ public class AdManager {
                 AdManager.mInterstitialAd_AdManager = null;
 
                 if (AdManager.mListener_AdManager != null) {
-                    AdManager.mListener_AdManager.OnAdDismissedListener();
+                    OnAdDismissedListener listener = AdManager.mListener_AdManager;
+                    AdManager.mListener_AdManager = null;
+                    listener.OnAdDismissedListener();
                 }
 
                 AdManager.loadAds_AdManager(
-                        InterAdLoadCallBack_AdManager.this.mContext_AdManager
-                );
+                        InterAdLoadCallBack_AdManager.this.mContext_AdManager);
             }
         }
 

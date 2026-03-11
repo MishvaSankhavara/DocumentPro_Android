@@ -165,7 +165,7 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
             String sb2 = "Merged" + System.currentTimeMillis();
             FileRenameDialog dialog = new FileRenameDialog(ReorderMergePdfActivity.this, sb2, nameFile -> {
                 Intent intent = new Intent(ReorderMergePdfActivity.this, ProcessingTaskActivity.class);
-                intent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO);
+                intent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_MERGE);
                 intent.putExtra(AppGlobalConstants.MERGE_PDF_FILE, nameFile);
                 startActivity(intent);
                 finish();

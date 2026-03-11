@@ -12,162 +12,136 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_dialog_root"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="@drawable/ripple_item_select">
-
-    <View
-        android:id="@+id/select_bg_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorSelectItemBackground"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/item_drag_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="10dp"
-        android:padding="2dp"
-        android:scaleType="centerInside"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_merge_drag_pdf"
-        app:tint="@color/colorNormalTint" />
-
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/item_icon"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
-        android:layout_gravity="center"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_name"
-        app:layout_constraintStart_toEndOf="@+id/item_drag_iv"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginStart="16dp"
-        app:srcCompat="@drawable/ic_type_pdf" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_name"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto_medium"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        android:text="Name"
-        android:textAlignment="viewStart"
-        android:textColor="@color/colorSurface"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@id/tvFileDate"
-        app:layout_constraintEnd_toStartOf="@+id/item_pdf_remove"
-        app:layout_constraintStart_toEndOf="@+id/item_icon"
-        app:layout_constraintTop_toTopOf="@id/item_icon"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_goneMarginEnd="10dp" />
+        android:background="@drawable/ripple_item_select"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_lock"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/tvFileDate"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toTopOf="@+id/tvFileDate"
-        app:srcCompat="@drawable/ic_pwd_lock" />
+        <View
+            android:id="@+id/select_bg_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorSelectItemBackground"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/lock_line"
-        android:layout_width="1dp"
-        android:layout_height="8dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="5dp"
-        android:background="#6689909c"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_lock"
-        app:layout_constraintEnd_toStartOf="@+id/tvFileDate"
-        app:layout_constraintStart_toEndOf="@+id/iv_lock"
-        app:layout_constraintTop_toTopOf="@+id/iv_lock" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvFileDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="4dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="start"
-        android:includeFontPadding="false"
-        android:text="24-09-2018"
-        android:textAlignment="viewStart"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/item_icon"
-        app:layout_constraintStart_toEndOf="@+id/lock_line"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
-
-    <ImageView
-        android:id="@+id/ivDot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="5dp"
-        android:src="@drawable/ic_separator"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
-        app:layout_constraintStart_toEndOf="@id/tvFileDate"
-        app:layout_constraintTop_toTopOf="@id/tvFileDate" />
-
-    <TextView
-        android:id="@+id/tvFileSize"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:fontFamily="@font/roboto_medium"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        android:text="24KB"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
-        app:layout_constraintEnd_toStartOf="@id/item_pdf_remove"
-        app:layout_constraintStart_toEndOf="@id/ivDot"
-        app:layout_constraintTop_toTopOf="@id/tvFileDate" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/item_pdf_remove"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_pdf_operate_remove"
-        app:tint="@color/colorNormalTint" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_drag_iv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="2dp"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_merge_drag_pdf"
+            app:tint="@color/colorNormalTint" />
 
 
-    <View
-        android:id="@+id/bottom_line"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimaryDim"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_name" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_drag_iv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginStart="0dp"
+            app:srcCompat="@drawable/ic_type_pdf" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="Name"
+            android:textAlignment="viewStart"
+            android:textColor="@color/app_primary_text"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/ll_info"
+            app:layout_constraintEnd_toStartOf="@+id/item_pdf_remove"
+            app:layout_constraintStart_toEndOf="@+id/item_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_lock"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_pwd_lock"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/lock_line"
+                android:layout_width="1dp"
+                android:layout_height="10dp"
+                android:layout_marginHorizontal="6dp"
+                android:background="#D1D1D1"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFileDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_regular"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="24-09-2018"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/ivDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:src="@drawable/ic_separator" />
+
+            <TextView
+                android:id="@+id/tvFileSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="24KB"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_pdf_remove"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_pdf_operate_remove"
+            app:tint="@color/colorNormalTint" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

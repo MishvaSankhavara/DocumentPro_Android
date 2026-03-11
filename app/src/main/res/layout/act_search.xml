@@ -44,37 +44,30 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_search_text"
-                style="@style/FontMedium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:background="@null"
-                android:gravity="start|center_vertical"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
                 android:hint="@string/hint_search_files"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:paddingEnd="36dp"
-                android:textAlignment="viewStart"
+                android:maxLines="1"
                 android:textColor="@color/app_primary_text"
                 android:textColorHint="@color/colorTextSecondary"
-                android:textCursorDrawable="@null"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_search_icon"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toStartOf="@+id/iv_clear"
+                app:layout_constraintStart_toEndOf="@+id/iv_search_icon" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/iv_clear"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:padding="10dp"
-                android:scaleType="center"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_close"
                 android:tint="@color/colorTextSecondary"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_close" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

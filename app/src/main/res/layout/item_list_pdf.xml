@@ -11,171 +11,139 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rootView"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:background="@drawable/ripple_item_select">
-
-    <RelativeLayout
-        android:id="@+id/rlRowContent"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ll_favorite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@drawable/ripple_item_select"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvFileIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:elevation="0dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:cardBackgroundColor="#00000000"
-            app:cardElevation="0dp">
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_icon"
-                android:layout_width="37dp"
-                android:layout_height="37dp"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:padding="1dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="2dp"
                 android:src="@drawable/ic_type_pdf" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivLock"
-                android:layout_width="37dp"
-                android:layout_height="37dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-
+                android:padding="4dp"
                 android:src="@drawable/ic_lock"
                 android:visibility="gone" />
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/llText"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="4dp"
-            android:layout_toEndOf="@+id/cvFileIcon"
-            android:orientation="vertical"
-            android:paddingTop="3dp">
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="Privacy policy.docx"
+            android:textColor="@color/app_primary_text"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/ll_info"
+            app:layout_constraintEnd_toStartOf="@+id/ll_favorite"
+            app:layout_constraintStart_toEndOf="@+id/cvFileIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <LinearLayout
+            android:id="@+id/ll_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFileDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:maxLines="1"
+                android:text="24-09-2018"
+                android:textColor="@color/app_normal_text"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/ivDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="6dp"
+                android:src="@drawable/ic_separator" />
 
             <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/tvFileSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_semibold"
+                android:fontFamily="@font/roboto_regular"
                 android:maxLines="1"
-                android:text="Privacy policy.docx"
-                android:textColor="@color/app_primary_text"
-                android:textSize="14sp" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp">
-
-                <TextView
-                    android:id="@+id/tvFileDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_semibold"
-                    android:maxLines="1"
-                    android:text="24-09-2018"
-                    android:textColor="@color/app_normal_text"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/ivDot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_toEndOf="@+id/tvFileDate"
-                    android:fontFamily="@font/roboto_semibold"
-                    android:src="@drawable/ic_separator"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/tvFileSize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/ivDot"
-                    android:fontFamily="@font/roboto_semibold"
-                    android:maxLines="1"
-                    android:text="24KB"
-                    android:textColor="@color/app_normal_text"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+                android:text="24KB"
+                android:textColor="@color/app_normal_text"
+                android:textSize="12sp" />
         </LinearLayout>
-    </RelativeLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_more"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/ll_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_more"
-        app:layout_constraintTop_toTopOf="parent">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lt_favorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerInside"
+                app:lottie_rawRes="@raw/lottie_favorite" />
+        </LinearLayout>
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lt_favorite"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:layout_gravity="center"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_more"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/actionBarItemBackground"
             android:scaleType="centerInside"
-            app:lottie_rawRes="@raw/lottie_favorite" />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_list_more" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_more"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="?attr/actionBarItemBackground"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_list_more" />
+        <LinearLayout
+            android:id="@+id/llSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/llSelection"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_weight="0.15"
-        android:elevation="11dp"
-        android:gravity="end"
-        android:orientation="horizontal"
-        android:paddingTop="3dp"
-        android:visibility="gone"
-        app:elevation="11dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/cb_selection"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            android:button="@drawable/background_list_checkbox"
-            android:gravity="center" />
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cb_selection"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:button="@drawable/background_list_checkbox" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

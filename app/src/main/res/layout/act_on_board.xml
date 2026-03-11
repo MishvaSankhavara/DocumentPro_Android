@@ -4,73 +4,87 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff5f7fa">
+    android:background="#FFFFFF">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/guide_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/ad_container"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_container"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="25dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/guide_vp"
-        app:layout_constraintStart_toStartOf="parent">
+        android:paddingBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/ad_container">
 
-        <View
-            android:id="@+id/v_indicator1"
-            android:layout_width="44dp"
-            android:layout_height="4dp"
-            android:layout_marginEnd="7dp"
-            android:background="@drawable/shape_red_radius" />
-
-        <View
-            android:id="@+id/v_indicator2"
-            android:layout_width="16dp"
-            android:layout_height="4dp"
-            android:layout_marginEnd="7dp"
-            android:background="@drawable/shape_gray_radius" />
-
-        <View
-            android:id="@+id/v_indicator3"
-            android:layout_width="16dp"
-            android:layout_height="4dp"
-            android:background="@drawable/shape_gray_radius" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/next_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_marginBottom="9dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/ad_container"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/next_start_tv"
+        <LinearLayout
+            android:id="@+id/ll_indicators"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
-            android:fontFamily="@font/roboto_bold"
-            android:includeFontPadding="false"
-            android:text="@string/action_next"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:layout_marginStart="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/next_start_iv"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginEnd="18dp"
-            android:src="@drawable/ic_return_rtl" />
-    </LinearLayout>
+            <View
+                android:id="@+id/v_indicator1"
+                android:layout_width="32dp"
+                android:layout_height="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/shape_blue_indicator" />
+
+            <View
+                android:id="@+id/v_indicator2"
+                android:layout_width="12dp"
+                android:layout_height="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/shape_gray_indicator" />
+
+            <View
+                android:id="@+id/v_indicator3"
+                android:layout_width="12dp"
+                android:layout_height="6dp"
+                android:background="@drawable/shape_gray_indicator" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/next_layout"
+            android:layout_width="120dp"
+            android:layout_height="54dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_blue_pill_btn"
+            android:gravity="center"
+            android:minWidth="130dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/next_start_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="@string/action_next"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/next_start_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/right_arrow"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <include

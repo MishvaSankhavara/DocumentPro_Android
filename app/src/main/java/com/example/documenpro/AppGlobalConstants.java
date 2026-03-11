@@ -61,20 +61,28 @@ public class AppGlobalConstants {
     public static int DIALOG_CONFIRM_EXIT_PHOTO_TO_PDF = 4;
     public static int DIALOG_CONFIRM_REMOVE_FAVORITE = 7;
 
-    public static String DIRECTORY_COMPRESSED_PDF = Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Compressed/";
+    public static String DIRECTORY_COMPRESSED_PDF = Environment.getExternalStorageDirectory()
+            + "/Documents/AllPdf/Compressed/";
     public static String DIRECTORY_MERGED_PDF = Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Merged/";
     public static String DIRECTORY_SPLIT_PDF = Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Split/";
-    public static String DIRECTORY_IMAGE_TO_PDF = Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Image2Pdf/";
+    public static String DIRECTORY_IMAGE_TO_PDF = Environment.getExternalStorageDirectory()
+            + "/Documents/AllPdf/Image2Pdf/";
     public static String DIRECTORY_IMAGES = Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Images/";
     public static String DIRECTORY_LOCKED_PDF = Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Lock/";
 
-    public static File DIRECTORY_COMPRESSED_PDF_FILE = new File(Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Compressed");
-    public static File DIRECTORY_MERGED_PDF_FILE = new File(Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Merged");
-    public static File DIRECTORY_SPLIT_PDF_FILE = new File(Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Split");
-    public static File DIRECTORY_IMAGE_TO_PDF_FILE = new File(Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Image2Pdf");
-    public static File DIRECTORY_LOCKED_PDF_FILE = new File(Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Lock");
+    public static File DIRECTORY_COMPRESSED_PDF_FILE = new File(
+            Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Compressed");
+    public static File DIRECTORY_MERGED_PDF_FILE = new File(
+            Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Merged");
+    public static File DIRECTORY_SPLIT_PDF_FILE = new File(
+            Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Split");
+    public static File DIRECTORY_IMAGE_TO_PDF_FILE = new File(
+            Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Image2Pdf");
+    public static File DIRECTORY_LOCKED_PDF_FILE = new File(
+            Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Lock");
 
-    public static File DIRECTORY_SAVED_IMAGES = new File(Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Images");
+    public static File DIRECTORY_SAVED_IMAGES = new File(
+            Environment.getExternalStorageDirectory() + "/Documents/AllPdf/Images");
 
     public static String FEEDBACK_EMAIL = "goat.mobile.apps@gmail.com";
 
@@ -84,36 +92,37 @@ public class AppGlobalConstants {
 
     public static final String QUERY_PDF_FILES = MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/pdf'";
 
-    public static final String QUERY_ALL_DOCUMENT_FILES =
-            MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-excel'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/msword'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-powerpoint'"
-                    + " OR  " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/pdf'";
+    public static final String QUERY_ALL_DOCUMENT_FILES = MediaStore.Files.FileColumns.MIME_TYPE
+            + " LIKE 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-excel'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE
+            + " LIKE 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/msword'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE
+            + " LIKE 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-powerpoint'"
+            + " OR  " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/pdf'";
 
-    public static final String QUERY_EXCEL_FILES =
-            MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-excel'";
+    public static final String QUERY_EXCEL_FILES = MediaStore.Files.FileColumns.MIME_TYPE
+            + " LIKE 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-excel'";
 
-    public static final String QUERY_WORD_FILES =
-            MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/msword'";
+    public static final String QUERY_WORD_FILES = MediaStore.Files.FileColumns.MIME_TYPE
+            + " LIKE 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/msword'";
 
-    public static final String QUERY_PPT_FILES =
-            MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                    + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-powerpoint'";
+    public static final String QUERY_PPT_FILES = MediaStore.Files.FileColumns.MIME_TYPE
+            + " LIKE 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+            + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-powerpoint'";
 
-    public static final String QUERY_TEXT_FILES =
-            MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'text/plain'";
+    public static final String QUERY_TEXT_FILES = MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'text/plain'";
 
     public static String PREF_LANGUAGE_SET = "language_set";
 
     public static int TOOL_YOUR_PDF = 0;
     public static int TOOL_ID_SPLIT = 1;
     public static int TOOL_ID_COMPRESS = 2;
-    public static int TOOL_ID_PDF_TO_PHOTO = 3;
+    public static int TOOL_ID_MERGE = 3;
     public static int TOOL_PDF_TO_PHOTO = 4;
     public static int TOOL_ID_PHOTO_TO_PDF = 5;
     public static int TOOL_ID_BROWSE_PDF = 6;
@@ -178,16 +187,26 @@ public class AppGlobalConstants {
 
     public static ArrayList<ToolsModel> setToolsList() {
         ArrayList<ToolsModel> arrayList = new ArrayList<>();
-        arrayList.add(new ToolsModel(R.string.tool_title_your_pdf, R.drawable.ic_tools_your_pdf, AppGlobalConstants.TOOL_YOUR_PDF, 12));
-        arrayList.add(new ToolsModel(R.string.tool_title_split_pdf, R.drawable.ic_tools_merge, AppGlobalConstants.TOOL_ID_PDF_TO_PHOTO, 12));
-        arrayList.add(new ToolsModel(R.string.tool_title_compress_pdf, R.drawable.ic_tools_compress, AppGlobalConstants.TOOL_ID_COMPRESS, 12));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_split, R.drawable.ic_tools_split, AppGlobalConstants.TOOL_ID_SPLIT, 0));
-//        arrayList.add(new Tools(R.string.tool_tittle_browse, R.drawable.ic_tools_browse_pdf, GlobalConstant.TOOL_BROWSE_PDF, 12));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_print, R.drawable.ic_tools_print, AppGlobalConstants.TOOL_ID_PRINT, 12));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_image_to_pdf, R.drawable.ic_tools_img_to_pdf, AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF, 12));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_pdf_to_image, R.drawable.ic_pdf_to_image, AppGlobalConstants.TOOL_PDF_TO_PHOTO, 0));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_lock_pdf, R.drawable.ic_tools_lock, AppGlobalConstants.TOOL_ID_LOCK_PDF, 12));
-        arrayList.add(new ToolsModel(R.string.tool_tittle_unlock_pdf, R.drawable.ic_tools_unlock, AppGlobalConstants.TOOL_ID_UNLOCK_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_title_your_pdf, R.drawable.ic_tools_your_pdf,
+                AppGlobalConstants.TOOL_YOUR_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_merge, R.drawable.ic_tools_merge,
+                AppGlobalConstants.TOOL_ID_MERGE, 12));
+        arrayList.add(new ToolsModel(R.string.tool_title_compress_pdf, R.drawable.ic_tools_compress,
+                AppGlobalConstants.TOOL_ID_COMPRESS, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_split, R.drawable.ic_tools_split,
+                AppGlobalConstants.TOOL_ID_SPLIT, 0));
+        // arrayList.add(new Tools(R.string.tool_tittle_browse,
+        // R.drawable.ic_tools_browse_pdf, GlobalConstant.TOOL_BROWSE_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_print, R.drawable.ic_tools_print,
+                AppGlobalConstants.TOOL_ID_PRINT, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_image_to_pdf, R.drawable.ic_tools_img_to_pdf,
+                AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_pdf_to_image, R.drawable.ic_pdf_to_image,
+                AppGlobalConstants.TOOL_PDF_TO_PHOTO, 0));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_lock_pdf, R.drawable.ic_tools_lock,
+                AppGlobalConstants.TOOL_ID_LOCK_PDF, 12));
+        arrayList.add(new ToolsModel(R.string.tool_tittle_unlock_pdf, R.drawable.ic_tools_unlock,
+                AppGlobalConstants.TOOL_ID_UNLOCK_PDF, 12));
         return arrayList;
     }
 

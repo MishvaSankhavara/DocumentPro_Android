@@ -28,8 +28,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="6dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:padding="6dp"
@@ -136,8 +136,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_full_screen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="13dp"
             android:layout_marginBottom="14dp"

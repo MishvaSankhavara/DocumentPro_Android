@@ -72,10 +72,16 @@ public class OnBoardActivity extends AppCompatActivity {
                 if (appCompatTextView != null) {
                     appCompatTextView.setText(R.string.action_start);
                 }
+                if (activity.findViewById(R.id.next_start_iv) != null) {
+                    activity.findViewById(R.id.next_start_iv).setVisibility(View.GONE);
+                }
             } else {
                 AppCompatTextView appCompatTextView2 = activity.nextButtonText;
                 if (appCompatTextView2 != null) {
                     appCompatTextView2.setText(R.string.action_next);
+                }
+                if (activity.findViewById(R.id.next_start_iv) != null) {
+                    activity.findViewById(R.id.next_start_iv).setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -145,8 +151,8 @@ public class OnBoardActivity extends AppCompatActivity {
                 } else if (previousPagePosition == 1) {
                     onboardingViewPager.setCurrentItem(2);
                 } else {
-                    PreferenceUtils.getInstance(OnBoardActivity.this).setBoolean(AppGlobalConstants.PREF_GUIDE_COMPLETED, true);
-
+                    PreferenceUtils.getInstance(OnBoardActivity.this)
+                            .setBoolean(AppGlobalConstants.PREF_GUIDE_COMPLETED, true);
 
                     AdManager.showAds_AdManager(OnBoardActivity.this, new OnAdDismissedListener() {
                         @Override
@@ -192,9 +198,9 @@ public class OnBoardActivity extends AppCompatActivity {
     public final void animateDescriptionText(AppCompatTextView tvDes) {
         if (this.descriptionAnimationSet == null) {
             float dimensionPixelSize = (float) getResources().getDimensionPixelSize(R.dimen.dp_75);
-//            if (this.H) {
-//                dimensionPixelSize = -dimensionPixelSize;
-//            }
+            // if (this.H) {
+            // dimensionPixelSize = -dimensionPixelSize;
+            // }
             AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 1.0f);
             TranslateAnimation translateAnimation = new TranslateAnimation(dimensionPixelSize, 0.0f, 0.0f, 0.0f);
             AnimationSet animationSet = new AnimationSet(true);
@@ -220,24 +226,20 @@ public class OnBoardActivity extends AppCompatActivity {
 
     public final void updateIndicator(View view, boolean selected) {
         int idResource;
-        int idDimen;
+        int width;
         if (view != null) {
             Resources resources = getResources();
             if (selected) {
-                idResource = R.drawable.shape_red_radius;
+                idResource = R.drawable.shape_blue_indicator;
+                width = (int) (32 * resources.getDisplayMetrics().density);
             } else {
-                idResource = R.drawable.shape_gray_radius;
+                idResource = R.drawable.shape_gray_indicator;
+                width = (int) (12 * resources.getDisplayMetrics().density);
             }
             view.setBackground(ResourcesCompat.getDrawable(resources, idResource, null));
             ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
             if (layoutParams != null) {
-                Resources resources2 = getResources();
-                if (selected) {
-                    idDimen = R.dimen.dp_44;
-                } else {
-                    idDimen = R.dimen.dp_16;
-                }
-                layoutParams.width = resources2.getDimensionPixelSize(idDimen);
+                layoutParams.width = width;
             }
             view.setLayoutParams(layoutParams);
         }

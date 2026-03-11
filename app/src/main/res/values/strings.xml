@@ -788,7 +788,7 @@
     // Tool Type
     <string name="tool_title_your_pdf">Your PDF</string>
     <string name="tool_tittle_merge">Merge PDF</string>
-    <string name="tool_title_split_pdf">Merge PDF</string>
+    <string name="tool_title_split_pdf">Split PDF</string>
     <string name="tool_tittle_print">Print</string>
     <string name="tool_tittle_split">Split PDF</string>
     <string name="tool_title_compress_pdf">Compress PDF</string>
