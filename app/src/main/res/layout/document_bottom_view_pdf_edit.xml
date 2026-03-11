@@ -12,7 +12,7 @@
         android:id="@+id/ll_pdf_edit_bottom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_pdf_edit_toolbar_bg"
+        android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -78,12 +78,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_color" />
         </LinearLayout>
-
-<!--        <View-->
-<!--            android:id="@+id/v_ll_ink_bottom_line"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/dp_1"-->
-<!--            android:background="#f2f4f9" />-->
 
         <LinearLayout
             android:layout_width="match_parent"

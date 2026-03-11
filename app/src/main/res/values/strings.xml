@@ -388,6 +388,7 @@
     <string name="editor_no_media_hint" translatable="false">Sharing the storage media with a PC can make it inaccessible</string>
     <string name="editor_no_media_warning" translatable="false">Storage media not present</string>
     <string name="editor_not_supported" translatable="false">Not supported</string>
+    <string name="sodk_editor_not_supported" translatable="false">Not supported</string>
     <string name="editor_not_yet_supported" translatable="false">not yet supported</string>
     <string name="editor_note_upper" translatable="false">NOTE</string>
     <string name="number_format_accounting" translatable="false">Number Format - Accounting</string>
@@ -581,7 +582,7 @@
     <string name="toolbar_accessibility" translatable="false">Last reply by %1$s at %2$s.</string>
     <string name="view_article_error" translatable="false">Failed to fetch article</string>
     <string name="view_article_loaded_accessibility" translatable="false">%s article loaded</string>
-    <string name="article_loading_title" />
+    <string name="article_loading_title">Loading article…</string>
     <string name="article_vote_no_accessibility" translatable="false">No vote</string>
     <string name="article_vote_no_remove_accessibility" translatable="false">Remove yes vote</string>
     <string name="vote_yes_accessibility" translatable="false">Yes vote</string>
@@ -717,6 +718,7 @@
     <string name="label_security">Security</string>
     <string name="label_convert_editor">Convert &amp; Editor</string>
     <string name="label_tools">Tools</string>
+    <string name="tools">Tools</string>
     <string name="no_files_yet">No files yet</string>
     <string name="feed_back_app">FeedBack PDF Reader app</string>
     <string name="pdf_created_toolbar"> Created</string>

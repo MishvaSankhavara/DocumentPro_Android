@@ -21,15 +21,12 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/bg_tittle"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <include layout="@layout/toolbar_document_main" />
-
         <include layout="@layout/toolbar_search" />
-
         <include layout="@layout/toolbar_document_edit" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -209,12 +206,6 @@
                     android:paddingBottom="5dp"
                     app:srcCompat="@drawable/ic_draw_back" />
 
-                <!--                    <View-->
-                <!--                        android:id="@+id/v_undo_line"-->
-                <!--                        android:layout_width="@dimen/dp_1"-->
-                <!--                        android:layout_height="16dp"-->
-                <!--                        android:background="#4dffffff" />-->
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_redo"
                     android:layout_width="39dp"
@@ -306,7 +297,6 @@
         android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent">
-
         <include layout="@layout/ad_native_container_banner2" />
 
     </LinearLayout>
