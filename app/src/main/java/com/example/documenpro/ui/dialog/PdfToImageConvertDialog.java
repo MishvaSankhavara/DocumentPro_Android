@@ -94,9 +94,11 @@ public class PdfToImageConvertDialog extends Dialog {
             }
 
             for (int i = 0; i < weakReference.get().pdfPageList.size(); i++) {
-                String fileName = Utils.getFileNameFromUri(weakReference.get().pdfPageList.get(i).getThumbnailUri_PDFPageModel());
+                String fileName = Utils
+                        .getFileNameFromUri(weakReference.get().pdfPageList.get(i).getThumbnailUri_PDFPageModel());
                 String pathCopy = pathFolder + "/" + fileName;
-                Utils.copyFile(weakReference.get().activityContext, weakReference.get().pdfPageList.get(i).getThumbnailUri_PDFPageModel(),
+                Utils.copyFile(weakReference.get().activityContext,
+                        weakReference.get().pdfPageList.get(i).getThumbnailUri_PDFPageModel(),
                         pathCopy);
                 publishProgress(i + 1);
             }
@@ -114,8 +116,6 @@ public class PdfToImageConvertDialog extends Dialog {
                 intent.putExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 5);
                 weakReference.get().activityContext.startActivity(intent);
                 weakReference.get().dismiss();
-                weakReference.get().activityContext.finish();
-
             });
             weakReference.get().setCancelable(true);
             weakReference.get().setCanceledOnTouchOutside(true);
@@ -128,10 +128,12 @@ public class PdfToImageConvertDialog extends Dialog {
             super.onProgressUpdate(values);
             int i3 = ((int) (((float) values[0]) * 100.0f)) / weakReference.get().pdfPageList.size();
             weakReference.get().tvDescription
-                    .setText(weakReference.get().activityContext.getResources().getString(R.string.message_save_image_progress,
+                    .setText(weakReference.get().activityContext.getResources().getString(
+                            R.string.message_save_image_progress,
                             String.valueOf(values[0]), String.valueOf(weakReference.get().pdfPageList.size())));
             weakReference.get().tvProgressPercent.setText(
-                    weakReference.get().activityContext.getResources().getString(R.string.format_percent_value, String.valueOf(i3)));
+                    weakReference.get().activityContext.getResources().getString(R.string.format_percent_value,
+                            String.valueOf(i3)));
             weakReference.get().progressBarView.setProgress(values[0]);
 
         }

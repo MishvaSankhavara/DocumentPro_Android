@@ -91,6 +91,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return true;
                     }
                 });
+
+        // Navigate to requested tab if launched with EXTRA_START_TAB
+        int startTab = getIntent().getIntExtra("EXTRA_START_TAB", 0);
+        if (startTab > 0) {
+            viewPager.post(() -> {
+                viewPager.setCurrentItem(startTab, false);
+                bottomNavigationView.getMenu().getItem(startTab).setChecked(true);
+            });
+        }
     }
 
     private void initializeData() {

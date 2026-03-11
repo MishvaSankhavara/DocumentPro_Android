@@ -47,8 +47,11 @@ public class ResultViewerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            int targetPos = intent.getIntExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 0);
-            contentPager.setCurrentItem(targetPos);
+            final int targetPos = intent.getIntExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 0);
+            if (targetPos > 0) {
+                // Post after the first layout pass so ViewPager2 honours the position
+                contentPager.post(() -> contentPager.setCurrentItem(targetPos, false));
+            }
         }
     }
 
@@ -57,7 +60,7 @@ public class ResultViewerActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.iv_back);
         tvToolbarName = findViewById(R.id.tv_name);
 
-        ivBack.setOnClickListener(v -> finish());
+        ivBack.setOnClickListener(v -> navigateToMainTools());
 
         setSupportActionBar(headerToolbar);
         if (getSupportActionBar() != null) {
@@ -103,10 +106,23 @@ public class ResultViewerActivity extends AppCompatActivity {
         }).attach();
     }
 
+    private void navigateToMainTools() {
+        Intent intent = new Intent(this, com.example.documenpro.ui.activities.MainActivity.class);
+        intent.putExtra("EXTRA_START_TAB", 1); // 1 = Tools tab
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateToMainTools();
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            navigateToMainTools();
         }
         return super.onOptionsItemSelected(item);
     }
