@@ -106,8 +106,6 @@
     <string name="action_no">Нет</string>
     <string name="action_more">Более</string>
     <string name="action_compressor">Компрессор</string>
-    <string name="action_remove_ads">Убрать рекламу</string>
-    <string name="action_sponsored">Спонсор</string>
     <string name="action_remove_favorite">Удалить избранное</string>
     <string name="move_out">Выйди</string>
     <string name="share_via_photo">Поделиться через фото</string>

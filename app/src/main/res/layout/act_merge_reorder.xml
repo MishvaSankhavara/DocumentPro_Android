@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/ad_container"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -142,14 +142,7 @@
             android:textSize="18sp" />
     </FrameLayout>
 
-    <include
-        android:id="@+id/ad_container"
-        layout="@layout/ad_native_container_banner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent" />
+
 
     <FrameLayout
         android:id="@+id/containerFl"

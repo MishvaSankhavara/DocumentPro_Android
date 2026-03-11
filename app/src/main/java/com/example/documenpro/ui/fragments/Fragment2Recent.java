@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.RecentFilesAdapter;
-import com.example.documenpro.advertisement.AdManager;
+
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
@@ -43,16 +43,18 @@ public class Fragment2Recent extends Fragment implements DocClickListener {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_recyclerview, container, false);
         initViews(view);
-        DataSingletonRecent.getInstance().getRecentDocumentsLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<DocumentModel>>() {
-            @Override
-            public void onChanged(ArrayList<DocumentModel> documents) {
-                recentFilesAdapter = new RecentFilesAdapter(activityContext, Fragment2Recent.this);
-                recentRecyclerView.setAdapter(recentFilesAdapter);
-            }
-        });
+        DataSingletonRecent.getInstance().getRecentDocumentsLiveData().observe(getViewLifecycleOwner(),
+                new Observer<ArrayList<DocumentModel>>() {
+                    @Override
+                    public void onChanged(ArrayList<DocumentModel> documents) {
+                        recentFilesAdapter = new RecentFilesAdapter(activityContext, Fragment2Recent.this);
+                        recentRecyclerView.setAdapter(recentFilesAdapter);
+                    }
+                });
         return view;
     }
 
@@ -87,9 +89,7 @@ public class Fragment2Recent extends Fragment implements DocClickListener {
 
     @Override
     public void onDocClick(DocumentModel document) {
-        AdManager.showAds_AdManager(activityContext, () -> Utils.openFile(activityContext, document));
-
+        Utils.openFile(activityContext, document);
     }
-
 
 }

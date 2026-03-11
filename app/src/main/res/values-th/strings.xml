@@ -100,8 +100,6 @@
     <string name="action_no">เลขที่</string>
     <string name="action_more">มากกว่า</string>
     <string name="action_compressor">คอมเพรสเซอร์</string>
-    <string name="action_remove_ads">ลบโฆษณา</string>
-    <string name="action_sponsored">ได้รับการสนับสนุน</string>
     <string name="action_remove_favorite">ลบรายการโปรด</string>
     <string name="move_out">ย้ายออก</string>
     <string name="share_via_photo">แบ่งปันผ่านภาพถ่าย</string>

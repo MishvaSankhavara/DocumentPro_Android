@@ -42,21 +42,7 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_return_white</item>
     </style>
-    <style name="AppTheme.Ads">
-        <item name="android:textSize">11sp</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:gravity">left|center_horizontal|clip_horizontal</item>
-        <item name="android:layout_gravity">left</item>
-        <item name="android:background">@drawable/ads_icon_blue_custom</item>
-        <item name="android:paddingLeft">3dp</item>
-        <item name="android:paddingRight">6dp</item>
-        <item name="android:paddingBottom">1dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minWidth">15px</item>
-        <item name="android:minHeight">15px</item>
-        <item name="android:text">Ad</item>
-    </style>
+
     <style name="TextButtonDialog">
         <item name="fontFamily">@font/roboto_bold</item>
         <item name="android:textSize">14sp</item>

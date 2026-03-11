@@ -231,6 +231,6 @@
             android:textSize="18sp"
             app:textAllCaps="true" />
     </LinearLayout>
-    <!--    <include layout="@layout/ad_native_container_banner_1"/>-->
+
 </androidx.constraintlayout.motion.widget.MotionLayout>
 

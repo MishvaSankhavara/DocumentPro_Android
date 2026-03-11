@@ -59,17 +59,7 @@
         android:text="@string/splash_tagline"
         android:textColor="@color/dark_color_100_748090"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/my_template_banner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/my_template_banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <include layout="@layout/banner_ad_container" />
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

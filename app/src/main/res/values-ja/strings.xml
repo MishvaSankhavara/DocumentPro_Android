@@ -108,8 +108,6 @@
     <string name="action_no">いいえ</string>
     <string name="action_more">もっと</string>
     <string name="action_compressor">コンプレッサー</string>
-    <string name="action_remove_ads">広告を削除</string>
-    <string name="action_sponsored">スポンサー付き</string>
     <string name="action_remove_favorite">お気に入りを削除</string>
     <string name="move_out">引っ越し</string>
     <string name="share_via_photo">写真で共有</string>

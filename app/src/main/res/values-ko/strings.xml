@@ -111,8 +111,6 @@
     <string name="action_no">아니요</string>
     <string name="action_more">더</string>
     <string name="action_compressor">압축기</string>
-    <string name="action_remove_ads">광고를 제거하다</string>
-    <string name="action_sponsored">후원</string>
     <string name="action_remove_favorite">즐겨찾기 제거</string>
     <string name="move_out">퇴거</string>
     <string name="share_via_photo">사진을 통해 공유</string>

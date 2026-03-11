@@ -106,8 +106,6 @@
     <string name="action_no">Nej</string>
     <string name="action_more">Mer</string>
     <string name="action_compressor">Kompressor</string>
-    <string name="action_remove_ads">Ta bort annonser</string>
-    <string name="action_sponsored">Sponsrad</string>
     <string name="action_remove_favorite">Ta bort favorit</string>
     <string name="move_out">Flytta ut</string>
     <string name="share_via_photo">Dela via foto</string>

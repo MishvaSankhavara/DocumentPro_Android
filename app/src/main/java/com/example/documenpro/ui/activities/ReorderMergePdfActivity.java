@@ -61,7 +61,6 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // NativeAdsAdmob.showNativeBanner1(this,null);
 
         initToolBar();
         initViews();

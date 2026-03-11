@@ -24,9 +24,6 @@ import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.OnboardingScreenAdapter;
-import com.example.documenpro.advertisement.OnAdDismissedListener;
-import com.example.documenpro.advertisement.AdManager;
-import com.example.documenpro.advertisement.AdMobNativeAdManager;
 
 import java.util.ArrayList;
 
@@ -97,7 +94,7 @@ public class OnBoardActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
+
         initView();
         initViewPager();
     }
@@ -154,13 +151,8 @@ public class OnBoardActivity extends AppCompatActivity {
                     PreferenceUtils.getInstance(OnBoardActivity.this)
                             .setBoolean(AppGlobalConstants.PREF_GUIDE_COMPLETED, true);
 
-                    AdManager.showAds_AdManager(OnBoardActivity.this, new OnAdDismissedListener() {
-                        @Override
-                        public void OnAdDismissedListener() {
-                            startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
-                            finish();
-                        }
-                    });
+                    startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
+                    finish();
                 }
             }
         });

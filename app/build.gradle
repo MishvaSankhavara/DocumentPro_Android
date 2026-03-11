@@ -69,8 +69,6 @@ dependencies {
     //Ads
     implementation libs.shimmer
     implementation(libs.lifecycle.process)
-    implementation libs.play.services.ads
-    implementation(libs.user.messaging.platform)
     implementation libs.imagezoom
     implementation(libs.eventbus)
     implementation libs.advrecyclerview

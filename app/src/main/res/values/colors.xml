@@ -558,7 +558,7 @@
     <color name="text_color_light_white">@color/color_light_grey</color>
     <color name="window_background_color">@color/color_light_grey</color>
     <color name="colorText_0A245B">#0A245B</color>
-    <color name="color_ads_open">#E9E9E9</color>
+
     <color name="background">#F5F5F5</color>
     <color name="line_view">#F5F5F5</color>
     <color name="sign_orange">#ff7d05</color>
@@ -654,7 +654,7 @@
     <color name="colorSelectItemBackground">#0d0b61da</color>
     <color name="colorSurfaceFix">#9798a2</color>
     <color name="busy_indicator">#c0202020</color>
-    <color name="bg_ads">#ffffff</color>
+
     <color name="gnt_gray">#aaaaaa</color>
     <color name="clear_img_color">#89909c</color>
     <color name="bg_cancel_text_color">#4c5462</color>

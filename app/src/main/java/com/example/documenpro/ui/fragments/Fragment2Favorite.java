@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FavoriteItemsAdapter;
-import com.example.documenpro.advertisement.AdManager;
+
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.model_reader.DocumentModel;
 import com.example.documenpro.ui.activities.MainActivity;
@@ -44,18 +44,20 @@ public class Fragment2Favorite extends Fragment implements DocClickListener {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_recyclerview, container, false);
         initViews(view);
 
-        DataSingletonFavorite.getInstance().getFavoriteDocumentsLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<DocumentModel>>() {
-            @Override
-            public void onChanged(ArrayList<DocumentModel> documents) {
+        DataSingletonFavorite.getInstance().getFavoriteDocumentsLiveData().observe(getViewLifecycleOwner(),
+                new Observer<ArrayList<DocumentModel>>() {
+                    @Override
+                    public void onChanged(ArrayList<DocumentModel> documents) {
 
-                favoriteAdapter = new FavoriteItemsAdapter(activityContext, Fragment2Favorite.this);
-                favoriteRecyclerView.setAdapter(favoriteAdapter);
-            }
-        });
+                        favoriteAdapter = new FavoriteItemsAdapter(activityContext, Fragment2Favorite.this);
+                        favoriteRecyclerView.setAdapter(favoriteAdapter);
+                    }
+                });
         return view;
     }
 
@@ -90,8 +92,7 @@ public class Fragment2Favorite extends Fragment implements DocClickListener {
 
     @Override
     public void onDocClick(DocumentModel document) {
-        AdManager.showAds_AdManager(activityContext, () -> Utils.openFile(activityContext, document));
-
+        Utils.openFile(activityContext, document);
     }
 
 }

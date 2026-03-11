@@ -158,15 +158,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/colorPrimaryDim"
-                        android:visibility="gone" />
 
-                    <include
-                        layout="@layout/ad_native_container_banner1"
-                        android:visibility="gone" />
 
                     <View
                         android:layout_width="match_parent"

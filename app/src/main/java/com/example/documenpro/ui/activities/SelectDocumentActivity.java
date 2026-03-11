@@ -34,7 +34,7 @@ import com.example.documenpro.ActivityBase;
 import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FilePickerAdapter;
-import com.example.documenpro.advertisement.AdMobNativeAdManager;
+
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.AppExecutor.FavoriteRemovalExecutor;
 import com.example.documenpro.clickListener.OnItemSelectListener;
@@ -85,7 +85,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
         initToolbar();
         readIntentData();
         initViews();
-        AdMobNativeAdManager.showNativeBanner3_AdMob(this, null);
+
         updateActionButtonsState(false);
     }
 

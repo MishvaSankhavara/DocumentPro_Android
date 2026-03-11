@@ -89,7 +89,6 @@ public class MatisseActivity extends AppCompatActivity implements
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // NativeAdsAdmob.showNativeBig7(MatisseActivity.this, null);
 
         if (mSpec.needOrientationRestriction()) {
             setRequestedOrientation(mSpec.orientation);

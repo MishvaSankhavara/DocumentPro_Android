@@ -177,7 +177,7 @@
         android:layout_height="70dp"
         android:layout_marginBottom="50dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@id/ll_ad"
+        app:layout_constraintBottom_toTopOf="@id/bottom_container"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bg_tab_home" />
 
@@ -185,7 +185,7 @@
         android:id="@+id/bottom_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/ll_ad"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -200,15 +200,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
-        android:id="@+id/ll_ad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent">
 
-        <include layout="@layout/ad_native_container_banner2" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,18 +61,10 @@
         android:layout_marginBottom="6dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/frame_ad_locale"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_locale_selection_title"
         app:layout_goneMarginBottom="0dp"
         tools:listitem="@layout/item_language_act" />
 
-    <include
-        android:id="@+id/frame_ad_locale"
-        layout="@layout/ad_native_container_banner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

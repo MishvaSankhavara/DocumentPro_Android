@@ -11,9 +11,8 @@ lottie = "6.6.7"
 glide = "4.16.0"
 multilanguages = "9.5"
 shimmer = "0.5.0"
-userMessagingPlatform = "3.2.0"
+
 lifecycleProcess = "2.9.3"
-playServicesAds = "24.5.0"
 rxjava = "3.1.11"
 rxandroid = "3.0.2"
 dexter = "6.2.3"
@@ -39,9 +38,7 @@ rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 multilanguages = { module = "com.github.getActivity:MultiLanguages", version.ref = "multilanguages" }
-play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
-user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "userMessagingPlatform" }
 lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleProcess" }
 imagezoom = { module = "it.sephiroth.android.library.imagezoom:imagezoom", version.ref = "imagezoom" }
 eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }

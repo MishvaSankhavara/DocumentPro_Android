@@ -99,14 +99,25 @@ public class ChoosePathActivity extends BaseActivity {
     }
 
     private void completeSave(final FileBrowser fileBrowser) {
+        if (fileBrowser != null) {
+            android.util.Log.d("ChoosePathActivity", "completeSave: fileName=" + fileBrowser.getFileName());
+            android.util.Log.d("ChoosePathActivity", "completeSave: folder="
+                    + (fileBrowser.getFolderAppFile() != null ? fileBrowser.getFolderAppFile().b() : "null"));
+        } else {
+            android.util.Log.e("ChoosePathActivity", "completeSave: fileBrowser is NULL");
+        }
         Utilities.hideKeyboard(this);
         d = true;
-        a.a(fileBrowser);
+        try {
+            a.a(fileBrowser);
+        } catch (Throwable e) {
+            android.util.Log.e("ChoosePathActivity", "Error in a.a(fileBrowser)", e);
+            throw e;
+        }
     }
 
     public interface a {
         void a();
-
         void a(FileBrowser var1);
     }
 }

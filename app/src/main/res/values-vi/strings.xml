@@ -103,8 +103,6 @@
     <string name="action_no">KHÔNG</string>
     <string name="action_more">Hơn</string>
     <string name="action_compressor">Máy nén</string>
-    <string name="action_remove_ads">Loại bỏ các quảng cáo</string>
-    <string name="action_sponsored">Được tài trợ</string>
     <string name="action_remove_favorite">Xóa mục ưa thích</string>
     <string name="move_out">Dời đi, chuyển đi, dịch chuyển đi ra</string>
     <string name="share_via_photo">Chia sẻ qua ảnh</string>

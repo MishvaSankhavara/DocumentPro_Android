@@ -47,7 +47,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.ads.AdSize;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
@@ -57,8 +56,7 @@ import com.example.documenpro.R;
 import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.FileListAdapter;
 import com.example.documenpro.adapter_reader.MergeFileSelectionAdapter;
-import com.example.documenpro.advertisement.OnAdDismissedListener;
-import com.example.documenpro.advertisement.AdManager;
+
 import com.example.documenpro.database.DatabaseHelper;
 import com.example.documenpro.clickListener.MoreClickListener;
 import com.example.documenpro.clickListener.OnConfirmClickListener;
@@ -435,28 +433,6 @@ public class Utils {
 
     }
 
-    public static void backWithAds(Activity mContext, int number) {
-        int numberAds = PreferenceUtils.getInstance(mContext).getInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, 1);
-        if (countAds(mContext, AppGlobalConstants.PREF_ADS_COUNT_BACK, number)) {
-            AdManager.showAds_AdManager(mContext, new OnAdDismissedListener() {
-                @Override
-                public void OnAdDismissedListener() {
-                    PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, numberAds + 1);
-                    mContext.finish();
-                }
-            });
-            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, numberAds + 1);
-
-        } else {
-            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT_BACK, numberAds + 1);
-            mContext.finish();
-        }
-    }
-
-    public static boolean countAds(Context mContext, String adsType, int numberAds) {
-        return PreferenceUtils.getInstance(mContext).getInt(adsType, 2) % numberAds == 0;
-    }
-
     public static String getFileNameFromUri(Uri contentUri, ContentResolver contentResolver) {
         try {
             String filePath;
@@ -475,27 +451,6 @@ public class Utils {
         }
 
         return null;
-    }
-
-    public static AdSize getAdSize(Activity context, View adContainer) {
-        WindowMetrics windowMetrics = null;
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
-            windowMetrics = context.getWindowManager().getCurrentWindowMetrics();
-        }
-        Rect bounds = null;
-
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
-            bounds = windowMetrics.getBounds();
-        }
-        float adWidthPixels = adContainer.getWidth();
-        if (adWidthPixels == 0f && bounds != null) {
-            adWidthPixels = bounds.width();
-        } else if (adWidthPixels == 0f) {
-            adWidthPixels = context.getResources().getDisplayMetrics().widthPixels;
-        }
-        float density = context.getResources().getDisplayMetrics().density;
-        int adWidth = (int) (adWidthPixels / density);
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(context, adWidth);
     }
 
     public static void copy(Context mContext, Uri source, String destination) {
@@ -570,28 +525,6 @@ public class Utils {
 
         return pdfList;
 
-    }
-
-    public static void openFileWithAds(Activity mContext, DocumentModel document, int number) {
-        int numberAds = PreferenceUtils.getInstance(mContext).getInt(AppGlobalConstants.PREF_ADS_COUNT, 1);
-        if (countAds(mContext, number)) {
-            AdManager.showAds_AdManager(mContext, new OnAdDismissedListener() {
-                @Override
-                public void OnAdDismissedListener() {
-                    openFile(mContext, document);
-                }
-
-            });
-            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT, numberAds + 1);
-        } else {
-            PreferenceUtils.getInstance(mContext).setInt(AppGlobalConstants.PREF_ADS_COUNT, numberAds + 1);
-            openFile(mContext, document);
-        }
-
-    }
-
-    public static boolean countAds(Context mContext, int numberAds) {
-        return PreferenceUtils.getInstance(mContext).getInt(AppGlobalConstants.PREF_ADS_COUNT, 2) % numberAds == 0;
     }
 
     public static void openFile(Activity mContext, DocumentModel document) {

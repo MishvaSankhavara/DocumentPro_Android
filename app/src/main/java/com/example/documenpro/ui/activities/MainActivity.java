@@ -25,26 +25,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.documenpro.BuildConfig;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 import com.example.documenpro.AppGlobalConstants;
+import com.example.documenpro.BuildConfig;
 import com.example.documenpro.R;
 import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.PagerViewAdapter;
-import com.example.documenpro.advertisement.OnAdDismissedListener;
-import com.example.documenpro.advertisement.AdManager;
 import com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch;
 import com.example.documenpro.ui.fragments.FragmentFiles;
 import com.example.documenpro.ui.fragments.FragmentSetting;
 import com.example.documenpro.ui.fragments.FragmentTools;
-import com.example.documenpro.utils.AdUtils;
 import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -64,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Menu mainMenu;
     TextView languageTextView;
     private ThemeToggleSwitch dayNightSwitch;
-    private AdView bannerAdView;
-    private FrameLayout adContainer;
-    private int navigationAdClickCount = 0;
     private AppCompatImageView ivSearch;
 
     @Override
@@ -79,22 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v.setPadding(0, systemBars.top, 0, 0);
             return insets;
         });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.bottom_nav), (v, insets) -> {
-            // Không áp dụng padding nào cả
 
-            return insets;
-        });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.my_template_banner), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(0, 0, 0, systemBars.bottom); // chỉ padding bottom
-            return insets;
-        });
-        navigationAdClickCount = PreferenceUtils.getInstance(this).getInt(AppGlobalConstants.NAVIGATION_CLICK_COUNT, 0);
         setupToolbar();
         initializeViews();
         initializeData();
         setupViewPager();
-        loadBannerAd();
+
         initializeListeners();
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -108,18 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else if (idMenu == R.id.navigation_settings) {
                             viewPager.setCurrentItem(2);
                         }
-                        // Tăng số lần click
-                        navigationAdClickCount++;
-                        if (navigationAdClickCount % 3 == 0) {
-                            AdManager.showAds_AdManager(MainActivity.this, new OnAdDismissedListener() {
-                                @Override
-                                public void OnAdDismissedListener() {
-
-                                }
-                            });
-                        }
-                        PreferenceUtils.getInstance(MainActivity.this).setInt(AppGlobalConstants.NAVIGATION_CLICK_COUNT,
-                                navigationAdClickCount);
 
                         return true;
                     }
@@ -160,34 +127,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initializeViews() {
         bottomNavigationView = findViewById(R.id.bottom_nav);
-        adContainer = findViewById(R.id.my_template_banner);
         viewPager = findViewById(R.id.viewpager_main);
         ivSearch = findViewById(R.id.iv_search);
         ivSearch.setOnClickListener(this);
 
         toolbarTitleTextView = findViewById(R.id.tv_name);
-    }
-
-    private void loadBannerAd() {
-        bannerAdView = new AdView(this);
-        bannerAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-
-        AdSize adSize = AdUtils.calculateAdaptiveAdSize(MainActivity.this, adContainer);
-        bannerAdView.setAdSize(adSize);
-
-        Bundle extras = new Bundle();
-        extras.putString("collapsible", "bottom");
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        bannerAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                adContainer.removeAllViews();
-                adContainer.addView(bannerAdView);
-            }
-        });
-        bannerAdView.loadAd(adRequest);
     }
 
     @Override

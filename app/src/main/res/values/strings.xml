@@ -620,7 +620,7 @@
     <string name="template_create" translatable="false">Template</string>
     <string name="new_file_create" translatable="false">Add file</string>
     <string name="create_document" translatable="false">Create document</string>
-    <string name="ads_text_button" translatable="false">ADS</string>
+
     <string name="txt" translatable="false">TXT</string>
     <string name="confirm" translatable="false">Confirm</string>
     <string name="rotate" translatable="false">Rotate</string>
@@ -704,8 +704,7 @@
     <string name="app_favorite">Favorites</string>
 
     <string name="action_more">More</string>
-    <string name="action_remove_ads">RemoveAds</string>
-    <string name="action_sponsored">Sponsored</string>
+
     <string name="action_remove_favorite">Remove Favorite</string>
     <string name="move_out">Move out</string>
     <string name="share_via_photo">Share via photo</string>
@@ -1014,4 +1013,5 @@
     <string name="dialog_exit_feedback_message">If you have a trouble when reading files, click to feedback to us</string>
     <string name="action_exit_app">Tap here to exit app</string>
     <string name="action_next" translatable="false">Next</string>
+    <string name="no_document_found">No document found</string>
 </resources>

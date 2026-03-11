@@ -102,8 +102,6 @@
     <string name="action_no">NEIN</string>
     <string name="action_more">Mehr</string>
     <string name="action_compressor">Kompressor</string>
-    <string name="action_remove_ads">Anzeigen entfernen</string>
-    <string name="action_sponsored">Gesponsert</string>
     <string name="action_remove_favorite">Favorit entfernen</string>
     <string name="move_out">Ausziehen</string>
     <string name="share_via_photo">Per Foto teilen</string>

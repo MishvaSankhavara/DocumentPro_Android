@@ -25,8 +25,7 @@ import com.example.documenpro.ActivityBase;
 import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileListAdapter;
-import com.example.documenpro.advertisement.AdManager;
-import com.example.documenpro.advertisement.AdMobNativeAdManager;
+
 import com.example.documenpro.clickListener.DocClickListener;
 import com.example.documenpro.clickListener.SortingListener;
 import com.example.documenpro.model_reader.DocumentModel;
@@ -66,7 +65,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
             fileType = getIntent().getIntExtra(EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_ALL);
         }
         initializeViews();
-        AdMobNativeAdManager.showNativeBanner1_AdMob(this, null);
+
         setUpToolbar();
         loadDocuments(selectedFileType);
     }
@@ -184,8 +183,7 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
 
     @Override
     public void onDocClick(DocumentModel document) {
-        // Utils.openFile(this, document);
-        AdManager.showAds_AdManager(this, () -> Utils.openFile(this, document));
+        Utils.openFile(this, document);
     }
 
     @Override

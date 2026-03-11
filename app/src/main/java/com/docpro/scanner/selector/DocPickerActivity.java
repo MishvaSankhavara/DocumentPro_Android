@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -18,11 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.ads.mediation.admob.AdMobAdapter;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.FileSelectionAdapter;
@@ -34,7 +28,6 @@ import com.example.documenpro.ui.activities.SharePdfAsImageActivity;
 import com.example.documenpro.ui.activities.SplitChooseFileActivity;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
-import com.example.documenpro.utils.AdUtils;
 import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
@@ -50,20 +43,9 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
     private LottieAnimationView lottieLoader;
     private ArrayList<PDFReaderModel> docList;
     private int operationMode;
-    private int selectedPosition;
-    private PDFReaderModel selectedDoc;
-    private Context baseContextWrapper;
     private final Executor asyncExecutor = Executors.newSingleThreadExecutor();
-    private FrameLayout adFrame;
-    private AdView bannerAdView;
     private android.widget.ImageView ivBack;
     private android.widget.TextView tvToolbarName;
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        baseContextWrapper = newBase;
-        super.attachBaseContext(newBase);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +58,6 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             return insets;
         });
 
-        adFrame = findViewById(R.id.frame_banner_ads);
-        initBannerAds();
         configureToolbar();
         setupPickerViews();
         extractIntentData();
@@ -150,9 +130,6 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
 
     @Override
     public void onPdfSelect(PDFReaderModel pdfModel_listener, int position) {
-        this.selectedPosition = position;
-        this.selectedDoc = pdfModel_listener;
-
         if (operationMode == AppGlobalConstants.TOOL_ID_PRINT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this,
@@ -225,29 +202,5 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
 
             });
         }
-    }
-
-    private void initBannerAds() {
-        bannerAdView = new AdView(this);
-        bannerAdView.setAdUnitId(AdUtils.AD_UNIT_ID_BANNER_TEST);
-
-        AdSize optimizedSize = AdUtils.calculateAdaptiveAdSize(DocPickerActivity.this, adFrame);
-        bannerAdView.setAdSize(optimizedSize);
-
-        Bundle adExtras = new Bundle();
-        adExtras.putString("collapsible", "bottom");
-        AdRequest bannerRequest = new AdRequest.Builder()
-                .addNetworkExtrasBundle(AdMobAdapter.class, adExtras)
-                .build();
-        bannerAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                adFrame.removeAllViews();
-                adFrame.addView(bannerAdView);
-            }
-        });
-
-        bannerAdView.loadAd(bannerRequest);
     }
 }

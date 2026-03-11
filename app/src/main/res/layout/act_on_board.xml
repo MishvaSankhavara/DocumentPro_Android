@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/ad_container">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:id="@+id/ll_indicators"
@@ -87,12 +87,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <include
-        android:id="@+id/ad_container"
-        layout="@layout/ad_native_container_banner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

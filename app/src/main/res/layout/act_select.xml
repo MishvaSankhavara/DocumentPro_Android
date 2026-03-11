@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/bg_top_radius_solid"
-        app:layout_constraintBottom_toTopOf="@id/adcontainer"
+        app:layout_constraintBottom_toTopOf="@id/ll_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -74,7 +74,7 @@
         android:clipToPadding="false"
         android:paddingTop="8dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toTopOf="@id/adcontainer"
+        app:layout_constraintBottom_toTopOf="@id/ll_share"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
@@ -90,7 +90,7 @@
         android:textSize="18sp"
         android:visibility="gone"
         app:drawableTopCompat="@drawable/ic_no_file"
-        app:layout_constraintBottom_toTopOf="@id/adcontainer"
+        app:layout_constraintBottom_toTopOf="@id/ll_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -104,7 +104,7 @@
         android:indeterminateTint="@color/colorAccent"
         android:indeterminateTintMode="src_atop"
 
-        app:layout_constraintBottom_toTopOf="@id/adcontainer"
+        app:layout_constraintBottom_toTopOf="@id/ll_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -119,17 +119,7 @@
     <!--        app:srcCompat="@drawable/bg_home_tab" />-->
 
 
-    <FrameLayout
-        android:id="@+id/adcontainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/ll_share"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <include layout="@layout/ad_native_container_banner3" />
-
-    </FrameLayout>
 
 
     <androidx.appcompat.widget.AppCompatImageView
