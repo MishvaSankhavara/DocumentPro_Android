@@ -22,6 +22,12 @@
     <string name="sodk_editor_share_error_title">Share Error</string>
     <string name="sodk_editor_no_documents_found">No documents found</string>
     <string name="label_file_count">%1$s files</string>
+    <string name="sodk_editor_wait">Please wait…</string>
+    <string name="sodk_editor_save">Save</string>
+    <string name="sodk_editor_save_as">Save As</string>
+    <string name="sodk_editor_save_as_pdf">Save PDF</string>
+    <string name="sodk_editor_success">Success</string>
+    <string name="secure_save_upper">SAVE</string>
 
     <string name="print_document">Print</string>
     <string name="menu_view_thumbnail">Thumbnail</string>

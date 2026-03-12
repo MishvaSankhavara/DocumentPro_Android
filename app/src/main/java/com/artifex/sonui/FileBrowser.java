@@ -168,10 +168,15 @@ public class FileBrowser extends RelativeLayout {
     }
 
     public void a(BaseActivity var1, String var2) {
+
         this.k = var1;
+        // FileBrowser.java – public void a(BaseActivity var1, String var2)
         if (var2 != null && !var2.isEmpty()) {
             this.i.setText(Utilities.removeExtension(var2));
+            // i = the SOEditText (EditText in the dialog)
+            // removeExtension() strips ".pdf" so it shows just "my_document"
         }
+
 
         this.i.setSelectAllOnFocus(true);
         this.i.addTextChangedListener(new TextWatcher() {

@@ -48,7 +48,6 @@ public class ViewOfficeActivity extends AppNUIActivity {
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        // Recreate the activity to ensure the new document is loaded and state is reset
-        recreate();
+        // Removed recreate() as it was causing redirection/reloading issues after save
     }
 }

@@ -36,50 +36,59 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
 
     @Override
     public void saveAsPdfHandler(String fileName, final SODoc doc) {
-        Log.d(TAG, "saveAsPdfHandler called");
-        Log.d(TAG, "  Library suggested fileName: " + fileName);
+        saveAsPdfHandlerInternal(fileName, doc, null, null);
+    }
 
-        // Primary source: The real name from the UI toolbar title
+    private void saveAsPdfHandlerInternal(String fileName, final SODoc doc, final SOSaveAsComplete saveAsComplete,
+            final SOCustomSaveComplete customSaveComplete) {
+        Log.d(TAG, "saveAsPdfHandlerInternal called");
+
+        String resolvedFileName = fileName;
+
         if (activity != null) {
             android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
             if (titleView != null) {
                 String uiName = titleView.getText().toString();
                 if (uiName != null && !uiName.isEmpty()) {
-                    Log.d(TAG, "  Using fileName from tvTittle: " + uiName);
-                    fileName = uiName;
+                    resolvedFileName = uiName;
                 }
             }
         }
 
-        // Secondary source: The activity's intent (if tvTittle was somehow empty)
-        if (fileName == null || fileName.isEmpty()) {
+        if (resolvedFileName == null || resolvedFileName.isEmpty()) {
             if (activity != null) {
                 Intent intent = activity.getIntent();
                 if (intent != null) {
-                    String intentFileName = intent
-                            .getStringExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME);
+                    String intentFileName = intent.getStringExtra(
+                            com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME);
                     if (intentFileName != null && !intentFileName.isEmpty()) {
-                        Log.d(TAG, "  Using fileName from EXTRA_SELECTED_FILE_NAME: " + intentFileName);
-                        fileName = intentFileName;
+                        resolvedFileName = intentFileName;
                     }
                 }
             }
         }
 
-        if (doc != null) {
-            Log.d(TAG, "  Document doc is not null");
-        }
+        final String latestFileName = (resolvedFileName != null) ? resolvedFileName : "";
 
         ChoosePathActivity.a(activity, 2, false, new ChoosePathActivity.a() {
             @Override
             public void a() {
                 Log.d(TAG, "ChoosePathActivity cancelled");
+                if (saveAsComplete != null) {
+                    saveAsComplete.onComplete(1, null);
+                }
+                if (customSaveComplete != null) {
+                    customSaveComplete.onComplete(1, null, false);
+                }
             }
 
             @Override
             public void a(FileBrowser fileBrowser) {
                 if (fileBrowser == null) {
-                    Log.e(TAG, "FileBrowser is null in selection callback");
+                    if (saveAsComplete != null)
+                        saveAsComplete.onComplete(1, null);
+                    if (customSaveComplete != null)
+                        customSaveComplete.onComplete(1, null, false);
                     return;
                 }
 
@@ -87,14 +96,19 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                 AppFile folderAppFile = fileBrowser.getFolderAppFile();
 
                 if (selectedFileName == null || folderAppFile == null) {
-                    Log.e(TAG, "Selected filename or folder is null");
+                    if (saveAsComplete != null)
+                        saveAsComplete.onComplete(1, null);
+                    if (customSaveComplete != null)
+                        customSaveComplete.onComplete(1, null, false);
                     return;
                 }
 
                 String selectedFolder = folderAppFile.b();
-
                 if (selectedFolder == null) {
-                    Log.e(TAG, "Selected folder path is null");
+                    if (saveAsComplete != null)
+                        saveAsComplete.onComplete(1, null);
+                    if (customSaveComplete != null)
+                        customSaveComplete.onComplete(1, null, false);
                     return;
                 }
 
@@ -105,30 +119,43 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                 File destinationFile = new File(selectedFolder, selectedFileName);
                 final String finalPath = destinationFile.getAbsolutePath();
 
-                Log.d(TAG, "Saving PDF to: " + finalPath);
-
                 if (destinationFile.exists()) {
-                    Utilities.yesNoMessage(activity, "File Exists", "File already exists. Overwrite?", "Yes", "No",
+                    Utilities.yesNoMessage(
+                            activity,
+                            "File Exists",
+                            "File already exists. Overwrite?",
+                            "Yes",
+                            "No",
                             new Runnable() {
                                 @Override
                                 public void run() {
-                                    performSave(doc, finalPath);
+                                    performSave(doc, finalPath, saveAsComplete, customSaveComplete);
                                 }
-                            }, null);
+                            },
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (saveAsComplete != null)
+                                        saveAsComplete.onComplete(1, null);
+                                    if (customSaveComplete != null)
+                                        customSaveComplete.onComplete(1, null, false);
+                                }
+                            });
                 } else {
-                    performSave(doc, finalPath);
+                    performSave(doc, finalPath, saveAsComplete, customSaveComplete);
                 }
             }
-        }, fileName);
+        }, latestFileName);
     }
 
-    private void performSave(SODoc doc, String path) {
-        // Check if the current document is already a PDF
+    private void performSave(SODoc doc, String path, final SOSaveAsComplete saveAsComplete,
+            final SOCustomSaveComplete customSaveComplete) {
         boolean isSourcePdf = false;
         if (activity != null) {
             Intent intent = activity.getIntent();
             if (intent != null) {
-                String uri = intent.getStringExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
+                String uri = intent.getStringExtra(
+                        com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
                 if (uri != null && uri.toLowerCase().endsWith(".pdf")) {
                     isSourcePdf = true;
                 }
@@ -143,45 +170,47 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                     activity.runOnUiThread(() -> {
                         File file = new File(path);
                         String fileName = file.getName();
+
                         Toast.makeText(activity, "PDF saved successfully", Toast.LENGTH_LONG).show();
 
-                        // 1. Update the toolbar title directly
                         android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
                         if (titleView != null) {
                             titleView.setText(fileName);
-                            Log.d(TAG, "Updated tvTittle with new filename: " + fileName);
                         }
 
-                        // 2. Update activity's intent so subsequent saves use the new filename
                         Intent intent = activity.getIntent();
                         if (intent != null) {
                             intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
                             intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
                                     fileName);
-                            Log.d(TAG, "Updated activity intent with new path: " + path);
                         }
 
-                        // 3. Trigger a reload of the document to ensure the editor references the new
-                        // file
                         if (activity instanceof com.artifex.sonui.AppNUIActivity) {
                             ((com.artifex.sonui.AppNUIActivity) activity).onNewIntent(intent);
+                        }
+
+                        if (saveAsComplete != null) {
+                            saveAsComplete.onComplete(0, path);
+                        }
+                        if (customSaveComplete != null) {
+                            customSaveComplete.onComplete(0, path, true);
                         }
                     });
                 } else {
                     activity.runOnUiThread(() -> {
                         Toast.makeText(activity, "Error saving PDF: " + error, Toast.LENGTH_LONG).show();
+                        if (saveAsComplete != null)
+                            saveAsComplete.onComplete(1, null);
+                        if (customSaveComplete != null)
+                            customSaveComplete.onComplete(1, null, false);
                     });
                 }
             }
         };
 
         if (isSourcePdf) {
-            // PDF to PDF: Use Standard Save (doc.a)
-            Log.d(TAG, "Source is PDF, using doc.a(path, ...)");
             doc.a(path, saveListener);
         } else {
-            // Non-PDF to PDF: Use Export (doc.b)
-            Log.d(TAG, "Source is NOT PDF, using doc.b(path, true, ...)");
             doc.b(path, true, saveListener);
         }
     }
@@ -196,53 +225,55 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "onActivityResult called: requestCode=" + requestCode + ", resultCode=" + resultCode);
+        Log.d(TAG, "onActivityResult called");
     }
 
     @Override
-    public void insertImageHandler(NUIDocView nuiDocView) throws UnsupportedOperationException {
+    public void insertImageHandler(NUIDocView nuiDocView) {
         Log.d(TAG, "insertImageHandler called");
     }
 
     @Override
-    public void insertPhotoHandler(NUIDocView nuiDocView) throws UnsupportedOperationException {
+    public void insertPhotoHandler(NUIDocView nuiDocView) {
         Log.d(TAG, "insertPhotoHandler called");
     }
 
     @Override
     public void pauseHandler(SODoc doc, boolean hasBeenModified) {
-        Log.d(TAG, "pauseHandler called, hasBeenModified=" + hasBeenModified);
+        Log.d(TAG, "pauseHandler called");
     }
 
     @Override
-    public void openInHandler(String var1, SODoc var2) throws UnsupportedOperationException {
+    public void openInHandler(String var1, SODoc var2) {
         Log.d(TAG, "openInHandler called");
     }
 
     @Override
-    public void openPdfInHandler(String var1, SODoc var2) throws UnsupportedOperationException {
+    public void openPdfInHandler(String var1, SODoc var2) {
         Log.d(TAG, "openPdfInHandler called");
     }
 
     @Override
-    public void printHandler(SODoc var1) throws UnsupportedOperationException {
+    public void printHandler(SODoc var1) {
         Log.d(TAG, "printHandler called");
     }
 
     @Override
-    public void saveAsHandler(String var1, SODoc var2, SOSaveAsComplete var3) throws UnsupportedOperationException {
+    public void saveAsHandler(String fileName, SODoc doc, SOSaveAsComplete completion) {
         Log.d(TAG, "saveAsHandler called");
+        saveAsPdfHandlerInternal(fileName, doc, completion, null);
     }
 
     @Override
-    public void shareHandler(String var1, SODoc var2) throws UnsupportedOperationException {
+    public void shareHandler(String var1, SODoc var2) {
         Log.d(TAG, "shareHandler called");
     }
 
     @Override
-    public void customSaveHandler(String var1, SODoc var2, String var3, SOCustomSaveComplete var4)
-            throws UnsupportedOperationException, IOException {
+    public void customSaveHandler(String fileName, SODoc doc, String var3, SOCustomSaveComplete completion)
+            throws IOException {
         Log.d(TAG, "customSaveHandler called");
+        saveAsPdfHandlerInternal(fileName, doc, null, completion);
     }
 
     @Override
@@ -251,7 +282,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     }
 
     @Override
-    public void launchUrlHandler(String url) throws UnsupportedOperationException {
+    public void launchUrlHandler(String url) {
         Log.d(TAG, "launchUrlHandler called: " + url);
     }
 }

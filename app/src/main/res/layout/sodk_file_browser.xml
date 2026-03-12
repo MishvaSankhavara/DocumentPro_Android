@@ -71,7 +71,7 @@
             android:padding="16dp"
             android:text="@string/editor_no_documents_found"
             android:textColor="@color/explorer_text_color"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:visibility="gone" />
 
         <ProgressBar
