@@ -3001,7 +3001,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 progressDialog1.getWindow().clearFlags(2);
                 progressDialog1.setOnShowListener(new OnShowListener() {
                     public void onShow(DialogInterface var1) {
-                        (new Handler()).post(new Runnable() {
+                        (new Handler()).postDelayed(new Runnable() {
                             public void run() {
                                 if (NUIDocView.this.mSession != null) {
                                     NUIDocView.this.mSession.destroy();
@@ -3012,7 +3012,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                 }
 
                             }
-                        });
+                        }, 800);
                     }
                 });
                 progressDialog1.show();

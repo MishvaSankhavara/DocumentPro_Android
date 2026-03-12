@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 
 import com.example.documenpro.R;
 
-
 public class ThemeToggleSwitch extends View implements Animator.AnimatorListener {
 
     private boolean animating = false;
@@ -31,12 +30,15 @@ public class ThemeToggleSwitch extends View implements Animator.AnimatorListener
     private int animationDuration;
     private ThemeToggleSwitchListener switchListener;
     private ThemeToggleAnimationListener animationListener;
+
     public ThemeToggleSwitch(Context context) {
         this(context, null, 0);
     }
+
     public ThemeToggleSwitch(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
+
     public ThemeToggleSwitch(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setWillNotDraw(false);
@@ -51,10 +53,9 @@ public class ThemeToggleSwitch extends View implements Animator.AnimatorListener
                 toggleSwitch();
             }
         });
-        dayBackgroundDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT
-                , new int[]{Color.parseColor("#21b5e7"), Color.parseColor("#59ccda")});
+        dayBackgroundDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[] { Color.parseColor("#21b5e7"), Color.parseColor("#59ccda") });
         dayBackgroundDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-
 
         nightBackgroundBitmap = (BitmapDrawable) getContext().getResources().getDrawable(R.drawable.dark_background);
         sunBitmap = (BitmapDrawable) getContext().getResources().getDrawable(R.drawable.img_sun);
@@ -62,7 +63,7 @@ public class ThemeToggleSwitch extends View implements Animator.AnimatorListener
         cloudsBitmap = (BitmapDrawable) getContext().getResources().getDrawable(R.drawable.img_clouds);
     }
 
-    public void toggleSwitch(){
+    public void toggleSwitch() {
         if (!animating) {
             animating = true;
             nightMode = !nightMode;
@@ -87,18 +88,13 @@ public class ThemeToggleSwitch extends View implements Animator.AnimatorListener
         dayBackgroundDrawable.setAlpha(255 - ((int) (animationValue * 255)));
         dayBackgroundDrawable.draw(canvas);
 
-
-        moonBitmap.setBounds((space) - (int) (animationValue * space)
-                , 0
-                , getWidth() - (int) (animationValue * space)
-                , getHeight());
+        moonBitmap.setBounds((int) (animationValue * space), 0, (int) (animationValue * space) + getHeight(),
+                getHeight());
         moonBitmap.setAlpha((int) (animationValue * 255));
         moonBitmap.getBitmap();
 
-        sunBitmap.setBounds((space) - (int) (animationValue * space)
-                , 0
-                , getWidth() - (int) (animationValue * space)
-                , getHeight());
+        sunBitmap.setBounds((int) (animationValue * space), 0, (int) (animationValue * space) + getHeight(),
+                getHeight());
         sunBitmap.setAlpha(255 - ((int) (animationValue * 255)));
 
         moonBitmap.draw(canvas);
@@ -106,14 +102,11 @@ public class ThemeToggleSwitch extends View implements Animator.AnimatorListener
 
         moonBitmap.setAlpha((int) (animationValue * 255));
 
-        int clouds_bitmap_alpha = animationValue <= 0.5 ? (255 - ((int) (((animationValue - 0.5) * 2) * 255))) : 0;
+        int clouds_bitmap_alpha = animationValue <= 0.5 ? (int) ((1.0f - animationValue * 2.0f) * 255) : 0;
         cloudsBitmap.setAlpha(clouds_bitmap_alpha);
 
-        int clouds_bitmap_left = (int) ((getHeight() / 2) - (animationValue * (getHeight() / 2)));
-        cloudsBitmap.setBounds(clouds_bitmap_left
-                , 0
-                , clouds_bitmap_left + getHeight()
-                , getHeight());
+        int clouds_bitmap_left = (int) (animationValue * (getHeight() / 2));
+        cloudsBitmap.setBounds(clouds_bitmap_left, 0, clouds_bitmap_left + getHeight(), getHeight());
         cloudsBitmap.draw(canvas);
 
     }

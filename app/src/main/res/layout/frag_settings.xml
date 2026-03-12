@@ -318,7 +318,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/FontMedium"
                 android:layout_width="wrap_content"
@@ -328,7 +327,6 @@
                 android:text="@string/help"
                 android:textColor="@color/gray"
                 android:textSize="12sp" />
-
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
