@@ -106,6 +106,4 @@
                 app:ImageEdt="@drawable/ic_eraser" />
         </LinearLayout>
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

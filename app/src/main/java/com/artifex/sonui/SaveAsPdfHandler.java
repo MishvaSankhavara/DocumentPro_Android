@@ -35,8 +35,40 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     }
 
     @Override
-    public void saveAsPdfHandler(final String fileName, final SODoc doc) {
-        Log.d(TAG, "saveAsPdfHandler called for file: " + fileName);
+    public void saveAsPdfHandler(String fileName, final SODoc doc) {
+        Log.d(TAG, "saveAsPdfHandler called");
+        Log.d(TAG, "  Library suggested fileName: " + fileName);
+
+        // Primary source: The real name from the UI toolbar title
+        if (activity != null) {
+            android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
+            if (titleView != null) {
+                String uiName = titleView.getText().toString();
+                if (uiName != null && !uiName.isEmpty()) {
+                    Log.d(TAG, "  Using fileName from tvTittle: " + uiName);
+                    fileName = uiName;
+                }
+            }
+        }
+
+        // Secondary source: The activity's intent (if tvTittle was somehow empty)
+        if (fileName == null || fileName.isEmpty()) {
+            if (activity != null) {
+                Intent intent = activity.getIntent();
+                if (intent != null) {
+                    String intentFileName = intent
+                            .getStringExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME);
+                    if (intentFileName != null && !intentFileName.isEmpty()) {
+                        Log.d(TAG, "  Using fileName from EXTRA_SELECTED_FILE_NAME: " + intentFileName);
+                        fileName = intentFileName;
+                    }
+                }
+            }
+        }
+
+        if (doc != null) {
+            Log.d(TAG, "  Document doc is not null");
+        }
 
         ChoosePathActivity.a(activity, 2, false, new ChoosePathActivity.a() {
             @Override
@@ -59,7 +91,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                     return;
                 }
 
-                String selectedFolder = folderAppFile.b(); // Accessible in com.artifex.sonui
+                String selectedFolder = folderAppFile.b();
 
                 if (selectedFolder == null) {
                     Log.e(TAG, "Selected folder path is null");
@@ -91,14 +123,49 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     }
 
     private void performSave(SODoc doc, String path) {
-        // Using SODoc.b for PDF export/save-as-pdf
-        doc.b(path, false, new SODocSaveListener() {
+        // Check if the current document is already a PDF
+        boolean isSourcePdf = false;
+        if (activity != null) {
+            Intent intent = activity.getIntent();
+            if (intent != null) {
+                String uri = intent.getStringExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
+                if (uri != null && uri.toLowerCase().endsWith(".pdf")) {
+                    isSourcePdf = true;
+                }
+            }
+        }
+
+        SODocSaveListener saveListener = new SODocSaveListener() {
             @Override
             public void onComplete(int result, int error) {
                 Log.d(TAG, "save onComplete: result=" + result + ", error=" + error);
                 if (result == 0) {
                     activity.runOnUiThread(() -> {
+                        File file = new File(path);
+                        String fileName = file.getName();
                         Toast.makeText(activity, "PDF saved successfully", Toast.LENGTH_LONG).show();
+
+                        // 1. Update the toolbar title directly
+                        android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
+                        if (titleView != null) {
+                            titleView.setText(fileName);
+                            Log.d(TAG, "Updated tvTittle with new filename: " + fileName);
+                        }
+
+                        // 2. Update activity's intent so subsequent saves use the new filename
+                        Intent intent = activity.getIntent();
+                        if (intent != null) {
+                            intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
+                            intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
+                                    fileName);
+                            Log.d(TAG, "Updated activity intent with new path: " + path);
+                        }
+
+                        // 3. Trigger a reload of the document to ensure the editor references the new
+                        // file
+                        if (activity instanceof com.artifex.sonui.AppNUIActivity) {
+                            ((com.artifex.sonui.AppNUIActivity) activity).onNewIntent(intent);
+                        }
                     });
                 } else {
                     activity.runOnUiThread(() -> {
@@ -106,7 +173,17 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                     });
                 }
             }
-        });
+        };
+
+        if (isSourcePdf) {
+            // PDF to PDF: Use Standard Save (doc.a)
+            Log.d(TAG, "Source is PDF, using doc.a(path, ...)");
+            doc.a(path, saveListener);
+        } else {
+            // Non-PDF to PDF: Use Export (doc.b)
+            Log.d(TAG, "Source is NOT PDF, using doc.b(path, true, ...)");
+            doc.b(path, true, saveListener);
+        }
     }
 
     @Override

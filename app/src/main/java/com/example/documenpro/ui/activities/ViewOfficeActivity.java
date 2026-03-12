@@ -43,4 +43,12 @@ public class ViewOfficeActivity extends AppNUIActivity {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        // Recreate the activity to ensure the new document is loaded and state is reset
+        recreate();
+    }
 }

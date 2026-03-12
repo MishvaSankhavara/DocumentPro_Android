@@ -110,6 +110,7 @@ public class ChoosePathActivity extends BaseActivity {
         d = true;
         try {
             a.a(fileBrowser);
+            finish(); // Close the selection activity after calling the callback
         } catch (Throwable e) {
             android.util.Log.e("ChoosePathActivity", "Error in a.a(fileBrowser)", e);
             throw e;
@@ -118,6 +119,7 @@ public class ChoosePathActivity extends BaseActivity {
 
     public interface a {
         void a();
+
         void a(FileBrowser var1);
     }
 }
