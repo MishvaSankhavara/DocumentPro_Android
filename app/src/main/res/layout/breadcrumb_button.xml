@@ -5,4 +5,4 @@
     android:background="@drawable/editor_button"
     android:minWidth="@dimen/_30sdp"
     android:textColor="@color/black"
-    android:textSize="24.0sp" />
+    android:textSize="20.0sp" />

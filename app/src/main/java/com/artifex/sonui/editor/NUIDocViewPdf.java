@@ -272,8 +272,6 @@ public class NUIDocViewPdf extends NUIDocView {
         }
 
     }
-
-
     public void onDeleteButton() {
         DocPdfView var2 = this.getPdfDocView();
         if (this.getDoc().getSelectionCanBeDeleted()) {

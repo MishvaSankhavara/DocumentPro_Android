@@ -19,8 +19,10 @@ public class ViewOfficeActivity extends AppNUIActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.artifex.sonui.editor.Utilities.setDataLeakHandlers(new com.artifex.sonui.SaveAsPdfHandler(this));
         try {
             super.onCreate(savedInstanceState);
+
             ImageView backButton = findViewById(R.id.img_back);
             if (backButton != null)
                 backButton.setOnClickListener(view -> finish());
@@ -30,7 +32,8 @@ public class ViewOfficeActivity extends AppNUIActivity {
             Intent intent = getIntent();
 
             String selectedFilePath;
-            if (intent.getData() != null && intent.getData().getPath() != null && !intent.getData().getPath().isEmpty()) {
+            if (intent.getData() != null && intent.getData().getPath() != null
+                    && !intent.getData().getPath().isEmpty()) {
                 selectedFilePath = intent.getStringExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
                 if (selectedFilePath != null)
                     openedFileExtension = selectedFilePath.substring(selectedFilePath.lastIndexOf("."));

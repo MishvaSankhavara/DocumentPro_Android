@@ -9,6 +9,18 @@
     <string name="sort_items">Sort</string>
 
     <string name="error_saving_document">Error saving document: SOError=%d</string>
+    <string name="sodk_editor_error_saving_document_code">Error saving document (code %d)</string>
+    <string name="sodk_editor_error_saving_document">Error saving document</string>
+    <string name="sodk_editor_error">Error</string>
+    <string name="sodk_editor_cant_change_extension">Cannot change file extension</string>
+    <string name="sodk_editor_file_already_exists">File already exists</string>
+    <string name="sodk_editor_file_already_exists2">File already exists. Overwrite?</string>
+    <string name="sodk_editor_error_renaming_file">Error renaming file</string>
+    <string name="sodk_editor_please_wait">Please wait...</string>
+    <string name="sodk_editor_not_supported_type">File type not supported</string>
+    <string name="sodk_editor_no_apps_can_perform">No apps can perform this action</string>
+    <string name="sodk_editor_share_error_title">Share Error</string>
+    <string name="sodk_editor_no_documents_found">No documents found</string>
     <string name="label_file_count">%1$s files</string>
 
     <string name="print_document">Print</string>
@@ -1014,4 +1026,11 @@
     <string name="action_exit_app">Tap here to exit app</string>
     <string name="action_next" translatable="false">Next</string>
     <string name="no_document_found">No document found</string>
+
+    <!-- Missing string resources for Artifex Save Dialog Fix -->
+    <string name="sodk_editor_invalid_file_name">Invalid file name.</string>
+    <string name="sodk_editor_replace_file_title">File Exists</string>
+    <string name="sodk_editor_replace_file_body">That file already exists. Do you want to replace it?</string>
+    <string name="sodk_editor_yes">Yes</string>
+    <string name="sodk_editor_no">No</string>
 </resources>
