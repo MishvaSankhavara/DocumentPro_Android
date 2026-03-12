@@ -754,6 +754,8 @@
     <string name="password">Password</string>
     <string name="password_des">Enter the password to open the PDF</string>
     <string name="enter_password">Enter password</string>
+    <string name="dialog_password_title">Enter Password</string>
+    <string name="toast_please_input_password">Please enter password!</string>
     <string name="set_password">Set password</string>
     <string name="app_password_des">Set the password to protect the PDF</string>
     <string name="toast_please_set_password">Please set password!</string>

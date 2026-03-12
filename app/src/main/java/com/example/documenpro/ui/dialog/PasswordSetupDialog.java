@@ -20,7 +20,6 @@ import com.example.documenpro.R;
 import com.example.documenpro.clickListener.PasswordClickListener;
 import com.example.documenpro.utils.ViewUtils;
 
-
 public class PasswordSetupDialog extends Dialog {
     private final AppCompatImageView ivTogglePasswordVisibility;
     private final ConstraintLayout clDialogRoot;
@@ -33,7 +32,6 @@ public class PasswordSetupDialog extends Dialog {
     public TextView tvDescription;
 
     private final PasswordClickListener passwordClickListener;
-
 
     public PasswordSetupDialog(@NonNull Context context, PasswordClickListener listener) {
         super(context);
@@ -82,5 +80,17 @@ public class PasswordSetupDialog extends Dialog {
                 llErrorContainer.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    public void setDialogMode(boolean isEntryMode) {
+        if (isEntryMode) {
+            tv_dialog_title.setText(R.string.dialog_password_title);
+            tvDescription.setText(R.string.dialog_password_message);
+            tvErrorMessage.setText(R.string.toast_please_input_password);
+        } else {
+            tv_dialog_title.setText(R.string.set_password);
+            tvDescription.setText(R.string.app_password_des);
+            tvErrorMessage.setText(R.string.toast_please_set_password);
+        }
     }
 }

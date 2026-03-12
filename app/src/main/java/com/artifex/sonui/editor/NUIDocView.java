@@ -28,6 +28,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import com.example.documenpro.utils.DialogManagerUtils;
+import com.example.documenpro.clickListener.PasswordClickListener;
+import com.example.documenpro.ui.dialog.PasswordSetupDialog;
+import com.example.documenpro.model_reader.PDFReaderModel;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
@@ -565,6 +569,45 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
 
     }
 
+    private void handlePasswordError() {
+        final Activity activity = activity();
+        if (activity == null)
+            return;
+
+        PasswordSetupDialog dialog = new PasswordSetupDialog(activity, new PasswordClickListener() {
+            @Override
+            public void onOkClickListener(String password) {
+                PDFReaderModel pdfModel = new PDFReaderModel();
+                pdfModel.setAbsolutePath_PDFModel(l);
+                pdfModel.setName_PDFModel(new File(l).getName());
+
+                try {
+                    PDFReaderModel unlockedModel = Utils.unlockPdfFile(pdfModel, password);
+                    if (unlockedModel != null) {
+                        String newPath = unlockedModel.getAbsolutePath_PDFModel();
+                        Intent intent = new Intent(activity, activity.getClass());
+                        intent.setData(Uri.fromFile(new File(newPath)));
+                        intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, newPath);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(intent);
+                        activity.finish();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Utilities.showMessage(activity, activity.getString(R.string.editor_error),
+                            "Incorrect password or error unlocking file.");
+                }
+            }
+        });
+        dialog.setDialogMode(true);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        dialog.show();
+    }
+
     private void k() {
         if (this.m == null) {
             this.m = new p() {
@@ -992,11 +1035,15 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                         NUIDocView.this.setDisableClick();
                                         NUIDocView.this.dismissProgressDialog();
                                         if (!NUIDocView.this.mSession.isCancelled() || var1 != 6) {
-                                            String var3 = Utilities
-                                                    .getOpenErrorDescription(NUIDocView.this.getContext(), var1);
-                                            Utilities.showMessage(var9,
-                                                    NUIDocView.this.getContext().getString(R.string.editor_error),
-                                                    var3);
+                                            if (var1 == 6) {
+                                                NUIDocView.this.handlePasswordError();
+                                            } else {
+                                                String var3 = Utilities
+                                                        .getOpenErrorDescription(NUIDocView.this.getContext(), var1);
+                                                Utilities.showMessage(var9,
+                                                        NUIDocView.this.getContext().getString(R.string.editor_error),
+                                                        var3);
+                                            }
                                         }
                                     }
 
@@ -1058,10 +1105,14 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                                         NUIDocView.this.setDisableClick();
                                                         NUIDocView.this.dismissProgressDialog();
                                                         if (!NUIDocView.this.mSession.isCancelled() || var1 != 6) {
-                                                            String var3 = Utilities.getOpenErrorDescription(
-                                                                    NUIDocView.this.getContext(), var1);
-                                                            Utilities.showMessage(var9, NUIDocView.this.getContext()
-                                                                    .getString(R.string.editor_error), var3);
+                                                            if (var1 == 6) {
+                                                                NUIDocView.this.handlePasswordError();
+                                                            } else {
+                                                                String var3 = Utilities.getOpenErrorDescription(
+                                                                        NUIDocView.this.getContext(), var1);
+                                                                Utilities.showMessage(var9, NUIDocView.this.getContext()
+                                                                        .getString(R.string.editor_error), var3);
+                                                            }
                                                         }
 
                                                     }
@@ -1170,10 +1221,14 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                                         NUIDocView.this.setDisableClick();
                                                         NUIDocView.this.dismissProgressDialog();
                                                         if (!NUIDocView.this.mSession.isCancelled() || var1 != 6) {
-                                                            String var3 = Utilities.getOpenErrorDescription(
-                                                                    NUIDocView.this.getContext(), var1);
-                                                            Utilities.showMessage(var9, NUIDocView.this.getContext()
-                                                                    .getString(R.string.editor_error), var3);
+                                                            if (var1 == 6) {
+                                                                NUIDocView.this.handlePasswordError();
+                                                            } else {
+                                                                String var3 = Utilities.getOpenErrorDescription(
+                                                                        NUIDocView.this.getContext(), var1);
+                                                                Utilities.showMessage(var9, NUIDocView.this.getContext()
+                                                                        .getString(R.string.editor_error), var3);
+                                                            }
                                                         }
 
                                                     }

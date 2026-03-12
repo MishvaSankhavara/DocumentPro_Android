@@ -39,5 +39,4 @@
         android:layout_weight="1"
         app:Image="@drawable/ic_pages_preview"
         app:Name="@string/menu_view_thumbnail" />
-
 </LinearLayout>
