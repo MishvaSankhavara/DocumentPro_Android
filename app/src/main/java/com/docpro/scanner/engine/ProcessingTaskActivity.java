@@ -2,6 +2,7 @@ package com.docpro.scanner.engine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,7 +23,9 @@ import com.example.documenpro.AppExecutor.RemovePasswordExecutor;
 import com.example.documenpro.AppExecutor.SetPasswordManager;
 import com.example.documenpro.AppExecutor.SplitDocExecutor;
 import com.example.documenpro.model_reader.PDFReaderModel;
+import com.example.documenpro.ui.dialog.AppLoadingDialog;
 import com.example.documenpro.utils.Utils;
+import com.docpro.scanner.result.ResultViewerActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -73,6 +76,9 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     public SplitDocExecutor coreSplitExecutor;
     public RemovePasswordExecutor coreUnlockExecutor;
 
+    private int activeTaskId = -1;
+    private boolean redirectedToResult = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +91,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         Intent taskIntent = getIntent();
         if (taskIntent != null) {
             int taskId = taskIntent.getIntExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, 1);
+            activeTaskId = taskId;
             if (taskId == AppGlobalConstants.TOOL_ID_COMPRESS) {
                 PDFReaderModel model = (PDFReaderModel) taskIntent
                         .getSerializableExtra(AppGlobalConstants.EXTRA_PDF_MODEL);
@@ -135,6 +142,41 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         }
     }
 
+    public void redirectToResultsAfterDone() {
+        if (redirectedToResult || isFinishing() || isDestroyed()) {
+            return;
+        }
+        redirectedToResult = true;
+
+        int targetTab = 0;
+        if (activeTaskId == AppGlobalConstants.TOOL_ID_MERGE) {
+            targetTab = 2; // ResultViewerActivity: Merged
+        } else if (activeTaskId == AppGlobalConstants.TOOL_ID_SPLIT) {
+            targetTab = 1; // ResultViewerActivity: Split
+        }
+
+        final int finalTargetTab = targetTab;
+
+        AppLoadingDialog dialog = new AppLoadingDialog(this);
+        dialog.setMessage(getString(R.string.sodk_editor_please_wait));
+        dialog.show();
+
+        new Handler(getMainLooper()).postDelayed(() -> {
+            try {
+                if (isFinishing() || isDestroyed()) {
+                    return;
+                }
+                dialog.dismiss();
+                Intent intent = new Intent(ProcessingTaskActivity.this, ResultViewerActivity.class);
+                intent.putExtra(AppGlobalConstants.FROM_SAVE_IMAGE, finalTargetTab);
+                startActivity(intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 450);
+    }
+
     private void bindViews() {
         btnStopTaskExecutor = findViewById(R.id.btnStopExecutor);
         txtProgressPercent = findViewById(R.id.operateProgressTv);
@@ -151,8 +193,8 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         btnAbortTask = findViewById(R.id.operateCloseImg);
         imgDocPreview = findViewById(R.id.previewImg);
         txtCurrentPageStatus = findViewById(R.id.indexTv);
-        layoutPhase1 = findViewById(R.id.motionLayout1);
-        layoutPhase2 = findViewById(R.id.motionLayout2);
+        layoutPhase1 = findViewById(R.id.inc_task_progress);
+        layoutPhase2 = findViewById(R.id.inc_task_completion);
 
         // Bind aliases
         btnClose = btnAbortTask;

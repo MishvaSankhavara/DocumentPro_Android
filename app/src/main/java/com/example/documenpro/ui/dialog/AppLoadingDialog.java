@@ -2,6 +2,7 @@ package com.example.documenpro.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -17,5 +18,12 @@ public class AppLoadingDialog extends Dialog {
 
     public AppLoadingDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
+    }
+
+    public void setMessage(CharSequence message) {
+        TextView tv = findViewById(R.id.tv_progress);
+        if (tv != null) {
+            tv.setText(message);
+        }
     }
 }

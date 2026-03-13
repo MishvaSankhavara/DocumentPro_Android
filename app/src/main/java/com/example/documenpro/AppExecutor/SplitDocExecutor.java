@@ -112,6 +112,9 @@ public class SplitDocExecutor {
                     Utils.displayPDFThumbnail(weakReference_SplitDoc.get(), file_SplitDoc, weakReference_SplitDoc.get().imgThumbnail);
 
                     weakReference_SplitDoc.get().tvPageNumber.setText(String.valueOf(Utils.getPageCountPDF(file_SplitDoc)));
+
+                    // After showing completion UI, redirect to ResultViewerActivity (Split tab)
+                    weakReference_SplitDoc.get().redirectToResultsAfterDone();
                 });
 
             } catch (Exception error_SplitDoc) {

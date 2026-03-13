@@ -137,6 +137,9 @@ public class PdfMergeManager {
 
                 weakReference_PdfMergeManager.get().tvPageNumber.setText(String.valueOf(Utils.getPageCountPDF(file1_PdfMergeManager)));
 
+                // After showing completion UI, redirect to ResultViewerActivity (Merged tab)
+                weakReference_PdfMergeManager.get().redirectToResultsAfterDone();
+
             });
 
         });
