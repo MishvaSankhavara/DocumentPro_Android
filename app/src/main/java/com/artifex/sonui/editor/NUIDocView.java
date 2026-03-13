@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.example.documenpro.utils.DialogManagerUtils;
@@ -609,6 +610,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     private void k() {
+        android.util.Log.d("SEARCH_DEBUG", "k() called to register listener. Current m: " + this.m);
         if (this.m == null) {
             this.m = new p() {
                 public void a() {
@@ -635,8 +637,18 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 }
 
                 public void a(int var1, RectF var2) {
+                    android.util.Log.d("SEARCH_DEBUG", "onFoundText REACHED! Page: " + var1 + ", Rect: " + var2);
                     NUIDocView.this.v();
+                    SODoc doc = NUIDocView.this.getDoc();
+                    if (doc != null) {
+                        Log.d("SEARCH_DEBUG", "Setting highlight color to yellow");
+                        doc.setSelectionBackgroundColor("#FFFB00");
+                    }
                     NUIDocView.this.getDocView().onFoundText(var1, var2);
+                    Log.d("SEARCH_DEBUG", "Scrolling to page " + var1);
+                    NUIDocView.this.mDocView.scrollToPage(var1, true);
+                    NUIDocView.this.mDocView.scrollSelectionIntoView();
+                    NUIDocView.this.triggerRender();
                 }
 
                 public boolean b() {
@@ -747,10 +759,15 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     private void searchText() {
+        android.util.Log.d("SEARCH_DEBUG", "searchText() called for: "
+                + (this.edtSearchTextInput != null ? this.edtSearchTextInput.getText().toString() : "null"));
         Utilities.hideKeyboard(this.getContext());
         this.u();
         String var1 = this.edtSearchTextInput.getText().toString();
         SODoc var2 = this.getDoc();
+        if (var2 != null) {
+            var2.setSelectionBackgroundColor("#FFFB00");
+        }
         var2.b(var1);
         var2.q();
     }
@@ -894,12 +911,23 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         });
         this.edtSearchTextInput.setOnEditorActionListener(new SOEditTextOnEditorActionListener() {
             public boolean onEditorAction(SOEditText var1, int var2, KeyEvent var3) {
-                if (var2 == 5) {
+                // Trigger search when user presses Done/Search/Enter on keyboard.
+                if (var2 == EditorInfo.IME_ACTION_SEARCH ||
+                        var2 == EditorInfo.IME_ACTION_DONE ||
+                        var2 == EditorInfo.IME_ACTION_NEXT ||
+                        var2 == EditorInfo.IME_ACTION_GO ||
+                        var2 == EditorInfo.IME_ACTION_SEND) {
                     NUIDocView.this.onSearchNext();
                     return true;
-                } else {
-                    return false;
                 }
+
+                if (var3 != null && var3.getAction() == KeyEvent.ACTION_DOWN
+                        && var3.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    NUIDocView.this.onSearchNext();
+                    return true;
+                }
+
+                return false;
             }
         });
         this.edtSearchTextInput.setOnKeyListener(new OnKeyListener() {
@@ -2685,6 +2713,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         var7 = var2 == 0;
 
         this.mPageCount = var1;
+        Log.d("SEARCH_DEBUG", "onPageLoaded: " + var1 + ", current pageCount: " + var2 + ", var7: " + var7);
         if (var7) {
             this.k();
             this.updateUIAppearance();
@@ -3210,6 +3239,12 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     public void setSearchStart() {
+        SODoc doc = getDoc();
+        if (doc != null && this.mDocView != null) {
+            int page = this.mDocView.getMostVisiblePage();
+            android.util.Log.d("SEARCH_DEBUG", "setSearchStart() resetting to page: " + page);
+            doc.a(page, 0.0F, 0.0F);
+        }
     }
 
     protected void setStartPage(int var1) {

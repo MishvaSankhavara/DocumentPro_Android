@@ -30,8 +30,7 @@ import com.example.documenpro.utils.Utils;
 
 public class NUIDocViewPdf extends NUIDocView {
     private EditBtn btnHighLight;
-    private
-    EditBtn btnDeleteNote;
+    private EditBtn btnDeleteNote;
     FrameLayout drawSizeOut;
     View drawSizeIn;
 
@@ -42,7 +41,6 @@ public class NUIDocViewPdf extends NUIDocView {
     private RangeSeekBar seekBarThickness;
 
     private TextView tvSize;
-
 
     private boolean q = false;
 
@@ -60,7 +58,6 @@ public class NUIDocViewPdf extends NUIDocView {
         super(var1, var2, var3);
         this.a(var1);
     }
-
 
     private void a(Context var1) {
     }
@@ -81,22 +78,23 @@ public class NUIDocViewPdf extends NUIDocView {
 
         this.llBottomDraw = this.findViewById(R.id.pdf_bottom_draw);
         this.recyclerViewColor = this.findViewById(R.id.recyclerColor);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,
+                false);
         recyclerViewColor.setLayoutManager(layoutManager);
         recyclerViewColor.setHasFixedSize(true);
 
         tvSize = this.findViewById(R.id.sizeTv);
 
-        ColorSelectionAdapter adapter = new ColorSelectionAdapter(AppGlobalConstants.getColorDrawList(), 3, new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
-            @Override
-            public void onColorChanged(String var1) {
-                DocPdfView var2 = NUIDocViewPdf.this.getPdfDocView();
-                int var2x = Color.parseColor(var1);
-                var2.setInkLineColor(var2x);
-            }
-        });
+        ColorSelectionAdapter adapter = new ColorSelectionAdapter(AppGlobalConstants.getColorDrawList(), 3,
+                new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
+                    @Override
+                    public void onColorChanged(String var1) {
+                        DocPdfView var2 = NUIDocViewPdf.this.getPdfDocView();
+                        int var2x = Color.parseColor(var1);
+                        var2.setInkLineColor(var2x);
+                    }
+                });
         recyclerViewColor.setAdapter(adapter);
-
 
         this.b();
         seekBarThickness = this.findViewById(R.id.thickness_seekBar);
@@ -157,7 +155,9 @@ public class NUIDocViewPdf extends NUIDocView {
                 boolean var2 = this.getDoc().x();
                 boolean var3 = this.getDoc().y();
                 if (var2 && !var3) {
-                    Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.editor_xfa_title), this.getContext().getString(R.string.editor_xfa_body));
+                    Utilities.showMessage((Activity) this.getContext(),
+                            this.getContext().getString(R.string.editor_xfa_title),
+                            this.getContext().getString(R.string.editor_xfa_body));
                 }
             }
         }
@@ -189,7 +189,6 @@ public class NUIDocViewPdf extends NUIDocView {
         return new DocPdfView(var1);
     }
 
-
     public int getBorderColor() {
         return ContextCompat.getColor(this.getContext(), R.color.editor_header_pdf_color);
     }
@@ -206,7 +205,6 @@ public class NUIDocViewPdf extends NUIDocView {
         return (DocPdfView) this.getDocView();
     }
 
-
     protected void goBack() {
         super.goBack();
     }
@@ -215,11 +213,11 @@ public class NUIDocViewPdf extends NUIDocView {
         return false;
     }
 
-//    @Override
-//    protected boolean isRedactionMode() {
-//        String var1 = this.getCurrentTab();
-//        return var1 != null && var1.equals("REDACT");
-//    }
+    // @Override
+    // protected boolean isRedactionMode() {
+    // String var1 = this.getCurrentTab();
+    // return var1 != null && var1.equals("REDACT");
+    // }
 
     protected void layoutAfterPageLoad() {
     }
@@ -244,7 +242,6 @@ public class NUIDocViewPdf extends NUIDocView {
                 this.onDrawButton();
                 btnDrawNew.setChoose(false);
 
-
             } else if (llBottomDraw.getVisibility() == GONE) {
                 Utils.showHideView(getContext(), llBottomDraw, true, R.dimen.cm_dp_102);
                 this.onDrawButton();
@@ -262,7 +259,6 @@ public class NUIDocViewPdf extends NUIDocView {
         if (var1 == this.btnCloseEdit) {
             this.getPdfDocView().saveNoteData();
 
-
             if (llBottomDraw.getVisibility() == VISIBLE) {
                 this.onDrawButton();
 
@@ -272,6 +268,7 @@ public class NUIDocViewPdf extends NUIDocView {
         }
 
     }
+
     public void onDeleteButton() {
         DocPdfView var2 = this.getPdfDocView();
         if (this.getDoc().getSelectionCanBeDeleted()) {
@@ -307,7 +304,8 @@ public class NUIDocViewPdf extends NUIDocView {
                 String var1;
                 if (this.mPageCount <= 0) {
                     var1 = Utilities.getOpenErrorDescription(this.getContext(), 17);
-                    Utilities.showMessage((Activity) this.getContext(), this.getContext().getString(R.string.editor_error), var1);
+                    Utilities.showMessage((Activity) this.getContext(),
+                            this.getContext().getString(R.string.editor_error), var1);
                 } else {
                     this.mAdapter.setCount(this.mPageCount);
                     this.layoutNow();
@@ -318,7 +316,8 @@ public class NUIDocViewPdf extends NUIDocView {
                     });
                     if (this.mSession.getDoc().getAuthor() == null) {
                         var1 = Utilities.getApplicationName(this.activity());
-                        var1 = Utilities.getStringPreference(Utilities.getPreferencesObject(this.activity(), "general"), "DocAuthKey", var1);
+                        var1 = Utilities.getStringPreference(Utilities.getPreferencesObject(this.activity(), "general"),
+                                "DocAuthKey", var1);
                         this.mSession.getDoc().setAuthor(var1);
                     }
 
@@ -328,7 +327,6 @@ public class NUIDocViewPdf extends NUIDocView {
             }
         }
     }
-
 
     public void onDrawButton() {
         try {
@@ -350,54 +348,55 @@ public class NUIDocViewPdf extends NUIDocView {
 
     }
 
-//    public void onNoteButton() {
-//        this.getPdfDocView().onNoteMode();
-//        this.updateUIAppearance();
-//    }
+    // public void onNoteButton() {
+    // this.getPdfDocView().onNoteMode();
+    // this.updateUIAppearance();
+    // }
 
     protected void onPageLoaded(int var1) {
         this.checkXFA();
         super.onPageLoaded(var1);
     }
 
-//    public void onRedactApply() {
-//        Utilities.yesNoMessage((Activity) this.getContext(), "", this.getContext().getString(R.string.sodk_editor_redact_confirm_apply_body), this.getContext().getString(R.string.sodk_editor_yes), this.getContext().getString(R.string.sodk_editor_no), new Runnable() {
-//            public void run() {
-//                c var1 = (c) NUIDocViewPdf.this.getDoc();
-//                var1.u();
-//                var1.clearSelection();
-//                NUIDocViewPdf.this.updateUIAppearance();
-//            }
-//        }, new Runnable() {
-//            public void run() {
-//            }
-//        });
-//    }
+    // public void onRedactApply() {
+    // Utilities.yesNoMessage((Activity) this.getContext(), "",
+    // this.getContext().getString(R.string.sodk_editor_redact_confirm_apply_body),
+    // this.getContext().getString(R.string.sodk_editor_yes),
+    // this.getContext().getString(R.string.sodk_editor_no), new Runnable() {
+    // public void run() {
+    // c var1 = (c) NUIDocViewPdf.this.getDoc();
+    // var1.u();
+    // var1.clearSelection();
+    // NUIDocViewPdf.this.updateUIAppearance();
+    // }
+    // }, new Runnable() {
+    // public void run() {
+    // }
+    // });
+    // }
 
-//    public void onRedactMark(View var1) {
-//        c var2 = (c) this.getDoc();
-//        var2.s();
-//        var2.clearSelection();
-//        this.updateUIAppearance();
-//    }
+    // public void onRedactMark(View var1) {
+    // c var2 = (c) this.getDoc();
+    // var2.s();
+    // var2.clearSelection();
+    // this.updateUIAppearance();
+    // }
 
-//    public void onRedactRemove(View var1) {
-//        if (this.getDoc().getSelectionCanBeDeleted()) {
-//            this.getDoc().selectionDelete();
-//            this.updateUIAppearance();
-//        }
-//
-//    }
+    // public void onRedactRemove(View var1) {
+    // if (this.getDoc().getSelectionCanBeDeleted()) {
+    // this.getDoc().selectionDelete();
+    // this.updateUIAppearance();
+    // }
+    //
+    // }
 
     public void onRedoButton(View var1) {
         super.onRedoButton(var1);
     }
 
-
     protected void onSearch() {
         super.onSearch();
     }
-
 
     public void onUndoButton(View var1) {
         super.onUndoButton(var1);
@@ -410,21 +409,24 @@ public class NUIDocViewPdf extends NUIDocView {
             }
 
         } else {
-            Utilities.yesNoMessage((Activity) this.getContext(), "", this.getContext().getString(R.string.editor_redact_confirm_save), this.getContext().getString(R.string.editor_yes), this.getContext().getString(R.string.editor_no), new Runnable() {
-                public void run() {
-                    if (var1 != null) {
-                        var1.run();
-                    }
+            Utilities.yesNoMessage((Activity) this.getContext(), "",
+                    this.getContext().getString(R.string.editor_redact_confirm_save),
+                    this.getContext().getString(R.string.editor_yes), this.getContext().getString(R.string.editor_no),
+                    new Runnable() {
+                        public void run() {
+                            if (var1 != null) {
+                                var1.run();
+                            }
 
-                }
-            }, new Runnable() {
-                public void run() {
-                    if (var2 != null) {
-                        var2.run();
-                    }
+                        }
+                    }, new Runnable() {
+                        public void run() {
+                            if (var2 != null) {
+                                var2.run();
+                            }
 
-                }
-            });
+                        }
+                    });
         }
     }
 
@@ -469,9 +471,7 @@ public class NUIDocViewPdf extends NUIDocView {
             Log.i("Thangfix", "loi null roi");
         }
 
-
     }
-
 
     public void setConfigurableButtons() {
         super.setConfigurableButtons();
@@ -494,7 +494,6 @@ public class NUIDocViewPdf extends NUIDocView {
         boolean var3 = this.getDoc().getSelectionCanBeDeleted();
         boolean var4 = this.getDoc().getSelectionIsAlterableTextSelection();
         this.btnHighLight.setEnable(var4);
-
 
         boolean var6 = var1.getDrawMode();
         this.btnDrawNew.setChoose(var6);
