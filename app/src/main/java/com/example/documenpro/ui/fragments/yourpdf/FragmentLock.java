@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.graphics.drawable.ColorDrawable;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,9 +20,12 @@ import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.adapter_reader.CompactFileListAdapter;
 import com.example.documenpro.clickListener.OnPdfTapListener;
+import com.example.documenpro.clickListener.PasswordClickListener;
 import com.example.documenpro.model_reader.PDFReaderModel;
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
+import com.example.documenpro.ui.dialog.AppLoadingDialog;
+import com.example.documenpro.ui.dialog.PasswordSetupDialog;
 import com.example.documenpro.utils.Utils;
 
 import java.io.File;
@@ -72,9 +78,54 @@ public class FragmentLock extends Fragment implements OnPdfTapListener {
 
     @Override
     public void onPdfTap(PDFReaderModel pdfModel) {
-        // PdfUtils.openPDF(mActivity, pdfModel);
-        File file = new File(pdfModel.getAbsolutePath_PDFModel());
-        Utils.openFile(activityContext, file);
+        if (activityContext == null) {
+            return;
+        }
+
+        PasswordSetupDialog dialog = new PasswordSetupDialog(activityContext, new PasswordClickListener() {
+            @Override
+            public void onOkClickListener(String password) {
+                AppLoadingDialog loadingDialog = new AppLoadingDialog(activityContext);
+                Window window = loadingDialog.getWindow();
+                if (window != null) {
+                    window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                }
+                loadingDialog.show();
+
+                AsyncTask.THREAD_POOL_EXECUTOR.execute(() -> {
+                    try {
+                        PDFReaderModel unlockedModel = Utils.unlockPdfFile(pdfModel, password);
+                        activityContext.runOnUiThread(() -> {
+                            loadingDialog.dismiss();
+                            if (unlockedModel != null) {
+                                File unlockedFile = new File(unlockedModel.getAbsolutePath_PDFModel());
+                                Utils.openFile(activityContext, unlockedFile);
+                            } else {
+                                Toast.makeText(activityContext,
+                                        activityContext.getString(R.string.editor_error),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        activityContext.runOnUiThread(() -> {
+                            loadingDialog.dismiss();
+                            Toast.makeText(activityContext,
+                                    activityContext.getString(R.string.editor_error),
+                                    Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                });
+            }
+        });
+        dialog.setDialogMode(true);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        dialog.show();
     }
 
     private static class LoadLockedPdfFilesTask extends AsyncTask<Void, Void, Void> {
