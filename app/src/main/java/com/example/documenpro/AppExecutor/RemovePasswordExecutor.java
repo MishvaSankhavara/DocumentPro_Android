@@ -37,7 +37,8 @@ public class RemovePasswordExecutor {
         executor_removePW.execute(() -> {
 
             weakReference_removePW.get().runOnUiThread(() -> {
-                weakReference_removePW.get().tvTool.setText(weakReference_removePW.get().getResources().getString(R.string.unlocking));
+                weakReference_removePW.get().tvTool
+                        .setText(weakReference_removePW.get().getResources().getString(R.string.unlocking));
                 weakReference_removePW.get().tvPercent.setText("0");
             });
 
@@ -53,23 +54,25 @@ public class RemovePasswordExecutor {
             file.delete();
 
             weakReference_removePW.get().runOnUiThread(() -> {
-
                 weakReference_removePW.get().tvPercent.setText("100");
-                weakReference_removePW.get().motionLayout1.transitionToEnd();
-                weakReference_removePW.get().motionLayout2.setVisibility(View.VISIBLE);
-                weakReference_removePW.get().motionLayout2.transitionToEnd();
-                weakReference_removePW.get().ltAnimBg.playAnimation();
-                weakReference_removePW.get().ltAnimDone.playAnimation();
+                weakReference_removePW.get().showCompletionUI(() -> {
+                    weakReference_removePW.get().motionLayout1.transitionToEnd();
+                    weakReference_removePW.get().motionLayout2.setVisibility(View.VISIBLE);
+                    weakReference_removePW.get().motionLayout2.transitionToEnd();
+                    weakReference_removePW.get().ltAnimBg.playAnimation();
+                    weakReference_removePW.get().ltAnimDone.playAnimation();
 
-                weakReference_removePW.get().tvPdfName.setText(new File(pdfModelNew.getName_PDFModel()).getName());
+                    weakReference_removePW.get().tvPdfName.setText(new File(pdfModelNew.getName_PDFModel()).getName());
+                    weakReference_removePW.get().tvPdfPath.setText(pdfModelNew.getAbsolutePath_PDFModel());
 
-                weakReference_removePW.get().tvPdfPath.setText(pdfModelNew.getAbsolutePath_PDFModel());
+                    weakReference_removePW.get().pdfModelFinal = pdfModelNew;
 
-                weakReference_removePW.get().pdfModelFinal = pdfModelNew;
-
-                Utils.displayPDFThumbnail(weakReference_removePW.get(), new File(pdfModelNew.getAbsolutePath_PDFModel()), weakReference_removePW.get().imgThumbnail);
-
-                weakReference_removePW.get().tvPageNumber.setText(String.valueOf(Utils.getPageCountPDF(new File(pdfModelNew.getAbsolutePath_PDFModel()))));
+                    Utils.displayPDFThumbnail(weakReference_removePW.get(),
+                            new File(pdfModelNew.getAbsolutePath_PDFModel()),
+                            weakReference_removePW.get().imgThumbnail);
+                    weakReference_removePW.get().tvPageNumber.setText(
+                            String.valueOf(Utils.getPageCountPDF(new File(pdfModelNew.getAbsolutePath_PDFModel()))));
+                });
             });
         });
     }
@@ -78,7 +81,8 @@ public class RemovePasswordExecutor {
         executor_removePW.shutdownNow();
     }
 
-    public RemovePasswordExecutor(ProcessingTaskActivity activity_removePW, String mPassword_removePW, PDFReaderModel mPdfModel_removePW) {
+    public RemovePasswordExecutor(ProcessingTaskActivity activity_removePW, String mPassword_removePW,
+            PDFReaderModel mPdfModel_removePW) {
 
         this.weakReference_removePW = new WeakReference<>(activity_removePW);
 

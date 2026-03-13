@@ -51,7 +51,8 @@ public class PdfMergeManager {
         executor_PdfMergeManager.execute(() -> {
 
             weakReference_PdfMergeManager.get().runOnUiThread(() -> {
-                weakReference_PdfMergeManager.get().tvTool.setText(weakReference_PdfMergeManager.get().getResources().getString(R.string.message_merging_files));
+                weakReference_PdfMergeManager.get().tvTool.setText(
+                        weakReference_PdfMergeManager.get().getResources().getString(R.string.message_merging_files));
                 weakReference_PdfMergeManager.get().tvPercent.setText("0");
 
                 for (int i = 0; i < pdfPaths_PdfMergeManager.size(); i++) {
@@ -76,7 +77,8 @@ public class PdfMergeManager {
                     file.mkdirs();
                 }
 
-                mergedFilePath_PdfMergeManager = allPdfMergedDir_PdfMergeManager + mergedFileName_PdfMergeManager + ".pdf";
+                mergedFilePath_PdfMergeManager = allPdfMergedDir_PdfMergeManager + mergedFileName_PdfMergeManager
+                        + ".pdf";
 
                 numFiles_PdfMergeManager = pdfPaths_PdfMergeManager.size();
 
@@ -108,38 +110,34 @@ public class PdfMergeManager {
             }
 
             weakReference_PdfMergeManager.get().runOnUiThread(() -> {
-
                 weakReference_PdfMergeManager.get().tvPercent.setText("100");
-                weakReference_PdfMergeManager.get().motionLayout1.transitionToEnd();
-                weakReference_PdfMergeManager.get().motionLayout2.setVisibility(View.VISIBLE);
-                weakReference_PdfMergeManager.get().motionLayout2.transitionToEnd();
-                weakReference_PdfMergeManager.get().ltAnimBg.playAnimation();
-                weakReference_PdfMergeManager.get().ltAnimDone.playAnimation();
+                weakReference_PdfMergeManager.get().showCompletionUI(() -> {
+                    weakReference_PdfMergeManager.get().motionLayout1.transitionToEnd();
+                    weakReference_PdfMergeManager.get().motionLayout2.setVisibility(View.VISIBLE);
+                    weakReference_PdfMergeManager.get().motionLayout2.transitionToEnd();
+                    weakReference_PdfMergeManager.get().ltAnimBg.playAnimation();
+                    weakReference_PdfMergeManager.get().ltAnimDone.playAnimation();
 
-                weakReference_PdfMergeManager.get().tvPdfPath.setText(mergedFilePath_PdfMergeManager);
+                    weakReference_PdfMergeManager.get().tvPdfPath.setText(mergedFilePath_PdfMergeManager);
+                    weakReference_PdfMergeManager.get().tvPdfName.setText(mergedFileName_PdfMergeManager);
 
-                weakReference_PdfMergeManager.get().tvPdfName.setText(mergedFileName_PdfMergeManager);
+                    File file1_PdfMergeManager = new File(mergedFilePath_PdfMergeManager);
+                    PDFReaderModel fileHolderModel_PdfMergeManager = new PDFReaderModel();
 
-                File file1_PdfMergeManager = new File(mergedFilePath_PdfMergeManager);
+                    fileHolderModel_PdfMergeManager.setName_PDFModel(file1_PdfMergeManager.getName());
+                    fileHolderModel_PdfMergeManager.setAbsolutePath_PDFModel(file1_PdfMergeManager.getAbsolutePath());
+                    fileHolderModel_PdfMergeManager.setFileUri_PDFModel(file1_PdfMergeManager.getAbsolutePath());
+                    fileHolderModel_PdfMergeManager.setLength_PDFModel(file1_PdfMergeManager.length());
+                    fileHolderModel_PdfMergeManager.setLastModified_PDFModel(file1_PdfMergeManager.lastModified());
+                    fileHolderModel_PdfMergeManager.setDirectory_PDFModel(file1_PdfMergeManager.isDirectory());
 
-                PDFReaderModel fileHolderModel_PdfMergeManager = new PDFReaderModel();
+                    weakReference_PdfMergeManager.get().pdfModelFinal = fileHolderModel_PdfMergeManager;
 
-                fileHolderModel_PdfMergeManager.setName_PDFModel(file1_PdfMergeManager.getName());
-                fileHolderModel_PdfMergeManager.setAbsolutePath_PDFModel(file1_PdfMergeManager.getAbsolutePath());
-                fileHolderModel_PdfMergeManager.setFileUri_PDFModel(file1_PdfMergeManager.getAbsolutePath());
-                fileHolderModel_PdfMergeManager.setLength_PDFModel(file1_PdfMergeManager.length());
-                fileHolderModel_PdfMergeManager.setLastModified_PDFModel(file1_PdfMergeManager.lastModified());
-                fileHolderModel_PdfMergeManager.setDirectory_PDFModel(file1_PdfMergeManager.isDirectory());
-
-                weakReference_PdfMergeManager.get().pdfModelFinal = fileHolderModel_PdfMergeManager;
-
-                Utils.displayPDFThumbnail(weakReference_PdfMergeManager.get(), file1_PdfMergeManager, weakReference_PdfMergeManager.get().imgThumbnail);
-
-                weakReference_PdfMergeManager.get().tvPageNumber.setText(String.valueOf(Utils.getPageCountPDF(file1_PdfMergeManager)));
-
-                // After showing completion UI, redirect to ResultViewerActivity (Merged tab)
-                weakReference_PdfMergeManager.get().redirectToResultsAfterDone();
-
+                    Utils.displayPDFThumbnail(weakReference_PdfMergeManager.get(), file1_PdfMergeManager,
+                            weakReference_PdfMergeManager.get().imgThumbnail);
+                    weakReference_PdfMergeManager.get().tvPageNumber
+                            .setText(String.valueOf(Utils.getPageCountPDF(file1_PdfMergeManager)));
+                });
             });
 
         });
@@ -149,14 +147,16 @@ public class PdfMergeManager {
         executor_PdfMergeManager.shutdownNow();
     }
 
-    public PdfMergeManager(ProcessingTaskActivity activity_PdfMergeManager, ArrayList<String> arrayList_PdfMergeManager, String mergedFileName_PdfMergeManager) {
+    public PdfMergeManager(ProcessingTaskActivity activity_PdfMergeManager, ArrayList<String> arrayList_PdfMergeManager,
+            String mergedFileName_PdfMergeManager) {
 
         this.weakReference_PdfMergeManager = new WeakReference<>(activity_PdfMergeManager);
 
         this.pdfPaths_PdfMergeManager = arrayList_PdfMergeManager;
         this.mergedFileName_PdfMergeManager = mergedFileName_PdfMergeManager;
 
-        this.weakReference_PdfMergeManager.get().btnClose.setOnClickListener(v -> weakReference_PdfMergeManager.get().finish());
+        this.weakReference_PdfMergeManager.get().btnClose
+                .setOnClickListener(v -> weakReference_PdfMergeManager.get().finish());
 
         this.weakReference_PdfMergeManager.get().btnStopExecutor.setOnClickListener(v -> {
             executor_PdfMergeManager.shutdownNow();

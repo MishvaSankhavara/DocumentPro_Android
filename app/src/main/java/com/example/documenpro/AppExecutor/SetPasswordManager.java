@@ -39,7 +39,8 @@ public class SetPasswordManager {
         executor_setPW.execute(() -> {
 
             weakReference_setPW.get().runOnUiThread(() -> {
-                weakReference_setPW.get().tvTool.setText(weakReference_setPW.get().getResources().getString(R.string.message_locking));
+                weakReference_setPW.get().tvTool
+                        .setText(weakReference_setPW.get().getResources().getString(R.string.message_locking));
                 weakReference_setPW.get().tvPercent.setText("0");
             });
 
@@ -48,7 +49,8 @@ public class SetPasswordManager {
                 publishProgress_setPW(i);
             }
 
-            boolean isSetPassword = Utils.encryptPdfFile(mPdfModel_setPW.getAbsolutePath_PDFModel(), mPdfModel_setPW.getName_PDFModel(), mPassword_setPW);
+            boolean isSetPassword = Utils.encryptPdfFile(mPdfModel_setPW.getAbsolutePath_PDFModel(),
+                    mPdfModel_setPW.getName_PDFModel(), mPassword_setPW);
 
             if (isSetPassword) {
 
@@ -66,26 +68,28 @@ public class SetPasswordManager {
                 pdfModel_setPW.setLastModified_PDFModel(file.lastModified());
                 pdfModel_setPW.setDirectory_PDFModel(file.isDirectory());
 
-                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{pdfModel_setPW.getAbsolutePath_PDFModel()}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(),
+                        new String[] { pdfModel_setPW.getAbsolutePath_PDFModel() }, new String[] { "application/pdf" },
+                        null);
 
                 weakReference_setPW.get().runOnUiThread(() -> {
-
                     weakReference_setPW.get().tvPercent.setText("100");
-                    weakReference_setPW.get().motionLayout1.transitionToEnd();
-                    weakReference_setPW.get().motionLayout2.setVisibility(View.VISIBLE);
-                    weakReference_setPW.get().motionLayout2.transitionToEnd();
-                    weakReference_setPW.get().ltAnimBg.playAnimation();
-                    weakReference_setPW.get().ltAnimDone.playAnimation();
+                    weakReference_setPW.get().showCompletionUI(() -> {
+                        weakReference_setPW.get().motionLayout1.transitionToEnd();
+                        weakReference_setPW.get().motionLayout2.setVisibility(View.VISIBLE);
+                        weakReference_setPW.get().motionLayout2.transitionToEnd();
+                        weakReference_setPW.get().ltAnimBg.playAnimation();
+                        weakReference_setPW.get().ltAnimDone.playAnimation();
 
-                    weakReference_setPW.get().tvPdfName.setText(new File(pdfModel_setPW.getName_PDFModel()).getName());
+                        weakReference_setPW.get().tvPdfName
+                                .setText(new File(pdfModel_setPW.getName_PDFModel()).getName());
+                        weakReference_setPW.get().tvPdfPath.setText(pdfModel_setPW.getAbsolutePath_PDFModel());
 
-                    weakReference_setPW.get().tvPdfPath.setText(pdfModel_setPW.getAbsolutePath_PDFModel());
+                        weakReference_setPW.get().pdfModelFinal = pdfModel_setPW;
 
-                    weakReference_setPW.get().pdfModelFinal = pdfModel_setPW;
-
-                    weakReference_setPW.get().imgThumbnail.setImageResource(R.drawable.locked_pdf);
-
-                    weakReference_setPW.get().tvPageNumber.setVisibility(View.GONE);
+                        weakReference_setPW.get().imgThumbnail.setImageResource(R.drawable.locked_pdf);
+                        weakReference_setPW.get().tvPageNumber.setVisibility(View.GONE);
+                    });
                 });
             }
         });
@@ -95,7 +99,8 @@ public class SetPasswordManager {
         executor_setPW.shutdownNow();
     }
 
-    public SetPasswordManager(ProcessingTaskActivity activity_setPW, String mPassword_setPW, PDFReaderModel mPdfModel_setPW) {
+    public SetPasswordManager(ProcessingTaskActivity activity_setPW, String mPassword_setPW,
+            PDFReaderModel mPdfModel_setPW) {
 
         this.weakReference_setPW = new WeakReference<>(activity_setPW);
 

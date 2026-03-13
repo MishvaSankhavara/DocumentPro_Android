@@ -67,20 +67,26 @@ public class ImageToPdfConverter {
 
                     String path_ImageToPdfConverter = arrayListPhoto_ImageToPdfConverter.get(i);
 
-                    Bitmap rotateBitmap_ImageToPdfConverter = ImageProcessorUtils.rotateBitmapImage(ImageProcessorUtils.getInstant().getCompressedBitmapPDF(path_ImageToPdfConverter), new ExifInterface(path_ImageToPdfConverter).getAttributeInt("Orientation", 0));
+                    Bitmap rotateBitmap_ImageToPdfConverter = ImageProcessorUtils.rotateBitmapImage(
+                            ImageProcessorUtils.getInstant().getCompressedBitmapPDF(path_ImageToPdfConverter),
+                            new ExifInterface(path_ImageToPdfConverter).getAttributeInt("Orientation", 0));
 
                     float width_ImageToPdfConverter = (float) rotateBitmap_ImageToPdfConverter.getWidth();
                     float height_ImageToPdfConverter = (float) rotateBitmap_ImageToPdfConverter.getHeight();
 
-                    PDPage pDPage_ImageToPdfConverter = new PDPage(new PDRectangle(width_ImageToPdfConverter, height_ImageToPdfConverter));
+                    PDPage pDPage_ImageToPdfConverter = new PDPage(
+                            new PDRectangle(width_ImageToPdfConverter, height_ImageToPdfConverter));
 
                     pDDocument.addPage(pDPage_ImageToPdfConverter);
 
-                    PDImageXObject createFromImage = JPEGFactory.createFromImage(pDDocument, rotateBitmap_ImageToPdfConverter);
+                    PDImageXObject createFromImage = JPEGFactory.createFromImage(pDDocument,
+                            rotateBitmap_ImageToPdfConverter);
 
-                    PDPageContentStream pDPageContentStream = new PDPageContentStream(pDDocument, pDPage_ImageToPdfConverter, true, true, true);
+                    PDPageContentStream pDPageContentStream = new PDPageContentStream(pDDocument,
+                            pDPage_ImageToPdfConverter, true, true, true);
 
-                    pDPageContentStream.drawImage(createFromImage, 0.0f, 0.0f, width_ImageToPdfConverter, height_ImageToPdfConverter);
+                    pDPageContentStream.drawImage(createFromImage, 0.0f, 0.0f, width_ImageToPdfConverter,
+                            height_ImageToPdfConverter);
 
                     pDPageContentStream.close();
 
@@ -91,39 +97,43 @@ public class ImageToPdfConverter {
                 pDDocument.save(generatedPDFPath_ImageToPdfConverter);
                 pDDocument.close();
 
-                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{generatedPDFPath_ImageToPdfConverter}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(),
+                        new String[] { generatedPDFPath_ImageToPdfConverter }, new String[] { "application/pdf" },
+                        null);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             weakReference_ImageToPdfConverter.get().runOnUiThread(() -> {
-
                 weakReference_ImageToPdfConverter.get().tvPercent.setText("100");
-                weakReference_ImageToPdfConverter.get().motionLayout1.transitionToEnd();
-                weakReference_ImageToPdfConverter.get().motionLayout2.setVisibility(View.VISIBLE);
-                weakReference_ImageToPdfConverter.get().motionLayout2.transitionToEnd();
-                weakReference_ImageToPdfConverter.get().ltAnimDone.playAnimation();
+                weakReference_ImageToPdfConverter.get().showCompletionUI(() -> {
+                    weakReference_ImageToPdfConverter.get().motionLayout1.transitionToEnd();
+                    weakReference_ImageToPdfConverter.get().motionLayout2.setVisibility(View.VISIBLE);
+                    weakReference_ImageToPdfConverter.get().motionLayout2.transitionToEnd();
+                    weakReference_ImageToPdfConverter.get().ltAnimDone.playAnimation();
 
-                weakReference_ImageToPdfConverter.get().tvPdfName.setText(new File(newFileName_ImageToPdfConverter).getName());
+                    weakReference_ImageToPdfConverter.get().tvPdfName
+                            .setText(new File(newFileName_ImageToPdfConverter).getName());
+                    weakReference_ImageToPdfConverter.get().tvPdfPath.setText(generatedPDFPath_ImageToPdfConverter);
 
-                weakReference_ImageToPdfConverter.get().tvPdfPath.setText(generatedPDFPath_ImageToPdfConverter);
+                    File file = new File(generatedPDFPath_ImageToPdfConverter);
 
-                File file = new File(generatedPDFPath_ImageToPdfConverter);
+                    PDFReaderModel fileHolderModel = new PDFReaderModel();
+                    fileHolderModel.setName_PDFModel(file.getName());
+                    fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
+                    fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
+                    fileHolderModel.setLength_PDFModel(file.length());
+                    fileHolderModel.setLastModified_PDFModel(file.lastModified());
+                    fileHolderModel.setDirectory_PDFModel(file.isDirectory());
 
-                PDFReaderModel fileHolderModel = new PDFReaderModel();
-                fileHolderModel.setName_PDFModel(file.getName());
-                fileHolderModel.setAbsolutePath_PDFModel(file.getAbsolutePath());
-                fileHolderModel.setFileUri_PDFModel(file.getAbsolutePath());
-                fileHolderModel.setLength_PDFModel(file.length());
-                fileHolderModel.setLastModified_PDFModel(file.lastModified());
-                fileHolderModel.setDirectory_PDFModel(file.isDirectory());
+                    weakReference_ImageToPdfConverter.get().pdfModelFinal = fileHolderModel;
 
-                weakReference_ImageToPdfConverter.get().pdfModelFinal = fileHolderModel;
-
-                Utils.displayPDFThumbnail(weakReference_ImageToPdfConverter.get(), file, weakReference_ImageToPdfConverter.get().imgThumbnail);
-
-                weakReference_ImageToPdfConverter.get().tvPageNumber.setText(String.valueOf(Utils.getPageCountPDF(file)));
+                    Utils.displayPDFThumbnail(weakReference_ImageToPdfConverter.get(), file,
+                            weakReference_ImageToPdfConverter.get().imgThumbnail);
+                    weakReference_ImageToPdfConverter.get().tvPageNumber
+                            .setText(String.valueOf(Utils.getPageCountPDF(file)));
+                });
             });
         });
     }
@@ -132,7 +142,8 @@ public class ImageToPdfConverter {
         executor_ImageToPdfConverter.shutdownNow();
     }
 
-    public ImageToPdfConverter(ProcessingTaskActivity activity_ImageToPdfConverter, String newFileName_ImageToPdfConverter, ArrayList<String> arrayListPhoto_ImageToPdfConverter) {
+    public ImageToPdfConverter(ProcessingTaskActivity activity_ImageToPdfConverter,
+            String newFileName_ImageToPdfConverter, ArrayList<String> arrayListPhoto_ImageToPdfConverter) {
 
         this.weakReference_ImageToPdfConverter = new WeakReference<>(activity_ImageToPdfConverter);
 
@@ -142,8 +153,10 @@ public class ImageToPdfConverter {
 
         this.numPages = arrayListPhoto_ImageToPdfConverter.size();
 
-        this.weakReference_ImageToPdfConverter.get().btnClose.setOnClickListener(v -> weakReference_ImageToPdfConverter.get().finish());
+        this.weakReference_ImageToPdfConverter.get().btnClose
+                .setOnClickListener(v -> weakReference_ImageToPdfConverter.get().finish());
 
-        this.weakReference_ImageToPdfConverter.get().btnStopExecutor.setOnClickListener(v -> executor_ImageToPdfConverter.shutdownNow());
+        this.weakReference_ImageToPdfConverter.get().btnStopExecutor
+                .setOnClickListener(v -> executor_ImageToPdfConverter.shutdownNow());
     }
 }

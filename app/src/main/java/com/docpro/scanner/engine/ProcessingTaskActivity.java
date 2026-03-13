@@ -48,6 +48,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     public AppCompatImageView imgDocPreview;
 
     public AppCompatTextView txtCurrentPageStatus;
+    public AppCompatTextView txtStatusInfo;
 
     public PDFReaderModel finalPdfResult;
     public AppCompatImageView btnStopTaskExecutor;
@@ -142,20 +143,10 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         }
     }
 
-    public void redirectToResultsAfterDone() {
-        if (redirectedToResult || isFinishing() || isDestroyed()) {
+    public void showCompletionUI(Runnable successUIRunner) {
+        if (isFinishing() || isDestroyed()) {
             return;
         }
-        redirectedToResult = true;
-
-        int targetTab = 0;
-        if (activeTaskId == AppGlobalConstants.TOOL_ID_MERGE) {
-            targetTab = 2; // ResultViewerActivity: Merged
-        } else if (activeTaskId == AppGlobalConstants.TOOL_ID_SPLIT) {
-            targetTab = 1; // ResultViewerActivity: Split
-        }
-
-        final int finalTargetTab = targetTab;
 
         AppLoadingDialog dialog = new AppLoadingDialog(this);
         dialog.setMessage(getString(R.string.sodk_editor_please_wait));
@@ -167,14 +158,20 @@ public class ProcessingTaskActivity extends AppCompatActivity {
                     return;
                 }
                 dialog.dismiss();
-                Intent intent = new Intent(ProcessingTaskActivity.this, ResultViewerActivity.class);
-                intent.putExtra(AppGlobalConstants.FROM_SAVE_IMAGE, finalTargetTab);
-                startActivity(intent);
-                finish();
+                if (successUIRunner != null) {
+                    successUIRunner.run();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 450);
+        }, 1000);
+    }
+
+    public void redirectToResultsAfterDone() {
+        // Redirection is now manual via ResultViewerActivity if needed,
+        // or we just show the success UI in this Activity.
+        // Keeping the method for compatibility but it will do nothing now
+        // as we want to stay on the success screen.
     }
 
     private void bindViews() {
@@ -186,6 +183,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         txtDocumentName = findViewById(R.id.fileNameTv);
         txtDocumentPath = findViewById(R.id.filePathTv);
         txtExecutionResult = findViewById(R.id.titleTv);
+        txtStatusInfo = findViewById(R.id.resultTv);
         btnShareResult = findViewById(R.id.shareTv);
         btnOpenResult = findViewById(R.id.openTv);
         animWorkingBackground = findViewById(R.id.bgAnimView);
@@ -208,7 +206,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         ltAnimDone = animSuccess;
         tvPdfName = txtDocumentName;
         tvPdfPath = txtDocumentPath;
-        tvResult = txtExecutionResult;
+        tvResult = txtStatusInfo;
         imgThumbnail = imgDocPreview;
         tvPageNumber = txtCurrentPageStatus;
         // pdfModelFinal will be set by executors directly as before

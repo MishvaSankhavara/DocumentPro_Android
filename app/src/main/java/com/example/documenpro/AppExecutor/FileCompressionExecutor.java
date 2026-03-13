@@ -165,42 +165,46 @@ public class FileCompressionExecutor {
 
                     if (weakReference_FileCompression.get() != null) {
                         weakReference_FileCompression.get().runOnUiThread(() -> {
-
                             weakReference_FileCompression.get().tvPercent.setText("100");
-                            weakReference_FileCompression.get().motionLayout1.transitionToEnd();
-                            weakReference_FileCompression.get().motionLayout2.setVisibility(View.VISIBLE);
-                            weakReference_FileCompression.get().motionLayout2.transitionToEnd();
-                            weakReference_FileCompression.get().ltAnimBg.playAnimation();
-                            weakReference_FileCompression.get().ltAnimDone.playAnimation();
+                            weakReference_FileCompression.get().showCompletionUI(() -> {
+                                weakReference_FileCompression.get().motionLayout1.transitionToEnd();
+                                weakReference_FileCompression.get().motionLayout2.setVisibility(View.VISIBLE);
+                                weakReference_FileCompression.get().motionLayout2.transitionToEnd();
+                                weakReference_FileCompression.get().ltAnimBg.playAnimation();
+                                weakReference_FileCompression.get().ltAnimDone.playAnimation();
 
-                            File file1 = new File(compressedPDF_FileCompression);
+                                File file1 = new File(compressedPDF_FileCompression);
 
-                            weakReference_FileCompression.get().tvPdfName.setText(file1.getName());
-                            weakReference_FileCompression.get().tvPdfPath.setText(compressedPDF_FileCompression);
+                                weakReference_FileCompression.get().tvPdfName.setText(file1.getName());
+                                weakReference_FileCompression.get().tvPdfPath.setText(compressedPDF_FileCompression);
 
-                            String sb2 = weakReference_FileCompression.get().getResources()
-                                    .getString(R.string.label_reduced_from) + " " + uncompressedFileSize_FileCompression
-                                    + " " + weakReference_FileCompression.get().getResources().getString(R.string.to)
-                                    + " " + compressedFileSize_FileCompression;
+                                String sb2 = weakReference_FileCompression.get().getResources()
+                                        .getString(R.string.label_reduced_from) + " "
+                                        + uncompressedFileSize_FileCompression
+                                        + " "
+                                        + weakReference_FileCompression.get().getResources().getString(R.string.to)
+                                        + " " + compressedFileSize_FileCompression;
 
-                            weakReference_FileCompression.get().tvResult.setText(sb2);
+                                weakReference_FileCompression.get().tvResult.setText(sb2);
+                                weakReference_FileCompression.get().tvResult.setVisibility(View.VISIBLE);
 
-                            PDFReaderModel fileHolderModel_FileCompression = new PDFReaderModel();
+                                PDFReaderModel fileHolderModel_FileCompression = new PDFReaderModel();
 
-                            fileHolderModel_FileCompression.setName_PDFModel(file1.getName());
-                            fileHolderModel_FileCompression.setAbsolutePath_PDFModel(file1.getAbsolutePath());
-                            fileHolderModel_FileCompression.setFileUri_PDFModel(file1.getAbsolutePath());
-                            fileHolderModel_FileCompression.setLength_PDFModel(file1.length());
-                            fileHolderModel_FileCompression.setLastModified_PDFModel(file1.lastModified());
-                            fileHolderModel_FileCompression.setDirectory_PDFModel(file1.isDirectory());
+                                fileHolderModel_FileCompression.setName_PDFModel(file1.getName());
+                                fileHolderModel_FileCompression.setAbsolutePath_PDFModel(file1.getAbsolutePath());
+                                fileHolderModel_FileCompression.setFileUri_PDFModel(file1.getAbsolutePath());
+                                fileHolderModel_FileCompression.setLength_PDFModel(file1.length());
+                                fileHolderModel_FileCompression.setLastModified_PDFModel(file1.lastModified());
+                                fileHolderModel_FileCompression.setDirectory_PDFModel(file1.isDirectory());
 
-                            weakReference_FileCompression.get().pdfModelFinal = fileHolderModel_FileCompression;
+                                weakReference_FileCompression.get().pdfModelFinal = fileHolderModel_FileCompression;
 
-                            Utils.displayPDFThumbnail(weakReference_FileCompression.get(), file1,
-                                    weakReference_FileCompression.get().imgThumbnail);
+                                Utils.displayPDFThumbnail(weakReference_FileCompression.get(), file1,
+                                        weakReference_FileCompression.get().imgThumbnail);
 
-                            weakReference_FileCompression.get().tvPageNumber
-                                    .setText(String.valueOf(Utils.getPageCountPDF(file1)));
+                                weakReference_FileCompression.get().tvPageNumber
+                                        .setText(String.valueOf(Utils.getPageCountPDF(file1)));
+                            });
                         });
                     }
 

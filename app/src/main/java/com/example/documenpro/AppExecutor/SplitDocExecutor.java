@@ -46,7 +46,8 @@ public class SplitDocExecutor {
         executor_SplitDoc.execute(() -> {
 
             weakReference_SplitDoc.get().runOnUiThread(() -> {
-                weakReference_SplitDoc.get().tvTool.setText(weakReference_SplitDoc.get().getResources().getString(R.string.message_splitting_files));
+                weakReference_SplitDoc.get().tvTool.setText(
+                        weakReference_SplitDoc.get().getResources().getString(R.string.message_splitting_files));
                 weakReference_SplitDoc.get().tvPercent.setText("0");
             });
 
@@ -68,7 +69,8 @@ public class SplitDocExecutor {
                 pageRange_SplitDoc.add(numberPage_SplitDoc.get(0));
                 pageRange_SplitDoc.add(numberPage_SplitDoc.get(numberPage_SplitDoc.size() - 1));
 
-                String outputPath = splitPdfDocumentDir_SplitDoc + mFileName_SplitDoc + "page" + pageRange_SplitDoc + ".pdf";
+                String outputPath = splitPdfDocumentDir_SplitDoc + mFileName_SplitDoc + "page" + pageRange_SplitDoc
+                        + ".pdf";
 
                 PdfCopy pc_SplitDoc = new PdfCopy(doc_SplitDoc, new FileOutputStream(outputPath));
 
@@ -83,38 +85,38 @@ public class SplitDocExecutor {
 
                 doc_SplitDoc.close();
 
-                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(), new String[]{generatedPDFPath_SplitDoc}, new String[]{"application/pdf"}, null);
+                MediaScannerConnection.scanFile(DocumentMyApplication.getInstance(),
+                        new String[] { generatedPDFPath_SplitDoc }, new String[] { "application/pdf" }, null);
 
                 weakReference_SplitDoc.get().runOnUiThread(() -> {
 
                     weakReference_SplitDoc.get().tvPercent.setText("100");
-                    weakReference_SplitDoc.get().motionLayout1.transitionToEnd();
-                    weakReference_SplitDoc.get().motionLayout2.setVisibility(View.VISIBLE);
-                    weakReference_SplitDoc.get().motionLayout2.transitionToEnd();
-                    weakReference_SplitDoc.get().ltAnimBg.playAnimation();
-                    weakReference_SplitDoc.get().ltAnimDone.playAnimation();
-                    weakReference_SplitDoc.get().tvPdfName.setText(mFileName_SplitDoc);
-                    weakReference_SplitDoc.get().tvPdfPath.setText(generatedPDFPath_SplitDoc);
+                    weakReference_SplitDoc.get().showCompletionUI(() -> {
+                        weakReference_SplitDoc.get().motionLayout1.transitionToEnd();
+                        weakReference_SplitDoc.get().motionLayout2.setVisibility(View.VISIBLE);
+                        weakReference_SplitDoc.get().motionLayout2.transitionToEnd();
+                        weakReference_SplitDoc.get().ltAnimBg.playAnimation();
+                        weakReference_SplitDoc.get().ltAnimDone.playAnimation();
+                        weakReference_SplitDoc.get().tvPdfName.setText(mFileName_SplitDoc);
+                        weakReference_SplitDoc.get().tvPdfPath.setText(generatedPDFPath_SplitDoc);
 
-                    File file_SplitDoc = new File(generatedPDFPath_SplitDoc);
+                        File file_SplitDoc = new File(generatedPDFPath_SplitDoc);
+                        PDFReaderModel fileHolderModel_SplitDoc = new PDFReaderModel();
 
-                    PDFReaderModel fileHolderModel_SplitDoc = new PDFReaderModel();
+                        fileHolderModel_SplitDoc.setName_PDFModel(file_SplitDoc.getName());
+                        fileHolderModel_SplitDoc.setAbsolutePath_PDFModel(file_SplitDoc.getAbsolutePath());
+                        fileHolderModel_SplitDoc.setFileUri_PDFModel(file_SplitDoc.getAbsolutePath());
+                        fileHolderModel_SplitDoc.setLength_PDFModel(file_SplitDoc.length());
+                        fileHolderModel_SplitDoc.setLastModified_PDFModel(file_SplitDoc.lastModified());
+                        fileHolderModel_SplitDoc.setDirectory_PDFModel(file_SplitDoc.isDirectory());
 
-                    fileHolderModel_SplitDoc.setName_PDFModel(file_SplitDoc.getName());
-                    fileHolderModel_SplitDoc.setAbsolutePath_PDFModel(file_SplitDoc.getAbsolutePath());
-                    fileHolderModel_SplitDoc.setFileUri_PDFModel(file_SplitDoc.getAbsolutePath());
-                    fileHolderModel_SplitDoc.setLength_PDFModel(file_SplitDoc.length());
-                    fileHolderModel_SplitDoc.setLastModified_PDFModel(file_SplitDoc.lastModified());
-                    fileHolderModel_SplitDoc.setDirectory_PDFModel(file_SplitDoc.isDirectory());
+                        weakReference_SplitDoc.get().pdfModelFinal = fileHolderModel_SplitDoc;
 
-                    weakReference_SplitDoc.get().pdfModelFinal = fileHolderModel_SplitDoc;
-
-                    Utils.displayPDFThumbnail(weakReference_SplitDoc.get(), file_SplitDoc, weakReference_SplitDoc.get().imgThumbnail);
-
-                    weakReference_SplitDoc.get().tvPageNumber.setText(String.valueOf(Utils.getPageCountPDF(file_SplitDoc)));
-
-                    // After showing completion UI, redirect to ResultViewerActivity (Split tab)
-                    weakReference_SplitDoc.get().redirectToResultsAfterDone();
+                        Utils.displayPDFThumbnail(weakReference_SplitDoc.get(), file_SplitDoc,
+                                weakReference_SplitDoc.get().imgThumbnail);
+                        weakReference_SplitDoc.get().tvPageNumber
+                                .setText(String.valueOf(Utils.getPageCountPDF(file_SplitDoc)));
+                    });
                 });
 
             } catch (Exception error_SplitDoc) {
@@ -127,7 +129,8 @@ public class SplitDocExecutor {
         executor_SplitDoc.shutdownNow();
     }
 
-    public SplitDocExecutor(ProcessingTaskActivity activity_SplitDoc, String fileName_SplitDoc, ArrayList<Integer> numberPages_SplitDoc, String pdfPath) {
+    public SplitDocExecutor(ProcessingTaskActivity activity_SplitDoc, String fileName_SplitDoc,
+            ArrayList<Integer> numberPages_SplitDoc, String pdfPath) {
 
         this.weakReference_SplitDoc = new WeakReference<>(activity_SplitDoc);
 
