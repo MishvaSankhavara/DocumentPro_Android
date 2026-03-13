@@ -111,6 +111,7 @@
     <string name="action_setting">การตั้งค่า</string>
     <string name="action_continue">ดำเนินการต่อ</string>
     <string name="go_to_set">ไปที่ชุด</string>
+    <string name="app_tab_storage">เอกสาร</string>
     <string name="tools">เครื่องมือ</string>
     <string name="no_files_yet">ยังไม่มีไฟล์</string>
     <string name="action_go">ไป</string>

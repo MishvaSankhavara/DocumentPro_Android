@@ -115,6 +115,7 @@
     <string name="action_setting">Setări</string>
     <string name="action_continue">Continua</string>
     <string name="go_to_set">Du-te la set</string>
+    <string name="app_tab_storage">Filele</string>
     <string name="tools">Instrumente</string>
     <string name="no_files_yet">Încă nu există fișiere</string>
     <string name="action_go">Merge</string>

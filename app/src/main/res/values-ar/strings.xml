@@ -130,6 +130,7 @@
     <string name="action_setting">إعدادات</string>
     <string name="action_continue">يكمل</string>
     <string name="go_to_set">اذهب إلى المجموعة</string>
+    <string name="app_tab_storage">الملفات</string>
     <string name="tools">أدوات</string>
     <string name="no_files_yet">لا توجد ملفات حتى الآن</string>
     <string name="action_go">يذهب</string>

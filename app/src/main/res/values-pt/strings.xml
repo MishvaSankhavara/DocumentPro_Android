@@ -116,6 +116,7 @@
     <string name="action_setting">Configurações</string>
     <string name="action_continue">Continuar</string>
     <string name="go_to_set">Vá para definir</string>
+    <string name="app_tab_storage">Arquivos</string>
     <string name="tools">Ferramentas</string>
     <string name="no_files_yet">Nenhum arquivo ainda</string>
     <string name="action_go">Ir</string>

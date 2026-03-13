@@ -662,7 +662,7 @@
     <string name="tab_reader" translatable="false">Reader</string>
     <string name="app_tab_recent" translatable="false">Recent</string>
     <string name="app_tab_boomark" translatable="false">Bookmark</string>
-    <string name="app_tab_storage" translatable="false">File</string>
+    <string name="app_tab_storage">Files</string>
     <string name="app_image" translatable="false">Image</string>
     <string name="app_album" translatable="false">Album</string>
     <string name="app_skip" translatable="false">Skip</string>

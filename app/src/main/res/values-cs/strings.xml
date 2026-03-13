@@ -123,6 +123,7 @@
     <string name="action_setting">Nastavení</string>
     <string name="action_continue">Pokračovat</string>
     <string name="go_to_set">Přejít na sadu</string>
+    <string name="app_tab_storage">Soubory</string>
     <string name="tools">Nástroje</string>
     <string name="no_files_yet">Zatím žádné soubory</string>
     <string name="action_go">Jít</string>

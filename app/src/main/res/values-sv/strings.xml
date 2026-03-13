@@ -117,6 +117,7 @@
     <string name="action_setting">inställningar</string>
     <string name="action_continue">Fortsätta</string>
     <string name="go_to_set">Gå till set</string>
+    <string name="app_tab_storage">Filer</string>
     <string name="tools">Verktyg</string>
     <string name="no_files_yet">Inga filer än</string>
     <string name="action_go">Gå</string>

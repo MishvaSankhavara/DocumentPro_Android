@@ -20,6 +20,7 @@ import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.adapter_reader.LanguageListAdapter;
 
 import com.example.documenpro.clickListener.LanguageClickListener;
+import com.example.documenpro.ui.activities.MainActivity;
 import com.example.documenpro.ui.activities.OnBoardActivity;
 
 import java.util.Locale;
@@ -66,7 +67,14 @@ public class LocaleSelectionActivity extends ActivityBase {
                         AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel());
                 utils.setInt(AppGlobalConstants.PREF_LANGUAGE_NUMBER, selectedLocaleIndex);
 
-                Intent restartIntent = new Intent(LocaleSelectionActivity.this, OnBoardActivity.class);
+                Class<?> nextActivity;
+                if (utils.getBoolean(AppGlobalConstants.PREF_GUIDE_COMPLETED, false)) {
+                    nextActivity = MainActivity.class;
+                } else {
+                    nextActivity = OnBoardActivity.class;
+                }
+
+                Intent restartIntent = new Intent(LocaleSelectionActivity.this, nextActivity);
                 restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 String key = AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex)

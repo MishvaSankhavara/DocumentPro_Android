@@ -114,6 +114,7 @@
     <string name="action_setting">Cài đặt</string>
     <string name="action_continue">Tiếp tục</string>
     <string name="go_to_set">Đi tới thiết lập</string>
+    <string name="app_tab_storage">Tệp</string>
     <string name="tools">Công cụ</string>
     <string name="no_files_yet">Chưa có tập tin nào</string>
     <string name="action_go">Đi</string>

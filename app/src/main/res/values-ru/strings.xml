@@ -117,6 +117,7 @@
     <string name="action_setting">Настройки</string>
     <string name="action_continue">Продолжать</string>
     <string name="go_to_set">Перейти к настройке</string>
+    <string name="app_tab_storage">Файлы</string>
     <string name="tools">Инструменты</string>
     <string name="no_files_yet">Файлов пока нет</string>
     <string name="action_go">Идти</string>

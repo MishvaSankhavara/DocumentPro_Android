@@ -125,6 +125,7 @@
     <string name="action_setting">Pengaturan</string>
     <string name="action_continue">Melanjutkan</string>
     <string name="go_to_set">Pergi ke lokasi syuting</string>
+    <string name="app_tab_storage">Data</string>
     <string name="tools">Peralatan</string>
     <string name="no_files_yet">Belum ada file</string>
     <string name="action_go">Pergi</string>

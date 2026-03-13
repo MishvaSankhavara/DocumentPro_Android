@@ -117,6 +117,7 @@
     <string name="action_setting">समायोजन</string>
     <string name="action_continue">जारी रखना</string>
     <string name="go_to_set">सेट पर जाएं</string>
+    <string name="app_tab_storage">फाइलें</string>
     <string name="tools">औजार</string>
     <string name="no_files_yet">अभी तक कोई फ़ाइल नहीं</string>
     <string name="action_go">जाना</string>

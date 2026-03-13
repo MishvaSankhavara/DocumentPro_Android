@@ -119,6 +119,7 @@
     <string name="action_setting">設定</string>
     <string name="action_continue">続く</string>
     <string name="go_to_set">セットに移動</string>
+    <string name="app_tab_storage">ファイル</string>
     <string name="tools">ツール</string>
     <string name="no_files_yet">まだファイルがありません</string>
     <string name="action_go">行く</string>

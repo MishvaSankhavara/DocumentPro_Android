@@ -110,6 +110,7 @@
     <string name="action_setting">Ajustes</string>
     <string name="action_continue">Continuar</string>
     <string name="go_to_set">Ir a configurar</string>
+    <string name="app_tab_storage">Archivos</string>
     <string name="tools">Herramientas</string>
     <string name="no_files_yet">Aún no hay archivos</string>
     <string name="action_go">Ir</string>
