@@ -8,7 +8,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.widget.Toast;
+
+import com.example.documenpro.utils.Utils;
 
 import com.example.documenpro.R;
 import com.example.documenpro.model_reader.DocumentModel;
@@ -27,13 +30,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean isStared_DatabaseHelper(SQLiteDatabase sQLiteDatabase_DatabaseHelper, String str_DatabaseHelper) {
         Cursor query = sQLiteDatabase_DatabaseHelper.query(
                 DatabaseContract.FavoriteEntry_DbContract.TABLE_NAME_DbContract,
-                new String[]{"path"},
+                new String[] { "path" },
                 "path =?",
-                new String[]{str_DatabaseHelper},
+                new String[] { str_DatabaseHelper },
                 null,
                 null,
-                null
-        );
+                null);
         boolean valueOf = query.moveToFirst();
         query.close();
         return valueOf;
@@ -42,13 +44,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean isStared_DatabaseHelper(String str_DatabaseHelper) {
         Cursor query = getReadableDb_DatabaseHelper().query(
                 DatabaseContract.FavoriteEntry_DbContract.TABLE_NAME_DbContract,
-                new String[]{"path"},
+                new String[] { "path" },
                 "path =?",
-                new String[]{str_DatabaseHelper},
+                new String[] { str_DatabaseHelper },
                 null,
                 null,
-                null
-        );
+                null);
         boolean valueOf = query.moveToFirst();
         query.close();
         closeDb_DatabaseHelper();
@@ -64,8 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     DatabaseContract.RecentEntry_DbContract.TABLE_NAME_DbContract,
                     contentValues_DatabaseHelper,
                     "path=?",
-                    new String[]{str_DatabaseHelper}
-            );
+                    new String[] { str_DatabaseHelper });
             closeDb_DatabaseHelper();
         } catch (Exception e) {
             Toast.makeText(this.context_DatabaseHelper, R.string.action_failed, Toast.LENGTH_LONG).show();
@@ -82,8 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     DatabaseContract.FavoriteEntry_DbContract.TABLE_NAME_DbContract,
                     contentValues_DatabaseHelper,
                     "path =?",
-                    new String[]{str_DatabaseHelper}
-            );
+                    new String[] { str_DatabaseHelper });
             closeDb_DatabaseHelper();
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,8 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         getReadableDb_DatabaseHelper().delete(
                 DatabaseContract.FavoriteEntry_DbContract.TABLE_NAME_DbContract,
                 "path =?",
-                new String[]{str_DatabaseHelper}
-        );
+                new String[] { str_DatabaseHelper });
         closeDb_DatabaseHelper();
     }
 
@@ -144,8 +142,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseContract.FavoriteEntry_DbContract.TABLE_NAME_DbContract,
                 contentValues,
                 "path=?",
-                new String[]{str_DatabaseHelper}
-        );
+                new String[] { str_DatabaseHelper });
         closeDb_DatabaseHelper();
     }
 
@@ -153,8 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         getReadableDb_DatabaseHelper().delete(
                 DatabaseContract.RecentEntry_DbContract.TABLE_NAME_DbContract,
                 "path =?",
-                new String[]{str_DatabaseHelper}
-        );
+                new String[] { str_DatabaseHelper });
         closeDb_DatabaseHelper();
     }
 
@@ -167,22 +163,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (rawQuery.moveToFirst()) {
             do {
                 @SuppressLint("Range")
-                String string_DatabaseHelper =
-                        rawQuery.getString(rawQuery.getColumnIndex("path"));
+                String string_DatabaseHelper = rawQuery.getString(rawQuery.getColumnIndex("path"));
                 File file = new File(string_DatabaseHelper);
 
                 if (file.exists()) {
-                    DocumentModel document = new DocumentModel();
-                    document.setFileName_DocModel(file.getName());
-                    document.setFileUri_DocModel(file.getAbsolutePath());
-                    document.setLength_DocModel(file.length());
-                    document.setSrcImage_DocModel(getDocumentSrc(file));
-                    document.setLastModified_DocModel(file.lastModified());
-                    document.setStarred_DocModel(
-                            isStared_DatabaseHelper(readableDb_DatabaseHelper,
-                                    file.getAbsolutePath())
-                    );
-                    arrayList_DatabaseHelper.add(document);
+                    boolean isLockedPdf = false;
+                    if (file.getName().toLowerCase().endsWith(".pdf")) {
+                        isLockedPdf = Utils.checkHavePassword(context_DatabaseHelper, Uri.fromFile(file));
+                    }
+
+                    if (!isLockedPdf) {
+                        DocumentModel document = new DocumentModel();
+                        document.setFileName_DocModel(file.getName());
+                        document.setFileUri_DocModel(file.getAbsolutePath());
+                        document.setLength_DocModel(file.length());
+                        document.setSrcImage_DocModel(getDocumentSrc(file));
+                        document.setLastModified_DocModel(file.lastModified());
+                        document.setStarred_DocModel(
+                                isStared_DatabaseHelper(readableDb_DatabaseHelper,
+                                        file.getAbsolutePath()));
+                        arrayList_DatabaseHelper.add(document);
+                    }
                 } else {
                     deleteRecentPDF_DatabaseHelper(string_DatabaseHelper);
                 }
@@ -197,8 +198,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         getReadableDb_DatabaseHelper().delete(
                 DatabaseContract.RecentEntry_DbContract.TABLE_NAME_DbContract,
                 "path =?",
-                new String[]{str_DatabaseHelper}
-        );
+                new String[] { str_DatabaseHelper });
         closeDb_DatabaseHelper();
     }
 
@@ -213,13 +213,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean isRecent_DatabaseHelper(String str_DatabaseHelper) {
         Cursor query = getReadableDb_DatabaseHelper().query(
                 DatabaseContract.RecentEntry_DbContract.TABLE_NAME_DbContract,
-                new String[]{"path"},
+                new String[] { "path" },
                 "path =?",
-                new String[]{str_DatabaseHelper},
+                new String[] { str_DatabaseHelper },
                 null,
                 null,
-                null
-        );
+                null);
         boolean valueOf = query.moveToFirst();
         query.close();
         closeDb_DatabaseHelper();
@@ -230,28 +229,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sQLiteDatabase_DatabaseHelper, int i, int i2) {
         if (i == 1) {
             sQLiteDatabase_DatabaseHelper.execSQL(
-                    "CREATE TABLE IF NOT EXISTS last_opened_page ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, page_number INTEGER)"
-            );
+                    "CREATE TABLE IF NOT EXISTS last_opened_page ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, page_number INTEGER)");
             sQLiteDatabase_DatabaseHelper.execSQL(
-                    "CREATE TABLE IF NOT EXISTS bookmarks ( _id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, path TEXT, page_number INTEGER UNIQUE, created_at DATETIME DEFAULT (DATETIME('now','localtime')))"
-            );
+                    "CREATE TABLE IF NOT EXISTS bookmarks ( _id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, path TEXT, page_number INTEGER UNIQUE, created_at DATETIME DEFAULT (DATETIME('now','localtime')))");
         }
     }
 
     @Override
     public void onCreate(SQLiteDatabase sQLiteDatabase_DatabaseHelper) {
         sQLiteDatabase_DatabaseHelper.execSQL(
-                "CREATE TABLE IF NOT EXISTS history_pdfs ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, last_accessed_at DATETIME DEFAULT (DATETIME('now','localtime')))"
-        );
+                "CREATE TABLE IF NOT EXISTS history_pdfs ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, last_accessed_at DATETIME DEFAULT (DATETIME('now','localtime')))");
         sQLiteDatabase_DatabaseHelper.execSQL(
-                "CREATE TABLE IF NOT EXISTS stared_pdfs ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, created_at DATETIME DEFAULT (DATETIME('now','localtime')))"
-        );
+                "CREATE TABLE IF NOT EXISTS stared_pdfs ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, created_at DATETIME DEFAULT (DATETIME('now','localtime')))");
         sQLiteDatabase_DatabaseHelper.execSQL(
-                "CREATE TABLE IF NOT EXISTS last_opened_page ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, page_number INTEGER)"
-        );
+                "CREATE TABLE IF NOT EXISTS last_opened_page ( _id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT UNIQUE, page_number INTEGER)");
         sQLiteDatabase_DatabaseHelper.execSQL(
-                "CREATE TABLE IF NOT EXISTS bookmarks ( _id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, path TEXT, page_number INTEGER UNIQUE, created_at DATETIME DEFAULT (DATETIME('now','localtime')))"
-        );
+                "CREATE TABLE IF NOT EXISTS bookmarks ( _id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, path TEXT, page_number INTEGER UNIQUE, created_at DATETIME DEFAULT (DATETIME('now','localtime')))");
     }
 
     public synchronized void closeDb_DatabaseHelper() {
@@ -273,8 +266,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper databaseHelper_DatabaseHelper;
         synchronized (DatabaseHelper.class) {
             if (sInstance_DatabaseHelper == null) {
-                sInstance_DatabaseHelper =
-                        new DatabaseHelper(context2_DatabaseHelper.getApplicationContext());
+                sInstance_DatabaseHelper = new DatabaseHelper(context2_DatabaseHelper.getApplicationContext());
             }
             databaseHelper_DatabaseHelper = sInstance_DatabaseHelper;
         }
