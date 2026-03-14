@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -15,15 +16,16 @@
 
             <ImageView
                 android:id="@+id/storage_icon"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:contentDescription="@string/editor_go_up"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/btn_green" />
+                android:padding="8dp"
+                android:src="@drawable/ic_file"
+                app:tint="@color/app_main_color" />
 
             <LinearLayout
                 android:id="@+id/names_bar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:orientation="horizontal" />

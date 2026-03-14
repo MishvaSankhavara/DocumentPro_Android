@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.artifex.solib.ConfigOptions;
 import com.artifex.solib.SOSelectionLimits;
 import com.artifex.solib.c;
+import com.artifex.mupdf.fitz.PDFAnnotation;
 
 import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
@@ -279,21 +280,48 @@ public class NUIDocViewPdf extends NUIDocView {
     public void onDeleteButton() {
         DocPdfView var2 = this.getPdfDocView();
         c var12 = (c) this.getDoc();
-        boolean var4 = this.getDoc().getSelectionIsAlterableTextSelection();
+        SOSelectionLimits var13 = var2.getSelectionLimits();
+        boolean hasSelection = var13 != null && var13.getIsActive();
+
+        // 1. Try deleting the currently selected annotation
+        PDFAnnotation ann = var12.m();
+        if (ann != null) {
+            try {
+                ann.destroy();
+                ann.update();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            var12.clearSelection();
+            this.updateUIAppearance();
+            return;
+        }
+
+        // 2. Try deleting highlight annotation explicitly
+        try {
+            var12.deleteHighlightAnnotation();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 3. If text selection can be deleted
         if (this.getDoc().getSelectionCanBeDeleted()) {
             try {
                 this.getDoc().selectionDelete();
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
-        } else if (var12.n() || var4) {
-            var12.deleteHighlightAnnotation();
-        } else {
-            if (!var2.getDrawMode()) {
-                return;
-            }
+        }
 
-            var2.clearInk();
+        // 4. If selection exists but highlight still not removed
+        if (hasSelection) {
+            var12.clearSelection();
+        } else {
+            // 5. Handle drawing erase
+            if (var2.getDrawMode()) {
+                var2.clearInk();
+            }
         }
 
         this.updateUIAppearance();
@@ -352,11 +380,9 @@ public class NUIDocViewPdf extends NUIDocView {
     public void onHighlightButton() {
         try {
             this.getDoc().addHighlightAnnotation();
-            this.getDoc().clearSelection();
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-
     }
 
     // public void onNoteButton() {
@@ -504,7 +530,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
         boolean var3 = this.getDoc().getSelectionCanBeDeleted();
         boolean var4 = this.getDoc().getSelectionIsAlterableTextSelection();
-        this.btnHighLight.setEnable(var4);
+        boolean isActive = var2 != null && var2.getIsActive();
 
         boolean var6 = var1.getDrawMode();
         this.btnDrawNew.setChoose(var6);
@@ -512,7 +538,7 @@ public class NUIDocViewPdf extends NUIDocView {
         EditBtn var11 = this.btnDeleteNote;
         c var12 = (c) this.getDoc();
         boolean isAnnotation = var12.n();
-        var5 = (var6 && var5) || var3 || isAnnotation || var4;
+        var5 = (var6 && var5) || var3 || isAnnotation || var4 || isActive;
 
         var11.setEnable(var5);
         this.btnHighLight.setEnable(var4 || var6);
