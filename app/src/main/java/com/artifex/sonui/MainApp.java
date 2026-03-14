@@ -1,6 +1,8 @@
 package com.artifex.sonui;
 
 import android.content.Context;
+import android.util.Log;
+import java.lang.reflect.Field;
 
 import com.artifex.solib.ConfigOptions;
 import com.example.documenpro.DocumentMyApplication;
@@ -40,7 +42,40 @@ public class MainApp extends DocumentMyApplication {
 
     public void onCreate() {
         context = this;
+        initArtifexResources();
         this.a();
         super.onCreate();
+    }
+
+    private void initArtifexResources() {
+        String packageName = getPackageName();
+        String sdkRPackage = "com.artifex.sonui.editor";
+        String[] innerClasses = { "anim", "attr", "bool", "color", "dimen", "drawable", "id", "integer", "layout",
+                "string", "style" };
+
+        for (String inner : innerClasses) {
+            try {
+                Class<?> sdkRInner = Class.forName(sdkRPackage + ".R$" + inner);
+                Field[] fields = sdkRInner.getDeclaredFields();
+                for (Field field : fields) {
+                    try {
+                        String name = field.getName();
+                        int id = getResources().getIdentifier(name, inner, packageName);
+                        if (id != 0) {
+                            field.setAccessible(true);
+                            field.set(null, id);
+                        } else {
+                            if (inner.equals("string") && name.startsWith("sodk_editor_")) {
+                                Log.w("MainApp", "Resource not found for SDK field: " + inner + "." + name);
+                            }
+                        }
+                    } catch (Exception e) {
+                        // Skip individual field errors
+                    }
+                }
+            } catch (ClassNotFoundException e) {
+                Log.e("MainApp", "SDK R inner class not found: " + inner, e);
+            }
+        }
     }
 }

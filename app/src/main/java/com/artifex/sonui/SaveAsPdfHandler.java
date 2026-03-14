@@ -2,6 +2,9 @@ package com.artifex.sonui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -167,35 +170,56 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
             public void onComplete(int result, int error) {
                 Log.d(TAG, "save onComplete: result=" + result + ", error=" + error);
                 if (result == 0) {
+                    final File file = new File(path);
+                    final String fileName = file.getName();
                     activity.runOnUiThread(() -> {
-                        File file = new File(path);
-                        String fileName = file.getName();
-
                         Toast.makeText(activity, "PDF saved successfully", Toast.LENGTH_LONG).show();
-
-                        android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
-                        if (titleView != null) {
-                            titleView.setText(fileName);
-                        }
-
-                        Intent intent = activity.getIntent();
-                        if (intent != null) {
-                            intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
-                            intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
-                                    fileName);
-                        }
-
-                        if (activity instanceof com.artifex.sonui.AppNUIActivity) {
-                            ((com.artifex.sonui.AppNUIActivity) activity).onNewIntent(intent);
-                        }
-
-                        if (saveAsComplete != null) {
-                            saveAsComplete.onComplete(0, path);
-                        }
-                        if (customSaveComplete != null) {
-                            customSaveComplete.onComplete(0, path, true);
-                        }
                     });
+                    // Defer dialog so SDK can finish any internal "Please wait" / cleanup first
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                        if (activity.isFinishing() || activity.isDestroyed()) return;
+                        // Show confirm dialog: "Open saved document?"
+                        Utilities.yesNoMessage(
+                                activity,
+                                "Open saved document?",
+                                "Would you like to open the saved document?",
+                                "Yes",
+                                "No",
+                                () -> {
+                                    // Yes: redirect to saved document
+                                    Intent openIntent = new Intent(activity, com.example.documenpro.ui.activities.ViewOfficeActivity.class);
+                                    openIntent.setAction(Intent.ACTION_VIEW);
+                                    openIntent.setData(Uri.fromFile(file));
+                                    openIntent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
+                                    openIntent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, fileName);
+                                    openIntent.putExtra("STARTED_FROM_EXPLORER", true);
+                                    openIntent.putExtra("START_PAGE", 0);
+                                    openIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    activity.startActivity(openIntent);
+                                    activity.finish();
+                                },
+                                () -> {
+                                    // No: stay on current document, update footer and state
+                                    android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
+                                    if (titleView != null) {
+                                        titleView.setText(fileName);
+                                    }
+                                    Intent intent = activity.getIntent();
+                                    if (intent != null) {
+                                        intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
+                                        intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, fileName);
+                                    }
+                                    if (activity instanceof com.artifex.sonui.AppNUIActivity) {
+                                        ((com.artifex.sonui.AppNUIActivity) activity).onNewIntent(intent);
+                                    }
+                                    if (saveAsComplete != null) {
+                                        saveAsComplete.onComplete(0, path);
+                                    }
+                                    if (customSaveComplete != null) {
+                                        customSaveComplete.onComplete(0, path, true);
+                                    }
+                                });
+                    }, 200);
                 } else {
                     activity.runOnUiThread(() -> {
                         Toast.makeText(activity, "Error saving PDF: " + error, Toast.LENGTH_LONG).show();

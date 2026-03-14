@@ -102,8 +102,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lt_favorite"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:lottie_rawRes="@raw/lottie_favorite"
                 app:lottie_speed="2" />
         </LinearLayout>

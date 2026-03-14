@@ -1695,42 +1695,9 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     public void doSave() {
-        if (this.T) {
-            this.a(false);
-        } else {
-            this.preSaveQuestion(new Runnable() {
-                public void run() {
-                    final ProgressDialog var1 = Utilities.createAndShowWaitSpinner(NUIDocView.this.getContext());
-                    NUIDocView.this.mSession.getDoc().a(NUIDocView.this.mSOFileState.getInternalPath(),
-                            new SODocSaveListener() {
-                                public void onComplete(int var1x, int var2) {
-                                    var1.dismiss();
-                                    if (var1x == 0) {
-                                        NUIDocView.this.mSOFileState.saveFile();
-                                        NUIDocView.this.updateUIAppearance();
-                                        if (NUIDocView.this.n != null) {
-                                            NUIDocView.this.n.postSaveHandler(new SOSaveAsComplete() {
-                                                public void onComplete(int var1x, String var2) {
-                                                    NUIDocView.this.reloadFile();
-                                                }
-                                            });
-                                        }
-                                    } else {
-                                        String var3 = String.format(
-                                                NUIDocView.this.activity().getString(R.string.error_saving_document),
-                                                var2);
-                                        Utilities.showMessage(NUIDocView.this.activity(),
-                                                NUIDocView.this.activity().getString(R.string.editor_error), var3);
-                                    }
-
-                                }
-                            });
-                }
-            }, new Runnable() {
-                public void run() {
-                }
-            });
-        }
+        // Always open ChoosePath (set-path dialog) so user can choose folder + file name.
+        // In-place save is not used; Save always triggers Save As flow.
+        this.a(false);
     }
 
     // public void doSelectAll() {

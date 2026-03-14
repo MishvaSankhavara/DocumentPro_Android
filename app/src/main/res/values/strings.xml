@@ -418,6 +418,8 @@
     <string name="number_format_percentage" translatable="false">Number Format - Percentage</string>
     <string name="number_format_upper" translatable="false">"NUMBER FORMAT"</string>
     <string name="editor_ok" translatable="false">OK</string>
+    <string name="editor_open_saved_document_title" translatable="false">Open saved document?</string>
+    <string name="editor_open_saved_document_message" translatable="false">Would you like to open the saved document?</string>
     <string name="editor_open_in" translatable="false">Open In</string>
     <string name="editor_open_in_upper" translatable="false">OPEN IN</string>
     <string name="editor_open_pdf_in" translatable="false">Open PDF In</string>
@@ -465,6 +467,17 @@
     <string name="save_upper" translatable="false">SAVE</string>
     <string name="saved_body" translatable="false">File save is complete.</string>
     <string name="saved_title" translatable="false">Saved</string>
+    <string name="sodk_editor_saved_body" translatable="false">File save is complete.</string>
+    <string name="sodk_editor_saved_title" translatable="false">Saved</string>
+    <string name="sodk_editor_ok" translatable="false">OK</string>
+    <string name="sodk_editor_cancel" translatable="false">Cancel</string>
+    <string name="sodk_editor_yes" translatable="false">Yes</string>
+    <string name="sodk_editor_no" translatable="false">No</string>
+    <string name="sodk_editor_open_saved_document_title" translatable="false">Open saved document?</string>
+    <string name="sodk_editor_open_saved_document_message" translatable="false">Would you like to open the saved document?</string>
+    <string name="sodk_editor_alert_dialog_style">sodk_editor_alert_dialog_style</string>
+    <string name="app_sodk_editor_alert_button_color">@color/colorPrimary</string>
+    <string name="app_sodk_editor_discard">Discard</string>
     <string name="editor_scientific" translatable="false">Scientific</string>
     <string name="editor_search" translatable="false">Search</string>
     <string name="editor_searching" translatable="false">Searching</string>
@@ -681,7 +694,6 @@
     <string name="app_attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="app_todo" translatable="false">Todo</string>
     <string name="app_str_color_value" translatable="false">Color Value</string>
-    <string name="app_sodk_editor_discard" translatable="false">Discard</string>
 
     <string name="new_intent_title" translatable="false">Edit session already in progress</string>
     <string name="new_intent_body" translatable="false">Opening a new document will lose changes made to another document</string>
@@ -1039,6 +1051,4 @@
     <string name="sodk_editor_invalid_file_name">Invalid file name.</string>
     <string name="sodk_editor_replace_file_title">File Exists</string>
     <string name="sodk_editor_replace_file_body">That file already exists. Do you want to replace it?</string>
-    <string name="sodk_editor_yes">Yes</string>
-    <string name="sodk_editor_no">No</string>
 </resources>
