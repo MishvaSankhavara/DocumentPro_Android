@@ -7,11 +7,9 @@ import android.graphics.Color;
 import android.supportv1.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,10 +43,6 @@ public class NUIDocViewPdf extends NUIDocView {
     private TextView tvSize;
 
     private boolean q = false;
-    private boolean mIsEraserMode = false;
-    private OnTouchListener mEraserTouchListener;
-    private int mPenSize = 5;
-    private int mEraserSize = 10;
 
     public NUIDocViewPdf(Context var1) {
         super(var1);
@@ -125,13 +119,9 @@ public class NUIDocViewPdf extends NUIDocView {
                         int value = (int) leftValue;
                         tvSize.setText(String.valueOf(value));
                         DocPdfView docPdfView = NUIDocViewPdf.this.getPdfDocView();
-                        if (mIsEraserMode) {
-                            mEraserSize = value;
-                        } else {
-                            mPenSize = value;
-                            if (docPdfView.getDrawMode()) {
-                                docPdfView.setInkLineThickness(value);
-                            }
+                        if (docPdfView.getDrawMode()) {
+                            float var2 = docPdfView.getInkLineThickness();
+                            docPdfView.setInkLineThickness(value);
                         }
                         LayoutParams layoutParams = (LayoutParams) drawSizeIn.getLayoutParams();
                         layoutParams.width = value;
@@ -153,39 +143,6 @@ public class NUIDocViewPdf extends NUIDocView {
 
             }
         });
-
-        mEraserTouchListener = new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (mIsEraserMode) {
-                    int x = (int) event.getX();
-                    int y = (int) event.getY();
-
-                    DocView docView = getPdfDocView();
-                    DocPageView pageView = docView.findPageViewContainingPoint(x, y, false);
-                    if (pageView != null) {
-                        // Check multiple points within the eraser radius
-                        int radius = mEraserSize / 2;
-                        int[][] offsets = { { 0, 0 }, { radius, 0 }, { -radius, 0 }, { 0, radius }, { 0, -radius } };
-
-                        for (int[] offset : offsets) {
-                            Point p = pageView.screenToPage(x + offset[0], y + offset[1]);
-                            getDoc().clearSelection();
-                            pageView.getPage().select(2, (double) p.x, (double) p.y);
-                            if (getDoc().getSelectionCanBeDeleted()) {
-                                getDoc().selectionDelete();
-                            }
-                        }
-                    }
-
-                    if (event.getAction() == MotionEvent.ACTION_UP) {
-                        updateUIAppearance();
-                    }
-                    return true;
-                }
-                return false;
-            }
-        };
 
     }
 
@@ -272,107 +229,45 @@ public class NUIDocViewPdf extends NUIDocView {
             if (this.getPdfDocView().getDrawMode()) {
                 this.getPdfDocView().onDrawMode();
             }
-            mIsEraserMode = false;
-            getPdfDocView().setOnTouchListener(null);
-
-            this.post(new Runnable() {
-                @Override
-                public void run() {
-                    updateUIAppearance();
-                }
-            });
+            try {
+                this.getDoc().clearSelection();
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
         }
 
         if (var1 == this.btnDrawNew) {
             if (llBottomDraw.getVisibility() == VISIBLE) {
-                if (mIsEraserMode) {
-                    // Switch from eraser to draw
-                    mIsEraserMode = false;
-                    getPdfDocView().setOnTouchListener(null);
-                    if (!this.getPdfDocView().getDrawMode()) {
-                        this.onDrawButton();
-                    }
-                    seekBarThickness.setProgress(mPenSize);
-                    tvSize.setText(String.valueOf(mPenSize));
-                } else {
-                    Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
-                    if (this.getPdfDocView().getDrawMode()) {
-                        this.onDrawButton();
-                    }
-                }
-                btnDrawNew.setChoose(!mIsEraserMode && this.getPdfDocView().getDrawMode());
+                Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
+                this.onDrawButton();
+                btnDrawNew.setChoose(false);
 
             } else if (llBottomDraw.getVisibility() == GONE) {
                 Utils.showHideView(getContext(), llBottomDraw, true, R.dimen.cm_dp_102);
-                if (!this.getPdfDocView().getDrawMode()) {
-                    this.onDrawButton();
-                }
-                mIsEraserMode = false;
-                getPdfDocView().setOnTouchListener(null);
-                seekBarThickness.setProgress(mPenSize);
-                tvSize.setText(String.valueOf(mPenSize));
+                this.onDrawButton();
                 btnDrawNew.setChoose(true);
             }
         }
         if (var1 == this.btnHighLight) {
-            if (this.getPdfDocView().getDrawMode() || mIsEraserMode) {
+            if (this.getPdfDocView().getDrawMode()) {
                 if (llBottomDraw.getVisibility() == VISIBLE) {
                     Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
                 }
-                if (this.getPdfDocView().getDrawMode()) {
-                    this.onDrawButton();
-                }
-                mIsEraserMode = false;
-                getPdfDocView().setOnTouchListener(null);
+                this.onDrawButton();
                 btnDrawNew.setChoose(false);
             }
             this.onHighlightButton();
         }
 
         if (var1 == this.btnDeleteNote) {
-            if (llBottomDraw.getVisibility() == VISIBLE) {
-                mIsEraserMode = !mIsEraserMode;
-                if (mIsEraserMode) {
-                    if (this.getPdfDocView().getDrawMode()) {
-                        this.onDrawButton();
-                    }
-                    getPdfDocView().setOnTouchListener(mEraserTouchListener);
-                    seekBarThickness.setProgress(mEraserSize);
-                    tvSize.setText(String.valueOf(mEraserSize));
-                } else {
-                    if (!this.getPdfDocView().getDrawMode()) {
-                        this.onDrawButton();
-                    }
-                    getPdfDocView().setOnTouchListener(null);
-                    seekBarThickness.setProgress(mPenSize);
-                    tvSize.setText(String.valueOf(mPenSize));
-                }
-                this.updateUIAppearance();
-                return;
-            } else {
-                // Open the bottom draw and enable eraser mode
-                Utils.showHideView(getContext(), llBottomDraw, true, R.dimen.cm_dp_102);
-                if (this.getPdfDocView().getDrawMode()) {
-                    this.onDrawButton();
-                }
-                mIsEraserMode = true;
-                getPdfDocView().setOnTouchListener(mEraserTouchListener);
-                seekBarThickness.setProgress(mEraserSize);
-                tvSize.setText(String.valueOf(mEraserSize));
-                this.updateUIAppearance();
-                return;
-            }
+            this.onDeleteButton();
         }
 
         if (var1 == this.btnCloseEdit) {
             this.getPdfDocView().saveNoteData();
-            mIsEraserMode = false;
-            getPdfDocView().setOnTouchListener(null);
 
             if (llBottomDraw.getVisibility() == VISIBLE) {
-                if (this.getPdfDocView().getDrawMode()) {
-                    this.onDrawButton();
-                }
+                this.onDrawButton();
 
                 Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
 
@@ -383,12 +278,16 @@ public class NUIDocViewPdf extends NUIDocView {
 
     public void onDeleteButton() {
         DocPdfView var2 = this.getPdfDocView();
+        c var12 = (c) this.getDoc();
+        boolean var4 = this.getDoc().getSelectionIsAlterableTextSelection();
         if (this.getDoc().getSelectionCanBeDeleted()) {
             try {
                 this.getDoc().selectionDelete();
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
+        } else if (var12.n() || var4) {
+            var12.deleteHighlightAnnotation();
         } else {
             if (!var2.getDrawMode()) {
                 return;
@@ -454,7 +353,6 @@ public class NUIDocViewPdf extends NUIDocView {
         try {
             this.getDoc().addHighlightAnnotation();
             this.getDoc().clearSelection();
-            this.updateUIAppearance();
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
@@ -606,21 +504,19 @@ public class NUIDocViewPdf extends NUIDocView {
 
         boolean var3 = this.getDoc().getSelectionCanBeDeleted();
         boolean var4 = this.getDoc().getSelectionIsAlterableTextSelection();
+        this.btnHighLight.setEnable(var4);
+
         boolean var6 = var1.getDrawMode();
-
-        boolean isEditTabActive = toolbarEditContainer != null && toolbarEditContainer.getVisibility() == VISIBLE;
-
         this.btnDrawNew.setChoose(var6);
-        this.btnDeleteNote.setChoose(mIsEraserMode);
-
         boolean var5 = ((DocPdfView) this.getDocView()).hasNotSavedInk();
         EditBtn var11 = this.btnDeleteNote;
-        var5 = (var6 && var5) || mIsEraserMode || var3;
-
-        var11.setEnable(var5 || isEditTabActive);
-        this.btnHighLight.setEnable(var4 || var6 || mIsEraserMode || isEditTabActive);
-
         c var12 = (c) this.getDoc();
+        boolean isAnnotation = var12.n();
+        var5 = (var6 && var5) || var3 || isAnnotation || var4;
+
+        var11.setEnable(var5);
+        this.btnHighLight.setEnable(var4 || var6);
+
         if (var3) {
             var12.n();
         }
