@@ -309,9 +309,6 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                     NUIDocView.this.onSelectionChanged();
                                     NUIDocView.this.reloadFile();
 
-                                    // Show success dialog
-                                    Utilities.showMessage(NUIDocView.this.activity(), "Success",
-                                            "File save is completed.");
                                 } else {
                                     NUIDocView.this.mSOFileState.setUserPath(null);
                                 }
@@ -1695,7 +1692,8 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     public void doSave() {
-        // Always open ChoosePath (set-path dialog) so user can choose folder + file name.
+        // Always open ChoosePath (set-path dialog) so user can choose folder + file
+        // name.
         // In-place save is not used; Save always triggers Save As flow.
         this.a(false);
     }
