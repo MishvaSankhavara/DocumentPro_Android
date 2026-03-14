@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -70,6 +72,38 @@ public class NUIDocViewPdf extends NUIDocView {
         }
     }
 
+    private void showTextBoxAt(float rawX, float rawY) {
+        int[] rootLocation = new int[2];
+        this.getLocationOnScreen(rootLocation);
+        float x = rawX - rootLocation[0];
+        float y = rawY - rootLocation[1];
+
+        EditText editText = new EditText(getContext());
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+        );
+        editText.setLayoutParams(lp);
+        editText.setX(x);
+        editText.setY(y);
+        editText.setSingleLine(false);
+        editText.setMinLines(1);
+        editText.setTextColor(Color.BLACK);
+        editText.setBackgroundColor(Color.argb(200, 255, 255, 255));
+
+        this.addView(editText);
+        editText.requestFocus();
+
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+        }
+
+        // Exit text-add mode after placing one box
+        setIsAddTextMode(false);
+        this.updateUIAppearance();
+    }
+
     protected void afterFirstLayoutComplete() {
         super.afterFirstLayoutComplete();
         this.btnHighLight = (EditBtn) this.createToolbarButton(R.id.btnHighlight);
@@ -101,6 +135,26 @@ public class NUIDocViewPdf extends NUIDocView {
 
         this.b();
         seekBarThickness = this.findViewById(R.id.thickness_seekBar);
+
+        // Handle tap-to-add-text for PDFs when Text tool is active.
+        if (getPdfDocView() != null) {
+            getPdfDocView().setOnTouchListener(new OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (!getIsAddTextMode()) {
+                        return false;
+                    }
+
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        float rawX = event.getRawX();
+                        float rawY = event.getRawY();
+                        showTextBoxAt(rawX, rawY);
+                        return true;
+                    }
+                    return true;
+                }
+            });
+        }
 
         seekBarThickness.setOnTouchListener(new OnTouchListener() {
             @Override
