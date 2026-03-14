@@ -31,6 +31,7 @@ import com.example.documenpro.utils.Utils;
 
 public class NUIDocViewPdf extends NUIDocView {
     private EditBtn btnHighLight;
+    private EditBtn btnText;
     private EditBtn btnDeleteNote;
     FrameLayout drawSizeOut;
     View drawSizeIn;
@@ -76,6 +77,7 @@ public class NUIDocViewPdf extends NUIDocView {
         this.drawSizeIn = this.findViewById(R.id.paint_size);
         this.btnDeleteNote = (EditBtn) this.createToolbarButton(R.id.btnDelete);
         this.btnDrawNew = (EditBtn) this.createToolbarButton(R.id.btnDrawNew);
+        this.btnText = (EditBtn) this.createToolbarButton(R.id.btnText);
 
         this.llBottomDraw = this.findViewById(R.id.pdf_bottom_draw);
         this.recyclerViewColor = this.findViewById(R.id.recyclerColor);
@@ -180,7 +182,10 @@ public class NUIDocViewPdf extends NUIDocView {
 
     }
 
+    @Override
     protected void createInputView() {
+        mInputView = new InputView(this.getContext(), null, this);
+        this.addView(mInputView);
     }
 
     protected void createInsertButtons() {
@@ -194,8 +199,11 @@ public class NUIDocViewPdf extends NUIDocView {
         return ContextCompat.getColor(this.getContext(), R.color.editor_header_pdf_color);
     }
 
+    private InputView mInputView;
+
+    @Override
     public InputView getInputView() {
-        return null;
+        return mInputView;
     }
 
     protected int getLayoutId() {
@@ -258,6 +266,14 @@ public class NUIDocViewPdf extends NUIDocView {
                 btnDrawNew.setChoose(false);
             }
             this.onHighlightButton();
+        }
+
+        if (var1 == this.btnText) {
+            this.onTextButton();
+        }
+
+        if (var1 == this.btnDrawNew || var1 == this.btnHighLight) {
+            this.mIsAddTextMode = false;
         }
 
         if (var1 == this.btnDeleteNote) {
@@ -385,10 +401,14 @@ public class NUIDocViewPdf extends NUIDocView {
         }
     }
 
-    // public void onNoteButton() {
-    // this.getPdfDocView().onNoteMode();
-    // this.updateUIAppearance();
-    // }
+    public void onTextButton() {
+        this.mIsAddTextMode = !this.mIsAddTextMode;
+        Log.d("TEXT_TOOL_DEBUG", "onTextButton called, mIsAddTextMode: " + this.mIsAddTextMode);
+        if (this.mIsAddTextMode) {
+            this.getPdfDocView().resetModes();
+        }
+        this.updateUIAppearance();
+    }
 
     protected void onPageLoaded(int var1) {
         this.checkXFA();
@@ -542,6 +562,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
         var11.setEnable(var5);
         this.btnHighLight.setEnable(var4 || var6);
+        this.btnText.setChoose(this.mIsAddTextMode);
 
         if (var3) {
             var12.n();

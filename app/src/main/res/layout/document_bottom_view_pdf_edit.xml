@@ -99,6 +99,13 @@
                 app:ImageEdt="@drawable/ic_draw_preview" />
 
             <com.example.documenpro.ui.customviews.EditBtn
+                android:id="@+id/btnText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:ImageEdt="@drawable/editor_icon_shape_textbox" />
+
+            <com.example.documenpro.ui.customviews.EditBtn
                 android:id="@+id/btnDelete"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

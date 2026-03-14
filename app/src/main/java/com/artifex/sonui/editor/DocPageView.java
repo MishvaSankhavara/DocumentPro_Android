@@ -15,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.supportv1.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
@@ -90,9 +91,11 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
         var4.setStrokeWidth((float) Utilities.convertDpToPixel(2.0F));
         var4 = new Paint();
         this.y = var4;
-        this.setSelectedBorderColor(ContextCompat.getColor(this.getContext(), R.color.editor_selected_page_border_color));
+        this.setSelectedBorderColor(
+                ContextCompat.getColor(this.getContext(), R.color.editor_selected_page_border_color));
         var4.setStyle(Style.STROKE);
-        var4.setStrokeWidth((float) Utilities.convertDpToPixel((float) var1.getResources().getInteger(R.integer.editor_selected_page_border_width)));
+        var4.setStrokeWidth((float) Utilities
+                .convertDpToPixel((float) var1.getResources().getInteger(R.integer.editor_selected_page_border_width)));
         if (F == null) {
             Paint var3 = new Paint();
             F = var3;
@@ -114,7 +117,8 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
             int var3 = var1.b().top + 5;
             int var4 = var1.b().right - 5;
             int var5 = var1.b().bottom - 5;
-            return this.a(new int[]{var1.a().getPixel(var2, var3), var1.a().getPixel(var4, var3), var1.a().getPixel(var2, var5), var1.a().getPixel(var4, var5)});
+            return this.a(new int[] { var1.a().getPixel(var2, var3), var1.a().getPixel(var4, var3),
+                    var1.a().getPixel(var2, var5), var1.a().getPixel(var4, var5) });
         } else {
             return -1;
         }
@@ -267,7 +271,8 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
                 throw new ClassNotFoundException();
             }
         } catch (ExceptionInInitializerError e2) {
-            str = String.format("getDataLeakHandlers() experienced unexpected exception [%s]", "ExceptionInInitializerError");
+            str = String.format("getDataLeakHandlers() experienced unexpected exception [%s]",
+                    "ExceptionInInitializerError");
             Log.e("DocPageView", str);
         } catch (LinkageError e3) {
             str = String.format("getDataLeakHandlers() experienced unexpected exception [%s]", "LinkageError");
@@ -417,7 +422,7 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
     }
 
     public float[] getVerticalRuler() {
-//        return this.e ? null : this.mPage.getVerticalRuler();
+        // return this.e ? null : this.mPage.getVerticalRuler();
         if (this.e) {
             return null;
         } else {
@@ -542,6 +547,49 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
         this.mSize.x = var1.mSize.x;
         this.mSize.y = var1.mSize.y;
         this.requestLayout();
+    }
+
+    private float mDownX;
+    private float mDownY;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        DocViewHost host = getDocView() != null ? getDocView().mHostActivity : null;
+        if (host instanceof NUIDocView) {
+            boolean addTextMode = ((NUIDocView) host).getIsAddTextMode();
+            if (addTextMode) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    mDownX = event.getRawX();
+                    mDownY = event.getRawY();
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    float dx = event.getRawX() - mDownX;
+                    float dy = event.getRawY() - mDownY;
+                    if (Math.abs(dx) < 20 && Math.abs(dy) < 20) {
+                        NUIDocView nuiHost = (NUIDocView) host;
+                        if (this.b instanceof com.artifex.solib.c) {
+                            com.artifex.solib.c pdfDoc = (com.artifex.solib.c) this.b;
+                            Point var5 = this.screenToPage((int) event.getX(), (int) event.getY());
+                            try {
+                                // Create a text annotation at the tapped location.
+                                pdfDoc.createTextAnnotationAt(new PointF(var5.x, var5.y), 2);
+                                // Exit add-text mode and update toolbar state.
+                                nuiHost.setIsAddTextMode(false);
+                                nuiHost.updateUIAppearance();
+                                // Bring up the keyboard so the user can type.
+                                nuiHost.showKeyboard();
+                                // Force page redraw.
+                                this.invalidate();
+                                this.requestLayout();
+                                return true;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     public boolean onSingleTap(int var1, int var2, boolean var3, ExternalLinkListener var4) {

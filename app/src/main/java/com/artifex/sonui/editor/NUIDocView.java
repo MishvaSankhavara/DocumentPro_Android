@@ -182,6 +182,16 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     private SODataLeakHandlers n;
     private boolean isFullScreen = true;
 
+    protected boolean mIsAddTextMode = false;
+
+    public boolean getIsAddTextMode() {
+        return mIsAddTextMode;
+    }
+
+    public void setIsAddTextMode(boolean var1) {
+        mIsAddTextMode = var1;
+    }
+
     public NUIDocView(Context context) {
         super(context);
         this.init(context);
