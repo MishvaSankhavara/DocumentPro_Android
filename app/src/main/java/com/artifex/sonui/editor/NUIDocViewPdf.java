@@ -502,9 +502,7 @@ public class NUIDocViewPdf extends NUIDocView {
         var5 = (var6 && var5) || var3;
 
         var11.setEnable(var5);
-        var5 = !var6;
-        var11.setEnable(var5);
-        this.btnHighLight.setEnable(var5);
+        this.btnHighLight.setEnable(!var6);
 
         c var12 = (c) this.getDoc();
         if (var3) {
