@@ -407,7 +407,9 @@ public class Utils {
     public static void shareImage(Context context, String filePath) {
         try {
             Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.share_image_message));
+            String appUrl = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
+            String shareMessage = String.format(context.getString(R.string.custom_share_message), appUrl);
+            intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), filePath, "", null);
             Uri screenshotUri = Uri.parse(path);
             intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
@@ -719,7 +721,7 @@ public class Utils {
 
             i.putExtra(Intent.EXTRA_SUBJECT, res.getString(R.string.share_app_title));
             String appUrl = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
-            String shareMessage = res.getString(R.string.share_recommend_message) + "\n" + appUrl;
+            String shareMessage = String.format(res.getString(R.string.custom_share_message), appUrl);
             i.putExtra(Intent.EXTRA_TEXT, shareMessage);
             context.startActivity(Intent.createChooser(i, res.getString(R.string.share_choose_option)));
         } catch (Exception e) {
@@ -1064,6 +1066,9 @@ public class Utils {
                         shareIntent.setType("application/*");
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT, mContext.getString(R.string.app_name));
                         shareIntent.putExtra(Intent.EXTRA_TITLE, mContext.getString(R.string.app_name));
+                        String appUrl = "https://play.google.com/store/apps/details?id=" + mContext.getPackageName();
+                        String shareMessage = String.format(mContext.getString(R.string.custom_share_message), appUrl);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
                         // Thêm cờ để tạo một task mới và xóa các task cũ khi chia sẻ hoàn tất
                         shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

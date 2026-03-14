@@ -15,6 +15,7 @@ import com.artifex.sonui.editor.SODataLeakHandlers;
 import com.artifex.sonui.editor.SOSaveAsComplete;
 import com.artifex.sonui.editor.SOCustomSaveComplete;
 import com.artifex.sonui.editor.Utilities;
+import com.example.documenpro.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -177,7 +178,8 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                     });
                     // Defer dialog so SDK can finish any internal "Please wait" / cleanup first
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                        if (activity.isFinishing() || activity.isDestroyed()) return;
+                        if (activity.isFinishing() || activity.isDestroyed())
+                            return;
                         // Show confirm dialog: "Open saved document?"
                         Utilities.yesNoMessage(
                                 activity,
@@ -187,11 +189,15 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                                 "No",
                                 () -> {
                                     // Yes: redirect to saved document
-                                    Intent openIntent = new Intent(activity, com.example.documenpro.ui.activities.ViewOfficeActivity.class);
+                                    Intent openIntent = new Intent(activity,
+                                            com.example.documenpro.ui.activities.ViewOfficeActivity.class);
                                     openIntent.setAction(Intent.ACTION_VIEW);
                                     openIntent.setData(Uri.fromFile(file));
-                                    openIntent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
-                                    openIntent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, fileName);
+                                    openIntent.putExtra(
+                                            com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
+                                    openIntent.putExtra(
+                                            com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
+                                            fileName);
                                     openIntent.putExtra("STARTED_FROM_EXPLORER", true);
                                     openIntent.putExtra("START_PAGE", 0);
                                     openIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -200,14 +206,19 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                                 },
                                 () -> {
                                     // No: stay on current document, update footer and state
-                                    android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
+                                    android.widget.TextView titleView = activity
+                                            .findViewById(com.example.documenpro.R.id.tvTittle);
                                     if (titleView != null) {
                                         titleView.setText(fileName);
                                     }
                                     Intent intent = activity.getIntent();
                                     if (intent != null) {
-                                        intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
-                                        intent.putExtra(com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, fileName);
+                                        intent.putExtra(
+                                                com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI,
+                                                path);
+                                        intent.putExtra(
+                                                com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
+                                                fileName);
                                     }
                                     if (activity instanceof com.artifex.sonui.AppNUIActivity) {
                                         ((com.artifex.sonui.AppNUIActivity) activity).onNewIntent(intent);
@@ -291,6 +302,17 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     @Override
     public void shareHandler(String var1, SODoc var2) {
         Log.d(TAG, "shareHandler called");
+        try {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("application/*");
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(var1)));
+            String appUrl = "https://play.google.com/store/apps/details?id=" + activity.getPackageName();
+            String shareMessage = String.format(activity.getString(R.string.custom_share_message), appUrl);
+            intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.share_file_using_title)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

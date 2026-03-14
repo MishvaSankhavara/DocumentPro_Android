@@ -916,6 +916,7 @@
     <string name="share_app_title">My application name</string>
     <string name="share_choose_option">Choose one</string>
     <string name="share_recommend_message">Let me recommend you this application</string>
+    <string name="custom_share_message">Open and manage your documents easily with DocReader.\nFast and simple PDF, PPT, and document viewer.\n\nDownload now:\n%s</string>
     <string name="permission_none">No permissions</string>
     <string name="permission_all_files_required">Permission is required to access all files</string>
     <string name="action_remove_from_recent">Remove From Recent</string>
