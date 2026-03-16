@@ -85,6 +85,7 @@ public class AppGlobalConstants {
 
         public static String FEEDBACK_EMAIL = "goat.mobile.apps@gmail.com";
 
+        public static final int REQUEST_CODE_INSERT_IMAGE = 1002;
         public static final int REQUEST_CODE_FILE_PICKER = 1001;
         public static int REQUEST_CODE_STORAGE_PERMISSION = 2296;
         public static int REQUEST_CODE_MANAGE_ALL_FILES = 2290;

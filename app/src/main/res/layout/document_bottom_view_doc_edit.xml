@@ -148,7 +148,6 @@
 
             <com.example.documenpro.ui.customviews.EditBtn
                 android:id="@+id/btn_align_right"
-
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 app:ImageEdt="@drawable/editor_icon_align_text_right" />
@@ -167,7 +166,6 @@
 
             <com.example.documenpro.ui.customviews.EditBtn
                 android:id="@+id/btn_list_numbers"
-
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 app:ImageEdt="@drawable/editor_icon_list_numbers" />

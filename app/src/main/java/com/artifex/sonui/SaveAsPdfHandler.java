@@ -23,6 +23,7 @@ import java.io.IOException;
 public class SaveAsPdfHandler implements SODataLeakHandlers {
     private static final String TAG = "SaveAsPdfHandler";
     private final Activity activity;
+    private NUIDocView mNuiDocView;
 
     public SaveAsPdfHandler(Activity activity) {
         this.activity = activity;
@@ -261,16 +262,45 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult called");
+        if (requestCode == com.example.documenpro.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE) {
+            if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+                Uri selectedUri = data.getData();
+                if (mNuiDocView != null) {
+                    insertImageFromUri(selectedUri);
+                }
+            }
+        }
+    }
+
+    private void insertImageFromUri(Uri uri) {
+        String filename = com.example.documenpro.utils.Utils.getFileNameFromUri(uri, activity.getContentResolver());
+        File tempFolder = new File(activity.getExternalFilesDir(null), "temp_images");
+        if (!tempFolder.exists()) {
+            tempFolder.mkdirs();
+        }
+
+        File destFile = new File(tempFolder, filename);
+        com.example.documenpro.utils.Utils.copy(activity, uri, destFile.getAbsolutePath());
+
+        if (mNuiDocView != null) {
+            mNuiDocView.doInsertImage(destFile.getAbsolutePath());
+        }
     }
 
     @Override
     public void insertImageHandler(NUIDocView nuiDocView) {
         Log.d(TAG, "insertImageHandler called");
+        this.mNuiDocView = nuiDocView;
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        activity.startActivityForResult(Intent.createChooser(intent, "Select Image"),
+                com.example.documenpro.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE);
     }
 
     @Override
     public void insertPhotoHandler(NUIDocView nuiDocView) {
         Log.d(TAG, "insertPhotoHandler called");
+        insertImageHandler(nuiDocView);
     }
 
     @Override
