@@ -4,16 +4,23 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.supportv1.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,12 +48,16 @@ public class NUIDocViewPdf extends NUIDocView {
     private EditBtn btnDrawNew;
     private LinearLayout llBottomDraw;
 
+    // For scroll synchronization
+    private ArrayList<View> mAnnotationViews = new ArrayList<>();
+
     private RecyclerView recyclerViewColor;
     private RangeSeekBar seekBarThickness;
 
     private TextView tvSize;
 
     private boolean q = false;
+    private View mActiveAnnotationView;
 
     public NUIDocViewPdf(Context var1) {
         super(var1);
@@ -72,26 +83,180 @@ public class NUIDocViewPdf extends NUIDocView {
         }
     }
 
+    private void repositionAnnotations() {
+        int[] rootLocation = new int[2];
+        this.getLocationOnScreen(rootLocation);
+
+        for (View container : mAnnotationViews) {
+            Object[] tag = (Object[]) container.getTag();
+            if (tag != null && tag.length >= 2) {
+                DocPageView pageView = (DocPageView) tag[0];
+                Point pagePoint = (Point) tag[1];
+
+                Point screenPoint = pageView.pageToScreen(pagePoint);
+                container.setX(screenPoint.x - rootLocation[0] - (container.getWidth() / 2.0f));
+                container.setY(screenPoint.y - rootLocation[1] - (container.getHeight() / 2.0f));
+            }
+        }
+    }
+
     private void showTextBoxAt(float rawX, float rawY) {
+        DocView docView = getPdfDocView();
+        if (docView == null)
+            return;
+
+        DocPageView targetPage = null;
+        for (int i = 0; i < docView.getChildCount(); i++) {
+            View child = docView.getChildAt(i);
+            if (child instanceof DocPageView) {
+                DocPageView page = (DocPageView) child;
+                Rect r = page.screenRect();
+                if (r.contains((int) rawX, (int) rawY)) {
+                    targetPage = page;
+                    break;
+                }
+            }
+        }
+
+        if (targetPage == null)
+            return;
+
         int[] rootLocation = new int[2];
         this.getLocationOnScreen(rootLocation);
         float x = rawX - rootLocation[0];
         float y = rawY - rootLocation[1];
 
-        EditText editText = new EditText(getContext());
+        // Map screen point to page point
+        Point pagePoint = targetPage.screenToPage((int) rawX, (int) rawY);
+
+        // Inflate the advanced textbox layout
+        final View container = LayoutInflater.from(getContext()).inflate(R.layout.layout_text_annotation, this, false);
+        container.setTag(new Object[] { targetPage, pagePoint }); // Store anchor info
+
+        final EditText editText = container.findViewById(R.id.annotation_edit_text);
+        View btnCancel = container.findViewById(R.id.btn_cancel);
+        View btnFlip = container.findViewById(R.id.btn_flip);
+        View btnResize = container.findViewById(R.id.btn_resize);
+
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-        );
-        editText.setLayoutParams(lp);
-        editText.setX(x);
-        editText.setY(y);
-        editText.setSingleLine(false);
-        editText.setMinLines(1);
-        editText.setTextColor(Color.BLACK);
-        editText.setBackgroundColor(Color.argb(200, 255, 255, 255));
+                FrameLayout.LayoutParams.WRAP_CONTENT);
+        container.setLayoutParams(lp);
+        container.setX(x - Utilities.convertDpToPixel(50)); // Center it roughly
+        container.setY(y - Utilities.convertDpToPixel(20));
 
-        this.addView(editText);
+        this.mActiveAnnotationView = container;
+        this.mAnnotationViews.add(container);
+
+        // Cancel/Delete logic
+        btnCancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeView(container);
+                mAnnotationViews.remove(container);
+                if (mActiveAnnotationView == container)
+                    mActiveAnnotationView = null;
+            }
+        });
+
+        // Flip logic
+        btnFlip.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float currentScale = editText.getScaleX();
+                editText.setScaleX(currentScale * -1);
+            }
+        });
+
+        // Resize logic
+        btnResize.setOnTouchListener(new OnTouchListener() {
+            private float lastX, lastY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        lastX = event.getRawX();
+                        lastY = event.getRawY();
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        float dx = event.getRawX() - lastX;
+                        float dy = event.getRawY() - lastY;
+
+                        ViewGroup.LayoutParams elp = editText.getLayoutParams();
+                        elp.width = (int) Math.max(Utilities.convertDpToPixel(50), editText.getWidth() + dx);
+                        elp.height = (int) Math.max(Utilities.convertDpToPixel(30), editText.getHeight() + dy);
+                        editText.setLayoutParams(elp);
+
+                        lastX = event.getRawX();
+                        lastY = event.getRawY();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        // Movement logic (Drag the whole container)
+        container.setOnTouchListener(new OnTouchListener() {
+            private float lastX, lastY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        lastX = event.getRawX();
+                        lastY = event.getRawY();
+                        editText.requestFocus();
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        float dx = event.getRawX() - lastX;
+                        float dy = event.getRawY() - lastY;
+                        v.setX(v.getX() + dx);
+                        v.setY(v.getY() + dy);
+
+                        // Update the anchored page point when moved manually
+                        Object[] tag = (Object[]) v.getTag();
+                        if (tag != null && tag.length >= 2) {
+                            DocPageView pageView = (DocPageView) tag[0];
+                            // Use container's center for anchoring
+                            int[] loc = new int[2];
+                            v.getLocationOnScreen(loc);
+                            int centerX = loc[0] + v.getWidth() / 2;
+                            int centerY = loc[1] + v.getHeight() / 2;
+
+                            Point newPagePoint = pageView.screenToPage(centerX, centerY);
+                            tag[1] = newPagePoint;
+                        }
+
+                        lastX = event.getRawX();
+                        lastY = event.getRawY();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        // Focus behavior
+        editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                editText.setCursorVisible(hasFocus);
+                // Optionally hide/show handles based on focus
+                int visibility = hasFocus ? VISIBLE : GONE;
+                container.findViewById(R.id.btn_cancel).setVisibility(visibility);
+                container.findViewById(R.id.btn_flip).setVisibility(visibility);
+                container.findViewById(R.id.btn_resize).setVisibility(visibility);
+
+                // Also update the border visibility or style
+                android.graphics.drawable.GradientDrawable gd = (android.graphics.drawable.GradientDrawable) editText
+                        .getBackground();
+                if (gd != null) {
+                    gd.setStroke(hasFocus ? 3 : 1, hasFocus ? Color.BLACK : Color.TRANSPARENT);
+                }
+            }
+        });
+
+        this.addView(container);
         editText.requestFocus();
 
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -99,13 +264,23 @@ public class NUIDocViewPdf extends NUIDocView {
             imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
         }
 
-        // Exit text-add mode after placing one box
         setIsAddTextMode(false);
         this.updateUIAppearance();
     }
 
     protected void afterFirstLayoutComplete() {
         super.afterFirstLayoutComplete();
+
+        // Ensure we listen for scroll/zoom changes to reposition
+        DocView docView = getPdfDocView();
+        if (docView != null) {
+            docView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    repositionAnnotations();
+                }
+            });
+        }
         this.btnHighLight = (EditBtn) this.createToolbarButton(R.id.btnHighlight);
         this.drawSizeOut = this.findViewById(R.id.paint_size_container);
         this.drawSizeIn = this.findViewById(R.id.paint_size);
@@ -142,6 +317,12 @@ public class NUIDocViewPdf extends NUIDocView {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (!getIsAddTextMode()) {
+                        if (mActiveAnnotationView != null && event.getAction() == MotionEvent.ACTION_DOWN) {
+                            EditText et = mActiveAnnotationView.findViewById(R.id.annotation_edit_text);
+                            if (et != null)
+                                et.clearFocus();
+                            Utilities.hideKeyboard(getContext());
+                        }
                         return false;
                     }
 
@@ -326,8 +507,14 @@ public class NUIDocViewPdf extends NUIDocView {
             this.onTextButton();
         }
 
-        if (var1 == this.btnDrawNew || var1 == this.btnHighLight) {
+        if (var1 == this.btnDrawNew || var1 == this.btnHighLight || var1 == this.btnDeleteNote) {
             this.mIsAddTextMode = false;
+            if (mActiveAnnotationView != null) {
+                EditText et = mActiveAnnotationView.findViewById(R.id.annotation_edit_text);
+                if (et != null)
+                    et.clearFocus();
+                Utilities.hideKeyboard(getContext());
+            }
         }
 
         if (var1 == this.btnDeleteNote) {
@@ -348,6 +535,17 @@ public class NUIDocViewPdf extends NUIDocView {
     }
 
     public void onDeleteButton() {
+        // Handle deletion of our custom annotation view first
+        if (mActiveAnnotationView != null) {
+            EditText et = mActiveAnnotationView.findViewById(R.id.annotation_edit_text);
+            if (et != null && et.isFocused()) {
+                this.removeView(mActiveAnnotationView);
+                mActiveAnnotationView = null;
+                this.updateUIAppearance();
+                return;
+            }
+        }
+
         DocPdfView var2 = this.getPdfDocView();
         c var12 = (c) this.getDoc();
         SOSelectionLimits var13 = var2.getSelectionLimits();
