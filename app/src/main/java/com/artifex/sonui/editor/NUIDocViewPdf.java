@@ -6,7 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.supportv1.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +70,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
     private boolean q = false;
     private View mActiveAnnotationView;
+    private String mLoadedPath;
 
     public NUIDocViewPdf(Context var1) {
         super(var1);
@@ -187,10 +188,33 @@ public class NUIDocViewPdf extends NUIDocView {
         Utilities.hideKeyboard(getContext());
     }
 
+    private void applyAnnotationLock(View container) {
+        EditText et = container.findViewById(R.id.annotation_edit_text);
+        if (et != null) {
+            et.setEnabled(false);
+            et.setFocusable(false);
+            et.setCursorVisible(false);
+            et.setKeyListener(null);
+        }
+        View btnCancel = container.findViewById(R.id.btn_cancel);
+        View btnFlip = container.findViewById(R.id.btn_flip);
+        View btnResize = container.findViewById(R.id.btn_resize);
+        if (btnCancel != null)
+            btnCancel.setVisibility(GONE);
+        if (btnFlip != null)
+            btnFlip.setVisibility(GONE);
+        if (btnResize != null)
+            btnResize.setVisibility(GONE);
+        container.setOnTouchListener(null);
+    }
+
     private String getAnnotationFilePath() {
         if (this.mSession == null || this.mSession.getFileState() == null)
             return null;
-        String path = this.mSession.getFileState().getOpenedPath();
+        return getAnnotationFilePath(this.mSession.getFileState().getOpenedPath());
+    }
+
+    private String getAnnotationFilePath(String path) {
         if (path == null)
             return null;
         try {
@@ -204,6 +228,29 @@ public class NUIDocViewPdf extends NUIDocView {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    private void copySidecar(String oldPath, String newPath) {
+        String oldSidecar = getAnnotationFilePath(oldPath);
+        String newSidecar = getAnnotationFilePath(newPath);
+        if (oldSidecar == null || newSidecar == null || oldSidecar.equals(newSidecar))
+            return;
+
+        File oldFile = new File(oldSidecar);
+        if (!oldFile.exists())
+            return;
+
+        File newFile = new File(newSidecar);
+        try (java.io.InputStream in = new java.io.FileInputStream(oldFile);
+                java.io.OutputStream out = new java.io.FileOutputStream(newFile)) {
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -226,6 +273,7 @@ public class NUIDocViewPdf extends NUIDocView {
                 obj.put("page", pageNum);
                 obj.put("px", pagePoint.x);
                 obj.put("py", pagePoint.y);
+                obj.put("locked", true); // After save, it becomes read-only
 
                 EditText et = container.findViewById(R.id.annotation_edit_text);
                 ImageView iv = container.findViewById(R.id.annotation_image_view);
@@ -235,13 +283,13 @@ public class NUIDocViewPdf extends NUIDocView {
                     obj.put("text", et.getText().toString());
                     obj.put("width", et.getWidth());
                     obj.put("height", et.getHeight());
-                    obj.put("scaleX", et.getScaleX());
+                    obj.put("scaleX", (double) et.getScaleX());
                 } else if (iv != null) {
                     obj.put("type", "image");
                     obj.put("path", container.getTag(R.id.annotation_image_view));
                     obj.put("width", iv.getWidth());
                     obj.put("height", iv.getHeight());
-                    obj.put("scaleX", iv.getScaleX());
+                    obj.put("scaleX", (double) iv.getScaleX());
                 }
                 array.put(obj);
             }
@@ -251,6 +299,12 @@ public class NUIDocViewPdf extends NUIDocView {
             writer.write(array.toString());
             writer.close();
             Log.d("ANNOTATION_DEBUG", "Saved " + array.length() + " annotations to " + filePath);
+
+            // Immediately lock all annotations in UI
+            for (View container : mAnnotationViews) {
+                applyAnnotationLock(container);
+            }
+            deselectAllAnnotations();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -293,18 +347,20 @@ public class NUIDocViewPdf extends NUIDocView {
                             int py = obj.getInt("py");
                             String type = obj.getString("type");
 
+                            boolean locked = obj.optBoolean("locked", false);
+
                             if (type.equals("text")) {
                                 String text = obj.getString("text");
                                 int width = obj.getInt("width");
                                 int height = obj.getInt("height");
                                 float scaleX = (float) obj.getDouble("scaleX");
-                                showTextBoxAt(0, 0, pageNum, px, py, text, width, height, scaleX);
+                                showTextBoxAt(0, 0, pageNum, px, py, text, width, height, scaleX, locked);
                             } else if (type.equals("image")) {
                                 String path = obj.getString("path");
                                 int width = obj.getInt("width");
                                 int height = obj.getInt("height");
                                 float scaleX = (float) obj.getDouble("scaleX");
-                                showImageAt(0, 0, pageNum, px, py, path, width, height, scaleX);
+                                showImageAt(0, 0, pageNum, px, py, path, width, height, scaleX, locked);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -341,11 +397,11 @@ public class NUIDocViewPdf extends NUIDocView {
             return;
 
         Point pagePoint = targetPage.screenToPage((int) rawX, (int) rawY);
-        showTextBoxAt(rawX, rawY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, null, -1, -1, 1.0f);
+        showTextBoxAt(rawX, rawY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, null, -1, -1, 1.0f, false);
     }
 
     private void showTextBoxAt(float rawX, float rawY, int pageNum, int px, int py, String text, int w, int h,
-            float scaleX) {
+            float scaleX, boolean locked) {
         final View container = LayoutInflater.from(getContext()).inflate(R.layout.layout_text_annotation, this, false);
         container.setTag(new Object[] { pageNum, new Point(px, py) }); // Store anchor info
 
@@ -359,10 +415,9 @@ public class NUIDocViewPdf extends NUIDocView {
             editText.setLayoutParams(elp);
         }
         editText.setScaleX(scaleX);
-
-        View btnCancel = container.findViewById(R.id.btn_cancel);
-        View btnFlip = container.findViewById(R.id.btn_flip);
-        View btnResize = container.findViewById(R.id.btn_resize);
+        final View btnCancel = container.findViewById(R.id.btn_cancel);
+        final View btnFlip = container.findViewById(R.id.btn_flip);
+        final View btnResize = container.findViewById(R.id.btn_resize);
 
         int[] rootLocation = new int[2];
         this.getLocationOnScreen(rootLocation);
@@ -372,128 +427,135 @@ public class NUIDocViewPdf extends NUIDocView {
         container.setX(lx - Utilities.convertDpToPixel(50)); // Center it roughly
         container.setY(ly - Utilities.convertDpToPixel(20));
 
-        this.mActiveAnnotationView = container;
-        this.mAnnotationViews.add(container);
+        if (locked) {
+            applyAnnotationLock(container);
+        } else {
+            this.mActiveAnnotationView = container;
+            this.mAnnotationViews.add(container);
 
-        // Cancel/Delete logic
-        btnCancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeView(container);
-                mAnnotationViews.remove(container);
-                if (mActiveAnnotationView == container)
-                    mActiveAnnotationView = null;
-            }
-        });
-
-        // Flip logic
-        btnFlip.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                float currentScale = editText.getScaleX();
-                editText.setScaleX(currentScale * -1);
-            }
-        });
-
-        // Resize logic
-        btnResize.setOnTouchListener(new OnTouchListener() {
-            private float lastX, lastY;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        return true;
-                    case MotionEvent.ACTION_MOVE:
-                        float dx = event.getRawX() - lastX;
-                        float dy = event.getRawY() - lastY;
-
-                        ViewGroup.LayoutParams elp = editText.getLayoutParams();
-                        elp.width = (int) Math.max(Utilities.convertDpToPixel(50), editText.getWidth() + dx);
-                        elp.height = (int) Math.max(Utilities.convertDpToPixel(30), editText.getHeight() + dy);
-                        editText.setLayoutParams(elp);
-
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        return true;
+            // Cancel/Delete logic
+            btnCancel.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeView(container);
+                    mAnnotationViews.remove(container);
+                    if (mActiveAnnotationView == container)
+                        mActiveAnnotationView = null;
                 }
-                return false;
-            }
-        });
+            });
 
-        // Movement logic (Drag the whole container)
-        container.setOnTouchListener(new OnTouchListener() {
-            private float lastX, lastY;
+            // Flip logic
+            btnFlip.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    float currentScale = editText.getScaleX();
+                    editText.setScaleX(currentScale * -1);
+                }
+            });
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        editText.requestFocus();
-                        return true;
-                    case MotionEvent.ACTION_MOVE:
-                        float dx = event.getRawX() - lastX;
-                        float dy = event.getRawY() - lastY;
-                        v.setX(v.getX() + dx);
-                        v.setY(v.getY() + dy);
+            // Resize logic
+            btnResize.setOnTouchListener(new OnTouchListener() {
+                private float lastX, lastY;
 
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        // Update the anchored page point when moved manually
-                        Object[] tag = (Object[]) container.getTag();
-                        int pageNum = (int) tag[0];
-                        DocView docView = getPdfDocView();
-                        DocPageView pageView = null;
-                        if (docView != null) {
-                            for (int i = 0; i < docView.getChildCount(); i++) {
-                                View child = docView.getChildAt(i);
-                                if (child instanceof DocPageView) {
-                                    DocPageView page = (DocPageView) child;
-                                    if (page.getPageNumber() == pageNum) {
-                                        pageView = page;
-                                        break;
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            return true;
+                        case MotionEvent.ACTION_MOVE:
+                            float dx = event.getRawX() - lastX;
+                            float dy = event.getRawY() - lastY;
+
+                            ViewGroup.LayoutParams elp = editText.getLayoutParams();
+                            elp.width = (int) Math.max(Utilities.convertDpToPixel(50), editText.getWidth() + dx);
+                            elp.height = (int) Math.max(Utilities.convertDpToPixel(30), editText.getHeight() + dy);
+                            editText.setLayoutParams(elp);
+
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+            // Movement logic (Drag the whole container)
+            container.setOnTouchListener(new OnTouchListener() {
+                private float lastX, lastY;
+
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            editText.requestFocus();
+                            return true;
+                        case MotionEvent.ACTION_MOVE:
+                            float dx = event.getRawX() - lastX;
+                            float dy = event.getRawY() - lastY;
+                            v.setX(v.getX() + dx);
+                            v.setY(v.getY() + dy);
+
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            return true;
+                        case MotionEvent.ACTION_UP:
+                            // Update the anchored page point when moved manually
+                            Object[] tag = (Object[]) container.getTag();
+                            int pageNum = (int) tag[0];
+                            DocView docView = getPdfDocView();
+                            DocPageView pageView = null;
+                            if (docView != null) {
+                                for (int i = 0; i < docView.getChildCount(); i++) {
+                                    View child = docView.getChildAt(i);
+                                    if (child instanceof DocPageView) {
+                                        DocPageView page = (DocPageView) child;
+                                        if (page.getPageNumber() == pageNum) {
+                                            pageView = page;
+                                            break;
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        if (pageView != null) {
-                            int[] loc = new int[2];
-                            v.getLocationOnScreen(loc);
-                            int centerX = loc[0] + v.getWidth() / 2;
-                            int centerY = loc[1] + v.getHeight() / 2;
+                            if (pageView != null) {
+                                int[] loc = new int[2];
+                                v.getLocationOnScreen(loc);
+                                int centerX = loc[0] + v.getWidth() / 2;
+                                int centerY = loc[1] + v.getHeight() / 2;
 
-                            Point newPagePoint = pageView.screenToPage(centerX, centerY);
-                            tag[1] = newPagePoint;
-                        }
+                                Point newPagePoint = pageView.screenToPage(centerX, centerY);
+                                tag[1] = newPagePoint;
+                            }
 
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        return true;
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
 
         // Focus behavior
-        editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    updateAnnotationSelectionUI(container, true);
+        if (!locked) {
+            editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        updateAnnotationSelectionUI(container, true);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         this.addView(container);
         if (text == null) {
             updateAnnotationSelectionUI(container, true);
+            // Show keyboard for new text boxes
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
                 imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
@@ -538,6 +600,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
         this.llBottomDraw = this.findViewById(R.id.pdf_bottom_draw);
         this.recyclerViewColor = this.findViewById(R.id.recyclerColor);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,
                 false);
         recyclerViewColor.setLayoutManager(layoutManager);
@@ -709,7 +772,8 @@ public class NUIDocViewPdf extends NUIDocView {
 
         if (targetPage != null) {
             Point pagePoint = targetPage.screenToPage((int) centerX, (int) centerY);
-            showImageAt(centerX, centerY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, var1, -1, -1, 1.0f);
+            showImageAt(centerX, centerY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, var1, -1, -1, 1.0f,
+                    false);
         }
     }
 
@@ -732,12 +796,13 @@ public class NUIDocViewPdf extends NUIDocView {
         }
         if (targetPage != null) {
             Point pagePoint = targetPage.screenToPage((int) rawX, (int) rawY);
-            showImageAt(rawX, rawY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, imagePath, -1, -1, 1.0f);
+            showImageAt(rawX, rawY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, imagePath, -1, -1, 1.0f,
+                    false);
         }
     }
 
     private void showImageAt(float rawX, float rawY, int pageNum, int px, int py, String imagePath, int w, int h,
-            float scaleX) {
+            float scaleX, boolean locked) {
         final View container = LayoutInflater.from(getContext()).inflate(R.layout.layout_image_annotation, this, false);
         container.setTag(new Object[] { pageNum, new Point(px, py) });
         container.setTag(R.id.annotation_image_view, imagePath); // Store path for persistence
@@ -757,14 +822,9 @@ public class NUIDocViewPdf extends NUIDocView {
         }
         imageView.setScaleX(scaleX);
 
-        View btnCancel = container.findViewById(R.id.btn_cancel);
-        View btnFlip = container.findViewById(R.id.btn_flip);
-        View btnResize = container.findViewById(R.id.btn_resize);
-
-        // Initially hide handles
-        btnCancel.setVisibility(GONE);
-        btnFlip.setVisibility(GONE);
-        btnResize.setVisibility(GONE);
+        final View btnCancel = container.findViewById(R.id.btn_cancel);
+        final View btnFlip = container.findViewById(R.id.btn_flip);
+        final View btnResize = container.findViewById(R.id.btn_resize);
 
         int[] rootLocation = new int[2];
         this.getLocationOnScreen(rootLocation);
@@ -774,108 +834,114 @@ public class NUIDocViewPdf extends NUIDocView {
         container.setX(lx - Utilities.convertDpToPixel(75));
         container.setY(ly - Utilities.convertDpToPixel(75));
 
-        this.mActiveAnnotationView = container;
-        this.mAnnotationViews.add(container);
+        if (locked) {
+            applyAnnotationLock(container);
+        } else {
+            this.mActiveAnnotationView = container;
+            this.mAnnotationViews.add(container);
 
-        btnCancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeView(container);
-                mAnnotationViews.remove(container);
-                if (mActiveAnnotationView == container)
-                    mActiveAnnotationView = null;
-            }
-        });
-
-        btnFlip.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                float currentScale = imageView.getScaleX();
-                imageView.setScaleX(currentScale * -1);
-            }
-        });
-
-        btnResize.setOnTouchListener(new OnTouchListener() {
-            private float lastX, lastY;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        return true;
-                    case MotionEvent.ACTION_MOVE:
-                        float dx = event.getRawX() - lastX;
-                        float dy = event.getRawY() - lastY;
-
-                        ViewGroup.LayoutParams elp = imageView.getLayoutParams();
-                        elp.width = (int) Math.max(Utilities.convertDpToPixel(50), imageView.getWidth() + dx);
-                        elp.height = (int) Math.max(Utilities.convertDpToPixel(50), imageView.getHeight() + dy);
-                        imageView.setLayoutParams(elp);
-
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        return true;
+            btnCancel.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeView(container);
+                    mAnnotationViews.remove(container);
+                    if (mActiveAnnotationView == container)
+                        mActiveAnnotationView = null;
                 }
-                return false;
-            }
-        });
+            });
 
-        container.setOnTouchListener(new OnTouchListener() {
-            private float lastX, lastY;
+            btnFlip.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    float currentScale = imageView.getScaleX();
+                    imageView.setScaleX(currentScale * -1);
+                }
+            });
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        deselectAllAnnotations();
-                        updateAnnotationSelectionUI(container, true);
-                        return true;
-                    case MotionEvent.ACTION_MOVE:
-                        float dx = event.getRawX() - lastX;
-                        float dy = event.getRawY() - lastY;
-                        v.setX(v.getX() + dx);
-                        v.setY(v.getY() + dy);
+            btnResize.setOnTouchListener(new OnTouchListener() {
+                private float lastX, lastY;
 
-                        Object[] tag = (Object[]) container.getTag();
-                        int pageNum = (int) tag[0];
-                        DocView docView = getPdfDocView();
-                        DocPageView pageView = null;
-                        if (docView != null) {
-                            for (int i = 0; i < docView.getChildCount(); i++) {
-                                View child = docView.getChildAt(i);
-                                if (child instanceof DocPageView) {
-                                    DocPageView page = (DocPageView) child;
-                                    if (page.getPageNumber() == pageNum) {
-                                        pageView = page;
-                                        break;
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            return true;
+                        case MotionEvent.ACTION_MOVE:
+                            float dx = event.getRawX() - lastX;
+                            float dy = event.getRawY() - lastY;
+
+                            ViewGroup.LayoutParams elp = imageView.getLayoutParams();
+                            elp.width = (int) Math.max(Utilities.convertDpToPixel(50), imageView.getWidth() + dx);
+                            elp.height = (int) Math.max(Utilities.convertDpToPixel(50), imageView.getHeight() + dy);
+                            imageView.setLayoutParams(elp);
+
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            return true;
+                    }
+                    return false;
+                }
+            });
+
+            container.setOnTouchListener(new OnTouchListener() {
+                private float lastX, lastY;
+
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            deselectAllAnnotations();
+                            updateAnnotationSelectionUI(container, true);
+                            return true;
+                        case MotionEvent.ACTION_MOVE:
+                            float dx = event.getRawX() - lastX;
+                            float dy = event.getRawY() - lastY;
+                            v.setX(v.getX() + dx);
+                            v.setY(v.getY() + dy);
+
+                            Object[] tag = (Object[]) container.getTag();
+                            int pageNum = (int) tag[0];
+                            DocView docView = getPdfDocView();
+                            DocPageView pageView = null;
+                            if (docView != null) {
+                                for (int i = 0; i < docView.getChildCount(); i++) {
+                                    View child = docView.getChildAt(i);
+                                    if (child instanceof DocPageView) {
+                                        DocPageView page = (DocPageView) child;
+                                        if (page.getPageNumber() == pageNum) {
+                                            pageView = page;
+                                            break;
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        if (pageView != null) {
-                            int[] loc = new int[2];
-                            v.getLocationOnScreen(loc);
-                            int centerX = loc[0] + v.getWidth() / 2;
-                            int centerY = loc[1] + v.getHeight() / 2;
-                            Point newPagePoint = pageView.screenToPage(centerX, centerY);
-                            tag[1] = newPagePoint;
-                        }
+                            if (pageView != null) {
+                                int[] loc = new int[2];
+                                v.getLocationOnScreen(loc);
+                                int centerX = loc[0] + v.getWidth() / 2;
+                                int centerY = loc[1] + v.getHeight() / 2;
+                                Point newPagePoint = pageView.screenToPage(centerX, centerY);
+                                tag[1] = newPagePoint;
+                            }
 
-                        lastX = event.getRawX();
-                        lastY = event.getRawY();
-                        return true;
+                            lastX = event.getRawX();
+                            lastY = event.getRawY();
+                            return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
 
         this.addView(container);
         updateAnnotationSelectionUI(container, w <= 0); // Only select if new
+        setIsAddTextMode(false);
+        this.updateUIAppearance();
     }
 
     protected DocView createMainView(Activity var1) {
@@ -1080,6 +1146,7 @@ public class NUIDocViewPdf extends NUIDocView {
                                 "DocAuthKey", var1);
                         this.mSession.getDoc().setAuthor(var1);
                     }
+                    mLoadedPath = this.mSession.getFileState().getOpenedPath(); // Initialize mLoadedPath
                     loadCustomAnnotations();
                 }
             } catch (Exception e) {
@@ -1228,7 +1295,7 @@ public class NUIDocViewPdf extends NUIDocView {
                 if (targetPage != null) {
                     Point pagePoint = targetPage.screenToPage((int) centerX, (int) centerY);
                     showImageAt(centerX, centerY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, path, -1, -1,
-                            1.0f);
+                            1.0f, false);
                 } else {
                     // Fallback if not over a specific page center
                     showImageAt(centerX, centerY, path);
@@ -1248,10 +1315,17 @@ public class NUIDocViewPdf extends NUIDocView {
     }
 
     public void reloadFile() {
+        String oldPath = mLoadedPath;
         c cVar = (c) getDoc();
         String openedPath = this.mSession.getFileState().getOpenedPath();
 
         if (cVar != null && openedPath != null) {
+            // Handle Save As: copy sidecar to new path hash
+            if (oldPath != null && !oldPath.equals(openedPath)) {
+                copySidecar(oldPath, openedPath);
+            }
+            mLoadedPath = openedPath;
+
             if (!cVar.h()) {
                 if (!cVar.f()) {
                     if (com.artifex.solib.a.a(openedPath) < cVar.a()) {
@@ -1278,7 +1352,6 @@ public class NUIDocViewPdf extends NUIDocView {
         } else {
             Log.i("Thangfix", "loi null roi");
         }
-
     }
 
     public void setConfigurableButtons() {
