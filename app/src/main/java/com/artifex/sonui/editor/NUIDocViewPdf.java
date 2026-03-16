@@ -211,36 +211,54 @@ public class NUIDocViewPdf extends NUIDocView {
     private String getAnnotationFilePath() {
         if (this.mSession == null || this.mSession.getFileState() == null)
             return null;
-        return getAnnotationFilePath(this.mSession.getFileState().getOpenedPath());
+        String path = this.mSession.getFileState().getOpenedPath();
+        Log.d("ANNOTATION_DEBUG", "getAnnotationFilePath: current openedPath=" + path);
+        return getAnnotationFilePath(path);
     }
 
     private String getAnnotationFilePath(String path) {
         if (path == null)
             return null;
         try {
+            // Use canonical path to ensure consistency (handles symlinks, relative
+            // segments, etc.)
+            File f = new File(path);
+            String canonicalPath = f.getCanonicalPath();
+
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] hash = md.digest(path.getBytes());
+            byte[] hash = md.digest(canonicalPath.getBytes("UTF-8"));
             StringBuilder sb = new StringBuilder();
             for (byte b : hash) {
                 sb.append(String.format("%02x", b));
             }
-            return getContext().getFilesDir() + "/annotations_" + sb.toString() + ".json";
+            String fileName = "annotations_" + sb.toString() + ".json";
+            String fullPath = getContext().getFilesDir() + "/" + fileName;
+            Log.d("ANNOTATION_DEBUG", "getAnnotationFilePath: path=[" + path + "], canonical=[" + canonicalPath
+                    + "], hashFile=[" + fileName + "]");
+            return fullPath;
         } catch (Exception e) {
+            Log.e("ANNOTATION_DEBUG", "getAnnotationFilePath error", e);
             e.printStackTrace();
             return null;
         }
     }
 
     private void copySidecar(String oldPath, String newPath) {
+        Log.d("ANNOTATION_DEBUG", "copySidecar: old=" + oldPath + ", new=" + newPath);
         String oldSidecar = getAnnotationFilePath(oldPath);
         String newSidecar = getAnnotationFilePath(newPath);
-        if (oldSidecar == null || newSidecar == null || oldSidecar.equals(newSidecar))
+        if (oldSidecar == null || newSidecar == null || oldSidecar.equals(newSidecar)) {
+            Log.d("ANNOTATION_DEBUG", "copySidecar: paths null or equal, skipping");
             return;
+        }
 
         File oldFile = new File(oldSidecar);
-        if (!oldFile.exists())
+        if (!oldFile.exists()) {
+            Log.d("ANNOTATION_DEBUG", "copySidecar: old sidecar does not exist: " + oldSidecar);
             return;
+        }
 
+        Log.d("ANNOTATION_DEBUG", "copySidecar: copying " + oldSidecar + " to " + newSidecar);
         File newFile = new File(newSidecar);
         try (java.io.InputStream in = new java.io.FileInputStream(oldFile);
                 java.io.OutputStream out = new java.io.FileOutputStream(newFile)) {
@@ -249,23 +267,47 @@ public class NUIDocViewPdf extends NUIDocView {
             while ((length = in.read(buffer)) > 0) {
                 out.write(buffer, 0, length);
             }
+            Log.d("ANNOTATION_DEBUG", "copySidecar: copy success");
         } catch (IOException e) {
+            Log.e("ANNOTATION_DEBUG", "copySidecar error", e);
             e.printStackTrace();
         }
     }
 
     public void saveCustomAnnotations() {
-        String filePath = getAnnotationFilePath();
-        if (filePath == null)
+        saveCustomAnnotations(null);
+    }
+
+    public void saveCustomAnnotations(String overridePath) {
+        Log.d("ANNOTATION_DEBUG",
+                "saveCustomAnnotations called, overridePath=" + overridePath + ", mLoadedPath=" + mLoadedPath);
+        String filePath;
+        if (overridePath != null) {
+            filePath = getAnnotationFilePath(overridePath);
+        } else {
+            filePath = getAnnotationFilePath();
+        }
+
+        if (filePath == null) {
+            Log.d("ANNOTATION_DEBUG", "saveCustomAnnotations: filePath is null");
             return;
+        }
+        Log.d("ANNOTATION_DEBUG", "saveCustomAnnotations: saving to " + filePath);
 
         try {
             JSONArray array = new JSONArray();
+            Log.d("ANNOTATION_DEBUG", "saveCustomAnnotations: found " + mAnnotationViews.size() + " views in list");
             for (View container : mAnnotationViews) {
                 JSONObject obj = new JSONObject();
                 Object[] tag = (Object[]) container.getTag();
-                if (tag == null || tag.length < 2)
+                if (tag == null) {
+                    Log.d("ANNOTATION_DEBUG", "saveCustomAnnotations: container tag is null, skipping");
                     continue;
+                }
+                if (tag.length < 2) {
+                    Log.d("ANNOTATION_DEBUG", "saveCustomAnnotations: container tag length < 2, skipping");
+                    continue;
+                }
 
                 int pageNum = (int) tag[0];
                 Point pagePoint = (Point) tag[1];
@@ -298,7 +340,7 @@ public class NUIDocViewPdf extends NUIDocView {
             FileWriter writer = new FileWriter(file);
             writer.write(array.toString());
             writer.close();
-            Log.d("ANNOTATION_DEBUG", "Saved " + array.length() + " annotations to " + filePath);
+            Log.d("ANNOTATION_DEBUG", "saveCustomAnnotations: Saved " + array.length() + " annotations");
 
             // Immediately lock all annotations in UI
             for (View container : mAnnotationViews) {
@@ -306,18 +348,38 @@ public class NUIDocViewPdf extends NUIDocView {
             }
             deselectAllAnnotations();
         } catch (Exception e) {
+            Log.e("ANNOTATION_DEBUG", "saveCustomAnnotations error", e);
             e.printStackTrace();
         }
     }
 
+    private void clearAllAnnotations() {
+        Log.d("ANNOTATION_DEBUG", "clearAllAnnotations: removing " + mAnnotationViews.size() + " views");
+        Log.d("ANNOTATION_DEBUG", "clearAllAnnotations: removing " + mAnnotationViews.size() + " views");
+        for (View v : mAnnotationViews) {
+            removeView(v);
+        }
+        mAnnotationViews.clear();
+        Log.d("ANNOTATION_DEBUG", "clearAllAnnotations: mAnnotationViews cleared");
+        mActiveAnnotationView = null;
+    }
+
     private void loadCustomAnnotations() {
+        Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations called");
+        clearAllAnnotations();
         final String filePath = getAnnotationFilePath();
-        if (filePath == null)
+        if (filePath == null) {
+            Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations: filePath is null");
             return;
+        }
 
         File file = new File(filePath);
-        if (!file.exists())
+        if (!file.exists()) {
+            Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations: sidecar file does not exist: " + filePath);
             return;
+        }
+
+        Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations: loading from " + filePath);
 
         try {
             StringBuilder content = new StringBuilder();
@@ -366,6 +428,7 @@ public class NUIDocViewPdf extends NUIDocView {
                             e.printStackTrace();
                         }
                     }
+                    repositionAnnotations();
                     deselectAllAnnotations();
                 }
             }, 1000); // Wait for pages to layout
@@ -402,6 +465,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
     private void showTextBoxAt(float rawX, float rawY, int pageNum, int px, int py, String text, int w, int h,
             float scaleX, boolean locked) {
+        Log.d("ANNOTATION_DEBUG", "showTextBoxAt: text=[" + text + "], page=" + pageNum + ", locked=" + locked);
         final View container = LayoutInflater.from(getContext()).inflate(R.layout.layout_text_annotation, this, false);
         container.setTag(new Object[] { pageNum, new Point(px, py) }); // Store anchor info
 
@@ -427,11 +491,12 @@ public class NUIDocViewPdf extends NUIDocView {
         container.setX(lx - Utilities.convertDpToPixel(50)); // Center it roughly
         container.setY(ly - Utilities.convertDpToPixel(20));
 
+        this.mAnnotationViews.add(container);
+        Log.d("ANNOTATION_DEBUG", "showTextBoxAt: added to mAnnotationViews, new size=" + mAnnotationViews.size());
         if (locked) {
             applyAnnotationLock(container);
         } else {
             this.mActiveAnnotationView = container;
-            this.mAnnotationViews.add(container);
 
             // Cancel/Delete logic
             btnCancel.setOnClickListener(new OnClickListener() {
@@ -439,6 +504,8 @@ public class NUIDocViewPdf extends NUIDocView {
                 public void onClick(View v) {
                     removeView(container);
                     mAnnotationViews.remove(container);
+                    Log.d("ANNOTATION_DEBUG", "showTextBoxAt (Cancel): removed from mAnnotationViews, new size="
+                            + mAnnotationViews.size());
                     if (mActiveAnnotationView == container)
                         mActiveAnnotationView = null;
                 }
@@ -566,6 +633,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
         setIsAddTextMode(false);
         this.updateUIAppearance();
+        repositionAnnotations();
     }
 
     protected void afterFirstLayoutComplete() {
@@ -636,6 +704,7 @@ public class NUIDocViewPdf extends NUIDocView {
                     }
 
                     if (event.getAction() == MotionEvent.ACTION_UP) {
+                        Log.d("ANNOTATION_DEBUG", "TouchListener: ACTION_UP, mIsAddTextMode=" + getIsAddTextMode());
                         float rawX = event.getRawX();
                         float rawY = event.getRawY();
                         showTextBoxAt(rawX, rawY);
@@ -799,10 +868,12 @@ public class NUIDocViewPdf extends NUIDocView {
             showImageAt(rawX, rawY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, imagePath, -1, -1, 1.0f,
                     false);
         }
+        repositionAnnotations();
     }
 
     private void showImageAt(float rawX, float rawY, int pageNum, int px, int py, String imagePath, int w, int h,
             float scaleX, boolean locked) {
+        Log.d("ANNOTATION_DEBUG", "showImageAt: path=[" + imagePath + "], page=" + pageNum + ", locked=" + locked);
         final View container = LayoutInflater.from(getContext()).inflate(R.layout.layout_image_annotation, this, false);
         container.setTag(new Object[] { pageNum, new Point(px, py) });
         container.setTag(R.id.annotation_image_view, imagePath); // Store path for persistence
@@ -834,17 +905,20 @@ public class NUIDocViewPdf extends NUIDocView {
         container.setX(lx - Utilities.convertDpToPixel(75));
         container.setY(ly - Utilities.convertDpToPixel(75));
 
+        this.mAnnotationViews.add(container);
+        Log.d("ANNOTATION_DEBUG", "showImageAt: added to mAnnotationViews, new size=" + mAnnotationViews.size());
         if (locked) {
             applyAnnotationLock(container);
         } else {
             this.mActiveAnnotationView = container;
-            this.mAnnotationViews.add(container);
 
             btnCancel.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     removeView(container);
                     mAnnotationViews.remove(container);
+                    Log.d("ANNOTATION_DEBUG",
+                            "showImageAt (Cancel): removed from mAnnotationViews, new size=" + mAnnotationViews.size());
                     if (mActiveAnnotationView == container)
                         mActiveAnnotationView = null;
                 }
@@ -942,6 +1016,7 @@ public class NUIDocViewPdf extends NUIDocView {
         updateAnnotationSelectionUI(container, w <= 0); // Only select if new
         setIsAddTextMode(false);
         this.updateUIAppearance();
+        repositionAnnotations();
     }
 
     protected DocView createMainView(Activity var1) {
@@ -1119,6 +1194,13 @@ public class NUIDocViewPdf extends NUIDocView {
         a.b();
     }
 
+    @Override
+    protected void onPauseCommon() {
+        super.onPauseCommon();
+        Log.d("ANNOTATION_DEBUG", "onPauseCommon: auto-saving annotations");
+        saveCustomAnnotations();
+    }
+
     protected void onDocCompleted() {
         if (!this.mFinished) {
             try {
@@ -1231,12 +1313,6 @@ public class NUIDocViewPdf extends NUIDocView {
         super.onUndoButton(var1);
     }
 
-    @Override
-    public void preSave() {
-        saveCustomAnnotations();
-        super.preSave();
-    }
-
     protected void preSaveQuestion(final Runnable var1, final Runnable var2) {
         if (!((c) this.getDoc()).t()) {
             if (var1 != null) {
@@ -1297,8 +1373,33 @@ public class NUIDocViewPdf extends NUIDocView {
                     showImageAt(centerX, centerY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, path, -1, -1,
                             1.0f, false);
                 } else {
-                    // Fallback if not over a specific page center
-                    showImageAt(centerX, centerY, path);
+                    // Fallback to first visible page or first page if center is not over any page
+                    DocPageView fallbackPage = null;
+                    if (docView != null && docView.getChildCount() > 0) {
+                        for (int i = 0; i < docView.getChildCount(); i++) {
+                            View child = docView.getChildAt(i);
+                            if (child instanceof DocPageView && child.getVisibility() == VISIBLE) {
+                                fallbackPage = (DocPageView) child;
+                                break;
+                            }
+                        }
+                        if (fallbackPage == null && docView.getChildCount() > 0) {
+                            View child = docView.getChildAt(0);
+                            if (child instanceof DocPageView)
+                                fallbackPage = (DocPageView) child;
+                        }
+                    }
+
+                    if (fallbackPage != null) {
+                        Rect pr = fallbackPage.screenRect();
+                        float fx = (pr.left + pr.right) / 2.0f;
+                        float fy = (pr.top + pr.bottom) / 2.0f;
+                        Point pagePoint = fallbackPage.screenToPage((int) fx, (int) fy);
+                        showImageAt(fx, fy, fallbackPage.getPageNumber(), pagePoint.x, pagePoint.y, path, -1, -1, 1.0f,
+                                false);
+                    } else {
+                        showImageAt(centerX, centerY, path);
+                    }
                 }
             }
         });
@@ -1314,17 +1415,30 @@ public class NUIDocViewPdf extends NUIDocView {
         }
     }
 
+    @Override
+    public void preSave() {
+        Log.d("ANNOTATION_DEBUG", "preSave called");
+        saveCustomAnnotations();
+        super.preSave();
+    }
+
     public void reloadFile() {
+        Log.d("ANNOTATION_DEBUG", "reloadFile called");
         String oldPath = mLoadedPath;
         c cVar = (c) getDoc();
         String openedPath = this.mSession.getFileState().getOpenedPath();
+        Log.d("ANNOTATION_DEBUG", "reloadFile: oldPath=" + oldPath + ", openedPath=" + openedPath);
 
         if (cVar != null && openedPath != null) {
             // Handle Save As: copy sidecar to new path hash
             if (oldPath != null && !oldPath.equals(openedPath)) {
+                Log.d("ANNOTATION_DEBUG", "reloadFile: path changed, copying sidecar");
+                // Save current annotations to OLD path first to ensure they are captured
+                saveCustomAnnotations(oldPath);
                 copySidecar(oldPath, openedPath);
             }
             mLoadedPath = openedPath;
+            Log.d("ANNOTATION_DEBUG", "reloadFile: mLoadedPath updated to " + mLoadedPath);
 
             if (!cVar.h()) {
                 if (!cVar.f()) {

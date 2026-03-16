@@ -555,6 +555,12 @@ public class DocPageView extends View implements SOPageListener, AnimatableView 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         DocViewHost host = getDocView() != null ? getDocView().mHostActivity : null;
+        if (host instanceof NUIDocViewPdf) {
+            // Let NUIDocViewPdf handle custom View-based annotations without hijacking via
+            // base SDK logic
+            return super.dispatchTouchEvent(event);
+        }
+
         if (host instanceof NUIDocView) {
             boolean addTextMode = ((NUIDocView) host).getIsAddTextMode();
             if (addTextMode) {
