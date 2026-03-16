@@ -57,6 +57,7 @@ public class NUIDocViewPdf extends NUIDocView {
     View drawSizeIn;
 
     private EditBtn btnDrawNew;
+    private EditBtn btnSignature;
     private LinearLayout llBottomDraw;
 
     // For scroll synchronization
@@ -524,6 +525,16 @@ public class NUIDocViewPdf extends NUIDocView {
         this.btnDeleteNote = (EditBtn) this.createToolbarButton(R.id.btnDelete);
         this.btnDrawNew = (EditBtn) this.createToolbarButton(R.id.btnDrawNew);
         this.btnText = (EditBtn) this.createToolbarButton(R.id.btnText);
+        this.btnSignature = (EditBtn) this.createToolbarButton(R.id.btn_signature);
+
+        if (this.btnSignature != null) {
+            this.btnSignature.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showSignatureDialog();
+                }
+            });
+        }
 
         this.llBottomDraw = this.findViewById(R.id.pdf_bottom_draw);
         this.recyclerViewColor = this.findViewById(R.id.recyclerColor);
@@ -1185,6 +1196,46 @@ public class NUIDocViewPdf extends NUIDocView {
                         }
                     });
         }
+    }
+
+    private void showSignatureDialog() {
+        SignatureDialogFragment dialog = new SignatureDialogFragment();
+        dialog.setOnSignatureListener(new SignatureDialogFragment.OnSignatureListener() {
+            @Override
+            public void onSignatureCaptured(String path) {
+                // Place at center of viewport
+                Rect r = new Rect();
+                getDocView().getGlobalVisibleRect(r);
+                float centerX = (r.left + r.right) / 2.0f;
+                float centerY = (r.top + r.bottom) / 2.0f;
+
+                DocView docView = getPdfDocView();
+                DocPageView targetPage = null;
+                if (docView != null) {
+                    for (int i = 0; i < docView.getChildCount(); i++) {
+                        View child = docView.getChildAt(i);
+                        if (child instanceof DocPageView) {
+                            DocPageView page = (DocPageView) child;
+                            Rect pr = page.screenRect();
+                            if (pr.contains((int) centerX, (int) centerY)) {
+                                targetPage = page;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (targetPage != null) {
+                    Point pagePoint = targetPage.screenToPage((int) centerX, (int) centerY);
+                    showImageAt(centerX, centerY, targetPage.getPageNumber(), pagePoint.x, pagePoint.y, path, -1, -1,
+                            1.0f);
+                } else {
+                    // Fallback if not over a specific page center
+                    showImageAt(centerX, centerY, path);
+                }
+            }
+        });
+        dialog.show(((androidx.fragment.app.FragmentActivity) getContext()).getSupportFragmentManager(), "signature");
     }
 
     protected void prepareToGoBack() {
