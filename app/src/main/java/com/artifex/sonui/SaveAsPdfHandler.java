@@ -29,6 +29,10 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
         this.activity = activity;
     }
 
+    public void setNUIDocView(NUIDocView nuiDocView) {
+        this.mNuiDocView = nuiDocView;
+    }
+
     @Override
     public void initDataLeakHandlers(Activity activity) throws IOException {
         Log.d(TAG, "initDataLeakHandlers called");
@@ -243,6 +247,10 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                 }
             }
         };
+
+        if (mNuiDocView instanceof com.artifex.sonui.editor.NUIDocViewPdf) {
+            ((com.artifex.sonui.editor.NUIDocViewPdf) mNuiDocView).saveCustomAnnotations(path);
+        }
 
         if (isSourcePdf) {
             doc.a(path, saveListener);

@@ -135,6 +135,18 @@ public class NUIDocViewPdf extends NUIDocView {
         }
     }
 
+    private void hideDrawControls() {
+        if (llBottomDraw != null && llBottomDraw.getVisibility() == VISIBLE) {
+            Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
+            if (this.getPdfDocView().getDrawMode()) {
+                this.onDrawButton();
+            }
+            if (btnDrawNew != null) {
+                btnDrawNew.setChoose(false);
+            }
+        }
+    }
+
     private void updateAnnotationSelectionUI(View container, boolean selected) {
         if (container == null)
             return;
@@ -683,6 +695,7 @@ public class NUIDocViewPdf extends NUIDocView {
             this.btnSignature.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    hideDrawControls();
                     showSignatureDialog();
                 }
             });
@@ -1085,6 +1098,7 @@ public class NUIDocViewPdf extends NUIDocView {
         super.onClick(var1);
 
         if (var1 == this.btnEditTab) {
+            hideDrawControls();
             if (this.getPdfDocView().getDrawMode()) {
                 this.getPdfDocView().onDrawMode();
             }
@@ -1108,17 +1122,12 @@ public class NUIDocViewPdf extends NUIDocView {
             }
         }
         if (var1 == this.btnHighLight) {
-            if (this.getPdfDocView().getDrawMode()) {
-                if (llBottomDraw.getVisibility() == VISIBLE) {
-                    Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
-                }
-                this.onDrawButton();
-                btnDrawNew.setChoose(false);
-            }
+            hideDrawControls();
             this.onHighlightButton();
         }
 
         if (var1 == this.btnText) {
+            hideDrawControls();
             this.onTextButton();
         }
 
@@ -1133,6 +1142,7 @@ public class NUIDocViewPdf extends NUIDocView {
         }
 
         if (var1 == this.btnDeleteNote) {
+            hideDrawControls();
             this.onDeleteButton();
         }
 
@@ -1252,6 +1262,9 @@ public class NUIDocViewPdf extends NUIDocView {
                         this.mSession.getDoc().setAuthor(var1);
                     }
                     mLoadedPath = this.mSession.getFileState().getOpenedPath(); // Initialize mLoadedPath
+                    if (this.n instanceof com.artifex.sonui.SaveAsPdfHandler) {
+                        ((com.artifex.sonui.SaveAsPdfHandler) this.n).setNUIDocView(this);
+                    }
                     loadCustomAnnotations();
                 }
             } catch (Exception e) {
@@ -1286,6 +1299,12 @@ public class NUIDocViewPdf extends NUIDocView {
             this.getPdfDocView().resetModes();
         }
         this.updateUIAppearance();
+    }
+
+    @Override
+    public void onInsertImageButton() {
+        hideDrawControls();
+        super.onInsertImageButton();
     }
 
     protected void onPageLoaded(int var1) {
@@ -1439,10 +1458,10 @@ public class NUIDocViewPdf extends NUIDocView {
         }
     }
 
-    @Override
     public void preSave() {
         Log.d("ANNOTATION_DEBUG", "preSave called");
-        saveCustomAnnotations();
+        // Removed saveCustomAnnotations() from here to fix "Save As" issue.
+        // Saving is now handled by SaveAsPdfHandler.performSave(path)
         super.preSave();
     }
 

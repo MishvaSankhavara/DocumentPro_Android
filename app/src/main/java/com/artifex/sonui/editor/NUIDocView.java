@@ -179,7 +179,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     protected SODocSession mSession;
     protected Uri mStartUri = null;
     protected SOFileState mState = null;
-    private SODataLeakHandlers n;
+    protected SODataLeakHandlers n;
     private boolean isFullScreen = true;
 
     protected boolean mIsAddTextMode = false;
