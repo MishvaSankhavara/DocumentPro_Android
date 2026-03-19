@@ -860,6 +860,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         if (this.btnFullScreen != null) {
             this.btnFullScreen.setVisibility(GONE);
         }
+
         this.tvPageNumber = this.findViewById(R.id.footer_page_text);
         if (this.tvPageNumber != null) {
             this.tvPageNumber.setVisibility(GONE);

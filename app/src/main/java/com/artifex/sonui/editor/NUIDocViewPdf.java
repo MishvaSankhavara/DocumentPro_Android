@@ -275,10 +275,14 @@ public class NUIDocViewPdf extends NUIDocView {
     }
 
     public void saveCustomAnnotations() {
-        saveCustomAnnotations(null);
+        saveCustomAnnotations(null, true);
     }
 
     public void saveCustomAnnotations(String overridePath) {
+        saveCustomAnnotations(overridePath, true);
+    }
+
+    public void saveCustomAnnotations(String overridePath, boolean lock) {
         Log.d("ANNOTATION_DEBUG",
                 "saveCustomAnnotations called, overridePath=" + overridePath + ", mLoadedPath=" + mLoadedPath);
         String filePath;
@@ -315,7 +319,7 @@ public class NUIDocViewPdf extends NUIDocView {
                 obj.put("page", pageNum);
                 obj.put("px", pagePoint.x);
                 obj.put("py", pagePoint.y);
-                obj.put("locked", true); // After save, it becomes read-only
+                obj.put("locked", lock); // control lock state
 
                 EditText et = container.findViewById(R.id.annotation_edit_text);
                 ImageView iv = container.findViewById(R.id.annotation_image_view);
@@ -342,11 +346,13 @@ public class NUIDocViewPdf extends NUIDocView {
             writer.close();
             Log.d("ANNOTATION_DEBUG", "saveCustomAnnotations: Saved " + array.length() + " annotations");
 
-            // Immediately lock all annotations in UI
-            for (View container : mAnnotationViews) {
-                applyAnnotationLock(container);
+            // Immediately lock annotations in UI if requested
+            if (lock) {
+                for (View container : mAnnotationViews) {
+                    applyAnnotationLock(container);
+                }
+                deselectAllAnnotations();
             }
-            deselectAllAnnotations();
         } catch (Exception e) {
             Log.e("ANNOTATION_DEBUG", "saveCustomAnnotations error", e);
             e.printStackTrace();
@@ -366,6 +372,22 @@ public class NUIDocViewPdf extends NUIDocView {
 
     private void loadCustomAnnotations() {
         Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations called");
+
+        // If we already have annotations in memory, just reposition them after the
+        // delay
+        // This prevents the "blinking" effect during document refreshes (e.g. after
+        // highlight)
+        if (!mAnnotationViews.isEmpty()) {
+            Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations: already loaded, repositioning instead");
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    repositionAnnotations();
+                }
+            }, 500);
+            return;
+        }
+
         clearAllAnnotations();
         final String filePath = getAnnotationFilePath();
         if (filePath == null) {
@@ -1129,6 +1151,7 @@ public class NUIDocViewPdf extends NUIDocView {
     }
 
     public void onDeleteButton() {
+        saveCustomAnnotations(null, false);
         // Handle deletion of our custom annotation view first
         if (mActiveAnnotationView != null) {
             EditText et = mActiveAnnotationView.findViewById(R.id.annotation_edit_text);
@@ -1248,6 +1271,7 @@ public class NUIDocViewPdf extends NUIDocView {
     }
 
     public void onHighlightButton() {
+        saveCustomAnnotations(null, false);
         try {
             this.getDoc().addHighlightAnnotation();
         } catch (IndexOutOfBoundsException e) {
