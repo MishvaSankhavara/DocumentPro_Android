@@ -1052,4 +1052,252 @@
     <string name="sodk_editor_invalid_file_name">Invalid file name.</string>
     <string name="sodk_editor_replace_file_title">File Exists</string>
     <string name="sodk_editor_replace_file_body">That file already exists. Do you want to replace it?</string>
+    <string name="sodk_editor_Australia" translatable="false">Australia</string>
+    <string name="sodk_editor_Canada" translatable="false">Canada</string>
+    <string name="sodk_editor_China" translatable="false">China</string>
+    <string name="sodk_editor_India" translatable="false">India</string>
+    <string name="sodk_editor_Japan" translatable="false">Japan</string>
+    <string name="sodk_editor_Korea" translatable="false">Korea</string>
+    <string name="sodk_editor_New_Zealand" translatable="false">New Zealand</string>
+    <string name="sodk_editor_OK" translatable="false">OK</string>
+    <string name="sodk_editor_Singapore" translatable="false">Singapore</string>
+    <string name="sodk_editor_South_Africa" translatable="false">South Africa</string>
+    <string name="sodk_editor_United_Kingdom" translatable="false">United Kingdom</string>
+    <string name="sodk_editor_United_States" translatable="false">United States</string>
+    <string name="sodk_editor_accept_upper" translatable="false">ACCEPT</string>
+    <string name="sodk_editor_all" translatable="false">All</string>
+    <string name="sodk_editor_arrange_upper" translatable="false">ARRANGE</string>
+    <string name="sodk_editor_as_eighths" translatable="false">As Eighths</string>
+    <string name="sodk_editor_as_halves" translatable="false">As Halves</string>
+    <string name="sodk_editor_as_hundredths" translatable="false">As Hundredths</string>
+    <string name="sodk_editor_as_quarters" translatable="false">As Quarters</string>
+    <string name="sodk_editor_as_sixteenths" translatable="false">As Sixteenths</string>
+    <string name="sodk_editor_as_tenths" translatable="false">As Tenths</string>
+    <string name="sodk_editor_author_dialog_title" translatable="false">Author</string>
+    <string name="sodk_editor_author_upper" translatable="false">AUTHOR</string>
+    <string name="sodk_editor_autosum_text" translatable="false">SUM(first_cell:last_cell)</string>
+    <string name="sodk_editor_background" translatable="false">Background</string>
+    <string name="sodk_editor_cant_create_temp_file" translatable="false">"Could not create temporary file %s Have storage permissions been granted?"</string>
+    <string name="sodk_editor_cant_review_doc_body" translatable="false">"Review actions are not supported for Office 1997–2007 format documents. Please use Office on a desktop computer to convert the file to the newer format."</string>
+    <string name="sodk_editor_cell_height_upper" translatable="false">CELL HEIGHT</string>
+    <string name="sodk_editor_cell_width_upper" translatable="false">CELL WIDTH</string>
+    <string name="sodk_editor_cellbox_last_value" translatable="false">" "</string>
+    <string name="sodk_editor_changed_paragraph_properties" translatable="false">Changed paragraph properties</string>
+    <string name="sodk_editor_changed_run_properties" translatable="false">Changed run properties</string>
+    <string name="sodk_editor_changed_section_properties" translatable="false">Changed section properties</string>
+    <string name="sodk_editor_changed_table_cell_properties" translatable="false">Changed table cell properties</string>
+    <string name="sodk_editor_changed_table_grid" translatable="false">Changed Table Grid</string>
+    <string name="sodk_editor_changed_table_properties" translatable="false">Changed table properties</string>
+    <string name="sodk_editor_changed_table_row_properties" translatable="false">Changed table row properties</string>
+    <string name="sodk_editor_clear_text" translatable="false">Clear text</string>
+    <string name="sodk_editor_cm" translatable="false">cm</string>
+    <string name="sodk_editor_color" translatable="false">Color</string>
+    <string name="sodk_editor_comment_upper" translatable="false">COMMENT</string>
+    <string name="sodk_editor_confirm_logout_message" translatable="false">Confirm log out or cancel</string>
+    <string name="sodk_editor_confirm_logout_title" translatable="false">Log out from %s</string>
+    <string name="sodk_editor_connection_error_body" translatable="false">You are not connected to the internet. Check your connection and try again.</string>
+    <string name="sodk_editor_connection_error_title" translatable="false">Connection Error</string>
+    <string name="sodk_editor_content_error" translatable="false">content:// error</string>
+    <string name="sodk_editor_continue_editing" translatable="false">Continue editing</string>
+    <string name="sodk_editor_copy" translatable="false">Copy</string>
+    <string name="sodk_editor_copy_same_file" translatable="false">You cannot copy a file to itself. Please choose another name or location for the copy.</string>
+    <string name="sodk_editor_copy_upper" translatable="false">COPY</string>
+    <string name="sodk_editor_copyright" translatable="false">Copyright</string>
+    <string name="sodk_editor_create_new" translatable="false">Create New</string>
+    <string name="sodk_editor_cut_upper" translatable="false">CUT</string>
+    <string name="sodk_editor_datetime_upper" translatable="false">DATE/TIME</string>
+    <string name="sodk_editor_default_name_document" translatable="false">Document</string>
+    <string name="sodk_editor_default_name_presentation" translatable="false">Presentation</string>
+    <string name="sodk_editor_default_name_spreadsheet" translatable="false">Spreadsheet</string>
+    <string name="sodk_editor_delete" translatable="false">Delete</string>
+    <string name="sodk_editor_delete_comment_upper" translatable="false">"DELETE COMMENT"</string>
+    <string name="sodk_editor_delete_upper" translatable="false">DELETE</string>
+    <string name="sodk_editor_delete_worksheet_q" translatable="false">Delete worksheet q</string>
+    <string name="sodk_editor_deleted_text" translatable="false">Deleted text</string>
+    <string name="sodk_editor_deleting" translatable="false">Deleting…</string>
+    <string name="sodk_editor_device_files" translatable="false">Device Files</string>
+    <string name="sodk_editor_discard" translatable="false">Discard</string>
+    <string name="sodk_editor_dismiss" translatable="false">Dismiss</string>
+    <string name="sodk_editor_do_you_really_want_to_delete" translatable="false">Do you really want to delete \"%s\"?</string>
+    <string name="sodk_editor_do_you_want_to_delete_the_sheet" translatable="false">Do you want to delete the sheet</string>
+    <string name="sodk_editor_doc_open_error" translatable="false">There was an error (%d) opening the document.</string>
+    <string name="sodk_editor_doc_uses_unsupported_enc" translatable="false">Document uses unsupported encryption</string>
+    <string name="sodk_editor_document_has_been_modified" translatable="false">Document has been modified</string>
+    <string name="sodk_editor_download" translatable="false">Download</string>
+    <string name="sodk_editor_downloading" translatable="false">Downloading…</string>
+    <string name="sodk_editor_draw_upper" translatable="false">DRAW</string>
+    <string name="sodk_editor_edit_font" translatable="false">Edit Font</string>
+    <string name="sodk_editor_edit_function" translatable="false">Edit Function</string>
+    <string name="sodk_editor_engineering_upper" translatable="false">ENGINEERING</string>
+    <string name="sodk_editor_enter_a_new_name" translatable="false">Enter a new name for \"%s\":</string>
+    <string name="sodk_editor_error_copying_from_remote" translatable="false">Error copying from remote.</string>
+    <string name="sodk_editor_error_opening" translatable="false">"Error opening "</string>
+    <string name="sodk_editor_error_opening_from_other_app" translatable="false">Error opening document sent from another app</string>
+    <string name="sodk_editor_explore" translatable="false">Explore</string>
+    <string name="sodk_editor_file_name" translatable="false">File Name</string>
+    <string name="sodk_editor_file_size" translatable="false">File Size</string>
+    <string name="sodk_editor_financial_upper" translatable="false">FINANCIAL</string>
+    <string name="sodk_editor_find" translatable="false">Search</string>
+    <string name="sodk_editor_first_page_upper" translatable="false">FIRST PAGE</string>
+    <string name="sodk_editor_format_category_accounting" translatable="false">Accounting</string>
+    <string name="sodk_editor_format_category_currency" translatable="false">Currency</string>
+    <string name="sodk_editor_format_category_custom" translatable="false">Custom</string>
+    <string name="sodk_editor_format_category_date_and_time" translatable="false">Date and Time</string>
+    <string name="sodk_editor_format_category_fraction" translatable="false">Fraction</string>
+    <string name="sodk_editor_format_category_general" translatable="false">General</string>
+    <string name="sodk_editor_format_category_number" translatable="false">Number</string>
+    <string name="sodk_editor_format_category_percentage" translatable="false">Percentage</string>
+    <string name="sodk_editor_fullscreen_warning" translatable="false">"Tap the screen at any time to leave fullscreen mode."</string>
+    <string name="sodk_editor_fx" translatable="false">fx</string>
+    <string name="sodk_editor_getting_started" translatable="false">Getting Started</string>
+    <string name="sodk_editor_go_up" translatable="false">Go up</string>
+    <string name="sodk_editor_highlight_upper" translatable="false">HIGHLIGHT</string>
+    <string name="sodk_editor_image_upper" translatable="false">IMAGE</string>
+    <string name="sodk_editor_ime_action_label_done" translatable="false">Done</string>
+    <string name="sodk_editor_information_upper" translatable="false">INFORMATION</string>
+    <string name="sodk_editor_insert_image_gone_body" translatable="false">"The selected image can't be inserted. It may have been deleted or moved."</string>
+    <string name="sodk_editor_insert_image_gone_title" translatable="false">Unable to insert image</string>
+    <string name="sodk_editor_inserted_paragraph" translatable="false">Inserted paragraph</string>
+    <string name="sodk_editor_inserted_table_cell" translatable="false">Inserted table cell</string>
+    <string name="sodk_editor_inserted_table_row" translatable="false">Inserted table row</string>
+    <string name="sodk_editor_inserted_text" translatable="false">Inserted text</string>
+    <string name="sodk_editor_is_a_directory" translatable="false">\"%s\" is a directory. Directories cannot be deleted.</string>
+    <string name="sodk_editor_keep_searching" translatable="false">Keep searching?</string>
+    <string name="sodk_editor_last_page_upper" translatable="false">Last page upper</string>
+    <string name="sodk_editor_last_viewed" translatable="false">Last Viewed</string>
+    <string name="sodk_editor_like_to_retain" translatable="false">Would you like to update the author name, or retain the current one?</string>
+    <string name="sodk_editor_loading_please_wait" translatable="false">Loading, please wait.</string>
+    <string name="sodk_editor_log_out" translatable="false">Log out</string>
+    <string name="sodk_editor_logical_upper" translatable="false">LOGICAL</string>
+    <string name="sodk_editor_lookup_upper" translatable="false">LOOKUP</string>
+    <string name="sodk_editor_maths_upper" translatable="false">MATHS</string>
+    <string name="sodk_editor_menu" translatable="false">Menu</string>
+    <string name="sodk_editor_merge_cells_upper" translatable="false">MERGE CELLS</string>
+    <string name="sodk_editor_more" translatable="false">More</string>
+    <string name="sodk_editor_my_documents" translatable="false">My Documents</string>
+    <string name="sodk_editor_my_documents2" translatable="false">My documents2</string>
+    <string name="sodk_editor_my_font_name" translatable="false">My Font Name</string>
+    <string name="sodk_editor_n_thru_n_of_n" translatable="false">%d-%d OF %d</string>
+    <string name="sodk_editor_nav_back" translatable="false">Nav back</string>
+    <string name="sodk_editor_new_intent_body" translatable="false">Opening a new document will lose changes made to another document</string>
+    <string name="sodk_editor_new_intent_no_button" translatable="false">Continue with previous document</string>
+    <string name="sodk_editor_new_intent_title" translatable="false">Edit session already in progress</string>
+    <string name="sodk_editor_new_intent_yes_button" translatable="false">Open a new document</string>
+    <string name="sodk_editor_new_name" translatable="false">new name</string>
+    <string name="sodk_editor_next_link_upper" translatable="false">NEXT</string>
+    <string name="sodk_editor_next_upper" translatable="false">NEXT</string>
+    <string name="sodk_editor_no_media_hint" translatable="false">Sharing the storage media with a PC can make it inaccessible</string>
+    <string name="sodk_editor_no_media_warning" translatable="false">Storage media not present</string>
+    <string name="sodk_editor_no_more_found" translatable="false">No more found</string>
+    <string name="sodk_editor_not_yet_supported" translatable="false">not yet supported</string>
+    <string name="sodk_editor_note_upper" translatable="false">NOTE</string>
+    <string name="sodk_editor_number_format_accounting" translatable="false">Number Format - Accounting</string>
+    <string name="sodk_editor_number_format_currency" translatable="false">Number Format - Currency</string>
+    <string name="sodk_editor_number_format_custom" translatable="false">Number Format - Custom</string>
+    <string name="sodk_editor_number_format_date_and_time" translatable="false">Number Format - Date and Time</string>
+    <string name="sodk_editor_number_format_fractions" translatable="false">Number Format - Fractions</string>
+    <string name="sodk_editor_number_format_number" translatable="false">Number Format - Number</string>
+    <string name="sodk_editor_number_format_percentage" translatable="false">Number Format - Percentage</string>
+    <string name="sodk_editor_number_format_upper" translatable="false">"NUMBER FORMAT"</string>
+    <string name="sodk_editor_open_in" translatable="false">Open In</string>
+    <string name="sodk_editor_open_in_upper" translatable="false">OPEN IN</string>
+    <string name="sodk_editor_open_pdf_in" translatable="false">Open PDF In</string>
+    <string name="sodk_editor_open_pdf_in_upper" translatable="false">OPEN PDF IN</string>
+    <string name="sodk_editor_page_d_of_d" translatable="false">PAGE %d OF %d</string>
+    <string name="sodk_editor_page_zd_of_d" translatable="false">PAGE %1$zd OF %d</string>
+    <string name="sodk_editor_pages_n_thru_n_of_n" translatable="false">PAGES %d-%d OF %d</string>
+    <string name="sodk_editor_password_for_document" translatable="false">Password for document:</string>
+    <string name="sodk_editor_paste_upper" translatable="false">PASTE</string>
+    <string name="sodk_editor_permission_denied" translatable="false">Permission Denied</string>
+    <string name="sodk_editor_permission_final" translatable="false">Office Editor will now terminate.</string>
+    <string name="sodk_editor_permission_google_final" translatable="false">Sorry, you cannot access Google Drive.</string>
+    <string name="sodk_editor_permission_google_why" translatable="false">These permissions are necessary to choose your Google account. Would you like to try again?</string>
+    <string name="sodk_editor_permission_why" translatable="false">These permissions are necessary for Office Editor to open and save documents. Would you like to try again?</string>
+    <string name="sodk_editor_photo_upper" translatable="false">PHOTO</string>
+    <string name="sodk_editor_picker_title_App_Ver_Dir" translatable="false">%1$s %2$s: %3$s</string>
+    <string name="sodk_editor_present_upper" translatable="false">PRESENT</string>
+    <string name="sodk_editor_preview_icon" translatable="false">Preview</string>
+    <string name="sodk_editor_previous_link_upper" translatable="false">PREVIOUS</string>
+    <string name="sodk_editor_previous_upper" translatable="false">PREVIOUS</string>
+    <string name="sodk_editor_print_upper" translatable="false">PRINT</string>
+    <string name="sodk_editor_printing_not_supported_body" translatable="false">Printing is not supported for this version of Android.</string>
+    <string name="sodk_editor_printing_not_supported_title" translatable="false">Not Supported</string>
+    <string name="sodk_editor_protect_upper" translatable="false">PROTECT</string>
+    <string name="sodk_editor_recent" translatable="false">Recent</string>
+    <string name="sodk_editor_recent_documents" translatable="false">Recent Documents</string>
+    <string name="sodk_editor_redact_apply_upper" translatable="false">APPLY</string>
+    <string name="sodk_editor_redact_confirm_apply_body" translatable="false">Applying redactions cannot be undone. Do you want to continue?</string>
+    <string name="sodk_editor_redact_confirm_save" translatable="false">"This document contains redaction marks that have not yet been applied. Any content associated with these marks will still be present until they are applied. Are you sure you want to continue?"</string>
+    <string name="sodk_editor_redact_mark_upper" translatable="false">MARK</string>
+    <string name="sodk_editor_redact_remove_upper" translatable="false">Redact remove upper</string>
+    <string name="sodk_editor_reflow_upper" translatable="false">REFLOW</string>
+    <string name="sodk_editor_reject_upper" translatable="false">REJECT</string>
+    <string name="sodk_editor_rename" translatable="false">Rename</string>
+    <string name="sodk_editor_rename_error" translatable="false">Error renaming the file.</string>
+    <string name="sodk_editor_rename_upper" translatable="false">RENAME</string>
+    <string name="sodk_editor_renaming" translatable="false">Renaming…</string>
+    <string name="sodk_editor_retain" translatable="false">Retain</string>
+    <string name="sodk_editor_save_as_upper" translatable="false">SAVE AS</string>
+    <string name="sodk_editor_save_pdf_upper" translatable="false">SAVE PDF</string>
+    <string name="sodk_editor_save_upper" translatable="false">SAVE</string>
+    <string name="sodk_editor_scientific" translatable="false">Scientific</string>
+    <string name="sodk_editor_search" translatable="false">Search</string>
+    <string name="sodk_editor_searching" translatable="false">Searching</string>
+    <string name="sodk_editor_select_image" translatable="false">Select Image</string>
+    <string name="sodk_editor_shape_and_line_upper" translatable="false">"SHAPE AND LINE"</string>
+    <string name="sodk_editor_shape_upper" translatable="false">SHAPE</string>
+    <string name="sodk_editor_shapes" translatable="false">Shapes</string>
+    <string name="sodk_editor_share" translatable="false">Share</string>
+    <string name="sodk_editor_share_error_body" translatable="false">Error making local copy.</string>
+    <string name="sodk_editor_share_upper" translatable="false">SHARE</string>
+    <string name="sodk_editor_share_with" translatable="false">Share With</string>
+    <string name="sodk_editor_sheet_d_of_d" translatable="false">SHEET %d OF %d</string>
+    <string name="sodk_editor_show_changes_upper" translatable="false">"SHOW CHANGES"</string>
+    <string name="sodk_editor_smartoffice" translatable="false">Office Editor</string>
+    <string name="sodk_editor_sort_menu" translatable="false">Sort menu</string>
+    <string name="sodk_editor_statistical_upper" translatable="false">STATISTICAL</string>
+    <string name="sodk_editor_stop" translatable="false">Stop</string>
+    <string name="sodk_editor_storage" translatable="false">Storage</string>
+    <string name="sodk_editor_str_continue" translatable="false">Str continue</string>
+    <string name="sodk_editor_sum_upper" translatable="false">SUM</string>
+    <string name="sodk_editor_support" translatable="false">Support</string>
+    <string name="sodk_editor_tab_annotate" translatable="false">ANNOTATE</string>
+    <string name="sodk_editor_tab_edit" translatable="false">EDIT</string>
+    <string name="sodk_editor_tab_file" translatable="false">FILE</string>
+    <string name="sodk_editor_tab_find" translatable="false">FIND</string>
+    <string name="sodk_editor_tab_format" translatable="false">FORMAT</string>
+    <string name="sodk_editor_tab_formulas" translatable="false">FORMULAS</string>
+    <string name="sodk_editor_tab_hidden" translatable="false">HIDDEN</string>
+    <string name="sodk_editor_tab_insert" translatable="false">INSERT</string>
+    <string name="sodk_editor_tab_pages" translatable="false">PAGES</string>
+    <string name="sodk_editor_tab_redact" translatable="false">REDACT</string>
+    <string name="sodk_editor_tab_review" translatable="false">REVIEW</string>
+    <string name="sodk_editor_tab_single" translatable="false">SINGLE</string>
+    <string name="sodk_editor_tab_slides" translatable="false">SLIDES</string>
+    <string name="sodk_editor_templates" translatable="false">Templates</string>
+    <string name="sodk_editor_text_upper" translatable="false">TEXT</string>
+    <string name="sodk_editor_thousand_separator" translatable="false">Thousand separator</string>
+    <string name="sodk_editor_title" translatable="false">Title</string>
+    <string name="sodk_editor_toggle_upper" translatable="false">TOGGLE</string>
+    <string name="sodk_editor_track_changes_upper" translatable="false">"TRACK CHANGES"</string>
+    <string name="sodk_editor_two_decimal_places" translatable="false">Two Decimal Places</string>
+    <string name="sodk_editor_unable_to_load_document_title" translatable="false">Unable to load document</string>
+    <string name="sodk_editor_unsaved_signatures" translatable="false">The document must be saved before the signature can be verified</string>
+    <string name="sodk_editor_up_to_one_digit" translatable="false">Up to One Digit</string>
+    <string name="sodk_editor_up_to_three_digits" translatable="false">Up to Three Digits</string>
+    <string name="sodk_editor_up_to_two_digits" translatable="false">Up to Two Digits</string>
+    <string name="sodk_editor_update" translatable="false">Update</string>
+    <string name="sodk_editor_upgrade" translatable="false">Upgrade</string>
+    <string name="sodk_editor_uploading" translatable="false">Uploading…</string>
+    <string name="sodk_editor_user_guide" translatable="false">User guide</string>
+    <string name="sodk_editor_version" translatable="false">1.0</string>
+    <string name="sodk_editor_version_format" translatable="false">Office</string>
+    <string name="sodk_editor_version_title" translatable="false">Version</string>
+    <string name="sodk_editor_would_you_like_to_save_your_changes" translatable="false">Would you like to save your changes</string>
+    <string name="sodk_editor_xfa_body" translatable="false">This document contains an XML Forms Office not supported by Office Editor. XFA was deprecated when the PDF 2.0 specification was released in 2015. The creator of the PDF can convert it to use AcroForms, which are supported. If appropriate, please contact your IT administrator for assistance.</string>
+    <string name="sodk_editor_xfa_title" translatable="false">NoOfficeport</string>
+    <string name="sodk_library_annot_author_mupdf" translatable="false">MuPDF</string>
+    <string name="sodk_library_annot_author_so" translatable="false">SmartOffice</string>
+    <string name="sodk_library_app_name" translatable="false">@string/app_name</string>
+    <string name="sodk_wheel_app_name" translatable="false">@string/app_name</string>
 </resources>

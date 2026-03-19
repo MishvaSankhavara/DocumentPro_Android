@@ -2,6 +2,7 @@ package com.example.documenpro.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ public class AppLoadingDialog extends Dialog {
     public AppLoadingDialog(@NonNull Context context) {
         super(context);
         setContentView(R.layout.dialog_load);
+        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setCanceledOnTouchOutside(false);
         setCancelable(false);
     }

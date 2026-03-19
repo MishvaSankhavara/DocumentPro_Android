@@ -48,34 +48,69 @@ public class MainApp extends DocumentMyApplication {
     }
 
     private void initArtifexResources() {
-        String packageName = getPackageName();
-        String sdkRPackage = "com.artifex.sonui.editor";
-        String[] innerClasses = { "anim", "attr", "bool", "color", "dimen", "drawable", "id", "integer", "layout",
-                "string", "style" };
+        try {
+            String packageName = getPackageName();
+            Class rClass = null;
+            String[] possibleRClasses = {
+                    "com.artifex.sonui.editor.R",
+                    packageName + ".R",
+                    packageName + ".editor.R"
+            };
 
-        for (String inner : innerClasses) {
-            try {
-                Class<?> sdkRInner = Class.forName(sdkRPackage + ".R$" + inner);
-                Field[] fields = sdkRInner.getDeclaredFields();
-                for (Field field : fields) {
-                    try {
-                        String name = field.getName();
-                        int id = getResources().getIdentifier(name, inner, packageName);
-                        if (id != 0) {
-                            field.setAccessible(true);
-                            field.set(null, id);
-                        } else {
-                            if (inner.equals("string") && name.startsWith("sodk_editor_")) {
-                                Log.w("MainApp", "Resource not found for SDK field: " + inner + "." + name);
+            for (String rClassName : possibleRClasses) {
+                try {
+                    rClass = Class.forName(rClassName);
+                    Log.d("MainApp", "Found R class: " + rClassName);
+                    break;
+                } catch (ClassNotFoundException e) {
+                    // Try next
+                }
+            }
+
+            if (rClass != null) {
+                for (Class innerClass : rClass.getDeclaredClasses()) {
+                    String inner = innerClass.getSimpleName();
+                    for (Field field : innerClass.getDeclaredFields()) {
+                        try {
+                            String name = field.getName();
+                            int id = getResources().getIdentifier(name, inner, packageName);
+
+                            // Try variations if not found
+                            if (id == 0 && name.startsWith("sodk_editor_")) {
+                                id = getResources().getIdentifier(name.substring(12), inner, packageName);
                             }
+                            if (id == 0 && name.startsWith("sodk_")) {
+                                id = getResources().getIdentifier(name.substring(5), inner, packageName);
+                            }
+                            if (id == 0) {
+                                id = getResources().getIdentifier(name.toLowerCase(), inner, packageName);
+                            }
+                            if (id == 0 && name.startsWith("sodk_editor_")) {
+                                id = getResources().getIdentifier(name.substring(12).toLowerCase(), inner, packageName);
+                            }
+
+                            if (id != 0) {
+                                field.setAccessible(true);
+                                field.set(null, id);
+                                if (inner.equals("string")) {
+                                    Log.d("MainApp", "Mapped SDK field: " + name + " to ID: " + id);
+                                }
+                            } else {
+                                if (inner.equals("string") && name.startsWith("sodk_editor_")) {
+                                    Log.w("MainApp", "Resource not found for SDK field: " + inner + "." + name);
+                                }
+                            }
+                        } catch (Exception e) {
+                            // Skip individual field errors
                         }
-                    } catch (Exception e) {
-                        // Skip individual field errors
                     }
                 }
-            } catch (ClassNotFoundException e) {
-                Log.e("MainApp", "SDK R inner class not found: " + inner, e);
+            } else {
+                Log.e("MainApp", "Could not find any R class for SmartOffice initialization");
             }
+        } catch (Exception e) {
+            Log.e("MainApp", "Failed to initialize Artifex resources: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

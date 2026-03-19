@@ -12,25 +12,25 @@
         android:id="@+id/tv_progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center"
         android:text="@string/action_loading"
         android:textColor="@color/app_primary_text"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <com.example.documenpro.ui.customviews.HorizontalProgressBar
         android:id="@+id/loading_progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="38dp"
-        app:hpb_colorBackground="#ebebeb"
-        app:hpb_colorProgress="#009630"
+        android:layout_height="6dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="32dp"
+        app:hpb_colorBackground="#F0F0F0"
+        app:hpb_colorProgress="@color/bg_tittle"
         app:hpb_progress="100"
         app:hpb_useRoundRect="true" />
 </LinearLayout>

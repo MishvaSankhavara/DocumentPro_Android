@@ -12,7 +12,6 @@ import com.example.documenpro.ui.customviews.BottomButtonView;
 public class NUIDocViewOther extends NUIDocView {
     private BottomButtonView btnPrintTab;
 
-
     public NUIDocViewOther(Context var1) {
         super(var1);
         this.a();
@@ -99,7 +98,6 @@ public class NUIDocViewOther extends NUIDocView {
         return false;
     }
 
-
     protected boolean inputViewHasFocus() {
         return false;
     }
@@ -125,7 +123,6 @@ public class NUIDocViewOther extends NUIDocView {
         super.onRedoButton(var1);
     }
 
-
     public void onResume() {
         this.onResumeCommon();
     }
@@ -140,7 +137,6 @@ public class NUIDocViewOther extends NUIDocView {
     }
 
     public void showUI(boolean var1) {
-
 
         this.layoutNow();
     }

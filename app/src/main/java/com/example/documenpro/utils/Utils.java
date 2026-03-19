@@ -890,7 +890,7 @@ public class Utils {
 
     public static boolean isExcelFile(File file) {
         String fileName = file.getName();
-        return fileName.endsWith(".xls") || fileName.endsWith(".xlsx");
+        return fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv");
     }
 
     public static boolean isWordFile(File file) {
@@ -915,7 +915,7 @@ public class Utils {
             return R.drawable.ic_type_pdf;
         } else if (fileName.endsWith(".dox") || fileName.endsWith(".doc")) {
             return R.drawable.ic_type_word;
-        } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
+        } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv") ) {
             return R.drawable.ic_type_excel;
         } else if (fileName.endsWith(".ppt") || fileName.endsWith(".pptx")) {
             return R.drawable.ic_type_ppt;

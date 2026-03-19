@@ -56,7 +56,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:focusable="true">
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerBgColor"
                 android:layout_width="match_parent"

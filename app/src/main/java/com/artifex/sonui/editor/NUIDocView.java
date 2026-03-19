@@ -555,6 +555,9 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     private void showProgressDialog() {
+        if (this.mProgressDialog != null && this.mProgressDialog.isShowing()) {
+            return;
+        }
         this.mProgressDialog = new AppLoadingDialog(this.getContext());
         Window window5 = this.mProgressDialog.getWindow();
         assert window5 != null;
@@ -564,16 +567,14 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     private void dismissProgressDialog() {
-        AppLoadingDialog var1 = this.mProgressDialog;
         try {
-            if (var1 != null && var1.isShowing()) {
-                var1.dismiss();
-                this.mProgressDialog = null;
+            if (this.mProgressDialog != null && this.mProgressDialog.isShowing()) {
+                this.mProgressDialog.dismiss();
             }
-        } catch (IllegalArgumentException e) {
+            this.mProgressDialog = null;
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void handlePasswordError() {
@@ -856,6 +857,13 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         this.btnUndo = (ImageView) this.createToolbarButton(R.id.img_undo);
         this.btnRedo = (ImageView) this.createToolbarButton(R.id.img_redo);
         this.btnFullScreen = (AppCompatImageView) this.createToolbarButton(R.id.btn_full_screen);
+        if (this.btnFullScreen != null) {
+            this.btnFullScreen.setVisibility(GONE);
+        }
+        this.tvPageNumber = this.findViewById(R.id.footer_page_text);
+        if (this.tvPageNumber != null) {
+            this.tvPageNumber.setVisibility(GONE);
+        }
 
         this.headerContainer = this.findViewById(R.id.header);
         this.bottomContainer = this.findViewById(R.id.bottom_container);
@@ -2187,8 +2195,6 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         bottomToolBar.setClickable(false);
                         bottomToolBar.setFocusable(false);
                         NUIDocView.this.setEnableBottomBtn(false);
-                        // Utils.showHideView(getContext(), clBottomEditToolBar, true,
-                        // R.dimen.cm_dp_215);
                         bottomToolBarEdit.setVisibility(VISIBLE);
                         toolbarSearchContainer.setVisibility(GONE);
                         toolbarContainer.setVisibility(GONE);
@@ -2487,6 +2493,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     protected void onDocCompleted() {
+        this.dismissProgressDialog();
         if (!this.mFinished) {
             int var1 = this.mSession.getDoc().r();
             this.mPageCount = var1;
@@ -2667,6 +2674,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     protected void onPageLoaded(int var1) {
+        this.dismissProgressDialog();
         int var2 = this.mPageCount;
         boolean var3 = false;
         boolean var7;
