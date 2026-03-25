@@ -42,38 +42,60 @@ public class ColorSelectionAdapter extends RecyclerView.Adapter<ColorSelectionAd
     public void onBindViewHolder(@NonNull ViewHolder holder,
                                  int position) {
 
-        CodeColorModel colorModel =
-                colorModelArrayList_ColorSelection.get(position);
+        CodeColorModel colorModel = colorModelArrayList_ColorSelection.get(position);
 
-        if (colorModel.isWhite_ColorModel()) {
-            holder.imgChoose_ColorSelection.setImageResource(
-                    R.drawable.ic_choosed_color);
-        } else {
-            holder.imgChoose_ColorSelection.setImageResource(
-                    R.drawable.ic_choosed_color);
-        }
+        int color = android.graphics.Color.parseColor(colorModel.getCodeColor_ColorModel());
 
-        holder.viewBg_ColorSelection.setBackgroundResource(
-                colorModel.getIdSourceBg_ColorModel());
+        // Use setColor instead of setTint to avoid overwriting the stroke
+        android.graphics.drawable.GradientDrawable gd = (android.graphics.drawable.GradientDrawable) holder.viewBg_ColorSelection.getBackground().mutate();
+        gd.clearColorFilter();
+        gd.setColor(color);
 
+        // Selection state
         if (lastPost_ColorSelection == position) {
             holder.imgChoose_ColorSelection.setVisibility(View.VISIBLE);
+            holder.viewWhiteBorder.setVisibility(View.VISIBLE);
+            holder.viewGlow.setVisibility(View.VISIBLE);
+            
+            // Tint the glow with the same color but with transparency
+            // For white, use a light grey glow to make it visible
+            int glowColor;
+            if (colorModel.isWhite_ColorModel()) {
+                glowColor = android.graphics.Color.parseColor("#33A0A0A0"); // 20% alpha grey
+                holder.imgChoose_ColorSelection.setColorFilter(android.graphics.Color.parseColor("#7B7B7B"));
+            } else {
+                glowColor = (color & 0x00FFFFFF) | 0x33000000; // 20% alpha
+                holder.imgChoose_ColorSelection.clearColorFilter();
+            }
+            android.graphics.drawable.Drawable glowBg = holder.viewGlow.getBackground().mutate();
+            glowBg.clearColorFilter();
+            glowBg.setTint(glowColor);
+            
+            holder.viewWhiteBorder.getBackground().mutate(); // Just in case
         } else {
             holder.imgChoose_ColorSelection.setVisibility(View.GONE);
+            holder.viewWhiteBorder.setVisibility(View.GONE);
+            holder.viewGlow.setVisibility(View.GONE);
+        }
+
+        // Handle white color visibility (add a small border if needed)
+        if (colorModel.isWhite_ColorModel()) {
+            float density = holder.itemView.getContext().getResources().getDisplayMetrics().density;
+            gd.setStroke((int)(1.5f * density), android.graphics.Color.parseColor("#A0A0A0"));
+        } else {
+            gd.setStroke(0, android.graphics.Color.TRANSPARENT);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                notifyItemChanged(lastPost_ColorSelection);
-                notifyItemChanged(holder.getAdapterPosition());
-
+                int oldPos = lastPost_ColorSelection;
                 lastPost_ColorSelection = holder.getAdapterPosition();
+                notifyItemChanged(oldPos);
+                notifyItemChanged(lastPost_ColorSelection);
 
                 if (listener_ColorSelection != null) {
-                    listener_ColorSelection.onColorChanged(
-                            colorModel.getCodeColor_ColorModel());
+                    listener_ColorSelection.onColorChanged(colorModel.getCodeColor_ColorModel());
                 }
             }
         });
@@ -97,17 +119,17 @@ public class ColorSelectionAdapter extends RecyclerView.Adapter<ColorSelectionAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         AppCompatImageView imgChoose_ColorSelection;
-
         View viewBg_ColorSelection;
+        View viewWhiteBorder;
+        View viewGlow;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            viewBg_ColorSelection =
-                    itemView.findViewById(R.id.imgColor);
-
-            imgChoose_ColorSelection =
-                    itemView.findViewById(R.id.choose_color_iv1);
+            viewBg_ColorSelection = itemView.findViewById(R.id.imgColor);
+            imgChoose_ColorSelection = itemView.findViewById(R.id.choose_color_iv1);
+            viewWhiteBorder = itemView.findViewById(R.id.view_white_border);
+            viewGlow = itemView.findViewById(R.id.view_selection_glow);
         }
     }
 }

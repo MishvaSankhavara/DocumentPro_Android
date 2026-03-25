@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
+import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.documenpro.BuildConfig;
@@ -26,9 +26,8 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
 
     private Activity activityContext;
 
-    private AppCompatTextView languageTextView;
-
-    private AppCompatTextView versionTextView;
+    private TextView languageTextView;
+    private TextView versionTextView;
     private com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch swDarkMode;
 
     public FragmentSetting() {
@@ -72,11 +71,10 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.cl_rate_app).setOnClickListener(this);
         view.findViewById(R.id.cl_share_app).setOnClickListener(this);
         view.findViewById(R.id.cl_language_options).setOnClickListener(this);
-        view.findViewById(R.id.cl_faq).setOnClickListener(this);
-        view.findViewById(R.id.cl_request).setOnClickListener(this);
         view.findViewById(R.id.cl_feedback).setOnClickListener(this);
         view.findViewById(R.id.cl_privacy_policy).setOnClickListener(this);
         view.findViewById(R.id.cl_dark_mode).setOnClickListener(this);
+        view.findViewById(R.id.iv_back).setOnClickListener(this);
 
     }
 
@@ -110,10 +108,6 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
         } else if (idView == R.id.cl_language_options) {
             Intent intentLang = new Intent(activityContext, LocaleSelectionActivity.class);
             startActivity(intentLang);
-        } else if (idView == R.id.cl_faq) {
-
-        } else if (idView == R.id.cl_request) {
-
         } else if (idView == R.id.cl_feedback) {
             Utils.feedbackApp(activityContext);
         } else if (idView == R.id.cl_privacy_policy) {
@@ -124,6 +118,10 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
                 startActivity(i);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        } else if (idView == R.id.iv_back) {
+            if (activityContext != null) {
+                activityContext.onBackPressed();
             }
         }
     }

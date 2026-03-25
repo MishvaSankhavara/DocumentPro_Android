@@ -6,43 +6,47 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_bg"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
         android:scaleType="centerInside"
-        android:src="@drawable/bg3"
-        app:layout_constraintHeight_percent="0.65"
+        android:src="@drawable/onboarding_img3"
+        android:layout_marginTop="@dimen/_50sdp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingHorizontal="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/iv_bg">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title_tv3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/roboto_bold"
-            android:gravity="center"
-            android:text="@string/onboarding_title_pdf_read_edit"
-            android:textColor="@color/app_text_black"
-            android:textSize="28sp" />
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/subtitle_tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center"
-            android:text="@string/onboarding_description_pdf_edit_features"
-            android:textColor="@color/app_text_gray"
-            android:textSize="15sp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_tv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="start"
+                android:text="@string/onboarding_title_images_to_pdf"
+                android:textColor="@color/app_text_black"
+                android:textSize="28sp" />
 
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/subtitle_tv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="start"
+                android:text="@string/onboarding_description_convert_picture"
+                android:textColor="@color/app_text_gray"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

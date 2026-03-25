@@ -372,13 +372,7 @@
     <string name="str_action_convert">変換する</string>
     <string name="toolbar_title_convert_image_to_pdf">画像をPDFに変換</string>
 
-    <string name="onboarding_description_file_management">スマートで効率的なファイル管理</string>
-    <string name="onboarding_description_pdf_tools">さまざまなPDFツール</string>
-    <string name="onboarding_description_pdf_edit_features">テキストのハイライト、描画、下線、取り消し線</string>
     <string name="dialog_exit_feedback_title">PDFリーダーにご満足ですか？</string>
     <string name="dialog_exit_feedback_message">ファイルを読む際に問題がある場合は、フィードバックをいただければ幸いです</string>
     <string name="action_exit_app">アプリを終了するにはここをタップしてください</string>
-    <string name="onboarding_title_organize_pdf" >PDF を整理する</string>
-    <string name="onboarding_title_pdf_editor" >強力な PDF エディタ</string>
-    <string name="onboarding_title_pdf_read_edit" >PDF を読む＆編集する</string>
 </resources>

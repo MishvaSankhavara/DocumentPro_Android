@@ -366,14 +366,8 @@
     <string name="str_action_convert">Konvertieren</string>
     <string name="toolbar_title_convert_image_to_pdf">Bild in PDF konvertieren</string>
 
-    <string name="onboarding_description_file_management" >Intelligentes und effizientes Dateimanagement</string>
-    <string name="onboarding_description_pdf_tools" >Verschiedene PDF-Werkzeuge</string>
-    <string name="onboarding_description_pdf_edit_features" >Text hervorheben, zeichnen, unterstreichen, durchstreichen</string>
     <string name="dialog_exit_feedback_title">Sind Sie mit dem PDF-Reader zufrieden?</string>
     <string name="dialog_exit_feedback_message">Wenn Sie beim Lesen von Dateien Probleme haben, klicken Sie hier, um uns Feedback zu geben</string>
     <string name="action_exit_app">Tippen Sie hier, um die App zu beenden</string>
-    <string name="onboarding_title_organize_pdf" >Organisieren Sie \nIhre PDF-Dateien</string>
-    <string name="onboarding_title_pdf_editor" >Leistungsstarker \nPDF-Editor</string>
-    <string name="onboarding_title_pdf_read_edit" >PDF lesen &amp; bearbeiten</string>
 
 </resources>

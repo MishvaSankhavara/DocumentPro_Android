@@ -375,13 +375,7 @@
     <string name="message_save_image_progress">Obrázek %1$s z %2$s</string>
     <string name="str_action_convert">Konvertovat</string>
     <string name="toolbar_title_convert_image_to_pdf">Převést obrázek do PDF</string>
-    <string name="onboarding_description_file_management" >Chytré a efektivní správa souborů</string>
-    <string name="onboarding_description_pdf_tools" >Různé nástroje pro práci s PDF</string>
-    <string name="onboarding_description_pdf_edit_features" >Zvýrazňování, kreslení, podtrhávání, přeškrtnutí textu</string>
     <string name="dialog_exit_feedback_title">Jste spokojeni s čtečkou PDF?</string>
     <string name="dialog_exit_feedback_message">Pokud máte problémy při čtení souborů, klikněte sem pro zpětnou vazbu</string>
     <string name="action_exit_app">Klepněte sem pro ukončení aplikace</string>
-    <string name="onboarding_title_organize_pdf" >Organizujte \nsvé PDF soubory</string>
-    <string name="onboarding_title_pdf_editor" >Výkonný \neditor PDF</string>
-    <string name="onboarding_title_pdf_read_edit" >Čtení a úpravy PDF</string>
 </resources>

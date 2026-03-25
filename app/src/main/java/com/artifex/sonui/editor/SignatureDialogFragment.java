@@ -39,9 +39,9 @@ public class SignatureDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_signature_capture, container, false);
 
         signatureView = view.findViewById(R.id.signature_view);
-        Button btnClear = view.findViewById(R.id.btn_clear);
-        Button btnCancel = view.findViewById(R.id.btn_cancel);
-        Button btnDone = view.findViewById(R.id.btn_done);
+        View btnClear = view.findViewById(R.id.btn_clear);
+        View btnCancel = view.findViewById(R.id.btn_cancel);
+        View btnDone = view.findViewById(R.id.btn_done);
 
         btnClear.setOnClickListener(v -> signatureView.clear());
         btnCancel.setOnClickListener(v -> dismiss());
@@ -67,6 +67,7 @@ public class SignatureDialogFragment extends DialogFragment {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.WRAP_CONTENT;
             dialog.getWindow().setLayout(width, height);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         }
     }
 

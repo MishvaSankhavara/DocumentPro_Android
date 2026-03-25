@@ -8,12 +8,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.clickListener.OnToolTapListener;
 import com.example.documenpro.model_reader.ToolsModel;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
@@ -35,16 +37,15 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ToolsModel toolType = arrayList_DocumentTool.get(position);
-        float scale = mContext_DocumentTool.getResources().getDisplayMetrics().density;
-        int padding = (int) (toolType.getPadding_toolModel() * scale + 0.5f);
 
         holder.tvTool_DocumentTool.setText(
                 mContext_DocumentTool.getResources().getString(toolType.getNameTool_toolModel()));
 
-        holder.imgTool_DocumentTool.setPadding(padding, padding, padding, padding);
         holder.imgTool_DocumentTool.setImageResource(toolType.getIcRes_toolModel());
+        // Background is now white as per premium design
+        holder.cvToolBg_DocumentTool.setCardBackgroundColor(ContextCompat.getColor(mContext_DocumentTool, R.color.white));
 
-        holder.imgTool_DocumentTool.setOnClickListener(view -> {
+        holder.itemView.setOnClickListener(view -> {
             if (listener_DocumentTool != null) {
                 listener_DocumentTool.onToolTap(toolType);
             }
@@ -68,11 +69,13 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
 
         private final TextView tvTool_DocumentTool;
         private final AppCompatImageView imgTool_DocumentTool;
+        private final MaterialCardView cvToolBg_DocumentTool;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTool_DocumentTool = itemView.findViewById(R.id.tvTools);
+            tvTool_DocumentTool = itemView.findViewById(R.id.tv_tools_name);
             imgTool_DocumentTool = itemView.findViewById(R.id.iv_tools_icon);
+            cvToolBg_DocumentTool = itemView.findViewById(R.id.cv_tools_bg);
         }
     }
 }

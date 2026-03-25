@@ -370,13 +370,7 @@
     <string name="str_action_convert">Конвертировать</string>
     <string name="toolbar_title_convert_image_to_pdf">Конвертировать изображение в PDF</string>
 
-    <string name="onboarding_description_file_management">Умное и эффективное управление файлами</string>
-    <string name="onboarding_description_pdf_tools">Различные инструменты PDF</string>
-    <string name="onboarding_description_pdf_edit_features">Выделение, рисование, подчеркивание, перечеркивание текста</string>
     <string name="dialog_exit_feedback_title">Вы довольны читалкой PDF?</string>
     <string name="dialog_exit_feedback_message">Если у вас возникли проблемы при чтении файлов, нажмите здесь, чтобы отправить нам отзыв</string>
     <string name="action_exit_app">Нажмите здесь, чтобы выйти из приложения</string>
-    <string name="onboarding_title_organize_pdf" >Организуйте \nВаши PDF</string>
-    <string name="onboarding_title_pdf_editor" >Мощный \nредактор PDF</string>
-    <string name="onboarding_title_pdf_read_edit" >Чтение и редактирование PDF </string>
 </resources>

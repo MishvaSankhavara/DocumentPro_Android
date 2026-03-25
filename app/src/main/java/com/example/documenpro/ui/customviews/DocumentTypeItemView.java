@@ -61,12 +61,7 @@ public class DocumentTypeItemView extends LinearLayout {
             );
 
             if (bgColor != 0) {
-
-                GradientDrawable drawable = new GradientDrawable();
-                drawable.setColor(bgColor);
-                drawable.setCornerRadius(radius);
-
-                findViewById(R.id.cv_icon_bg).setBackground(drawable);
+                ((com.google.android.material.card.MaterialCardView) findViewById(R.id.cv_icon_bg)).setCardBackgroundColor(bgColor);
             }
 
             typedArray.recycle();

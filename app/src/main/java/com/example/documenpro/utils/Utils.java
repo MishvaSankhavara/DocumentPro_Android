@@ -909,20 +909,18 @@ public class Utils {
     }
 
     public static int getDocumentSrc(File file) {
-        String fileName = file.getName();
+        String fileName = file.getName().toLowerCase();
 
         if (fileName.endsWith(".pdf")) {
-            return R.drawable.ic_type_pdf;
-        } else if (fileName.endsWith(".dox") || fileName.endsWith(".doc")) {
-            return R.drawable.ic_type_word;
-        } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv") ) {
-            return R.drawable.ic_type_excel;
+            return R.drawable.ic_album_pdf;
+        } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
+            return R.drawable.ic_album_doc;
+        } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv")) {
+            return R.drawable.ic_album_xls;
         } else if (fileName.endsWith(".ppt") || fileName.endsWith(".pptx")) {
-            return R.drawable.ic_type_ppt;
-        } else if (fileName.endsWith(".txt")) {
-            return R.drawable.ic_type_txt;
+            return R.drawable.ic_album_ppt;
         }
-        return R.drawable.ic_type_word;
+        return R.drawable.ic_album_doc;
     }
 
     public static void showRateDialog(Activity mContext) {

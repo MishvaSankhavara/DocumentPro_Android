@@ -367,14 +367,8 @@
     <string name="str_action_convert">Chuyển thành</string>
     <string name="toolbar_title_convert_image_to_pdf">Chuyển đổi hình ảnh sang PDF</string>
 
-    <string name="onboarding_description_file_management">Quản lý tập tin thông minh và hiệu quả</string>
-    <string name="onboarding_description_pdf_tools">Các công cụ PDF đa dạng</string>
-    <string name="onboarding_description_pdf_edit_features">Nổi bật, vẽ, gạch chân, gạch ngang văn bản</string>
     <string name="dialog_exit_feedback_title">Bạn có hài lòng với Trình đọc PDF không?</string>
     <string name="dialog_exit_feedback_message">Nếu bạn gặp vấn đề khi đọc tập tin, nhấn vào đây để gửi phản hồi cho chúng tôi</string>
     <string name="action_exit_app">Nhấn vào đây để thoát ứng dụng</string>
 
-    <string name="onboarding_title_organize_pdf" >Tổ chức \nTài liệu PDF của bạn</string>
-    <string name="onboarding_title_pdf_editor" >Trình chỉnh sửa \nPDF mạnh mẽ</string>
-    <string name="onboarding_title_pdf_read_edit" >PDF \nĐọc &amp; Chỉnh sửa  </string>
 </resources>

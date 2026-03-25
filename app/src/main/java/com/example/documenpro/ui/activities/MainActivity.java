@@ -199,10 +199,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 1:
                 bottomNavigationView.getMenu().findItem(R.id.navigation_tools).setChecked(true);
-                mainToolbar.setVisibility(View.VISIBLE);
-                toolbarTitleTextView.setVisibility(View.VISIBLE);
-                toolbarTitleTextView.setText(R.string.label_tools);
-                ivSearch.setVisibility(View.VISIBLE);
+                mainToolbar.setVisibility(View.GONE);
+                toolbarTitleTextView.setVisibility(View.GONE);
+                ivSearch.setVisibility(View.GONE);
 
                 if (getSupportActionBar() != null) {
                     Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
@@ -210,9 +209,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 2:
                 bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
-                mainToolbar.setVisibility(View.VISIBLE);
-                toolbarTitleTextView.setVisibility(View.VISIBLE);
-                toolbarTitleTextView.setText(R.string.action_setting);
+                mainToolbar.setVisibility(View.GONE);
+                toolbarTitleTextView.setVisibility(View.GONE);
                 ivSearch.setVisibility(View.GONE);
 
                 if (getSupportActionBar() != null) {

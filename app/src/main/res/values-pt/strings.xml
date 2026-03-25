@@ -369,14 +369,8 @@
     <string name="str_action_convert">Converter</string>
     <string name="toolbar_title_convert_image_to_pdf">Converter imagem em PDF</string>
 
-    <string name="onboarding_description_file_management">Gestão inteligente e eficiente de arquivos</string>
-    <string name="onboarding_description_pdf_tools">Diversas ferramentas de PDF</string>
-    <string name="onboarding_description_pdf_edit_features">Realce, desenho, sublinhado, riscar texto</string>
     <string name="dialog_exit_feedback_title">Está satisfeito com o leitor de PDF?</string>
     <string name="dialog_exit_feedback_message">Se encontrar problemas ao ler ficheiros, clique aqui para nos fornecer feedback</string>
     <string name="action_exit_app">Toque aqui para sair da aplicação</string>
-    <string name="onboarding_title_organize_pdf" >Organize \nSeus arquivos PDF</string>
-    <string name="onboarding_title_pdf_editor" >Editor PDF \nPoderoso</string>
-    <string name="onboarding_title_pdf_read_edit" >Leia &amp; Edite PDF</string>
 
 </resources>

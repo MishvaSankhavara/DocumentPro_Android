@@ -180,6 +180,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     protected Uri mStartUri = null;
     protected SOFileState mState = null;
     protected SODataLeakHandlers n;
+    protected boolean mIsSaving = false;
     private boolean isFullScreen = true;
 
     protected boolean mIsAddTextMode = false;
@@ -309,6 +310,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                     NUIDocView.this.setFooterText(var2);
                                     NUIDocView.this.mSOFileState.setUserPath(var2);
                                     if (var1) {
+                                        NUIDocView.this.mIsSaving = true;
                                         NUIDocView.this.prefinish();
                                     }
 

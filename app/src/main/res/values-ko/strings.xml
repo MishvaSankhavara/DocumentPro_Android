@@ -375,13 +375,7 @@
     <string name="str_action_convert">전환하다</string>
     <string name="toolbar_title_convert_image_to_pdf">이미지를 PDF로 변환</string>
 
-    <string name="onboarding_description_file_management">스마트하고 효율적인 파일 관리</string>
-    <string name="onboarding_description_pdf_tools">다양한 PDF 도구</string>
-    <string name="onboarding_description_pdf_edit_features">텍스트 강조, 그리기, 밑줄 그리고 취소선 그리기</string>
     <string name="dialog_exit_feedback_title">PDF 리더에 만족하시나요?</string>
     <string name="dialog_exit_feedback_message">파일을 읽는 동안 문제가 있으시면 피드백을 주시기 바랍니다</string>
     <string name="action_exit_app">앱을 종료하려면 여기를 탭하세요</string>
-    <string name="onboarding_title_organize_pdf" >PDF 파일 \n정리하기</string>
-    <string name="onboarding_title_pdf_editor" >강력한 \nPDF 편집기</string>
-    <string name="onboarding_title_pdf_read_edit" >PDF 읽고 \n편집하기</string>
 </resources>

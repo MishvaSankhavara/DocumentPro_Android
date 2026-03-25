@@ -19,61 +19,80 @@
         <LinearLayout
             android:id="@+id/pdf_bottom_draw"
             android:layout_width="match_parent"
-            android:layout_height="102dp"
+            android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:paddingBottom="12dp"
+            android:visibility="visible">
 
+            <!-- Header with Close button -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:paddingHorizontal="16dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_close_draw"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_close_new"
+                    app:tint="@color/black" />
+            </RelativeLayout>
+
+            <!-- Thickness Slider Section -->
             <LinearLayout
                 android:id="@+id/rl_paint_xp"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/sizeTitleTv"
-                    style="@style/FontMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="22dp"
-                    android:gravity="center"
-                    android:text="@string/info_size"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                android:orientation="horizontal"
+                android:paddingHorizontal="22dp"
+                android:layout_marginBottom="5dp">
 
                 <com.example.documenpro.ui.customviews.seekbar.RangeSeekBar
                     android:id="@+id/thickness_seekBar"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     app:rsb_gravity="center"
                     app:rsb_max="50"
                     app:rsb_min="0.25"
-                    app:rsb_mode="single" />
+                    app:rsb_mode="single"
+                    app:rsb_progress_color="#7B7B7B"
+                    app:rsb_progress_default_color="#EBEBEB"
+                    app:rsb_progress_height="8dp"
+                    app:rsb_progress_radius="4dp"
+                    app:rsb_thumb_height="20dp"
+                    app:rsb_thumb_width="20dp"
+                    app:rsb_thumb_drawable="@drawable/bg_circle_thumb" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/sizeTv"
                     style="@style/FontMedium"
-                    android:layout_width="55dp"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:textColor="@color/white"
+                    android:text="10"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Color Picker -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerColor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="46dp"
                 android:layout_gravity="center"
+                android:clipToPadding="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:orientation="horizontal"
                 android:overScrollMode="never"
-                android:paddingEnd="20dp"
+                android:paddingHorizontal="12dp"
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_color" />

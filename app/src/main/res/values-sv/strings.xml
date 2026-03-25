@@ -370,14 +370,8 @@
     <string name="str_action_convert">Konvertera</string>
     <string name="toolbar_title_convert_image_to_pdf">Konvertera bild till PDF</string>
 
-    <string name="onboarding_description_file_management">Smart och effektiv filhantering</string>
-    <string name="onboarding_description_pdf_tools">Olika PDF-verktyg</string>
-    <string name="onboarding_description_pdf_edit_features">Markera, rita, understryk, stryk text</string>
     <string name="dialog_exit_feedback_title">Är du nöjd med PDF-läsaren?</string>
     <string name="dialog_exit_feedback_message">Om du har problem med att läsa filer, klicka här för att ge oss feedback</string>
     <string name="action_exit_app">Tryck här för att avsluta appen</string>
-    <string name="onboarding_title_organize_pdf" >Organisera \nDina PDF</string>
-    <string name="onboarding_title_pdf_editor" >Kraftfull \nPDF-redigerare</string>
-    <string name="onboarding_title_pdf_read_edit" >PDF \nLäs &amp; Redigera</string>
 
 </resources>

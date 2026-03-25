@@ -1,51 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_icon_bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_margin="4dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_icon_bg"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:strokeWidth="0dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="4dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_document" />
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_album_pdf" />
 
-    </com.google.android.material.card.MaterialCardView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:lines="1"
+            android:text="PDF"
+            android:textColor="@color/app_primary_text"
+            android:textSize="14sp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:lines="1"
-        android:text="All"
-        android:textColor="@color/app_primary_text"
-        android:textSize="13sp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_dialog_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:lines="1"
+            android:text="0 files"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp" />
+    </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_dialog_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:fontFamily="@font/roboto_regular"
-        android:gravity="center"
-        android:lines="1"
-        android:text="0 files"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="11sp" />
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

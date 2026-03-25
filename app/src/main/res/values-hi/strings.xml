@@ -370,13 +370,7 @@
     <string name="str_action_convert">बदलना</string>
     <string name="toolbar_title_convert_image_to_pdf">छवि को पीडीएफ में बदलें</string>
 
-    <string name="onboarding_description_file_management" >बुद्धिमान और कुशल फ़ाइल प्रबंधन</string>
-    <string name="onboarding_description_pdf_tools" >विभिन्न पीडीएफ़ उपकरण</string>
-    <string name="onboarding_description_pdf_edit_features" >टेक्स्ट को हाइलाइट, आरेखित, अंडरलाइन, और स्ट्रोक करें</string>
     <string name="dialog_exit_feedback_title">क्या आप पीडीएफ़ रीडर से संतुष्ट हैं?</string>
     <string name="dialog_exit_feedback_message">अगर आप फ़ाइलें पढ़ते समय किसी समस्या का सामना कर रहे हैं, हमें फीडबैक देने के लिए यहाँ क्लिक करें</string>
     <string name="action_exit_app">ऐप से बाहर निकलने के लिए यहाँ टैप करें</string>
-    <string name="onboarding_title_organize_pdf" >अपने PDF \nको संगठित करें</string>
-    <string name="onboarding_title_pdf_editor" >शक्तिशाली \nPDF संपादक</string>
-    <string name="onboarding_title_pdf_read_edit" >PDF पढ़ें और \nसंपादित करें</string>
 </resources>

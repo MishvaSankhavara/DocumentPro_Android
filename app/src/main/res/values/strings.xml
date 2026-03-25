@@ -93,7 +93,9 @@
     <string name="info_size">Size</string>
     <string name="info_path">Path</string>
 
-    <string name="splash_tagline">Your all-in-one document reader</string>
+    <string name="splash_title">AI DOC READER</string>
+    <string name="splash_subtitle">Scan, Organize &amp; Share Documents</string>
+    <string name="splash_tagline">Initializing AI...</string>
     <string name="sort_by">Sort by</string>
     <string name="sort_date_ascending">Date: Ascending</string>
     <string name="sort_date_descending">Date: Descending</string>
@@ -1034,14 +1036,14 @@
     <string name="str_action_convert">Convert</string>
     <string name="toolbar_title_convert_image_to_pdf">Convert image to PDF</string>
 
-
-    <string name="onboarding_title_organize_pdf">Organize \nYour PDF</string>
-    <string name="onboarding_title_pdf_editor">Powerful \nPDF Editor</string>
-    <string name="onboarding_title_pdf_read_edit">PDF \nRead &amp; Edit </string>
-
-    <string name="onboarding_description_file_management">Smart and efficient file management</string>
-    <string name="onboarding_description_pdf_tools">Various PDF tools</string>
-    <string name="onboarding_description_pdf_edit_features">Highlight, draw, underline , stroke text</string>
+    <string name="onboarding_title_editing_tools">Multiple Editing Tools</string>
+    <string name="onboarding_title_all_in_one">All-in-one Documents</string>
+    <string name="onboarding_title_images_to_pdf">Images to PDF</string>
+    <string name="onboarding_description_modify_text">Modify text and annotations in\nyour documents</string>
+    <string name="onboarding_description_streamline">Streamline your documents.\nOne app, all formats</string>
+    <string name="onboarding_description_convert_picture">Convert any picture into PDF\nwith one tap</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_get_start">Get Start</string>
     <string name="dialog_exit_feedback_title">Are you satisfied with PDF Reader?</string>
     <string name="dialog_exit_feedback_message">If you have a trouble when reading files, click to feedback to us</string>
     <string name="action_exit_app">Tap here to exit app</string>

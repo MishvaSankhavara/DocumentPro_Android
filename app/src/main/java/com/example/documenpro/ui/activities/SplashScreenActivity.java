@@ -15,25 +15,32 @@ import com.example.documenpro.R;
 import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.utils.Utils;
 
+import android.widget.ProgressBar;
 import java.util.concurrent.TimeUnit;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
     private static final long SPLASH_DURATION_MS = 2000;
     private long remainingSeconds;
+    private ProgressBar pbSplash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_splash);
+        pbSplash = findViewById(R.id.pb_splash);
         startSplashTimer();
     }
 
     private void startSplashTimer() {
-        CountDownTimer countDownTimer = new CountDownTimer(SPLASH_DURATION_MS, 1000) {
+        CountDownTimer countDownTimer = new CountDownTimer(SPLASH_DURATION_MS, 50) {
             @Override
             public void onTick(long millisUntilFinished) {
                 remainingSeconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1;
+                if (pbSplash != null) {
+                    int progress = (int) (((SPLASH_DURATION_MS - millisUntilFinished) / (float) SPLASH_DURATION_MS) * 100);
+                    pbSplash.setProgress(progress);
+                }
             }
 
             @Override

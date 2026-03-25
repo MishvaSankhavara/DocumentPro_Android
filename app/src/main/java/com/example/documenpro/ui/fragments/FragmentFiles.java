@@ -49,12 +49,10 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     private MainActivity activityContext;
 
     private LinearLayout permissionContainer;
-    private DocumentTypeItemView txtButton;
     private DocumentTypeItemView pdfButton;
     private DocumentTypeItemView wordButton;
     private DocumentTypeItemView excelButton;
     private DocumentTypeItemView pptButton;
-    ArrayList<DocumentModel> txtFile;
     ArrayList<DocumentModel> excelFile;
     ArrayList<DocumentModel> pdfFile;
     ArrayList<DocumentModel> wordFile;
@@ -80,7 +78,6 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
     private void initAction(View view) {
         view.findViewById(R.id.tv_go_to_set).setOnClickListener(this);
-        txtButton.setOnClickListener(this);
         pdfButton.setOnClickListener(this);
         wordButton.setOnClickListener(this);
         excelButton.setOnClickListener(this);
@@ -128,7 +125,6 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(activityContext);
 
-        txtButton = view.findViewById(R.id.btnTXT);
         pdfButton = view.findViewById(R.id.btnPdf);
         wordButton = view.findViewById(R.id.btnWord);
         excelButton = view.findViewById(R.id.btnExcel);
@@ -183,7 +179,6 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
     private void countFiles() {
         executor.execute(() -> {
-            txtFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_TEXT_FILES);
             excelFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_EXCEL_FILES);
             pdfFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_PDF_FILES);
             wordFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_WORD_FILES);
@@ -191,8 +186,6 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             activityContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    txtButton.setTvCount(
-                            getResources().getString(R.string.label_file_count, String.valueOf(txtFile.size())));
                     pdfButton.setTvCount(
                             getResources().getString(R.string.label_file_count, String.valueOf(pdfFile.size())));
                     excelButton.setTvCount(
@@ -266,8 +259,6 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
                 intentRecent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_FAVORITE);
                 startActivity(intentRecent);
             }
-        } else if (idView == R.id.btnTXT) {
-            openFileList(AppGlobalConstants.FILE_TYPE_TEXT);
         } else if (idView == R.id.btnPdf) {
             openFileList(AppGlobalConstants.FILE_TYPE_PDF);
         } else if (idView == R.id.btnExcel) {

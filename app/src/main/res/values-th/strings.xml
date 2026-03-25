@@ -364,14 +364,8 @@
     <string name="str_action_convert">แปลง</string>
     <string name="toolbar_title_convert_image_to_pdf">แปลงรูปภาพเป็น PDF</string>
 
-    <string name="onboarding_description_file_management">การจัดการไฟล์อัจฉริยะและมีประสิทธิภาพ</string>
-    <string name="onboarding_description_pdf_tools">เครื่องมือ PDF ต่าง ๆ</string>
-    <string name="onboarding_description_pdf_edit_features">เน้น, วาด, ขีดเส้นใต้, ขีดทับข้อความ</string>
     <string name="dialog_exit_feedback_title">คุณพึงพอใจกับผู้อ่าน PDF หรือไม่?</string>
     <string name="dialog_exit_feedback_message">หากคุณมีปัญหาในการอ่านไฟล์ คลิกที่นี่เพื่อให้เราทราบความคิดเห็น</string>
     <string name="action_exit_app">แตะที่นี่เพื่อออกจากแอปพลิเคชัน</string>
-    <string name="onboarding_title_organize_pdf" >จัดระเบียบ \nPDF ของคุณ</string>
-    <string name="onboarding_title_pdf_editor" >เครื่องมือแก้ไข PDF \nที่มีประสิทธิภาพ</string>
-    <string name="onboarding_title_pdf_read_edit" >อ่านและแก้ไข PDF </string>
 
 </resources>

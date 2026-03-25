@@ -368,13 +368,7 @@
     <string name="str_action_convert">Convertit</string>
     <string name="toolbar_title_convert_image_to_pdf">Convertiți imaginea în PDF</string>
 
-    <string name="onboarding_description_file_management">Gestionarea inteligentă și eficientă a fișierelor</string>
-    <string name="onboarding_description_pdf_tools">Diverse instrumente PDF</string>
-    <string name="onboarding_description_pdf_edit_features">Evidențiere, desenare, subliniere, tăiere text</string>
     <string name="dialog_exit_feedback_title">Ești satisfăcut de cititorul PDF?</string>
     <string name="dialog_exit_feedback_message">Dacă întâmpini probleme la citirea fișierelor, dă-ne feedback aici</string>
     <string name="action_exit_app">Apasă aici pentru a ieși din aplicație</string>
-    <string name="onboarding_title_organize_pdf" >Organizează \nFișierele tale PDF</string>
-    <string name="onboarding_title_pdf_editor" >Editor PDF \nPuternic</string>
-    <string name="onboarding_title_pdf_read_edit" >Citește &amp; Editează PDF</string>
 </resources>

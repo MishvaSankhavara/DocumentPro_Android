@@ -67,18 +67,12 @@ public class OnBoardActivity extends AppCompatActivity {
             if (position == 2) {
                 AppCompatTextView appCompatTextView = activity.nextButtonText;
                 if (appCompatTextView != null) {
-                    appCompatTextView.setText(R.string.action_start);
-                }
-                if (activity.findViewById(R.id.next_start_iv) != null) {
-                    activity.findViewById(R.id.next_start_iv).setVisibility(View.GONE);
+                    appCompatTextView.setText(R.string.action_get_start);
                 }
             } else {
                 AppCompatTextView appCompatTextView2 = activity.nextButtonText;
                 if (appCompatTextView2 != null) {
                     appCompatTextView2.setText(R.string.action_next);
-                }
-                if (activity.findViewById(R.id.next_start_iv) != null) {
-                    activity.findViewById(R.id.next_start_iv).setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -121,6 +115,7 @@ public class OnBoardActivity extends AppCompatActivity {
         this.indicator1 = findViewById(R.id.v_indicator1);
         this.indicator2 = findViewById(R.id.v_indicator2);
         this.indicator3 = findViewById(R.id.v_indicator3);
+
         View view = this.viewGuide1;
         if (view != null) {
             this.listView.add(view);
@@ -139,10 +134,10 @@ public class OnBoardActivity extends AppCompatActivity {
             this.titlePageThreeText = view4.findViewById(R.id.title_tv3);
             this.descriptionPageThreeText = view4.findViewById(R.id.subtitle_tv3);
         }
+
         nextButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (previousPagePosition == 0) {
                     onboardingViewPager.setCurrentItem(1);
                 } else if (previousPagePosition == 1) {
@@ -150,7 +145,6 @@ public class OnBoardActivity extends AppCompatActivity {
                 } else {
                     PreferenceUtils.getInstance(OnBoardActivity.this)
                             .setBoolean(AppGlobalConstants.PREF_GUIDE_COMPLETED, true);
-
                     startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
                     finish();
                 }

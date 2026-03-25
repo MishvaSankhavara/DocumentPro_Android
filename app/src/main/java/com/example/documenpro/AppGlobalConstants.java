@@ -188,25 +188,23 @@ public class AppGlobalConstants {
         public static ArrayList<ToolsModel> setToolsList() {
                 ArrayList<ToolsModel> arrayList = new ArrayList<>();
                 arrayList.add(new ToolsModel(R.string.tool_title_your_pdf, R.drawable.ic_tools_your_pdf,
-                                AppGlobalConstants.TOOL_YOUR_PDF, 12));
+                                AppGlobalConstants.TOOL_YOUR_PDF, 12, R.color.tool_red));
                 arrayList.add(new ToolsModel(R.string.tool_tittle_merge, R.drawable.ic_tools_merge,
-                                AppGlobalConstants.TOOL_ID_MERGE, 12));
+                                AppGlobalConstants.TOOL_ID_MERGE, 12, R.color.tool_blue));
                 arrayList.add(new ToolsModel(R.string.tool_title_compress_pdf, R.drawable.ic_tools_compress,
-                                AppGlobalConstants.TOOL_ID_COMPRESS, 12));
+                                AppGlobalConstants.TOOL_ID_COMPRESS, 12, R.color.tool_purple));
                 arrayList.add(new ToolsModel(R.string.tool_tittle_split, R.drawable.ic_tools_split,
-                                AppGlobalConstants.TOOL_ID_SPLIT, 0));
-                // arrayList.add(new Tools(R.string.tool_tittle_browse,
-                // R.drawable.ic_tools_browse_pdf, GlobalConstant.TOOL_BROWSE_PDF, 12));
+                                AppGlobalConstants.TOOL_ID_SPLIT, 0, R.color.tool_orange));
                 arrayList.add(new ToolsModel(R.string.tool_tittle_print, R.drawable.ic_tools_print,
-                                AppGlobalConstants.TOOL_ID_PRINT, 12));
+                                AppGlobalConstants.TOOL_ID_PRINT, 12, R.color.tool_green));
                 arrayList.add(new ToolsModel(R.string.tool_tittle_image_to_pdf, R.drawable.ic_tools_img_to_pdf,
-                                AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF, 12));
+                                AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF, 12, R.color.tool_pink));
                 arrayList.add(new ToolsModel(R.string.tool_tittle_pdf_to_image, R.drawable.ic_pdf_to_image,
-                                AppGlobalConstants.TOOL_PDF_TO_PHOTO, 0));
+                                AppGlobalConstants.TOOL_PDF_TO_PHOTO, 0, R.color.tool_indigo));
                 arrayList.add(new ToolsModel(R.string.tool_tittle_lock_pdf, R.drawable.ic_tools_lock,
-                                AppGlobalConstants.TOOL_ID_LOCK_PDF, 12));
+                                AppGlobalConstants.TOOL_ID_LOCK_PDF, 12, R.color.tool_amber));
                 arrayList.add(new ToolsModel(R.string.tool_tittle_unlock_pdf, R.drawable.ic_tools_unlock,
-                                AppGlobalConstants.TOOL_ID_UNLOCK_PDF, 12));
+                                AppGlobalConstants.TOOL_ID_UNLOCK_PDF, 12, R.color.tool_teal));
                 return arrayList;
         }
 

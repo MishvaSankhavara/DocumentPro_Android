@@ -71,6 +71,7 @@ public class NUIDocViewPdf extends NUIDocView {
     private boolean q = false;
     private View mActiveAnnotationView;
     private String mLoadedPath;
+    private String mSidecarBackupPath;
 
     public NUIDocViewPdf(Context var1) {
         super(var1);
@@ -131,18 +132,6 @@ public class NUIDocViewPdf extends NUIDocView {
                 } else {
                     container.setVisibility(GONE);
                 }
-            }
-        }
-    }
-
-    private void hideDrawControls() {
-        if (llBottomDraw != null && llBottomDraw.getVisibility() == VISIBLE) {
-            Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
-            if (this.getPdfDocView().getDrawMode()) {
-                this.onDrawButton();
-            }
-            if (btnDrawNew != null) {
-                btnDrawNew.setChoose(false);
             }
         }
     }
@@ -297,6 +286,7 @@ public class NUIDocViewPdf extends NUIDocView {
     public void saveCustomAnnotations(String overridePath, boolean lock) {
         Log.d("ANNOTATION_DEBUG",
                 "saveCustomAnnotations called, overridePath=" + overridePath + ", mLoadedPath=" + mLoadedPath);
+
         String filePath;
         if (overridePath != null) {
             filePath = getAnnotationFilePath(overridePath);
@@ -407,7 +397,15 @@ public class NUIDocViewPdf extends NUIDocView {
             return;
         }
 
+        // Create a backup of the sidecar when we first load it
         File file = new File(filePath);
+        if (file.exists()) {
+            mSidecarBackupPath = filePath + ".bak";
+            copyFile(file, new File(mSidecarBackupPath));
+            Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations: created backup at " + mSidecarBackupPath);
+        } else {
+            mSidecarBackupPath = null;
+        }
         if (!file.exists()) {
             Log.d("ANNOTATION_DEBUG", "loadCustomAnnotations: sidecar file does not exist: " + filePath);
             return;
@@ -695,7 +693,6 @@ public class NUIDocViewPdf extends NUIDocView {
             this.btnSignature.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    hideDrawControls();
                     showSignatureDialog();
                 }
             });
@@ -750,17 +747,36 @@ public class NUIDocViewPdf extends NUIDocView {
             });
         }
 
+        View ivCloseDraw = this.findViewById(R.id.iv_close_draw);
+        if (ivCloseDraw != null) {
+            ivCloseDraw.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (llBottomDraw.getVisibility() == VISIBLE) {
+                        Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
+                        onDrawButton();
+                        if (btnDrawNew != null) {
+                            btnDrawNew.setChoose(false);
+                        }
+                    }
+                }
+            });
+        }
+
         seekBarThickness.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    NUIDocViewPdf.this.drawSizeOut.setVisibility(VISIBLE);
+                    if (NUIDocViewPdf.this.drawSizeOut != null)
+                        NUIDocViewPdf.this.drawSizeOut.setVisibility(VISIBLE);
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    NUIDocViewPdf.this.drawSizeOut.setVisibility(GONE);
+                    if (NUIDocViewPdf.this.drawSizeOut != null)
+                        NUIDocViewPdf.this.drawSizeOut.setVisibility(GONE);
                 }
                 return false;
             }
         });
+
         seekBarThickness.setOnRangeChangedListener(new RangeSeekBarChangeListener() {
             @Override
             public void onRangeValueChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
@@ -768,30 +784,29 @@ public class NUIDocViewPdf extends NUIDocView {
                     @Override
                     public void run() {
                         int value = (int) leftValue;
-                        tvSize.setText(String.valueOf(value));
+                        if (tvSize != null)
+                            tvSize.setText(String.valueOf(value));
                         DocPdfView docPdfView = NUIDocViewPdf.this.getPdfDocView();
-                        if (docPdfView.getDrawMode()) {
-                            float var2 = docPdfView.getInkLineThickness();
+                        if (docPdfView != null && docPdfView.getDrawMode()) {
                             docPdfView.setInkLineThickness(value);
                         }
-                        LayoutParams layoutParams = (LayoutParams) drawSizeIn.getLayoutParams();
-                        layoutParams.width = value;
-                        layoutParams.height = value;
-                        layoutParams.gravity = 17;
-                        drawSizeIn.setLayoutParams(layoutParams);
-
+                        if (drawSizeIn != null) {
+                            LayoutParams layoutParams = (LayoutParams) drawSizeIn.getLayoutParams();
+                            layoutParams.width = value;
+                            layoutParams.height = value;
+                            layoutParams.gravity = 17;
+                            drawSizeIn.setLayoutParams(layoutParams);
+                        }
                     }
                 });
             }
 
             @Override
             public void onTrackingStarted(RangeSeekBar view, boolean isLeft) {
-
             }
 
             @Override
             public void onTrackingStopped(RangeSeekBar view, boolean isLeft) {
-
             }
         });
 
@@ -1098,7 +1113,6 @@ public class NUIDocViewPdf extends NUIDocView {
         super.onClick(var1);
 
         if (var1 == this.btnEditTab) {
-            hideDrawControls();
             if (this.getPdfDocView().getDrawMode()) {
                 this.getPdfDocView().onDrawMode();
             }
@@ -1111,23 +1125,28 @@ public class NUIDocViewPdf extends NUIDocView {
 
         if (var1 == this.btnDrawNew) {
             if (llBottomDraw.getVisibility() == VISIBLE) {
-                Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
+                Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
                 this.onDrawButton();
                 btnDrawNew.setChoose(false);
 
             } else if (llBottomDraw.getVisibility() == GONE) {
-                Utils.showHideView(getContext(), llBottomDraw, true, R.dimen.cm_dp_102);
+                Utils.showHideView(getContext(), llBottomDraw, true, R.dimen.cm_dp_162);
                 this.onDrawButton();
                 btnDrawNew.setChoose(true);
             }
         }
         if (var1 == this.btnHighLight) {
-            hideDrawControls();
+            if (this.getPdfDocView().getDrawMode()) {
+                if (llBottomDraw.getVisibility() == VISIBLE) {
+                    Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
+                }
+                this.onDrawButton();
+                btnDrawNew.setChoose(false);
+            }
             this.onHighlightButton();
         }
 
         if (var1 == this.btnText) {
-            hideDrawControls();
             this.onTextButton();
         }
 
@@ -1142,7 +1161,6 @@ public class NUIDocViewPdf extends NUIDocView {
         }
 
         if (var1 == this.btnDeleteNote) {
-            hideDrawControls();
             this.onDeleteButton();
         }
 
@@ -1153,7 +1171,7 @@ public class NUIDocViewPdf extends NUIDocView {
             if (llBottomDraw.getVisibility() == VISIBLE) {
                 this.onDrawButton();
 
-                Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
+                Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
 
             }
         }
@@ -1299,12 +1317,6 @@ public class NUIDocViewPdf extends NUIDocView {
             this.getPdfDocView().resetModes();
         }
         this.updateUIAppearance();
-    }
-
-    @Override
-    public void onInsertImageButton() {
-        hideDrawControls();
-        super.onInsertImageButton();
     }
 
     protected void onPageLoaded(int var1) {
@@ -1463,6 +1475,53 @@ public class NUIDocViewPdf extends NUIDocView {
         // Removed saveCustomAnnotations() from here to fix "Save As" issue.
         // Saving is now handled by SaveAsPdfHandler.performSave(path)
         super.preSave();
+    }
+
+    @Override
+    public void prefinish() {
+        Log.d("ANNOTATION_DEBUG", "prefinish called, mIsSaving=" + mIsSaving);
+        String sidecarPath = getAnnotationFilePath();
+
+        if (mIsSaving) {
+            // Document was saved successfully, commit the sidecar by deleting the backup
+            if (mSidecarBackupPath != null) {
+                new File(mSidecarBackupPath).delete();
+                Log.d("ANNOTATION_DEBUG", "prefinish: save successful, deleted backup");
+            }
+        } else {
+            // Document was DISCARDED or closed without saving
+            if (mSidecarBackupPath != null) {
+                // Restore from backup
+                File mainFile = new File(sidecarPath);
+                File backupFile = new File(mSidecarBackupPath);
+                if (backupFile.exists()) {
+                    copyFile(backupFile, mainFile);
+                    backupFile.delete();
+                    Log.d("ANNOTATION_DEBUG", "prefinish: discarded changes, restored sidecar from backup");
+                }
+            } else {
+                // No backup existed (it was a new sidecar), delete it
+                File mainFile = new File(sidecarPath);
+                if (mainFile.exists()) {
+                    mainFile.delete();
+                    Log.d("ANNOTATION_DEBUG", "prefinish: discarded changes, deleted new sidecar");
+                }
+            }
+        }
+        super.prefinish();
+    }
+
+    private void copyFile(File src, File dst) {
+        try (java.io.FileInputStream in = new java.io.FileInputStream(src);
+                java.io.FileOutputStream out = new java.io.FileOutputStream(dst)) {
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+        } catch (IOException e) {
+            Log.e("ANNOTATION_DEBUG", "copyFile error", e);
+        }
     }
 
     public void reloadFile() {

@@ -57,6 +57,12 @@ public class FragmentTools extends Fragment {
     private void initViews(View view) {
         ArrayList<ToolsModel> allTools = AppGlobalConstants.setToolsList();
 
+        view.findViewById(R.id.iv_back).setOnClickListener(v -> {
+            if (activityContext != null) {
+                activityContext.onBackPressed();
+            }
+        });
+
         ArrayList<ToolsModel> pdfToolsList = new ArrayList<>();
         ArrayList<ToolsModel> securityToolsList = new ArrayList<>();
         ArrayList<ToolsModel> convertEditorList = new ArrayList<>();
@@ -84,10 +90,8 @@ public class FragmentTools extends Fragment {
     }
 
     private void setupRecyclerView(RecyclerView recyclerView, ArrayList<ToolsModel> toolsList) {
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen._1sdp);
-        recyclerView.addItemDecoration(new ViewItemDecoration(spacingInPixels));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 4, RecyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3, RecyclerView.VERTICAL, false));
         DocumentToolAdapter adapter = new DocumentToolAdapter(requireActivity(), toolsList, new OnToolTapListener() {
             @Override
             public void onToolTap(ToolsModel toolType) {

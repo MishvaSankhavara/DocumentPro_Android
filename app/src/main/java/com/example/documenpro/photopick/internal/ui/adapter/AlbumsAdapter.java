@@ -44,12 +44,24 @@ public class AlbumsAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         Album album = Album.valueOf(cursor);
-        ((TextView) view.findViewById(R.id.album_name)).setText(album.getDisplayName(context));
-        ((TextView) view.findViewById(R.id.album_media_count)).setText(String.valueOf(album.getCount()));
+        String displayName = album.getDisplayName(context);
+        ((TextView) view.findViewById(R.id.album_name)).setText(displayName);
+        ((TextView) view.findViewById(R.id.album_media_count)).setText(context.getString(R.string.label_file_count, String.valueOf(album.getCount())));
 
-        // do not need to load animated Gif
-        SelectionSpec.getInstance().imageEngine.loadThumbnail_ImageEngine(context, context.getResources().getDimensionPixelSize(R
-                        .dimen.media_grid_size), mPlaceholder,
-                view.findViewById(R.id.album_cover), album.getCoverUri());
+        com.example.documenpro.photopick.internal.ui.widget.RoundedRectangleImageView coverView = view.findViewById(R.id.album_cover);
+        
+        if (displayName.toLowerCase().contains("pdf")) {
+            coverView.setImageResource(R.drawable.ic_album_pdf);
+        } else if (displayName.toLowerCase().contains("word") || displayName.toLowerCase().contains("doc")) {
+            coverView.setImageResource(R.drawable.ic_album_doc);
+        } else if (displayName.toLowerCase().contains("excel") || displayName.toLowerCase().contains("xls")) {
+            coverView.setImageResource(R.drawable.ic_album_xls);
+        } else if (displayName.toLowerCase().contains("ppt") || displayName.toLowerCase().contains("powerpoint")) {
+            coverView.setImageResource(R.drawable.ic_album_ppt);
+        } else {
+            SelectionSpec.getInstance().imageEngine.loadThumbnail_ImageEngine(context, context.getResources().getDimensionPixelSize(R
+                            .dimen.media_grid_size), mPlaceholder,
+                    coverView, album.getCoverUri());
+        }
     }
 }

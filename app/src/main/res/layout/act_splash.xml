@@ -3,63 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:background="@drawable/splash_bg_new">
 
-    <LinearLayout
-        android:id="@+id/ll_logo_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_splash_logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/splash_logo_new"
+        app:layout_constraintBottom_toTopOf="@+id/tv_splash_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_splash"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/tvNameApp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/app_name"
-            android:textColor="@color/app_primary_text"
-            android:textSize="25sp" />
-
-    </LinearLayout>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lav_anim"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        android:scaleType="fitCenter"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/tv_splash_des"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/lottie_splash_loading" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_splash_des"
+        android:id="@+id/tv_splash_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/splash_title"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_splash_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_splash_logo" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_splash_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/splash_subtitle"
+        android:textColor="@color/app_text_gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_splash_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ProgressBar
+        android:id="@+id/pb_splash"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="16dp"
+        android:max="100"
+        android:progress="40"
+        android:progressDrawable="@drawable/custom_splash_progress"
+        app:layout_constraintBottom_toTopOf="@+id/tv_splash_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_splash_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/splash_tagline"
-        android:textColor="@color/dark_color_100_748090"
+        android:textColor="@color/app_blue"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
