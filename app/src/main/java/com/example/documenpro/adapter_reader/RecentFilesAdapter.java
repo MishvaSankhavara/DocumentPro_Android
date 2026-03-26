@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -67,6 +69,21 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
         holder.tvFileSize_RecentFiles.setText(Formatter.formatFileSize(mContext_RecentFiles, document.getLength_DocModel()));
 
         Glide.with(mContext_RecentFiles).load(document.getSrcImage_DocModel()).into(holder.imgIcon_RecentFiles);
+
+        String fileName = document.getFileName_DocModel().toLowerCase();
+        int bgColor = ContextCompat.getColor(mContext_RecentFiles, R.color.app_background); // Default
+
+        if (fileName.endsWith(".pdf")) {
+            bgColor = ContextCompat.getColor(mContext_RecentFiles, R.color.pdf_card_bg);
+        } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
+            bgColor = ContextCompat.getColor(mContext_RecentFiles, R.color.word_card_bg);
+        } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv")) {
+            bgColor = ContextCompat.getColor(mContext_RecentFiles, R.color.excel_card_bg);
+        } else if (fileName.endsWith(".ppt") || fileName.endsWith(".pptx")) {
+            bgColor = ContextCompat.getColor(mContext_RecentFiles, R.color.ppt_card_bg);
+        }
+
+        holder.cvIcon_RecentFiles.setCardBackgroundColor(bgColor);
 
         if (databaseHelper_RecentFiles.isStared_DatabaseHelper(document.getFileUri_DocModel())) {
             holder.imgFavorite_RecentFiles.setFrame(50);
@@ -242,6 +259,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
         LinearLayout btnFavorite_RecentFiles;
         ImageView imgMore_RecentFiles;
         ImageView imgIcon_RecentFiles;
+        CardView cvIcon_RecentFiles;
         TextView tvFileDate_RecentFiles;
         TextView tvFileSize_RecentFiles;
         TextView tvFileName_RecentFiles;
@@ -256,6 +274,8 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
             tvFileDate_RecentFiles = itemView.findViewById(R.id.tvFileDate);
 
             imgIcon_RecentFiles = itemView.findViewById(R.id.iv_icon);
+
+            cvIcon_RecentFiles = itemView.findViewById(R.id.cv_icon);
 
             btnFavorite_RecentFiles = itemView.findViewById(R.id.ll_favorite);
 

@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="10dp" />
+                android:paddingHorizontal="12dp" />
 
             <!-- Security Section -->
             <LinearLayout
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="10dp" />
+                android:paddingHorizontal="12dp" />
 
             <!-- Convert & Editor Section -->
             <LinearLayout
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="10dp" />
+                android:paddingHorizontal="12dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

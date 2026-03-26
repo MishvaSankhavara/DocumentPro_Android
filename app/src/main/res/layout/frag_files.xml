@@ -111,8 +111,7 @@
                             android:id="@+id/ll_document_type"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:background="@color/app_background"
+                            android:layout_marginTop="20dp"
                             android:orientation="horizontal"
                             android:weightSum="4">
 
@@ -121,8 +120,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@android:color/transparent"
-                                app:imgFileType="@drawable/ic_album_pdf"
+                                app:backgroundColorFileType="@color/pdf_card_bg"
+                                app:imgFileType="@drawable/ic_album_pdf_file"
                                 app:nameFileType="@string/document_pdf"
                                 app:cornerRadiusFileType="16dp"/>
 
@@ -131,8 +130,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@android:color/transparent"
-                                app:imgFileType="@drawable/ic_album_doc"
+                                app:backgroundColorFileType="@color/word_card_bg"
+                                app:imgFileType="@drawable/ic_album_doc_file"
                                 app:nameFileType="@string/document_word"
                                 app:cornerRadiusFileType="16dp"/>
 
@@ -141,8 +140,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@android:color/transparent"
-                                app:imgFileType="@drawable/ic_album_xls"
+                                app:backgroundColorFileType="@color/excel_card_bg"
+                                app:imgFileType="@drawable/ic_album_xls_file"
                                 app:nameFileType="@string/document_excel"
                                 app:cornerRadiusFileType="16dp"/>
 
@@ -151,8 +150,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@android:color/transparent"
-                                app:imgFileType="@drawable/ic_album_ppt"
+                                app:backgroundColorFileType="@color/ppt_card_bg"
+                                app:imgFileType="@drawable/ic_album_ppt_file"
                                 app:nameFileType="@string/document_ppt"
                                 app:cornerRadiusFileType="16dp"/>
 

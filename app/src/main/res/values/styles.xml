@@ -25,6 +25,10 @@
     <style name="MainActivity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:homeAsUpIndicator">@drawable/ic_sidebar</item>
     </style>
+    <style name="SplashTheme" parent="MainActivity">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
     <style name="FontSemiBold">
         <item name="android:includeFontPadding">false</item>
         <item name="android:fontFamily">@font/roboto_bold</item>

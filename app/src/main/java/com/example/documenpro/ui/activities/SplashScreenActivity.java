@@ -16,6 +16,8 @@ import com.example.documenpro.PreferenceUtils;
 import com.example.documenpro.utils.Utils;
 
 import android.widget.ProgressBar;
+import android.view.WindowManager;
+
 import java.util.concurrent.TimeUnit;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -27,6 +29,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.act_splash);
         pbSplash = findViewById(R.id.pb_splash);
         startSplashTimer();

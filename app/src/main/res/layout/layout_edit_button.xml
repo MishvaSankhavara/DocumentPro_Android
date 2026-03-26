@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="?attr/selectableItemBackground">
+    android:background="@drawable/bg_editor_tool"
+    android:padding="8dp">
 
     <View
         android:id="@+id/viewBg"

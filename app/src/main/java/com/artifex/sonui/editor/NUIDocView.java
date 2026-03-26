@@ -128,6 +128,8 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     private AppCompatTextView tvCancelSearch;
     // Toolbar Edit
     protected AppCompatImageView btnCloseEdit;
+    protected TextView tvTittleEdit;
+    protected ImageView btnSaveEdit;
     private LinearLayout llTextColorContainer;
     private LinearLayout llBgColorContainer;
     private AppCompatImageView btnSearchNext;
@@ -752,8 +754,14 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
             String var2 = (new File(var1)).getName();
             if (!var2.isEmpty()) {
                 this.tvTittle.setText(var2);
+                if (this.tvTittleEdit != null) {
+                    this.tvTittleEdit.setText(var2);
+                }
             } else {
                 this.tvTittle.setText(var1);
+                if (this.tvTittleEdit != null) {
+                    this.tvTittleEdit.setText(var1);
+                }
             }
         }
 
@@ -1006,6 +1014,8 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         }
 
         this.tvTittle = this.findViewById(R.id.tvTittle);
+        this.tvTittleEdit = this.findViewById(R.id.tv_title_edit);
+        this.btnSaveEdit = (ImageView) this.createToolbarButton(R.id.iv_save_edit);
 
         if (this.mConfigOptions.r()) {
             this.mSoFileDatabase = SOFileDatabase.getDatabase();
@@ -2259,6 +2269,9 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         toolbarEditContainer.setVisibility(GONE);
                     }
                 });
+            }
+            if (var1 == this.btnSaveEdit) {
+                this.onSaveButton();
             }
 
             if (var1 == this.btnSave) {

@@ -211,7 +211,7 @@ public class AppGlobalConstants {
         public static ArrayList<CodeColorModel> getColorBgList() {
 
                 ArrayList<CodeColorModel> arrayList = new ArrayList<>();
-                arrayList.add(new CodeColorModel(R.drawable.bg_tran_color, "transparent", false));
+                arrayList.add(new CodeColorModel(R.drawable.bg_tran_color, "#00000000", false));
                 arrayList.add(new CodeColorModel(R.drawable.bg_color1, "#000000", false));
                 arrayList.add(new CodeColorModel(R.drawable.bg_color2, "#ffffff", true));
                 arrayList.add(new CodeColorModel(R.drawable.bg_color3, "#888888", false));

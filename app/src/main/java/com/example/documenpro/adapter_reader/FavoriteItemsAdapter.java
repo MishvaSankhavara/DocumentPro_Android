@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -76,6 +78,21 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
         Glide.with(mContext_FavoriteItems)
                 .load(document.getSrcImage_DocModel())
                 .into(holder.imgIcon_FavoriteItems);
+
+        String fileName = document.getFileName_DocModel().toLowerCase();
+        int bgColor = ContextCompat.getColor(mContext_FavoriteItems, R.color.app_background); // Default
+
+        if (fileName.endsWith(".pdf")) {
+            bgColor = ContextCompat.getColor(mContext_FavoriteItems, R.color.pdf_card_bg);
+        } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
+            bgColor = ContextCompat.getColor(mContext_FavoriteItems, R.color.word_card_bg);
+        } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv")) {
+            bgColor = ContextCompat.getColor(mContext_FavoriteItems, R.color.excel_card_bg);
+        } else if (fileName.endsWith(".ppt") || fileName.endsWith(".pptx")) {
+            bgColor = ContextCompat.getColor(mContext_FavoriteItems, R.color.ppt_card_bg);
+        }
+
+        holder.cvIcon_FavoriteItems.setCardBackgroundColor(bgColor);
 
         if (databaseHelper_FavoriteItems.isStared_DatabaseHelper(document.getFileUri_DocModel())) {
             holder.imgFavorite_FavoriteItems.setFrame(50);
@@ -270,6 +287,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
         LinearLayout btnFavorite_FavoriteItems;
         ImageView imgMore_FavoriteItems;
         ImageView imgIcon_FavoriteItems;
+        CardView cvIcon_FavoriteItems;
         TextView tvFileDate_FavoriteItems;
         TextView tvFileSize_FavoriteItems;
         TextView tvFileName_FavoriteItems;
@@ -288,6 +306,9 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
 
             imgIcon_FavoriteItems =
                     itemView.findViewById(R.id.iv_icon);
+
+            cvIcon_FavoriteItems =
+                    itemView.findViewById(R.id.cv_icon);
 
             btnFavorite_FavoriteItems =
                     itemView.findViewById(R.id.ll_favorite);
