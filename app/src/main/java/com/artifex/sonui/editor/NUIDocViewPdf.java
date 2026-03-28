@@ -727,16 +727,20 @@ public class NUIDocViewPdf extends NUIDocView {
             getPdfDocView().setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
+                    // Always deselect on touch down if we have an active annotation
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        if (mActiveAnnotationView != null) {
+                            deselectAllAnnotations();
+                        }
+                    }
+
                     if (!getIsAddTextMode()) {
                         // If we are in drawing mode, ensure parents don't intercept
-                        if (event.getAction() == MotionEvent.ACTION_DOWN && getPdfDocView() != null && getPdfDocView().getDrawMode()) {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN && getPdfDocView() != null
+                                && getPdfDocView().getDrawMode()) {
                             v.getParent().requestDisallowInterceptTouchEvent(true);
                         }
                         return false;
-                    }
-
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        deselectAllAnnotations();
                     }
 
                     if (event.getAction() == MotionEvent.ACTION_UP) {
