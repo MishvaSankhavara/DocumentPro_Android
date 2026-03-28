@@ -20,9 +20,9 @@ import com.example.documenpro.ui.dialog.FileRenameDialog;
 import com.example.documenpro.ui.dialog.PasswordSetupDialog;
 
 public class DialogManagerUtils {
-    public static void showPasswordSetup(Activity mContext, PasswordClickListener listener) {
+    public static PasswordSetupDialog showPasswordSetup(Activity mContext, PasswordClickListener listener) {
         if (mContext == null) {
-            return;
+            return null;
         }
         PasswordSetupDialog renameDialog = new PasswordSetupDialog(mContext, listener);
         Window window = renameDialog.getWindow();
@@ -31,6 +31,7 @@ public class DialogManagerUtils {
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
         renameDialog.show();
+        return renameDialog;
     }
 
     public static void showPdfPasswordRemoval(Activity mContext, PDFReaderModel pdfModel, PasswordClickListener listener) {

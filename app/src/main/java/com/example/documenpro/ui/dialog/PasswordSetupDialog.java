@@ -72,14 +72,20 @@ public class PasswordSetupDialog extends Dialog {
             if (etPassword.getText() != null && etPassword.getText().length() > 0) {
                 if (passwordClickListener != null) {
                     passwordClickListener.onOkClickListener(etPassword.getText().toString());
-                    dismiss();
                 }
             } else {
                 ObjectAnimator objectAnimator = ViewUtils.shakeAnimation(clDialogRoot);
                 objectAnimator.start();
-                llErrorContainer.setVisibility(View.VISIBLE);
+                showError(getContext().getString(R.string.toast_please_input_password));
             }
         });
+    }
+
+    public void showError(String message) {
+        tvErrorMessage.setText(message);
+        llErrorContainer.setVisibility(View.VISIBLE);
+        ObjectAnimator objectAnimator = ViewUtils.shakeAnimation(clDialogRoot);
+        objectAnimator.start();
     }
 
     public void setDialogMode(boolean isEntryMode) {

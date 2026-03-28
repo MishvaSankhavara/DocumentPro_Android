@@ -586,7 +586,8 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         if (activity == null)
             return;
 
-        PasswordSetupDialog dialog = new PasswordSetupDialog(activity, new PasswordClickListener() {
+        final PasswordSetupDialog[] dialogHolder = new PasswordSetupDialog[1];
+        dialogHolder[0] = new PasswordSetupDialog(activity, new PasswordClickListener() {
             @Override
             public void onOkClickListener(String password) {
                 PDFReaderModel pdfModel = new PDFReaderModel();
@@ -596,6 +597,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 try {
                     PDFReaderModel unlockedModel = Utils.unlockPdfFile(pdfModel, password);
                     if (unlockedModel != null) {
+                        if (dialogHolder[0] != null) dialogHolder[0].dismiss();
                         String newPath = unlockedModel.getAbsolutePath_PDFModel();
                         Intent intent = new Intent(activity, activity.getClass());
                         intent.setData(Uri.fromFile(new File(newPath)));
@@ -603,21 +605,22 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(intent);
                         activity.finish();
+                    } else {
+                        if (dialogHolder[0] != null) dialogHolder[0].showError(activity.getString(R.string.pwd_error));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Utilities.showMessage(activity, activity.getString(R.string.editor_error),
-                            "Incorrect password or error unlocking file.");
+                    if (dialogHolder[0] != null) dialogHolder[0].showError(activity.getString(R.string.pwd_error));
                 }
             }
         });
-        dialog.setDialogMode(true);
-        Window window = dialog.getWindow();
+        dialogHolder[0].setDialogMode(true);
+        Window window = dialogHolder[0].getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
-        dialog.show();
+        dialogHolder[0].show();
     }
 
     private void k() {

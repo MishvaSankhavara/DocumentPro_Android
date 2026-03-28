@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:cardBackgroundColor="#F7F7F7"
+                app:cardBackgroundColor="@color/app_card_bg"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
@@ -134,7 +134,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F0F0F0" />
+                        android:background="@color/app_divider_line" />
 
                     <!-- Share -->
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -194,7 +194,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F0F0F0" />
+                        android:background="@color/app_divider_line" />
 
                     <!-- Rate -->
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -269,7 +269,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:cardBackgroundColor="#F7F7F7"
+                app:cardBackgroundColor="@color/app_card_bg"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
@@ -338,7 +338,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F0F0F0" />
+                        android:background="@color/app_divider_line" />
 
                     <!-- Dark Mode -->
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -414,7 +414,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:cardBackgroundColor="#F7F7F7"
+                app:cardBackgroundColor="@color/app_card_bg"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
@@ -482,7 +482,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#F0F0F0" />
+                        android:background="@color/app_divider_line" />
 
                     <!-- Privacy Policy -->
                     <androidx.constraintlayout.widget.ConstraintLayout

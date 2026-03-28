@@ -2,11 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/ic_checked"
+        android:drawable="@drawable/ic_check_premium"
         android:state_checked="true" />
 
     <item
-        android:drawable="@drawable/ic_unchecked_list"
+        android:drawable="@drawable/ic_uncheck_premium"
         android:state_checked="false" />
 
 </selector>

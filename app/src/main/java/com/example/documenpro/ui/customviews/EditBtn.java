@@ -16,6 +16,7 @@ import com.example.documenpro.R;
 public class EditBtn extends ConstraintLayout {
 
     View backgroundView;
+    ImageView imgEdit;
 
     public EditBtn(@NonNull Context context) {
         super(context);
@@ -26,10 +27,11 @@ public class EditBtn extends ConstraintLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_edit_button, this, true);
         if (attrs != null) {
             backgroundView = findViewById(R.id.viewBg);
+            imgEdit = findViewById(R.id.imgEdit);
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.EditBtn);
             int iconResId = typedArray.getResourceId(R.styleable.EditBtn_ImageEdt, R.drawable.ic_highlight_preview);
             if (iconResId > 0) {
-                ((ImageView) findViewById(R.id.imgEdit)).setImageResource(iconResId);
+                imgEdit.setImageResource(iconResId);
             }
 
             typedArray.recycle();
@@ -42,11 +44,27 @@ public class EditBtn extends ConstraintLayout {
         super(context, attrs, defStyleAttr);
 
     }
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+        setChoose(selected);
+    }
+
     public void setChoose(boolean isChoose){
         if (isChoose){
-            backgroundView.setVisibility(VISIBLE);
+            if (backgroundView != null) {
+                backgroundView.setVisibility(VISIBLE);
+            }
+            if (imgEdit != null) {
+                imgEdit.setColorFilter(getContext().getResources().getColor(R.color.app_blue));
+            }
         }else {
-            backgroundView.setVisibility(INVISIBLE);
+            if (backgroundView != null) {
+                backgroundView.setVisibility(INVISIBLE);
+            }
+            if (imgEdit != null) {
+                imgEdit.clearColorFilter();
+            }
         }
     }
 

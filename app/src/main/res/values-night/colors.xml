@@ -21,6 +21,8 @@
     <color name="ip_color_convert_bg">#27282d</color>
     <color name="colorEtTint">#78869d</color>
     <color name="app_background">#141515</color>
+    <color name="app_card_bg">#232528</color>
+    <color name="app_divider_line">#383a43</color>
 
     <color name="colorIcon">#FFFFFFFF</color>
     <color name="colorOnPrimary">#141515</color>

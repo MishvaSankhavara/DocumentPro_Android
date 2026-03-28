@@ -28,6 +28,7 @@ import com.example.documenpro.ui.activities.SharePdfAsImageActivity;
 import com.example.documenpro.ui.activities.SplitChooseFileActivity;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 import com.example.documenpro.ui.customviews.EmptyStateRecyclerView;
+import com.example.documenpro.ui.dialog.PasswordSetupDialog;
 import com.example.documenpro.utils.DialogManagerUtils;
 import com.example.documenpro.utils.Utils;
 
@@ -175,9 +176,13 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this,
                         R.string.toast_convert_password_protected);
             } else {
-                DialogManagerUtils.showPasswordSetup(this, new PasswordClickListener() {
+                final PasswordSetupDialog[] passwordDialogArr = new PasswordSetupDialog[1];
+                passwordDialogArr[0] = DialogManagerUtils.showPasswordSetup(this, new PasswordClickListener() {
                     @Override
                     public void onOkClickListener(String pass) {
+                        if (passwordDialogArr[0] != null) {
+                            passwordDialogArr[0].dismiss();
+                        }
                         Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
                         taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE, AppGlobalConstants.TOOL_ID_LOCK_PDF);
                         taskIntent.putExtra(AppGlobalConstants.EXTRA_PDF_MODEL, pdfModel_listener);
@@ -185,7 +190,6 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                         startActivity(taskIntent);
                         finish();
                     }
-
                 });
             }
         } else if (operationMode == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {

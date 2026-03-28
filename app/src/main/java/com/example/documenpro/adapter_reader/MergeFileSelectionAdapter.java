@@ -85,12 +85,9 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
                 pdfModel.isChecked_PDFModel()
                         ? ResourcesCompat.getDrawable(
                                 mContextMergeFileSelection.getResources(),
-                                R.drawable.bg_selection,
+                                R.drawable.bg_item_selection_premium,
                                 null)
-                        : ResourcesCompat.getDrawable(
-                                mContextMergeFileSelection.getResources(),
-                                R.drawable.bg_transparent,
-                                null));
+                        : null); // Simple null or transparent background
 
         holder.cbSelect_MergeFileSelection.setClickable(false);
         holder.cbSelect_MergeFileSelection.setFocusable(false);
@@ -106,12 +103,9 @@ public class MergeFileSelectionAdapter extends RecyclerView.Adapter<MergeFileSel
                         pdfModel.isChecked_PDFModel()
                                 ? ResourcesCompat.getDrawable(
                                         mContextMergeFileSelection.getResources(),
-                                        R.drawable.bg_selection,
+                                        R.drawable.bg_item_selection_premium,
                                         null)
-                                : ResourcesCompat.getDrawable(
-                                        mContextMergeFileSelection.getResources(),
-                                        R.drawable.bg_transparent,
-                                        null));
+                                : null);
 
                 if (mListenerMergeFileSelection != null) {
                     mListenerMergeFileSelection.onMergeSelect(holder.getAdapterPosition());

@@ -82,7 +82,8 @@ public class FragmentLock extends Fragment implements OnPdfTapListener {
             return;
         }
 
-        PasswordSetupDialog dialog = new PasswordSetupDialog(activityContext, new PasswordClickListener() {
+        final PasswordSetupDialog[] dialogHolder = new PasswordSetupDialog[1];
+        dialogHolder[0] = new PasswordSetupDialog(activityContext, new PasswordClickListener() {
             @Override
             public void onOkClickListener(String password) {
                 AppLoadingDialog loadingDialog = new AppLoadingDialog(activityContext);
@@ -99,33 +100,30 @@ public class FragmentLock extends Fragment implements OnPdfTapListener {
                         activityContext.runOnUiThread(() -> {
                             loadingDialog.dismiss();
                             if (unlockedModel != null) {
+                                if (dialogHolder[0] != null) dialogHolder[0].dismiss();
                                 File unlockedFile = new File(unlockedModel.getAbsolutePath_PDFModel());
                                 Utils.openFile(activityContext, unlockedFile);
                             } else {
-                                Toast.makeText(activityContext,
-                                        activityContext.getString(R.string.editor_error),
-                                        Toast.LENGTH_SHORT).show();
+                                if (dialogHolder[0] != null) dialogHolder[0].showError(activityContext.getString(R.string.pwd_error));
                             }
                         });
                     } catch (Exception e) {
                         e.printStackTrace();
                         activityContext.runOnUiThread(() -> {
                             loadingDialog.dismiss();
-                            Toast.makeText(activityContext,
-                                    activityContext.getString(R.string.editor_error),
-                                    Toast.LENGTH_SHORT).show();
+                            if (dialogHolder[0] != null) dialogHolder[0].showError(activityContext.getString(R.string.pwd_error));
                         });
                     }
                 });
             }
         });
-        dialog.setDialogMode(true);
-        Window window = dialog.getWindow();
+        dialogHolder[0].setDialogMode(true);
+        Window window = dialogHolder[0].getWindow();
         if (window != null) {
             window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
-        dialog.show();
+        dialogHolder[0].show();
     }
 
     private static class LoadLockedPdfFilesTask extends AsyncTask<Void, Void, Void> {

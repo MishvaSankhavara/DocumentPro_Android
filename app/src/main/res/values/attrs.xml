@@ -6,6 +6,8 @@
         <attr name="nameFileType" format="string" />
         <attr name="cornerRadiusFileType" format="dimension"/>
         <attr name="backgroundColorFileType" format="color" />
+        <attr name="startColorFileType" format="color" />
+        <attr name="endColorFileType" format="color" />
     </declare-styleable>
     <style name="SearchPageTabItemText">
         <item name="android:textSize">15sp</item>

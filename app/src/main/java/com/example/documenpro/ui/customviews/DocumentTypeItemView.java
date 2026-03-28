@@ -55,12 +55,29 @@ public class DocumentTypeItemView extends LinearLayout {
                     0
             );
 
+            int startColor = typedArray.getColor(
+                    R.styleable.FileTypeItem_startColorFileType,
+                    0
+            );
+
+            int endColor = typedArray.getColor(
+                    R.styleable.FileTypeItem_endColorFileType,
+                    0
+            );
+
             float radius = typedArray.getDimension(
                     R.styleable.FileTypeItem_cornerRadiusFileType,
                     0f
             );
 
-            if (bgColor != 0) {
+            if (startColor != 0 && endColor != 0) {
+                GradientDrawable gradientDrawable = new GradientDrawable(
+                        GradientDrawable.Orientation.TOP_BOTTOM,
+                        new int[]{startColor, endColor}
+                );
+                gradientDrawable.setCornerRadius(radius);
+                findViewById(R.id.cv_icon_bg).setBackground(gradientDrawable);
+            } else if (bgColor != 0) {
                 ((com.google.android.material.card.MaterialCardView) findViewById(R.id.cv_icon_bg)).setCardBackgroundColor(bgColor);
             }
 

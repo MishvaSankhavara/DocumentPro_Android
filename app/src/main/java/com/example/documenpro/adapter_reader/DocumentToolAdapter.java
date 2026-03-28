@@ -42,8 +42,7 @@ public class DocumentToolAdapter extends RecyclerView.Adapter<DocumentToolAdapte
                 mContext_DocumentTool.getResources().getString(toolType.getNameTool_toolModel()));
 
         holder.imgTool_DocumentTool.setImageResource(toolType.getIcRes_toolModel());
-        // Background is now white as per premium design
-        holder.cvToolBg_DocumentTool.setCardBackgroundColor(ContextCompat.getColor(mContext_DocumentTool, R.color.white));
+        // Background is now handled via XML using app_card_bg for theme support
 
         holder.itemView.setOnClickListener(view -> {
             if (listener_DocumentTool != null) {

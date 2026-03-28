@@ -1569,20 +1569,30 @@ public class NUIDocViewPdf extends NUIDocView {
                     return;
                 }
             }
-            cVar.a(false);
-            cVar.a(openedPath);
-            final ProgressDialog createAndShowWaitSpinner = Utilities.createAndShowWaitSpinner(getContext());
-            cVar.a(new c.c() {
-                public void a() {
-                    if (NUIDocViewPdf.this.getDocView() != null) {
-                        NUIDocViewPdf.this.getDocView().onReloadFile();
-                    }
-                    if (NUIDocViewPdf.this.usePagesView() && NUIDocViewPdf.this.getDocListPagesView() != null) {
-                        NUIDocViewPdf.this.getDocListPagesView().onReloadFile();
-                    }
-                    createAndShowWaitSpinner.dismiss();
+
+            // Postponing reload to ensure file is not locked by save-as process
+            Log.d("ANNOTATION_DEBUG", "reloadFile: postponing reload by 300ms");
+            final String finalPath = openedPath;
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("ANNOTATION_DEBUG", "reloadFile: performing postponed reload for " + finalPath);
+                    cVar.a(false);
+                    cVar.a(finalPath);
+                    final ProgressDialog createAndShowWaitSpinner = Utilities.createAndShowWaitSpinner(getContext());
+                    cVar.a(new c.c() {
+                        public void a() {
+                            if (NUIDocViewPdf.this.getDocView() != null) {
+                                NUIDocViewPdf.this.getDocView().onReloadFile();
+                            }
+                            if (NUIDocViewPdf.this.usePagesView() && NUIDocViewPdf.this.getDocListPagesView() != null) {
+                                NUIDocViewPdf.this.getDocListPagesView().onReloadFile();
+                            }
+                            createAndShowWaitSpinner.dismiss();
+                        }
+                    });
                 }
-            });
+            }, 300);
         } else {
             Log.i("Thangfix", "loi null roi");
         }
@@ -1611,7 +1621,7 @@ public class NUIDocViewPdf extends NUIDocView {
         boolean isActive = var2 != null && var2.getIsActive();
 
         boolean var6 = var1.getDrawMode();
-        this.btnDrawNew.setChoose(var6);
+        this.btnDrawNew.setSelected(var6);
         boolean var5 = ((DocPdfView) this.getDocView()).hasNotSavedInk();
         EditBtn var11 = this.btnDeleteNote;
         c var12 = (c) this.getDoc();
@@ -1624,9 +1634,10 @@ public class NUIDocViewPdf extends NUIDocView {
         // Hide/Disable other tools when drawing
         boolean otherToolsEnabled = !var6;
         var11.setEnable(otherToolsEnabled || canDelete); 
-        this.btnHighLight.setEnable(otherToolsEnabled);
-        
-        this.btnText.setChoose(this.mIsAddTextMode);
+        this.btnHighLight.setSelected(false); // Highlight is currently one-shot, can be updated if mode added
+        this.btnText.setSelected(this.mIsAddTextMode);
+        this.btnSignature.setSelected(false);
+        this.btnDeleteNote.setSelected(false);
 
         if (var3) {
             var12.n();

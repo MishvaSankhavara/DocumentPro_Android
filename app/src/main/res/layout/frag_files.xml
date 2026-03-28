@@ -111,7 +111,7 @@
                             android:id="@+id/ll_document_type"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="15dp"
                             android:orientation="horizontal"
                             android:weightSum="4">
 
@@ -120,7 +120,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@color/pdf_card_bg"
+                                app:startColorFileType="@color/pdf_start_color"
+                                app:endColorFileType="@color/pdf_end_color"
                                 app:imgFileType="@drawable/ic_album_pdf_file"
                                 app:nameFileType="@string/document_pdf"
                                 app:cornerRadiusFileType="16dp"/>
@@ -130,7 +131,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@color/word_card_bg"
+                                app:startColorFileType="@color/word_start_color"
+                                app:endColorFileType="@color/word_end_color"
                                 app:imgFileType="@drawable/ic_album_doc_file"
                                 app:nameFileType="@string/document_word"
                                 app:cornerRadiusFileType="16dp"/>
@@ -140,7 +142,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@color/excel_card_bg"
+                                app:startColorFileType="@color/excel_start_color"
+                                app:endColorFileType="@color/excel_end_color"
                                 app:imgFileType="@drawable/ic_album_xls_file"
                                 app:nameFileType="@string/document_excel"
                                 app:cornerRadiusFileType="16dp"/>
@@ -150,11 +153,11 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:backgroundColorFileType="@color/ppt_card_bg"
+                                app:startColorFileType="@color/ppt_start_color"
+                                app:endColorFileType="@color/ppt_end_color"
                                 app:imgFileType="@drawable/ic_album_ppt_file"
                                 app:nameFileType="@string/document_ppt"
                                 app:cornerRadiusFileType="16dp"/>
-
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -164,20 +167,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/colorPrimaryDim" />
-
                     <include
                         layout="@layout/layout_scroll_tab_home"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorPrimaryDim" />
                 </LinearLayout>
 
             </com.google.android.material.appbar.AppBarLayout>
