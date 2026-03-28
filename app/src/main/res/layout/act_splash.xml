@@ -20,7 +20,6 @@
         android:id="@+id/tv_splash_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/splash_title"
         android:textColor="@color/black"

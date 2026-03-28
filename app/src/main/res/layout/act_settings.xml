@@ -193,140 +193,172 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/app_display"
                 android:textColor="@color/gray"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_language_options"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="?attr/selectableItemBackground">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#F8F8F8"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_language_options"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_settings_language"
-                    app:tint="@color/tint_settings_icon_unselected" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_language_options"
-                    style="@style/FontMedium"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="56dp"
-                    android:text="@string/change_language_title"
-                    android:textColor="@color/colorTextPrimary"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_language_hint"
-                    app:layout_constraintEnd_toStartOf="@+id/lan_new_tag"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintWidth_default="wrap" />
+                    android:orientation="vertical"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/lan_new_tag"
-                    style="@style/FontSemiBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="44dp"
-                    android:background="@drawable/shape_new_tag_bg"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:text="@string/label_new_tag"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_language_options"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_language_options"
-                    app:layout_constraintTop_toTopOf="@+id/tv_language_options" />
+                    <!-- Language Option -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_language_options"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="?attr/selectableItemBackground">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_language_hint"
-                    style="@style/FontMedium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="44dp"
-                    android:gravity="left|center_vertical|center_horizontal|center|start"
-                    android:text="VietNam"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/gray"
-                    android:textSize="11sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_language_options" />
+                        <View
+                            android:id="@+id/v_lang_icon_bg"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/bg_settings_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_language_go"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_unfold" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/v_lang_icon_bg"
+                            app:layout_constraintEnd_toEndOf="@+id/v_lang_icon_bg"
+                            app:layout_constraintStart_toStartOf="@+id/v_lang_icon_bg"
+                            app:layout_constraintTop_toTopOf="@+id/v_lang_icon_bg"
+                            app:srcCompat="@drawable/ic_settings_language"
+                            app:tint="@color/black" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_dark_mode"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="?attr/selectableItemBackground">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_language_label"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/change_language_title"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@+id/tv_language_hint"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_language_go"
+                            app:layout_constraintStart_toEndOf="@+id/v_lang_icon_bg"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_dark_mode"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_dark_mode"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_moon"
-                    app:tint="@color/tint_settings_icon_unselected" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_language_hint"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="English"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_language_label"
+                            app:layout_constraintStart_toStartOf="@+id/tv_language_label"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_language_label" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_dark_mode"
-                    style="@style/FontMedium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginEnd="20dp"
-                    android:gravity="left|center_vertical|center_horizontal|center|start"
-                    android:text="@string/navigation_dark_mode"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/colorTextPrimary"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/sw_dark_mode"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_language_go"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:alpha="0.3"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_right_arrow"
+                            app:tint="@color/black" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch
-                    android:id="@+id/sw_dark_mode"
-                    android:layout_width="45dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="80dp"
+                        android:background="#EEEEEE" />
+
+                    <!-- Dark Mode Option -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_dark_mode"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <View
+                            android:id="@+id/v_dark_icon_bg"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/bg_settings_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/v_dark_icon_bg"
+                            app:layout_constraintEnd_toEndOf="@+id/v_dark_icon_bg"
+                            app:layout_constraintStart_toStartOf="@+id/v_dark_icon_bg"
+                            app:layout_constraintTop_toTopOf="@+id/v_dark_icon_bg"
+                            app:srcCompat="@drawable/ic_moon"
+                            app:tint="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_dark_mode_label"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/navigation_dark_mode"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@+id/tv_dark_mode_subtitle"
+                            app:layout_constraintEnd_toStartOf="@+id/sw_dark_mode"
+                            app:layout_constraintStart_toEndOf="@+id/v_dark_icon_bg"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_dark_mode_subtitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Enable dark theme"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_dark_mode_label"
+                            app:layout_constraintStart_toStartOf="@+id/tv_dark_mode_label"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_dark_mode_label" />
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/sw_dark_mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:thumb="@drawable/bg_switch_thumb"
+                            app:track="@drawable/bg_switch_track"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:showText="false" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/FontMedium"
@@ -525,38 +557,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/cl_version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/FontMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/version"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/FontMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=":"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_version"
-                    style="@style/FontMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

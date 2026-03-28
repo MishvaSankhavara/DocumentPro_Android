@@ -186,15 +186,16 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             activityContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    pdfButton.setTvCount(
-                            getResources().getString(R.string.label_file_count, String.valueOf(pdfFile.size())));
-                    excelButton.setTvCount(
-                            getResources().getString(R.string.label_file_count, String.valueOf(excelFile.size())));
-                    wordButton.setTvCount(
-                            getResources().getString(R.string.label_file_count, String.valueOf(wordFile.size())));
-                    pptButton.setTvCount(
-                            getResources().getString(R.string.label_file_count, String.valueOf(pptFile.size())));
-
+                    if (isAdded() && getContext() != null) {
+                        pdfButton.setTvCount(
+                                getResources().getString(R.string.label_file_count, String.valueOf(pdfFile.size())));
+                        excelButton.setTvCount(
+                                getResources().getString(R.string.label_file_count, String.valueOf(excelFile.size())));
+                        wordButton.setTvCount(
+                                getResources().getString(R.string.label_file_count, String.valueOf(wordFile.size())));
+                        pptButton.setTvCount(
+                                getResources().getString(R.string.label_file_count, String.valueOf(pptFile.size())));
+                    }
                 }
             });
         });

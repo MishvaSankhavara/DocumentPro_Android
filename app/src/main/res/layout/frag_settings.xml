@@ -18,6 +18,7 @@
             android:layout_height="45dp"
             android:layout_marginStart="8dp"
             android:padding="12dp"
+            android:visibility="gone"
             android:src="@drawable/back_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +58,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="General"
+                android:text="@string/label_general"
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
 
@@ -107,14 +108,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="@string/file_manager"
+                                android:text="@string/navigation_file_manager"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Manage your files"
+                                android:text="@string/navigation_file_manager"
                                 android:textColor="@color/gray"
                                 android:textSize="13sp" />
                         </LinearLayout>
@@ -133,7 +134,6 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginStart="72dp"
                         android:background="#F0F0F0" />
 
                     <!-- Share -->
@@ -168,14 +168,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="Share"
+                                android:text="@string/action_share"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Share with friends"
+                                android:text="@string/desc_share_with_friends"
                                 android:textColor="@color/gray"
                                 android:textSize="13sp" />
                         </LinearLayout>
@@ -194,7 +194,6 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginStart="72dp"
                         android:background="#F0F0F0" />
 
                     <!-- Rate -->
@@ -229,14 +228,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="Rate"
+                                android:text="@string/navigation_rate_us"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Rate us on store"
+                                android:text="@string/desc_rate_us_on_store"
                                 android:textColor="@color/gray"
                                 android:textSize="13sp" />
                         </LinearLayout>
@@ -262,7 +261,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Display"
+                android:text="@string/label_display"
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
 
@@ -312,7 +311,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="Language"
+                                android:text="@string/navigation_language"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="16sp" />
 
@@ -339,7 +338,6 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginStart="72dp"
                         android:background="#F0F0F0" />
 
                     <!-- Dark Mode -->
@@ -374,25 +372,28 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="Dark Mode"
+                                android:text="@string/navigation_dark_mode"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Enable dark theme"
+                                android:text="@string/desc_enable_dark_theme"
                                 android:textColor="@color/gray"
                                 android:textSize="13sp" />
                         </LinearLayout>
 
-                        <com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/sw_dark_mode"
-                            android:layout_width="45dp"
-                            android:layout_height="25dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:thumb="@drawable/bg_switch_thumb"
+                            app:track="@drawable/bg_switch_track"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:showText="false" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -405,7 +406,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Support"
+                android:text="@string/label_support"
                 android:textColor="@color/gray"
                 android:textSize="14sp" />
 
@@ -455,14 +456,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="Help &amp; Feedback"
+                                android:text="@string/navigation_feedback_or_suggestion"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Get help or send feedback"
+                                android:text="@string/desc_feedback_suggestions"
                                 android:textColor="@color/gray"
                                 android:textSize="13sp" />
                         </LinearLayout>
@@ -481,7 +482,6 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginStart="72dp"
                         android:background="#F0F0F0" />
 
                     <!-- Privacy Policy -->
@@ -516,14 +516,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="Privacy Policy"
+                                android:text="@string/navigation_privacy_policy"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Read our privacy policy"
+                                android:text="@string/desc_privacy_policy"
                                 android:textColor="@color/gray"
                                 android:textSize="13sp" />
                         </LinearLayout>
@@ -541,20 +541,9 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Version -->
-            <TextView
-                android:id="@+id/tv_version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Version 1.0.0"
-                android:textColor="@color/gray"
-                android:textSize="13sp" />
 
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -30,7 +31,7 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
     private AppCompatTextView appVersionTextView;
     private android.widget.ImageView ivBack;
     private android.widget.TextView tvToolbarName;
-    private com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch swDarkMode;
+    private SwitchCompat swDarkMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +79,8 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
         languageTextView
                 .setText(PreferenceUtils.getInstance(this).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English"));
 
-        swDarkMode
-                .setNightMode(PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
-        swDarkMode.setSwitchListener(is_night -> {
+        swDarkMode.setChecked(PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
+        swDarkMode.setOnCheckedChangeListener((buttonView, is_night) -> {
             PreferenceUtils.getInstance(AppSettingsActivity.this).setBoolean(AppGlobalConstants.PREF_NIGHT_MODE,
                     is_night);
             Utils.setTheme(getApplication(), is_night);
@@ -93,7 +93,6 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
 
     private void initializeViews() {
         languageTextView = findViewById(R.id.tv_language_hint);
-        appVersionTextView = findViewById(R.id.tv_version);
         swDarkMode = findViewById(R.id.sw_dark_mode);
     }
 
@@ -127,7 +126,7 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
         } else if (idView == R.id.cl_feedback) {
             Utils.feedbackApp(this);
         } else if (idView == R.id.cl_dark_mode) {
-            swDarkMode.setNightMode(!swDarkMode.isNightMode());
+            swDarkMode.setChecked(!swDarkMode.isChecked());
         } else if (idView == R.id.cl_privacy_policy) {
             try {
                 String url = AppGlobalConstants.PRIVACY_POLICY_URL;

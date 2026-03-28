@@ -93,56 +93,72 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:background="#00000000"
-
                 android:orientation="horizontal">
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_size_down"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/text_decrease" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_size_up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/text_increase" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/format_bold" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_italic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/format_italic" />
 
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_under"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/ic_preview_underscore" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/editor_icon_text_color" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_striketrough"
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/ic_strikethrough_preview" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_text_bg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/ic_highlight_preview" />
 
                 <!--                <com.example.documenpro.ui.customviews.EditBtn-->
@@ -153,20 +169,26 @@
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_cut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/editor_icon_cut" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_copy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/ic_copy_new" />
 
                 <com.example.documenpro.ui.customviews.EditBtn
                     android:id="@+id/btn_paste"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:ImageEdt="@drawable/content_paste" />
             </LinearLayout>
         </HorizontalScrollView>

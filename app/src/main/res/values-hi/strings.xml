@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Document Reader</string>
+    <string name="app_name">दस्तावेज़ रीडर</string>
 
     <string name="action_move_out">घर छोड़ देना</string>
     <string name="action_create_shortcut">छोटा रास्ता</string>
@@ -14,7 +14,20 @@
     <string name="menu_view_thumbnail">थंबनेल</string>
 
     <string name="navigation_privacy_policy">गोपनीयता नीति</string>
-    <string name="navigation_language">भाषा</string>
+    <string name="label_display">डिस्प्ले</string>
+    <string name="label_support">सपोर्ट</string>
+    <string name="desc_share_with_friends">दोस्तों के साथ शेयर करें</string>
+    <string name="desc_rate_us_on_store">हमें स्टोर पर रेट करें</string>
+    <string name="desc_privacy_policy">हमारी गोपनीयता नीति पढ़ें</string>
+    <string name="desc_feedback_suggestions">हमें अपनी प्रतिक्रिया भेजें</string>
+    <string name="label_categories">श्रेणियाँ</string>
+    <string name="action_see_all">सभी देखें</string>
+    <string name="label_general">सामान्य</string>
+    <string name="action_share_app">ऐप शेयर करें</string>
+    <string name="desc_enable_dark_theme">डार्क मोड सक्षम करें</string>
+    <string name="label_version_prefix">संस्करण </string>
+    <string name="app_doc_reader">DocReader</string>
+    <string name="navigation_dark_mode">डार्क मोड</string>
     <string name="navigation_feedback_or_suggestion">प्रतिक्रिया या सुझाव</string>
     <string name="navigation_file_manager">फ़ाइल मैनेजर</string>
     <string name="navigation_rate_us">हमें रेटिंग दें</string>
@@ -151,6 +164,24 @@
     <string name="action_shortcut">छोटा रास्ता</string>
     <string name="action_request_new_feature">एक नई सुविधा का अनुरोध करें</string>
     <string name="label_new_tag">नया</string>
+    <string name="sodk_editor_save">सहेजें</string>
+    <string name="sodk_editor_save_as">इस रूप में सहेजें</string>
+    <string name="sodk_editor_save_as_pdf">पीडीएफ सहेजें</string>
+    <string name="editor_storage">स्टोरेज</string>
+    <string name="sodk_editor_storage">स्टोरेज</string>
+    <string name="editor_my_documents">मेरे दस्तावेज़</string>
+    <string name="my_documents">मेरे दस्तावेज़ (आंतरिक)</string>
+    <string name="sodk_editor_my_documents">मेरे दस्तावेज़</string>
+    <string name="sodk_editor_save_as_upper">इस रूप में सहेजें</string>
+    <string name="sodk_editor_save_pdf_upper">पीडीएफ सहेजें</string>
+    <string name="sodk_editor_save_upper">सहेजें</string>
+    <string name="sodk_editor_saved_body">फ़ाइल सहेज ली गई है।</string>
+    <string name="sodk_editor_saved_title">सहेज लिया गया</string>
+    <string name="editor_no_documents_found">कोई दस्तावेज़ नहीं मिला</string>
+    <string name="editor_ok">ठीक है</string>
+    <string name="editor_recent">हाल ही का</string>
+    <string name="editor_recent_documents">हाल के दस्तावेज़</string>
+    <string name="editor_save">सहेजें</string>
     <string name="settings_faq">सामान्य प्रश्न</string>
     <string name="version">संस्करण</string>
     <string name="action_go_to_page">पृष्ठ पर जाओ</string>
@@ -259,7 +290,6 @@
     <string name="dialog_sort_size_large_to_small">बड़े से छोटे तक</string>
     <string name="dialog_sort_size_small_to_large">छोटे से लेकर बड़े तक</string>
     <string name="dialog_exporting_images_title">छवियाँ निर्यात हो रही हैं…</string>
-    <string name="label_general">सामान्य</string>
     <string name="toolbar_title_select_file">किसी फाइल का चयन करें</string>
     <string name="toolbar_title_choose_language">भाषा चुनें</string>
     <string name="message_recent_files_empty">आपकी हाल ही में देखी गई फ़ाइलें यहां दिखाई देंगी</string>

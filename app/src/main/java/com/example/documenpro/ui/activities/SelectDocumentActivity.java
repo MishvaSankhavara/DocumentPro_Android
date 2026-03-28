@@ -134,7 +134,7 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
         documentRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         documentRecyclerView.setLayoutManager(layoutManager);
-        documentRecyclerView.setEmptyView(findViewById(R.id.tv_empty_title));
+        documentRecyclerView.setEmptyView(findViewById(R.id.empty_layout));
         if (selectedFileType == AppGlobalConstants.FILE_TYPE_ALL) {
             mainContainerLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));
             topToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.app_all_list_bg));

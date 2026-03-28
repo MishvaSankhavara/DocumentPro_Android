@@ -1,4 +1,17 @@
 <resources>
+    <string name="label_display">Display</string>
+    <string name="label_support">Support</string>
+    <string name="desc_share_with_friends">Share with friends</string>
+    <string name="desc_rate_us_on_store">Rate us on store</string>
+    <string name="desc_feedback_suggestions">Send us your feedback</string>
+    <string name="desc_privacy_policy">Read our privacy policy</string>
+    <string name="label_categories">Categories</string>
+    <string name="action_see_all">See All</string>
+    <string name="label_general">General</string>
+    <string name="action_share_app">Share App</string>
+    <string name="desc_enable_dark_theme">Enable dark theme</string>
+    <string name="label_version_prefix">Version </string>
+    <string name="app_doc_reader">DocReader</string>
     <string name="app_name">Document Reader</string>
 
     <string name="action_move_out">Move out</string>
@@ -40,13 +53,13 @@
     <string name="navigation_feedback_or_suggestion">Feedback or suggestion</string>
     <string name="navigation_file_manager">File manager</string>
     <string name="navigation_rate_us">Rate us</string>
-    <string name="navigation_dark_mode" translatable="false">Dark Mode</string>
+    <string name="navigation_dark_mode">Dark Mode</string>
 
-    <string name="document_word" translatable="false">Word</string>
-    <string name="document_excel" translatable="false">Excel</string>
-    <string name="document_ppt" translatable="false">PPT</string>
-    <string name="document_pdf" translatable="false">PDF</string>
-    <string name="document_txt" translatable="false">TXT</string>
+    <string name="document_word">Word</string>
+    <string name="document_excel">Excel</string>
+    <string name="document_ppt">PPT</string>
+    <string name="document_pdf">PDF</string>
+    <string name="document_txt">TXT</string>
 
     <string name="document_all">All</string>
 
@@ -55,7 +68,7 @@
     <string name="tittle_toolbar_pdf">PDF Files</string>
     <string name="title_toolbar_powerpoint">PowerPoint Files</string>
     <string name="tittle_toolbar_word">Word Files</string>
-    <string name="tittle_toolbar_txt" translatable="false">TXT Files</string>
+    <string name="tittle_toolbar_txt">TXT Files</string>
 
     <string name="editor_continue_editing">Continue editing</string>
     <string name="editor_xfa_body">This document contains an XML Forms Office not supported by Office Editor. XFA was deprecated when the PDF 2.0 specification was released in 2015. The creator of the PDF can convert it to use AcroForms, which are supported. If appropriate, please contact your IT administrator for assistance.</string>
@@ -142,13 +155,13 @@
 
 
 
-    <string name="app_Cancel" translatable="false">Cancel</string>
-    <string name="app_Continue" translatable="false">Continue</string>
+    <string name="app_Cancel">Cancel</string>
+    <string name="app_Continue">Continue</string>
     <string name="create_folder" translatable="false">Create folder</string>
     <string name="go_back" translatable="false">Go back</string>
     <string name="please_wait" translatable="false">Please wait…</string>
     <string name="security_Warning" translatable="false">Security Warning</string>
-    <string name="app_Select" translatable="false">Select</string>
+    <string name="app_Select">Select</string>
     <string name="select_an_account_to_use" translatable="false">Select an account to use</string>
     <string name="there_are_problems_with_the_security_certificate_for_this_site" translatable="false">There are problems with the security certificate for this site.</string>
     <string name="use_a_different_account" translatable="false">Use a different account</string>
@@ -157,8 +170,8 @@
     <string name="alert_dialog_password" translatable="false">Password</string>
     <string name="alert_dialog_text_entry" translatable="false">This website or application is requesting authentication.</string>
     <string name="alert_dialog_username" translatable="false">Username</string>
-    <string name="button_ok" translatable="false">OK</string>
-    <string name="button_okay" translatable="false">OKAY</string>
+    <string name="button_ok">OK</string>
+    <string name="button_okay">OKAY</string>
     <string name="common_name" translatable="false">common name:</string>
     <string name="app_details" translatable="false">Details</string>
     <string name="error_fatal_refresh" translatable="false">You have been logged out.</string>
@@ -395,8 +408,8 @@
     <string name="editor_menu" translatable="false">Menu</string>
     <string name="editor_merge_cells_upper" translatable="false">MERGE CELLS</string>
     <string name="editor_more" translatable="false">More</string>
-    <string name="editor_my_documents" translatable="false">My Documents</string>
-    <string name="my_documents" translatable="false">My Documents (internal)</string>
+    <string name="editor_my_documents">My Documents</string>
+    <string name="my_documents">My Documents (internal)</string>
     <string name="my_font_name" translatable="false">My Font Name</string>
     <string name="editor_n_thru_n_of_n" formatted="false" translatable="false">%d-%d OF %d</string>
     <string name="editor_nav_bac" translatable="false">Go Back</string>
@@ -404,7 +417,7 @@
     <string name="editor_next_link_upper" translatable="false">NEXT</string>
     <string name="editor_next_upper" translatable="false">NEXT</string>
     <string name="editor_no_apps_can_perform" translatable="false">No apps can perform this action.</string>
-    <string name="editor_no_documents_found" translatable="false">No documents found</string>
+    <string name="editor_no_documents_found">No documents found</string>
     <string name="editor_no_media_hint" translatable="false">Sharing the storage media with a PC can make it inaccessible</string>
     <string name="editor_no_media_warning" translatable="false">Storage media not present</string>
     <string name="editor_not_supported" translatable="false">Not supported</string>
@@ -419,7 +432,7 @@
     <string name="number_format_number" translatable="false">Number Format - Number</string>
     <string name="number_format_percentage" translatable="false">Number Format - Percentage</string>
     <string name="number_format_upper" translatable="false">"NUMBER FORMAT"</string>
-    <string name="editor_ok" translatable="false">OK</string>
+    <string name="editor_ok">OK</string>
     <string name="editor_open_saved_document_title" translatable="false">Open saved document?</string>
     <string name="editor_open_saved_document_message" translatable="false">Would you like to open the saved document?</string>
     <string name="editor_open_in" translatable="false">Open In</string>
@@ -447,8 +460,8 @@
     <string name="printing_not_supported_body" translatable="false">Printing is not supported for this version of Android.</string>
     <string name="printing_not_supported_title" translatable="false">Not Supported</string>
     <string name="editor_protect_upper" translatable="false">PROTECT</string>
-    <string name="editor_recent" translatable="false">Recent</string>
-    <string name="editor_recent_documents" translatable="false">Recent Documents</string>
+    <string name="editor_recent">Recent</string>
+    <string name="editor_recent_documents">Recent Documents</string>
     <string name="redact_apply_upper" translatable="false">APPLY</string>
     <string name="redact_confirm_apply_body" translatable="false">Applying redactions cannot be undone. Do you want to continue?</string>
 
@@ -463,14 +476,14 @@
     <string name="replace_file_body" translatable="false">That file already exists. Do you want to replace it?</string>
     <string name="replace_file_title" translatable="false">File Exists</string>
     <string name="editor_retain" translatable="false">Retain</string>
-    <string name="editor_save" translatable="false">Save</string>
+    <string name="editor_save">Save</string>
     <string name="save_as_upper" translatable="false">SAVE AS</string>
     <string name="save_pdf_upper" translatable="false">SAVE PDF</string>
     <string name="save_upper" translatable="false">SAVE</string>
     <string name="saved_body" translatable="false">File save is complete.</string>
     <string name="saved_title" translatable="false">Saved</string>
-    <string name="sodk_editor_saved_body" translatable="false">File save is complete.</string>
-    <string name="sodk_editor_saved_title" translatable="false">Saved</string>
+    <string name="sodk_editor_saved_body">File save is complete.</string>
+    <string name="sodk_editor_saved_title">Saved</string>
     <string name="sodk_editor_ok" translatable="false">OK</string>
     <string name="sodk_editor_cancel" translatable="false">Cancel</string>
     <string name="sodk_editor_yes" translatable="false">Yes</string>
@@ -497,7 +510,7 @@
     <string name="editor_smartoffice" translatable="false">Office Editor</string>
     <string name="editor_sort_menu" translatable="false">Sort menu</string>
     <string name="editor_statistical_upper" translatable="false">STATISTICAL</string>
-    <string name="editor_storage" translatable="false">Storage</string>
+    <string name="editor_storage">Storage</string>
     <string name="editor_sum_upper" translatable="false">SUM</string>
     <string name="editor_support" translatable="false">Support</string>
     <string name="tab_annotate" translatable="false">ANNOTATE</string>
@@ -544,7 +557,7 @@
     <string name="app_issued_to" translatable="false">Issued To</string>
     <string name="annot_author_mupdf" translatable="false">muPDF</string>
     <string name="annot_author_so" translatable="false">Office Editor</string>
-    <string name="library_app_name" translatable="false">solib</string>
+    <string name="library_app_name">solib</string>
     <string name="app_licence" translatable="false">License</string>
     <string name="no_certificates" translatable="false">No certificates available - please contact your IT support</string>
     <string name="password_protected_file" translatable="false">Password protected file</string>
@@ -568,7 +581,7 @@
     <string name="app_upload_logs" translatable="false">Upload Logs</string>
     <string name="app_user_reject" translatable="false">User rejected request</string>
     <string name="app_version" translatable="false">Version</string>
-    <string name="wheel_app_name" translatable="false">wheel</string>
+    <string name="wheel_app_name">wheel</string>
     <string name="bar_notification_info_overflow" translatable="false">999+</string>
     <string name="support_activity_title" translatable="false">Support</string>
     <string name="support_articles_list_fragment_error_message" translatable="false">@string/articles_error_message</string>
@@ -908,7 +921,6 @@
     <string name="dialog_sort_size_small_to_large">From small to large</string>
 
     <string name="dialog_exporting_images_title">Exporting images…</string>
-    <string name="label_general">General</string>
 
     //ToolBar Tittle
     <string name="toolbar_title_select_file">Select a file</string>
@@ -1176,8 +1188,8 @@
     <string name="sodk_editor_menu" translatable="false">Menu</string>
     <string name="sodk_editor_merge_cells_upper" translatable="false">MERGE CELLS</string>
     <string name="sodk_editor_more" translatable="false">More</string>
-    <string name="sodk_editor_my_documents" translatable="false">My Documents</string>
-    <string name="sodk_editor_my_documents2" translatable="false">My documents2</string>
+    <string name="sodk_editor_my_documents">My Documents</string>
+    <string name="sodk_editor_my_documents2">My documents2</string>
     <string name="sodk_editor_my_font_name" translatable="false">My Font Name</string>
     <string name="sodk_editor_n_thru_n_of_n" translatable="false">%d-%d OF %d</string>
     <string name="sodk_editor_nav_back" translatable="false">Nav back</string>
@@ -1239,9 +1251,9 @@
     <string name="sodk_editor_rename_upper" translatable="false">RENAME</string>
     <string name="sodk_editor_renaming" translatable="false">Renaming…</string>
     <string name="sodk_editor_retain" translatable="false">Retain</string>
-    <string name="sodk_editor_save_as_upper" translatable="false">SAVE AS</string>
-    <string name="sodk_editor_save_pdf_upper" translatable="false">SAVE PDF</string>
-    <string name="sodk_editor_save_upper" translatable="false">SAVE</string>
+    <string name="sodk_editor_save_as_upper">SAVE AS</string>
+    <string name="sodk_editor_save_pdf_upper">SAVE PDF</string>
+    <string name="sodk_editor_save_upper">SAVE</string>
     <string name="sodk_editor_scientific" translatable="false">Scientific</string>
     <string name="sodk_editor_search" translatable="false">Search</string>
     <string name="sodk_editor_searching" translatable="false">Searching</string>
@@ -1257,9 +1269,9 @@
     <string name="sodk_editor_show_changes_upper" translatable="false">"SHOW CHANGES"</string>
     <string name="sodk_editor_smartoffice" translatable="false">Office Editor</string>
     <string name="sodk_editor_sort_menu" translatable="false">Sort menu</string>
-    <string name="sodk_editor_statistical_upper" translatable="false">STATISTICAL</string>
-    <string name="sodk_editor_stop" translatable="false">Stop</string>
-    <string name="sodk_editor_storage" translatable="false">Storage</string>
+    <string name="sodk_editor_statistical_upper">STATISTICAL</string>
+    <string name="sodk_editor_stop">Stop</string>
+    <string name="sodk_editor_storage">Storage</string>
     <string name="sodk_editor_str_continue" translatable="false">Str continue</string>
     <string name="sodk_editor_sum_upper" translatable="false">SUM</string>
     <string name="sodk_editor_support" translatable="false">Support</string>
@@ -1300,6 +1312,6 @@
     <string name="sodk_editor_xfa_title" translatable="false">NoOfficeport</string>
     <string name="sodk_library_annot_author_mupdf" translatable="false">MuPDF</string>
     <string name="sodk_library_annot_author_so" translatable="false">SmartOffice</string>
-    <string name="sodk_library_app_name" translatable="false">@string/app_name</string>
-    <string name="sodk_wheel_app_name" translatable="false">@string/app_name</string>
+    <string name="sodk_library_app_name">@string/app_name</string>
+    <string name="sodk_wheel_app_name">@string/app_name</string>
 </resources>

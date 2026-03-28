@@ -693,6 +693,7 @@ public class NUIDocViewPdf extends NUIDocView {
             this.btnSignature.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    hideDrawingToolbox();
                     showSignatureDialog();
                 }
             });
@@ -722,17 +723,20 @@ public class NUIDocViewPdf extends NUIDocView {
         this.b();
         seekBarThickness = this.findViewById(R.id.thickness_seekBar);
 
-        // Handle tap-to-add-text for PDFs when Text tool is active.
         if (getPdfDocView() != null) {
             getPdfDocView().setOnTouchListener(new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        deselectAllAnnotations();
+                    if (!getIsAddTextMode()) {
+                        // If we are in drawing mode, ensure parents don't intercept
+                        if (event.getAction() == MotionEvent.ACTION_DOWN && getPdfDocView() != null && getPdfDocView().getDrawMode()) {
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                        }
+                        return false;
                     }
 
-                    if (!getIsAddTextMode()) {
-                        return false;
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        deselectAllAnnotations();
                     }
 
                     if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -753,7 +757,7 @@ public class NUIDocViewPdf extends NUIDocView {
                 @Override
                 public void onClick(View v) {
                     if (llBottomDraw.getVisibility() == VISIBLE) {
-                        Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
+                        Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
                         onDrawButton();
                         if (btnDrawNew != null) {
                             btnDrawNew.setChoose(false);
@@ -1136,18 +1140,21 @@ public class NUIDocViewPdf extends NUIDocView {
             }
         }
         if (var1 == this.btnHighLight) {
-            if (this.getPdfDocView().getDrawMode()) {
-                if (llBottomDraw.getVisibility() == VISIBLE) {
-                    Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
-                }
-                this.onDrawButton();
-                btnDrawNew.setChoose(false);
-            }
+            hideDrawingToolbox();
             this.onHighlightButton();
         }
 
         if (var1 == this.btnText) {
+            hideDrawingToolbox();
             this.onTextButton();
+        }
+
+        if (var1 == this.findViewById(R.id.btn_insert_image)) {
+            hideDrawingToolbox();
+        }
+
+        if (var1 == this.btnSignature) {
+            hideDrawingToolbox();
         }
 
         if (var1 == this.btnDrawNew || var1 == this.btnHighLight || var1 == this.btnDeleteNote) {
@@ -1171,7 +1178,7 @@ public class NUIDocViewPdf extends NUIDocView {
             if (llBottomDraw.getVisibility() == VISIBLE) {
                 this.onDrawButton();
 
-                Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
+                Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_102);
 
             }
         }
@@ -1291,6 +1298,18 @@ public class NUIDocViewPdf extends NUIDocView {
         }
     }
 
+    private void hideDrawingToolbox() {
+        if (llBottomDraw != null && llBottomDraw.getVisibility() == VISIBLE) {
+            Utils.showHideView(getContext(), llBottomDraw, false, R.dimen.cm_dp_162);
+            if (getPdfDocView().getDrawMode()) {
+                onDrawButton();
+            }
+            if (btnDrawNew != null) {
+                btnDrawNew.setChoose(false);
+            }
+        }
+    }
+
     public void onDrawButton() {
         try {
             this.getPdfDocView().onDrawMode();
@@ -1298,7 +1317,6 @@ public class NUIDocViewPdf extends NUIDocView {
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-
     }
 
     public void onHighlightButton() {
@@ -1598,10 +1616,16 @@ public class NUIDocViewPdf extends NUIDocView {
         EditBtn var11 = this.btnDeleteNote;
         c var12 = (c) this.getDoc();
         boolean isAnnotation = var12.n();
-        var5 = (var6 && var5) || var3 || isAnnotation || var4 || isActive;
-
-        var11.setEnable(var5);
-        this.btnHighLight.setEnable(var4 || var6);
+        
+        // Match the reference logic for enablement
+        boolean canDelete = (var6 && var5) || var3 || isAnnotation || var4;
+        var11.setEnable(canDelete);
+        
+        // Hide/Disable other tools when drawing
+        boolean otherToolsEnabled = !var6;
+        var11.setEnable(otherToolsEnabled || canDelete); 
+        this.btnHighLight.setEnable(otherToolsEnabled);
+        
         this.btnText.setChoose(this.mIsAddTextMode);
 
         if (var3) {

@@ -60,7 +60,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:fontFamily="@font/roboto_bold"
-                                android:text="DocReader"
+                                android:text="@string/app_doc_reader"
                                 android:textColor="@color/app_primary_text"
                                 android:textSize="24sp" />
                         </LinearLayout>
@@ -103,7 +103,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="24sp"
                             android:fontFamily="@font/roboto_bold"
-                            android:text="Categories"
+                            android:text="@string/label_categories"
                             android:textColor="@color/app_primary_text"
                             android:textSize="20sp" />
 
@@ -216,7 +216,7 @@
                             layout="@layout/layout_permission_denied"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="90dp" />
+                            android:layout_marginBottom="160dp" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

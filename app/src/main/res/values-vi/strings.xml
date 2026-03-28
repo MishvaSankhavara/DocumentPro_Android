@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Document Reader</string>
+    <string name="app_name">Trình đọc tài liệu</string>
 
     <string name="action_move_out">Dời đi, chuyển đi, dịch chuyển đi ra</string>
     <string name="action_create_shortcut">Đường tắt</string>
@@ -16,7 +16,20 @@
     <string name="navigation_privacy_policy">Chính sách bảo mật</string>
     <string name="navigation_language">Ngôn ngữ</string>
     <string name="navigation_feedback_or_suggestion">Phản hồi hoặc đề xuất</string>
-    <string name="navigation_file_manager">Quản lý tập tin</string>
+    <string name="label_display">Trưng bày</string>
+    <string name="label_support">Hỗ trợ</string>
+    <string name="desc_share_with_friends">Chia sẻ với bạn bè</string>
+    <string name="desc_rate_us_on_store">Đánh giá chúng tôi trên cửa hàng</string>
+    <string name="desc_privacy_policy">Đọc chính sách bảo mật của chúng tôi</string>
+    <string name="desc_feedback_suggestions">Gửi cho chúng tôi phản hồi của bạn</string>
+    <string name="label_categories">Danh mục</string>
+    <string name="action_see_all">Xem tất cả</string>
+    <string name="label_general">Chung</string>
+    <string name="action_share_app">Chia sẻ ứng dụng</string>
+    <string name="desc_enable_dark_theme">Bật chủ đề tối</string>
+    <string name="label_version_prefix">Phiên bản </string>
+    <string name="app_doc_reader">DocReader</string>
+    <string name="navigation_dark_mode">Chế độ tối</string>
     <string name="navigation_rate_us">Đánh giá chúng tôi</string>
     <string name="document_all">Tất cả</string>
     <string name="tittle_toolbar_all">Tất cả các tệp</string>
@@ -148,6 +161,24 @@
     <string name="action_shortcut">Đường tắt</string>
     <string name="action_request_new_feature">Yêu cầu một tính năng mới</string>
     <string name="label_new_tag">Mới</string>
+    <string name="sodk_editor_save">Lưu</string>
+    <string name="sodk_editor_save_as">Lưu dưới dạng</string>
+    <string name="sodk_editor_save_as_pdf">Lưu PDF</string>
+    <string name="editor_storage">Kho lưu trữ</string>
+    <string name="sodk_editor_storage">Kho lưu trữ</string>
+    <string name="editor_my_documents">Tài liệu của tôi</string>
+    <string name="my_documents">Tài liệu của tôi (nội bộ)</string>
+    <string name="sodk_editor_my_documents">Tài liệu của tôi</string>
+    <string name="sodk_editor_save_as_upper">LƯU DƯỚI DẠNG</string>
+    <string name="sodk_editor_save_pdf_upper">LƯU PDF</string>
+    <string name="sodk_editor_save_upper">LƯU</string>
+    <string name="sodk_editor_saved_body">Việc lưu tệp đã hoàn tất.</string>
+    <string name="sodk_editor_saved_title">Đã lưu</string>
+    <string name="editor_no_documents_found">Không tìm thấy tài liệu nào</string>
+    <string name="editor_ok">Được rồi</string>
+    <string name="editor_recent">Gần đây</string>
+    <string name="editor_recent_documents">Tài liệu gần đây</string>
+    <string name="editor_save">Lưu</string>
     <string name="settings_faq">Câu hỏi thường gặp</string>
     <string name="version">Phiên bản</string>
     <string name="action_go_to_page">Đi tới trang</string>
@@ -256,7 +287,6 @@
     <string name="dialog_sort_size_large_to_small">Từ lớn đến nhỏ</string>
     <string name="dialog_sort_size_small_to_large">Từ nhỏ đến lớn</string>
     <string name="dialog_exporting_images_title">Đang xuất hình ảnh…</string>
-    <string name="label_general">Tổng quan</string>
     <string name="toolbar_title_select_file">Chọn một tập tin</string>
     <string name="toolbar_title_choose_language">Chọn ngôn ngữ</string>
     <string name="message_recent_files_empty">Các tập tin được xem gần đây của bạn sẽ xuất hiện ở đây</string>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.widget.TextView;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.documenpro.BuildConfig;
@@ -26,9 +27,8 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
 
     private Activity activityContext;
 
-    private TextView languageTextView;
-    private TextView versionTextView;
-    private com.example.documenpro.ui.customviews.switchdaynight.ThemeToggleSwitch swDarkMode;
+    private TextView tv_language_hint;
+    private SwitchCompat swDarkMode;
 
     public FragmentSetting() {
     }
@@ -49,19 +49,23 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
     }
 
     private void initData() {
-        versionTextView.setText(BuildConfig.VERSION_NAME);
 
-        languageTextView.setText(
-                PreferenceUtils.getInstance(activityContext).getString(AppGlobalConstants.PREF_LANGUAGE_NAME,
-                        "English"));
+        if (tv_language_hint != null) {
+            String langName = PreferenceUtils.getInstance(activityContext).getString(AppGlobalConstants.PREF_LANGUAGE_NAME, "English");
+            tv_language_hint.setText(langName);
+        }
 
         if (swDarkMode != null) {
-            swDarkMode.setNightMode(
+            swDarkMode.setChecked(
                     PreferenceUtils.getInstance(activityContext).getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false));
-            swDarkMode.setSwitchListener(is_night -> {
-                PreferenceUtils.getInstance(activityContext).setBoolean(AppGlobalConstants.PREF_NIGHT_MODE, is_night);
-                Utils.setTheme(activityContext.getApplication(), is_night);
-                activityContext.recreate();
+            swDarkMode.setOnCheckedChangeListener((buttonView, is_night) -> {
+                if (buttonView.isPressed()) {
+                    boolean currentNightMode = PreferenceUtils.getInstance(activityContext)
+                            .getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false);
+                    if (is_night != currentNightMode) {
+                        Utils.setTheme(activityContext.getApplication(), is_night);
+                    }
+                }
             });
         }
     }
@@ -79,8 +83,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
     }
 
     private void initViews(View view) {
-        languageTextView = view.findViewById(R.id.tv_language_hint);
-        versionTextView = view.findViewById(R.id.tv_version);
+        tv_language_hint = view.findViewById(R.id.tv_language_hint);
         swDarkMode = view.findViewById(R.id.sw_dark_mode);
     }
 
@@ -99,7 +102,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
             Utils.chooseFileManager(activityContext);
         } else if (idView == R.id.cl_dark_mode) {
             if (swDarkMode != null) {
-                swDarkMode.setNightMode(!swDarkMode.isNightMode());
+                swDarkMode.setChecked(!swDarkMode.isChecked());
             }
         } else if (idView == R.id.cl_rate_app) {
             Utils.showRateDialog(activityContext);
