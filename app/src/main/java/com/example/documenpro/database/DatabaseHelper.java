@@ -249,14 +249,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public synchronized void closeDb_DatabaseHelper() {
         this.mOpenCounter_DatabaseHelper--;
-        if (this.mOpenCounter_DatabaseHelper == 0) {
-            this.mDatabase_DatabaseHelper.close();
+        if (this.mOpenCounter_DatabaseHelper <= 0) {
+            this.mOpenCounter_DatabaseHelper = 0;
+            if (this.mDatabase_DatabaseHelper != null && this.mDatabase_DatabaseHelper.isOpen()) {
+                this.mDatabase_DatabaseHelper.close();
+            }
+            this.mDatabase_DatabaseHelper = null;
         }
     }
 
     public synchronized SQLiteDatabase getReadableDb_DatabaseHelper() {
         this.mOpenCounter_DatabaseHelper++;
-        if (this.mOpenCounter_DatabaseHelper == 1) {
+        if (this.mOpenCounter_DatabaseHelper == 1 || this.mDatabase_DatabaseHelper == null || !this.mDatabase_DatabaseHelper.isOpen()) {
             this.mDatabase_DatabaseHelper = getWritableDatabase();
         }
         return this.mDatabase_DatabaseHelper;

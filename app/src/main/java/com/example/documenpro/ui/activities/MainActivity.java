@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeData() {
+        com.example.documenpro.viewmodel.DataSingletonRecent.getInstance().refresh(this);
+        com.example.documenpro.viewmodel.DataSingletonFavorite.getInstance().refresh(this);
     }
 
     private void initializeListeners() {

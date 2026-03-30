@@ -27,7 +27,7 @@
             android:layout_gravity="start|center_vertical"
             android:padding="8dp"
             android:src="@drawable/ic_return_white"
-            android:tint="@color/black" />
+            android:tint="@color/colorIcon" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_name"
@@ -39,7 +39,7 @@
             android:gravity="center"
             android:lines="1"
             android:text="@string/action_continue"
-            android:textColor="@color/black"
+            android:textColor="@color/colorTextPrimary"
             android:textSize="17sp" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -116,7 +116,7 @@
         android:fontFamily="@font/roboto_bold"
         android:includeFontPadding="false"
         android:text="@string/no_files_yet"
-        android:textColor="@color/colorSolidText"
+        android:textColor="@color/colorTextSecondary"
         android:textSize="18sp"
         android:visibility="gone"
         app:drawableTopCompat="@drawable/ic_no_file"

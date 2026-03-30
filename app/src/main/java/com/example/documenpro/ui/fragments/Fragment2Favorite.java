@@ -53,9 +53,12 @@ public class Fragment2Favorite extends Fragment implements DocClickListener {
                 new Observer<ArrayList<DocumentModel>>() {
                     @Override
                     public void onChanged(ArrayList<DocumentModel> documents) {
-
-                        favoriteAdapter = new FavoriteItemsAdapter(activityContext, Fragment2Favorite.this);
-                        favoriteRecyclerView.setAdapter(favoriteAdapter);
+                        if (favoriteAdapter == null) {
+                            favoriteAdapter = new FavoriteItemsAdapter(activityContext, Fragment2Favorite.this);
+                            favoriteRecyclerView.setAdapter(favoriteAdapter);
+                        } else {
+                            favoriteAdapter.refreshData();
+                        }
                     }
                 });
         return view;
@@ -78,8 +81,9 @@ public class Fragment2Favorite extends Fragment implements DocClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        favoriteAdapter = new FavoriteItemsAdapter(activityContext, this);
-        favoriteRecyclerView.setAdapter(favoriteAdapter);
+        if (favoriteAdapter != null) {
+            favoriteAdapter.refreshData();
+        }
     }
 
     @Override

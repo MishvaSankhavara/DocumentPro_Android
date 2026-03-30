@@ -347,7 +347,7 @@
                         <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/sw_dark_mode"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginEnd="16dp"
                             android:thumb="@drawable/bg_switch_thumb"
                             app:track="@drawable/bg_switch_track"

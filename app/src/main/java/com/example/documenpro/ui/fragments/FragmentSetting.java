@@ -21,7 +21,10 @@ import com.example.documenpro.BuildConfig;
 import com.example.documenpro.AppGlobalConstants;
 import com.example.documenpro.R;
 import com.example.documenpro.PreferenceUtils;
+import com.example.documenpro.ui.dialog.ThemeLoadingDialog;
 import com.example.documenpro.utils.Utils;
+import android.os.Handler;
+import android.os.Looper;
 
 public class FragmentSetting extends Fragment implements View.OnClickListener {
 
@@ -63,7 +66,13 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
                     boolean currentNightMode = PreferenceUtils.getInstance(activityContext)
                             .getBoolean(AppGlobalConstants.PREF_NIGHT_MODE, false);
                     if (is_night != currentNightMode) {
-                        Utils.setTheme(activityContext.getApplication(), is_night);
+                        ThemeLoadingDialog loadingDialog = new ThemeLoadingDialog(activityContext);
+                        loadingDialog.show();
+                        
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            Utils.setTheme(activityContext.getApplication(), is_night);
+                            // activity will recreate, dialog will be gone
+                        }, 800);
                     }
                 }
             });

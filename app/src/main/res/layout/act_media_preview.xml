@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:padding="6dp"
             android:rotation="180"
-            android:tint="@color/black"
+            android:tint="@color/colorIcon"
             android:scaleType="centerInside"
             android:src="@drawable/ic_return_rtl" />
 

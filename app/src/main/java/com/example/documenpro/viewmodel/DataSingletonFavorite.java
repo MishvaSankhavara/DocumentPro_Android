@@ -32,4 +32,10 @@ public class DataSingletonFavorite {
         favoriteDocuments.remove(document);
         favoriteDocumentsLiveData.setValue(favoriteDocuments);
     }
+
+    public void refresh(android.content.Context context) {
+        favoriteDocuments.clear();
+        favoriteDocuments.addAll(com.example.documenpro.database.DatabaseHelper.getInstance(context).getStarredDocuments_DatabaseHelper());
+        favoriteDocumentsLiveData.setValue(favoriteDocuments);
+    }
 }

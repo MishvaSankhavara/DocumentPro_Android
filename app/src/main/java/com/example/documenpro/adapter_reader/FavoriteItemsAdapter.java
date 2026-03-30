@@ -46,10 +46,16 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                                 DocClickListener listener) {
         this.mContext_FavoriteItems = mContext;
         this.listener_FavoriteItems = listener;
-        this.arrayList_FavoriteItems =
-                DatabaseHelper.getInstance(mContext).getStarredDocuments_DatabaseHelper();
         this.databaseHelper_FavoriteItems =
                 DatabaseHelper.getInstance(mContext);
+        this.arrayList_FavoriteItems = new ArrayList<>();
+        refreshData();
+    }
+
+    public void refreshData() {
+        this.arrayList_FavoriteItems.clear();
+        this.arrayList_FavoriteItems.addAll(databaseHelper_FavoriteItems.getStarredDocuments_DatabaseHelper());
+        notifyDataSetChanged();
     }
 
     @Override

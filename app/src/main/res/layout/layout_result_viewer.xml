@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_result_viewer"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="@color/app_background"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
@@ -33,7 +33,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/app_text_black" />
+                app:tint="@color/colorIcon" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
@@ -46,7 +46,7 @@
                 android:gravity="center"
                 android:lines="1"
                 android:text="@string/app_name"
-                android:textColor="@color/app_text_black"
+                android:textColor="@color/colorTextPrimary"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
         android:id="@+id/tabs_result_categories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/app_background"
         android:paddingStart="6dp"
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"

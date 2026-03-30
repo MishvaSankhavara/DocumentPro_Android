@@ -51,8 +51,12 @@ public class Fragment2Recent extends Fragment implements DocClickListener {
                 new Observer<ArrayList<DocumentModel>>() {
                     @Override
                     public void onChanged(ArrayList<DocumentModel> documents) {
-                        recentFilesAdapter = new RecentFilesAdapter(activityContext, Fragment2Recent.this);
-                        recentRecyclerView.setAdapter(recentFilesAdapter);
+                        if (recentFilesAdapter == null) {
+                            recentFilesAdapter = new RecentFilesAdapter(activityContext, Fragment2Recent.this);
+                            recentRecyclerView.setAdapter(recentFilesAdapter);
+                        } else {
+                            recentFilesAdapter.refreshData();
+                        }
                     }
                 });
         return view;
@@ -75,8 +79,9 @@ public class Fragment2Recent extends Fragment implements DocClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        recentFilesAdapter = new RecentFilesAdapter(activityContext, this);
-        recentRecyclerView.setAdapter(recentFilesAdapter);
+        if (recentFilesAdapter != null) {
+            recentFilesAdapter.refreshData();
+        }
     }
 
     @Override

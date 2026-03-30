@@ -34,4 +34,10 @@ public class DataSingletonRecent {
         recentDocuments.add(document);
         recentDocumentsLiveData.setValue(recentDocuments);
     }
+
+    public void refresh(android.content.Context context) {
+        recentDocuments.clear();
+        recentDocuments.addAll(com.example.documenpro.database.DatabaseHelper.getInstance(context).getRecentDocuments_DatabaseHelper());
+        recentDocumentsLiveData.setValue(recentDocuments);
+    }
 }

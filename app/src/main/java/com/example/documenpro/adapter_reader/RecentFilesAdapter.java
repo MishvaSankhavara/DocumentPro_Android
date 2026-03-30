@@ -44,8 +44,15 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
     public RecentFilesAdapter(Activity mContext, DocClickListener listener) {
         this.mContext_RecentFiles = mContext;
         this.listener_RecentFiles = listener;
-        this.arrayList_RecentFiles = DatabaseHelper.getInstance(mContext).getRecentDocuments_DatabaseHelper();
         this.databaseHelper_RecentFiles = DatabaseHelper.getInstance(mContext);
+        this.arrayList_RecentFiles = new ArrayList<>();
+        refreshData();
+    }
+
+    public void refreshData() {
+        this.arrayList_RecentFiles.clear();
+        this.arrayList_RecentFiles.addAll(databaseHelper_RecentFiles.getRecentDocuments_DatabaseHelper());
+        notifyDataSetChanged();
     }
 
     @Override

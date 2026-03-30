@@ -117,7 +117,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.btnSelect).setOnClickListener(this);
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         ViewPager viewPager = view.findViewById(R.id.vp_content);
-        PagerViewAdapter adapter = new PagerViewAdapter(activityContext.getSupportFragmentManager());
+        PagerViewAdapter adapter = new PagerViewAdapter(getChildFragmentManager());
         adapter.addFrag(new Fragment2Recent(activityContext), getResources().getString(R.string.app_recent));
         adapter.addFrag(new Fragment2Favorite(activityContext), getResources().getString(R.string.app_favorite));
         viewPager.setAdapter(adapter);
