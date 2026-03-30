@@ -41,13 +41,13 @@ import com.artifex.solib.SOSelectionLimits;
 import com.artifex.solib.c;
 import com.artifex.mupdf.fitz.PDFAnnotation;
 
-import com.example.documenpro.AppGlobalConstants;
-import com.example.documenpro.R;
-import com.example.documenpro.adapter_reader.ColorSelectionAdapter;
-import com.example.documenpro.ui.customviews.EditBtn;
-import com.example.documenpro.ui.customviews.seekbar.RangeSeekBarChangeListener;
-import com.example.documenpro.ui.customviews.seekbar.RangeSeekBar;
-import com.example.documenpro.utils.Utils;
+import docreader.aidoc.pdfreader.AppGlobalConstants;
+import docreader.aidoc.pdfreader.R;
+import docreader.aidoc.pdfreader.adapter_reader.ColorSelectionAdapter;
+import docreader.aidoc.pdfreader.ui.customviews.EditBtn;
+import docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBarChangeListener;
+import docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBar;
+import docreader.aidoc.pdfreader.utils.Utils;
 
 public class NUIDocViewPdf extends NUIDocView {
     private EditBtn btnHighLight;

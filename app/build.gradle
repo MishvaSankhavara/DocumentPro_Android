@@ -2,11 +2,11 @@ plugins {
     alias(libs.plugins.android.application)
 }
 android {
-    namespace 'com.example.documenpro'
+    namespace 'docreader.aidoc.pdfreader'
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.example.documenpro"
+        applicationId "docreader.aidoc.pdfreader"
         minSdk 24
         targetSdk 36
         versionCode 1

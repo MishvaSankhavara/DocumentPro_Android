@@ -30,7 +30,7 @@
             android:src="@drawable/ic_other_enlagre"
             android:visibility="visible" />
 
-        <com.example.documenpro.photopick.internal.ui.widget.CheckView
+        <docreader.aidoc.pdfreader.photopick.internal.ui.widget.CheckView
             android:id="@+id/check_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

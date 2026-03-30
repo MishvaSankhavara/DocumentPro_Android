@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.documenpro.R;
+import docreader.aidoc.pdfreader.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

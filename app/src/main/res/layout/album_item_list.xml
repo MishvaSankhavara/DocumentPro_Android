@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/album_item_height">
 
-    <com.example.documenpro.photopick.internal.ui.widget.RoundedRectangleImageView
+    <docreader.aidoc.pdfreader.photopick.internal.ui.widget.RoundedRectangleImageView
         android:id="@+id/album_cover"
         android:layout_width="40dp"
         android:layout_height="40dp"

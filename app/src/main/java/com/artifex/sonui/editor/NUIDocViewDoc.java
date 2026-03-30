@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.artifex.solib.SODoc;
-import com.example.documenpro.R;
+import docreader.aidoc.pdfreader.R;
 
 public class NUIDocViewDoc extends NUIDocView {
 

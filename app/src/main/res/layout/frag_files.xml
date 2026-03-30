@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_background">
 
-    <com.example.documenpro.ui.customviews.smartrefresh.SmartRefreshLayout
+    <docreader.aidoc.pdfreader.ui.customviews.smartrefresh.SmartRefreshLayout
         android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -115,7 +115,7 @@
                             android:orientation="horizontal"
                             android:weightSum="4">
 
-                            <com.example.documenpro.ui.customviews.DocumentTypeItemView
+                            <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
                                 android:id="@+id/btnPdf"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                                 app:nameFileType="@string/document_pdf"
                                 app:cornerRadiusFileType="16dp"/>
 
-                            <com.example.documenpro.ui.customviews.DocumentTypeItemView
+                            <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
                                 android:id="@+id/btnWord"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                                 app:nameFileType="@string/document_word"
                                 app:cornerRadiusFileType="16dp"/>
 
-                            <com.example.documenpro.ui.customviews.DocumentTypeItemView
+                            <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
                                 android:id="@+id/btnExcel"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
                                 app:nameFileType="@string/document_excel"
                                 app:cornerRadiusFileType="16dp"/>
 
-                            <com.example.documenpro.ui.customviews.DocumentTypeItemView
+                            <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
                                 android:id="@+id/btnPpt"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <com.example.documenpro.ui.customviews.WrapContentViewPager
+                    <docreader.aidoc.pdfreader.ui.customviews.WrapContentViewPager
                         android:id="@+id/vp_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -217,5 +217,5 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </com.example.documenpro.ui.customviews.smartrefresh.SmartRefreshLayout>
+    </docreader.aidoc.pdfreader.ui.customviews.smartrefresh.SmartRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

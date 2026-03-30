@@ -15,10 +15,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.example.documenpro.AppGlobalConstants;
-import com.example.documenpro.R;
-import com.example.documenpro.adapter_reader.PdfViewerPagerAdapter;
-import com.example.documenpro.utils.Utils;
+import docreader.aidoc.pdfreader.AppGlobalConstants;
+import docreader.aidoc.pdfreader.R;
+import docreader.aidoc.pdfreader.adapter_reader.PdfViewerPagerAdapter;
+import docreader.aidoc.pdfreader.utils.Utils;
 
 import java.util.Objects;
 
@@ -107,7 +107,7 @@ public class ResultViewerActivity extends AppCompatActivity {
     }
 
     private void navigateToMainTools() {
-        Intent intent = new Intent(this, com.example.documenpro.ui.activities.MainActivity.class);
+        Intent intent = new Intent(this, docreader.aidoc.pdfreader.ui.activities.MainActivity.class);
         intent.putExtra("EXTRA_START_TAB", 1); // 1 = Tools tab
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);

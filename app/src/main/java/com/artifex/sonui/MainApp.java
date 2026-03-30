@@ -5,7 +5,7 @@ import android.util.Log;
 import java.lang.reflect.Field;
 
 import com.artifex.solib.ConfigOptions;
-import com.example.documenpro.DocumentMyApplication;
+import docreader.aidoc.pdfreader.DocumentMyApplication;
 
 public class MainApp extends DocumentMyApplication {
     private static Context context;

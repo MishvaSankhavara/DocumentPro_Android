@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.documenpro.photopick.internal.ui.widget.MediaGrid
+<docreader.aidoc.pdfreader.photopick.internal.ui.widget.MediaGrid
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

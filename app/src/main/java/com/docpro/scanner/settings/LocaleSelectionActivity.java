@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.language.MultiLanguages;
-import com.example.documenpro.ActivityBase;
-import com.example.documenpro.AppGlobalConstants;
-import com.example.documenpro.R;
-import com.example.documenpro.PreferenceUtils;
-import com.example.documenpro.adapter_reader.LanguageListAdapter;
+import docreader.aidoc.pdfreader.ActivityBase;
+import docreader.aidoc.pdfreader.AppGlobalConstants;
+import docreader.aidoc.pdfreader.R;
+import docreader.aidoc.pdfreader.PreferenceUtils;
+import docreader.aidoc.pdfreader.adapter_reader.LanguageListAdapter;
 
-import com.example.documenpro.clickListener.LanguageClickListener;
-import com.example.documenpro.ui.activities.MainActivity;
-import com.example.documenpro.ui.activities.OnBoardActivity;
+import docreader.aidoc.pdfreader.clickListener.LanguageClickListener;
+import docreader.aidoc.pdfreader.ui.activities.MainActivity;
+import docreader.aidoc.pdfreader.ui.activities.OnBoardActivity;
 
 import java.util.Locale;
 

@@ -15,7 +15,7 @@ import com.artifex.sonui.editor.SODataLeakHandlers;
 import com.artifex.sonui.editor.SOSaveAsComplete;
 import com.artifex.sonui.editor.SOCustomSaveComplete;
 import com.artifex.sonui.editor.Utilities;
-import com.example.documenpro.R;
+import docreader.aidoc.pdfreader.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
         String resolvedFileName = fileName;
 
         if (activity != null) {
-            android.widget.TextView titleView = activity.findViewById(com.example.documenpro.R.id.tvTittle);
+            android.widget.TextView titleView = activity.findViewById(docreader.aidoc.pdfreader.R.id.tvTittle);
             if (titleView != null) {
                 String uiName = titleView.getText().toString();
                 if (uiName != null && !uiName.isEmpty()) {
@@ -69,7 +69,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                 Intent intent = activity.getIntent();
                 if (intent != null) {
                     String intentFileName = intent.getStringExtra(
-                            com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME);
+                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME);
                     if (intentFileName != null && !intentFileName.isEmpty()) {
                         resolvedFileName = intentFileName;
                     }
@@ -164,7 +164,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
             Intent intent = activity.getIntent();
             if (intent != null) {
                 String uri = intent.getStringExtra(
-                        com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
+                        docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
                 if (uri != null && uri.toLowerCase().endsWith(".pdf")) {
                     isSourcePdf = true;
                 }
@@ -195,13 +195,13 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                                 () -> {
                                     // Yes: redirect to saved document
                                     Intent openIntent = new Intent(activity,
-                                            com.example.documenpro.ui.activities.ViewOfficeActivity.class);
+                                            docreader.aidoc.pdfreader.ui.activities.ViewOfficeActivity.class);
                                     openIntent.setAction(Intent.ACTION_VIEW);
                                     openIntent.setData(Uri.fromFile(file));
                                     openIntent.putExtra(
-                                            com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
+                                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
                                     openIntent.putExtra(
-                                            com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
+                                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
                                             fileName);
                                     openIntent.putExtra("STARTED_FROM_EXPLORER", true);
                                     openIntent.putExtra("START_PAGE", 0);
@@ -212,17 +212,17 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                                 () -> {
                                     // No: stay on current document, update footer and state
                                     android.widget.TextView titleView = activity
-                                            .findViewById(com.example.documenpro.R.id.tvTittle);
+                                            .findViewById(docreader.aidoc.pdfreader.R.id.tvTittle);
                                     if (titleView != null) {
                                         titleView.setText(fileName);
                                     }
                                     Intent intent = activity.getIntent();
                                     if (intent != null) {
                                         intent.putExtra(
-                                                com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_URI,
+                                                docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI,
                                                 path);
                                         intent.putExtra(
-                                                com.example.documenpro.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
+                                                docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
                                                 fileName);
                                     }
                                     if (activity instanceof com.artifex.sonui.AppNUIActivity) {
@@ -270,7 +270,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult called");
-        if (requestCode == com.example.documenpro.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE) {
+        if (requestCode == docreader.aidoc.pdfreader.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE) {
             if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
                 Uri selectedUri = data.getData();
                 if (mNuiDocView != null) {
@@ -281,14 +281,14 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     }
 
     private void insertImageFromUri(Uri uri) {
-        String filename = com.example.documenpro.utils.Utils.getFileNameFromUri(uri, activity.getContentResolver());
+        String filename = docreader.aidoc.pdfreader.utils.Utils.getFileNameFromUri(uri, activity.getContentResolver());
         File tempFolder = new File(activity.getExternalFilesDir(null), "temp_images");
         if (!tempFolder.exists()) {
             tempFolder.mkdirs();
         }
 
         File destFile = new File(tempFolder, filename);
-        com.example.documenpro.utils.Utils.copy(activity, uri, destFile.getAbsolutePath());
+        docreader.aidoc.pdfreader.utils.Utils.copy(activity, uri, destFile.getAbsolutePath());
 
         if (mNuiDocView != null) {
             mNuiDocView.doInsertImage(destFile.getAbsolutePath());
@@ -302,7 +302,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         activity.startActivityForResult(Intent.createChooser(intent, "Select Image"),
-                com.example.documenpro.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE);
+                docreader.aidoc.pdfreader.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE);
     }
 
     @Override

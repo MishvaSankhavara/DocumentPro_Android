@@ -10,8 +10,8 @@ import android.view.View;
 import com.artifex.solib.SOSelectionLimits;
 import com.artifex.sonui.editor.ShapeDialog.Shape;
 import com.artifex.sonui.editor.ShapeDialog.onSelectShapeListener;
-import com.example.documenpro.R;
-import com.example.documenpro.ui.customviews.BottomButtonView;
+import docreader.aidoc.pdfreader.R;
+import docreader.aidoc.pdfreader.ui.customviews.BottomButtonView;
 
 public class NUIDocViewPpt extends NUIDocView {
     boolean b = false;

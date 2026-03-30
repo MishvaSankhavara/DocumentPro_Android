@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_background">
 
-    <com.example.documenpro.ui.customviews.EmptyStateRecyclerView
+    <docreader.aidoc.pdfreader.ui.customviews.EmptyStateRecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

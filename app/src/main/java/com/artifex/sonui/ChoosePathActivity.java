@@ -14,7 +14,7 @@ import com.artifex.sonui.editor.BaseActivity;
 import com.artifex.sonui.editor.SOEditText;
 import com.artifex.sonui.editor.SOEditTextOnEditorActionListener;
 import com.artifex.sonui.editor.Utilities;
-import com.example.documenpro.R;
+import docreader.aidoc.pdfreader.R;
 
 public class ChoosePathActivity extends BaseActivity {
     private static ChoosePathActivity.a a;

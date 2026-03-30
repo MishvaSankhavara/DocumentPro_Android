@@ -180,7 +180,7 @@
             android:theme="@style/ActivityChoosePhoto" />
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.documenpro.provider"
+            android:authorities="docreader.aidoc.pdfreader.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import com.artifex.solib.ConfigOptions;
 import com.artifex.sonui.editor.NUIView.OnDoneListener;
 import com.artifex.sonui.editor.SODocSession.SODocSessionLoadListenerCustom;
-import com.example.documenpro.R;
+import docreader.aidoc.pdfreader.R;
 
 public class NUIActivity extends BaseActivity {
     private static SODocSession a;

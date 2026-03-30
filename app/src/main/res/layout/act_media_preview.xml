@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.documenpro.photopick.internal.ui.widget.PreviewViewPager
+    <docreader.aidoc.pdfreader.photopick.internal.ui.widget.PreviewViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,7 +67,7 @@
             android:layout_toStartOf="@id/btnSelect"
             android:orientation="horizontal">
 
-            <com.example.documenpro.photopick.internal.ui.widget.CheckView
+            <docreader.aidoc.pdfreader.photopick.internal.ui.widget.CheckView
                 android:id="@+id/check_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -23,7 +23,7 @@ import com.artifex.sonui.AppFile.CloudPermissionChecked;
 import com.artifex.sonui.editor.BaseActivity;
 import com.artifex.sonui.editor.SOEditText;
 import com.artifex.sonui.editor.Utilities;
-import com.example.documenpro.R;
+import docreader.aidoc.pdfreader.R;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -53,7 +53,7 @@
                 android:paddingHorizontal="22dp"
                 android:layout_marginBottom="5dp">
 
-                <com.example.documenpro.ui.customviews.seekbar.RangeSeekBar
+                <docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBar
                     android:id="@+id/thickness_seekBar"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -104,7 +104,7 @@
             android:layout_height="60dp"
             android:orientation="horizontal">
 
-            <com.example.documenpro.ui.customviews.EditBtn
+            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnHighlight"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -113,7 +113,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 app:ImageEdt="@drawable/ic_highlight" />
 
-            <com.example.documenpro.ui.customviews.EditBtn
+            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnDrawNew"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -122,7 +122,7 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 app:ImageEdt="@drawable/ic_draw_preview" />
 
-            <com.example.documenpro.ui.customviews.EditBtn
+            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnText"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -131,7 +131,7 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 app:ImageEdt="@drawable/editor_icon_shape_textbox" />
 
-            <com.example.documenpro.ui.customviews.EditBtn
+            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btn_insert_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -140,7 +140,7 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 app:ImageEdt="@drawable/add_photo_alternate" />
 
-            <com.example.documenpro.ui.customviews.EditBtn
+            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btn_signature"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -149,7 +149,7 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 app:ImageEdt="@drawable/ic_sign" />
 
-            <com.example.documenpro.ui.customviews.EditBtn
+            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnDelete"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

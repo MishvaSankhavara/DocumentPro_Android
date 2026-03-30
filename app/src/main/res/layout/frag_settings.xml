@@ -414,6 +414,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="24dp"
                 app:cardBackgroundColor="@color/app_card_bg"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="2dp"
@@ -430,7 +431,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
-                        android:padding="16dp">
+                        android:padding="16dp"
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/iv_help_icon"
@@ -482,6 +484,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:visibility="gone"
                         android:background="@color/app_divider_line" />
 
                     <!-- Privacy Policy -->

@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
 
-    <com.example.documenpro.ui.customviews.EmptyStateRecyclerView
+    <docreader.aidoc.pdfreader.ui.customviews.EmptyStateRecyclerView
         android:id="@+id/recyclerRecent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,8 @@
         android:id="@+id/empty_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="350dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="@dimen/_70sdp"
         android:paddingStart="36dp"
         android:paddingEnd="36dp"
         android:visibility="visible"
