@@ -401,4 +401,12 @@
     <string name="dialog_exit_feedback_message">Nếu bạn gặp vấn đề khi đọc tập tin, nhấn vào đây để gửi phản hồi cho chúng tôi</string>
     <string name="action_exit_app">Nhấn vào đây để thoát ứng dụng</string>
 
+
+    <string name="onboarding_title_editing_tools">Nhiều công cụ chỉnh sửa</string>
+    <string name="onboarding_title_all_in_one">Tài liệu tất cả trong một</string>
+    <string name="onboarding_title_images_to_pdf">Hình ảnh sang PDF</string>
+    <string name="onboarding_description_modify_text">Xem, quản lý và sắp xếp tất cả tài liệu của bạn ở một nơi. PDF, Word, Excel, PPT và hơn thế nữa.</string>
+    <string name="onboarding_description_streamline">Chuyển đổi hình ảnh của bạn thành PDF chất lượng cao chỉ bằng một lần chạm. Nhanh chóng, dễ dàng và an toàn.</string>
+    <string name="onboarding_description_convert_picture">Chuyển đổi bất kỳ hình ảnh nào sang PDF bằng một lần chạm</string>
+
 </resources>

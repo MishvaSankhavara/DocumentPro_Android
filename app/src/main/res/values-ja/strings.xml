@@ -375,4 +375,12 @@
     <string name="dialog_exit_feedback_title">PDFリーダーにご満足ですか？</string>
     <string name="dialog_exit_feedback_message">ファイルを読む際に問題がある場合は、フィードバックをいただければ幸いです</string>
     <string name="action_exit_app">アプリを終了するにはここをタップしてください</string>
+
+    <string name="onboarding_title_editing_tools">複数の編集ツール</string>
+    <string name="onboarding_title_all_in_one">オールインワンのドキュメント</string>
+    <string name="onboarding_title_images_to_pdf">画像からPDFへ</string>
+    <string name="onboarding_description_modify_text">すべてのドキュメントを1か所で表示、管理、整理できます。PDF、Word、Excel、PPTなどに対応。</string>
+    <string name="onboarding_description_streamline">タップするだけで画像を高品質のPDFに変換。高速、簡単、安全。</string>
+    <string name="onboarding_description_convert_picture">ワンタップで任意の写真をPDFに変換</string>
+
 </resources>

@@ -1,136 +1,188 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    android:paddingTop="8dp">
+    android:orientation="vertical">
 
+    <!-- File Name Input Wrapper -->
     <LinearLayout
         android:id="@+id/edit_text_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/bg_edit_text_premium"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_dialog_input_field"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="4dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingVertical="2dp">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
             android:src="@drawable/ic_file"
-            app:tint="@color/app_main_color" />
+            app:tint="@color/colorAccent" />
 
         <com.artifex.sonui.editor.SOEditText
             android:id="@+id/edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/inter_medium"
             android:hint="@string/editor_file_name"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:minHeight="48dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:minHeight="44dp"
+            android:textColor="@color/app_primary_text"
+            android:textSize="15sp" />
     </LinearLayout>
 
-    <LinearLayout
+    <!-- Current Location Header Label -->
+    <TextView
+        android:id="@+id/tv_current_location_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Current location"
+        android:textColor="@color/colorAccent"
+        android:textSize="13sp" />
+
+    <!-- Current Location Info Card -->
+    <FrameLayout
         android:id="@+id/breadcrumb_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:paddingHorizontal="8dp"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_wrapper">
-        <include layout="@layout/view_breadcrumb_path" />
-    </LinearLayout>
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/bg_dialog_info_row"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp">
 
+        <include layout="@layout/view_breadcrumb_path" />
+    </FrameLayout>
+
+    <!-- Other Locations Header Label -->
+    <TextView
+        android:id="@+id/tv_other_locations_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="15dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Other locations"
+        android:textColor="@color/app_text_gray"
+        android:textSize="13sp" />
+
+    <!-- Explorer ListView Container -->
     <RelativeLayout
         android:id="@+id/rlContainer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="8dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/cancel_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/breadcrumb_wrapper">
+        android:layout_marginBottom="12dp">
 
         <com.artifex.sonui.ExplorerListView
             android:id="@+id/fileListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:choiceMode="singleChoice"
             android:divider="#F0F2F5"
             android:dividerHeight="1dp"
-            android:paddingHorizontal="8dp"
+            android:paddingHorizontal="4dp"
             android:splitMotionEvents="false" />
 
         <com.artifex.sonui.editor.SOTextView
             android:id="@+id/no_documents_found"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/inter_medium"
             android:gravity="center"
             android:padding="24dp"
             android:text="@string/editor_no_documents_found"
             android:textColor="@color/app_text_gray"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:visibility="gone" />
 
         <ProgressBar
             android:id="@+id/enumerate_progress"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:indeterminateTint="@color/app_main_color"
+            android:indeterminateTint="@color/colorAccent"
             android:visibility="gone" />
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/cancel_button"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
+    <!-- Info/Warning Banner Layout -->
+    <LinearLayout
+        android:id="@+id/info_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_button_cancel_premium"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:text="@string/action_cancel"
-        android:textAllCaps="false"
-        android:textColor="@color/app_text_gray"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/save_button"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:background="@drawable/bg_dialog_info_banner"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:visibility="gone">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/save_button"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_button_save_premium"
-        android:fontFamily="@font/roboto_bold"
-        android:elevation="4dp"
-        android:gravity="center"
-        android:text="@string/editor_save"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/cancel_button" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_dialog_info_icon"
+            app:tint="#D97706" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Your document will be saved in the selected location."
+            android:textColor="#92400E"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!-- Cancel and Save Buttons Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dialog_btn_secondary"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/action_cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/app_primary_text"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dialog_btn_save_rounded"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="@string/editor_save"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -374,4 +374,12 @@
     <string name="dialog_exit_feedback_message">Om du har problem med att läsa filer, klicka här för att ge oss feedback</string>
     <string name="action_exit_app">Tryck här för att avsluta appen</string>
 
+
+    <string name="onboarding_title_editing_tools">Flera redigeringsverktyg</string>
+    <string name="onboarding_title_all_in_one">Allt-i-ett-dokument</string>
+    <string name="onboarding_title_images_to_pdf">Bilder till PDF</string>
+    <string name="onboarding_description_modify_text">Visa, hantera och organisera alla dina dokument på ett ställe. PDF, Word, Excel, PPT och mer.</string>
+    <string name="onboarding_description_streamline">Konvertera dina bilder till högkvalitativ PDF med bara ett tryck. Snabbt, enkelt och säkert.</string>
+    <string name="onboarding_description_convert_picture">Konvertera valfri bild till PDF med ett tryck</string>
+
 </resources>

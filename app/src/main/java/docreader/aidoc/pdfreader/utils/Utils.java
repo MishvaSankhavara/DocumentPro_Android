@@ -912,15 +912,15 @@ public class Utils {
         String fileName = file.getName().toLowerCase();
 
         if (fileName.endsWith(".pdf")) {
-            return R.drawable.ic_album_pdf;
+            return R.drawable.ic_type_pdf;
         } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
-            return R.drawable.ic_album_doc;
+            return R.drawable.ic_type_word;
         } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv")) {
-            return R.drawable.ic_album_xls;
+            return R.drawable.ic_type_excel;
         } else if (fileName.endsWith(".ppt") || fileName.endsWith(".pptx")) {
-            return R.drawable.ic_album_ppt;
+            return R.drawable.ic_ppt_document;
         }
-        return R.drawable.ic_album_doc;
+        return R.drawable.ic_type_word;
     }
 
     public static void showRateDialog(Activity mContext) {

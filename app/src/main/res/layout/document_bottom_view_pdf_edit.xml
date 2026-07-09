@@ -5,8 +5,8 @@
     android:id="@+id/bottomEditToolBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom|center_vertical|center_horizontal|center"
-    android:background="@color/bg_tittle">
+    android:layout_gravity="bottom"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/ll_pdf_edit_bottom_toolbar"
@@ -14,8 +14,11 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
+        <!-- Thickness Slider and Color Picker for Drawing Mode -->
         <LinearLayout
             android:id="@+id/pdf_bottom_draw"
             android:layout_width="match_parent"
@@ -23,24 +26,36 @@
             android:clickable="true"
             android:focusable="true"
             android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:paddingBottom="12dp"
+            android:layout_marginTop="8dp"
             android:visibility="gone">
 
-            <!-- Header with Close button -->
+            <!-- Header with Close/Minimize button -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="32dp"
                 android:paddingHorizontal="16dp">
+
+                <TextView
+                    style="@style/FontBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="STROKE"
+                    android:textColor="#64748B"
+                    android:textSize="11sp"
+                    android:letterSpacing="0.05" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_close_draw"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:padding="6dp"
                     android:src="@drawable/ic_close_new"
-                    app:tint="@color/black" />
+                    app:tint="#111827" />
             </RelativeLayout>
 
             <!-- Thickness Slider Section -->
@@ -51,7 +66,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="22dp"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="8dp">
 
                 <docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBar
                     android:id="@+id/thickness_seekBar"
@@ -62,27 +77,31 @@
                     app:rsb_max="50"
                     app:rsb_min="0.25"
                     app:rsb_mode="single"
-                    app:rsb_progress_color="#7B7B7B"
-                    app:rsb_progress_default_color="#EBEBEB"
-                    app:rsb_progress_height="8dp"
-                    app:rsb_progress_radius="4dp"
+                    app:rsb_progress_color="@color/selected_tab_blue"
+                    app:rsb_progress_default_color="#E2E8F0"
+                    app:rsb_progress_height="6dp"
+                    app:rsb_progress_radius="3dp"
                     app:rsb_thumb_height="20dp"
                     app:rsb_thumb_width="20dp"
                     app:rsb_thumb_drawable="@drawable/bg_circle_thumb" />
 
+                <!-- Badge style displaying size -->
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/sizeTv"
-                    style="@style/FontMedium"
-                    android:layout_width="40dp"
+                    style="@style/FontBold"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_language_badge"
                     android:gravity="center"
-                    android:text="10"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="2px"
+                    android:textColor="@color/selected_tab_blue"
+                    android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Color Picker -->
+            <!-- Color Picker list -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerColor"
                 android:layout_width="match_parent"
@@ -99,63 +118,65 @@
                 tools:listitem="@layout/item_color" />
         </LinearLayout>
 
+        <!-- Edit Tools Bottom Bar -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="68dp"
+            android:background="@color/white"
             android:orientation="horizontal">
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
-                android:id="@+id/btnHighlight"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="@dimen/_20sdp"
-                app:ImageEdt="@drawable/ic_highlight" />
-
+            <!-- Draw -->
             <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnDrawNew"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="@dimen/_15sdp"
-                app:ImageEdt="@drawable/ic_draw_preview" />
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:TextEdt="Draw"
+                app:ImageEdt="@drawable/ic_edit" />
 
+            <!-- Highlight -->
+            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+                android:id="@+id/btnHighlight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:TextEdt="Highlight"
+                app:ImageEdt="@drawable/ic_highlight" />
+
+            <!-- Font -->
             <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnText"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="@dimen/_15sdp"
-                app:ImageEdt="@drawable/editor_icon_shape_textbox" />
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:TextEdt="Font"
+                app:ImageEdt="@drawable/ic_edit_font_aa" />
 
+            <!-- Stickers -->
             <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btn_insert_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="@dimen/_15sdp"
-                app:ImageEdt="@drawable/add_photo_alternate" />
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:TextEdt="Stickers"
+                app:ImageEdt="@drawable/ic_edit_stickers" />
 
+            <!-- Sign -->
             <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btn_signature"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:TextEdt="Sign"
                 app:ImageEdt="@drawable/ic_sign" />
 
+            <!-- Erase -->
             <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnDelete"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:TextEdt="Erase"
                 app:ImageEdt="@drawable/ic_eraser" />
         </LinearLayout>
     </LinearLayout>

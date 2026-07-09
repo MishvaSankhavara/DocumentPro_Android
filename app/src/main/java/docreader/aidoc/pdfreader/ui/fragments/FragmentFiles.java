@@ -22,12 +22,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.TabLayout;
 import docreader.aidoc.pdfreader.AppGlobalConstants;
 import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.adapter_reader.PagerViewAdapter;
+import docreader.aidoc.pdfreader.clickListener.DocClickListener;
 import docreader.aidoc.pdfreader.model_reader.DocumentModel;
 import docreader.aidoc.pdfreader.ui.activities.MainActivity;
 import docreader.aidoc.pdfreader.ui.activities.SelectDocumentActivity;
@@ -35,6 +35,10 @@ import docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView;
 import docreader.aidoc.pdfreader.ui.customviews.smartrefresh.api.SmartRefreshLayout;
 import docreader.aidoc.pdfreader.ui.customviews.smartrefresh.header.ClassicRefreshHeaderView;
 import docreader.aidoc.pdfreader.ui.customviews.smartrefresh.listener.RefreshListener;
+import docreader.aidoc.pdfreader.adapter_reader.RecentFilesAdapter;
+import docreader.aidoc.pdfreader.adapter_reader.FavoriteCardItemsAdapter;
+import docreader.aidoc.pdfreader.viewmodel.DataSingletonRecent;
+import docreader.aidoc.pdfreader.viewmodel.DataSingletonFavorite;
 import docreader.aidoc.pdfreader.utils.Utils;
 
 import java.io.File;
@@ -49,15 +53,22 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     private MainActivity activityContext;
 
     private LinearLayout permissionContainer;
+    private DocumentTypeItemView allButton;
     private DocumentTypeItemView pdfButton;
     private DocumentTypeItemView wordButton;
     private DocumentTypeItemView excelButton;
     private DocumentTypeItemView pptButton;
+    private DocumentTypeItemView txtButton;
+    
+    private RecyclerView recentRecyclerView;
+    private RecyclerView favoriteRecyclerView;
+    private RecentFilesAdapter recentFilesAdapter;
+    private FavoriteCardItemsAdapter favoriteCardAdapter;
+    
     ArrayList<DocumentModel> excelFile;
     ArrayList<DocumentModel> pdfFile;
     ArrayList<DocumentModel> wordFile;
     ArrayList<DocumentModel> pptFile;
-    private int selectedTabPosition;
     private final Executor executor = Executors.newSingleThreadExecutor();
 
     public FragmentFiles() {
@@ -78,11 +89,16 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
     private void initAction(View view) {
         view.findViewById(R.id.tv_go_to_set).setOnClickListener(this);
+        allButton.setOnClickListener(this);
         pdfButton.setOnClickListener(this);
         wordButton.setOnClickListener(this);
         excelButton.setOnClickListener(this);
         pptButton.setOnClickListener(this);
+        txtButton.setOnClickListener(this);
         view.findViewById(R.id.cv_search_bar).setOnClickListener(this);
+        
+        view.findViewById(R.id.btn_recent_view_all).setOnClickListener(this);
+        view.findViewById(R.id.btn_favorite_view_all).setOnClickListener(this);
     }
 
     private void getData() {
@@ -114,21 +130,81 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
     private void initViews(View view) {
         permissionContainer = view.findViewById(R.id.llPermission_container);
-        view.findViewById(R.id.btnSelect).setOnClickListener(this);
-        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
-        ViewPager viewPager = view.findViewById(R.id.vp_content);
-        PagerViewAdapter adapter = new PagerViewAdapter(getChildFragmentManager());
-        adapter.addFrag(new Fragment2Recent(activityContext), getResources().getString(R.string.app_recent));
-        adapter.addFrag(new Fragment2Favorite(activityContext), getResources().getString(R.string.app_favorite));
-        viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.addOnPageChangeListener(activityContext);
+        
+        recentRecyclerView = view.findViewById(R.id.recyclerRecentHome);
+        recentRecyclerView.setLayoutManager(new LinearLayoutManager(activityContext) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        recentRecyclerView.setHasFixedSize(true);
+        recentFilesAdapter = new RecentFilesAdapter(activityContext, new DocClickListener() {
+            @Override
+            public void onDocClick(DocumentModel document) {
+                Utils.openFile(activityContext, document);
+            }
+        }, true);
+        recentRecyclerView.setAdapter(recentFilesAdapter);
 
+        favoriteRecyclerView = view.findViewById(R.id.recyclerFavoriteHome);
+        favoriteRecyclerView.setLayoutManager(new LinearLayoutManager(activityContext, LinearLayoutManager.HORIZONTAL, false) {
+            @Override
+            public boolean canScrollHorizontally() {
+                return true;
+            }
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        favoriteRecyclerView.setHasFixedSize(false);
+        favoriteCardAdapter = new FavoriteCardItemsAdapter(activityContext, new DocClickListener() {
+            @Override
+            public void onDocClick(DocumentModel document) {
+                Utils.openFile(activityContext, document);
+            }
+        });
+        favoriteRecyclerView.setAdapter(favoriteCardAdapter);
+
+        DataSingletonRecent.getInstance().getRecentDocumentsLiveData().observe(getViewLifecycleOwner(),
+                documents -> {
+                    if (recentFilesAdapter != null) {
+                        recentFilesAdapter.refreshData();
+                        View recentCard = view.findViewById(R.id.card_recent_container);
+                        View recentEmpty = view.findViewById(R.id.recent_empty_layout);
+                        if (documents == null || documents.isEmpty()) {
+                            recentCard.setVisibility(View.GONE);
+                            recentEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            recentCard.setVisibility(View.VISIBLE);
+                            recentEmpty.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+        DataSingletonFavorite.getInstance().getFavoriteDocumentsLiveData().observe(getViewLifecycleOwner(),
+                documents -> {
+                    if (favoriteCardAdapter != null) {
+                        favoriteCardAdapter.refreshData();
+                        View favoriteEmpty = view.findViewById(R.id.favorite_empty_layout);
+                        if (documents == null || documents.isEmpty()) {
+                            favoriteRecyclerView.setVisibility(View.GONE);
+                            favoriteEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            favoriteRecyclerView.setVisibility(View.VISIBLE);
+                            favoriteEmpty.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+        allButton = view.findViewById(R.id.btnAll);
         pdfButton = view.findViewById(R.id.btnPdf);
         wordButton = view.findViewById(R.id.btnWord);
         excelButton = view.findViewById(R.id.btnExcel);
         pptButton = view.findViewById(R.id.btnPpt);
+        txtButton = view.findViewById(R.id.btnTxt);
+        
         SmartRefreshLayout refreshLayout = view.findViewById(R.id.smartRefreshLayout);
         refreshLayout.setHeaderRefresh(new ClassicRefreshHeaderView(activityContext));
         refreshLayout.setRefreshListener(new RefreshListener() {
@@ -183,18 +259,25 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             pdfFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_PDF_FILES);
             wordFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_WORD_FILES);
             pptFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_PPT_FILES);
+            ArrayList<DocumentModel> txtFile = Utils.countFile(activityContext, AppGlobalConstants.QUERY_TEXT_FILES);
+            
+            int excelCount = (excelFile != null) ? excelFile.size() : 0;
+            int pdfCount = (pdfFile != null) ? pdfFile.size() : 0;
+            int wordCount = (wordFile != null) ? wordFile.size() : 0;
+            int pptCount = (pptFile != null) ? pptFile.size() : 0;
+            int txtCount = (txtFile != null) ? txtFile.size() : 0;
+            int allCount = excelCount + pdfCount + wordCount + pptCount + txtCount;
+            
             activityContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if (isAdded() && getContext() != null) {
-                        pdfButton.setTvCount(
-                                getResources().getString(R.string.label_file_count, String.valueOf(pdfFile.size())));
-                        excelButton.setTvCount(
-                                getResources().getString(R.string.label_file_count, String.valueOf(excelFile.size())));
-                        wordButton.setTvCount(
-                                getResources().getString(R.string.label_file_count, String.valueOf(wordFile.size())));
-                        pptButton.setTvCount(
-                                getResources().getString(R.string.label_file_count, String.valueOf(pptFile.size())));
+                        allButton.setTvCount(String.valueOf(allCount));
+                        pdfButton.setTvCount(String.valueOf(pdfCount));
+                        excelButton.setTvCount(String.valueOf(excelCount));
+                        wordButton.setTvCount(String.valueOf(wordCount));
+                        pptButton.setTvCount(String.valueOf(pptCount));
+                        txtButton.setTvCount(String.valueOf(txtCount));
                     }
                 }
             });
@@ -219,6 +302,12 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         if (Utils.checkPermission(activityContext)) {
             permissionContainer.setVisibility(View.GONE);
             countFiles();
+            if (recentFilesAdapter != null) {
+                recentFilesAdapter.refreshData();
+            }
+            if (favoriteCardAdapter != null) {
+                favoriteCardAdapter.refreshData();
+            }
         } else {
             permissionContainer.setVisibility(View.VISIBLE);
         }
@@ -250,16 +339,26 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         int idView = v.getId();
         if (idView == R.id.tv_go_to_set) {
             Utils.askPermission(activityContext);
-        } else if (idView == R.id.btnSelect) {
-            if (selectedTabPosition == 0) {
-                Intent intentAll = new Intent(activityContext, SelectDocumentActivity.class);
-                intentAll.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_RECENT);
-                startActivity(intentAll);
-            } else if (selectedTabPosition == 1) {
+        } else if (idView == R.id.btn_recent_view_all) {
+            if (Utils.checkPermission(activityContext)) {
                 Intent intentRecent = new Intent(activityContext, SelectDocumentActivity.class);
-                intentRecent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_FAVORITE);
+                intentRecent.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_RECENT);
                 startActivity(intentRecent);
+            } else {
+                Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required),
+                        Toast.LENGTH_SHORT).show();
             }
+        } else if (idView == R.id.btn_favorite_view_all) {
+            if (Utils.checkPermission(activityContext)) {
+                Intent intentFavorite = new Intent(activityContext, SelectDocumentActivity.class);
+                intentFavorite.putExtra(AppGlobalConstants.EXTRA_FILE_TYPE, AppGlobalConstants.FILE_TYPE_FAVORITE);
+                startActivity(intentFavorite);
+            } else {
+                Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required),
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else if (idView == R.id.btnAll) {
+            openFileList(AppGlobalConstants.FILE_TYPE_ALL);
         } else if (idView == R.id.btnPdf) {
             openFileList(AppGlobalConstants.FILE_TYPE_PDF);
         } else if (idView == R.id.btnExcel) {
@@ -268,6 +367,8 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             openFileList(AppGlobalConstants.FILE_TYPE_WORD);
         } else if (idView == R.id.btnPpt) {
             openFileList(AppGlobalConstants.FILE_TYPE_PPT);
+        } else if (idView == R.id.btnTxt) {
+            openFileList(AppGlobalConstants.FILE_TYPE_TEXT);
         } else if (idView == R.id.cv_search_bar) {
             if (Utils.checkPermission(activityContext)) {
                 Intent intentSearch = new Intent(activityContext,

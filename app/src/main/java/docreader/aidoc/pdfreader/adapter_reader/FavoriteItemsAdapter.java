@@ -81,9 +81,7 @@ public class FavoriteItemsAdapter extends RecyclerView.Adapter<FavoriteItemsAdap
                         mContext_FavoriteItems,
                         document.getLength_DocModel()));
 
-        Glide.with(mContext_FavoriteItems)
-                .load(document.getSrcImage_DocModel())
-                .into(holder.imgIcon_FavoriteItems);
+        holder.imgIcon_FavoriteItems.setImageResource(document.getSrcImage_DocModel());
 
         String fileName = document.getFileName_DocModel().toLowerCase();
         int bgColor = ContextCompat.getColor(mContext_FavoriteItems, R.color.app_background); // Default

@@ -29,6 +29,32 @@ public class DocumentInfoDialog extends Dialog {
         filePathText.setText(document.getFileUri_DocModel());
         fileSizeText.setText(Formatter.formatFileSize(context, document.getLength_DocModel()));
         lastModifiedText.setText(Utils.formatDateToHumanReadable(document.getLastModified_DocModel()));
+        
+        // Dynamic file extension badge
+        String fileName = document.getFileName_DocModel();
+        String ext = "";
+        if (fileName != null && fileName.contains(".")) {
+            ext = fileName.substring(fileName.lastIndexOf(".") + 1).toUpperCase();
+        }
+        if (ext.isEmpty()) {
+            ext = "FILE";
+        }
+        TextView extBadge = findViewById(R.id.tv_extension_badge);
+        if (extBadge != null) {
+            extBadge.setText(ext);
+        }
+
+        // Close button click listener
+        View btnClose = findViewById(R.id.btn_close);
+        if (btnClose != null) {
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                }
+            });
+        }
+
         findViewById(R.id.btn_confirm_sort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

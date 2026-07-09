@@ -7,18 +7,28 @@
     android:background="@color/white"
     android:visibility="gone">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_exit_edit"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="12dp"
-        android:padding="4dp"
-        android:scaleType="fitXY"
+    <!-- Premium Close X Button Container -->
+    <FrameLayout
+        android:id="@+id/fl_exit_edit_container"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_icon_white_circle"
+        android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_return_white"
-        app:tint="@color/black" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_exit_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="11dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_close_new"
+            app:tint="#111827" />
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title_edit"
@@ -30,24 +40,34 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="#111827"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/iv_save_edit"
-        app:layout_constraintStart_toEndOf="@+id/iv_exit_edit"
+        app:layout_constraintEnd_toStartOf="@+id/fl_save_edit_container"
+        app:layout_constraintStart_toEndOf="@+id/fl_exit_edit_container"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_save_edit"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="12dp"
-        android:padding="4dp"
-        android:scaleType="fitXY"
+    <!-- Premium Save Button Container -->
+    <FrameLayout
+        android:id="@+id/fl_save_edit_container"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_icon_white_circle"
+        android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_save"
-        app:tint="@color/black" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_save_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_save"
+            app:tint="#111827" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,16 +7,23 @@
     android:background="@drawable/bg_success_gradient"
     app:layoutDescription="@xml/img_success_scene">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/operateCloseImg"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:padding="16dp"
+    <!-- White Card Background (bodyBg) -->
+    <View
+        android:id="@+id/bodyBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/bg_premium_card"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_search_clear_home"
-        app:tint="@color/app_main_color" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Guideline for top layout constraints (compatibility) -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
         android:layout_width="0dp"
@@ -24,6 +31,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
+    <!-- Guideline for center constraints (compatibility) -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCenter"
         android:layout_width="0dp"
@@ -31,21 +39,58 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
+    <!-- Home Button (top-left inside card) -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/operateHomeImg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_dialog_circle_button"
+        android:elevation="6dp"
+        android:padding="10dp"
+        app:srcCompat="@drawable/ic_main_home"
+        app:tint="@color/app_main_color"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/bodyBg"
+        app:layout_constraintTop_toTopOf="@id/bodyBg" />
+
+    <!-- Close Button (top-right inside card) -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/operateCloseImg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_dialog_circle_button"
+        android:elevation="6dp"
+        android:padding="10dp"
+        app:srcCompat="@drawable/ic_close_x"
+        app:tint="#5E6C84"
+        app:layout_constraintEnd_toEndOf="@id/bodyBg"
+        app:layout_constraintTop_toTopOf="@id/bodyBg" />
+
+    <!-- Top Layout (checkmark, title, subtitle) -->
+
+    <!-- File Layout (containing preview container card, file name, path) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="@id/bodyBg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/bodyBg"
+        app:layout_constraintTop_toTopOf="@id/bodyBg">
 
+        <!-- Checkmark animation done bg -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/bgAnimView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/titleTv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,72 +98,80 @@
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/lottie_operate_done_bg" />
 
+        <!-- Checkmark animation done icon -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:layout_constraintBottom_toTopOf="@+id/titleTv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bgAnimView"
+            app:layout_constraintEnd_toEndOf="@+id/bgAnimView"
+            app:layout_constraintStart_toStartOf="@+id/bgAnimView"
+            app:layout_constraintTop_toTopOf="@+id/bgAnimView"
             app:lottie_autoPlay="false"
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/lottie_operate_done_icon"
             app:lottie_speed="1.2" />
 
+        <!-- Success Title -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleTv"
-            style="@style/FontSemiBold"
+            style="@style/FontBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Successfully!"
-            android:textColor="@color/app_main_color"
+            android:textColor="@color/app_text_black"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/animationView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/bgAnimView" />
 
-    <View
-        android:id="@+id/bodyBg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="-30dp"
-        android:background="@drawable/bg_premium_card"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineTop" />
+        <!-- Success Subtitle -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subTitleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="Your document has been processed."
+            android:textColor="@color/app_text_gray"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/fileLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="6dp"
+        android:layout_height="0dp"
+        android:elevation="5dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/optLayout"
         app:layout_constraintEnd_toEndOf="@id/bodyBg"
         app:layout_constraintStart_toStartOf="@id/bodyBg"
-        app:layout_constraintTop_toTopOf="@id/bodyBg">
+        app:layout_constraintTop_toBottomOf="@id/topLayout"
+        app:layout_constraintVertical_bias="0.5">
 
+        <!-- Preview Container Card -->
         <FrameLayout
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:background="@drawable/bg_premium_card"
-            android:padding="4dp">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="12dp"
+            android:background="@drawable/bg_preview_container"
+            android:padding="20dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
+                android:layout_gravity="center"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/previewImg"
@@ -128,95 +181,134 @@
                     app:srcCompat="@drawable/ic_pdf_no" />
             </androidx.cardview.widget.CardView>
 
+            <!-- Page count index badge -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/indexTv"
                 style="@style/FontSemiBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="8dp"
+                android:layout_margin="12dp"
                 android:background="@drawable/ip_bg_indexx_convert"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:elevation="4dp" />
         </FrameLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fileNameTv"
-            style="@style/FontBold"
+        <!-- File info row (horizontal layout with PDF icon on the left, filename and path on the right) -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="2"
-            android:textColor="@color/app_text_black"
-            android:textSize="18sp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginHorizontal="12dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/filePathTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ellipsize="middle"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/app_text_gray"
-            android:textSize="13sp" />
-            
+            <!-- Circular PDF Icon Background -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_dialog_circle_button"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_document_pdf" />
+
+            <!-- Name & Path layout -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fileNameTv"
+                    style="@style/FontBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/app_text_black"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/filePathTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="middle"
+                    android:fontFamily="@font/inter_regular"
+                    android:maxLines="1"
+                    android:textColor="@color/app_text_gray"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Hidden status indicator -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/resultTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:gravity="center"
             android:textColor="@color/app_main_color"
-            android:textSize="14sp"
-            android:fontFamily="@font/roboto_medium"
+            android:textSize="13sp"
+            android:fontFamily="@font/inter_medium"
             android:visibility="gone" />
 
     </LinearLayout>
 
+    <!-- Options Layout (buttons) -->
     <LinearLayout
         android:id="@+id/optLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="6dp"
+        android:elevation="5dp"
         android:orientation="vertical"
-        android:paddingHorizontal="40dp"
-        android:paddingBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="36dp"
+        android:paddingBottom="24dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="@id/bodyBg"
         app:layout_constraintEnd_toEndOf="@id/bodyBg"
-        app:layout_constraintStart_toStartOf="@id/bodyBg"
-        app:layout_constraintTop_toBottomOf="@+id/fileLayout"
-        app:layout_constraintVertical_bias="0.3">
+        app:layout_constraintStart_toStartOf="@id/bodyBg">
 
+        <!-- Share Button with upload icon -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/shareTv"
             style="@style/FontSemiBold"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="50dp"
             android:background="@drawable/bg_premium_btn_primary"
             android:gravity="center"
             android:text="@string/action_share"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:textAllCaps="true" />
+            android:textSize="16sp"
+            app:textAllCaps="true"
+            android:drawableStart="@drawable/ic_share_up"
+            android:drawableLeft="@drawable/ic_share_up"
+            android:drawablePadding="8dp"
+            app:tint="@color/white" />
 
+        <!-- Open Button with open icon -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/openTv"
             style="@style/FontSemiBold"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/bg_premium_btn_secondary"
             android:gravity="center"
             android:text="@string/action_open"
             android:textColor="@color/app_main_color"
-            android:textSize="18sp"
-            app:textAllCaps="true" />
+            android:textSize="16sp"
+            app:textAllCaps="true"
+            android:drawableStart="@drawable/ic_open_in_new"
+            android:drawableLeft="@drawable/ic_open_in_new"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/app_main_color" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

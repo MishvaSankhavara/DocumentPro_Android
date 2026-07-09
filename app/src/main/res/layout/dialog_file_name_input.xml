@@ -5,64 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginLeft="24dp"
-    android:layout_marginRight="24dp"
-    android:background="@drawable/bg_dialog_rounded">
+    android:layout_marginHorizontal="24dp"
+    android:background="@drawable/bg_dialog_confirm_card"
+    android:padding="24dp">
 
+    <!-- Dialog Title -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/inter_medium"
         android:gravity="center"
         android:text="@string/dialog_file_name_title"
         android:textColor="@color/app_primary_text"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Edit Text Container (with Custom Background) -->
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_name"
         style="@style/MyEditTextStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_blue_edit"
-        android:gravity="left|center_vertical|center_horizontal|center|start"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_dialog_input_field"
+        android:gravity="start|center_vertical"
         android:inputType="text"
-        android:paddingStart="12dp"
-        android:paddingEnd="40dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="44dp"
         android:textAlignment="viewStart"
         android:textColor="@color/app_primary_text"
         android:textColorHint="#8089909c"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
+    <!-- Clear Text Icon -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_clear"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="12dp"
         android:background="?attr/actionBarItemBackground"
+        android:contentDescription="@null"
         android:visibility="visible"
+        app:tint="#89909c"
         app:layout_constraintBottom_toBottomOf="@+id/et_name"
         app:layout_constraintEnd_toEndOf="@+id/et_name"
         app:layout_constraintTop_toTopOf="@+id/et_name"
         app:srcCompat="@drawable/ic_close" />
 
+    <!-- Error Container -->
     <LinearLayout
         android:id="@+id/ll_error_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="invisible"
@@ -72,59 +74,63 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="16dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_prompt" />
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/ic_prompt"
+            app:tint="#E65100" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_error_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/roboto_medium"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/inter_medium"
             android:gravity="start"
             android:textAlignment="viewStart"
-            android:textColor="#e02020"
+            android:textColor="#E65100"
             android:textSize="12sp" />
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/btn_cancel"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_btn_nagative"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:text="@string/action_cancel"
-        android:textColor="@color/app_negative_text"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_confirm"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- Action Buttons Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/ll_error_container"
-        app:textAllCaps="true" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/btn_confirm"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_button_action_round"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:text="@string/action_ok"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_cancel"
-        app:layout_constraintTop_toTopOf="@+id/btn_cancel"
-        app:textAllCaps="true" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cancel" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Cancel Button -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_dialog_btn_secondary"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/action_cancel"
+            android:textColor="#5E6C84"
+            android:textSize="16sp" />
+
+        <!-- Confirm Button -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_dialog_btn_primary"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/action_ok"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

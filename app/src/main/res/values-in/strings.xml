@@ -380,4 +380,12 @@
     <string name="dialog_exit_feedback_title">Apakah Anda puas dengan Pembaca PDF?</string>
     <string name="dialog_exit_feedback_message">Jika Anda mengalami masalah saat membaca file, klik di sini untuk memberi kami umpan balik</string>
     <string name="action_exit_app">Ketuk di sini untuk keluar dari aplikasi</string>
+
+    <string name="onboarding_title_editing_tools">Beberapa Alat Pengeditan</string>
+    <string name="onboarding_title_all_in_one">Dokumen Serba Ada</string>
+    <string name="onboarding_title_images_to_pdf">Gambar ke PDF</string>
+    <string name="onboarding_description_modify_text">Lihat, kelola, dan atur semua dokumen Anda di satu tempat. PDF, Word, Excel, PPT, dan lainnya.</string>
+    <string name="onboarding_description_streamline">Konversikan gambar Anda ke PDF berkualitas tinggi hanya dalam satu ketukan. Cepat, mudah, dan aman.</string>
+    <string name="onboarding_description_convert_picture">Konversikan gambar apa pun menjadi PDF dengan satu ketukan</string>
+
 </resources>

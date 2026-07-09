@@ -30,6 +30,7 @@ import docreader.aidoc.pdfreader.clickListener.MoreClickListener;
 import docreader.aidoc.pdfreader.model_reader.DocumentModel;
 import docreader.aidoc.pdfreader.utils.Utils;
 import docreader.aidoc.pdfreader.viewmodel.DataSingletonFavorite;
+import docreader.aidoc.pdfreader.viewmodel.DataSingletonRecent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,11 +42,18 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
     private final ArrayList<DocumentModel> arrayList_RecentFiles;
     private final Activity mContext_RecentFiles;
 
+    private boolean isLimited = false;
+
     public RecentFilesAdapter(Activity mContext, DocClickListener listener) {
+        this(mContext, listener, false);
+    }
+
+    public RecentFilesAdapter(Activity mContext, DocClickListener listener, boolean isLimited) {
         this.mContext_RecentFiles = mContext;
         this.listener_RecentFiles = listener;
         this.databaseHelper_RecentFiles = DatabaseHelper.getInstance(mContext);
         this.arrayList_RecentFiles = new ArrayList<>();
+        this.isLimited = isLimited;
         refreshData();
     }
 
@@ -60,6 +68,9 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
         if (arrayList_RecentFiles == null) {
             return 0;
         } else {
+            if (isLimited) {
+                return Math.min(arrayList_RecentFiles.size(), 3);
+            }
             return arrayList_RecentFiles.size();
         }
     }
@@ -75,7 +86,7 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
 
         holder.tvFileSize_RecentFiles.setText(Formatter.formatFileSize(mContext_RecentFiles, document.getLength_DocModel()));
 
-        Glide.with(mContext_RecentFiles).load(document.getSrcImage_DocModel()).into(holder.imgIcon_RecentFiles);
+        holder.imgIcon_RecentFiles.setImageResource(document.getSrcImage_DocModel());
 
         String fileName = document.getFileName_DocModel().toLowerCase();
         int bgColor = ContextCompat.getColor(mContext_RecentFiles, R.color.app_background); // Default
@@ -175,6 +186,8 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
                         if (databaseHelper_RecentFiles.isRecent_DatabaseHelper(document.getFileUri_DocModel())) {
 
                             databaseHelper_RecentFiles.removeRecentDocument_DatabaseHelper(document.getFileUri_DocModel());
+
+                            DataSingletonRecent.getInstance().removeFromRecent(document);
                         }
 
                         int position = holder.getAdapterPosition();
@@ -202,6 +215,8 @@ public class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.
                         notifyItemRemoved(holder.getAdapterPosition());
 
                         databaseHelper_RecentFiles.removeRecentDocument_DatabaseHelper(document.getFileUri_DocModel());
+
+                        DataSingletonRecent.getInstance().removeFromRecent(document);
 
                         if (arrayList_RecentFiles.isEmpty()) {
                             notifyDataSetChanged();

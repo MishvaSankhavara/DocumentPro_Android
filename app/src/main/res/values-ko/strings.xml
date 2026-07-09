@@ -378,4 +378,12 @@
     <string name="dialog_exit_feedback_title">PDF 리더에 만족하시나요?</string>
     <string name="dialog_exit_feedback_message">파일을 읽는 동안 문제가 있으시면 피드백을 주시기 바랍니다</string>
     <string name="action_exit_app">앱을 종료하려면 여기를 탭하세요</string>
+
+    <string name="onboarding_title_editing_tools">여러 편집 도구</string>
+    <string name="onboarding_title_all_in_one">올인원 문서</string>
+    <string name="onboarding_title_images_to_pdf">이미지를 PDF로</string>
+    <string name="onboarding_description_modify_text">모든 문서를 한 곳에서 보고, 관리하고, 정리하세요. PDF, Word, Excel, PPT 등을 지원합니다.</string>
+    <string name="onboarding_description_streamline">한 번의 탭으로 이미지를 고품질 PDF로 변환하세요. 빠르고 쉽고 안전합니다.</string>
+    <string name="onboarding_description_convert_picture">한 번의 탭으로 모든 사진을 PDF로 변환</string>
+
 </resources>

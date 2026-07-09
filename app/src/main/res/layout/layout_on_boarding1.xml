@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/inter_bold"
                 android:gravity="start"
                 android:text="@string/onboarding_title_editing_tools"
                 android:textColor="@color/app_text_black"
@@ -40,14 +40,12 @@
                 android:id="@+id/subtitle_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter_medium"
                 android:gravity="start"
                 android:text="@string/onboarding_description_modify_text"
                 android:textColor="@color/app_text_gray"
                 android:textSize="15sp" />
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

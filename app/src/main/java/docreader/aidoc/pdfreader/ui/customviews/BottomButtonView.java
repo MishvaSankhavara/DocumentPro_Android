@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +40,24 @@ public class BottomButtonView extends LinearLayout {
         }
         setClickable(true);
         setFocusable(true);
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+        View circleBg = findViewById(R.id.fl_circle_bg);
+        View img = findViewById(R.id.imgButton);
+        View tv = findViewById(R.id.tvButton);
+        
+        if (circleBg != null) {
+            circleBg.setSelected(selected);
+        }
+        if (img != null) {
+            img.setSelected(selected);
+        }
+        if (tv != null) {
+            tv.setSelected(selected);
+        }
     }
 
     public void setEnable(boolean enable) {

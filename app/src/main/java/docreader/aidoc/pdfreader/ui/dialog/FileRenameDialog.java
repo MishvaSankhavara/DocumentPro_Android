@@ -33,6 +33,7 @@ public class FileRenameDialog extends Dialog {
         tvErrorMessage = findViewById(R.id.tv_error_message);
         etFileName.setText(oldName);
         etFileName.setSelectAllOnFocus(true);
+        findViewById(R.id.iv_clear).setOnClickListener(view -> etFileName.setText(""));
         findViewById(R.id.btn_cancel).setOnClickListener(view -> dismiss());
         findViewById(R.id.btn_confirm).setOnClickListener(view -> {
             if (TextUtils.equals(oldName, etFileName.getText().toString())) {

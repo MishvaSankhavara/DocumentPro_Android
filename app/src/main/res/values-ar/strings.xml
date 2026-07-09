@@ -388,4 +388,12 @@
     <string name="dialog_exit_feedback_title">هل أنت راضٍ عن قارئ PDF؟</string>
     <string name="dialog_exit_feedback_message">إذا كنت تواجه مشكلة أثناء قراءة الملفات، انقر لتزويدنا بملاحظاتك</string>
     <string name="action_exit_app">انقر هنا للخروج من التطبيق</string>
+
+    <string name="onboarding_title_editing_tools">أدوات تحرير متعددة</string>
+    <string name="onboarding_title_all_in_one">مستندات الكل في واحد</string>
+    <string name="onboarding_title_images_to_pdf">الصور إلى PDF</string>
+    <string name="onboarding_description_modify_text">عرض وإدارة وتنظيم جميع مستنداتك في مكان واحد. PDF وWord وExcel وPPT والمزيد.</string>
+    <string name="onboarding_description_streamline">قم بتحويل صورك إلى ملف PDF عالي الجودة بنقرة واحدة فقط. سريع وسهل وآمن.</string>
+    <string name="onboarding_description_convert_picture">قم بتحويل أي صورة إلى ملف PDF بنقرة واحدة</string>
+
 </resources>

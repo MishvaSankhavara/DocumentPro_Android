@@ -2,109 +2,118 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="66dp"
-    android:background="@drawable/ripple_item_select">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="2dp"
+    android:background="@drawable/ripple_item_select"
+    android:paddingVertical="12dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="14dp"
-        android:scaleType="fitXY"
+    <!-- Card Wrapper for File Icon -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_icon"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_type_excel" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_album_pdf" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- File Name -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="90dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto_medium"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="middle"
+        android:fontFamily="@font/inter_medium"
         android:gravity="start"
         android:includeFontPadding="false"
         android:lines="1"
         android:text="@string/document_all"
         android:textAlignment="viewStart"
         android:textColor="@color/app_primary_text"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvFileDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/ll_metadata"
+        app:layout_constraintEnd_toStartOf="@+id/iv_select"
+        app:layout_constraintStart_toEndOf="@+id/cv_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvFileDate"
-        style="@style/FontRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ellipsize="end"
-        android:gravity="start"
-        android:includeFontPadding="false"
-        android:text="24-09-2018"
-        android:textAlignment="viewStart"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
-    <ImageView
-        android:id="@+id/ivDot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="5dp"
-        android:src="@drawable/ic_separator"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
-        app:layout_constraintStart_toEndOf="@id/tvFileDate"
-        app:layout_constraintTop_toTopOf="@id/tvFileDate" />
-
-    <TextView
-        android:id="@+id/tvFileSize"
-        style="@style/FontRegular"
+    <!-- Metadata Row -->
+    <LinearLayout
+        android:id="@+id/ll_metadata"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:maxLines="1"
-        android:text="24KB"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/tvFileDate"
-        app:layout_constraintEnd_toStartOf="@id/iv_select"
-        app:layout_constraintStart_toEndOf="@id/ivDot"
-        app:layout_constraintTop_toTopOf="@id/tvFileDate" />
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_select"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name">
 
+        <TextView
+            android:id="@+id/tvFileSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="24KB"
+            android:textColor="@color/app_text_gray"
+            android:textSize="14sp" />
 
+        <ImageView
+            android:id="@+id/ivDot"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginHorizontal="8dp"
+            android:src="@drawable/shape_dot_separator" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFileDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="24-09-2018"
+            android:textColor="@color/app_text_gray"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Selection Checkbox -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_select"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="9dp"
-        android:padding="3dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_check"
-        android:visibility="visible"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_un_check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!-- Divider Line -->
     <View
         android:id="@+id/divider_line"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginEnd="3dp"
         android:background="@color/app_divider_two"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/iv_select"
-        app:layout_constraintStart_toStartOf="@+id/tv_name" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

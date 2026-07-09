@@ -368,4 +368,12 @@
     <string name="dialog_exit_feedback_message">หากคุณมีปัญหาในการอ่านไฟล์ คลิกที่นี่เพื่อให้เราทราบความคิดเห็น</string>
     <string name="action_exit_app">แตะที่นี่เพื่อออกจากแอปพลิเคชัน</string>
 
+
+    <string name="onboarding_title_editing_tools">เครื่องมือแก้ไขที่หลากหลาย</string>
+    <string name="onboarding_title_all_in_one">เอกสารครบวงจร</string>
+    <string name="onboarding_title_images_to_pdf">รูปภาพเป็น PDF</string>
+    <string name="onboarding_description_modify_text">ดู จัดการ และจัดระเบียบเอกสารทั้งหมดของคุณในที่เดียว ทั้ง PDF, Word, Excel, PPT และอื่นๆ</string>
+    <string name="onboarding_description_streamline">แปลงรูปภาพของคุณเป็น PDF คุณภาพสูงด้วยการแตะเพียงครั้งเดียว รวดเร็ว ง่าย และปลอดภัย</string>
+    <string name="onboarding_description_convert_picture">แปลงรูปภาพใดๆ เป็น PDF ด้วยการแตะเพียงครั้งเดียว</string>
+
 </resources>

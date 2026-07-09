@@ -100,5 +100,6 @@ public class FragmentExcel extends Fragment implements DocClickListener {
 
     @Override
     public void onDocClick(DocumentModel document) {
+        Utils.openFile(activityContext, document);
     }
 }

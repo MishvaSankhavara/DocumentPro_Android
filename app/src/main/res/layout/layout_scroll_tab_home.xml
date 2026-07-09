@@ -35,7 +35,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="16dp"
         android:background="?attr/selectableItemBackground"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/inter_medium"
         android:text="@string/action_see_all"
         android:textColor="@color/app_text_blue"
         android:textSize="15sp"

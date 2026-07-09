@@ -75,7 +75,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                          int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_document, parent, false);
+                .inflate(R.layout.item_list_pdf, parent, false);
 
         return new ViewHolder(view);
     }
@@ -128,9 +128,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                             mContext_FileList,
                             document_FileList.getLength_DocModel()));
 
-            Glide.with(mContext_FileList)
-                    .load(document_FileList.getSrcImage_DocModel())
-                    .into(imgIcon_FileList);
+            imgIcon_FileList.setImageResource(document_FileList.getSrcImage_DocModel());
 
             if (databaseHelper_FileList.isStared_DatabaseHelper(
                     document_FileList.getFileUri_DocModel())) {

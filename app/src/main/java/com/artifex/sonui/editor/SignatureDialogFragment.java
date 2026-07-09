@@ -1,13 +1,11 @@
 package com.artifex.sonui.editor;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +30,13 @@ public class SignatureDialogFragment extends DialogFragment {
         this.listener = listener;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Wrap the dialog context in the Material Components dialog theme to prevent card inflation crash
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.SortDialogTheme);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -39,15 +44,36 @@ public class SignatureDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_signature_capture, container, false);
 
         signatureView = view.findViewById(R.id.signature_view);
+        View placeholder = view.findViewById(R.id.ll_signature_placeholder);
         View btnClear = view.findViewById(R.id.btn_clear);
+        View btnUndo = view.findViewById(R.id.btn_undo);
         View btnCancel = view.findViewById(R.id.btn_cancel);
         View btnDone = view.findViewById(R.id.btn_done);
+        View ivClose = view.findViewById(R.id.iv_close);
 
-        btnClear.setOnClickListener(v -> signatureView.clear());
+        // Hide placeholder when drawing starts
+        signatureView.setOnDrawStartListener(() -> placeholder.setVisibility(View.GONE));
+
+        // Clear drawing and show placeholder again
+        btnClear.setOnClickListener(v -> {
+            signatureView.clear();
+            placeholder.setVisibility(View.VISIBLE);
+        });
+
+        // Undo last stroke, show placeholder if no strokes are left
+        btnUndo.setOnClickListener(v -> {
+            signatureView.undo();
+            if (signatureView.isSignatureEmpty()) {
+                placeholder.setVisibility(View.VISIBLE);
+            }
+        });
+
+        ivClose.setOnClickListener(v -> dismiss());
         btnCancel.setOnClickListener(v -> dismiss());
+        
         btnDone.setOnClickListener(v -> {
             Bitmap bitmap = signatureView.getSignatureBitmap();
-            if (bitmap != null) {
+            if (bitmap != null && !signatureView.isSignatureEmpty()) {
                 String path = saveSignatureTemp(bitmap);
                 if (path != null && listener != null) {
                     listener.onSignatureCaptured(path);

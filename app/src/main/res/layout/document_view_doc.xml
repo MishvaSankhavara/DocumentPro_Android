@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="68dp"
         android:background="@color/white"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
                     android:id="@+id/doc_note_editor_author"
                     style="@style/sodk_editor_note_editor_textview_style"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/inter_bold"
                     android:text=""
                     android:textSize="24.0sp" />
 
@@ -74,7 +74,7 @@
                     android:id="@+id/doc_note_editor_date"
                     style="@style/sodk_editor_note_editor_textview_style"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:text=""
                     android:textSize="13sp" />
 
@@ -82,7 +82,7 @@
                     android:id="@+id/doc_note_editor_text"
                     style="@style/sodk_editor_note_editor_textview_style"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/inter_medium"
                     android:gravity="top"
                     android:imeOptions="flagNoFullscreen"
                     android:minLines="6"
@@ -106,7 +106,7 @@
                 android:paddingBottom="7dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btn_full_screen"
@@ -162,7 +162,7 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@id/bottom_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bg_tab_home" />
+        app:srcCompat="@android:color/transparent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_container"
@@ -175,7 +175,7 @@
         <include
             layout="@layout/dialog_document_bottom_view"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="68dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -9,12 +9,23 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignatureView extends View {
     private Paint paint = new Paint();
-    private Path path = new Path();
-    private Bitmap bitmap;
-    private Canvas canvas;
+    private List<Path> paths = new ArrayList<>();
+    private Path currentPath;
+
+    public interface OnDrawStartListener {
+        void onDrawStart();
+    }
+    
+    private OnDrawStartListener onDrawStartListener;
+
+    public void setOnDrawStartListener(OnDrawStartListener listener) {
+        this.onDrawStartListener = listener;
+    }
 
     public SignatureView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -27,18 +38,14 @@ public class SignatureView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (w > 0 && h > 0) {
-            bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-            canvas = new Canvas(bitmap);
-        }
-    }
-
-    @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        canvas.drawPath(path, paint);
+        super.onDraw(canvas);
+        for (Path p : paths) {
+            canvas.drawPath(p, paint);
+        }
+        if (currentPath != null) {
+            canvas.drawPath(currentPath, paint);
+        }
     }
 
     @Override
@@ -48,14 +55,24 @@ public class SignatureView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                path.moveTo(x, y);
+                if (onDrawStartListener != null) {
+                    onDrawStartListener.onDrawStart();
+                }
+                currentPath = new Path();
+                currentPath.moveTo(x, y);
+                invalidate();
                 return true;
             case MotionEvent.ACTION_MOVE:
-                path.lineTo(x, y);
+                if (currentPath != null) {
+                    currentPath.lineTo(x, y);
+                }
                 break;
             case MotionEvent.ACTION_UP:
-                canvas.drawPath(path, paint);
-                path.reset();
+                if (currentPath != null) {
+                    currentPath.lineTo(x, y);
+                    paths.add(currentPath);
+                    currentPath = null;
+                }
                 break;
             default:
                 return false;
@@ -66,19 +83,32 @@ public class SignatureView extends View {
     }
 
     public void clear() {
-        if (bitmap != null) {
-            bitmap.eraseColor(Color.TRANSPARENT);
+        paths.clear();
+        currentPath = null;
+        invalidate();
+    }
+
+    public void undo() {
+        if (!paths.isEmpty()) {
+            paths.remove(paths.size() - 1);
             invalidate();
         }
     }
 
     public Bitmap getSignatureBitmap() {
+        if (getWidth() <= 0 || getHeight() <= 0) {
+            return null;
+        }
+        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        bitmap.eraseColor(Color.TRANSPARENT);
+        for (Path p : paths) {
+            canvas.drawPath(p, paint);
+        }
         return bitmap;
     }
 
     public boolean isSignatureEmpty() {
-        // Simple check to see if anything was drawn.
-        // For a more robust check, you could scan the bitmap pixels.
-        return false;
+        return paths.isEmpty();
     }
 }

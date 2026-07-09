@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Files & Settings tab icon: #2563EB when selected, #64748B otherwise -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:color="#2563EB" />
+    <item android:color="#64748B" />
+</selector>

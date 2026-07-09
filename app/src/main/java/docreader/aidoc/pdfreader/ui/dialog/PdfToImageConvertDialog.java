@@ -29,6 +29,7 @@ public class PdfToImageConvertDialog extends Dialog {
     private TextView btnViewImages;
     private TextView tvProgressPercent;
     private SharePdfAsImageActivity activityContext;
+    private CopyImage copyImageTask;
 
     public PdfToImageConvertDialog(@NonNull SharePdfAsImageActivity context, ArrayList<PDFPageModel> arrayList) {
         super(context);
@@ -38,10 +39,9 @@ public class PdfToImageConvertDialog extends Dialog {
         setCanceledOnTouchOutside(false);
         setCancelable(false);
         initializeViews();
-
         initializeData();
-        new CopyImage(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
+        copyImageTask = new CopyImage(this);
+        copyImageTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private void initializeViews() {
@@ -53,11 +53,37 @@ public class PdfToImageConvertDialog extends Dialog {
     }
 
     private void initializeData() {
-
         tvDescription.setVisibility(View.VISIBLE);
         btnViewImages.setVisibility(View.GONE);
         btnCancelAction.setVisibility(View.VISIBLE);
+        btnCancelAction.setOnClickListener(view -> {
+            if (copyImageTask != null) {
+                copyImageTask.cancel(true);
+            }
+            dismiss();
+        });
+    }
 
+    /** Called on the main thread once the export task completes. */
+    private void showCompletionState() {
+        // Re-enable dismissal by touch
+        setCancelable(true);
+        setCanceledOnTouchOutside(true);
+
+        // Show "View files" button
+        btnViewImages.setVisibility(View.VISIBLE);
+        btnViewImages.setOnClickListener(view -> {
+            dismiss();
+            Intent intent = new Intent(activityContext, ResultViewerActivity.class);
+            intent.putExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 5);
+            activityContext.startActivity(intent);
+            activityContext.finish();
+        });
+
+        // Change Cancel → OK to dismiss only
+        btnCancelAction.setVisibility(View.VISIBLE);
+        btnCancelAction.setText(android.R.string.ok);
+        btnCancelAction.setOnClickListener(view -> dismiss());
     }
 
     private static class CopyImage extends AsyncTask<Void, Integer, Void> {
@@ -66,39 +92,28 @@ public class PdfToImageConvertDialog extends Dialog {
 
         public CopyImage(PdfToImageConvertDialog progressSaveDialog) {
             this.weakReference = new WeakReference<>(progressSaveDialog);
-
-            this.weakReference.get().btnCancelAction.setOnClickListener(view -> {
-                CopyImage.this.cancel(true);
-                weakReference.get().dismiss();
-            });
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            weakReference.get().activityContext.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    weakReference.get().progressBarView.setMax(weakReference.get().pdfPageList.size());
+            PdfToImageConvertDialog dialog = weakReference.get();
+            if (dialog == null) return null;
 
-                }
-            });
+            dialog.activityContext.runOnUiThread(() ->
+                    dialog.progressBarView.setMax(dialog.pdfPageList.size()));
 
             File pathFolder = new File(AppGlobalConstants.DIRECTORY_IMAGES);
             if (!pathFolder.exists()) {
                 pathFolder.mkdirs();
             }
 
-            for (int i = 0; i < weakReference.get().pdfPageList.size(); i++) {
+            for (int i = 0; i < dialog.pdfPageList.size(); i++) {
+                if (isCancelled()) break;
                 String fileName = Utils
-                        .getFileNameFromUri(weakReference.get().pdfPageList.get(i).getThumbnailUri_PDFPageModel());
+                        .getFileNameFromUri(dialog.pdfPageList.get(i).getThumbnailUri_PDFPageModel());
                 String pathCopy = pathFolder + "/" + fileName;
-                Utils.copyFile(weakReference.get().activityContext,
-                        weakReference.get().pdfPageList.get(i).getThumbnailUri_PDFPageModel(),
+                Utils.copyFile(dialog.activityContext,
+                        dialog.pdfPageList.get(i).getThumbnailUri_PDFPageModel(),
                         pathCopy);
                 publishProgress(i + 1);
             }
@@ -108,34 +123,31 @@ public class PdfToImageConvertDialog extends Dialog {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
-            weakReference.get().btnViewImages.setVisibility(View.VISIBLE);
-            weakReference.get().btnCancelAction.setVisibility(View.GONE);
+            PdfToImageConvertDialog dialog = weakReference.get();
+            if (dialog == null || !dialog.isShowing()) return;
 
-            weakReference.get().btnViewImages.setOnClickListener(view -> {
-                Intent intent = new Intent(weakReference.get().activityContext, ResultViewerActivity.class);
-                intent.putExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 5);
-                weakReference.get().activityContext.startActivity(intent);
-                weakReference.get().dismiss();
-            });
-            weakReference.get().setCancelable(true);
-            weakReference.get().setCanceledOnTouchOutside(true);
-
+            // Run on UI thread to guarantee view updates and dismiss work correctly
+            dialog.activityContext.runOnUiThread(dialog::showCompletionState);
         }
 
         @SuppressLint("StringFormatInvalid")
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            int i3 = ((int) (((float) values[0]) * 100.0f)) / weakReference.get().pdfPageList.size();
-            weakReference.get().tvDescription
-                    .setText(weakReference.get().activityContext.getResources().getString(
-                            R.string.message_save_image_progress,
-                            String.valueOf(values[0]), String.valueOf(weakReference.get().pdfPageList.size())));
-            weakReference.get().tvProgressPercent.setText(
-                    weakReference.get().activityContext.getResources().getString(R.string.format_percent_value,
-                            String.valueOf(i3)));
-            weakReference.get().progressBarView.setProgress(values[0]);
+            PdfToImageConvertDialog dialog = weakReference.get();
+            if (dialog == null) return;
 
+            int percent = ((int) (((float) values[0]) * 100.0f)) / dialog.pdfPageList.size();
+            dialog.tvDescription.setText(
+                    dialog.activityContext.getResources().getString(
+                            R.string.message_save_image_progress,
+                            String.valueOf(values[0]),
+                            String.valueOf(dialog.pdfPageList.size())));
+            dialog.tvProgressPercent.setText(
+                    dialog.activityContext.getResources().getString(
+                            R.string.format_percent_value,
+                            String.valueOf(percent)));
+            dialog.progressBarView.setProgress(values[0]);
         }
     }
 

@@ -220,6 +220,20 @@ public class ProcessingTaskActivity extends AppCompatActivity {
         });
         btnShareResult.setOnClickListener(
                 v -> Utils.shareFile(ProcessingTaskActivity.this, new File(pdfModelFinal.getFileUri_PDFModel())));
+
+        // Bind and handle new Home button click listener
+        View btnHome = findViewById(R.id.operateHomeImg);
+        if (btnHome != null) {
+            btnHome.setOnClickListener(v -> navigateToMainTools());
+        }
+    }
+
+    private void navigateToMainTools() {
+        Intent intent = new Intent(this, docreader.aidoc.pdfreader.ui.activities.MainActivity.class);
+        intent.putExtra("EXTRA_START_TAB", 1); // 1 = Tools tab
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 
     @Override

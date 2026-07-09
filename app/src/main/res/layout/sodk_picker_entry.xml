@@ -19,7 +19,7 @@
             android:id="@id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/inter_regular"
             android:paddingStart="@dimen/_15sdp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
@@ -70,7 +70,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_share_menu" />
+                    android:src="@drawable/ic_share" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_share_menu" />
+                    android:src="@drawable/ic_share" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_share_menu" />
+                    android:src="@drawable/ic_share" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
                     android:clickable="false"
                     android:padding="@dimen/sodk_editor_control_icon_padding"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_share_menu" />
+                    android:src="@drawable/ic_share" />
 
                 <com.artifex.sonui.editor.SOTextView
                     android:layout_width="wrap_content"

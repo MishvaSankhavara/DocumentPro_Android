@@ -55,57 +55,30 @@ public class FragmentTools extends Fragment {
     }
 
     private void initViews(View view) {
-        ArrayList<ToolsModel> allTools = AppGlobalConstants.setToolsList();
-
         view.findViewById(R.id.iv_back).setOnClickListener(v -> {
             if (activityContext != null) {
                 activityContext.onBackPressed();
             }
         });
 
-        ArrayList<ToolsModel> pdfToolsList = new ArrayList<>();
-        ArrayList<ToolsModel> securityToolsList = new ArrayList<>();
-        ArrayList<ToolsModel> convertEditorList = new ArrayList<>();
-
-        for (ToolsModel tool : allTools) {
-            int type = tool.getToolType_toolModel();
-            if (type == AppGlobalConstants.TOOL_YOUR_PDF ||
-                    type == AppGlobalConstants.TOOL_ID_MERGE ||
-                    type == AppGlobalConstants.TOOL_ID_COMPRESS ||
-                    type == AppGlobalConstants.TOOL_ID_SPLIT ||
-                    type == AppGlobalConstants.TOOL_ID_PRINT) {
-                pdfToolsList.add(tool);
-            } else if (type == AppGlobalConstants.TOOL_ID_LOCK_PDF ||
-                    type == AppGlobalConstants.TOOL_ID_UNLOCK_PDF) {
-                securityToolsList.add(tool);
-            } else if (type == AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF ||
-                    type == AppGlobalConstants.TOOL_PDF_TO_PHOTO) {
-                convertEditorList.add(tool);
-            }
-        }
-
-        setupRecyclerView(view.findViewById(R.id.rv_pdf_tools), pdfToolsList);
-        setupRecyclerView(view.findViewById(R.id.rv_security), securityToolsList);
-        setupRecyclerView(view.findViewById(R.id.rv_convert_editor), convertEditorList);
+        view.findViewById(R.id.card_view_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_YOUR_PDF));
+        view.findViewById(R.id.card_merge_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_ID_MERGE));
+        view.findViewById(R.id.card_compress_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_ID_COMPRESS));
+        view.findViewById(R.id.card_print_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_ID_PRINT));
+        view.findViewById(R.id.card_split_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_ID_SPLIT));
+        view.findViewById(R.id.card_lock_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_ID_LOCK_PDF));
+        view.findViewById(R.id.card_unlock_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_ID_UNLOCK_PDF));
+        view.findViewById(R.id.card_image_to_pdf).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF));
+        view.findViewById(R.id.card_save_as_image).setOnClickListener(v -> executeToolWithPermissionCheck(AppGlobalConstants.TOOL_PDF_TO_PHOTO));
     }
 
-    private void setupRecyclerView(RecyclerView recyclerView, ArrayList<ToolsModel> toolsList) {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3, RecyclerView.VERTICAL, false));
-        DocumentToolAdapter adapter = new DocumentToolAdapter(requireActivity(), toolsList, new OnToolTapListener() {
-            @Override
-            public void onToolTap(ToolsModel toolType) {
-                selectedTool = toolType;
-                if (activityContext == null)
-                    return;
-                if (Utils.checkPermission(activityContext)) {
-                    executeTool(selectedTool.getToolType_toolModel());
-                } else {
-                    Utils.showPermissionDialog(activityContext);
-                }
-            }
-        });
-        recyclerView.setAdapter(adapter);
+    private void executeToolWithPermissionCheck(int toolType) {
+        if (activityContext == null) return;
+        if (Utils.checkPermission(activityContext)) {
+            executeTool(toolType);
+        } else {
+            Utils.showPermissionDialog(activityContext);
+        }
     }
 
     private void executeTool(int toolType) {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <!-- Selected state: Solid Blue Circle -->
+        <shape android:shape="oval">
+            <solid android:color="@color/selected_tab_blue" />
+        </shape>
+    </item>
+    <item>
+        <!-- Unselected state: Solid White Circle with soft grey border -->
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+            <stroke
+                android:width="1.2dp"
+                android:color="#E2E8F0" />
+        </shape>
+    </item>
+</selector>

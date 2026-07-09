@@ -1,4 +1,21 @@
 <resources>
+    <string name="sort_by_title">Sort by</string>
+    <string name="sort_option_date_modified">Date modified</string>
+    <string name="sort_desc_newest_first">Newest first</string>
+    <string name="sort_option_name_az">Name (A to Z)</string>
+    <string name="sort_desc_alphabetical">Alphabetical order</string>
+    <string name="sort_option_name_za">Name (Z to A)</string>
+    <string name="sort_desc_reverse_alphabetical">Reverse alphabetical order</string>
+    <string name="sort_option_size_large_small">File size (Large to Small)</string>
+    <string name="sort_desc_largest_first">Largest first</string>
+    <string name="sort_option_size_small_large">File size (Small to Large)</string>
+    <string name="sort_desc_smallest_first">Smallest first</string>
+    <string name="sort_option_date_created">Date created</string>
+    <string name="sort_desc_oldest_first">Oldest first</string>
+    <string name="desc_file_manager">Manage and organize your files</string>
+    <string name="desc_choose_preferred_language">Choose your preferred language</string>
+    <string name="label_help_support">Help &amp; Support</string>
+    <string name="desc_get_help_support">Get help and contact us</string>
     <string name="label_display">Display</string>
     <string name="label_support">Support</string>
     <string name="desc_share_with_friends">Share with friends</string>
@@ -60,6 +77,7 @@
     <string name="document_ppt">PPT</string>
     <string name="document_pdf">PDF</string>
     <string name="document_txt">TXT</string>
+    <string name="document_directories">Directories</string>
 
     <string name="document_all">All</string>
 
@@ -106,9 +124,17 @@
     <string name="info_size">Size</string>
     <string name="info_path">Path</string>
 
-    <string name="splash_title">AI DOC READER</string>
-    <string name="splash_subtitle">Scan, Organize &amp; Share Documents</string>
+    <string name="splash_title">ALL <font color="#0b61da">DOC</font> READER</string>
+    <string name="splash_subtitle">Scan, Edit &amp; Share with AI</string>
     <string name="splash_tagline">Initializing AI...</string>
+    <string name="home_header_title"><font color="#0b61da">All Doc</font> Reader</string>
+    <string name="home_header_subtitle">Ready All Your Documents Easily</string>
+    <string name="label_browse_by_type">Browse by Type</string>
+    <string name="label_all_files">All Files</string>
+    <string name="view_pdf_files">View PDF\nfiles</string>
+    <string name="view_word_files">View Word\nfiles</string>
+    <string name="view_excel_files">View Excel\nfiles</string>
+    <string name="view_ppt_files">View PPT\nfiles</string>
     <string name="sort_by">Sort by</string>
     <string name="sort_date_ascending">Date: Ascending</string>
     <string name="sort_date_descending">Date: Descending</string>
@@ -721,6 +747,7 @@
     <string name="action_allow">Allow</string>
     <string name="action_failed">Failed</string>
     <string name="action_ok">OK</string>
+    <string name="action_exit">Exit</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_share">Share</string>
     <string name="action_okay">Okay</string>
@@ -758,7 +785,7 @@
     <string name="go_to_set">Go to set</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="search_documents">Search documents...</string>
-    <string name="label_pdf_tools">PDF Tools</string>
+    <string name="label_pdf_tools">Tools</string>
     <string name="label_security">Security</string>
     <string name="label_convert_editor">Convert &amp; Editor</string>
     <string name="label_tools">Tools</string>
@@ -870,7 +897,7 @@
     <string name="dialog_remove_password_description">The file will no longer be protected</string>
     <string name="dialog_password_message">You need to enter the password to open it.</string>
     <string name="dialog_password_input_hint">Password</string>
-    <string name="dialog_delete_message">Are you sure want to delete? This action cannot be undone</string>
+    <string name="dialog_delete_message">Are you sure want to delete?</string>
     <string name="dialog_info_storage_path">Storage path</string>
     <string name="dialog_info_last_modified">Last modified</string>
     <string name="dialog_file_name_title">Set file Name</string>
@@ -1047,13 +1074,6 @@
     <string name="format_percent_complete" translatable="false">%d%%</string>
     <string name="str_action_convert">Convert</string>
     <string name="toolbar_title_convert_image_to_pdf">Convert image to PDF</string>
-
-    <string name="onboarding_title_editing_tools">Multiple Editing Tools</string>
-    <string name="onboarding_title_all_in_one">All-in-one Documents</string>
-    <string name="onboarding_title_images_to_pdf">Images to PDF</string>
-    <string name="onboarding_description_modify_text">Modify text and annotations in\nyour documents</string>
-    <string name="onboarding_description_streamline">Streamline your documents.\nOne app, all formats</string>
-    <string name="onboarding_description_convert_picture">Convert any picture into PDF\nwith one tap</string>
     <string name="action_skip">Skip</string>
     <string name="action_get_start">Get Start</string>
     <string name="dialog_exit_feedback_title">Are you satisfied with PDF Reader?</string>
@@ -1314,4 +1334,22 @@
     <string name="sodk_library_annot_author_so" translatable="false">SmartOffice</string>
     <string name="sodk_library_app_name">@string/app_name</string>
     <string name="sodk_wheel_app_name">@string/app_name</string>
+
+    <!-- Tool Description Strings -->
+    <string name="desc_view_pdf">Open and read PDF files easily</string>
+    <string name="desc_merge_pdf">Combine multiple PDF files</string>
+    <string name="desc_compress_pdf">Reduce PDF file size</string>
+    <string name="desc_split_pdf">Extract pages from PDF</string>
+    <string name="desc_print_pdf">Print PDF documents</string>
+    <string name="desc_lock_pdf">Password protect your PDF</string>
+    <string name="desc_unlock_pdf">Remove password protection</string>
+    <string name="desc_image_to_pdf">Convert images to PDF</string>
+    <string name="desc_save_as_image">Save PDF pages as images</string>
+
+    <string name="onboarding_title_editing_tools">Multiple Editing Tools</string>
+    <string name="onboarding_title_all_in_one">All-in-one Documents</string>
+    <string name="onboarding_title_images_to_pdf">Images to PDF</string>
+    <string name="onboarding_description_modify_text">View, manage and organize all your documents in one place.</string>
+    <string name="onboarding_description_streamline">Convert your images to high quality PDF in just one tap. Fast, easy and secure.</string>
+    <string name="onboarding_description_convert_picture">Convert any picture into PDF with one tap</string>
 </resources>

@@ -403,4 +403,12 @@
     <string name="dialog_exit_feedback_title">क्या आप पीडीएफ़ रीडर से संतुष्ट हैं?</string>
     <string name="dialog_exit_feedback_message">अगर आप फ़ाइलें पढ़ते समय किसी समस्या का सामना कर रहे हैं, हमें फीडबैक देने के लिए यहाँ क्लिक करें</string>
     <string name="action_exit_app">ऐप से बाहर निकलने के लिए यहाँ टैप करें</string>
+
+    <string name="onboarding_title_editing_tools">एकाधिक संपादन उपकरण</string>
+    <string name="onboarding_title_all_in_one">ऑल-इन-वन दस्तावेज़</string>
+    <string name="onboarding_title_images_to_pdf">छवियों से पीडीएफ</string>
+    <string name="onboarding_description_modify_text">अपने सभी दस्तावेज़ों को एक ही स्थान पर देखें, प्रबंधित करें और व्यवस्थित करें। पीडीएफ, वर्ड, एक्सेल, पीपीटी और बहुत कुछ।</string>
+    <string name="onboarding_description_streamline">केवल एक टैप में अपनी छवियों को उच्च गुणवत्ता वाले पीडीएफ में बदलें। तेज़, आसान और सुरक्षित।</string>
+    <string name="onboarding_description_convert_picture">किसी भी तस्वीर को एक टैप में पीडीएफ में बदलें</string>
+
 </resources>

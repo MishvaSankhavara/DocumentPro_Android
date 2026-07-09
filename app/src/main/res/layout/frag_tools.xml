@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -27,10 +28,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/label_pdf_tools"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/home_header_title"
             android:textColor="@color/app_primary_text"
-            android:textSize="20sp"
+            android:textSize="22sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,114 +44,943 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_header">
+        app:layout_constraintTop_toBottomOf="@id/cl_header"
+        android:layout_marginBottom="@dimen/_50sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="24dp">
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="36dp">
 
-            <!-- PDF Tools Section -->
+            <!-- PDF Tools Section Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_type_pdf" />
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_devider"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/inter_bold"
                     android:text="@string/label_pdf_tools"
                     android:textColor="@color/app_primary_text"
-                    android:textSize="19sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_pdf_tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="12dp" />
-
-            <!-- Security Section -->
+            <!-- PDF Tools Grid Row 1 -->
             <LinearLayout
+                android:id="@+id/llGridRowOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_tools_security"
-                    app:tint="#4CAF50" />
+                <!-- View PDF Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_view_pdf"
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:strokeColor="#ECEFF5">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="@string/label_security"
-                    android:textColor="@color/app_primary_text"
-                    android:textSize="19sp" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_icon_view_pdf"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tools_your_pdf" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tv_title_view_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/tool_title_your_pdf"
+                            android:textColor="@color/app_primary_text"
+                            android:textSize="12sp"
+                            app:layout_constraintTop_toBottomOf="@id/cv_icon_view_pdf" />
+
+                        <TextView
+                            android:id="@+id/tv_desc_view_pdf"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="@string/desc_view_pdf"
+                            android:textColor="@color/app_text_gray"
+                            android:textSize="10sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/cv_arrow_view_pdf"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title_view_pdf"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_arrow_view_pdf"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="4dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#FFF0EE"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_desc_view_pdf">
+
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_right_arrow"
+                                app:tint="#FF483C" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Merge PDF Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_merge_pdf"
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:layout_margin="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:strokeColor="#ECEFF5">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_icon_merge_pdf"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#EAF2FF"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tools_merge" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tv_title_merge_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/tool_tittle_merge"
+                            android:textColor="@color/app_primary_text"
+                            android:textSize="12sp"
+                            app:layout_constraintTop_toBottomOf="@id/cv_icon_merge_pdf" />
+
+                        <TextView
+                            android:id="@+id/tv_desc_merge_pdf"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="@string/desc_merge_pdf"
+                            android:textColor="@color/app_text_gray"
+                            android:textSize="10sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/cv_arrow_merge_pdf"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title_merge_pdf"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_arrow_merge_pdf"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="4dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#EAF2FF"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_desc_merge_pdf">
+
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_right_arrow"
+                                app:tint="#2F80ED" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Compress PDF Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_compress_pdf"
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:layout_margin="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:strokeColor="#ECEFF5">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_icon_compress_pdf"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#F2E9FC"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tools_compress" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tv_title_compress_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/tool_title_compress_pdf"
+                            android:textColor="@color/app_primary_text"
+                            android:textSize="12sp"
+                            app:layout_constraintTop_toBottomOf="@id/cv_icon_compress_pdf" />
+
+                        <TextView
+                            android:id="@+id/tv_desc_compress_pdf"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="@string/desc_compress_pdf"
+                            android:textColor="@color/app_text_gray"
+                            android:textSize="10sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/cv_arrow_compress_pdf"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title_compress_pdf"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_arrow_compress_pdf"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="4dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#F2E9FC"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_desc_compress_pdf">
+
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_right_arrow"
+                                app:tint="#9B51E0" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_security"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="12dp" />
-
-            <!-- Convert & Editor Section -->
+            <!-- PDF Tools Grid Row 2 -->
             <LinearLayout
+                android:id="@+id/llGridRowtwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="18dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_tools_convert"
-                    app:tint="#2196F3" />
+                <!-- Print PDF Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_print_pdf"
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:layout_margin="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:strokeColor="#ECEFF5">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="@string/label_convert_editor"
-                    android:textColor="@color/app_primary_text"
-                    android:textSize="19sp" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_icon_print_pdf"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#E8F5E9"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tools_print"/>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tv_title_print_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/tool_tittle_print"
+                            android:textColor="@color/app_primary_text"
+                            android:textSize="12sp"
+                            app:layout_constraintTop_toBottomOf="@id/cv_icon_print_pdf" />
+
+                        <TextView
+                            android:id="@+id/tv_desc_print_pdf"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="@string/desc_print_pdf"
+                            android:textColor="@color/app_text_gray"
+                            android:textSize="10sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/cv_arrow_print_pdf"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title_print_pdf"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_arrow_print_pdf"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="4dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#E8F5E9"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_desc_print_pdf">
+
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_right_arrow"
+                                app:tint="#27AE60" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Split PDF Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_split_pdf"
+                    android:layout_width="0dp"
+                    android:layout_height="125dp"
+                    android:layout_weight="1"
+                    android:layout_margin="6dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:strokeColor="#ECEFF5">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="8dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_icon_split_pdf"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#FEF4EA"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tools_split" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:id="@+id/tv_title_split_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/tool_tittle_split"
+                            android:textColor="@color/app_primary_text"
+                            android:textSize="12sp"
+                            app:layout_constraintTop_toBottomOf="@id/cv_icon_split_pdf" />
+
+                        <TextView
+                            android:id="@+id/tv_desc_split_pdf"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="@string/desc_split_pdf"
+                            android:textColor="@color/app_text_gray"
+                            android:textSize="10sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/cv_arrow_split_pdf"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title_split_pdf"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_arrow_split_pdf"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="4dp"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="#FEF4EA"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_desc_split_pdf">
+
+                            <ImageView
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_right_arrow"
+                                app:tint="#F2994A" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Spacer to align grid columns -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_convert_editor"
+            <!-- Security Section Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                android:paddingHorizontal="12dp" />
+                android:layout_marginTop="20dp"
+                android:layout_margin="4dp"
+                app:cardBackgroundColor="#F1F8F6"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Section Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tools_security" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/label_security"
+                            android:textColor="@color/app_primary_text"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Lock PDF Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_lock_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="68dp"
+                        android:layout_marginVertical="6dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingHorizontal="16dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_icon_lock"
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                app:cardCornerRadius="19dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_tools_lock"/>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
+                                android:layout_marginEnd="12dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/cv_arrow_lock"
+                                app:layout_constraintStart_toEndOf="@id/cv_icon_lock"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="@string/tool_tittle_lock_pdf"
+                                    android:textColor="@color/app_primary_text"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:text="@string/desc_lock_pdf"
+                                    android:textColor="@color/app_text_gray"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_arrow_lock"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                app:cardCornerRadius="13dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:cardBackgroundColor="#E8F5E9"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_right_arrow"
+                                    app:tint="#27AE60" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Unlock PDF Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_unlock_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="68dp"
+                        android:layout_marginVertical="6dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingHorizontal="16dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_icon_unlock"
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                app:cardCornerRadius="19dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_tools_unlock"/>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
+                                android:layout_marginEnd="12dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/cv_arrow_unlock"
+                                app:layout_constraintStart_toEndOf="@id/cv_icon_unlock"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="@string/tool_tittle_unlock_pdf"
+                                    android:textColor="@color/app_primary_text"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:text="@string/desc_unlock_pdf"
+                                    android:textColor="@color/app_text_gray"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_arrow_unlock"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                app:cardCornerRadius="13dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:cardBackgroundColor="#E0F2F1"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_right_arrow"
+                                    app:tint="#008080" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Convert & Editor Section Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_margin="4dp"
+                app:cardBackgroundColor="#F4F3FF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Section Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tools_convert" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/label_convert_editor"
+                            android:textColor="@color/app_primary_text"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Image to PDF Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_image_to_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="68dp"
+                        android:layout_marginVertical="6dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingHorizontal="16dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_icon_image_to_pdf"
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                app:cardCornerRadius="19dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_tools_img_to_pdf" />
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
+                                android:layout_marginEnd="12dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/cv_arrow_img_to_pdf"
+                                app:layout_constraintStart_toEndOf="@id/cv_icon_image_to_pdf"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="@string/tool_tittle_image_to_pdf"
+                                    android:textColor="@color/app_primary_text"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:text="@string/desc_image_to_pdf"
+                                    android:textColor="@color/app_text_gray"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_arrow_img_to_pdf"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                app:cardCornerRadius="13dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:cardBackgroundColor="#F2E9FC"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_right_arrow"
+                                    app:tint="#9B51E0" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Save as Image Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_save_as_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="68dp"
+                        android:layout_marginVertical="6dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingHorizontal="16dp">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_icon_save_as_image"
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                app:cardCornerRadius="19dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_pdf_to_image"/>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
+                                android:layout_marginEnd="12dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/cv_arrow_save_as_image"
+                                app:layout_constraintStart_toEndOf="@id/cv_icon_save_as_image"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="@string/tool_tittle_pdf_to_image"
+                                    android:textColor="@color/app_primary_text"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:text="@string/desc_save_as_image"
+                                    android:textColor="@color/app_text_gray"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cv_arrow_save_as_image"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                app:cardCornerRadius="13dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp"
+                                app:cardBackgroundColor="#EAF2FF"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_right_arrow"
+                                    app:tint="#2F80ED" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

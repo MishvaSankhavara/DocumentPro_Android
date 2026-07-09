@@ -373,4 +373,12 @@
     <string name="dialog_exit_feedback_title">Вы довольны читалкой PDF?</string>
     <string name="dialog_exit_feedback_message">Если у вас возникли проблемы при чтении файлов, нажмите здесь, чтобы отправить нам отзыв</string>
     <string name="action_exit_app">Нажмите здесь, чтобы выйти из приложения</string>
+
+    <string name="onboarding_title_editing_tools">Несколько инструментов редактирования</string>
+    <string name="onboarding_title_all_in_one">Документы «все в одном»</string>
+    <string name="onboarding_title_images_to_pdf">Изображения в PDF</string>
+    <string name="onboarding_description_modify_text">Просматривайте, управляйте и систематизируйте все свои документы в одном месте. PDF, Word, Excel, PPT и другие.</string>
+    <string name="onboarding_description_streamline">Конвертируйте изображения в высококачественный PDF-файл одним касанием. Быстро, просто и безопасно.</string>
+    <string name="onboarding_description_convert_picture">Конвертируйте любое изображение в PDF одним касанием</string>
+
 </resources>

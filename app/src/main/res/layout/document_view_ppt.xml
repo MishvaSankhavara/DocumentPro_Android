@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="68dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
                 android:paddingBottom="7dp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -117,7 +117,7 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@id/bottom_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bg_tab_home" />
+        app:srcCompat="@android:color/transparent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_container"
@@ -130,7 +130,7 @@
         <include
             layout="@layout/document_bottom_view_ppt"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="68dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="parent" />

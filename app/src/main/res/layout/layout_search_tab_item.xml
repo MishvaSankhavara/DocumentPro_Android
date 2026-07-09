@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="2dp">
+
+    <!-- Outer selected ring container -->
+    <FrameLayout
+        android:id="@+id/fl_outer_container"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:padding="6dp">
+
+        <!-- Inner colored badge container -->
+        <FrameLayout
+            android:id="@+id/fl_icon_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_icon_circle">
+
+            <!-- Image based icons (All, TXT) -->
+            <ImageView
+                android:id="@+id/iv_tab_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_document_pdf"
+                android:visibility="visible"
+                android:padding="@dimen/_2sdp"/>
+        </FrameLayout>
+    </FrameLayout>
+
+    <!-- Tab label -->
+    <TextView
+        android:id="@+id/tv_tab_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="11sp"
+        android:textColor="#64748B"
+        android:fontFamily="@font/inter_medium" />
+
+    <!-- Tab selected underline bar indicator -->
+    <View
+        android:id="@+id/v_indicator"
+        android:layout_width="16dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/bg_category_indicator"
+        android:visibility="invisible" />
+</LinearLayout>

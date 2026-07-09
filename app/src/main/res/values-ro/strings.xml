@@ -371,4 +371,12 @@
     <string name="dialog_exit_feedback_title">Ești satisfăcut de cititorul PDF?</string>
     <string name="dialog_exit_feedback_message">Dacă întâmpini probleme la citirea fișierelor, dă-ne feedback aici</string>
     <string name="action_exit_app">Apasă aici pentru a ieși din aplicație</string>
+
+    <string name="onboarding_title_editing_tools">Instrumente de editare multiple</string>
+    <string name="onboarding_title_all_in_one">Documente all-in-one</string>
+    <string name="onboarding_title_images_to_pdf">Imagini în PDF</string>
+    <string name="onboarding_description_modify_text">Vizualizați, gestionați și organizați toate documentele într-un singur loc. PDF, Word, Excel, PPT și multe altele.</string>
+    <string name="onboarding_description_streamline">Convertiți imaginile în PDF de înaltă calitate cu o singură atingere. Rapid, ușor și sigur.</string>
+    <string name="onboarding_description_convert_picture">Convertiți orice imagine în PDF cu o singură atingere</string>
+
 </resources>

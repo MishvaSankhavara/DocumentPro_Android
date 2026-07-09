@@ -368,4 +368,12 @@
     <string name="dialog_exit_feedback_message">Si tienes problemas al leer archivos, haz clic aquí para darnos tu opinión</string>
     <string name="action_exit_app">Toca aquí para salir de la aplicación</string>
 
+
+    <string name="onboarding_title_editing_tools">Múltiples herramientas de edición</string>
+    <string name="onboarding_title_all_in_one">Documentos todo en uno</string>
+    <string name="onboarding_title_images_to_pdf">Imágenes a PDF</string>
+    <string name="onboarding_description_modify_text">Visualice, administre y organice todos sus documentos en un solo lugar. PDF, Word, Excel, PPT y más.</string>
+    <string name="onboarding_description_streamline">Convierta sus imágenes a PDF de alta qualidade con un solo toque. Rápido, fácil y seguro.</string>
+    <string name="onboarding_description_convert_picture">Convierta cualquier imagen en PDF con un toque</string>
+
 </resources>

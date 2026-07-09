@@ -33,7 +33,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="4dp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/inter_bold"
                     android:lines="1"
                     android:text="@string/app_name"
                     android:textColor="@color/colorTextPrimary"
@@ -63,34 +63,143 @@
             app:layout_constraintBottom_toTopOf="@id/divider"
             app:layout_constraintTop_toBottomOf="@id/toolbar_main" />
 
-        <View
-            android:id="@+id/divider"
+        <!-- Custom bottom bar with floating centre Tools button -->
+        <RelativeLayout
+            android:id="@+id/rltBottomBar"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorPrimaryDim"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewpager_main" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            style="@style/Widget.Design.BottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/bg_title"
-            android:elevation="10dp"
-            app:itemIconTint="@color/main_menu"
-            app:itemTextAppearanceActive="@style/Text13Bold"
-            app:itemTextAppearanceActiveBoldEnabled="false"
-            app:itemTextColor="@color/main_menu"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            app:labelVisibilityMode="labeled"
-            app:layout_behavior="@string/hide_bottom_on_scroll"
-            app:layout_constraintBaseline_toBottomOf="parent"
+            android:layout_height="96dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/main_bottom_menu" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- White card bar (Files + spacer + Settings) -->
+            <LinearLayout
+                android:id="@+id/bottom_nav_layout"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_main_tab_bg"
+                android:elevation="8dp"
+                android:orientation="horizontal">
+
+                <!-- Files Tab -->
+                <LinearLayout
+                    android:id="@+id/btnFilesTab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_45sdp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="4dp">
+
+                    <ImageView
+                        android:id="@+id/imgButton_files"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_nav_files"
+                        app:tint="@color/color_side_tab_icon" />
+
+                    <TextView
+                        android:id="@+id/tvButton_files"
+                        style="@style/FontMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Files"
+                        android:textColor="@color/color_side_tab_icon"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Centre spacer reserved for the floating Tools button -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <!-- Settings Tab -->
+                <LinearLayout
+                    android:id="@+id/btnSettingsTab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginEnd="@dimen/_45sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="4dp">
+
+                    <ImageView
+                        android:id="@+id/imgButton_settings"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_nav_settings"
+                        app:tint="@color/color_side_tab_icon" />
+
+                    <TextView
+                        android:id="@+id/tvButton_settings"
+                        style="@style/FontMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Settings"
+                        android:textColor="@color/color_side_tab_icon"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Tools Tab: floating blue circle centred above the bar -->
+            <LinearLayout
+                android:id="@+id/btnToolsTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:elevation="12dp"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- Always-blue circle with white wrench icon -->
+                <FrameLayout
+                    android:id="@+id/fl_circle_bg_tools"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_tools_circle"
+                    android:clickable="false"
+                    android:focusable="false">
+
+                    <ImageView
+                        android:id="@+id/imgButton_tools"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_nav_tools"
+                        app:tint="#FFFFFF" />
+                </FrameLayout>
+
+                <!-- "Tools" label — blue when this tab is active -->
+                <TextView
+                    android:id="@+id/tvButton_tools"
+                    style="@style/FontMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:text="Tools"
+                    android:textColor="@color/color_bottom_tab_text"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+

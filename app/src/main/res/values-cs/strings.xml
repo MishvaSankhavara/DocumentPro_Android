@@ -378,4 +378,12 @@
     <string name="dialog_exit_feedback_title">Jste spokojeni s čtečkou PDF?</string>
     <string name="dialog_exit_feedback_message">Pokud máte problémy při čtení souborů, klikněte sem pro zpětnou vazbu</string>
     <string name="action_exit_app">Klepněte sem pro ukončení aplikace</string>
+
+    <string name="onboarding_title_editing_tools">Více editačních nástrojů</string>
+    <string name="onboarding_title_all_in_one">Dokumenty vše v jednom</string>
+    <string name="onboarding_title_images_to_pdf">Obrázky do PDF</string>
+    <string name="onboarding_description_modify_text">Zobrazujte, spravujte a organizujte všechny své dokumenty na jednom místě. PDF, Word, Excel, PPT a další.</string>
+    <string name="onboarding_description_streamline">Převeďte své obrázky do vysoce kvalitního PDF jediným klepnutím. Rychle, snadno a bezpečně.</string>
+    <string name="onboarding_description_convert_picture">Převeďte jakýkoli obrázek do PDF jediným klepnutím</string>
+
 </resources>

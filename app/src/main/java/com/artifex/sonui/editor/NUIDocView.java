@@ -151,7 +151,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     private boolean W = false;
     OnDoneListener mDoneListener = null;
     private boolean aa = false;
-    private int pageNumber = 0;
+    protected int pageNumber = 0;
     private k ah;
     private final ArrayList<String> ai = new ArrayList<>();
 
@@ -2181,6 +2181,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 onSelectionChanged();
                 RelativeLayout thumbnailContainer = this.findViewById(R.id.pages_container);
                 if (thumbnailContainer != null && thumbnailContainer.getVisibility() != VISIBLE) {
+                    this.btnThumbnailTab.setSelected(true);
+                    this.btnRotateTab.setSelected(false);
+                    this.btnEditTab.setSelected(false);
+                    this.btnSearchTab.setSelected(false);
                     final int var2 = this.mDocView.getMostVisiblePage();
                     this.mDocView.onShowPages();
                     thumbnailContainer.setVisibility(VISIBLE);
@@ -2195,13 +2199,17 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         }
                     });
                 } else if (thumbnailContainer != null && thumbnailContainer.getVisibility() != GONE) {
+                    this.btnThumbnailTab.setSelected(false);
                     this.mDocView.onHidePages();
                     thumbnailContainer.setVisibility(GONE);
-
                 }
                 layoutNow();
             }
             if (var1 == this.btnEditTab) {
+                this.btnEditTab.setSelected(true);
+                this.btnRotateTab.setSelected(false);
+                this.btnSearchTab.setSelected(false);
+                this.btnThumbnailTab.setSelected(false);
                 activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -2221,6 +2229,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
 
             }
             if (var1 == this.btnSearchTab) {
+                this.btnSearchTab.setSelected(true);
+                this.btnRotateTab.setSelected(false);
+                this.btnEditTab.setSelected(false);
+                this.btnThumbnailTab.setSelected(false);
                 this.activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -2239,6 +2251,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 });
             }
             if (var1 == this.btnRotateTab) {
+                this.btnRotateTab.setSelected(true);
+                this.btnEditTab.setSelected(false);
+                this.btnSearchTab.setSelected(false);
+                this.btnThumbnailTab.setSelected(false);
                 NUIDocView.this.h();
                 this.changeOrientationOnClick();
                 onSelectionChanged();
@@ -2246,6 +2262,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 layoutNow();
             }
             if (var1 == this.tvCancelSearch) {
+                this.btnSearchTab.setSelected(false);
                 this.activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -2259,6 +2276,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 });
             }
             if (var1 == this.btnCloseEdit) {
+                this.btnEditTab.setSelected(false);
                 activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -3218,8 +3236,11 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     protected void setPageNumberText() {
         (new Handler()).post(new Runnable() {
             public void run() {
-                NUIDocView.this.tvPageNumber.setText(NUIDocView.this.getPageNumberText());
-                NUIDocView.this.tvPageNumber.measure(0, 0);
+                if (NUIDocView.this.tvPageNumber != null) {
+                    NUIDocView.this.tvPageNumber.setVisibility(VISIBLE);
+                    NUIDocView.this.tvPageNumber.setText(NUIDocView.this.getPageNumberText());
+                    NUIDocView.this.tvPageNumber.measure(0, 0);
+                }
             }
         });
     }

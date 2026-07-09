@@ -79,9 +79,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
 
         holder.tvFileName_FilePicker.setText(document.getFileName_DocModel());
 
-        Glide.with(mContext_FilePicker)
-                .load(document.getSrcImage_DocModel())
-                .into(holder.imgIcon_FilePicker);
+        holder.imgIcon_FilePicker.setImageResource(document.getSrcImage_DocModel());
 
         holder.imgCheck_FilePicker.setClickable(false);
         holder.imgCheck_FilePicker.setFocusable(false);

@@ -46,7 +46,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_pdf_text"
-        android:fontFamily="@font/roboto_semibold"
+        android:fontFamily="@font/inter_semibold"
         android:gravity="center_vertical"
         android:includeFontPadding="false"
         android:paddingStart="6dp"

@@ -373,4 +373,12 @@
     <string name="dialog_exit_feedback_message">Jeśli napotkasz problemy podczas czytania plików, kliknij tutaj, aby przekazać nam opinię</string>
     <string name="action_exit_app">Kliknij tutaj, aby wyjść z aplikacji</string>
 
+
+    <string name="onboarding_title_editing_tools">Wiele narzędzi edycyjnych</string>
+    <string name="onboarding_title_all_in_one">Dokumenty all-in-one</string>
+    <string name="onboarding_title_images_to_pdf">Obrazy do PDF</string>
+    <string name="onboarding_description_modify_text">Przeglądaj, zarządzaj i organizuj wszystkie swoje dokumenty w jednym miejscu. PDF, Word, Excel, PPT i inne.</string>
+    <string name="onboarding_description_streamline">Konwertuj obrazy na wysokiej jakości pliki PDF jednym dotknięciem. Szybko, łatwo i bezpiecznie.</string>
+    <string name="onboarding_description_convert_picture">Konwertuj dowolny obraz na PDF jednym dotknięciem</string>
+
 </resources>

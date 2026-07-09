@@ -2,7 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    <color name="settings_card_bg">#232528</color>
+    <color name="settings_card_stroke">#383a43</color>
+    <color name="settings_category_indicator">#9798a2</color>
+    <color name="settings_category_text">#9798a2</color>
     <color name="colorAccent">#0b61da</color>
     <color name="bg_title">#141515</color>
 

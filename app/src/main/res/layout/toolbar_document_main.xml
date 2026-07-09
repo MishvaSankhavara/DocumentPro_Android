@@ -5,96 +5,164 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:elevation="4dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="6dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:padding="6dp"
-        android:scaleType="centerCrop"
-        android:visibility="visible"
+    <!-- Styled Back Button Container (Using FrameLayout for theme compatibility) -->
+    <FrameLayout
+        android:id="@+id/fl_back_btn"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_icon_white_circle"
+        android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_return_white"
-        app:tint="@color/black" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:visibility="visible"
+            app:srcCompat="@drawable/ic_return_white"
+            app:tint="#111827" />
+    </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvTittle"
+    <!-- Center Title and Page Number Capsule Container -->
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto_bold"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ll_more"
-        app:layout_constraintStart_toEndOf="@id/img_back"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/ll_more"
+        app:layout_constraintStart_toEndOf="@id/fl_back_btn"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/tvTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="#111827"
+            android:textSize="16sp" />
+
+        <!-- Relocated Page Number TextView styled as a capsule badge -->
+        <TextView
+            android:id="@+id/footer_page_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_page_badge"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="3dp"
+            android:textColor="#3B82F6"
+            android:textSize="11sp"
+            android:fontFamily="@font/inter_bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <!-- Right Side Actions Container -->
     <LinearLayout
         android:id="@+id/ll_more"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/btnSaveAsPdf"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+        <!-- Save PDF -->
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:padding="4dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/editor_icon_save_pdf"
-            android:visibility="visible"
-            app:tint="@color/black" />
+            android:background="@drawable/bg_icon_white_circle"
+            android:elevation="1dp"
+            android:visibility="gone">
 
-        <ImageView
-            android:id="@+id/btnSave"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="center"
+            <ImageView
+                android:id="@+id/btnSaveAsPdf"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/editor_icon_save_pdf"
+                android:visibility="visible" />
+        </FrameLayout>
+
+        <!-- Save -->
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/save"
-            android:padding="4dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_save"
-            android:visibility="visible"
-            app:tint="@color/black" />
+            android:background="@drawable/bg_icon_white_circle"
+            android:elevation="1dp">
 
-        <ImageView
-            android:id="@+id/btnPrint"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            <ImageView
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/save"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_bookmark"
+                android:visibility="visible" />
+        </FrameLayout>
 
-            android:layout_gravity="center"
+        <!-- Bookmark -->
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/print_document"
-            android:padding="4dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_print"
+            android:background="@drawable/bg_icon_white_circle"
+            android:elevation="1dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/btn_bookmark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_bookmark" />
+        </FrameLayout>
+
+        <!-- Print -->
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
             android:visibility="gone"
-            app:tint="@color/black" />
+            android:background="@drawable/bg_icon_white_circle"
+            android:elevation="1dp">
+
+            <ImageView
+                android:id="@+id/btnPrint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/print_document"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_print"
+                app:tint="#111827" />
+        </FrameLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-

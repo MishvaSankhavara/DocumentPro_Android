@@ -35,14 +35,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="middle"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/inter_medium"
         android:gravity="start"
         android:includeFontPadding="false"
         android:lines="1"
         android:text="Financial_Report.pdf"
         android:textAlignment="viewStart"
         android:textColor="@color/app_primary_text"
-        android:textSize="17sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/ll_metadata"
         app:layout_constraintEnd_toStartOf="@+id/iv_more"
         app:layout_constraintStart_toEndOf="@+id/cv_icon"
@@ -65,10 +65,10 @@
             android:id="@+id/tvFileSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/inter_regular"
             android:text="12.4 MB"
             android:textColor="@color/app_text_gray"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <View
             android:layout_width="4dp"
@@ -80,10 +80,10 @@
             android:id="@+id/tvFileDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/inter_regular"
             android:text="Updated 2h ago"
             android:textColor="@color/app_text_gray"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView

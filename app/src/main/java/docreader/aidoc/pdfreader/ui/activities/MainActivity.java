@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -30,13 +31,13 @@ import docreader.aidoc.pdfreader.BuildConfig;
 import docreader.aidoc.pdfreader.R;
 import docreader.aidoc.pdfreader.PreferenceUtils;
 import docreader.aidoc.pdfreader.adapter_reader.PagerViewAdapter;
-import docreader.aidoc.pdfreader.ui.customviews.switchdaynight.ThemeToggleSwitch;
+
 import docreader.aidoc.pdfreader.ui.fragments.FragmentFiles;
 import docreader.aidoc.pdfreader.ui.fragments.FragmentSetting;
 import docreader.aidoc.pdfreader.ui.fragments.FragmentTools;
 import docreader.aidoc.pdfreader.utils.DialogManagerUtils;
 import docreader.aidoc.pdfreader.utils.Utils;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -46,16 +47,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Toolbar mainToolbar;
     private TextView toolbarTitleTextView;
-    public BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
-    AppCompatImageView filesIconImageView;
-    TextView toolsTextView;
-    TextView filesTextView;
-    private ConstraintLayout toolsButtonLayout;
-    private ConstraintLayout filesButtonLayout;
+    // Bottom bar tab containers
+    private LinearLayout btnFilesTab;
+    private LinearLayout btnToolsTab;
+    private LinearLayout btnSettingsTab;
+    // Bottom bar icons and labels (for selected-state tinting)
+    private ImageView imgButton_files;
+    private ImageView imgButton_tools;
+    private ImageView imgButton_settings;
+    private FrameLayout fl_circle_bg_tools;
+    private TextView tvButton_files;
+    private TextView tvButton_tools;
+    private TextView tvButton_settings;
     Menu mainMenu;
-    TextView languageTextView;
-    private ThemeToggleSwitch dayNightSwitch;
     private AppCompatImageView ivSearch;
 
     @Override
@@ -65,7 +70,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.act_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(0, systemBars.top, 0, 0);
+            // Apply BOTH top (status bar) and bottom (nav bar) padding to main container.
+            // This shifts the entire ConstraintLayout up above the system nav bar so
+            // rltBottomBar's constraintBottom_toBottomOf="parent" lands correctly.
+            v.setPadding(0, systemBars.top, 0, systemBars.bottom);
             return insets;
         });
 
@@ -73,33 +81,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initializeViews();
         initializeData();
         setupViewPager();
-
         initializeListeners();
-        bottomNavigationView
-                .setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        int idMenu = menuItem.getItemId();
-                        if (idMenu == R.id.navigation_files) {
-                            viewPager.setCurrentItem(0);
-                        } else if (idMenu == R.id.navigation_tools) {
-                            viewPager.setCurrentItem(1);
-                        } else if (idMenu == R.id.navigation_settings) {
-                            viewPager.setCurrentItem(2);
-                        }
 
-                        return true;
-                    }
-                });
+        // Select the first tab by default
+        updateTabSelection(0);
 
         // Navigate to requested tab if launched with EXTRA_START_TAB
         int startTab = getIntent().getIntExtra("EXTRA_START_TAB", 0);
         if (startTab > 0) {
             viewPager.post(() -> {
                 viewPager.setCurrentItem(startTab, false);
-                bottomNavigationView.getMenu().getItem(startTab).setChecked(true);
+                updateTabSelection(startTab);
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initializeData();
     }
 
     private void initializeData() {
@@ -108,9 +108,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeListeners() {
-        // btnFiles.setOnClickListener(this);
-        // btnTools.setOnClickListener(this);
-        // findViewById(R.id.pdf_act_main_select_image).setOnClickListener(this);
+        btnFilesTab.setOnClickListener(v -> {
+            viewPager.setCurrentItem(0, true);
+            updateTabSelection(0);
+        });
+        btnToolsTab.setOnClickListener(v -> {
+            viewPager.setCurrentItem(1, true);
+            updateTabSelection(1);
+        });
+        btnSettingsTab.setOnClickListener(v -> {
+            viewPager.setCurrentItem(2, true);
+            updateTabSelection(2);
+        });
+    }
+
+    /** Updates the visual selected state of all bottom-bar tabs. */
+    private void updateTabSelection(int selectedIndex) {
+        // Files — icon + label blue when selected
+        boolean filesSelected = (selectedIndex == 0);
+        btnFilesTab.setSelected(filesSelected);
+        imgButton_files.setSelected(filesSelected);
+        tvButton_files.setSelected(filesSelected);
+
+        // Tools — circle is always blue; only drive the label colour
+        boolean toolsSelected = (selectedIndex == 1);
+        tvButton_tools.setSelected(toolsSelected);
+
+        // Settings — icon + label blue when selected
+        boolean settingsSelected = (selectedIndex == 2);
+        btnSettingsTab.setSelected(settingsSelected);
+        imgButton_settings.setSelected(settingsSelected);
+        tvButton_settings.setSelected(settingsSelected);
     }
 
     private void setupViewPager() {
@@ -137,12 +165,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeViews() {
-        bottomNavigationView = findViewById(R.id.bottom_nav);
         viewPager = findViewById(R.id.viewpager_main);
         ivSearch = findViewById(R.id.iv_search);
         ivSearch.setOnClickListener(this);
-
         toolbarTitleTextView = findViewById(R.id.tv_name);
+
+        // Custom bottom bar views
+        btnFilesTab    = findViewById(R.id.btnFilesTab);
+        btnToolsTab    = findViewById(R.id.btnToolsTab);
+        btnSettingsTab = findViewById(R.id.btnSettingsTab);
+
+        imgButton_files    = findViewById(R.id.imgButton_files);
+        imgButton_tools    = findViewById(R.id.imgButton_tools);
+        imgButton_settings = findViewById(R.id.imgButton_settings);
+        fl_circle_bg_tools = findViewById(R.id.fl_circle_bg_tools);
+
+        tvButton_files    = findViewById(R.id.tvButton_files);
+        tvButton_tools    = findViewById(R.id.tvButton_tools);
+        tvButton_settings = findViewById(R.id.tvButton_settings);
     }
 
     @Override
@@ -186,41 +226,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onPageSelected(int position) {
-        int currentItem = viewPager.getCurrentItem();
-        switch (currentItem) {
-            case 0:
-                bottomNavigationView.getMenu().findItem(R.id.navigation_files).setChecked(true);
-
-                mainToolbar.setVisibility(View.GONE);
-                toolbarTitleTextView.setVisibility(View.GONE);
-                ivSearch.setVisibility(View.GONE);
-                if (getSupportActionBar() != null) {
-                    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
-
-                }
-                break;
-            case 1:
-                bottomNavigationView.getMenu().findItem(R.id.navigation_tools).setChecked(true);
-                mainToolbar.setVisibility(View.GONE);
-                toolbarTitleTextView.setVisibility(View.GONE);
-                ivSearch.setVisibility(View.GONE);
-
-                if (getSupportActionBar() != null) {
-                    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
-                }
-                break;
-            case 2:
-                bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
-                mainToolbar.setVisibility(View.GONE);
-                toolbarTitleTextView.setVisibility(View.GONE);
-                ivSearch.setVisibility(View.GONE);
-
-                if (getSupportActionBar() != null) {
-                    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
-                }
-
-                // tvToolbar.setText(R.string.pdf_tools);
-                break;
+        updateTabSelection(position);
+        mainToolbar.setVisibility(View.GONE);
+        toolbarTitleTextView.setVisibility(View.GONE);
+        ivSearch.setVisibility(View.GONE);
+        if (getSupportActionBar() != null) {
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
         }
     }
 

@@ -6,4 +6,4 @@
     android:gravity="center"
     android:text="/"
     android:textColor="@color/app_sodk_breadcrumb_tint"
-    android:textSize="24.0sp" />
+    android:textSize="14sp" />

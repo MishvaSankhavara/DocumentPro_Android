@@ -1654,4 +1654,9 @@ public class NUIDocViewPdf extends NUIDocView {
         this.btnUndo.setVisibility(GONE);
         this.btnRedo.setVisibility(GONE);
     }
+
+    @Override
+    protected String getPageNumberText() {
+        return "Page " + (this.pageNumber + 1) + " of " + this.getPageCount();
+    }
 }

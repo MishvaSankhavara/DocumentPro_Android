@@ -8,143 +8,477 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_dialog_rounded"
+        android:background="@drawable/bg_sort_dialog"
+        android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.9">
 
+        <!-- Title -->
         <TextView
             android:id="@+id/tvTitleDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24sp"
-            android:layout_marginTop="24sp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/sort_by"
-            android:textColor="@color/colorTextPrimary"
-            android:textSize="16sp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/sort_by_title"
+            android:textColor="@color/app_primary_text"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioGroup
-            android:id="@+id/rg_sort_options"
+        <!-- Close Button -->
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_close_x"
+            android:padding="8dp"
+            android:background="@drawable/bg_icon_circle"
+            android:backgroundTint="#F1F5F9"
+            app:tint="#64748B"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Scrollable Options Container -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleDialog">
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDialog"
+            app:layout_constraintBottom_toTopOf="@id/btn_confirm_sort"
+            app:layout_constraintHeight_max="390dp">
 
-            <RadioButton
-                android:id="@+id/rb_date_oldest"
+            <LinearLayout
+                android:id="@+id/rg_sort_options"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:checked="false"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingHorizontal="10dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:text="@string/sort_date_ascending"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
-                android:theme="@style/CustomBottomSheetDialogTheme" />
+                android:orientation="vertical"
+                android:paddingVertical="2dp">
 
-            <RadioButton
-                android:id="@+id/rb_date_newest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:checked="false"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingHorizontal="10dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:text="@string/sort_date_descending"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
-                android:theme="@style/CustomBottomSheetDialogTheme" />
+                <!-- 1. Date modified (Newest first) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_date_newest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardBackgroundColor="@color/settings_card_bg"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/settings_card_stroke">
 
-            <RadioButton
-                android:id="@+id/rb_name_az"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingHorizontal="10dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:text="@string/sort_name_atoz"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
-                android:theme="@style/CustomBottomSheetDialogTheme" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
 
-            <RadioButton
-                android:id="@+id/rb_name_za"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingHorizontal="10dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:text="@string/sort_name_ztoa"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
-                android:theme="@style/CustomBottomSheetDialogTheme" />
+                        <ImageView
+                            android:id="@+id/iv_icon_date_newest"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:src="@drawable/ic_sort_date"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
-                android:id="@+id/rb_size_largest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingHorizontal="10dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:text="@string/sort_size_ascending"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
-                android:theme="@style/CustomBottomSheetDialogTheme" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/rb_date_newest"
+                            app:layout_constraintStart_toEndOf="@id/iv_icon_date_newest"
+                            app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/rb_size_smallest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingHorizontal="10dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:text="@string/sort_size_descending"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
-                android:theme="@style/CustomBottomSheetDialogTheme" />
-        </RadioGroup>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/sort_option_date_modified"
+                                android:textColor="@color/app_primary_text"
+                                android:textSize="14sp" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="@string/sort_desc_newest_first"
+                                android:textColor="@color/app_text_gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/rb_date_newest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:theme="@style/CustomBottomSheetDialogTheme"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 2. Name (A to Z) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_name_az"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardBackgroundColor="@color/settings_card_bg"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/settings_card_stroke">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_icon_name_az"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:src="@drawable/ic_sort_az"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/rb_name_az"
+                            app:layout_constraintStart_toEndOf="@id/iv_icon_name_az"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/sort_option_name_az"
+                                android:textColor="@color/app_primary_text"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="@string/sort_desc_alphabetical"
+                                android:textColor="@color/app_text_gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/rb_name_az"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:theme="@style/CustomBottomSheetDialogTheme"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 3. Name (Z to A) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_name_za"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardBackgroundColor="@color/settings_card_bg"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/settings_card_stroke">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_icon_name_za"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:src="@drawable/ic_sort_za"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/rb_name_za"
+                            app:layout_constraintStart_toEndOf="@id/iv_icon_name_za"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/sort_option_name_za"
+                                android:textColor="@color/app_primary_text"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="@string/sort_desc_reverse_alphabetical"
+                                android:textColor="@color/app_text_gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/rb_name_za"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:theme="@style/CustomBottomSheetDialogTheme"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 4. File size (Large to Small) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_size_largest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardBackgroundColor="@color/settings_card_bg"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/settings_card_stroke">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_icon_size_largest"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:src="@drawable/ic_sort_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/rb_size_largest"
+                            app:layout_constraintStart_toEndOf="@id/iv_icon_size_largest"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/sort_option_size_large_small"
+                                android:textColor="@color/app_primary_text"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="@string/sort_desc_largest_first"
+                                android:textColor="@color/app_text_gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/rb_size_largest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:theme="@style/CustomBottomSheetDialogTheme"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 5. File size (Small to Large) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_size_smallest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardBackgroundColor="@color/settings_card_bg"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/settings_card_stroke">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_icon_size_smallest"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:src="@drawable/ic_sort_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/rb_size_smallest"
+                            app:layout_constraintStart_toEndOf="@id/iv_icon_size_smallest"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/sort_option_size_small_large"
+                                android:textColor="@color/app_primary_text"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="@string/sort_desc_smallest_first"
+                                android:textColor="@color/app_text_gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/rb_size_smallest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:theme="@style/CustomBottomSheetDialogTheme"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 6. Date created (Oldest first) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_date_oldest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardBackgroundColor="@color/settings_card_bg"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/settings_card_stroke">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_icon_date_oldest"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:src="@drawable/ic_sort_date_created"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/rb_date_oldest"
+                            app:layout_constraintStart_toEndOf="@id/iv_icon_date_oldest"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/sort_option_date_created"
+                                android:textColor="@color/app_primary_text"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="@string/sort_desc_oldest_first"
+                                android:textColor="@color/app_text_gray"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <RadioButton
+                            android:id="@+id/rb_date_oldest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:theme="@style/CustomBottomSheetDialogTheme"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Confirm Button -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_confirm_sort"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="48dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/bg_button_action_round"
-            android:fontFamily="@font/roboto_medium"
+            android:background="@drawable/bg_button_accent_button_rounded"
+            android:fontFamily="@font/inter_bold"
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="@string/action_ok"
             android:textAllCaps="true"
             android:textColor="#ffffff"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/rg_sort_options" />
+            app:layout_constraintTop_toBottomOf="@id/nsv_options" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_confirm_sort" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
