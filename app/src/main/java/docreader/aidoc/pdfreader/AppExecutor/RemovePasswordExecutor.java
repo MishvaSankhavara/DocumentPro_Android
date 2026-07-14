@@ -58,7 +58,6 @@ public class RemovePasswordExecutor {
                 weakReference_removePW.get().showCompletionUI(() -> {
                     weakReference_removePW.get().motionLayout1.transitionToEnd();
                     weakReference_removePW.get().motionLayout2.setVisibility(View.VISIBLE);
-                    weakReference_removePW.get().motionLayout2.transitionToEnd();
                     weakReference_removePW.get().ltAnimBg.playAnimation();
                     weakReference_removePW.get().ltAnimDone.playAnimation();
 

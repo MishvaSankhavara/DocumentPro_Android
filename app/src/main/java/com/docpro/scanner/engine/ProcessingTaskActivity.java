@@ -38,10 +38,10 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     public TextView txtDocumentName;
     public TextView txtDocumentPath;
     public TextView txtExecutionResult;
-    public AppCompatTextView btnShareResult;
-    public AppCompatTextView btnOpenResult;
+    public View btnShareResult;
+    public View btnOpenResult;
     public MotionLayout layoutPhase1;
-    public MotionLayout layoutPhase2;
+    public View layoutPhase2;
     public LottieAnimationView animSuccess;
     public LottieAnimationView animWorkingBackground;
     public AppCompatImageView btnAbortTask;
@@ -60,7 +60,7 @@ public class ProcessingTaskActivity extends AppCompatActivity {
     public AppCompatTextView tvTool;
     public AppCompatTextView tvPercent;
     public MotionLayout motionLayout1;
-    public MotionLayout motionLayout2;
+    public View motionLayout2;
     public LottieAnimationView ltAnimBg;
     public LottieAnimationView ltAnimDone;
     public TextView tvPdfName;

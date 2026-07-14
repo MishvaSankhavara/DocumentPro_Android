@@ -3,8 +3,10 @@ package docreader.aidoc.pdfreader.ui.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -93,6 +95,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 viewPager.setCurrentItem(startTab, false);
                 updateTabSelection(startTab);
             });
+        }
+
+        // On Android 11+ request All Files Access so the Artifex SDK can
+        // copy documents from external storage without Error (4).
+        checkAndRequestStoragePermission();
+    }
+
+    /** Requests MANAGE_EXTERNAL_STORAGE on Android 11+ if not already granted. */
+    private void checkAndRequestStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                && !Environment.isExternalStorageManager()) {
+            Intent intent = new Intent(
+                    Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                    Uri.parse("package:" + getPackageName()));
+            try {
+                startActivityForResult(intent, docreader.aidoc.pdfreader.AppGlobalConstants.REQUEST_CODE_MANAGE_ALL_FILES);
+            } catch (Exception e) {
+                // Fallback: open the generic all-files-access settings screen
+                startActivityForResult(
+                        new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION),
+                        docreader.aidoc.pdfreader.AppGlobalConstants.REQUEST_CODE_MANAGE_ALL_FILES);
+            }
         }
     }
 

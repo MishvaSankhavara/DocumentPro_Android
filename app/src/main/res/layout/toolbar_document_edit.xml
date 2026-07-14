@@ -36,14 +36,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="67dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
         android:textColor="#111827"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fl_save_edit_container"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fl_exit_edit_container"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,6 +55,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_icon_white_circle"
         android:elevation="1dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">

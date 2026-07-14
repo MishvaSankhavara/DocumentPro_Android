@@ -181,11 +181,12 @@
 
                     <ImageView
                         android:id="@+id/imgButton_tools"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_nav_tools"
-                        app:tint="#FFFFFF" />
+                        android:padding="@dimen/_3sdp"
+                        android:src="@drawable/ic_pdf_tools"
+                        app:tint="@color/white" />
                 </FrameLayout>
 
                 <!-- "Tools" label — blue when this tab is active -->

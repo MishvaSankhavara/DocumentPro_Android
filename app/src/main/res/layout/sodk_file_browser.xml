@@ -6,6 +6,18 @@
     android:background="@android:color/transparent"
     android:orientation="vertical">
 
+    <!-- Current Location Header Label -->
+    <TextView
+        android:id="@+id/tv_file_name_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginHorizontal="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:text="File Name"
+        android:textColor="@color/colorAccent"
+        android:textSize="13sp" />
+
     <!-- File Name Input Wrapper -->
     <LinearLayout
         android:id="@+id/edit_text_wrapper"
@@ -24,7 +36,8 @@
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
             android:src="@drawable/ic_file"
-            app:tint="@color/colorAccent" />
+            app:tint="@color/colorAccent"
+            android:visibility="gone"/>
 
         <com.artifex.sonui.editor.SOEditText
             android:id="@+id/edit_text"
@@ -52,19 +65,82 @@
         android:textColor="@color/colorAccent"
         android:textSize="13sp" />
 
-    <!-- Current Location Info Card -->
-    <FrameLayout
-        android:id="@+id/breadcrumb_wrapper"
+    <!-- Current Location: breadcrumb + Browse (+) button side-by-side -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginHorizontal="15dp"
-        android:background="@drawable/bg_dialog_info_row"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="6dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="gone">
 
-        <include layout="@layout/view_breadcrumb_path" />
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/breadcrumb_wrapper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dialog_info_row"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp">
+            <include layout="@layout/view_breadcrumb_path" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Picked-path row: shown after system folder picker returns a path -->
+    <LinearLayout
+        android:id="@+id/ll_picked_path_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="@dimen/_8sdp"
+        android:background="@drawable/bg_dialog_input_field"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="7dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_nav_files"
+            app:tint="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/et_picked_path"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Folder path…"
+            android:singleLine="true"
+            android:ellipsize="start"
+            android:textColor="@color/app_primary_text"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/btn_edit_picked_path"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Edit path"
+            app:tint="@color/app_text_gray"
+            android:visibility="gone"/>
+
+        <!-- + Browse button -->
+        <ImageView
+            android:id="@+id/btn_browse_folder"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/ic_add_path"
+            android:tint="@color/colorAccent"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
 
     <!-- Other Locations Header Label -->
     <TextView
@@ -76,7 +152,8 @@
         android:fontFamily="@font/inter_bold"
         android:text="Other locations"
         android:textColor="@color/app_text_gray"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:visibility="gone"/>
 
     <!-- Explorer ListView Container -->
     <RelativeLayout
@@ -86,7 +163,8 @@
         android:layout_weight="1"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        android:visibility="gone">
 
         <com.artifex.sonui.ExplorerListView
             android:id="@+id/fileListView"
@@ -155,7 +233,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="4dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/cancel_button"

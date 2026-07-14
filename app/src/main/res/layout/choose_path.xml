@@ -57,7 +57,7 @@
         <com.artifex.sonui.FileBrowser
             android:id="@+id/file_browser"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_360sdp"
+            android:layout_height="@dimen/_240sdp"
             android:layout_marginTop="16dp" />
     </LinearLayout>
 </LinearLayout>

@@ -2,7 +2,11 @@ package com.artifex.sonui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +25,11 @@ public class ChoosePathActivity extends BaseActivity {
     private static int b;
     private static String c;
     private static boolean d;
+
+    private static final int REQUEST_FOLDER_PICK = 5001;
+
+    /** Reference kept so onActivityResult can call setSelectedFolderPath. */
+    private FileBrowser fileBrowser;
 
     public ChoosePathActivity() {
     }
@@ -45,8 +54,22 @@ public class ChoosePathActivity extends BaseActivity {
         super.onCreate(var1);
         this.setContentView(R.layout.choose_path);
         String var4 = c;
-        final FileBrowser fileBrowser = this.findViewById(R.id.file_browser);
+        fileBrowser = this.findViewById(R.id.file_browser);
         fileBrowser.a(this, var4);
+
+        // Wire the + Browse button to open the system folder picker
+        fileBrowser.setBrowseFolderListener(() -> {
+            Intent pickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            pickerIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            try {
+                startActivityForResult(pickerIntent, REQUEST_FOLDER_PICK);
+            } catch (Exception e) {
+                android.util.Log.e("ChoosePathActivity", "Folder picker not available", e);
+            }
+        });
+
         AppCompatTextView tvSave = this.findViewById(R.id.save_button);
         if (b == 3) {
             var4 = getString(R.string.editor_copy);
@@ -96,6 +119,61 @@ public class ChoosePathActivity extends BaseActivity {
                 return var4;
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_FOLDER_PICK && resultCode == RESULT_OK && data != null) {
+            Uri treeUri = data.getData();
+            if (treeUri != null) {
+                // Take persistent permission so the app can access this folder later
+                try {
+                    getContentResolver().takePersistableUriPermission(
+                            treeUri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                } catch (Exception e) {
+                    android.util.Log.w("ChoosePathActivity", "takePersistableUriPermission failed", e);
+                }
+                String folderPath = treeUriToPath(treeUri);
+                if (folderPath != null && fileBrowser != null) {
+                    fileBrowser.setSelectedFolderPath(folderPath);
+                }
+            }
+        }
+    }
+
+    /**
+     * Converts a tree URI from ACTION_OPEN_DOCUMENT_TREE to a real file-system path.
+     * Works for primary (internal) storage and most secondary (SD card) storage.
+     */
+    private String treeUriToPath(Uri treeUri) {
+        try {
+            String docId;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                docId = DocumentsContract.getTreeDocumentId(treeUri);
+            } else {
+                return null;
+            }
+            // docId format: "primary:Download" or "primary:" (root) or "<sdcardId>:path"
+            String[] parts = docId.split(":");
+            String storageType = parts[0];
+            String relativePath = (parts.length > 1) ? parts[1] : "";
+
+            String basePath;
+            if ("primary".equalsIgnoreCase(storageType)) {
+                basePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            } else {
+                // SD card or other secondary storage
+                basePath = "/storage/" + storageType;
+            }
+
+            return relativePath.isEmpty() ? basePath : basePath + "/" + relativePath;
+        } catch (Exception e) {
+            android.util.Log.e("ChoosePathActivity", "treeUriToPath failed", e);
+            return null;
+        }
     }
 
     private void completeSave(final FileBrowser fileBrowser) {

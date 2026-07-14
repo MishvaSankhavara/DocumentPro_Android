@@ -48,6 +48,7 @@ import docreader.aidoc.pdfreader.ui.customviews.EditBtn;
 import docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBarChangeListener;
 import docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBar;
 import docreader.aidoc.pdfreader.utils.Utils;
+import docreader.aidoc.pdfreader.ui.dialog.AppLoadingDialog;
 
 public class NUIDocViewPdf extends NUIDocView {
     private EditBtn btnHighLight;
@@ -221,9 +222,24 @@ public class NUIDocViewPdf extends NUIDocView {
         if (path == null)
             return null;
         try {
+            String resolvedPath = path;
+            android.content.Context context = getContext();
+            if (context instanceof android.app.Activity) {
+                android.content.Intent intent = ((android.app.Activity) context).getIntent();
+                if (intent != null) {
+                    String originalPath = intent.getStringExtra("selected_file_uri");
+                    if (originalPath != null && !originalPath.isEmpty()) {
+                        File cacheDocsDir = new File(context.getCacheDir(), "docs_cache");
+                        if (path.startsWith(cacheDocsDir.getAbsolutePath())) {
+                            resolvedPath = originalPath;
+                        }
+                    }
+                }
+            }
+
             // Use canonical path to ensure consistency (handles symlinks, relative
             // segments, etc.)
-            File f = new File(path);
+            File f = new File(resolvedPath);
             String canonicalPath = f.getCanonicalPath();
 
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -234,8 +250,8 @@ public class NUIDocViewPdf extends NUIDocView {
             }
             String fileName = "annotations_" + sb.toString() + ".json";
             String fullPath = getContext().getFilesDir() + "/" + fileName;
-            Log.d("ANNOTATION_DEBUG", "getAnnotationFilePath: path=[" + path + "], canonical=[" + canonicalPath
-                    + "], hashFile=[" + fileName + "]");
+            Log.d("ANNOTATION_DEBUG", "getAnnotationFilePath: path=[" + path + "], resolved=[" + resolvedPath
+                    + "], canonical=[" + canonicalPath + "], hashFile=[" + fileName + "]");
             return fullPath;
         } catch (Exception e) {
             Log.e("ANNOTATION_DEBUG", "getAnnotationFilePath error", e);
@@ -1583,7 +1599,11 @@ public class NUIDocViewPdf extends NUIDocView {
                     Log.d("ANNOTATION_DEBUG", "reloadFile: performing postponed reload for " + finalPath);
                     cVar.a(false);
                     cVar.a(finalPath);
-                    final ProgressDialog createAndShowWaitSpinner = Utilities.createAndShowWaitSpinner(getContext());
+                    final AppLoadingDialog createAndShowWaitSpinner = new AppLoadingDialog(getContext());
+                    if (createAndShowWaitSpinner.getWindow() != null) {
+                        createAndShowWaitSpinner.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    }
+                    createAndShowWaitSpinner.show();
                     cVar.a(new c.c() {
                         public void a() {
                             if (NUIDocViewPdf.this.getDocView() != null) {

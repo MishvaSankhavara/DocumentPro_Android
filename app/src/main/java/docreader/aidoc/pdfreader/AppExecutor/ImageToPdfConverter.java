@@ -110,7 +110,6 @@ public class ImageToPdfConverter {
                 weakReference_ImageToPdfConverter.get().showCompletionUI(() -> {
                     weakReference_ImageToPdfConverter.get().motionLayout1.transitionToEnd();
                     weakReference_ImageToPdfConverter.get().motionLayout2.setVisibility(View.VISIBLE);
-                    weakReference_ImageToPdfConverter.get().motionLayout2.transitionToEnd();
                     weakReference_ImageToPdfConverter.get().ltAnimDone.playAnimation();
 
                     weakReference_ImageToPdfConverter.get().tvPdfName

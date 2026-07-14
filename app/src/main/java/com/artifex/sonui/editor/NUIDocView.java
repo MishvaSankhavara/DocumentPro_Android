@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import docreader.aidoc.pdfreader.utils.DialogManagerUtils;
 import docreader.aidoc.pdfreader.clickListener.PasswordClickListener;
 import docreader.aidoc.pdfreader.ui.dialog.PasswordSetupDialog;
+import docreader.aidoc.pdfreader.ui.dialog.UnsavedChangesDialog;
 import docreader.aidoc.pdfreader.model_reader.PDFReaderModel;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -170,6 +171,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     private SOFileState mSOFileState;
     private SOFileDatabase mSoFileDatabase;
     private AppLoadingDialog mProgressDialog;
+    private long mShowDialogTime = 0L;
     private DocView mDocView;
     private DocListPagesView mDocListPageViews;
     private String k;
@@ -562,6 +564,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         if (this.mProgressDialog != null && this.mProgressDialog.isShowing()) {
             return;
         }
+        mShowDialogTime = System.currentTimeMillis();
         this.mProgressDialog = new AppLoadingDialog(this.getContext());
         Window window5 = this.mProgressDialog.getWindow();
         assert window5 != null;
@@ -573,9 +576,28 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     private void dismissProgressDialog() {
         try {
             if (this.mProgressDialog != null && this.mProgressDialog.isShowing()) {
-                this.mProgressDialog.dismiss();
+                long elapsed = System.currentTimeMillis() - mShowDialogTime;
+                long remaining = 2000L - elapsed;
+                if (remaining > 0) {
+                    final AppLoadingDialog dialogToDismiss = this.mProgressDialog;
+                    this.mProgressDialog = null;
+                    new Handler(android.os.Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                if (dialogToDismiss.isShowing()) {
+                                    dialogToDismiss.dismiss();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, remaining);
+                } else {
+                    this.mProgressDialog.dismiss();
+                    this.mProgressDialog = null;
+                }
             }
-            this.mProgressDialog = null;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -599,8 +621,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                     if (unlockedModel != null) {
                         if (dialogHolder[0] != null) dialogHolder[0].dismiss();
                         String newPath = unlockedModel.getAbsolutePath_PDFModel();
+                        // Pre-copy to cache so SDK can open without permission issues
+                        File cachedUnlocked = Utils.copyToCache(activity, new File(newPath));
                         Intent intent = new Intent(activity, activity.getClass());
-                        intent.setData(Uri.fromFile(new File(newPath)));
+                        intent.setData(Uri.fromFile(cachedUnlocked));
                         intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, newPath);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(intent);
@@ -1913,12 +1937,12 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                 var2 = var3;
                             }
                         }
-                        (new Builder(NUIDocView.this.activity(), R.style.sodk_editor_alert_dialog_style))
-                                .setTitle(R.string.editor_document_modified)
-                                .setMessage(R.string.editor_save_or_discard).setCancelable(false)
-                                .setPositiveButton(var2, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface var1, int var2) {
-                                        var1.dismiss();
+                        UnsavedChangesDialog unsavedChangesDialog = new UnsavedChangesDialog(
+                                NUIDocView.this.activity(),
+                                var2,
+                                new UnsavedChangesDialog.OnOptionSelectedListener() {
+                                    @Override
+                                    public void onSave() {
                                         NUIDocView.this.preSaveQuestion(new Runnable() {
                                             public void run() {
                                                 if (NUIDocView.this.k != null) {
@@ -1969,22 +1993,21 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                             }
                                         });
                                     }
-                                }).setNegativeButton(R.string.app_sodk_editor_discard,
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface var1, int var2) {
-                                                var1.dismiss();
-                                                NUIDocView.this.mSOFileState.closeFile();
-                                                NUIDocView.this.e = Boolean.FALSE;
-                                                NUIDocView.this.prefinish();
-                                            }
-                                        })
-                                .setNeutralButton(R.string.editor_continue_editing,
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface var1, int var2) {
-                                                var1.dismiss();
-                                            }
-                                        })
-                                .create().show();
+
+                                    @Override
+                                    public void onDiscard() {
+                                        NUIDocView.this.mSOFileState.closeFile();
+                                        NUIDocView.this.e = Boolean.FALSE;
+                                        NUIDocView.this.prefinish();
+                                    }
+
+                                    @Override
+                                    public void onContinue() {
+                                        // Do nothing
+                                    }
+                                });
+                        unsavedChangesDialog.setCancelable(false);
+                        unsavedChangesDialog.show();
                     }
                 });
             } else {
@@ -2145,10 +2168,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
     }
 
     public void setEnableBottomBtn(boolean enable) {
-        this.btnRotateTab.setEnable(enable);
-        this.btnEditTab.setEnable(enable);
-        this.btnSearchTab.setEnable(enable);
-        this.btnThumbnailTab.setEnable(enable);
+        if (this.btnRotateTab != null) this.btnRotateTab.setEnable(enable);
+        if (this.btnEditTab != null) this.btnEditTab.setEnable(enable);
+        if (this.btnSearchTab != null) this.btnSearchTab.setEnable(enable);
+        if (this.btnThumbnailTab != null) this.btnThumbnailTab.setEnable(enable);
     }
 
     @Override
@@ -2181,10 +2204,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 onSelectionChanged();
                 RelativeLayout thumbnailContainer = this.findViewById(R.id.pages_container);
                 if (thumbnailContainer != null && thumbnailContainer.getVisibility() != VISIBLE) {
-                    this.btnThumbnailTab.setSelected(true);
-                    this.btnRotateTab.setSelected(false);
-                    this.btnEditTab.setSelected(false);
-                    this.btnSearchTab.setSelected(false);
+                    if (this.btnThumbnailTab != null) this.btnThumbnailTab.setSelected(true);
+                    if (this.btnRotateTab != null) this.btnRotateTab.setSelected(false);
+                    if (this.btnEditTab != null) this.btnEditTab.setSelected(false);
+                    if (this.btnSearchTab != null) this.btnSearchTab.setSelected(false);
                     final int var2 = this.mDocView.getMostVisiblePage();
                     this.mDocView.onShowPages();
                     thumbnailContainer.setVisibility(VISIBLE);
@@ -2199,17 +2222,17 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         }
                     });
                 } else if (thumbnailContainer != null && thumbnailContainer.getVisibility() != GONE) {
-                    this.btnThumbnailTab.setSelected(false);
+                    if (this.btnThumbnailTab != null) this.btnThumbnailTab.setSelected(false);
                     this.mDocView.onHidePages();
                     thumbnailContainer.setVisibility(GONE);
                 }
                 layoutNow();
             }
             if (var1 == this.btnEditTab) {
-                this.btnEditTab.setSelected(true);
-                this.btnRotateTab.setSelected(false);
-                this.btnSearchTab.setSelected(false);
-                this.btnThumbnailTab.setSelected(false);
+                if (this.btnEditTab != null) this.btnEditTab.setSelected(true);
+                if (this.btnRotateTab != null) this.btnRotateTab.setSelected(false);
+                if (this.btnSearchTab != null) this.btnSearchTab.setSelected(false);
+                if (this.btnThumbnailTab != null) this.btnThumbnailTab.setSelected(false);
                 activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -2229,10 +2252,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
 
             }
             if (var1 == this.btnSearchTab) {
-                this.btnSearchTab.setSelected(true);
-                this.btnRotateTab.setSelected(false);
-                this.btnEditTab.setSelected(false);
-                this.btnThumbnailTab.setSelected(false);
+                if (this.btnSearchTab != null) this.btnSearchTab.setSelected(true);
+                if (this.btnRotateTab != null) this.btnRotateTab.setSelected(false);
+                if (this.btnEditTab != null) this.btnEditTab.setSelected(false);
+                if (this.btnThumbnailTab != null) this.btnThumbnailTab.setSelected(false);
                 this.activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -2251,10 +2274,10 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 });
             }
             if (var1 == this.btnRotateTab) {
-                this.btnRotateTab.setSelected(true);
-                this.btnEditTab.setSelected(false);
-                this.btnSearchTab.setSelected(false);
-                this.btnThumbnailTab.setSelected(false);
+                if (this.btnRotateTab != null) this.btnRotateTab.setSelected(true);
+                if (this.btnEditTab != null) this.btnEditTab.setSelected(false);
+                if (this.btnSearchTab != null) this.btnSearchTab.setSelected(false);
+                if (this.btnThumbnailTab != null) this.btnThumbnailTab.setSelected(false);
                 NUIDocView.this.h();
                 this.changeOrientationOnClick();
                 onSelectionChanged();
@@ -2262,7 +2285,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 layoutNow();
             }
             if (var1 == this.tvCancelSearch) {
-                this.btnSearchTab.setSelected(false);
+                if (this.btnSearchTab != null) this.btnSearchTab.setSelected(false);
                 this.activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -2276,7 +2299,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 });
             }
             if (var1 == this.btnCloseEdit) {
-                this.btnEditTab.setSelected(false);
+                if (this.btnEditTab != null) this.btnEditTab.setSelected(false);
                 activity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -3081,12 +3104,13 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
             }
 
             if (this.mSession != null) {
-                final ProgressDialog progressDialog1 = new ProgressDialog(this.getContext(),
-                        R.style.sodk_editor_alert_dialog_style);
+                final AppLoadingDialog progressDialog1 = new AppLoadingDialog(this.getContext());
                 progressDialog1.setMessage(this.getContext().getString(R.string.editor_wait));
                 progressDialog1.setCancelable(false);
-                progressDialog1.setIndeterminate(true);
-                progressDialog1.getWindow().clearFlags(2);
+                if (progressDialog1.getWindow() != null) {
+                    progressDialog1.getWindow().clearFlags(2);
+                    progressDialog1.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                }
                 progressDialog1.setOnShowListener(new OnShowListener() {
                     public void onShow(DialogInterface var1) {
                         (new Handler()).postDelayed(new Runnable() {

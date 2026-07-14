@@ -77,7 +77,6 @@ public class SetPasswordManager {
                     weakReference_setPW.get().showCompletionUI(() -> {
                         weakReference_setPW.get().motionLayout1.transitionToEnd();
                         weakReference_setPW.get().motionLayout2.setVisibility(View.VISIBLE);
-                        weakReference_setPW.get().motionLayout2.transitionToEnd();
                         weakReference_setPW.get().ltAnimBg.playAnimation();
                         weakReference_setPW.get().ltAnimDone.playAnimation();
 

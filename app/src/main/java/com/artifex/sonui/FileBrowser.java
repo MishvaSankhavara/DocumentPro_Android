@@ -41,6 +41,16 @@ public class FileBrowser extends RelativeLayout {
     private AppCompatTextView btnSave;
     private BaseActivity k = null;
 
+    /** Callback to tell the host activity to launch ACTION_OPEN_DOCUMENT_TREE. */
+    public interface BrowseFolderListener {
+        void onBrowseFolder();
+    }
+    private BrowseFolderListener browseFolderListener;
+
+    public void setBrowseFolderListener(BrowseFolderListener listener) {
+        this.browseFolderListener = listener;
+    }
+
     public FileBrowser(Context var1, AttributeSet var2) {
         super(var1, var2);
         this.b();
@@ -134,6 +144,24 @@ public class FileBrowser extends RelativeLayout {
         // var3 = com.artifex.sonui.c.c("/", "Dropbox", true, true);
 
         c = null;
+
+        // Wire the + Browse button and Edit button
+        View btnBrowse = this.findViewById(R.id.btn_browse_folder);
+        if (btnBrowse != null) {
+            btnBrowse.setOnClickListener(v -> {
+                if (browseFolderListener != null) {
+                    browseFolderListener.onBrowseFolder();
+                }
+            });
+        }
+        View btnEdit = this.findViewById(R.id.btn_edit_picked_path);
+        if (btnEdit != null) {
+            btnEdit.setOnClickListener(v -> {
+                if (browseFolderListener != null) {
+                    browseFolderListener.onBrowseFolder();
+                }
+            });
+        }
     }
 
     private void c() {
@@ -285,5 +313,30 @@ public class FileBrowser extends RelativeLayout {
 
     public AppFile getFolderAppFile() {
         return c;
+    }
+
+    /**
+     * Called when the host activity receives a folder path from ACTION_OPEN_DOCUMENT_TREE.
+     * Shows the picked-path row and wires the editable text field so the user can
+     * also type / correct the path manually.
+     */
+    public void setSelectedFolderPath(String path) {
+        if (path == null || path.isEmpty()) return;
+
+        // Set the static selected-folder AppFile so completeSave can resolve it
+        FileBrowser.c = new com.artifex.sonui.b(path, new java.io.File(path).getName());
+
+        // Show the picked-path row and populate the TextView
+        android.view.View pickedRow = this.findViewById(R.id.ll_picked_path_row);
+        if (pickedRow != null) {
+            pickedRow.setVisibility(android.view.View.VISIBLE);
+        }
+        android.widget.TextView tvPickedPath = this.findViewById(R.id.et_picked_path);
+        if (tvPickedPath != null) {
+            tvPickedPath.setText(path);
+        }
+
+        // Refresh the Save button now that a folder is selected
+        c();
     }
 }

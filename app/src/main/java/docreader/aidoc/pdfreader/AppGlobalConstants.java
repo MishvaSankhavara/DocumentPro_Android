@@ -32,6 +32,7 @@ public class AppGlobalConstants {
         public static String PRIVACY_POLICY_URL = "https://doc-hosting.flycricket.io/docreader-aidoc-pdfreader-privacy-policy/30888b03-bf3e-4542-b153-311d8e105aa7/privacy";
         public static final String PREF_IS_APP_RATED = "is_rate_app";
         public static final String ACTION_RATE_APP = "RATE_APP";
+        public static final String KEY_DOCUMENT_OPEN_COUNT = "document_open_count";
 
         public static String PREF_IS_FIRST_TIME = "first_time";
         public static String PREF_LANGUAGE_NUMBER = "language_key_number";
@@ -95,6 +96,8 @@ public class AppGlobalConstants {
         public static final String QUERY_ALL_DOCUMENT_FILES = MediaStore.Files.FileColumns.MIME_TYPE
                         + " LIKE 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
                         + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-excel'"
+                        + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'text/csv'"
+                        + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'text/comma-separated-values'"
                         + " OR " + MediaStore.Files.FileColumns.MIME_TYPE
                         + " LIKE 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
                         + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/msword'"
@@ -105,7 +108,9 @@ public class AppGlobalConstants {
 
         public static final String QUERY_EXCEL_FILES = MediaStore.Files.FileColumns.MIME_TYPE
                         + " LIKE 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                        + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-excel'";
+                        + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'application/vnd.ms-excel'"
+                        + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'text/csv'"
+                        + " OR " + MediaStore.Files.FileColumns.MIME_TYPE + " LIKE 'text/comma-separated-values'";
 
         public static final String QUERY_WORD_FILES = MediaStore.Files.FileColumns.MIME_TYPE
                         + " LIKE 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"

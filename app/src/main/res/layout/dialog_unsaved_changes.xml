@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_dialog_confirm_card"
+    android:padding="20dp">
+
+    <!-- Top Right Close Button -->
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:padding="3dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_close_x"
+        android:tint="#89909c"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
+
+    <!-- Content Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="4dp">
+
+        <!-- Custom Warning Document Badge (Decreased Size) -->
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_unsaved_document_warning"
+            android:contentDescription="@null" />
+
+        <!-- Dialog Title (Decreased Top Margin and Text Size) -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:text="@string/exit_without_saving_title"
+            android:textColor="#0b1e42"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Dialog Description (Decreased Spacing) -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_dialog_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:gravity="center"
+            android:text="@string/exit_without_saving_message"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="#4e5b72"
+            android:textSize="14sp" />
+
+        <!-- Action Buttons Container (Horizontal - Decreased Top Spacing) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="horizontal">
+
+            <!-- Discard Button (Left, Outline Blue styled - Decreased Height) -->
+            <LinearLayout
+                android:id="@+id/btn_discard"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_dialog_btn_outline_blue"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/app_sodk_editor_discard"
+                    android:textColor="#2563EB"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Save Button (Right, Solid Blue styled - Decreased Height) -->
+            <LinearLayout
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_dialog_btn_primary"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_btn_save_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/save"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

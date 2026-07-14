@@ -143,13 +143,13 @@
                 app:TextEdt="Highlight"
                 app:ImageEdt="@drawable/ic_highlight" />
 
-            <!-- Font -->
+            <!-- Text -->
             <docreader.aidoc.pdfreader.ui.customviews.EditBtn
                 android:id="@+id/btnText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:TextEdt="Font"
+                app:TextEdt="Text"
                 app:ImageEdt="@drawable/ic_edit_font_aa" />
 
             <!-- Stickers -->

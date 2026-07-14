@@ -1,315 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/motionLayout2"
+    android:id="@+id/inc_task_completion_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_success_gradient"
-    app:layoutDescription="@xml/img_success_scene">
+    android:background="@color/white">
 
     <!-- White Card Background (bodyBg) -->
-    <View
+    <LinearLayout
         android:id="@+id/bodyBg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
         android:background="@drawable/bg_premium_card"
         android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Guideline for top layout constraints (compatibility) -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
-    <!-- Guideline for center constraints (compatibility) -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCenter"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <!-- Home Button (top-left inside card) -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/operateHomeImg"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_dialog_circle_button"
-        android:elevation="6dp"
-        android:padding="10dp"
-        app:srcCompat="@drawable/ic_main_home"
-        app:tint="@color/app_main_color"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/bodyBg"
-        app:layout_constraintTop_toTopOf="@id/bodyBg" />
-
-    <!-- Close Button (top-right inside card) -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/operateCloseImg"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_dialog_circle_button"
-        android:elevation="6dp"
-        android:padding="10dp"
-        app:srcCompat="@drawable/ic_close_x"
-        app:tint="#5E6C84"
-        app:layout_constraintEnd_toEndOf="@id/bodyBg"
-        app:layout_constraintTop_toTopOf="@id/bodyBg" />
-
-    <!-- Top Layout (checkmark, title, subtitle) -->
-
-    <!-- File Layout (containing preview container card, file name, path) -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:elevation="5dp"
-        app:layout_constraintEnd_toEndOf="@id/bodyBg"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/bodyBg"
-        app:layout_constraintTop_toTopOf="@id/bodyBg">
-
-        <!-- Checkmark animation done bg -->
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/bgAnimView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/titleTv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/lottie_operate_done_bg" />
-
-        <!-- Checkmark animation done icon -->
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animationView"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bgAnimView"
-            app:layout_constraintEnd_toEndOf="@+id/bgAnimView"
-            app:layout_constraintStart_toStartOf="@+id/bgAnimView"
-            app:layout_constraintTop_toTopOf="@+id/bgAnimView"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/lottie_operate_done_icon"
-            app:lottie_speed="1.2" />
-
-        <!-- Success Title -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/titleTv"
-            style="@style/FontBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Successfully!"
-            android:textColor="@color/app_text_black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bgAnimView" />
-
-        <!-- Success Subtitle -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/subTitleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/inter_regular"
-            android:text="Your document has been processed."
-            android:textColor="@color/app_text_gray"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleTv" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/fileLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:elevation="5dp"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingHorizontal="24dp"
-        android:paddingTop="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/optLayout"
-        app:layout_constraintEnd_toEndOf="@id/bodyBg"
-        app:layout_constraintStart_toStartOf="@id/bodyBg"
-        app:layout_constraintTop_toBottomOf="@id/topLayout"
-        app:layout_constraintVertical_bias="0.5">
+        android:paddingVertical="16dp">
 
-        <!-- Preview Container Card -->
-        <FrameLayout
+        <!-- Top buttons (Home & Close) -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="12dp"
-            android:background="@drawable/bg_preview_container"
-            android:padding="20dp">
+            android:layout_height="wrap_content"
+            android:id="@+id/topBar">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="3dp">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/operateHomeImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/bg_dialog_circle_button"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:layout_margin="@dimen/_4sdp"
+                app:srcCompat="@drawable/ic_main_home"
+                app:tint="@color/app_main_color"
+                android:visibility="gone" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/previewImg"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/operateCloseImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/_4sdp"
+                android:background="@drawable/bg_dialog_circle_button"
+                android:elevation="2dp"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_close_x"
+                app:tint="#5E6C84" />
+        </RelativeLayout>
+
+        <!-- Top Success info (checkmark, title, subtitle) -->
+        <LinearLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp">
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp">
+
+                <!-- Checkmark animation done bg -->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/bgAnimView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_pdf_no" />
-            </androidx.cardview.widget.CardView>
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/lottie_operate_done_bg" />
 
-            <!-- Page count index badge -->
+                <!-- Checkmark animation done icon -->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/lottie_operate_done_icon"
+                    app:lottie_speed="1.2" />
+            </FrameLayout>
+
+            <!-- Success Title -->
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/indexTv"
-                style="@style/FontSemiBold"
+                android:id="@+id/titleTv"
+                style="@style/FontBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="12dp"
-                android:background="@drawable/ip_bg_indexx_convert"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:elevation="4dp" />
-        </FrameLayout>
+                android:layout_marginTop="2dp"
+                android:text="Successfully!"
+                android:textColor="@color/app_text_black"
+                android:textSize="24sp" />
 
-        <!-- File info row (horizontal layout with PDF icon on the left, filename and path on the right) -->
+            <!-- Success Subtitle -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/subTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="Your document has been processed."
+                android:textColor="@color/app_text_gray"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- File info layout (expanded to take remaining space, using weight) -->
         <LinearLayout
+            android:id="@+id/fileLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="12dp">
+
+            <!-- Preview Container Card -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/_8sdp"
+                android:layout_marginHorizontal="12dp"
+                android:background="@drawable/bg_preview_container">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_2sdp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/previewImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_pdf_no" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Page count index badge -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/indexTv"
+                    style="@style/FontSemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/ip_bg_indexx_convert"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:elevation="4dp" />
+            </FrameLayout>
+
+            <!-- File info row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="12dp">
+
+                <!-- Circular PDF Icon Background -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_dialog_circle_button"
+                    android:padding="12dp"
+                    app:srcCompat="@drawable/ic_document_pdf" />
+
+                <!-- Name & Path layout -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fileNameTv"
+                        style="@style/FontBold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/app_text_black"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/filePathTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="middle"
+                        android:fontFamily="@font/inter_regular"
+                        android:maxLines="1"
+                        android:textColor="@color/app_text_gray"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Hidden status indicator -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/resultTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:textColor="@color/app_main_color"
+                android:textSize="13sp"
+                android:fontFamily="@font/inter_medium"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Options Layout (buttons) -->
+        <LinearLayout
+            android:id="@+id/optLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginHorizontal="12dp">
+            android:orientation="vertical"
+            android:paddingHorizontal="36dp"
+            android:layout_marginTop="8dp">
 
-            <!-- Circular PDF Icon Background -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_dialog_circle_button"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_document_pdf" />
-
-            <!-- Name & Path layout -->
+            <!-- Share Button with upload icon -->
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:id="@+id/shareTv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_premium_btn_primary"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:srcCompat="@drawable/ic_share_up"
+                    app:tint="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/fileNameTv"
-                    style="@style/FontBold"
-                    android:layout_width="match_parent"
+                    style="@style/FontSemiBold"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/app_text_black"
-                    android:textSize="16sp" />
+                    android:layout_marginStart="8dp"
+                    android:text="@string/action_share"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:textAllCaps="true" />
+            </LinearLayout>
+
+            <!-- Open Button with open icon -->
+            <LinearLayout
+                android:id="@+id/openTv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginVertical="@dimen/_12sdp"
+                android:background="@drawable/bg_premium_btn_secondary"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:srcCompat="@drawable/ic_open_in_new"
+                    app:tint="@color/app_main_color" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/filePathTv"
-                    android:layout_width="match_parent"
+                    style="@style/FontSemiBold"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:ellipsize="middle"
-                    android:fontFamily="@font/inter_regular"
-                    android:maxLines="1"
-                    android:textColor="@color/app_text_gray"
-                    android:textSize="12sp" />
+                    android:layout_marginStart="8dp"
+                    android:text="@string/action_open"
+                    android:textColor="@color/app_main_color"
+                    android:textSize="16sp"
+                    app:textAllCaps="true" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Hidden status indicator -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/resultTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:gravity="center"
-            android:textColor="@color/app_main_color"
-            android:textSize="13sp"
-            android:fontFamily="@font/inter_medium"
-            android:visibility="gone" />
-
     </LinearLayout>
 
-    <!-- Options Layout (buttons) -->
-    <LinearLayout
-        android:id="@+id/optLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:orientation="vertical"
-        android:paddingHorizontal="36dp"
-        android:paddingBottom="24dp"
-        android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="@id/bodyBg"
-        app:layout_constraintEnd_toEndOf="@id/bodyBg"
-        app:layout_constraintStart_toStartOf="@id/bodyBg">
-
-        <!-- Share Button with upload icon -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/shareTv"
-            style="@style/FontSemiBold"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/bg_premium_btn_primary"
-            android:gravity="center"
-            android:text="@string/action_share"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:textAllCaps="true"
-            android:drawableStart="@drawable/ic_share_up"
-            android:drawableLeft="@drawable/ic_share_up"
-            android:drawablePadding="8dp"
-            app:tint="@color/white" />
-
-        <!-- Open Button with open icon -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/openTv"
-            style="@style/FontSemiBold"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_premium_btn_secondary"
-            android:gravity="center"
-            android:text="@string/action_open"
-            android:textColor="@color/app_main_color"
-            android:textSize="16sp"
-            app:textAllCaps="true"
-            android:drawableStart="@drawable/ic_open_in_new"
-            android:drawableLeft="@drawable/ic_open_in_new"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/app_main_color" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
-
+</RelativeLayout>

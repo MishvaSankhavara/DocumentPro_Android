@@ -169,7 +169,6 @@ public class FileCompressionExecutor {
                             weakReference_FileCompression.get().showCompletionUI(() -> {
                                 weakReference_FileCompression.get().motionLayout1.transitionToEnd();
                                 weakReference_FileCompression.get().motionLayout2.setVisibility(View.VISIBLE);
-                                weakReference_FileCompression.get().motionLayout2.transitionToEnd();
                                 weakReference_FileCompression.get().ltAnimBg.playAnimation();
                                 weakReference_FileCompression.get().ltAnimDone.playAnimation();
 

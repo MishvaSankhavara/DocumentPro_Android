@@ -529,16 +529,42 @@ public class Utils {
 
     }
 
+    /**
+     * Copies a file into the app's internal docs_cache directory so the Artifex SDK
+     * can always read it without requiring MANAGE_EXTERNAL_STORAGE at runtime.
+     * Falls back to the original file on any error.
+     */
+    public static File copyToCache(Context context, File sourceFile) {
+        try {
+            File cacheDir = new File(context.getCacheDir(), "docs_cache");
+            if (!cacheDir.exists()) cacheDir.mkdirs();
+            File cachedFile = new File(cacheDir, sourceFile.getName());
+            if (cachedFile.exists()) cachedFile.delete();
+            try (java.io.FileInputStream in = new java.io.FileInputStream(sourceFile);
+                 java.io.FileOutputStream out = new java.io.FileOutputStream(cachedFile)) {
+                byte[] buf = new byte[32768];
+                int len;
+                while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
+            }
+            return cachedFile;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return sourceFile; // fallback — SDK may still fail, but we won't crash here
+        }
+    }
+
     public static void openFile(Activity mContext, DocumentModel document) {
         try {
             File file = new File(document.getFileUri_DocModel());
 
             // File file = new File(fileHolderModel.getAbsolutePath());
             DatabaseHelper.getInstance(mContext).addRecentDocument_DatabaseHelper(file.getAbsolutePath());
-            Uri fromFile = Uri.fromFile(file);
+            // Pre-copy to internal cache so the Artifex SDK can open it without
+            // needing MANAGE_EXTERNAL_STORAGE to be granted at runtime.
+            File cachedFile = copyToCache(mContext, file);
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
             intent.setAction("android.intent.action.VIEW");
-            intent.setData(fromFile);
+            intent.setData(Uri.fromFile(cachedFile));
             intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, file.getAbsolutePath());
             intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, file.getName());
             intent.putExtra("STARTED_FROM_EXPLORER", true);
@@ -551,12 +577,13 @@ public class Utils {
 
     public static void openFile(Activity mContext, File file) {
         try {
-            // File file = new File(fileHolderModel.getAbsolutePath());
             DatabaseHelper.getInstance(mContext).addRecentDocument_DatabaseHelper(file.getAbsolutePath());
-            Uri fromFile = Uri.fromFile(file);
+            // Pre-copy to internal cache so the Artifex SDK can open it without
+            // needing MANAGE_EXTERNAL_STORAGE to be granted at runtime.
+            File cachedFile = copyToCache(mContext, file);
             Intent intent = new Intent(mContext, ViewOfficeActivity.class);
             intent.setAction("android.intent.action.VIEW");
-            intent.setData(fromFile);
+            intent.setData(Uri.fromFile(cachedFile));
             intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, file.getAbsolutePath());
             intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, file.getName());
             intent.putExtra("STARTED_FROM_EXPLORER", true);
@@ -878,33 +905,34 @@ public class Utils {
     }
 
     public static boolean isDocumentFile(File file) {
-        String fileName = file.getName();
+        String fileName = file.getName().toLowerCase();
         return fileName.endsWith(".pdf") ||
                 fileName.endsWith(".doc") ||
                 fileName.endsWith(".docx") ||
                 fileName.endsWith(".xls") ||
                 fileName.endsWith(".xlsx") ||
                 fileName.endsWith(".ppt") ||
-                fileName.endsWith(".pptx");
+                fileName.endsWith(".pptx") ||
+                fileName.endsWith(".csv");
     }
 
     public static boolean isExcelFile(File file) {
-        String fileName = file.getName();
+        String fileName = file.getName().toLowerCase();
         return fileName.endsWith(".xls") || fileName.endsWith(".xlsx") || fileName.endsWith(".csv");
     }
 
     public static boolean isWordFile(File file) {
-        String fileName = file.getName();
+        String fileName = file.getName().toLowerCase();
         return fileName.endsWith(".doc") || fileName.endsWith(".docx");
     }
 
     public static boolean isPPTFile(File file) {
-        String fileName = file.getName();
+        String fileName = file.getName().toLowerCase();
         return fileName.endsWith(".ppt") || fileName.endsWith(".pptx");
     }
 
     public static boolean isPdfFile(File file) {
-        String fileName = file.getName();
+        String fileName = file.getName().toLowerCase();
         return fileName.endsWith(".pdf");
     }
 

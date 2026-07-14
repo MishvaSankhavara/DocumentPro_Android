@@ -94,7 +94,6 @@ public class SplitDocExecutor {
                     weakReference_SplitDoc.get().showCompletionUI(() -> {
                         weakReference_SplitDoc.get().motionLayout1.transitionToEnd();
                         weakReference_SplitDoc.get().motionLayout2.setVisibility(View.VISIBLE);
-                        weakReference_SplitDoc.get().motionLayout2.transitionToEnd();
                         weakReference_SplitDoc.get().ltAnimBg.playAnimation();
                         weakReference_SplitDoc.get().ltAnimDone.playAnimation();
                         weakReference_SplitDoc.get().tvPdfName.setText(mFileName_SplitDoc);

@@ -114,7 +114,6 @@ public class PdfMergeManager {
                 weakReference_PdfMergeManager.get().showCompletionUI(() -> {
                     weakReference_PdfMergeManager.get().motionLayout1.transitionToEnd();
                     weakReference_PdfMergeManager.get().motionLayout2.setVisibility(View.VISIBLE);
-                    weakReference_PdfMergeManager.get().motionLayout2.transitionToEnd();
                     weakReference_PdfMergeManager.get().ltAnimBg.playAnimation();
                     weakReference_PdfMergeManager.get().ltAnimDone.playAnimation();
 

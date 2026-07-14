@@ -106,6 +106,8 @@
     <string name="editor_error">Error</string>
     <string name="editor_document_modified">There are unsaved changes</string>
     <string name="editor_save_or_discard">Save your changes or discard your changes?</string>
+    <string name="exit_without_saving_title">Exit</string>
+    <string name="exit_without_saving_message">Do you want to save your work before exiting?</string>
 
     //Toast
     <string name="toast_permission_required">Need Permission!</string>
@@ -785,7 +787,7 @@
     <string name="go_to_set">Go to set</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="search_documents">Search documents...</string>
-    <string name="label_pdf_tools">Tools</string>
+    <string name="label_pdf_tools">PDF Tools</string>
     <string name="label_security">Security</string>
     <string name="label_convert_editor">Convert &amp; Editor</string>
     <string name="label_tools">Tools</string>

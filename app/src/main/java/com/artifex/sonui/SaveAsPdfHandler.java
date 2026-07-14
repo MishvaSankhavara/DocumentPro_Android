@@ -45,11 +45,11 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
 
     @Override
     public void saveAsPdfHandler(String fileName, final SODoc doc) {
-        saveAsPdfHandlerInternal(fileName, doc, null, null);
+        saveAsPdfHandlerInternal(fileName, doc, null, null, true);
     }
 
     private void saveAsPdfHandlerInternal(String fileName, final SODoc doc, final SOSaveAsComplete saveAsComplete,
-            final SOCustomSaveComplete customSaveComplete) {
+            final SOCustomSaveComplete customSaveComplete, final boolean isSaveAsPdf) {
         Log.d(TAG, "saveAsPdfHandlerInternal called");
 
         String resolvedFileName = fileName;
@@ -121,8 +121,31 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                     return;
                 }
 
-                if (!selectedFileName.toLowerCase().endsWith(".pdf")) {
-                    selectedFileName += ".pdf";
+                String originalExtension = "";
+                if (activity != null && activity.getIntent() != null) {
+                    String uriStr = activity.getIntent().getStringExtra(
+                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
+                    if (uriStr != null) {
+                        int idx = uriStr.lastIndexOf('.');
+                        if (idx >= 0) {
+                            originalExtension = uriStr.substring(idx);
+                        }
+                    }
+                }
+                if (originalExtension.isEmpty() && selectedFileName != null) {
+                    int idx = selectedFileName.lastIndexOf('.');
+                    if (idx >= 0) {
+                        originalExtension = selectedFileName.substring(idx);
+                    }
+                }
+
+                String targetExtension = isSaveAsPdf ? ".pdf" : originalExtension;
+                if (!targetExtension.isEmpty()) {
+                    int lastDot = selectedFileName.lastIndexOf('.');
+                    if (lastDot >= 0) {
+                        selectedFileName = selectedFileName.substring(0, lastDot);
+                    }
+                    selectedFileName += targetExtension;
                 }
 
                 File destinationFile = new File(selectedFolder, selectedFileName);
@@ -138,7 +161,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                             new Runnable() {
                                 @Override
                                 public void run() {
-                                    performSave(doc, finalPath, saveAsComplete, customSaveComplete);
+                                    performSave(doc, finalPath, saveAsComplete, customSaveComplete, isSaveAsPdf);
                                 }
                             },
                             new Runnable() {
@@ -151,24 +174,40 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                                 }
                             });
                 } else {
-                    performSave(doc, finalPath, saveAsComplete, customSaveComplete);
+                    performSave(doc, finalPath, saveAsComplete, customSaveComplete, isSaveAsPdf);
                 }
             }
         }, latestFileName);
     }
 
-    private void performSave(SODoc doc, String path, final SOSaveAsComplete saveAsComplete,
-            final SOCustomSaveComplete customSaveComplete) {
-        boolean isSourcePdf = false;
-        if (activity != null) {
-            Intent intent = activity.getIntent();
-            if (intent != null) {
-                String uri = intent.getStringExtra(
-                        docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
-                if (uri != null && uri.toLowerCase().endsWith(".pdf")) {
-                    isSourcePdf = true;
-                }
+    private boolean copyFile(File source, File dest) {
+        try (java.io.FileInputStream in = new java.io.FileInputStream(source);
+             java.io.FileOutputStream out = new java.io.FileOutputStream(dest)) {
+            byte[] buf = new byte[32768];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
             }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void performSave(SODoc doc, String path, final SOSaveAsComplete saveAsComplete,
+            final SOCustomSaveComplete customSaveComplete, boolean isSaveAsPdf) {
+        final String finalSavePath;
+        if (!isSaveAsPdf && mNuiDocView != null && mNuiDocView.getSession() != null 
+                && mNuiDocView.getSession().getFileState() != null) {
+            String internalPath = mNuiDocView.getSession().getFileState().getInternalPath();
+            if (internalPath != null && !internalPath.isEmpty()) {
+                finalSavePath = internalPath;
+            } else {
+                finalSavePath = path;
+            }
+        } else {
+            finalSavePath = path;
         }
 
         SODocSaveListener saveListener = new SODocSaveListener() {
@@ -176,69 +215,58 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
             public void onComplete(int result, int error) {
                 Log.d(TAG, "save onComplete: result=" + result + ", error=" + error);
                 if (result == 0) {
+                    if (!finalSavePath.equals(path)) {
+                        boolean copied = copyFile(new File(finalSavePath), new File(path));
+                        if (!copied) {
+                            activity.runOnUiThread(() -> {
+                                Toast.makeText(activity, "Error writing to destination folder", Toast.LENGTH_LONG).show();
+                                if (saveAsComplete != null)
+                                    saveAsComplete.onComplete(1, null);
+                                if (customSaveComplete != null)
+                                    customSaveComplete.onComplete(1, null, false);
+                            });
+                            return;
+                        }
+                    }
+
                     final File file = new File(path);
                     final String fileName = file.getName();
                     activity.runOnUiThread(() -> {
-                        Toast.makeText(activity, "PDF saved successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "File saved successfully", Toast.LENGTH_LONG).show();
                     });
-                    // Defer dialog so SDK can finish any internal "Please wait" / cleanup first
+                    // Defer direct update so SDK can finish any internal cleanup first
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         if (activity.isFinishing() || activity.isDestroyed())
                             return;
-                        // Show confirm dialog: "Open saved document?"
-                        Utilities.yesNoMessage(
-                                activity,
-                                "Open saved document?",
-                                "Would you like to open the saved document?",
-                                "Yes",
-                                "No",
-                                () -> {
-                                    // Yes: redirect to saved document
-                                    Intent openIntent = new Intent(activity,
-                                            docreader.aidoc.pdfreader.ui.activities.ViewOfficeActivity.class);
-                                    openIntent.setAction(Intent.ACTION_VIEW);
-                                    openIntent.setData(Uri.fromFile(file));
-                                    openIntent.putExtra(
-                                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI, path);
-                                    openIntent.putExtra(
-                                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
-                                            fileName);
-                                    openIntent.putExtra("STARTED_FROM_EXPLORER", true);
-                                    openIntent.putExtra("START_PAGE", 0);
-                                    openIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    activity.startActivity(openIntent);
-                                    activity.finish();
-                                },
-                                () -> {
-                                    // No: stay on current document, update footer and state
-                                    android.widget.TextView titleView = activity
-                                            .findViewById(docreader.aidoc.pdfreader.R.id.tvTittle);
-                                    if (titleView != null) {
-                                        titleView.setText(fileName);
-                                    }
-                                    Intent intent = activity.getIntent();
-                                    if (intent != null) {
-                                        intent.putExtra(
-                                                docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI,
-                                                path);
-                                        intent.putExtra(
-                                                docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
-                                                fileName);
-                                    }
-                                    if (activity instanceof com.artifex.sonui.AppNUIActivity) {
-                                        ((com.artifex.sonui.AppNUIActivity) activity).onNewIntent(intent);
-                                    }
-                                    if (saveAsComplete != null) {
-                                        saveAsComplete.onComplete(0, path);
-                                    }
-                                    if (customSaveComplete != null) {
-                                        customSaveComplete.onComplete(0, path, true);
-                                    }
-                                });
+
+                        // Stay on current document, update footer and state directly
+                        android.widget.TextView titleView = activity
+                                .findViewById(docreader.aidoc.pdfreader.R.id.tvTittle);
+                        if (titleView != null) {
+                            titleView.setText(fileName);
+                        }
+                        Intent intent = activity.getIntent();
+                        if (intent != null) {
+                            intent.putExtra(
+                                    docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI,
+                                    path);
+                            intent.putExtra(
+                                    docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
+                                    fileName);
+                        }
+                        if (activity instanceof com.artifex.sonui.AppNUIActivity) {
+                            ((com.artifex.sonui.AppNUIActivity) activity).onNewIntent(intent);
+                        }
+                        if (saveAsComplete != null) {
+                            saveAsComplete.onComplete(0, path);
+                        }
+                        if (customSaveComplete != null) {
+                            customSaveComplete.onComplete(0, path, true);
+                        }
                     }, 200);
                 } else {
                     activity.runOnUiThread(() -> {
-                        Toast.makeText(activity, "Error saving PDF: " + error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "Error saving file: " + error, Toast.LENGTH_LONG).show();
                         if (saveAsComplete != null)
                             saveAsComplete.onComplete(1, null);
                         if (customSaveComplete != null)
@@ -249,13 +277,13 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
         };
 
         if (mNuiDocView instanceof com.artifex.sonui.editor.NUIDocViewPdf) {
-            ((com.artifex.sonui.editor.NUIDocViewPdf) mNuiDocView).saveCustomAnnotations(path);
+            ((com.artifex.sonui.editor.NUIDocViewPdf) mNuiDocView).saveCustomAnnotations(finalSavePath);
         }
 
-        if (isSourcePdf) {
-            doc.a(path, saveListener);
+        if (isSaveAsPdf) {
+            doc.b(finalSavePath, true, saveListener);
         } else {
-            doc.b(path, true, saveListener);
+            doc.a(finalSavePath, saveListener);
         }
     }
 
@@ -334,7 +362,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     @Override
     public void saveAsHandler(String fileName, SODoc doc, SOSaveAsComplete completion) {
         Log.d(TAG, "saveAsHandler called");
-        saveAsPdfHandlerInternal(fileName, doc, completion, null);
+        saveAsPdfHandlerInternal(fileName, doc, completion, null, false);
     }
 
     @Override
@@ -357,7 +385,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     public void customSaveHandler(String fileName, SODoc doc, String var3, SOCustomSaveComplete completion)
             throws IOException {
         Log.d(TAG, "customSaveHandler called");
-        saveAsPdfHandlerInternal(fileName, doc, null, completion);
+        saveAsPdfHandlerInternal(fileName, doc, null, completion, false);
     }
 
     @Override
