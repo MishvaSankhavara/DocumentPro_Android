@@ -300,6 +300,7 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         if (Utils.checkPermission(activityContext)) {
+            Utils.dismissPermissionDialog();
             permissionContainer.setVisibility(View.GONE);
             countFiles();
             if (recentFilesAdapter != null) {

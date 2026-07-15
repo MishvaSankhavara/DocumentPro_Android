@@ -964,10 +964,13 @@ public class Utils {
         rateDialog.show();
     }
 
+    private static java.lang.ref.WeakReference<RequestPermissionDialog> activePermissionDialogRef;
+
     public static void showPermissionDialog(Activity mContext) {
         if (mContext == null) {
             return;
         }
+        dismissPermissionDialog();
         RequestPermissionDialog permissionDialog = new RequestPermissionDialog(mContext);
         Window window = permissionDialog.getWindow();
         if (window != null) {
@@ -975,6 +978,17 @@ public class Utils {
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
         permissionDialog.show();
+        activePermissionDialogRef = new java.lang.ref.WeakReference<>(permissionDialog);
+    }
+
+    public static void dismissPermissionDialog() {
+        if (activePermissionDialogRef != null) {
+            RequestPermissionDialog dialog = activePermissionDialogRef.get();
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            activePermissionDialogRef = null;
+        }
     }
 
     public static void showMoreDialog(Activity mContext, DocumentModel mDocument, boolean isRecent,
