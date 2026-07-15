@@ -1,10 +1,12 @@
 package com.artifex.sonui;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -195,8 +197,115 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
         }
     }
 
+    private boolean copyFileToSaf(Activity activity, File tempFile, Uri treeUri, String displayName, boolean isSaveAsPdf) {
+        try {
+            ContentResolver resolver = activity.getContentResolver();
+            
+            // Try to find the document if it already exists
+            Uri existingUri = null;
+            Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(
+                    treeUri,
+                    DocumentsContract.getTreeDocumentId(treeUri)
+            );
+            try (android.database.Cursor c = resolver.query(
+                    childrenUri,
+                    new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME},
+                    null, null, null
+            )) {
+                if (c != null) {
+                    while (c.moveToNext()) {
+                        String name = c.getString(1);
+                        if (displayName.equals(name)) {
+                            String docId = c.getString(0);
+                            existingUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, docId);
+                            break;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to query child documents", e);
+            }
+
+            // If it exists, delete it so we can overwrite it
+            if (existingUri != null) {
+                try {
+                    DocumentsContract.deleteDocument(resolver, existingUri);
+                } catch (Exception e) {
+                    Log.w(TAG, "Failed to delete existing document for overwrite", e);
+                }
+            }
+
+            // Create new document in tree
+            Uri documentUri = DocumentsContract.buildDocumentUriUsingTree(
+                    treeUri,
+                    DocumentsContract.getTreeDocumentId(treeUri)
+            );
+            
+            String mimeType;
+            if (displayName.toLowerCase().endsWith(".pdf")) {
+                mimeType = "application/pdf";
+            } else if (displayName.toLowerCase().endsWith(".docx")) {
+                mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            } else if (displayName.toLowerCase().endsWith(".doc")) {
+                mimeType = "application/msword";
+            } else if (displayName.toLowerCase().endsWith(".xlsx")) {
+                mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            } else if (displayName.toLowerCase().endsWith(".xls")) {
+                mimeType = "application/vnd.ms-excel";
+            } else if (displayName.toLowerCase().endsWith(".pptx")) {
+                mimeType = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+            } else if (displayName.toLowerCase().endsWith(".ppt")) {
+                mimeType = "application/vnd.ms-powerpoint";
+            } else {
+                mimeType = "*/*";
+            }
+
+            Uri newFileUri = DocumentsContract.createDocument(
+                    resolver,
+                    documentUri,
+                    mimeType,
+                    displayName
+            );
+
+            if (newFileUri == null) {
+                Log.e(TAG, "Failed to create document via SAF");
+                return false;
+            }
+
+            // Write bytes
+            try (java.io.InputStream in = new java.io.FileInputStream(tempFile);
+                 java.io.OutputStream out = resolver.openOutputStream(newFileUri)) {
+                if (out == null) {
+                    Log.e(TAG, "Failed to open output stream for SAF URI");
+                    return false;
+                }
+                byte[] buf = new byte[32768];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "copyFileToSaf failed", e);
+            return false;
+        }
+    }
+
     private void performSave(SODoc doc, String path, final SOSaveAsComplete saveAsComplete,
             final SOCustomSaveComplete customSaveComplete, boolean isSaveAsPdf) {
+        final Uri selectedFolderUri = ChoosePathActivity.selectedFolderUri;
+        final String actualSavePath;
+        final File tempFile;
+        if (selectedFolderUri != null) {
+            String fileName = new File(path).getName();
+            tempFile = new File(activity.getCacheDir(), "temp_save_" + System.currentTimeMillis() + "_" + fileName);
+            actualSavePath = tempFile.getAbsolutePath();
+        } else {
+            tempFile = null;
+            actualSavePath = path;
+        }
+
         final String finalSavePath;
         if (!isSaveAsPdf && mNuiDocView != null && mNuiDocView.getSession() != null 
                 && mNuiDocView.getSession().getFileState() != null) {
@@ -204,10 +313,10 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
             if (internalPath != null && !internalPath.isEmpty()) {
                 finalSavePath = internalPath;
             } else {
-                finalSavePath = path;
+                finalSavePath = actualSavePath;
             }
         } else {
-            finalSavePath = path;
+            finalSavePath = actualSavePath;
         }
 
         SODocSaveListener saveListener = new SODocSaveListener() {
@@ -215,8 +324,8 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
             public void onComplete(int result, int error) {
                 Log.d(TAG, "save onComplete: result=" + result + ", error=" + error);
                 if (result == 0) {
-                    if (!finalSavePath.equals(path)) {
-                        boolean copied = copyFile(new File(finalSavePath), new File(path));
+                    if (!finalSavePath.equals(actualSavePath)) {
+                        boolean copied = copyFile(new File(finalSavePath), new File(actualSavePath));
                         if (!copied) {
                             activity.runOnUiThread(() -> {
                                 Toast.makeText(activity, "Error writing to destination folder", Toast.LENGTH_LONG).show();
@@ -225,7 +334,33 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                                 if (customSaveComplete != null)
                                     customSaveComplete.onComplete(1, null, false);
                             });
+                            if (tempFile != null && tempFile.exists()) {
+                                tempFile.delete();
+                            }
                             return;
+                        }
+                    }
+                    if (mNuiDocView instanceof com.artifex.sonui.editor.NUIDocViewPdf) {
+                        ((com.artifex.sonui.editor.NUIDocViewPdf) mNuiDocView).flattenAnnotationsIntoPdf(actualSavePath);
+                    }
+
+                    if (selectedFolderUri != null && tempFile != null) {
+                        boolean copiedToSaf = copyFileToSaf(activity, tempFile, selectedFolderUri, new File(path).getName(), isSaveAsPdf);
+                        if (!copiedToSaf) {
+                            activity.runOnUiThread(() -> {
+                                Toast.makeText(activity, "Error writing to destination folder via SAF", Toast.LENGTH_LONG).show();
+                                if (saveAsComplete != null)
+                                    saveAsComplete.onComplete(1, null);
+                                if (customSaveComplete != null)
+                                    customSaveComplete.onComplete(1, null, false);
+                            });
+                            if (tempFile.exists()) {
+                                tempFile.delete();
+                            }
+                            return;
+                        }
+                        if (tempFile.exists()) {
+                            tempFile.delete();
                         }
                     }
 
@@ -272,6 +407,9 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                         if (customSaveComplete != null)
                             customSaveComplete.onComplete(1, null, false);
                     });
+                    if (tempFile != null && tempFile.exists()) {
+                        tempFile.delete();
+                    }
                 }
             }
         };

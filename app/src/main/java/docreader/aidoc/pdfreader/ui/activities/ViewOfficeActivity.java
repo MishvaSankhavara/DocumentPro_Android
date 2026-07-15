@@ -106,7 +106,10 @@ public class ViewOfficeActivity extends AppNUIActivity {
                 File cachedFile = copyUriToCache(this, dataUri);
                 if (cachedFile != null) {
                     intent.setData(Uri.fromFile(cachedFile));
-                    intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, cachedFile.getAbsolutePath());
+                    if (!intent.hasExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI)
+                            || intent.getStringExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI) == null) {
+                        intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, dataUri.toString());
+                    }
                     intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_NAME, cachedFile.getName());
                 }
             }

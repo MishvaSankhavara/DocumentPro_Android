@@ -311,6 +311,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         SOSaveAsComplete var4 = new SOSaveAsComplete() {
                             public void onComplete(int var1x, String var2) {
                                 if (var1x == 0) {
+                                    NUIDocView.this.mIsSaving = true;
                                     NUIDocView.this.setFooterText(var2);
                                     NUIDocView.this.mSOFileState.setUserPath(var2);
                                     if (var1) {
@@ -2497,6 +2498,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                                 NUIDocView.this.mSOFileState.setHasChanges(false);
                                 if (var1 == 0) {
                                     NUIDocView.this.mSOFileState.setHasChanges(false);
+                                    NUIDocView.this.mIsSaving = true;
                                 }
 
                                 if (var3) {

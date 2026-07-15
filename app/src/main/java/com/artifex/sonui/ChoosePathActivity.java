@@ -25,6 +25,7 @@ public class ChoosePathActivity extends BaseActivity {
     private static int b;
     private static String c;
     private static boolean d;
+    public static Uri selectedFolderUri;
 
     private static final int REQUEST_FOLDER_PICK = 5001;
 
@@ -53,12 +54,22 @@ public class ChoosePathActivity extends BaseActivity {
     protected void onCreate(Bundle var1) {
         super.onCreate(var1);
         this.setContentView(R.layout.choose_path);
+        selectedFolderUri = null;
         String var4 = c;
         fileBrowser = this.findViewById(R.id.file_browser);
         fileBrowser.a(this, var4);
 
+        // Check and request storage permission if not already granted so that we can write the saved file
+        if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(this)) {
+            docreader.aidoc.pdfreader.utils.Utils.askPermission(this);
+        }
+
         // Wire the + Browse button to open the system folder picker
         fileBrowser.setBrowseFolderListener(() -> {
+            if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(this)) {
+                docreader.aidoc.pdfreader.utils.Utils.askPermission(this);
+                return;
+            }
             Intent pickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
             pickerIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
                     | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
@@ -80,6 +91,10 @@ public class ChoosePathActivity extends BaseActivity {
         tvSave.setText(var4);
         tvSave.setOnClickListener(new OnClickListener() {
             public void onClick(View var1) {
+                if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(ChoosePathActivity.this)) {
+                    docreader.aidoc.pdfreader.utils.Utils.askPermission(ChoosePathActivity.this);
+                    return;
+                }
                 ChoosePathActivity.this.completeSave(fileBrowser);
             }
         });
@@ -99,6 +114,10 @@ public class ChoosePathActivity extends BaseActivity {
         var5.setOnKeyListener(new OnKeyListener() {
             public boolean onKey(View var1, int var2x, KeyEvent var3) {
                 if (var3.getAction() == 0 && var2x == 66) {
+                    if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(ChoosePathActivity.this)) {
+                        docreader.aidoc.pdfreader.utils.Utils.askPermission(ChoosePathActivity.this);
+                        return true;
+                    }
                     ChoosePathActivity.this.completeSave(fileBrowser);
                     return true;
                 } else {
@@ -111,6 +130,10 @@ public class ChoosePathActivity extends BaseActivity {
             public boolean onEditorAction(SOEditText var1, int var2x, KeyEvent var3) {
                 boolean var4 = true;
                 if (var2x == 6) {
+                    if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(ChoosePathActivity.this)) {
+                        docreader.aidoc.pdfreader.utils.Utils.askPermission(ChoosePathActivity.this);
+                        return true;
+                    }
                     ChoosePathActivity.this.completeSave(fileBrowser);
                 } else {
                     var4 = false;
@@ -136,6 +159,7 @@ public class ChoosePathActivity extends BaseActivity {
                 } catch (Exception e) {
                     android.util.Log.w("ChoosePathActivity", "takePersistableUriPermission failed", e);
                 }
+                ChoosePathActivity.selectedFolderUri = treeUri;
                 String folderPath = treeUriToPath(treeUri);
                 if (folderPath != null && fileBrowser != null) {
                     fileBrowser.setSelectedFolderPath(folderPath);

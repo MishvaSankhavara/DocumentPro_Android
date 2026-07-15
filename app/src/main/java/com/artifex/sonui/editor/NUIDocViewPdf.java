@@ -33,6 +33,16 @@ import org.json.JSONException;
 import android.os.Handler;
 import android.os.Looper;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import java.util.concurrent.CountDownLatch;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
+import java.util.List;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -237,6 +247,10 @@ public class NUIDocViewPdf extends NUIDocView {
                 }
             }
 
+            if (resolvedPath.startsWith("file://")) {
+                resolvedPath = resolvedPath.substring(7);
+            }
+
             // Use canonical path to ensure consistency (handles symlinks, relative
             // segments, etc.)
             File f = new File(resolvedPath);
@@ -374,6 +388,199 @@ public class NUIDocViewPdf extends NUIDocView {
         } catch (Exception e) {
             Log.e("ANNOTATION_DEBUG", "saveCustomAnnotations error", e);
             e.printStackTrace();
+        }
+    }
+
+    private static class CapturedAnnotation {
+        int pageNum;
+        Point pagePoint;
+        byte[] imageBytes;
+        float widthInPoints;
+        float heightInPoints;
+
+        CapturedAnnotation(int pageNum, Point pagePoint, byte[] imageBytes, float widthInPoints, float heightInPoints) {
+            this.pageNum = pageNum;
+            this.pagePoint = pagePoint;
+            this.imageBytes = imageBytes;
+            this.widthInPoints = widthInPoints;
+            this.heightInPoints = heightInPoints;
+        }
+    }
+
+    private void captureAnnotationsOnUIThread(List<CapturedAnnotation> capturedList) {
+        deselectAllAnnotations();
+        DocView docView = getPdfDocView();
+        for (View container : mAnnotationViews) {
+            Object[] tag = (Object[]) container.getTag();
+            if (tag == null || tag.length < 2) continue;
+
+            int pageNum = (int) tag[0];
+            Point pagePoint = (Point) tag[1];
+
+            DocPageView pageView = null;
+            if (docView != null) {
+                for (int i = 0; i < docView.getChildCount(); i++) {
+                    View child = docView.getChildAt(i);
+                    if (child instanceof DocPageView) {
+                        DocPageView page = (DocPageView) child;
+                        if (page.getPageNumber() == pageNum) {
+                            pageView = page;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (pageView == null && docView != null) {
+                for (int i = 0; i < docView.getChildCount(); i++) {
+                    View child = docView.getChildAt(i);
+                    if (child instanceof DocPageView) {
+                        pageView = (DocPageView) child;
+                        break;
+                    }
+                }
+            }
+
+            double factor = (pageView != null) ? pageView.getFactor() : 1.0;
+            if (factor <= 0) factor = 1.0;
+
+            View innerView = container.findViewById(R.id.annotation_edit_text);
+            if (innerView == null) {
+                innerView = container.findViewById(R.id.annotation_image_view);
+            }
+            if (innerView == null) continue;
+
+            int viewWidth = innerView.getWidth();
+            int viewHeight = innerView.getHeight();
+            if (viewWidth <= 0 || viewHeight <= 0) continue;
+
+            // Render the view to a Bitmap at 4x scale for high quality
+            float scale = 4.0f;
+            Bitmap bitmap = Bitmap.createBitmap((int) (viewWidth * scale), (int) (viewHeight * scale), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            canvas.scale(scale, scale);
+            innerView.draw(canvas);
+
+            java.io.ByteArrayOutputStream stream = new java.io.ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            bitmap.recycle();
+
+            float widthInPoints = (float) (viewWidth / factor);
+            float heightInPoints = (float) (viewHeight / factor);
+
+            capturedList.add(new CapturedAnnotation(pageNum, pagePoint, byteArray, widthInPoints, heightInPoints));
+        }
+    }
+
+    public void flattenAnnotationsIntoPdf(String pdfPath) {
+        Log.d("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: path=" + pdfPath + ", count=" + mAnnotationViews.size());
+        if (mAnnotationViews.isEmpty()) {
+            return;
+        }
+
+        File file = new File(pdfPath);
+        if (!file.exists()) {
+            Log.e("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: file does not exist");
+            return;
+        }
+
+        final List<CapturedAnnotation> capturedList = new java.util.ArrayList<>();
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            captureAnnotationsOnUIThread(capturedList);
+        } else {
+            final CountDownLatch latch = new CountDownLatch(1);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        captureAnnotationsOnUIThread(capturedList);
+                    } finally {
+                        latch.countDown();
+                    }
+                }
+            });
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (capturedList.isEmpty()) {
+            Log.d("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: capturedList is empty, skipping stamp");
+            return;
+        }
+
+        // Temporary file for stamped output
+        File tempFile = new File(getContext().getCacheDir(), "temp_flatten_" + System.currentTimeMillis() + ".pdf");
+        
+        PdfReader reader = null;
+        PdfStamper stamper = null;
+        try {
+            reader = new PdfReader(pdfPath);
+            stamper = new PdfStamper(reader, new java.io.FileOutputStream(tempFile));
+
+            for (CapturedAnnotation cap : capturedList) {
+                Image image = Image.getInstance(cap.imageBytes);
+
+                int itextPageNum = cap.pageNum + 1; // iText is 1-indexed
+                if (itextPageNum > reader.getNumberOfPages() || itextPageNum <= 0) {
+                    Log.e("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: page number " + itextPageNum + " out of bounds");
+                    continue;
+                }
+
+                Rectangle pageSize = reader.getPageSizeWithRotation(itextPageNum);
+                float pageHeight = pageSize.getHeight();
+
+                // Calculate PDF coordinates (origin at bottom-left)
+                float pdfX = (float) cap.pagePoint.x - (cap.widthInPoints / 2.0f);
+                float pdfY = pageHeight - ((float) cap.pagePoint.y + (cap.heightInPoints / 2.0f));
+
+                image.setAbsolutePosition(pdfX, pdfY);
+                image.scaleAbsolute(cap.widthInPoints, cap.heightInPoints);
+
+                PdfContentByte content = stamper.getOverContent(itextPageNum);
+                if (content != null) {
+                    content.addImage(image);
+                    Log.d("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: stamped image on page " + itextPageNum + " at (" + pdfX + ", " + pdfY + ")");
+                }
+            }
+
+            stamper.close();
+            reader.close();
+            stamper = null;
+            reader = null;
+
+            // Replace original file
+            if (tempFile.exists()) {
+                if (file.delete()) {
+                    if (tempFile.renameTo(file)) {
+                        Log.d("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: Replaced original PDF successfully");
+                    } else {
+                        copyFile(tempFile, file);
+                        tempFile.delete();
+                        Log.d("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: Copied temp file to original PDF successfully");
+                    }
+                } else {
+                    // Try copying directly if delete failed
+                    copyFile(tempFile, file);
+                    tempFile.delete();
+                    Log.d("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf: Overwritten original PDF using copyFile");
+                }
+            }
+        } catch (Exception e) {
+            Log.e("ANNOTATION_DEBUG", "flattenAnnotationsIntoPdf error", e);
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stamper != null) stamper.close();
+            } catch (Exception e) {}
+            try {
+                if (reader != null) reader.close();
+            } catch (Exception e) {}
+            if (tempFile.exists()) {
+                tempFile.delete();
+            }
         }
     }
 
