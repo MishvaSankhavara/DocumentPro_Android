@@ -124,7 +124,7 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
                         intent.setAction(Intent.ACTION_SEND_MULTIPLE);
                         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_via_photo));
                         intent.setType("image/jpeg");
-                        String appUrl = "https://play.google.com/store/apps/details?id=" + getPackageName();
+                        String appUrl = com.arkay.gkinhindi.Constants.getAppStoreUrl(SharePdfAsImageActivity.this);
                         String shareMessage = String.format(getString(R.string.custom_share_message), appUrl);
                         intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, arrayList);

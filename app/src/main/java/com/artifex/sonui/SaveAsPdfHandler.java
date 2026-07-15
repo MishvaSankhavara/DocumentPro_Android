@@ -511,7 +511,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("application/*");
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(var1)));
-            String appUrl = "https://play.google.com/store/apps/details?id=" + activity.getPackageName();
+            String appUrl = com.arkay.gkinhindi.Constants.getAppStoreUrl(activity);
             String shareMessage = String.format(activity.getString(R.string.custom_share_message), appUrl);
             intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.share_file_using_title)));

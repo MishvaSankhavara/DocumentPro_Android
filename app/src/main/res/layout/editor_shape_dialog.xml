@@ -52,7 +52,6 @@
                     android:background="@drawable/editor_shape_button"
                     android:scaleX="0.75"
                     android:scaleY="0.75"
-                    android:src="@drawable/editor_icon_shape_speech_bubble2"
                     android:tag="speech2" />
 
                 <ImageButton

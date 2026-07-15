@@ -29,7 +29,11 @@ public class Constants {
         public static final String STYLE_ROMAN_LOWER = "r";
         public static String DOC_APP_FATAL = "PDF READER FATAL";
 
-        public static String PRIVACY_POLICY_URL = "https://doc-hosting.flycricket.io/docreader-aidoc-pdfreader-privacy-policy/30888b03-bf3e-4542-b153-311d8e105aa7/privacy";
+        public static String PRIVACY_POLICY_URL = "https://doc-hosting.flycricket.io/document-reader-word-pdf-xls-privacy-policy/6a0e76e6-ac8a-4001-8f54-86b4d09e50ea/privacy";
+
+        public static String getAppStoreUrl(android.content.Context context) {
+            return "https://play.google.com/store/apps/details?id=" + context.getPackageName();
+        }
         public static final String PREF_IS_APP_RATED = "is_rate_app";
         public static final String ACTION_RATE_APP = "RATE_APP";
         public static final String KEY_DOCUMENT_OPEN_COUNT = "document_open_count";

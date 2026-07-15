@@ -1,65 +1,6 @@
 <resources>
-    <string name="notification_channel_name">Daily Reminder</string>
-    <string name="notification_channel_desc">Daily reminder to check and read documents</string>
-    <string name="notification_channel_name_fcm">App Notifications</string>
-    <string name="notification_channel_desc_fcm">Notifications and updates from DocumentPro</string>
-    <string name="notification_title">Daily Reading Reminder</string>
-    <string name="notification_desc">Don\'t forget to read your documents today!</string>
 
-    <!-- Morning reminders -->
-    <string-array name="morning_notification_titles">
-        <item>📄 Good Morning!</item>
-        <item>☀️ Your PDF Toolkit</item>
-        <item>📚 Documents Ready</item>
-        <item>🚀 Stay Productive</item>
-        <item>📂 Organize Files</item>
-        <item>✍️ Quick PDF Tasks</item>
-        <item>💼 Work Made Easy</item>
-        <item>🔍 Find &amp; Read</item>
-        <item>📑 Smart PDF Manager</item>
-        <item>⚡ Boost Productivity</item>
-    </string-array>
-    
-    <string-array name="morning_notification_descs">
-        <item>Start your day by reading, editing, and managing your PDFs.</item>
-        <item>Merge, split, compress, and organize documents in one tap.</item>
-        <item>Open PDF, DOC, XLS, PPT, and more anytime, anywhere.</item>
-        <item>Edit, sign, convert, and share your PDFs with ease.</item>
-        <item>Keep your documents neat with powerful PDF tools.</item>
-        <item>Sign, print, or compress your PDFs in just seconds.</item>
-        <item>Everything you need to manage documents is here.</item>
-        <item>Access your important files instantly with All Doc Reader.</item>
-        <item>Handle all your PDF tasks from a single app.</item>
-        <item>Your all-in-one document manager is waiting for you.</item>
-    </string-array>
-
-    <!-- Evening reminders -->
-    <string-array name="evening_notification_titles">
-        <item>🌇 Evening Reminder</item>
-        <item>📂 Organize PDFs</item>
-        <item>🖨️ Print with Ease</item>
-        <item>✍️ Sign Documents</item>
-        <item>📤 Share Instantly</item>
-        <item>📄 Your Documents</item>
-        <item>⚡ Save Storage</item>
-        <item>🔄 Merge PDFs</item>
-        <item>📚 Ready for Tomorrow</item>
-        <item>🌙 Complete Your Work</item>
-    </string-array>
-    
-    <string-array name="evening_notification_descs">
-        <item>Finish today\'s document tasks with powerful PDF tools.</item>
-        <item>Merge, split, and compress your files before tomorrow.</item>
-        <item>Print your important PDFs in just a few taps.</item>
-        <item>Add your signature and save important files securely.</item>
-        <item>Send PDFs quickly after editing or compressing them.</item>
-        <item>Review and organize your files before the day ends.</item>
-        <item>Compress large PDFs without losing quality.</item>
-        <item>Combine multiple documents into one organized PDF.</item>
-        <item>Keep your documents organized and easy to access.</item>
-        <item>Your all-in-one PDF toolkit is just a tap away.</item>
-    </string-array>
-
+    <string name="app_name">Document Reader: Word, PDF,XLS</string>
     <string name="sort_by_title">Sort by</string>
     <string name="sort_option_date_modified">Date modified</string>
     <string name="sort_desc_newest_first">Newest first</string>
@@ -90,7 +31,69 @@
     <string name="desc_enable_dark_theme">Enable dark theme</string>
     <string name="label_version_prefix">Version </string>
     <string name="app_doc_reader">DocReader</string>
-    <string name="app_name">Document Reader: Word, PDF,XLS</string>
+
+
+    <string name="notification_channel_name">Daily Reminder</string>
+    <string name="notification_channel_desc">Daily reminder to check and read documents</string>
+    <string name="notification_channel_name_fcm">App Notifications</string>
+    <string name="notification_channel_desc_fcm">Notifications and updates from DocumentPro</string>
+    <string name="notification_title">Daily Reading Reminder</string>
+    <string name="notification_desc">Don\'t forget to read your documents today!</string>
+
+    <!-- Morning reminders -->
+    <string-array name="morning_notification_titles">
+        <item>📄 Good Morning!</item>
+        <item>☀️ Your PDF Toolkit</item>
+        <item>📚 Documents Ready</item>
+        <item>🚀 Stay Productive</item>
+        <item>📂 Organize Files</item>
+        <item>✍️ Quick PDF Tasks</item>
+        <item>💼 Work Made Easy</item>
+        <item>🔍 Find &amp; Read</item>
+        <item>📑 Smart PDF Manager</item>
+        <item>⚡ Boost Productivity</item>
+    </string-array>
+
+    <string-array name="morning_notification_descs">
+        <item>Start your day by reading, editing, and managing your PDFs.</item>
+        <item>Merge, split, compress, and organize documents in one tap.</item>
+        <item>Open PDF, DOC, XLS, PPT, and more anytime, anywhere.</item>
+        <item>Edit, sign, convert, and share your PDFs with ease.</item>
+        <item>Keep your documents neat with powerful PDF tools.</item>
+        <item>Sign, print, or compress your PDFs in just seconds.</item>
+        <item>Everything you need to manage documents is here.</item>
+        <item>Access your important files instantly with All Doc Reader.</item>
+        <item>Handle all your PDF tasks from a single app.</item>
+        <item>Your all-in-one document manager is waiting for you.</item>
+    </string-array>
+
+    <!-- Evening reminders -->
+    <string-array name="evening_notification_titles">
+        <item>🌇 Evening Reminder</item>
+        <item>📂 Organize PDFs</item>
+        <item>🖨️ Print with Ease</item>
+        <item>✍️ Sign Documents</item>
+        <item>📤 Share Instantly</item>
+        <item>📄 Your Documents</item>
+        <item>⚡ Save Storage</item>
+        <item>🔄 Merge PDFs</item>
+        <item>📚 Ready for Tomorrow</item>
+        <item>🌙 Complete Your Work</item>
+    </string-array>
+
+    <string-array name="evening_notification_descs">
+        <item>Finish today\'s document tasks with powerful PDF tools.</item>
+        <item>Merge, split, and compress your files before tomorrow.</item>
+        <item>Print your important PDFs in just a few taps.</item>
+        <item>Add your signature and save important files securely.</item>
+        <item>Send PDFs quickly after editing or compressing them.</item>
+        <item>Review and organize your files before the day ends.</item>
+        <item>Compress large PDFs without losing quality.</item>
+        <item>Combine multiple documents into one organized PDF.</item>
+        <item>Keep your documents organized and easy to access.</item>
+        <item>Your all-in-one PDF toolkit is just a tap away.</item>
+    </string-array>
+
 
     <string name="action_move_out">Move out</string>
     <string name="action_create_shortcut">Shortcut</string>
