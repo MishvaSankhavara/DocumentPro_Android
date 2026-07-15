@@ -23,6 +23,9 @@ pdfboxAndroid = "2.0.27.0"
 itextpdf = "5.5.13.4"
 androidPdfViewer = "3.2.0-beta05"
 androidpdfviewerVersion = "3.1.0-beta.1"
+googleServices = "4.4.1"
+firebaseCrashlyticsPlugin = "2.9.9"
+firebaseBom = "33.1.2"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -47,7 +50,12 @@ pdfbox-android = { module = "com.tom-roush:pdfbox-android", version.ref = "pdfbo
 itextpdf = { module = "com.itextpdf:itextpdf", version.ref = "itextpdf" }
 android-pdf-viewer = { module = "io.github.oothp:android-pdf-viewer", version.ref = "androidPdfViewer" }
 androidpdfviewer = { module = "com.github.DImuthuUpe:AndroidPdfViewer", version.ref = "androidpdfviewerVersion" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugin" }

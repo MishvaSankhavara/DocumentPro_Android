@@ -1,0 +1,105 @@
+package com.arkay.gkinhindi.ui.fragments.search;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.arkay.gkinhindi.Constants;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.adapter_reader.FileListAdapter;
+import com.arkay.gkinhindi.clickListener.DocClickListener;
+import com.arkay.gkinhindi.model_reader.DocumentModel;
+import com.arkay.gkinhindi.ui.customviews.EmptyStateRecyclerView;
+import com.arkay.gkinhindi.utils.Utils;
+import com.arkay.gkinhindi.viewmodel.ViewModelSearch;
+
+import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+public class FragmentExcel extends Fragment implements DocClickListener {
+    private Activity activityContext;
+    private EmptyStateRecyclerView excelRecyclerView;
+    private FileListAdapter excelAdapter;
+    private ArrayList<DocumentModel> arrayList;
+    private ViewModelSearch searchViewModel;
+    private ProgressBar loadingProgressBar;
+    private final Executor backgroundExecutor = Executors.newSingleThreadExecutor();
+
+    public FragmentExcel() {
+    }
+
+    public FragmentExcel(Activity mActivity) {
+        this.activityContext = mActivity;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_recyclerview, container, false);
+        initViews(view);
+        searchViewModel = new ViewModelProvider(requireActivity()).get(ViewModelSearch.class);
+        listFile();
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        searchViewModel.getSearchQueryLiveData().observe(requireActivity(), s -> Utils.searchDocument(s, arrayList, excelAdapter));
+    }
+
+    private void listFile() {
+
+        backgroundExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                arrayList = Utils.countFile(activityContext, Constants.QUERY_EXCEL_FILES);
+
+                activityContext.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        excelAdapter = new FileListAdapter(activityContext, arrayList, FragmentExcel.this);
+                        excelRecyclerView.setAdapter(excelAdapter);
+                        excelRecyclerView.setVisibility(View.VISIBLE);
+                        loadingProgressBar.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+    }
+
+    private void initViews(View view) {
+        loadingProgressBar = view.findViewById(R.id.loadingView);
+        excelRecyclerView = view.findViewById(R.id.recyclerRecent);
+        excelRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activityContext);
+        excelRecyclerView.setLayoutManager(layoutManager);
+        excelRecyclerView.setEmptyView(view.findViewById(R.id.empty_layout));
+        arrayList = new ArrayList<>();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof Activity) {
+            this.activityContext = (Activity) context;
+        }
+    }
+
+    @Override
+    public void onDocClick(DocumentModel document) {
+        Utils.openFile(activityContext, document);
+    }
+}

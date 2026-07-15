@@ -10,6 +10,7 @@ import android.provider.DocumentsContract;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.arkay.gkinhindi.Constants;
 import com.artifex.solib.SODoc;
 import com.artifex.solib.SODocSaveListener;
 import com.artifex.sonui.editor.NUIDocView;
@@ -17,7 +18,7 @@ import com.artifex.sonui.editor.SODataLeakHandlers;
 import com.artifex.sonui.editor.SOSaveAsComplete;
 import com.artifex.sonui.editor.SOCustomSaveComplete;
 import com.artifex.sonui.editor.Utilities;
-import docreader.aidoc.pdfreader.R;
+import com.arkay.gkinhindi.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
         String resolvedFileName = fileName;
 
         if (activity != null) {
-            android.widget.TextView titleView = activity.findViewById(docreader.aidoc.pdfreader.R.id.tvTittle);
+            android.widget.TextView titleView = activity.findViewById(com.arkay.gkinhindi.R.id.tvTittle);
             if (titleView != null) {
                 String uiName = titleView.getText().toString();
                 if (uiName != null && !uiName.isEmpty()) {
@@ -71,7 +72,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                 Intent intent = activity.getIntent();
                 if (intent != null) {
                     String intentFileName = intent.getStringExtra(
-                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME);
+                            Constants.EXTRA_SELECTED_FILE_NAME);
                     if (intentFileName != null && !intentFileName.isEmpty()) {
                         resolvedFileName = intentFileName;
                     }
@@ -126,7 +127,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
                 String originalExtension = "";
                 if (activity != null && activity.getIntent() != null) {
                     String uriStr = activity.getIntent().getStringExtra(
-                            docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI);
+                            Constants.EXTRA_SELECTED_FILE_URI);
                     if (uriStr != null) {
                         int idx = uriStr.lastIndexOf('.');
                         if (idx >= 0) {
@@ -376,17 +377,17 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
 
                         // Stay on current document, update footer and state directly
                         android.widget.TextView titleView = activity
-                                .findViewById(docreader.aidoc.pdfreader.R.id.tvTittle);
+                                .findViewById(com.arkay.gkinhindi.R.id.tvTittle);
                         if (titleView != null) {
                             titleView.setText(fileName);
                         }
                         Intent intent = activity.getIntent();
                         if (intent != null) {
                             intent.putExtra(
-                                    docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_URI,
+                                    Constants.EXTRA_SELECTED_FILE_URI,
                                     path);
                             intent.putExtra(
-                                    docreader.aidoc.pdfreader.AppGlobalConstants.EXTRA_SELECTED_FILE_NAME,
+                                    Constants.EXTRA_SELECTED_FILE_NAME,
                                     fileName);
                         }
                         if (activity instanceof com.artifex.sonui.AppNUIActivity) {
@@ -436,7 +437,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult called");
-        if (requestCode == docreader.aidoc.pdfreader.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE) {
+        if (requestCode == Constants.REQUEST_CODE_INSERT_IMAGE) {
             if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
                 Uri selectedUri = data.getData();
                 if (mNuiDocView != null) {
@@ -447,14 +448,14 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
     }
 
     private void insertImageFromUri(Uri uri) {
-        String filename = docreader.aidoc.pdfreader.utils.Utils.getFileNameFromUri(uri, activity.getContentResolver());
+        String filename = com.arkay.gkinhindi.utils.Utils.getFileNameFromUri(uri, activity.getContentResolver());
         File tempFolder = new File(activity.getExternalFilesDir(null), "temp_images");
         if (!tempFolder.exists()) {
             tempFolder.mkdirs();
         }
 
         File destFile = new File(tempFolder, filename);
-        docreader.aidoc.pdfreader.utils.Utils.copy(activity, uri, destFile.getAbsolutePath());
+        com.arkay.gkinhindi.utils.Utils.copy(activity, uri, destFile.getAbsolutePath());
 
         if (mNuiDocView != null) {
             mNuiDocView.doInsertImage(destFile.getAbsolutePath());
@@ -468,7 +469,7 @@ public class SaveAsPdfHandler implements SODataLeakHandlers {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         activity.startActivityForResult(Intent.createChooser(intent, "Select Image"),
-                docreader.aidoc.pdfreader.AppGlobalConstants.REQUEST_CODE_INSERT_IMAGE);
+                Constants.REQUEST_CODE_INSERT_IMAGE);
     }
 
     @Override

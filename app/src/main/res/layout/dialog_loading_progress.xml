@@ -22,7 +22,7 @@
         android:textStyle="bold" />
 
     <!-- Progress Bar -->
-    <docreader.aidoc.pdfreader.ui.customviews.HorizontalProgressBar
+    <com.arkay.gkinhindi.ui.customviews.HorizontalProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="6dp"

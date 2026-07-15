@@ -1,7 +1,6 @@
 package com.artifex.sonui.editor;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -51,14 +50,14 @@ import com.artifex.solib.SOSelectionLimits;
 import com.artifex.solib.c;
 import com.artifex.mupdf.fitz.PDFAnnotation;
 
-import docreader.aidoc.pdfreader.AppGlobalConstants;
-import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.adapter_reader.ColorSelectionAdapter;
-import docreader.aidoc.pdfreader.ui.customviews.EditBtn;
-import docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBarChangeListener;
-import docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBar;
-import docreader.aidoc.pdfreader.utils.Utils;
-import docreader.aidoc.pdfreader.ui.dialog.AppLoadingDialog;
+import com.arkay.gkinhindi.Constants;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.adapter_reader.ColorSelectionAdapter;
+import com.arkay.gkinhindi.ui.customviews.EditBtn;
+import com.arkay.gkinhindi.ui.customviews.seekbar.RangeSeekBarChangeListener;
+import com.arkay.gkinhindi.ui.customviews.seekbar.RangeSeekBar;
+import com.arkay.gkinhindi.utils.Utils;
+import com.arkay.gkinhindi.ui.dialog.AppLoadingDialog;
 
 public class NUIDocViewPdf extends NUIDocView {
     private EditBtn btnHighLight;
@@ -932,7 +931,7 @@ public class NUIDocViewPdf extends NUIDocView {
 
         tvSize = this.findViewById(R.id.sizeTv);
 
-        ColorSelectionAdapter adapter = new ColorSelectionAdapter(AppGlobalConstants.getColorDrawList(), 3,
+        ColorSelectionAdapter adapter = new ColorSelectionAdapter(Constants.getColorDrawList(), 3,
                 new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
                     @Override
                     public void onColorChanged(String var1) {

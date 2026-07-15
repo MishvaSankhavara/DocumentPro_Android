@@ -30,7 +30,7 @@ import com.artifex.solib.SOPageListener;
 import com.artifex.solib.SORender;
 import com.artifex.solib.SOSelectionLimits;
 import com.artifex.solib.o;
-import docreader.aidoc.pdfreader.R;
+import com.arkay.gkinhindi.R;
 
 public class DocPageView extends View implements SOPageListener, AnimatableView {
     private static Paint F;

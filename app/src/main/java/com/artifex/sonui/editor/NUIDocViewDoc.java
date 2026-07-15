@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.artifex.solib.SODoc;
-import docreader.aidoc.pdfreader.R;
+import com.arkay.gkinhindi.R;
 
 public class NUIDocViewDoc extends NUIDocView {
 

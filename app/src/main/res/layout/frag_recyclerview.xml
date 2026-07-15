@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <docreader.aidoc.pdfreader.ui.customviews.EmptyStateRecyclerView
+    <com.arkay.gkinhindi.ui.customviews.EmptyStateRecyclerView
         android:id="@+id/recyclerRecent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

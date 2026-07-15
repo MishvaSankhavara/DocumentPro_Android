@@ -68,7 +68,7 @@
                 android:paddingHorizontal="22dp"
                 android:layout_marginBottom="8dp">
 
-                <docreader.aidoc.pdfreader.ui.customviews.seekbar.RangeSeekBar
+                <com.arkay.gkinhindi.ui.customviews.seekbar.RangeSeekBar
                     android:id="@+id/thickness_seekBar"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -126,7 +126,7 @@
             android:orientation="horizontal">
 
             <!-- Draw -->
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btnDrawNew"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -135,7 +135,7 @@
                 app:ImageEdt="@drawable/ic_edit" />
 
             <!-- Highlight -->
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btnHighlight"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -144,7 +144,7 @@
                 app:ImageEdt="@drawable/ic_highlight" />
 
             <!-- Text -->
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btnText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -153,7 +153,7 @@
                 app:ImageEdt="@drawable/ic_edit_font_aa" />
 
             <!-- Stickers -->
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_insert_image"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -162,7 +162,7 @@
                 app:ImageEdt="@drawable/ic_edit_stickers" />
 
             <!-- Sign -->
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_signature"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -171,7 +171,7 @@
                 app:ImageEdt="@drawable/ic_sign" />
 
             <!-- Erase -->
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btnDelete"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

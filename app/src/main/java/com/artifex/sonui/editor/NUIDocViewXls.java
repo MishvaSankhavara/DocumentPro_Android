@@ -23,8 +23,8 @@ import android.widget.PopupWindow.OnDismissListener;
 import com.artifex.solib.SODoc;
 import com.artifex.solib.SOSelectionLimits;
 import com.artifex.solib.SOSelectionTableRange;
-import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.ui.customviews.EditBtn;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.ui.customviews.EditBtn;
 
 public class NUIDocViewXls extends NUIDocView {
     private int E = -1;

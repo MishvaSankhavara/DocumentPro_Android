@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_background">
 
-    <docreader.aidoc.pdfreader.ui.customviews.smartrefresh.SmartRefreshLayout
+    <com.arkay.gkinhindi.ui.customviews.smartrefresh.SmartRefreshLayout
         android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -148,7 +148,7 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
+                        <com.arkay.gkinhindi.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnAll"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                             app:nameFileType="@string/document_all"
                             app:cornerRadiusFileType="16dp"/>
 
-                        <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
+                        <com.arkay.gkinhindi.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnPdf"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
+                        <com.arkay.gkinhindi.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnWord"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                             app:nameFileType="@string/document_word"
                             app:cornerRadiusFileType="16dp"/>
 
-                        <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
+                        <com.arkay.gkinhindi.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnExcel"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
+                        <com.arkay.gkinhindi.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnPpt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                             app:nameFileType="@string/document_ppt"
                             app:cornerRadiusFileType="16dp"/>
 
-                        <docreader.aidoc.pdfreader.ui.customviews.DocumentTypeItemView
+                        <com.arkay.gkinhindi.ui.customviews.DocumentTypeItemView
                             android:id="@+id/btnTxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -441,7 +441,7 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-    </docreader.aidoc.pdfreader.ui.customviews.smartrefresh.SmartRefreshLayout>
+    </com.arkay.gkinhindi.ui.customviews.smartrefresh.SmartRefreshLayout>
 
     <!-- Permission Denied Layout -->
     <LinearLayout

@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
 
-import docreader.aidoc.pdfreader.R;
+import com.arkay.gkinhindi.R;
 
 public class SheetTab2 extends LinearLayout {
     private static boolean a;

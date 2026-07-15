@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <docreader.aidoc.pdfreader.ui.customviews.HorizontalProgressBar
+    <com.arkay.gkinhindi.ui.customviews.HorizontalProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="5dp"

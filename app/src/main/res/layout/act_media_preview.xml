@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <docreader.aidoc.pdfreader.photopick.internal.ui.widget.PreviewViewPager
+    <com.arkay.gkinhindi.photopick.internal.ui.widget.PreviewViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,7 +67,7 @@
             android:layout_toStartOf="@id/btnSelect"
             android:orientation="horizontal">
 
-            <docreader.aidoc.pdfreader.photopick.internal.ui.widget.CheckView
+            <com.arkay.gkinhindi.photopick.internal.ui.widget.CheckView
                 android:id="@+id/check_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

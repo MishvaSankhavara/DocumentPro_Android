@@ -2,7 +2,6 @@ package com.artifex.sonui.editor;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,11 +27,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import docreader.aidoc.pdfreader.utils.DialogManagerUtils;
-import docreader.aidoc.pdfreader.clickListener.PasswordClickListener;
-import docreader.aidoc.pdfreader.ui.dialog.PasswordSetupDialog;
-import docreader.aidoc.pdfreader.ui.dialog.UnsavedChangesDialog;
-import docreader.aidoc.pdfreader.model_reader.PDFReaderModel;
+
+import com.arkay.gkinhindi.clickListener.PasswordClickListener;
+import com.arkay.gkinhindi.ui.dialog.PasswordSetupDialog;
+import com.arkay.gkinhindi.ui.dialog.UnsavedChangesDialog;
+import com.arkay.gkinhindi.model_reader.PDFReaderModel;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.Window;
@@ -62,17 +61,17 @@ import com.artifex.solib.p;
 import com.artifex.sonui.editor.NUIView.OnDoneListener;
 import com.artifex.sonui.editor.SODocSession.SODocSessionLoadListener;
 
-import docreader.aidoc.pdfreader.AppGlobalConstants;
-import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.ui.activities.ViewOfficeActivity;
-import docreader.aidoc.pdfreader.adapter_reader.ColorSelectionAdapter;
+import com.arkay.gkinhindi.Constants;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.ui.activities.ViewOfficeActivity;
+import com.arkay.gkinhindi.adapter_reader.ColorSelectionAdapter;
 
-import docreader.aidoc.pdfreader.ui.customviews.BottomButtonView;
-import docreader.aidoc.pdfreader.ui.customviews.EditBtn;
-import docreader.aidoc.pdfreader.ui.dialog.GoToPageDialog;
-import docreader.aidoc.pdfreader.ui.dialog.AppLoadingDialog;
-import docreader.aidoc.pdfreader.clickListener.GoToPageDialogListener;
-import docreader.aidoc.pdfreader.utils.Utils;
+import com.arkay.gkinhindi.ui.customviews.BottomButtonView;
+import com.arkay.gkinhindi.ui.customviews.EditBtn;
+import com.arkay.gkinhindi.ui.dialog.GoToPageDialog;
+import com.arkay.gkinhindi.ui.dialog.AppLoadingDialog;
+import com.arkay.gkinhindi.clickListener.GoToPageDialogListener;
+import com.arkay.gkinhindi.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -626,7 +625,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                         File cachedUnlocked = Utils.copyToCache(activity, new File(newPath));
                         Intent intent = new Intent(activity, activity.getClass());
                         intent.setData(Uri.fromFile(cachedUnlocked));
-                        intent.putExtra(AppGlobalConstants.EXTRA_SELECTED_FILE_URI, newPath);
+                        intent.putExtra(Constants.EXTRA_SELECTED_FILE_URI, newPath);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(intent);
                         activity.finish();
@@ -1360,7 +1359,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
         recyclerBgColor.setLayoutManager(layoutManager1);
         recyclerBgColor.setHasFixedSize(true);
 
-        ColorSelectionAdapter adapterBgColor = new ColorSelectionAdapter(AppGlobalConstants.getColorBgList(), 0,
+        ColorSelectionAdapter adapterBgColor = new ColorSelectionAdapter(Constants.getColorBgList(), 0,
                 new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
                     @Override
                     public void onColorChanged(String var1) {
@@ -1381,7 +1380,7 @@ public class NUIDocView extends FrameLayout implements OnClickListener, DocViewH
                 false);
         recyclerTextColor.setLayoutManager(layoutManager2);
         recyclerTextColor.setHasFixedSize(true);
-        ColorSelectionAdapter adapterTextColor = new ColorSelectionAdapter(AppGlobalConstants.getColorTextList(), 0,
+        ColorSelectionAdapter adapterTextColor = new ColorSelectionAdapter(Constants.getColorTextList(), 0,
                 new ColorSelectionAdapter.ColorChangedListener_ColorSelection() {
                     @Override
                     public void onColorChanged(String var1) {

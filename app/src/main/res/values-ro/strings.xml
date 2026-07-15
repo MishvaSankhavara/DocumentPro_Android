@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Document Reader</string>
+    <string name="app_name">Document Reader: Word, PDF,XLS</string>
 
     <string name="action_move_out">A se muta</string>
     <string name="action_create_shortcut">Comandă rapidă</string>

@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjq.language.MultiLanguages;
-import docreader.aidoc.pdfreader.ActivityBase;
-import docreader.aidoc.pdfreader.AppGlobalConstants;
-import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.PreferenceUtils;
-import docreader.aidoc.pdfreader.adapter_reader.LanguageListAdapter;
+import com.arkay.gkinhindi.ActivityBase;
+import com.arkay.gkinhindi.Constants;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.PreferenceUtils;
+import com.arkay.gkinhindi.adapter_reader.LanguageListAdapter;
 
-import docreader.aidoc.pdfreader.clickListener.LanguageClickListener;
-import docreader.aidoc.pdfreader.ui.activities.MainActivity;
-import docreader.aidoc.pdfreader.ui.activities.OnBoardActivity;
+import com.arkay.gkinhindi.clickListener.LanguageClickListener;
+import com.arkay.gkinhindi.ui.activities.MainActivity;
+import com.arkay.gkinhindi.ui.activities.OnBoardActivity;
 
 import java.util.Locale;
 
@@ -60,15 +60,15 @@ public class LocaleSelectionActivity extends ActivityBase {
             @Override
             public void onClick(View v) {
                 PreferenceUtils utils = PreferenceUtils.getInstance(LocaleSelectionActivity.this);
-                utils.setBoolean(AppGlobalConstants.PREF_LANGUAGE_SET, true);
-                utils.setString(AppGlobalConstants.PREF_LANGUAGE_NAME,
-                        AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex).getNameLanguage_LanModel());
-                utils.setString(AppGlobalConstants.PREF_LANGUAGE_KEY,
-                        AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel());
-                utils.setInt(AppGlobalConstants.PREF_LANGUAGE_NUMBER, selectedLocaleIndex);
+                utils.setBoolean(Constants.PREF_LANGUAGE_SET, true);
+                utils.setString(Constants.PREF_LANGUAGE_NAME,
+                        Constants.createArrayLanguage().get(selectedLocaleIndex).getNameLanguage_LanModel());
+                utils.setString(Constants.PREF_LANGUAGE_KEY,
+                        Constants.createArrayLanguage().get(selectedLocaleIndex).getKeyLanguage_LanModel());
+                utils.setInt(Constants.PREF_LANGUAGE_NUMBER, selectedLocaleIndex);
 
                 Class<?> nextActivity;
-                if (utils.getBoolean(AppGlobalConstants.PREF_GUIDE_COMPLETED, false)) {
+                if (utils.getBoolean(Constants.PREF_GUIDE_COMPLETED, false)) {
                     nextActivity = MainActivity.class;
                 } else {
                     nextActivity = OnBoardActivity.class;
@@ -77,7 +77,7 @@ public class LocaleSelectionActivity extends ActivityBase {
                 Intent restartIntent = new Intent(LocaleSelectionActivity.this, nextActivity);
                 restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                String key = AppGlobalConstants.createArrayLanguage().get(selectedLocaleIndex)
+                String key = Constants.createArrayLanguage().get(selectedLocaleIndex)
                         .getKeyLanguage_LanModel();
                 MultiLanguages.setAppLanguage(context, new Locale(key));
 

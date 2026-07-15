@@ -18,7 +18,7 @@ import com.artifex.sonui.editor.BaseActivity;
 import com.artifex.sonui.editor.SOEditText;
 import com.artifex.sonui.editor.SOEditTextOnEditorActionListener;
 import com.artifex.sonui.editor.Utilities;
-import docreader.aidoc.pdfreader.R;
+import com.arkay.gkinhindi.R;
 
 public class ChoosePathActivity extends BaseActivity {
     private static ChoosePathActivity.a a;
@@ -60,14 +60,14 @@ public class ChoosePathActivity extends BaseActivity {
         fileBrowser.a(this, var4);
 
         // Check and request storage permission if not already granted so that we can write the saved file
-        if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(this)) {
-            docreader.aidoc.pdfreader.utils.Utils.askPermission(this);
+        if (!com.arkay.gkinhindi.utils.Utils.checkPermission(this)) {
+            com.arkay.gkinhindi.utils.Utils.askPermission(this);
         }
 
         // Wire the + Browse button to open the system folder picker
         fileBrowser.setBrowseFolderListener(() -> {
-            if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(this)) {
-                docreader.aidoc.pdfreader.utils.Utils.askPermission(this);
+            if (!com.arkay.gkinhindi.utils.Utils.checkPermission(this)) {
+                com.arkay.gkinhindi.utils.Utils.askPermission(this);
                 return;
             }
             Intent pickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
@@ -91,8 +91,8 @@ public class ChoosePathActivity extends BaseActivity {
         tvSave.setText(var4);
         tvSave.setOnClickListener(new OnClickListener() {
             public void onClick(View var1) {
-                if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(ChoosePathActivity.this)) {
-                    docreader.aidoc.pdfreader.utils.Utils.askPermission(ChoosePathActivity.this);
+                if (!com.arkay.gkinhindi.utils.Utils.checkPermission(ChoosePathActivity.this)) {
+                    com.arkay.gkinhindi.utils.Utils.askPermission(ChoosePathActivity.this);
                     return;
                 }
                 ChoosePathActivity.this.completeSave(fileBrowser);
@@ -114,8 +114,8 @@ public class ChoosePathActivity extends BaseActivity {
         var5.setOnKeyListener(new OnKeyListener() {
             public boolean onKey(View var1, int var2x, KeyEvent var3) {
                 if (var3.getAction() == 0 && var2x == 66) {
-                    if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(ChoosePathActivity.this)) {
-                        docreader.aidoc.pdfreader.utils.Utils.askPermission(ChoosePathActivity.this);
+                    if (!com.arkay.gkinhindi.utils.Utils.checkPermission(ChoosePathActivity.this)) {
+                        com.arkay.gkinhindi.utils.Utils.askPermission(ChoosePathActivity.this);
                         return true;
                     }
                     ChoosePathActivity.this.completeSave(fileBrowser);
@@ -130,8 +130,8 @@ public class ChoosePathActivity extends BaseActivity {
             public boolean onEditorAction(SOEditText var1, int var2x, KeyEvent var3) {
                 boolean var4 = true;
                 if (var2x == 6) {
-                    if (!docreader.aidoc.pdfreader.utils.Utils.checkPermission(ChoosePathActivity.this)) {
-                        docreader.aidoc.pdfreader.utils.Utils.askPermission(ChoosePathActivity.this);
+                    if (!com.arkay.gkinhindi.utils.Utils.checkPermission(ChoosePathActivity.this)) {
+                        com.arkay.gkinhindi.utils.Utils.askPermission(ChoosePathActivity.this);
                         return true;
                     }
                     ChoosePathActivity.this.completeSave(fileBrowser);

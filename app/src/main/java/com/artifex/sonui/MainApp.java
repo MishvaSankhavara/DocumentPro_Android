@@ -5,9 +5,9 @@ import android.util.Log;
 import java.lang.reflect.Field;
 
 import com.artifex.solib.ConfigOptions;
-import docreader.aidoc.pdfreader.DocumentMyApplication;
+import com.arkay.gkinhindi.MyApplication;
 
-public class MainApp extends DocumentMyApplication {
+public class MainApp extends MyApplication {
     private static Context context;
 
     public MainApp() {

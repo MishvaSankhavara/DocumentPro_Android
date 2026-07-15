@@ -6,8 +6,8 @@ import android.supportv1.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.ui.customviews.BottomButtonView;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.ui.customviews.BottomButtonView;
 
 public class NUIDocViewOther extends NUIDocView {
     private BottomButtonView btnPrintTab;

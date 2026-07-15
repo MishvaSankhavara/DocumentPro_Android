@@ -22,19 +22,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
-import docreader.aidoc.pdfreader.AppGlobalConstants;
-import docreader.aidoc.pdfreader.DocumentMyApplication;
-import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.PreferenceUtils;
-import docreader.aidoc.pdfreader.adapter_reader.PhotoSelectionAdapter;
-import docreader.aidoc.pdfreader.clickListener.OnConfirmClickListener;
-import docreader.aidoc.pdfreader.clickListener.OnRemovePhotoListener;
-import docreader.aidoc.pdfreader.clickListener.RenameDialogClickListener;
-import docreader.aidoc.pdfreader.model_reader.PhotoModel;
-import docreader.aidoc.pdfreader.photopick.Matisse;
+import com.arkay.gkinhindi.Constants;
+import com.arkay.gkinhindi.MyApplication;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.PreferenceUtils;
+import com.arkay.gkinhindi.adapter_reader.PhotoSelectionAdapter;
+import com.arkay.gkinhindi.clickListener.OnConfirmClickListener;
+import com.arkay.gkinhindi.clickListener.OnRemovePhotoListener;
+import com.arkay.gkinhindi.clickListener.RenameDialogClickListener;
+import com.arkay.gkinhindi.model_reader.PhotoModel;
+import com.arkay.gkinhindi.photopick.Matisse;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
-import docreader.aidoc.pdfreader.utils.DialogManagerUtils;
-import docreader.aidoc.pdfreader.utils.Utils;
+import com.arkay.gkinhindi.utils.DialogManagerUtils;
+import com.arkay.gkinhindi.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +100,7 @@ public class MediaSorterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Utils.showConfirmDialog(this, AppGlobalConstants.DIALOG_CONFIRM_EXIT_PHOTO_TO_PDF,
+        Utils.showConfirmDialog(this, Constants.DIALOG_CONFIRM_EXIT_PHOTO_TO_PDF,
                 new OnConfirmClickListener() {
                     @Override
                     public void onConfirmClickListener() {
@@ -114,7 +114,7 @@ public class MediaSorterActivity extends AppCompatActivity {
 
         containerTips = findViewById(R.id.container_sorting_tips);
 
-        if (PreferenceUtils.getInstance(this).getBoolean(AppGlobalConstants.PHOTO_ORDER_TIP, false)) {
+        if (PreferenceUtils.getInstance(this).getBoolean(Constants.PHOTO_ORDER_TIP, false)) {
             containerTips.setVisibility(View.GONE);
         }
 
@@ -128,7 +128,7 @@ public class MediaSorterActivity extends AppCompatActivity {
                                 super.onAnimationEnd(animation);
                                 containerTips.setVisibility(View.GONE);
                                 PreferenceUtils.getInstance(MediaSorterActivity.this)
-                                        .setBoolean(AppGlobalConstants.PHOTO_ORDER_TIP, true);
+                                        .setBoolean(Constants.PHOTO_ORDER_TIP, true);
                             }
                         });
             }
@@ -188,11 +188,11 @@ public class MediaSorterActivity extends AppCompatActivity {
                             @Override
                             public void onRenameDialogListener(String newChosenName) {
                                 String finalOutName = newChosenName + System.currentTimeMillis();
-                                DocumentMyApplication.getInstance().updateSelectedImages(mediaPaths);
+                                MyApplication.getInstance().updateSelectedImages(mediaPaths);
                                 Intent taskIntent = new Intent(MediaSorterActivity.this, ProcessingTaskActivity.class);
-                                taskIntent.putExtra(AppGlobalConstants.EXTRA_TOOL_TYPE,
-                                        AppGlobalConstants.TOOL_ID_PHOTO_TO_PDF);
-                                taskIntent.putExtra(AppGlobalConstants.PHOTO_TO_PDF_FILE_NAME, finalOutName);
+                                taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE,
+                                        Constants.TOOL_ID_PHOTO_TO_PDF);
+                                taskIntent.putExtra(Constants.PHOTO_TO_PDF_FILE_NAME, finalOutName);
                                 startActivity(taskIntent);
                                 finish();
                             }

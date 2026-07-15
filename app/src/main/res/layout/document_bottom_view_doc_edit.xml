@@ -88,7 +88,7 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp">
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_text_size_up"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -96,7 +96,7 @@
                 app:ImageEdt="@drawable/text_increase"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_text_size_down"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -104,7 +104,7 @@
                 app:ImageEdt="@drawable/text_decrease"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_text_bold"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -112,7 +112,7 @@
                 app:ImageEdt="@drawable/format_bold"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_text_italic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -121,7 +121,7 @@
                 android:visibility="visible"/>
 
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_text_under"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -130,7 +130,7 @@
                 android:visibility="visible"/>
 
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_striketrough"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -138,14 +138,14 @@
                 app:ImageEdt="@drawable/ic_strikethrough_preview"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_text_color"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 app:ImageEdt="@drawable/bg_color_red" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_text_bg"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -153,7 +153,7 @@
                 app:ImageEdt="@drawable/ic_highlight"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_align_left"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -161,7 +161,7 @@
                 app:ImageEdt="@drawable/editor_icon_align_text_left"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_align_center"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -169,7 +169,7 @@
                 app:ImageEdt="@drawable/editor_icon_align_text_center"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_align_right"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -177,7 +177,7 @@
                 app:ImageEdt="@drawable/editor_icon_align_text_right"
                 android:visibility="visible"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_align_justify"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -185,21 +185,21 @@
                 android:visibility="visible"
                 app:ImageEdt="@drawable/editor_icon_align_text_full" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_list_bullets"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 app:ImageEdt="@drawable/editor_icon_list_bullet" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_list_numbers"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 app:ImageEdt="@drawable/editor_icon_list_numbers" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_indent_decrease"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -207,7 +207,7 @@
                 app:ImageEdt="@drawable/editor_icon_indent_text_left"
                 android:visibility="gone"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_indent_increase"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -215,14 +215,14 @@
                 app:ImageEdt="@drawable/editor_icon_indent_text_right"
                 android:visibility="gone"/>
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_insert_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 app:ImageEdt="@drawable/add_a_photo" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_insert_photo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -230,21 +230,21 @@
                 android:visibility="visible"
                 app:ImageEdt="@drawable/add_a_photo" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_cut"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 app:ImageEdt="@drawable/editor_icon_cut" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_copy"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 app:ImageEdt="@drawable/ic_copy_new" />
 
-            <docreader.aidoc.pdfreader.ui.customviews.EditBtn
+            <com.arkay.gkinhindi.ui.customviews.EditBtn
                 android:id="@+id/btn_paste"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

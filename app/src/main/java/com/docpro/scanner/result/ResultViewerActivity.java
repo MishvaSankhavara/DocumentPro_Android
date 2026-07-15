@@ -15,10 +15,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import docreader.aidoc.pdfreader.AppGlobalConstants;
-import docreader.aidoc.pdfreader.R;
-import docreader.aidoc.pdfreader.adapter_reader.PdfViewerPagerAdapter;
-import docreader.aidoc.pdfreader.utils.Utils;
+import com.arkay.gkinhindi.Constants;
+import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.adapter_reader.PdfViewerPagerAdapter;
+import com.arkay.gkinhindi.utils.Utils;
 
 import java.util.Objects;
 
@@ -47,7 +47,7 @@ public class ResultViewerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            final int targetPos = intent.getIntExtra(AppGlobalConstants.FROM_SAVE_IMAGE, 0);
+            final int targetPos = intent.getIntExtra(Constants.FROM_SAVE_IMAGE, 0);
             if (targetPos > 0) {
                 // Post after the first layout pass so ViewPager2 honours the position
                 contentPager.post(() -> contentPager.setCurrentItem(targetPos, false));
@@ -107,7 +107,7 @@ public class ResultViewerActivity extends AppCompatActivity {
     }
 
     private void navigateToMainTools() {
-        Intent intent = new Intent(this, docreader.aidoc.pdfreader.ui.activities.MainActivity.class);
+        Intent intent = new Intent(this, com.arkay.gkinhindi.ui.activities.MainActivity.class);
         intent.putExtra("EXTRA_START_TAB", 1); // 1 = Tools tab
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import docreader.aidoc.pdfreader.R;
+import com.arkay.gkinhindi.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
