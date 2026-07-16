@@ -718,13 +718,28 @@ public class Utils {
     }
 
     public static boolean checkPermission(Context mContext) {
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-            return Environment.isExternalStorageManager();
+        if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return ContextCompat.checkSelfPermission(mContext,
+                    Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED;
         } else {
-            return !(ContextCompat.checkSelfPermission(mContext,
-                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                    && ContextCompat.checkSelfPermission(mContext,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
+            return ContextCompat.checkSelfPermission(mContext,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+        }
+    }
+
+    public static void askPermission(Activity mContext) {
+        if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(mContext,
+                    Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(mContext, new String[] { Manifest.permission.READ_MEDIA_IMAGES },
+                        REQUEST_CODE_STORAGE_PERMISSION);
+            }
+        } else {
+            if (ActivityCompat.checkSelfPermission(mContext,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(mContext, new String[] { Manifest.permission.READ_EXTERNAL_STORAGE },
+                        REQUEST_CODE_STORAGE_PERMISSION);
+            }
         }
     }
 
@@ -754,43 +769,6 @@ public class Utils {
         }
     }
 
-    public static void askPermission(Activity mContext) {
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                intent.addCategory("android.intent.category.DEFAULT");
-                intent.setData(
-                        Uri.parse(String.format("package:%s", mContext.getApplicationContext().getPackageName())));
-                mContext.startActivityForResult(intent, REQUEST_CODE_MANAGE_ALL_FILES);
-
-            } catch (Exception e) {
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                mContext.startActivityForResult(intent, REQUEST_CODE_MANAGE_ALL_FILES);
-            }
-        } else {
-            if (ActivityCompat.checkSelfPermission(mContext,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                // Yêu cầu quyền truy cập lưu trữ
-                ActivityCompat.requestPermissions(mContext, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-                        REQUEST_CODE_STORAGE_PERMISSION);
-            }
-            // below android 11
-            // Dexter.withContext(mContext).withPermissions(READ_EXTERNAL_STORAGE,
-            // WRITE_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
-            // @Override
-            // public void onPermissionsChecked(MultiplePermissionsReport
-            // multiplePermissionsReport) {
-            // }
-            //
-            // @Override
-            // public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list,
-            // PermissionToken permissionToken) {
-            //
-            // }
-            // }).onSameThread().check();
-        }
-    }
 
     public static ArrayList<DocumentModel> getAllDocument() {
         ArrayList<DocumentModel> documents = new ArrayList<>();
