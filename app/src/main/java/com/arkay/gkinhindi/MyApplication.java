@@ -44,6 +44,7 @@ public class MyApplication extends Application
         }
         MultiLanguages.init(this);
         com.arkay.gkinhindi.utils.AnalyticsHelper.init(this);
+        com.google.android.gms.ads.MobileAds.initialize(this);
 
         boolean isDark = com.arkay.gkinhindi.PreferenceUtils.getInstance(this).getBoolean(Constants.PREF_NIGHT_MODE, false);
         if (isDark) {

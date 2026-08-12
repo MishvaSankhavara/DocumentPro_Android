@@ -14,6 +14,18 @@ public class Constants {
         public static String PREF_GUIDE_COMPLETED = "guide_set";
         public static String PREF_NIGHT_MODE = "night_mode";
         public static String NAVIGATION_CLICK_COUNT = "navigationClickCount";
+
+
+        //  Ads ID
+
+        public static boolean enable_all_in_app_ads = true;
+        public static boolean native_onboarding = true;
+        public static boolean native_onboarding_2ID = true;
+
+
+
+
+
         public static int DIALOG_CONFIRM_CLEAR_RECENT = 5;
         public static int DIALOG_CONFIRM_CLEAR_FAV = 6;
         public static int DIALOG_CONFIRM_EXIT_SPLIT = 2;

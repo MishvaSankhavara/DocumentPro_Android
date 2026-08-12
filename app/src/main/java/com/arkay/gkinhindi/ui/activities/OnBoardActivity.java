@@ -156,6 +156,18 @@ public class OnBoardActivity extends AppCompatActivity {
                 }
             }
         });
+
+        android.widget.FrameLayout adContainer = findViewById(R.id.ad_container);
+        if (adContainer != null) {
+            com.arkay.gkinhindi.utils.AdsUtils.showLargeNativeAd(
+                    this,
+                    adContainer,
+                    com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
+                    com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
+                    Constants.native_onboarding,
+                    Constants.native_onboarding_2ID
+            );
+        }
     }
 
     public final void animatePageText(int position) {

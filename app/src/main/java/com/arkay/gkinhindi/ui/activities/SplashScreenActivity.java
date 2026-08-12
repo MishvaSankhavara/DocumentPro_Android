@@ -4,6 +4,7 @@ import com.docpro.scanner.settings.LocaleSelectionActivity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -25,6 +26,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     private long remainingSeconds;
     private ProgressBar pbSplash;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,33 @@ public class SplashScreenActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.act_splash);
         pbSplash = findViewById(R.id.pb_splash);
+        fetchRemoteConfig();
         startSplashTimer();
+    }
+
+    private void fetchRemoteConfig() {
+        try {
+            com.google.firebase.remoteconfig.FirebaseRemoteConfig remoteConfig =
+                    com.google.firebase.remoteconfig.FirebaseRemoteConfig.getInstance();
+            com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings configSettings =
+                    new com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings.Builder()
+                            .setMinimumFetchIntervalInSeconds(0)
+                            .build();
+            remoteConfig.setConfigSettingsAsync(configSettings);
+            remoteConfig.fetchAndActivate().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Constants.enable_all_in_app_ads = remoteConfig.getBoolean("enable_all_inapp_ads");
+                    Constants.native_onboarding = remoteConfig.getBoolean("native_onboarding");
+                    Constants.native_onboarding_2ID = remoteConfig.getBoolean("native_onboarding_2ID");
+                    Log.d("RemoteConfig", "Fetched native_onboarding=" + Constants.native_onboarding +
+                            ", native_onboarding_2ID=" + Constants.native_onboarding_2ID);
+                } else {
+                    Log.w("RemoteConfig", "Fetch failed or pending");
+                }
+            });
+        } catch (Exception e) {
+            Log.e("RemoteConfig", "Error fetching remote config: " + e.getMessage());
+        }
     }
 
     @Override
