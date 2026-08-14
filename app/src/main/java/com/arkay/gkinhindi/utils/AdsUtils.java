@@ -36,7 +36,7 @@ public class AdsUtils {
             return;
         }
 
-        if (!Constants.enable_all_in_app_ads || (!flag1 && !flag2)) {
+        if (!Constants.enable_all_ads || (!flag1 && !flag2)) {
             Log.d(TAG, "showLargeNativeAd: SKIPPED — ads disabled globally or flags are false");
             adContainer.removeAllViews();
             adContainer.setVisibility(View.GONE);
@@ -91,7 +91,7 @@ public class AdsUtils {
                             return;
                         }
 
-                        if (!Constants.enable_all_in_app_ads) {
+                        if (!Constants.enable_all_ads) {
                             adContainer.removeAllViews();
                             adContainer.setVisibility(View.GONE);
                             nativeAd.destroy();

@@ -4,7 +4,6 @@ import com.docpro.scanner.settings.LocaleSelectionActivity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -48,13 +47,24 @@ public class SplashScreenActivity extends AppCompatActivity {
                             .setMinimumFetchIntervalInSeconds(0)
                             .build();
             remoteConfig.setConfigSettingsAsync(configSettings);
+
             remoteConfig.fetchAndActivate().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Constants.enable_all_in_app_ads = remoteConfig.getBoolean("enable_all_inapp_ads");
+
+                    Constants.enable_all_ads = false; //remoteConfig.getBoolean("enable_all_ads")
                     Constants.native_onboarding = remoteConfig.getBoolean("native_onboarding");
                     Constants.native_onboarding_2ID = remoteConfig.getBoolean("native_onboarding_2ID");
-                    Log.d("RemoteConfig", "Fetched native_onboarding=" + Constants.native_onboarding +
-                            ", native_onboarding_2ID=" + Constants.native_onboarding_2ID);
+                    Constants.native_home = remoteConfig.getBoolean("native_home");
+                    Constants.native_home_2ID = remoteConfig.getBoolean("native_home_2ID");
+
+
+                    Log.d("RemoteConfig", "Fetched enable_all_ads=" + Constants.enable_all_ads);
+
+                    Log.d("RemoteConfig", "native_onboarding=" + Constants.native_onboarding);
+                    Log.d("RemoteConfig", "native_onboarding_2ID=" + Constants.native_onboarding_2ID);
+                    Log.d("RemoteConfig", "native_home=" + Constants.native_home);
+                    Log.d("RemoteConfig", "native_home_2ID=" + Constants.native_home_2ID);
+
                 } else {
                     Log.w("RemoteConfig", "Fetch failed or pending");
                 }
@@ -105,6 +115,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             if (!PreferenceUtils.getInstance(SplashScreenActivity.this).getBoolean(Constants.PREF_LANGUAGE_SET,
                     false)) {
                 startActivity(new Intent(SplashScreenActivity.this, LocaleSelectionActivity.class));
+                finish();
+            } else if (!PreferenceUtils.getInstance(SplashScreenActivity.this).getBoolean(Constants.PREF_GUIDE_COMPLETED,
+                    false)) {
+                startActivity(new Intent(SplashScreenActivity.this, OnBoardActivity.class));
                 finish();
             } else {
                 startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));

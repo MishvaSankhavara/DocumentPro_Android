@@ -90,6 +90,7 @@
         android:id="@+id/ad_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_native_ad_card"
         android:minHeight="100dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 

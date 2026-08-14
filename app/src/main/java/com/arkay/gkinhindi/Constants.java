@@ -18,9 +18,11 @@ public class Constants {
 
         //  Ads ID
 
-        public static boolean enable_all_in_app_ads = true;
+        public static boolean enable_all_ads = true;
         public static boolean native_onboarding = true;
         public static boolean native_onboarding_2ID = true;
+        public static boolean native_home = true;
+        public static boolean native_home_2ID = true;
 
 
 
