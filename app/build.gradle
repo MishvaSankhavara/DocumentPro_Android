@@ -28,6 +28,8 @@ android {
         buildConfigField "String", "native_onboarding_2", "\"ca-app-pub-3940256099942544/2247696110\""
         buildConfigField "String", "native_home_1", "\"ca-app-pub-3940256099942544/2247696110\""
         buildConfigField "String", "native_home_2", "\"ca-app-pub-3940256099942544/2247696110\""
+        buildConfigField "String", "banner_splash_1", "\"ca-app-pub-3940256099942544/6300978111\""
+        buildConfigField "String", "banner_splash_2", "\"ca-app-pub-3940256099942544/6300978111\""
     }
 
     flavorDimensions = ["env"]
@@ -41,6 +43,8 @@ android {
             buildConfigField "String", "native_onboarding_2", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_home_1", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_home_2", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "banner_splash_1", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "banner_splash_2", "\"ca-app-pub-3940256099942544/6300978111\""
         }
         appProd {
             dimension "env"
@@ -51,6 +55,8 @@ android {
             buildConfigField "String", "native_onboarding_2", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_home_1", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_home_2", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "banner_splash_1", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "banner_splash_2", "\"ca-app-pub-3940256099942544/6300978111\""
         }
     }
 

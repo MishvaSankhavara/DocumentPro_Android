@@ -184,4 +184,103 @@ public class AdsUtils {
 
         adView.setNativeAd(nativeAd);
     }
+
+    public static void showBannerAd(
+            final Activity activity,
+            final FrameLayout bannerContainer,
+            final String primaryAdUnitId,
+            final String fallbackAdUnitId,
+            final boolean flag1,
+            final boolean flag2
+    ) {
+        if (activity == null || bannerContainer == null) {
+            Log.d("====BannerAd", "showBannerAd: SKIPPED — activity or container is null");
+            return;
+        }
+
+        if (!Constants.enable_all_ads || (!flag1 && !flag2)) {
+            Log.d("====BannerAd", "showBannerAd: SKIPPED — ads disabled globally or flags are false");
+            bannerContainer.removeAllViews();
+            bannerContainer.setVisibility(View.GONE);
+            return;
+        }
+
+        loadBannerAdInternal(activity, bannerContainer, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, false);
+    }
+
+    private static void loadBannerAdInternal(
+            final Activity activity,
+            final FrameLayout bannerContainer,
+            final String primaryAdUnitId,
+            final String fallbackAdUnitId,
+            final boolean flag1,
+            final boolean flag2,
+            final boolean usingFallback
+    ) {
+        if (activity == null || bannerContainer == null) return;
+
+        boolean shouldLoad = usingFallback ? flag2 : flag1;
+        String targetAdUnitId = usingFallback ? fallbackAdUnitId : primaryAdUnitId;
+
+        if (!shouldLoad || targetAdUnitId == null || targetAdUnitId.trim().isEmpty()) {
+            if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
+                loadBannerAdInternal(activity, bannerContainer, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true);
+            } else {
+                bannerContainer.removeAllViews();
+                bannerContainer.setVisibility(View.GONE);
+            }
+            return;
+        }
+
+        Log.d("====BannerAd", "loadBannerAdInternal: loading " + (usingFallback ? "fallback" : "primary") + " id=" + targetAdUnitId);
+
+        try {
+            com.google.android.gms.ads.AdView adView = new com.google.android.gms.ads.AdView(activity);
+            adView.setAdUnitId(targetAdUnitId);
+
+            int adWidth = activity.getResources().getDisplayMetrics().widthPixels;
+            if (adWidth <= 0) adWidth = 320;
+            float density = activity.getResources().getDisplayMetrics().density;
+            int adaptiveWidth = density > 0 ? (int) (adWidth / density) : 320;
+            com.google.android.gms.ads.AdSize adSize = com.google.android.gms.ads.AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adaptiveWidth);
+            adView.setAdSize(adSize);
+
+            adView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    if (activity.isDestroyed() || activity.isFinishing()) {
+                        adView.destroy();
+                        return;
+                    }
+                    if (!Constants.enable_all_ads) {
+                        bannerContainer.removeAllViews();
+                        bannerContainer.setVisibility(View.GONE);
+                        adView.destroy();
+                        return;
+                    }
+                    bannerContainer.removeAllViews();
+                    bannerContainer.addView(adView);
+                    bannerContainer.setVisibility(View.VISIBLE);
+                    Log.d("====BannerAd", "onAdLoaded: banner ad displayed successfully");
+                }
+
+                @Override
+                public void onAdFailedToLoad(@NonNull LoadAdError adError) {
+                    Log.d("====BannerAd", "onAdFailedToLoad: " + adError.getMessage() + " | usingFallback=" + usingFallback);
+                    if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
+                        loadBannerAdInternal(activity, bannerContainer, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true);
+                    } else {
+                        bannerContainer.removeAllViews();
+                        bannerContainer.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            adView.loadAd(new AdRequest.Builder().build());
+        } catch (Exception e) {
+            Log.e("====BannerAd", "loadBannerAdInternal error: " + e.getMessage());
+            bannerContainer.removeAllViews();
+            bannerContainer.setVisibility(View.GONE);
+        }
+    }
 }

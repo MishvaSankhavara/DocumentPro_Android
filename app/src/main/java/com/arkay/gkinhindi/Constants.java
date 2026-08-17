@@ -23,6 +23,8 @@ public class Constants {
         public static boolean native_onboarding_2ID = true;
         public static boolean native_home = true;
         public static boolean native_home_2ID = true;
+        public static boolean banner_splash = true;
+        public static boolean banner_splash_2ID = true;
 
 
 
