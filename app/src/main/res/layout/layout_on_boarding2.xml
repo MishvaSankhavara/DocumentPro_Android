@@ -40,5 +40,30 @@
             android:text="@string/onboarding_description_streamline"
             android:textColor="@color/app_text_gray"
             android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_swipe_left"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/swipe_left" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="Swipe left"
+                android:textColor="@color/app_text_gray"
+                android:textSize="15sp" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

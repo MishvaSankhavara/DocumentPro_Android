@@ -78,8 +78,6 @@ public class OnBoardActivity extends AppCompatActivity {
                         int target = isMovingForward ? 2 : 0;
                         activity.onboardingViewPager.setCurrentItem(target, false);
                     }
-                } else {
-                    activity.startAutoScrollTimer(2);
                 }
             } else if (position == 3) {
                 if (activity.isFullAd2Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID)) {
@@ -87,8 +85,6 @@ public class OnBoardActivity extends AppCompatActivity {
                         int target = isMovingForward ? 4 : 2;
                         activity.onboardingViewPager.setCurrentItem(target, false);
                     }
-                } else {
-                    activity.startAutoScrollTimer(4);
                 }
             }
         }
@@ -186,8 +182,13 @@ public class OnBoardActivity extends AppCompatActivity {
                     shimmer1,
                     com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
                     com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
-                    Constants.native_onboarding, // Constants.native_onboarding
-                    Constants.native_onboarding_2ID, // Constants.native_onboarding_2ID
+                    Constants.native_onboarding,
+                    Constants.native_onboarding_2ID,
+                    v -> {
+                        if (onboardingViewPager != null) {
+                            onboardingViewPager.setCurrentItem(2);
+                        }
+                    },
                     new com.arkay.gkinhindi.utils.AdsUtils.OnNativeAdStateListener() {
                         @Override
                         public void onAdLoaded() {
@@ -223,8 +224,13 @@ public class OnBoardActivity extends AppCompatActivity {
                     shimmer2,
                     com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
                     com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
-                    Constants.native_onboarding, // Constants.native_onboarding
-                    Constants.native_onboarding_2ID, // Constants.native_onboarding_2ID
+                    Constants.native_onboarding,
+                    Constants.native_onboarding_2ID,
+                    v -> {
+                        if (onboardingViewPager != null) {
+                            onboardingViewPager.setCurrentItem(4);
+                        }
+                    },
                     new com.arkay.gkinhindi.utils.AdsUtils.OnNativeAdStateListener() {
                         @Override
                         public void onAdLoaded() {

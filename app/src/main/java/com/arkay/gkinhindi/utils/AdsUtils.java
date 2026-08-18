@@ -298,6 +298,7 @@ public class AdsUtils {
             final String adsPriority2,
             final boolean flag1,
             final boolean flag2,
+            final View.OnClickListener onCloseClickListener,
             final OnNativeAdStateListener listener
     ) {
         if (activity == null || adContainer == null) return;
@@ -316,7 +317,7 @@ public class AdsUtils {
             return;
         }
 
-        loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, adsPriority1, adsPriority2, flag1, flag2, false, listener);
+        loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, adsPriority1, adsPriority2, flag1, flag2, false, onCloseClickListener, listener);
     }
 
     private static void loadFullScreenNativeAdInternal(
@@ -328,6 +329,7 @@ public class AdsUtils {
             final boolean flag1,
             final boolean flag2,
             final boolean usingFallback,
+            final View.OnClickListener onCloseClickListener,
             final OnNativeAdStateListener listener
     ) {
         if (activity == null || adContainer == null) return;
@@ -337,7 +339,7 @@ public class AdsUtils {
 
         if (!shouldLoad || targetAdUnitId == null || targetAdUnitId.trim().isEmpty()) {
             if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
-                loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, listener);
+                loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, onCloseClickListener, listener);
             } else {
                 if (shimmerView != null) {
                     shimmerView.setVisibility(View.GONE);
@@ -383,6 +385,66 @@ public class AdsUtils {
 
                             populateNativeAdView(nativeAd, adView);
 
+                            View btnClose = adView.findViewById(R.id.btn_full_ad_close);
+                            TextView tvTimer = adView.findViewById(R.id.tv_full_ad_timer);
+                            ImageView ivClose = adView.findViewById(R.id.iv_full_ad_close);
+
+                            if (btnClose != null && tvTimer != null && ivClose != null) {
+                                tvTimer.setText("10s");
+                                tvTimer.setVisibility(View.VISIBLE);
+                                ivClose.setVisibility(View.GONE);
+                                btnClose.setClickable(false);
+
+                                adView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                                    private android.os.CountDownTimer countDownTimer;
+
+                                    @Override
+                                    public void onViewAttachedToWindow(View v) {
+                                        if (countDownTimer != null) {
+                                            countDownTimer.cancel();
+                                        }
+                                        tvTimer.setText("10s");
+                                        tvTimer.setVisibility(View.VISIBLE);
+                                        ivClose.setVisibility(View.GONE);
+                                        btnClose.setClickable(false);
+
+                                        countDownTimer = new android.os.CountDownTimer(10000, 1000) {
+                                            @Override
+                                            public void onTick(long millisUntilFinished) {
+                                                if (activity.isDestroyed() || activity.isFinishing()) {
+                                                    cancel();
+                                                    return;
+                                                }
+                                                long secondsLeft = (millisUntilFinished + 999) / 1000;
+                                                if (secondsLeft > 10) secondsLeft = 10;
+                                                tvTimer.setText(secondsLeft + "s");
+                                            }
+
+                                            @Override
+                                            public void onFinish() {
+                                                if (activity.isDestroyed() || activity.isFinishing()) return;
+                                                tvTimer.setVisibility(View.GONE);
+                                                ivClose.setVisibility(View.VISIBLE);
+                                                btnClose.setClickable(true);
+                                                btnClose.setOnClickListener(clickVal -> {
+                                                    if (onCloseClickListener != null) {
+                                                        onCloseClickListener.onClick(clickVal);
+                                                    }
+                                                });
+                                            }
+                                        };
+                                        countDownTimer.start();
+                                    }
+
+                                    @Override
+                                    public void onViewDetachedFromWindow(View v) {
+                                        if (countDownTimer != null) {
+                                            countDownTimer.cancel();
+                                        }
+                                    }
+                                });
+                            }
+
                             if (shimmerView != null) {
                                 shimmerView.setVisibility(View.GONE);
                             }
@@ -414,7 +476,7 @@ public class AdsUtils {
                     public void onAdFailedToLoad(@NonNull LoadAdError adError) {
                         Log.d("====FullNativeAd", "onAdFailedToLoad: " + adError.getMessage() + " | usingFallback=" + usingFallback);
                         if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
-                            loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, listener);
+                            loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, onCloseClickListener, listener);
                         } else {
                             if (shimmerView != null) {
                                 shimmerView.setVisibility(View.GONE);
