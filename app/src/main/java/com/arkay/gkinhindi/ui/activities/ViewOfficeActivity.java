@@ -3,14 +3,20 @@ package com.arkay.gkinhindi.ui.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.core.content.ContextCompat;
 
 import com.artifex.sonui.AppNUIActivity;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.PreferenceUtils;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.utils.Utils;
 import java.io.File;
 
@@ -146,6 +152,45 @@ public class ViewOfficeActivity extends AppNUIActivity {
                     }
                 }
                 getWindow().setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.bg_tittle));
+            }
+
+            View rootView = findViewById(android.R.id.content);
+            if (rootView instanceof ViewGroup) {
+                ViewGroup root = (ViewGroup) rootView;
+                View mainContentView = root.getChildCount() > 0 ? root.getChildAt(0) : null;
+
+                FrameLayout bannerAdContainer = new FrameLayout(this);
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                params.gravity = Gravity.BOTTOM;
+                bannerAdContainer.setLayoutParams(params);
+
+                bannerAdContainer.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+                    int bannerHeight = bottom - top;
+                    if (mainContentView != null) {
+                        ViewGroup.LayoutParams lp = mainContentView.getLayoutParams();
+                        if (lp instanceof ViewGroup.MarginLayoutParams) {
+                            ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) lp;
+                            if (marginParams.bottomMargin != bannerHeight) {
+                                marginParams.bottomMargin = bannerHeight;
+                                mainContentView.setLayoutParams(marginParams);
+                            }
+                        }
+                    }
+                });
+
+                root.addView(bannerAdContainer);
+
+                AdsUtils.showBannerAd(
+                        this,
+                        bannerAdContainer,
+                        BuildConfig.banner_all,
+                        BuildConfig.banner_all_2ID,
+                        Constants.banner_all,
+                        Constants.banner_all_2ID
+                );
             }
         } catch (Exception e) {
             e.printStackTrace();

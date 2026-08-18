@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.arkay.gkinhindi.ActivityBase;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.PagerViewAdapter;
@@ -33,6 +35,7 @@ import com.arkay.gkinhindi.ui.fragments.search.FragmentPdf;
 import com.arkay.gkinhindi.ui.fragments.search.FragmentPpt;
 import com.arkay.gkinhindi.ui.fragments.search.FragmentTxt;
 import com.arkay.gkinhindi.ui.fragments.search.FragmentWord;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.viewmodel.ViewModelSearch;
 
 import java.util.Objects;
@@ -67,6 +70,18 @@ public class SearchDocumentActivity extends ActivityBase implements ViewPager.On
 
         applyToolbarTheme(selectedFileType);
         searchViewModel = new ViewModelProvider(this).get(ViewModelSearch.class);
+
+        FrameLayout bannerAdContainer = findViewById(R.id.banner_ad_container);
+        if (bannerAdContainer != null) {
+            AdsUtils.showBannerAd(
+                    this,
+                    bannerAdContainer,
+                    BuildConfig.banner_all,
+                    BuildConfig.banner_all_2ID,
+                    Constants.banner_all,
+                    Constants.banner_all_2ID
+            );
+        }
     }
 
     private void applyToolbarTheme(int fileType) {

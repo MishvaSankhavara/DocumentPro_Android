@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.arkay.gkinhindi.ActivityBase;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.FilePickerAdapter;
@@ -42,6 +44,7 @@ import com.arkay.gkinhindi.clickListener.OnConfirmClickListener;
 import com.arkay.gkinhindi.model_reader.DocumentModel;
 import com.arkay.gkinhindi.ui.customviews.EmptyStateRecyclerView;
 import com.arkay.gkinhindi.ui.dialog.FileProgressDialog;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.utils.DialogManagerUtils;
 import com.arkay.gkinhindi.utils.Utils;
 
@@ -87,6 +90,18 @@ public class SelectDocumentActivity extends ActivityBase implements View.OnClick
         initViews();
 
         updateActionButtonsState(false);
+
+        FrameLayout bannerAdContainer = findViewById(R.id.banner_ad_container);
+        if (bannerAdContainer != null) {
+            AdsUtils.showBannerAd(
+                    this,
+                    bannerAdContainer,
+                    BuildConfig.banner_all,
+                    BuildConfig.banner_all_2ID,
+                    Constants.banner_all,
+                    Constants.banner_all_2ID
+            );
+        }
     }
 
     private void initToolbar() {

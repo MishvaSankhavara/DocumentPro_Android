@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.arkay.gkinhindi.ActivityBase;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.FileListAdapter;
@@ -30,6 +32,7 @@ import com.arkay.gkinhindi.clickListener.DocClickListener;
 import com.arkay.gkinhindi.clickListener.SortingListener;
 import com.arkay.gkinhindi.model_reader.DocumentModel;
 import com.arkay.gkinhindi.ui.customviews.EmptyStateRecyclerView;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.utils.Utils;
 
 import java.util.ArrayList;
@@ -68,6 +71,18 @@ public class DocumentListActivity extends ActivityBase implements DocClickListen
 
         setUpToolbar();
         loadDocuments(selectedFileType);
+
+        FrameLayout bannerAdContainer = findViewById(R.id.banner_ad_container);
+        if (bannerAdContainer != null) {
+            AdsUtils.showBannerAd(
+                    this,
+                    bannerAdContainer,
+                    BuildConfig.banner_all,
+                    BuildConfig.banner_all_2ID,
+                    Constants.banner_all,
+                    Constants.banner_all_2ID
+            );
+        }
     }
 
     private void loadDocuments(String fileType) {

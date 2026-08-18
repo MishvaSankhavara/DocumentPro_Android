@@ -176,7 +176,7 @@
         android:layout_height="60dp"
         android:background="@color/colorPrimaryDim"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/banner_ad_container" />
 
     <LinearLayout
         android:id="@+id/ll_share"
@@ -185,7 +185,7 @@
         android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/banner_ad_container"
         app:layout_constraintEnd_toStartOf="@+id/ll_remove"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -222,7 +222,7 @@
         android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/banner_ad_container"
         app:layout_constraintEnd_toStartOf="@+id/ll_delete"
         app:layout_constraintStart_toEndOf="@+id/ll_share">
 
@@ -257,7 +257,7 @@
         android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/banner_ad_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ll_remove">
 
@@ -287,5 +287,12 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_share" />
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/banner_ad_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

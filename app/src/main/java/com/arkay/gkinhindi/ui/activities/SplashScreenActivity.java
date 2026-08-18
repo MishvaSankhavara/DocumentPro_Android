@@ -90,6 +90,14 @@ public class SplashScreenActivity extends AppCompatActivity {
                         Constants.banner_splash_2ID = remoteConfig.getBoolean("banner_splash_2ID");
                     }
 
+                    if (remoteConfig.getAll().containsKey("banner_all")) {
+                        Constants.banner_all = remoteConfig.getBoolean("banner_all");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("banner_all_2ID")) {
+                        Constants.banner_all_2ID = remoteConfig.getBoolean("banner_all_2ID");
+                    }
+
                     if (remoteConfig.getAll().containsKey("interstitial_splash")) {
                         Constants.interstitial_splash = remoteConfig.getBoolean("interstitial_splash");
                     }
@@ -113,6 +121,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                     Log.d("=====RemoteConfig", "native_home_2ID=" + Constants.native_home_2ID);
                     Log.d("=====RemoteConfig", "banner_splash=" + Constants.banner_splash);
                     Log.d("=====RemoteConfig", "banner_splash_2ID=" + Constants.banner_splash_2ID);
+                    Log.d("=====RemoteConfig", "banner_all=" + Constants.banner_all);
+                    Log.d("=====RemoteConfig", "banner_all_2ID=" + Constants.banner_all_2ID);
                     Log.d("=====RemoteConfig", "interstitial_splash=" + Constants.interstitial_splash);
                     Log.d("=====RemoteConfig", "interstitial_splash_2ID=" + Constants.interstitial_splash_2ID);
                     Log.d("=====RemoteConfig", "interstitial_function=" + Constants.interstitial_function);
