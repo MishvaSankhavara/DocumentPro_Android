@@ -1,5 +1,7 @@
 package com.arkay.gkinhindi.ui.activities;
 
+import com.arkay.gkinhindi.BuildConfig;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 
 import android.content.Intent;
@@ -151,25 +153,31 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
         continueButton = findViewById(R.id.tv_continue);
         pdfPagesRecyclerView = findViewById(R.id.chooser_recycler_view);
 
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String nameFile = "Split-" + System.currentTimeMillis();
-                DialogManagerUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile,
-                        new RenameDialogClickListener() {
-                            @Override
-                            public void onRenameDialogListener(String newName) {
-                                MyApplication.getInstance()
-                                        .updateSplitIndices(pdfThumbnailAdapter.getPageNumbers_PdfPreview());
-                                Intent intent = new Intent(SplitChooseFileActivity.this, ProcessingTaskActivity.class);
-                                intent.putExtra(Constants.EXTRA_PDF_FILE_NAME, newName);
-                                intent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_SPLIT);
-                                intent.putExtra(Constants.EXTRA_PDF_MODEL, selectedPdfModel);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-            }
+        continueButton.setOnClickListener(view -> {
+                AdsUtils.showInterstitialAdFunction(
+                    SplitChooseFileActivity.this,
+                    BuildConfig.interstitial_function,
+                    BuildConfig.interstitial_function_2ID,
+                    Constants.interstitial_function,
+                    Constants.interstitial_function_2ID,
+                    () -> {
+                        String nameFile = "Split-" + System.currentTimeMillis();
+                        DialogManagerUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile,
+                                new RenameDialogClickListener() {
+                                    @Override
+                                    public void onRenameDialogListener(String newName) {
+                                        MyApplication.getInstance()
+                                                .updateSplitIndices(pdfThumbnailAdapter.getPageNumbers_PdfPreview());
+                                        Intent intent = new Intent(SplitChooseFileActivity.this, ProcessingTaskActivity.class);
+                                        intent.putExtra(Constants.EXTRA_PDF_FILE_NAME, newName);
+                                        intent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_SPLIT);
+                                        intent.putExtra(Constants.EXTRA_PDF_MODEL, selectedPdfModel);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                    }
+            );
         });
 
     }

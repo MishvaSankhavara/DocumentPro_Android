@@ -19,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.arkay.gkinhindi.BuildConfig;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
@@ -174,31 +176,37 @@ public class MediaSorterActivity extends AppCompatActivity {
         AppCompatTextView btnExecuteConvert = findViewById(R.id.btn_proceed_convert);
         btnExecuteConvert.setEnabled(true);
 
-        btnExecuteConvert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<String> mediaPaths = new ArrayList<>();
-                for (int i = 0; i < photoCollection.size(); i++) {
-                    mediaPaths.add(photoCollection.get(i).getFilePath_PhotoModel());
-                }
+        btnExecuteConvert.setOnClickListener(view -> {
+            AdsUtils.showInterstitialAdFunction(
+                    MediaSorterActivity.this,
+                    BuildConfig.interstitial_function,
+                    BuildConfig.interstitial_function_2ID,
+                    Constants.interstitial_function,
+                    Constants.interstitial_function_2ID,
+                    () -> {
+                        ArrayList<String> mediaPaths = new ArrayList<>();
+                        for (int i = 0; i < photoCollection.size(); i++) {
+                            mediaPaths.add(photoCollection.get(i).getFilePath_PhotoModel());
+                        }
 
-                String defaultFileName = "Photo2PDF" + System.currentTimeMillis();
-                DialogManagerUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName,
-                        new RenameDialogClickListener() {
-                            @Override
-                            public void onRenameDialogListener(String newChosenName) {
-                                String finalOutName = newChosenName + System.currentTimeMillis();
-                                MyApplication.getInstance().updateSelectedImages(mediaPaths);
-                                Intent taskIntent = new Intent(MediaSorterActivity.this, ProcessingTaskActivity.class);
-                                taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE,
-                                        Constants.TOOL_ID_PHOTO_TO_PDF);
-                                taskIntent.putExtra(Constants.PHOTO_TO_PDF_FILE_NAME, finalOutName);
-                                startActivity(taskIntent);
-                                finish();
-                            }
+                        String defaultFileName = "Photo2PDF" + System.currentTimeMillis();
+                        DialogManagerUtils.showRenameDialog(MediaSorterActivity.this, defaultFileName,
+                                new RenameDialogClickListener() {
+                                    @Override
+                                    public void onRenameDialogListener(String newChosenName) {
+                                        String finalOutName = newChosenName + System.currentTimeMillis();
+                                        MyApplication.getInstance().updateSelectedImages(mediaPaths);
+                                        Intent taskIntent = new Intent(MediaSorterActivity.this, ProcessingTaskActivity.class);
+                                        taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE,
+                                                Constants.TOOL_ID_PHOTO_TO_PDF);
+                                        taskIntent.putExtra(Constants.PHOTO_TO_PDF_FILE_NAME, finalOutName);
+                                        startActivity(taskIntent);
+                                        finish();
+                                    }
 
-                        });
-            }
+                                });
+                    }
+            );
         });
     }
 }

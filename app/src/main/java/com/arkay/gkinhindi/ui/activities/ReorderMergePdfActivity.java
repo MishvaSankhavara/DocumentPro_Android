@@ -1,5 +1,7 @@
 package com.arkay.gkinhindi.ui.activities;
 
+import com.arkay.gkinhindi.BuildConfig;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
 
 import android.animation.Animator;
@@ -161,20 +163,28 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         mergeButtonText.setOnClickListener(view -> {
-            String sb2 = "Merged" + System.currentTimeMillis();
-            FileRenameDialog dialog = new FileRenameDialog(ReorderMergePdfActivity.this, sb2, nameFile -> {
-                Intent intent = new Intent(ReorderMergePdfActivity.this, ProcessingTaskActivity.class);
-                intent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_MERGE);
-                intent.putExtra(Constants.MERGE_PDF_FILE, nameFile);
-                startActivity(intent);
-                finish();
-            });
-            Window window2 = dialog.getWindow();
-            assert window2 != null;
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            window2.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.show();
-
+                AdsUtils.showInterstitialAdFunction(
+                    ReorderMergePdfActivity.this,
+                    BuildConfig.interstitial_function,
+                    BuildConfig.interstitial_function_2ID,
+                    Constants.interstitial_function,
+                    Constants.interstitial_function_2ID,
+                    () -> {
+                        String sb2 = "Merged" + System.currentTimeMillis();
+                        FileRenameDialog dialog = new FileRenameDialog(ReorderMergePdfActivity.this, sb2, nameFile -> {
+                            Intent intent = new Intent(ReorderMergePdfActivity.this, ProcessingTaskActivity.class);
+                            intent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_MERGE);
+                            intent.putExtra(Constants.MERGE_PDF_FILE, nameFile);
+                            startActivity(intent);
+                            finish();
+                        });
+                        Window window2 = dialog.getWindow();
+                        assert window2 != null;
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        window2.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialog.show();
+                    }
+            );
         });
     }
 

@@ -13,11 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.CompactFileListAdapter;
 import com.arkay.gkinhindi.clickListener.OnPdfTapListener;
 import com.arkay.gkinhindi.model_reader.PDFReaderModel;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.docpro.scanner.result.ResultViewerActivity;
 import com.arkay.gkinhindi.ui.customviews.EmptyStateRecyclerView;
 import com.arkay.gkinhindi.utils.Utils;
@@ -62,9 +64,31 @@ public class FragmentImageToPdf extends Fragment implements OnPdfTapListener {
 
     @Override
     public void onPdfTap(PDFReaderModel pdfModel) {
-        // PdfUtils.openPDF(mActivity, pdfModel);
-        File file = new File(pdfModel.getAbsolutePath_PDFModel());
-        Utils.openFile(activityContext, file);
+        if (activityContext != null) {
+            AdsUtils.showInterstitialAdFunction(
+                    activityContext,
+                    BuildConfig.interstitial_function,
+                    BuildConfig.interstitial_function_2ID,
+                    Constants.interstitial_function,
+                    Constants.interstitial_function_2ID,
+                    () -> {
+                        File file = new File(pdfModel.getAbsolutePath_PDFModel());
+                        Utils.openFile(activityContext, file);
+                    }
+            );
+        } else if (getActivity() != null) {
+            AdsUtils.showInterstitialAdFunction(
+                    getActivity(),
+                    BuildConfig.interstitial_function,
+                    BuildConfig.interstitial_function_2ID,
+                    Constants.interstitial_function,
+                    Constants.interstitial_function_2ID,
+                    () -> {
+                        File file = new File(pdfModel.getAbsolutePath_PDFModel());
+                        Utils.openFile(getActivity(), file);
+                    }
+            );
+        }
     }
 
     @Override
