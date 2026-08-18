@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.clickListener.DocClickListener;
@@ -37,6 +38,7 @@ import com.arkay.gkinhindi.ui.customviews.smartrefresh.header.ClassicRefreshHead
 import com.arkay.gkinhindi.ui.customviews.smartrefresh.listener.RefreshListener;
 import com.arkay.gkinhindi.adapter_reader.RecentFilesAdapter;
 import com.arkay.gkinhindi.adapter_reader.FavoriteCardItemsAdapter;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.viewmodel.DataSingletonRecent;
 import com.arkay.gkinhindi.viewmodel.DataSingletonFavorite;
 import com.arkay.gkinhindi.utils.Utils;
@@ -79,12 +81,16 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.frag_files, container, false);
+
         initViews(view);
         initAction(view);
         checkPermission();
         getData();
+
         return view;
+
     }
 
     private void initAction(View view) {
@@ -142,7 +148,14 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         recentFilesAdapter = new RecentFilesAdapter(activityContext, new DocClickListener() {
             @Override
             public void onDocClick(DocumentModel document) {
-                Utils.openFile(activityContext, document);
+                AdsUtils.showInterstitialAdFunction(
+                        activityContext,
+                        BuildConfig.interstitial_function,
+                        BuildConfig.interstitial_function_2ID,
+                        Constants.interstitial_function,
+                        Constants.interstitial_function_2ID,
+                        () -> Utils.openFile(activityContext, document)
+                );
             }
         }, true);
         recentRecyclerView.setAdapter(recentFilesAdapter);
@@ -162,7 +175,14 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         favoriteCardAdapter = new FavoriteCardItemsAdapter(activityContext, new DocClickListener() {
             @Override
             public void onDocClick(DocumentModel document) {
-                Utils.openFile(activityContext, document);
+                AdsUtils.showInterstitialAdFunction(
+                        activityContext,
+                        BuildConfig.interstitial_function,
+                        BuildConfig.interstitial_function_2ID,
+                        Constants.interstitial_function,
+                        Constants.interstitial_function_2ID,
+                        () -> Utils.openFile(activityContext, document)
+                );
             }
         });
         favoriteRecyclerView.setAdapter(favoriteCardAdapter);
@@ -316,7 +336,14 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
 
     private void openFileList(int allFileType) {
         if (Utils.checkPermission(activityContext)) {
-            Utils.openListFileActivity(activityContext, allFileType);
+            AdsUtils.showInterstitialAdFunction(
+                    activityContext,
+                    BuildConfig.interstitial_function,
+                    BuildConfig.interstitial_function_2ID,
+                    Constants.interstitial_function,
+                    Constants.interstitial_function_2ID,
+                    () -> Utils.openListFileActivity(activityContext, allFileType)
+            );
         } else {
             Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required),
                     Toast.LENGTH_SHORT).show();

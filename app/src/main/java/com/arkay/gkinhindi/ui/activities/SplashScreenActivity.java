@@ -1,5 +1,7 @@
 package com.arkay.gkinhindi.ui.activities;
 
+import com.arkay.gkinhindi.BuildConfig;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.docpro.scanner.settings.LanguageSelectionActivity;
 
 import android.content.Intent;
@@ -32,9 +34,19 @@ public class SplashScreenActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.act_splash);
         pbSplash = findViewById(R.id.pb_splash);
-        loadSplashBannerAd();
+        preloadSplashInterstitialAd();
         fetchRemoteConfig();
         startSplashTimer();
+    }
+
+    private void preloadSplashInterstitialAd() {
+        AdsUtils.preloadSplashInterstitialAd(
+                SplashScreenActivity.this,
+                BuildConfig.interstitial_splash,
+                BuildConfig.interstitial_splash_2ID,
+                Constants.interstitial_splash,
+                Constants.interstitial_splash_2ID
+        );
     }
 
     private void fetchRemoteConfig() {
@@ -50,68 +62,75 @@ public class SplashScreenActivity extends AppCompatActivity {
             remoteConfig.fetchAndActivate().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
 
-                    boolean enableAllAds = true;
                     if (remoteConfig.getAll().containsKey("enable_all_ads")) {
-                        enableAllAds = remoteConfig.getBoolean("enable_all_ads");
-                    } else if (remoteConfig.getAll().containsKey("enable_all_inapp_ads")) {
-                        enableAllAds = remoteConfig.getBoolean("enable_all_inapp_ads");
+                        Constants.enable_all_ads = remoteConfig.getBoolean("enable_all_ads");
                     }
-                    Constants.enable_all_ads = enableAllAds;
 
                     if (remoteConfig.getAll().containsKey("native_onboarding")) {
                         Constants.native_onboarding = remoteConfig.getBoolean("native_onboarding");
-                    } else {
-                        Constants.native_onboarding = true;
                     }
 
                     if (remoteConfig.getAll().containsKey("native_onboarding_2ID")) {
                         Constants.native_onboarding_2ID = remoteConfig.getBoolean("native_onboarding_2ID");
-                    } else {
-                        Constants.native_onboarding_2ID = true;
                     }
 
                     if (remoteConfig.getAll().containsKey("native_home")) {
                         Constants.native_home = remoteConfig.getBoolean("native_home");
-                    } else {
-                        Constants.native_home = true;
                     }
 
                     if (remoteConfig.getAll().containsKey("native_home_2ID")) {
                         Constants.native_home_2ID = remoteConfig.getBoolean("native_home_2ID");
-                    } else {
-                        Constants.native_home_2ID = true;
                     }
 
                     if (remoteConfig.getAll().containsKey("banner_splash")) {
                         Constants.banner_splash = remoteConfig.getBoolean("banner_splash");
-                    } else {
-                        Constants.banner_splash = true;
                     }
 
                     if (remoteConfig.getAll().containsKey("banner_splash_2ID")) {
                         Constants.banner_splash_2ID = remoteConfig.getBoolean("banner_splash_2ID");
-                    } else {
-                        Constants.banner_splash_2ID = true;
                     }
 
-                    Log.d("RemoteConfig", "Fetched enable_all_ads=" + Constants.enable_all_ads +
-                            ", native_onboarding=" + Constants.native_onboarding +
-                            ", native_onboarding_2ID=" + Constants.native_onboarding_2ID +
-                            ", native_home=" + Constants.native_home +
-                            ", native_home_2ID=" + Constants.native_home_2ID +
-                            ", banner_splash=" + Constants.banner_splash +
-                            ", banner_splash_2ID=" + Constants.banner_splash_2ID);
+                    if (remoteConfig.getAll().containsKey("interstitial_splash")) {
+                        Constants.interstitial_splash = remoteConfig.getBoolean("interstitial_splash");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("interstitial_splash_2ID")) {
+                        Constants.interstitial_splash_2ID = remoteConfig.getBoolean("interstitial_splash_2ID");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("interstitial_function")) {
+                        Constants.interstitial_function = remoteConfig.getBoolean("interstitial_function");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("interstitial_function_2ID")) {
+                        Constants.interstitial_function_2ID = remoteConfig.getBoolean("interstitial_function_2ID");
+                    }
+
+                    Log.d("=====RemoteConfig", "enable_all_ads=" + Constants.enable_all_ads);
+                    Log.d("=====RemoteConfig", "native_onboarding=" + Constants.native_onboarding);
+                    Log.d("=====RemoteConfig", "native_onboarding_2ID=" + Constants.native_onboarding_2ID);
+                    Log.d("=====RemoteConfig", "native_home=" + Constants.native_home);
+                    Log.d("=====RemoteConfig", "native_home_2ID=" + Constants.native_home_2ID);
+                    Log.d("=====RemoteConfig", "banner_splash=" + Constants.banner_splash);
+                    Log.d("=====RemoteConfig", "banner_splash_2ID=" + Constants.banner_splash_2ID);
+                    Log.d("=====RemoteConfig", "interstitial_splash=" + Constants.interstitial_splash);
+                    Log.d("=====RemoteConfig", "interstitial_splash_2ID=" + Constants.interstitial_splash_2ID);
+                    Log.d("=====RemoteConfig", "interstitial_function=" + Constants.interstitial_function);
+                    Log.d("=====RemoteConfig", "interstitial_function_2ID=" + Constants.interstitial_function_2ID);
 
                     loadSplashBannerAd();
+                    preloadSplashInterstitialAd();
 
                 } else {
-                    Log.w("RemoteConfig", "Fetch failed or pending");
+                    Log.w("=====RemoteConfig", "Fetch failed or pending");
                     loadSplashBannerAd();
+                    preloadSplashInterstitialAd();
                 }
             });
         } catch (Exception e) {
-            Log.e("RemoteConfig", "Error fetching remote config: " + e.getMessage());
+            Log.e("=====RemoteConfig", "Error fetching remote config: " + e.getMessage());
             loadSplashBannerAd();
+            preloadSplashInterstitialAd();
         }
     }
 
@@ -121,8 +140,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             com.arkay.gkinhindi.utils.AdsUtils.showBannerAd(
                     SplashScreenActivity.this,
                     bannerAdContainer,
-                    com.arkay.gkinhindi.BuildConfig.banner_splash_1,
-                    com.arkay.gkinhindi.BuildConfig.banner_splash_2,
+                    BuildConfig.banner_splash,
+                    BuildConfig.banner_splash_2ID,
                     Constants.banner_splash,
                     Constants.banner_splash_2ID
             );
@@ -149,7 +168,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 remainingSeconds = 0;
-                handleNavigationAfterSplash();
+                AdsUtils.showSplashInterstitialAd(
+                        SplashScreenActivity.this,
+                        () -> handleNavigationAfterSplash()
+                );
             }
         };
         countDownTimer.start();

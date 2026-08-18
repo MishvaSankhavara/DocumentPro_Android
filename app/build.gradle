@@ -24,12 +24,12 @@ android {
 
         manifestPlaceholders = [admob_app_id: "ca-app-pub-3940256099942544~3347511713"]
 
-        buildConfigField "String", "native_onboarding_1", "\"ca-app-pub-3940256099942544/2247696110\""
-        buildConfigField "String", "native_onboarding_2", "\"ca-app-pub-3940256099942544/2247696110\""
-        buildConfigField "String", "native_home_1", "\"ca-app-pub-3940256099942544/2247696110\""
-        buildConfigField "String", "native_home_2", "\"ca-app-pub-3940256099942544/2247696110\""
-        buildConfigField "String", "banner_splash_1", "\"ca-app-pub-3940256099942544/6300978111\""
-        buildConfigField "String", "banner_splash_2", "\"ca-app-pub-3940256099942544/6300978111\""
+        buildConfigField "String", "native_onboarding", "\"ca-app-pub-3940256099942544/2247696110\""
+        buildConfigField "String", "native_onboarding_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
+        buildConfigField "String", "native_home", "\"ca-app-pub-3940256099942544/2247696110\""
+        buildConfigField "String", "native_home_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
+        buildConfigField "String", "banner_splash", "\"ca-app-pub-3940256099942544/6300978111\""
+        buildConfigField "String", "banner_splash_2ID", "\"ca-app-pub-3940256099942544/6300978111\""
     }
 
     flavorDimensions = ["env"]
@@ -39,24 +39,32 @@ android {
 
             manifestPlaceholders = [admob_app_id: "ca-app-pub-3940256099942544~3347511713"]
 
-            buildConfigField "String", "native_onboarding_1", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_onboarding_2", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_home_1", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_home_2", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "banner_splash_1", "\"ca-app-pub-3940256099942544/6300978111\""
-            buildConfigField "String", "banner_splash_2", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "native_onboarding", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "native_onboarding_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "native_home", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "native_home_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "banner_splash", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "banner_splash_2ID", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "interstitial_splash", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "interstitial_splash_2ID", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "interstitial_function", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "interstitial_function_2ID", "\"ca-app-pub-3940256099942544/1033173712\""
         }
         appProd {
             dimension "env"
 
             manifestPlaceholders = [admob_app_id: "ca-app-pub-3940256099942544~3347511713"]
 
-            buildConfigField "String", "native_onboarding_1", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_onboarding_2", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_home_1", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_home_2", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "banner_splash_1", "\"ca-app-pub-3940256099942544/6300978111\""
-            buildConfigField "String", "banner_splash_2", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "native_onboarding", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "native_onboarding_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "native_home", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "native_home_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "banner_splash", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "banner_splash_2ID", "\"ca-app-pub-3940256099942544/6300978111\""
+            buildConfigField "String", "interstitial_splash", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "interstitial_splash_2ID", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "interstitial_function", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "interstitial_function_2ID", "\"ca-app-pub-3940256099942544/1033173712\""
         }
     }
 

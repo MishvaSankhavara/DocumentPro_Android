@@ -27,6 +27,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.PagerViewAdapter;
@@ -34,6 +35,7 @@ import com.arkay.gkinhindi.adapter_reader.PagerViewAdapter;
 import com.arkay.gkinhindi.ui.fragments.FragmentFiles;
 import com.arkay.gkinhindi.ui.fragments.FragmentSetting;
 import com.arkay.gkinhindi.ui.fragments.FragmentTools;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.utils.Utils;
 
 
@@ -115,6 +117,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Utils.dismissPermissionDialog();
         }
         initializeData();
+        AdsUtils.preloadSplashInterstitialAd(
+                this,
+                BuildConfig.interstitial_function,
+                BuildConfig.interstitial_function_2ID,
+                Constants.interstitial_function,
+                Constants.interstitial_function_2ID
+        );
     }
 
     private void initializeData() {

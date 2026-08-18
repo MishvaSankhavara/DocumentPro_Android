@@ -20,6 +20,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.PreferenceUtils;
@@ -180,8 +181,8 @@ public class OnBoardActivity extends AppCompatActivity {
                     this,
                     fullAdFrame1,
                     shimmer1,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
+                    BuildConfig.native_onboarding,
+                    BuildConfig.native_onboarding_2ID,
                     Constants.native_onboarding,
                     Constants.native_onboarding_2ID,
                     v -> {
@@ -222,8 +223,8 @@ public class OnBoardActivity extends AppCompatActivity {
                     this,
                     fullAdFrame2,
                     shimmer2,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
+                    BuildConfig.native_onboarding,
+                    BuildConfig.native_onboarding_2ID,
                     Constants.native_onboarding,
                     Constants.native_onboarding_2ID,
                     v -> {
@@ -274,13 +275,13 @@ public class OnBoardActivity extends AppCompatActivity {
             }
         });
 
-        android.widget.FrameLayout adContainer = findViewById(R.id.ad_container);
+        android.widget.FrameLayout adContainer = findViewById(R.id.native_ad_container);
         if (adContainer != null) {
             com.arkay.gkinhindi.utils.AdsUtils.showLargeNativeAd(
                     this,
                     adContainer,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
+                    BuildConfig.native_onboarding,
+                    BuildConfig.native_onboarding_2ID,
                     Constants.native_onboarding, //Constants.native_onboarding
                     Constants.native_onboarding_2ID //Constants.native_onboarding_2ID
             );
@@ -309,7 +310,7 @@ public class OnBoardActivity extends AppCompatActivity {
 
     public final void updateIndicatorAnimation(int position) {
         View bottomContainer = findViewById(R.id.bottom_container);
-        View adContainer = findViewById(R.id.ad_container);
+        View adContainer = findViewById(R.id.native_ad_container);
 
         if (position == 1 || position == 3) {
             if (bottomContainer != null) bottomContainer.setVisibility(View.GONE);

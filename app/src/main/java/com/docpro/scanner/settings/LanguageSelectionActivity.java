@@ -1,5 +1,6 @@
 package com.docpro.scanner.settings;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.arkay.gkinhindi.BuildConfig;
 import com.hjq.language.MultiLanguages;
 import com.arkay.gkinhindi.ActivityBase;
 import com.arkay.gkinhindi.Constants;
@@ -57,13 +59,13 @@ public class LanguageSelectionActivity extends ActivityBase {
         rcvLocales.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rcvLocales.setAdapter(localeAdapter);
 
-        android.widget.FrameLayout adContainer = findViewById(R.id.ad_container);
+        android.widget.FrameLayout adContainer = findViewById(R.id.native_ad_container);
         if (adContainer != null) {
             com.arkay.gkinhindi.utils.AdsUtils.showLargeNativeAd(
                     this,
                     adContainer,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
-                    com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
+                    BuildConfig.native_onboarding,
+                    BuildConfig.native_onboarding_2ID,
                     Constants.native_onboarding,
                     Constants.native_onboarding_2ID
             );

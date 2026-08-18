@@ -25,6 +25,10 @@ public class Constants {
         public static boolean native_home_2ID = true;
         public static boolean banner_splash = true;
         public static boolean banner_splash_2ID = true;
+        public static boolean interstitial_splash = true;
+        public static boolean interstitial_splash_2ID = true;
+        public static boolean interstitial_function = true;
+        public static boolean interstitial_function_2ID = true;
 
 
 
