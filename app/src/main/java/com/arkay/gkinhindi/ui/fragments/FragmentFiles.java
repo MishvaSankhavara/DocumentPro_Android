@@ -369,18 +369,36 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             Utils.askPermission(activityContext);
         } else if (idView == R.id.btn_recent_view_all) {
             if (Utils.checkPermission(activityContext)) {
-                Intent intentRecent = new Intent(activityContext, SelectDocumentActivity.class);
-                intentRecent.putExtra(Constants.EXTRA_FILE_TYPE, Constants.FILE_TYPE_RECENT);
-                startActivity(intentRecent);
+                AdsUtils.showInterstitialAdFunction(
+                        activityContext,
+                        BuildConfig.interstitial_function,
+                        BuildConfig.interstitial_function_2ID,
+                        Constants.interstitial_function,
+                        Constants.interstitial_function_2ID,
+                        () -> {
+                            Intent intentRecent = new Intent(activityContext, SelectDocumentActivity.class);
+                            intentRecent.putExtra(Constants.EXTRA_FILE_TYPE, Constants.FILE_TYPE_RECENT);
+                            startActivity(intentRecent);
+                        }
+                );
             } else {
                 Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required),
                         Toast.LENGTH_SHORT).show();
             }
         } else if (idView == R.id.btn_favorite_view_all) {
             if (Utils.checkPermission(activityContext)) {
-                Intent intentFavorite = new Intent(activityContext, SelectDocumentActivity.class);
-                intentFavorite.putExtra(Constants.EXTRA_FILE_TYPE, Constants.FILE_TYPE_FAVORITE);
-                startActivity(intentFavorite);
+                AdsUtils.showInterstitialAdFunction(
+                        activityContext,
+                        BuildConfig.interstitial_function,
+                        BuildConfig.interstitial_function_2ID,
+                        Constants.interstitial_function,
+                        Constants.interstitial_function_2ID,
+                        () -> {
+                            Intent intentFavorite = new Intent(activityContext, SelectDocumentActivity.class);
+                            intentFavorite.putExtra(Constants.EXTRA_FILE_TYPE, Constants.FILE_TYPE_FAVORITE);
+                            startActivity(intentFavorite);
+                        }
+                );
             } else {
                 Toast.makeText(activityContext, getResources().getString(R.string.toast_permission_required),
                         Toast.LENGTH_SHORT).show();

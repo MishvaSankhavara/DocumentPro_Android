@@ -7,10 +7,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import androidx.annotation.NonNull;
 
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
+import com.arkay.gkinhindi.ui.dialog.AppLoadingDialog;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdListener;
@@ -201,30 +205,54 @@ public class AdsUtils {
             return;
         }
 
-        if (splashInterstitialAd != null) {
-            splashInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    Log.d("====InterstitialAd", "onAdDismissedFullScreenContent");
-                    splashInterstitialAd = null;
-                    preloadSplashInterstitialAd(activity, primaryAdUnitId, fallbackAdUnitId, flag1, flag2);
-                    if (onAdDismissed != null) onAdDismissed.run();
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    Log.d("====InterstitialAd", "onAdFailedToShowFullScreenContent: " + adError.getMessage());
-                    splashInterstitialAd = null;
-                    preloadSplashInterstitialAd(activity, primaryAdUnitId, fallbackAdUnitId, flag1, flag2);
-                    if (onAdDismissed != null) onAdDismissed.run();
-                }
-            });
-            splashInterstitialAd.show(activity);
-        } else {
-            Log.d("====InterstitialAd", "No preloaded ad ready, preloading now and opening file");
-            preloadSplashInterstitialAd(activity, primaryAdUnitId, fallbackAdUnitId, flag1, flag2);
-            if (onAdDismissed != null) onAdDismissed.run();
+        AppLoadingDialog loadingDialog = new AppLoadingDialog(activity);
+        try {
+            if (!activity.isFinishing() && !activity.isDestroyed()) {
+                loadingDialog.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            try {
+                if (loadingDialog.isShowing() && !activity.isFinishing() && !activity.isDestroyed()) {
+                    loadingDialog.dismiss();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                if (onAdDismissed != null) onAdDismissed.run();
+                return;
+            }
+
+            if (splashInterstitialAd != null) {
+                splashInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        Log.d("====InterstitialAd", "onAdDismissedFullScreenContent");
+                        splashInterstitialAd = null;
+                        preloadSplashInterstitialAd(activity, primaryAdUnitId, fallbackAdUnitId, flag1, flag2);
+                        if (onAdDismissed != null) onAdDismissed.run();
+                    }
+
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                        Log.d("====InterstitialAd", "onAdFailedToShowFullScreenContent: " + adError.getMessage());
+                        splashInterstitialAd = null;
+                        preloadSplashInterstitialAd(activity, primaryAdUnitId, fallbackAdUnitId, flag1, flag2);
+                        if (onAdDismissed != null) onAdDismissed.run();
+                    }
+                });
+                splashInterstitialAd.show(activity);
+            } else {
+                Log.d("====InterstitialAd", "No preloaded ad ready, preloading now and opening file");
+                preloadSplashInterstitialAd(activity, primaryAdUnitId, fallbackAdUnitId, flag1, flag2);
+                if (onAdDismissed != null) onAdDismissed.run();
+            }
+        }, 500);
     }
 
     public static void showLargeNativeAd(
