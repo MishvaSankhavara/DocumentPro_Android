@@ -102,6 +102,7 @@ public class AdsUtils {
                             NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
                                     .inflate(R.layout.layout_native_ad_large, null);
 
+                            adView.setBackgroundResource(R.drawable.bg_native_ad_card);
                             populateNativeAdView(nativeAd, adView);
 
                             adContainer.removeAllViews();
@@ -282,5 +283,154 @@ public class AdsUtils {
             bannerContainer.removeAllViews();
             bannerContainer.setVisibility(View.GONE);
         }
+    }
+
+    public interface OnNativeAdStateListener {
+        void onAdLoaded();
+        void onAdFailed();
+    }
+
+    public static void showFullScreenNativeAd(
+            final Activity activity,
+            final FrameLayout adContainer,
+            final View shimmerView,
+            final String adsPriority1,
+            final String adsPriority2,
+            final boolean flag1,
+            final boolean flag2,
+            final OnNativeAdStateListener listener
+    ) {
+        if (activity == null || adContainer == null) return;
+
+        if (!Constants.enable_all_ads || (!flag1 && !flag2)) {
+            if (shimmerView != null) {
+                shimmerView.setVisibility(View.GONE);
+            }
+            if (adContainer != null) {
+                adContainer.removeAllViews();
+                adContainer.setVisibility(View.GONE);
+            }
+            if (listener != null) {
+                listener.onAdFailed();
+            }
+            return;
+        }
+
+        loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, adsPriority1, adsPriority2, flag1, flag2, false, listener);
+    }
+
+    private static void loadFullScreenNativeAdInternal(
+            final Activity activity,
+            final FrameLayout adContainer,
+            final View shimmerView,
+            final String primaryAdUnitId,
+            final String fallbackAdUnitId,
+            final boolean flag1,
+            final boolean flag2,
+            final boolean usingFallback,
+            final OnNativeAdStateListener listener
+    ) {
+        if (activity == null || adContainer == null) return;
+
+        boolean shouldLoad = usingFallback ? flag2 : flag1;
+        String targetAdUnitId = usingFallback ? fallbackAdUnitId : primaryAdUnitId;
+
+        if (!shouldLoad || targetAdUnitId == null || targetAdUnitId.trim().isEmpty()) {
+            if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
+                loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, listener);
+            } else {
+                if (shimmerView != null) {
+                    shimmerView.setVisibility(View.GONE);
+                }
+                if (adContainer != null) {
+                    adContainer.removeAllViews();
+                    adContainer.setVisibility(View.GONE);
+                }
+                if (listener != null) {
+                    listener.onAdFailed();
+                }
+            }
+            return;
+        }
+
+        AdLoader adLoader = new AdLoader.Builder(activity, targetAdUnitId)
+                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+                    @Override
+                    public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
+                        if (activity.isDestroyed() || activity.isFinishing()) {
+                            nativeAd.destroy();
+                            return;
+                        }
+
+                        if (!Constants.enable_all_ads) {
+                            nativeAd.destroy();
+                            if (shimmerView != null) {
+                                shimmerView.setVisibility(View.GONE);
+                            }
+                            if (adContainer != null) {
+                                adContainer.removeAllViews();
+                                adContainer.setVisibility(View.GONE);
+                            }
+                            if (listener != null) {
+                                listener.onAdFailed();
+                            }
+                            return;
+                        }
+
+                        try {
+                            NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
+                                    .inflate(R.layout.layout_native_ad_fullscreen, null);
+
+                            populateNativeAdView(nativeAd, adView);
+
+                            if (shimmerView != null) {
+                                shimmerView.setVisibility(View.GONE);
+                            }
+                            adContainer.removeAllViews();
+                            adContainer.addView(adView);
+                            adContainer.setVisibility(View.VISIBLE);
+                            Log.d(TAG, "showFullScreenNativeAd: ad displayed successfully");
+                            if (listener != null) {
+                                listener.onAdLoaded();
+                            }
+                        } catch (Exception e) {
+                            Log.e("====FullNativeAd", "onNativeAdLoaded layout error: " + e.getMessage());
+                            nativeAd.destroy();
+                            if (shimmerView != null) {
+                                shimmerView.setVisibility(View.GONE);
+                            }
+                            if (adContainer != null) {
+                                adContainer.removeAllViews();
+                                adContainer.setVisibility(View.GONE);
+                            }
+                            if (listener != null) {
+                                listener.onAdFailed();
+                            }
+                        }
+                    }
+                })
+                .withAdListener(new AdListener() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError adError) {
+                        Log.d("====FullNativeAd", "onAdFailedToLoad: " + adError.getMessage() + " | usingFallback=" + usingFallback);
+                        if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
+                            loadFullScreenNativeAdInternal(activity, adContainer, shimmerView, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, listener);
+                        } else {
+                            if (shimmerView != null) {
+                                shimmerView.setVisibility(View.GONE);
+                            }
+                            if (adContainer != null) {
+                                adContainer.removeAllViews();
+                                adContainer.setVisibility(View.GONE);
+                            }
+                            if (listener != null) {
+                                listener.onAdFailed();
+                            }
+                        }
+                    }
+                })
+                .build();
+
+        adLoader.loadAd(new AdRequest.Builder().build());
     }
 }

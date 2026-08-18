@@ -49,6 +49,11 @@ public class OnBoardActivity extends AppCompatActivity {
     public AppCompatTextView titlePageThreeText;
     public AppCompatTextView descriptionPageThreeText;
 
+    private final android.os.Handler autoScrollHandler = new android.os.Handler(android.os.Looper.getMainLooper());
+    private Runnable autoScrollRunnable;
+    private boolean isFullAd1Failed = false;
+    private boolean isFullAd2Failed = false;
+
     public static final class ViewPagerChange extends ViewPager2.OnPageChangeCallback {
         public final OnBoardActivity activity;
 
@@ -59,23 +64,60 @@ public class OnBoardActivity extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             super.onPageSelected(position);
+            boolean isMovingForward = position >= activity.previousPagePosition;
+            activity.cancelAutoScrollTimer();
             activity.updateIndicatorAnimation(position);
             if (position > activity.previousPagePosition) {
                 activity.animatePageText(position);
             }
             activity.previousPagePosition = position;
-            if (position == 2) {
-                AppCompatTextView appCompatTextView = activity.nextButtonText;
-                if (appCompatTextView != null) {
-                    appCompatTextView.setText(R.string.action_get_start);
+
+            if (position == 1) {
+                if (activity.isFullAd1Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID)) {
+                    if (activity.onboardingViewPager != null) {
+                        int target = isMovingForward ? 2 : 0;
+                        activity.onboardingViewPager.setCurrentItem(target, false);
+                    }
+                } else {
+                    activity.startAutoScrollTimer(2);
                 }
-            } else {
-                AppCompatTextView appCompatTextView2 = activity.nextButtonText;
-                if (appCompatTextView2 != null) {
-                    appCompatTextView2.setText(R.string.action_next);
+            } else if (position == 3) {
+                if (activity.isFullAd2Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID)) {
+                    if (activity.onboardingViewPager != null) {
+                        int target = isMovingForward ? 4 : 2;
+                        activity.onboardingViewPager.setCurrentItem(target, false);
+                    }
+                } else {
+                    activity.startAutoScrollTimer(4);
                 }
             }
         }
+    }
+
+    public void startAutoScrollTimer(final int targetItem) {
+        cancelAutoScrollTimer();
+        autoScrollRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (onboardingViewPager != null) {
+                    onboardingViewPager.setCurrentItem(targetItem);
+                }
+            }
+        };
+        autoScrollHandler.postDelayed(autoScrollRunnable, 10000);
+    }
+
+    public void cancelAutoScrollTimer() {
+        if (autoScrollRunnable != null) {
+            autoScrollHandler.removeCallbacks(autoScrollRunnable);
+            autoScrollRunnable = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        cancelAutoScrollTimer();
+        super.onDestroy();
     }
 
     @Override
@@ -118,41 +160,110 @@ public class OnBoardActivity extends AppCompatActivity {
         this.viewGuide1 = from.inflate(R.layout.layout_on_boarding1, null);
         this.viewGuide2 = from.inflate(R.layout.layout_on_boarding2, null);
         this.viewGuide3 = from.inflate(R.layout.layout_on_boarding3, null);
+
+        View viewFullAd1 = from.inflate(R.layout.layout_on_boarding_full_ad, null);
+        View viewFullAd2 = from.inflate(R.layout.layout_on_boarding_full_ad, null);
+
         this.indicator1 = findViewById(R.id.v_indicator1);
         this.indicator2 = findViewById(R.id.v_indicator2);
         this.indicator3 = findViewById(R.id.v_indicator3);
 
-        View view = this.viewGuide1;
-        if (view != null) {
-            this.listView.add(view);
-            this.titlePageOneText = view.findViewById(R.id.title_tv);
-            this.descriptionPageOneText = view.findViewById(R.id.subtitle_tv);
+        // Index 0: Page 1
+        if (this.viewGuide1 != null) {
+            this.listView.add(this.viewGuide1);
+            this.titlePageOneText = this.viewGuide1.findViewById(R.id.title_tv);
+            this.descriptionPageOneText = this.viewGuide1.findViewById(R.id.subtitle_tv);
         }
-        View view3 = this.viewGuide2;
-        if (view3 != null) {
-            listView.add(view3);
-            this.titlePageTwoText = view3.findViewById(R.id.title_tv2);
-            this.descriptionPageTwoText = view3.findViewById(R.id.subtitle_tv2);
+
+        // Index 1: Full Screen Native Ad 1 (after Page 1)
+        if (viewFullAd1 != null) {
+            this.listView.add(viewFullAd1);
+            android.widget.FrameLayout fullAdFrame1 = viewFullAd1.findViewById(R.id.full_native_ad_frame);
+            View shimmer1 = viewFullAd1.findViewById(R.id.shimmer_full_ad);
+            com.arkay.gkinhindi.utils.AdsUtils.showFullScreenNativeAd(
+                    this,
+                    fullAdFrame1,
+                    shimmer1,
+                    com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
+                    com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
+                    Constants.native_onboarding, // Constants.native_onboarding
+                    Constants.native_onboarding_2ID, // Constants.native_onboarding_2ID
+                    new com.arkay.gkinhindi.utils.AdsUtils.OnNativeAdStateListener() {
+                        @Override
+                        public void onAdLoaded() {
+                            isFullAd1Failed = false;
+                        }
+
+                        @Override
+                        public void onAdFailed() {
+                            isFullAd1Failed = true;
+                            if (onboardingViewPager != null && onboardingViewPager.getCurrentItem() == 1) {
+                                onboardingViewPager.setCurrentItem(2, false);
+                            }
+                        }
+                    }
+            );
         }
-        View view4 = this.viewGuide3;
-        if (view4 != null) {
-            listView.add(view4);
-            this.titlePageThreeText = view4.findViewById(R.id.title_tv3);
-            this.descriptionPageThreeText = view4.findViewById(R.id.subtitle_tv3);
+
+        // Index 2: Page 2
+        if (this.viewGuide2 != null) {
+            this.listView.add(this.viewGuide2);
+            this.titlePageTwoText = this.viewGuide2.findViewById(R.id.title_tv2);
+            this.descriptionPageTwoText = this.viewGuide2.findViewById(R.id.subtitle_tv2);
+        }
+
+        // Index 3: Full Screen Native Ad 2 (after Page 2)
+        if (viewFullAd2 != null) {
+            this.listView.add(viewFullAd2);
+            android.widget.FrameLayout fullAdFrame2 = viewFullAd2.findViewById(R.id.full_native_ad_frame);
+            View shimmer2 = viewFullAd2.findViewById(R.id.shimmer_full_ad);
+            com.arkay.gkinhindi.utils.AdsUtils.showFullScreenNativeAd(
+                    this,
+                    fullAdFrame2,
+                    shimmer2,
+                    com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
+                    com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
+                    Constants.native_onboarding, // Constants.native_onboarding
+                    Constants.native_onboarding_2ID, // Constants.native_onboarding_2ID
+                    new com.arkay.gkinhindi.utils.AdsUtils.OnNativeAdStateListener() {
+                        @Override
+                        public void onAdLoaded() {
+                            isFullAd2Failed = false;
+                        }
+
+                        @Override
+                        public void onAdFailed() {
+                            isFullAd2Failed = true;
+                            if (onboardingViewPager != null && onboardingViewPager.getCurrentItem() == 3) {
+                                onboardingViewPager.setCurrentItem(4, false);
+                            }
+                        }
+                    }
+            );
+        }
+
+        // Index 4: Page 3
+        if (this.viewGuide3 != null) {
+            this.listView.add(this.viewGuide3);
+            this.titlePageThreeText = this.viewGuide3.findViewById(R.id.title_tv3);
+            this.descriptionPageThreeText = this.viewGuide3.findViewById(R.id.subtitle_tv3);
         }
 
         nextButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (previousPagePosition == 0) {
-                    onboardingViewPager.setCurrentItem(1);
+                    boolean ad1Disabled = isFullAd1Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID);
+                    onboardingViewPager.setCurrentItem(ad1Disabled ? 2 : 1, true);
                 } else if (previousPagePosition == 1) {
-                    onboardingViewPager.setCurrentItem(2);
+                    onboardingViewPager.setCurrentItem(2, true);
+                } else if (previousPagePosition == 2) {
+                    boolean ad2Disabled = isFullAd2Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID);
+                    onboardingViewPager.setCurrentItem(ad2Disabled ? 4 : 3, true);
+                } else if (previousPagePosition == 3) {
+                    onboardingViewPager.setCurrentItem(4, true);
                 } else {
-                    PreferenceUtils.getInstance(OnBoardActivity.this)
-                            .setBoolean(Constants.PREF_GUIDE_COMPLETED, true);
-                    startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
-                    finish();
+                    finishOnboarding();
                 }
             }
         });
@@ -164,38 +275,65 @@ public class OnBoardActivity extends AppCompatActivity {
                     adContainer,
                     com.arkay.gkinhindi.BuildConfig.native_onboarding_1,
                     com.arkay.gkinhindi.BuildConfig.native_onboarding_2,
-                    Constants.native_onboarding,
-                    Constants.native_onboarding_2ID
+                    Constants.native_onboarding, //Constants.native_onboarding
+                    Constants.native_onboarding_2ID //Constants.native_onboarding_2ID
             );
         }
+    }
+
+    private void finishOnboarding() {
+        PreferenceUtils.getInstance(OnBoardActivity.this)
+                .setBoolean(Constants.PREF_GUIDE_COMPLETED, true);
+        startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
+        finish();
     }
 
     public final void animatePageText(int position) {
         if (position == 0) {
             animateTitleText(this.titlePageOneText);
             animateDescriptionText(this.descriptionPageOneText);
-        } else if (position == 1) {
+        } else if (position == 2) {
             animateTitleText(this.titlePageTwoText);
             animateDescriptionText(this.descriptionPageTwoText);
-        } else if (position == 2) {
+        } else if (position == 4) {
             animateTitleText(this.titlePageThreeText);
             animateDescriptionText(this.descriptionPageThreeText);
         }
     }
 
     public final void updateIndicatorAnimation(int position) {
+        View bottomContainer = findViewById(R.id.bottom_container);
+        View adContainer = findViewById(R.id.ad_container);
+
+        if (position == 1 || position == 3) {
+            if (bottomContainer != null) bottomContainer.setVisibility(View.GONE);
+            if (adContainer != null) adContainer.setVisibility(View.GONE);
+            return;
+        }
+
+        if (bottomContainer != null) bottomContainer.setVisibility(View.VISIBLE);
+
+        if (position == 2) {
+            if (adContainer != null) adContainer.setVisibility(View.GONE);
+        } else if (adContainer != null && Constants.enable_all_ads && (Constants.native_onboarding || Constants.native_onboarding_2ID)) {
+            adContainer.setVisibility(View.VISIBLE);
+        }
+
         if (position == 0) {
             updateIndicator(this.indicator1, true);
             updateIndicator(this.indicator2, false);
             updateIndicator(this.indicator3, false);
-        } else if (position == 1) {
+            if (nextButtonText != null) nextButtonText.setText(R.string.action_next);
+        } else if (position == 2) {
             updateIndicator(this.indicator1, false);
             updateIndicator(this.indicator2, true);
             updateIndicator(this.indicator3, false);
-        } else if (position == 2) {
+            if (nextButtonText != null) nextButtonText.setText(R.string.action_next);
+        } else if (position == 4) {
             updateIndicator(this.indicator1, false);
             updateIndicator(this.indicator2, false);
             updateIndicator(this.indicator3, true);
+            if (nextButtonText != null) nextButtonText.setText(R.string.action_get_start);
         }
     }
 

@@ -150,7 +150,7 @@
             android:theme="@style/ActivityDialog"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.docpro.scanner.settings.LocaleSelectionActivity"
+            android:name="com.docpro.scanner.settings.LanguageSelectionActivity"
             android:exported="false"
             android:theme="@style/ListFileTheme" />
         <activity

@@ -1,6 +1,6 @@
 package com.arkay.gkinhindi.ui.fragments;
 
-import com.docpro.scanner.settings.LocaleSelectionActivity;
+import com.docpro.scanner.settings.LanguageSelectionActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -117,7 +117,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
         } else if (idView == R.id.cl_share_app) {
             Utils.shareApp(activityContext);
         } else if (idView == R.id.cl_language_options) {
-            Intent intentLang = new Intent(activityContext, LocaleSelectionActivity.class);
+            Intent intentLang = new Intent(activityContext, LanguageSelectionActivity.class);
             startActivity(intentLang);
         } else if (idView == R.id.cl_feedback) {
             Utils.feedbackApp(activityContext);

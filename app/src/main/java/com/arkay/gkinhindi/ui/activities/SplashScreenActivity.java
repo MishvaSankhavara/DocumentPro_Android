@@ -1,6 +1,6 @@
 package com.arkay.gkinhindi.ui.activities;
 
-import com.docpro.scanner.settings.LocaleSelectionActivity;
+import com.docpro.scanner.settings.LanguageSelectionActivity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -169,7 +169,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         } else {
             if (!PreferenceUtils.getInstance(SplashScreenActivity.this).getBoolean(Constants.PREF_LANGUAGE_SET,
                     false)) {
-                startActivity(new Intent(SplashScreenActivity.this, LocaleSelectionActivity.class));
+                startActivity(new Intent(SplashScreenActivity.this, LanguageSelectionActivity.class));
                 finish();
             } else if (!PreferenceUtils.getInstance(SplashScreenActivity.this).getBoolean(Constants.PREF_GUIDE_COMPLETED,
                     false)) {

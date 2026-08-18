@@ -8,6 +8,8 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimaryVariant">#000000</color>
+    <color name="cyan">#0b61da</color>
     <color name="settings_card_bg">#FFFFFF</color>
     <color name="settings_card_stroke">#E2E8F0</color>
     <color name="settings_category_indicator">#5E6C84</color>

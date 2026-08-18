@@ -61,10 +61,15 @@
         android:layout_marginBottom="6dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ad_container"
         app:layout_constraintTop_toBottomOf="@+id/txt_locale_selection_title"
-        app:layout_goneMarginBottom="0dp"
         tools:listitem="@layout/item_language_act" />
 
+    <FrameLayout
+        android:id="@+id/ad_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
