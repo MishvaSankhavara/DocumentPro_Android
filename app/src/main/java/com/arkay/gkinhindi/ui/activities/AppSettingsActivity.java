@@ -143,14 +143,7 @@ public class AppSettingsActivity extends AppCompatActivity implements View.OnCli
             swDarkMode.setChecked(!swDarkMode.isChecked());
         } else if (idView == R.id.cl_privacy_policy) {
             com.arkay.gkinhindi.utils.AnalyticsHelper.logEvent("click_privacy_policy", null);
-            try {
-                String url = Constants.PRIVACY_POLICY_URL;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Utils.openPrivacyPolicy(this);
         }
 
     }

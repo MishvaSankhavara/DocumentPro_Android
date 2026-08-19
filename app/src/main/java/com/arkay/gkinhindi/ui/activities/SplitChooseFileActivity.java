@@ -156,10 +156,10 @@ public class SplitChooseFileActivity extends AppCompatActivity implements OnThum
         continueButton.setOnClickListener(view -> {
                 AdsUtils.showInterstitialAdFunction(
                     SplitChooseFileActivity.this,
-                    BuildConfig.interstitial_function,
                     BuildConfig.interstitial_function_2ID,
-                    Constants.interstitial_function,
+                    BuildConfig.interstitial_function,
                     Constants.interstitial_function_2ID,
+                    Constants.interstitial_function,
                     () -> {
                         String nameFile = "Split-" + System.currentTimeMillis();
                         DialogManagerUtils.showRenameDialog(SplitChooseFileActivity.this, nameFile,

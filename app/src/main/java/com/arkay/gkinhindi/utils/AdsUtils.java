@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -22,12 +23,15 @@ import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.appopen.AppOpenAd;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdView;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+
+import java.util.Date;
 
 public class AdsUtils {
 
@@ -79,7 +83,7 @@ public class AdsUtils {
 
         Log.d("====SplashInterstitial", "loadSplashInterstitialInternal: usingFallback = " + usingFallback +
                 " \n targetID = " + targetAdUnitId +
-                " \n primaryID = " + primaryAdUnitId + " \n secondaryID = " + fallbackAdUnitId +
+                " \n primaryID (High Factor) = " + primaryAdUnitId + " \n secondaryID (Low Factor) = " + fallbackAdUnitId +
                 " \n flag1 = " + flag1 + " \n flag2 = " + flag2);
 
         if (!shouldLoad || targetAdUnitId == null || targetAdUnitId.trim().isEmpty()) {
@@ -275,7 +279,7 @@ public class AdsUtils {
             return;
         }
 
-        if (activity == null || activity.isFinishing()) {
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
             if (onSaveAction != null) onSaveAction.run();
             return;
         }
@@ -285,15 +289,45 @@ public class AdsUtils {
             loadingDialog.show();
         } catch (Exception ignored) {}
 
-        final String targetAdUnitId = (flag1 && primaryAdUnitId != null && !primaryAdUnitId.isEmpty())
-                ? primaryAdUnitId
-                : fallbackAdUnitId;
+        loadRewardedAdInternal(activity, loadingDialog, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, false, onSaveAction);
+    }
 
-        if (targetAdUnitId == null || targetAdUnitId.isEmpty()) {
+    private static void loadRewardedAdInternal(
+            final Activity activity,
+            final AppLoadingDialog loadingDialog,
+            final String primaryAdUnitId,
+            final String fallbackAdUnitId,
+            final boolean flag1,
+            final boolean flag2,
+            final boolean usingFallback,
+            final Runnable onSaveAction
+    ) {
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
             try {
-                if (loadingDialog.isShowing()) loadingDialog.dismiss();
+                if (loadingDialog != null && loadingDialog.isShowing()) loadingDialog.dismiss();
             } catch (Exception ignored) {}
             if (onSaveAction != null) onSaveAction.run();
+            return;
+        }
+
+        boolean shouldLoad = usingFallback ? flag2 : flag1;
+        String targetAdUnitId = usingFallback ? fallbackAdUnitId : primaryAdUnitId;
+
+        Log.d("====RewardedAdSave", "loadRewardedAdInternal: usingFallback=" + usingFallback +
+                " | targetID=" + targetAdUnitId +
+                " | primaryID=" + primaryAdUnitId + " | secondaryID=" + fallbackAdUnitId +
+                " | flag1=" + flag1 + " | flag2=" + flag2);
+
+        if (!shouldLoad || targetAdUnitId == null || targetAdUnitId.trim().isEmpty()) {
+            if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
+                Log.d("====RewardedAdSave", "loadRewardedAdInternal: Retrying with fallback ID");
+                loadRewardedAdInternal(activity, loadingDialog, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, onSaveAction);
+            } else {
+                try {
+                    if (loadingDialog != null && loadingDialog.isShowing()) loadingDialog.dismiss();
+                } catch (Exception ignored) {}
+                if (onSaveAction != null) onSaveAction.run();
+            }
             return;
         }
 
@@ -303,7 +337,9 @@ public class AdsUtils {
             public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
                 Log.d("====RewardedAdSave", "onAdLoaded: Rewarded Ad loaded successfully!");
                 try {
-                    if (loadingDialog.isShowing()) loadingDialog.dismiss();
+                    if (loadingDialog != null && loadingDialog.isShowing() && !activity.isFinishing() && !activity.isDestroyed()) {
+                        loadingDialog.dismiss();
+                    }
                 } catch (Exception ignored) {}
 
                 rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
@@ -327,11 +363,16 @@ public class AdsUtils {
 
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                Log.d("====RewardedAdSave", "onAdFailedToLoad: " + loadAdError.getMessage());
-                try {
-                    if (loadingDialog.isShowing()) loadingDialog.dismiss();
-                } catch (Exception ignored) {}
-                if (onSaveAction != null) onSaveAction.run();
+                Log.d("====RewardedAdSave", "onAdFailedToLoad: " + loadAdError.getMessage() + " | usingFallback=" + usingFallback);
+                if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
+                    Log.d("====RewardedAdSave", "onAdFailedToLoad: Triggering fallback load");
+                    loadRewardedAdInternal(activity, loadingDialog, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true, onSaveAction);
+                } else {
+                    try {
+                        if (loadingDialog != null && loadingDialog.isShowing()) loadingDialog.dismiss();
+                    } catch (Exception ignored) {}
+                    if (onSaveAction != null) onSaveAction.run();
+                }
             }
         });
     }
@@ -440,7 +481,7 @@ public class AdsUtils {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError adError) {
                         Log.d(TAG, "onAdFailedToLoad: " + adError.getMessage() + " | usingFallback=" + usingFallback);
-                        if (!usingFallback && flag2 && fallbackAdUnitId != null && !fallbackAdUnitId.trim().isEmpty()) {
+                        if (!usingFallback && flag1 && primaryAdUnitId != null && !primaryAdUnitId.trim().isEmpty()) {
                             loadNativeAdInternal(activity, adContainer, primaryAdUnitId, fallbackAdUnitId, flag1, flag2, true);
                         } else {
                             adContainer.removeAllViews();
@@ -833,5 +874,163 @@ public class AdsUtils {
                 .build();
 
         adLoader.loadAd(new AdRequest.Builder().build());
+    }
+
+    public static class AppOpenAdManager {
+        private static final String LOG_TAG = "====AppOpenAdManager";
+        private AppOpenAd appOpenAd = null;
+        private boolean isLoadingAd = false;
+        private boolean isShowingAd = false;
+        private long loadTime = 0;
+
+        public AppOpenAdManager() {
+        }
+
+        public void loadAd(
+                final Context context,
+                final String adUnitId,
+                final boolean isEnabled
+        ) {
+            if (isAdAvailable()) {
+                Log.d(LOG_TAG, "loadAd: Ad is already available.");
+                return;
+            }
+            if (isLoadingAd) {
+                Log.d(LOG_TAG, "loadAd: Already loading an App Open Ad.");
+                return;
+            }
+            if (context == null || !Constants.enable_all_ads || !isEnabled) {
+                Log.d(LOG_TAG, "loadAd: Ads disabled (enable_all_ads=" + Constants.enable_all_ads + ", isEnabled=" + isEnabled + ").");
+                return;
+            }
+
+            if (adUnitId == null || adUnitId.trim().isEmpty()) {
+                Log.d(LOG_TAG, "loadAd: Invalid adUnitId.");
+                return;
+            }
+
+            Log.d(LOG_TAG, "loadAd: Requesting App Open Ad with ID=" + adUnitId);
+
+            isLoadingAd = true;
+            AdRequest request = new AdRequest.Builder().build();
+            AppOpenAd.load(
+                    context,
+                    adUnitId,
+                    request,
+                    new AppOpenAd.AppOpenAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull AppOpenAd ad) {
+                            Log.d(LOG_TAG, "App Open Ad loaded successfully!");
+                            appOpenAd = ad;
+                            isLoadingAd = false;
+                            loadTime = new Date().getTime();
+                        }
+
+                        @Override
+                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            Log.d(LOG_TAG, "App Open Ad failed to load: " + loadAdError.getMessage());
+                            isLoadingAd = false;
+                            appOpenAd = null;
+                        }
+                    }
+            );
+        }
+
+        private boolean wasLoadTimeLessThanNHoursAgo(long numHours) {
+            long dateDifference = new Date().getTime() - this.loadTime;
+            long numMilliSecondsPerHour = 3600000;
+            return (dateDifference < (numMilliSecondsPerHour * numHours));
+        }
+
+        public boolean isAdAvailable() {
+            return appOpenAd != null && wasLoadTimeLessThanNHoursAgo(4);
+        }
+
+        public void showAdIfAvailable(
+                @NonNull final Activity activity,
+                final String adUnitId,
+                final boolean isEnabled
+        ) {
+            if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+                Log.d(LOG_TAG, "showAdIfAvailable: Activity is null, finishing, or destroyed.");
+                return;
+            }
+
+            if (isShowingAd) {
+                Log.d(LOG_TAG, "showAdIfAvailable: App Open Ad is already showing.");
+                return;
+            }
+
+            if (!Constants.enable_all_ads || !isEnabled) {
+                Log.d(LOG_TAG, "showAdIfAvailable: Ads disabled (enable_all_ads=" + Constants.enable_all_ads + ", isEnabled=" + isEnabled + ").");
+                return;
+            }
+
+            if (activity instanceof com.arkay.gkinhindi.ui.activities.SplashScreenActivity) {
+                Log.d(LOG_TAG, "showAdIfAvailable: Skipping App Open Ad on SplashScreenActivity.");
+                return;
+            }
+
+            if (isAdAvailable()) {
+                displayLoadedAppOpenAd(activity, adUnitId, isEnabled);
+            } else if (isLoadingAd) {
+                Log.d(LOG_TAG, "showAdIfAvailable: Ad is still loading in background, waiting up to 2 seconds...");
+                final Handler handler = new Handler(Looper.getMainLooper());
+                final long startTime = System.currentTimeMillis();
+                final Runnable checkRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (activity.isDestroyed() || activity.isFinishing()) return;
+                        if (isAdAvailable()) {
+                            displayLoadedAppOpenAd(activity, adUnitId, isEnabled);
+                        } else if (isLoadingAd && (System.currentTimeMillis() - startTime < 2000)) {
+                            handler.postDelayed(this, 100);
+                        } else {
+                            Log.d(LOG_TAG, "showAdIfAvailable: Timed out waiting for App Open Ad load.");
+                        }
+                    }
+                };
+                handler.postDelayed(checkRunnable, 100);
+            } else {
+                Log.d(LOG_TAG, "showAdIfAvailable: No ad cached or loading. Preloading now...");
+                loadAd(activity.getApplicationContext(), adUnitId, isEnabled);
+            }
+        }
+
+        private void displayLoadedAppOpenAd(
+                @NonNull final Activity activity,
+                final String adUnitId,
+                final boolean isEnabled
+        ) {
+            if (activity.isFinishing() || activity.isDestroyed() || !isAdAvailable()) {
+                return;
+            }
+
+            appOpenAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    Log.d(LOG_TAG, "onAdDismissedFullScreenContent: App Open Ad dismissed.");
+                    appOpenAd = null;
+                    isShowingAd = false;
+                    loadAd(activity.getApplicationContext(), adUnitId, isEnabled);
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    Log.d(LOG_TAG, "onAdFailedToShowFullScreenContent: " + adError.getMessage());
+                    appOpenAd = null;
+                    isShowingAd = false;
+                    loadAd(activity.getApplicationContext(), adUnitId, isEnabled);
+                }
+
+                @Override
+                public void onAdShowedFullScreenContent() {
+                    Log.d(LOG_TAG, "onAdShowedFullScreenContent: App Open Ad displayed.");
+                    isShowingAd = true;
+                }
+            });
+
+            appOpenAd.show(activity);
+        }
     }
 }

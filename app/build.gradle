@@ -38,6 +38,7 @@ android {
         buildConfigField "String", "banner_all_2ID", "\"ca-app-pub-3940256099942544/6300978111\""
         buildConfigField "String", "reward_save", "\"ca-app-pub-3940256099942544/5224354917\""
         buildConfigField "String", "reward_save_2ID", "\"ca-app-pub-3940256099942544/5224354917\""
+        buildConfigField "String", "open_resume", "\"ca-app-pub-3940256099942544/9257395921\""
     }
 
     flavorDimensions = ["env"]
@@ -50,7 +51,7 @@ android {
             buildConfigField "String", "native_onboarding", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_onboarding_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_language", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_language_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String",  "native_language_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_onboarding_full_screen", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "native_onboarding_full_screen_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
             buildConfigField "String", "banner_splash", "\"ca-app-pub-3940256099942544/6300978111\""
@@ -63,28 +64,30 @@ android {
             buildConfigField "String", "interstitial_function_2ID", "\"ca-app-pub-3940256099942544/1033173712\""
             buildConfigField "String", "reward_save", "\"ca-app-pub-3940256099942544/5224354917\""
             buildConfigField "String", "reward_save_2ID", "\"ca-app-pub-3940256099942544/5224354917\""
+            buildConfigField "String", "open_resume", "\"ca-app-pub-3940256099942544/9257395921\""
         }
         appProd {
             dimension "env"
 
-            manifestPlaceholders = [admob_app_id: "ca-app-pub-3940256099942544~3347511713"]
+            manifestPlaceholders = [admob_app_id: "ca-app-pub-2790599950368798~6278209677"]
 
-            buildConfigField "String", "native_onboarding", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_onboarding_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_language", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_language_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_onboarding_full_screen", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "native_onboarding_full_screen_2ID", "\"ca-app-pub-3940256099942544/2247696110\""
-            buildConfigField "String", "banner_splash", "\"ca-app-pub-3940256099942544/6300978111\""
-            buildConfigField "String", "banner_splash_2ID", "\"ca-app-pub-3940256099942544/6300978111\""
-            buildConfigField "String", "banner_all", "\"ca-app-pub-3940256099942544/6300978111\""
-            buildConfigField "String", "banner_all_2ID", "\"ca-app-pub-3940256099942544/6300978111\""
-            buildConfigField "String", "interstitial_splash", "\"ca-app-pub-3940256099942544/1033173712\""
-            buildConfigField "String", "interstitial_splash_2ID", "\"ca-app-pub-3940256099942544/1033173712\""
-            buildConfigField "String", "interstitial_function", "\"ca-app-pub-3940256099942544/1033173712\""
-            buildConfigField "String", "interstitial_function_2ID", "\"ca-app-pub-3940256099942544/1033173712\""
-            buildConfigField "String", "reward_save", "\"ca-app-pub-3940256099942544/5224354917\""
-            buildConfigField "String", "reward_save_2ID", "\"ca-app-pub-3940256099942544/5224354917\""
+            buildConfigField "String", "native_onboarding", "\"ca-app-pub-2790599950368798/3413991157\""
+            buildConfigField "String", "native_onboarding_2ID", "\"ca-app-pub-2790599950368798/4198841245\""
+            buildConfigField "String", "native_language", "\"ca-app-pub-2790599950368798/4498224145\""
+            buildConfigField "String", "native_language_2ID", "\"ca-app-pub-2790599950368798/6918121897\""
+            buildConfigField "String", "native_onboarding_full_screen", "\"ca-app-pub-2790599950368798/9596256122\""
+            buildConfigField "String", "native_onboarding_full_screen_2ID", "\"ca-app-pub-2790599950368798/8048099680\""
+            buildConfigField "String", "banner_splash", "\"ca-app-pub-2790599950368798/9385232088\""
+            buildConfigField "String", "banner_splash_2ID", "\"ca-app-pub-2790599950368798/2819823737\""
+            buildConfigField "String", "banner_all", "\"ca-app-pub-2790599950368798/7880578725\""
+            buildConfigField "String", "banner_all_2ID", "\"ca-app-pub-2790599950368798/1254731675\""
+            buildConfigField "String", "interstitial_splash", "\"ca-app-pub-2790599950368798/4124437595\""
+            buildConfigField "String", "interstitial_splash_2ID", "\"ca-app-pub-2790599950368798/2236640859\""
+            buildConfigField "String", "interstitial_function", "\"ca-app-pub-2790599950368798/9185192581\""
+            buildConfigField "String", "interstitial_function_2ID", "\"ca-app-pub-2790599950368798/8217977301\""
+            buildConfigField "String", "reward_save", "\"ca-app-pub-2790599950368798/6666840457\""
+            buildConfigField "String", "reward_save_2ID", "\"ca-app-pub-2790599950368798/1414513773\""
+            buildConfigField "String", "open_resume", "\"ca-app-pub-2790599950368798/8076019840\""
         }
     }
 

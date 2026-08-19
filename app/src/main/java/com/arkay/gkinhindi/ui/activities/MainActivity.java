@@ -119,10 +119,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initializeData();
         AdsUtils.preloadSplashInterstitialAd(
                 this,
-                BuildConfig.interstitial_function,
                 BuildConfig.interstitial_function_2ID,
-                Constants.interstitial_function,
-                Constants.interstitial_function_2ID
+                BuildConfig.interstitial_function,
+                Constants.interstitial_function_2ID,
+                Constants.interstitial_function
         );
     }
 

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "10403813723",
-    "project_id": "documentreader-8a2fe",
-    "storage_bucket": "documentreader-8a2fe.firebasestorage.app"
+    "project_number": "48626343190",
+    "project_id": "arkayapps-document-reader",
+    "storage_bucket": "arkayapps-document-reader.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:10403813723:android:ebb0fd7e220bc15e80e27e",
+        "mobilesdk_app_id": "1:48626343190:android:57be6074cdf0ab2520c437",
         "android_client_info": {
           "package_name": "com.arkay.gkinhindi"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCuPpG7L5xkVZY-3HDMq7GDtDd0AYwNO9o"
+          "current_key": "AIzaSyB0BhJ6RqwFdsbYLSH8ElxiF4moIr3CA4Q"
         }
       ],
       "services": {

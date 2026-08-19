@@ -182,10 +182,10 @@ public class OnBoardActivity extends AppCompatActivity {
                     this,
                     fullAdFrame1,
                     shimmer1,
-                    BuildConfig.native_onboarding_full_screen,
                     BuildConfig.native_onboarding_full_screen_2ID,
-                    Constants.native_onboarding_full_screen,
+                    BuildConfig.native_onboarding_full_screen,
                     Constants.native_onboarding_full_screen_2ID,
+                    Constants.native_onboarding_full_screen,
                     v -> {
                         if (onboardingViewPager != null) {
                             onboardingViewPager.setCurrentItem(2);
@@ -224,10 +224,10 @@ public class OnBoardActivity extends AppCompatActivity {
                     this,
                     fullAdFrame2,
                     shimmer2,
-                    BuildConfig.native_onboarding_full_screen,
                     BuildConfig.native_onboarding_full_screen_2ID,
-                    Constants.native_onboarding_full_screen,
+                    BuildConfig.native_onboarding_full_screen,
                     Constants.native_onboarding_full_screen_2ID,
+                    Constants.native_onboarding_full_screen,
                     v -> {
                         if (onboardingViewPager != null) {
                             onboardingViewPager.setCurrentItem(4);
@@ -281,10 +281,10 @@ public class OnBoardActivity extends AppCompatActivity {
             com.arkay.gkinhindi.utils.AdsUtils.showLargeNativeAd(
                     this,
                     adContainer,
-                    BuildConfig.native_onboarding,
                     BuildConfig.native_onboarding_2ID,
-                    Constants.native_onboarding, //Constants.native_onboarding
-                    Constants.native_onboarding_2ID //Constants.native_onboarding_2ID
+                    BuildConfig.native_onboarding,
+                    Constants.native_onboarding_2ID,
+                    Constants.native_onboarding
             );
         }
     }

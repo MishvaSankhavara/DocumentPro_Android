@@ -752,6 +752,18 @@ public class Utils {
         } catch (ActivityNotFoundException ignored) {
         }
     }
+    public static void openPrivacyPolicy(Context context) {
+        if (context == null) return;
+        try {
+            Intent intent = new Intent(context, com.arkay.gkinhindi.ui.activities.PrivacyPolicyActivity.class);
+            if (!(context instanceof Activity)) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void shareApp(Activity context) {
         try {

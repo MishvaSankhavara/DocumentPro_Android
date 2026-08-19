@@ -52,10 +52,10 @@ public class FileRenameDialog extends Dialog {
                     if (context instanceof Activity) {
                         AdsUtils.showRewardedAdSave(
                                 (Activity) context,
-                                BuildConfig.reward_save,
                                 BuildConfig.reward_save_2ID,
-                                Constants.reward_save,
+                                BuildConfig.reward_save,
                                 Constants.reward_save_2ID,
+                                Constants.reward_save,
                                 () -> renameListener.onRenameDialogListener(newName)
                         );
                     } else {

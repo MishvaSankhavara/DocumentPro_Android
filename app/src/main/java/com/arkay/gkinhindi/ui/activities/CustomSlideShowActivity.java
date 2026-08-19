@@ -31,10 +31,10 @@ public class CustomSlideShowActivity extends SlideShowActivity {
         isAdHandled = true;
         AdsUtils.showInterstitialAdFunction(
                 this,
-                BuildConfig.interstitial_function,
                 BuildConfig.interstitial_function_2ID,
-                Constants.interstitial_function,
+                BuildConfig.interstitial_function,
                 Constants.interstitial_function_2ID,
+                Constants.interstitial_function,
                 CustomSlideShowActivity.super::finish
         );
     }

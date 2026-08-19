@@ -34,7 +34,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.act_splash);
         pbSplash = findViewById(R.id.pb_splash);
-        preloadSplashInterstitialAd();
         fetchRemoteConfig();
         startSplashTimer();
     }
@@ -42,10 +41,10 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void preloadSplashInterstitialAd() {
         AdsUtils.preloadSplashInterstitialAd(
                 SplashScreenActivity.this,
-                BuildConfig.interstitial_splash,
                 BuildConfig.interstitial_splash_2ID,
-                Constants.interstitial_splash,
-                Constants.interstitial_splash_2ID
+                BuildConfig.interstitial_splash,
+                Constants.interstitial_splash_2ID,
+                Constants.interstitial_splash
         );
     }
 
@@ -138,15 +137,20 @@ public class SplashScreenActivity extends AppCompatActivity {
                         Constants.reward_save_2ID = remoteConfig.getBoolean("reward_save_2ID");
                     }
 
+                    if (remoteConfig.getAll().containsKey("open_resume")) {
+                        Constants.open_resume = remoteConfig.getBoolean("open_resume");
+                    } else if (remoteConfig.getAll().containsKey("app_open_ad")) {
+                        Constants.open_resume = remoteConfig.getBoolean("app_open_ad");
+                    }
+
                     Log.d("=====RemoteConfig", "enable_all_ads=" + Constants.enable_all_ads);
+                    Log.d("=====RemoteConfig", "open_resume=" + Constants.open_resume);
                     Log.d("=====RemoteConfig", "native_onboarding=" + Constants.native_onboarding);
                     Log.d("=====RemoteConfig", "native_onboarding_2ID=" + Constants.native_onboarding_2ID);
                     Log.d("=====RemoteConfig", "native_language=" + Constants.native_language);
                     Log.d("=====RemoteConfig", "native_language_2ID=" + Constants.native_language_2ID);
                     Log.d("=====RemoteConfig", "native_onboarding_full_screen=" + Constants.native_onboarding_full_screen);
                     Log.d("=====RemoteConfig", "native_onboarding_full_screen_2ID=" + Constants.native_onboarding_full_screen_2ID);
-                    Log.d("=====RemoteConfig", "native_home=" + Constants.native_home);
-                    Log.d("=====RemoteConfig", "native_home_2ID=" + Constants.native_home_2ID);
                     Log.d("=====RemoteConfig", "banner_splash=" + Constants.banner_splash);
                     Log.d("=====RemoteConfig", "banner_splash_2ID=" + Constants.banner_splash_2ID);
                     Log.d("=====RemoteConfig", "banner_all=" + Constants.banner_all);
@@ -180,10 +184,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             com.arkay.gkinhindi.utils.AdsUtils.showBannerAd(
                     SplashScreenActivity.this,
                     bannerAdContainer,
-                    BuildConfig.banner_splash,
                     BuildConfig.banner_splash_2ID,
-                    Constants.banner_splash,
-                    Constants.banner_splash_2ID
+                    BuildConfig.banner_splash,
+                    Constants.banner_splash_2ID,
+                    Constants.banner_splash
             );
         }
     }

@@ -179,10 +179,10 @@ public class MediaSorterActivity extends AppCompatActivity {
         btnExecuteConvert.setOnClickListener(view -> {
             AdsUtils.showInterstitialAdFunction(
                     MediaSorterActivity.this,
-                    BuildConfig.interstitial_function,
                     BuildConfig.interstitial_function_2ID,
-                    Constants.interstitial_function,
+                    BuildConfig.interstitial_function,
                     Constants.interstitial_function_2ID,
+                    Constants.interstitial_function,
                     () -> {
                         ArrayList<String> mediaPaths = new ArrayList<>();
                         for (int i = 0; i < photoCollection.size(); i++) {

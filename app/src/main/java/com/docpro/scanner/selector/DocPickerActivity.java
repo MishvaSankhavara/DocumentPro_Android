@@ -147,10 +147,10 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             } else {
                 AdsUtils.showRewardedAdSave(
                         DocPickerActivity.this,
-                        BuildConfig.reward_save,
                         BuildConfig.reward_save_2ID,
-                        Constants.reward_save,
+                        BuildConfig.reward_save,
                         Constants.reward_save_2ID,
+                        Constants.reward_save,
                         () -> {
                             Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
                             taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_COMPRESS);
@@ -195,10 +195,10 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                         }
                         AdsUtils.showRewardedAdSave(
                                 DocPickerActivity.this,
-                                BuildConfig.reward_save,
                                 BuildConfig.reward_save_2ID,
-                                Constants.reward_save,
+                                BuildConfig.reward_save,
                                 Constants.reward_save_2ID,
+                                Constants.reward_save,
                                 () -> {
                                     Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
                                     taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_LOCK_PDF);
@@ -217,10 +217,10 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                 public void onOkClickListener(String pass) {
                     AdsUtils.showRewardedAdSave(
                             DocPickerActivity.this,
-                            BuildConfig.reward_save,
                             BuildConfig.reward_save_2ID,
-                            Constants.reward_save,
+                            BuildConfig.reward_save,
                             Constants.reward_save_2ID,
+                            Constants.reward_save,
                             () -> {
                                 Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
                                 taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_UNLOCK_PDF);

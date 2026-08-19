@@ -37,6 +37,7 @@ public class Constants {
         public static boolean interstitial_function_2ID = true;
         public static boolean reward_save = true;
         public static boolean reward_save_2ID = true;
+        public static boolean open_resume = true;
 
 
 
@@ -57,7 +58,7 @@ public class Constants {
         public static final String STYLE_ROMAN_LOWER = "r";
         public static String DOC_APP_FATAL = "PDF READER FATAL";
 
-        public static String PRIVACY_POLICY_URL = "https://doc-hosting.flycricket.io/document-reader-word-pdf-xls-privacy-policy/6a0e76e6-ac8a-4001-8f54-86b4d09e50ea/privacy";
+        public static String PRIVACY_POLICY_URL = "";
 
         public static String getAppStoreUrl(android.content.Context context) {
             return "https://play.google.com/store/apps/details?id=" + context.getPackageName();

@@ -171,6 +171,10 @@
             android:exported="false"
             android:theme="@style/SearchTheme" />
         <activity
+            android:name=".ui.activities.PrivacyPolicyActivity"
+            android:exported="false"
+            android:theme="@style/ListFileTheme" />
+        <activity
             android:name=".ui.activities.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">

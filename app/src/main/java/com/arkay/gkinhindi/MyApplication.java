@@ -13,6 +13,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.hjq.language.MultiLanguages;
 import com.arkay.gkinhindi.model_reader.PDFReaderModel;
+import com.arkay.gkinhindi.utils.AdsUtils;
 
 import java.util.ArrayList;
 
@@ -24,9 +25,14 @@ public class MyApplication extends Application
     private static ArrayList<PDFReaderModel> arrayListMerge;
     private static ArrayList<Integer> arraySplit;
     private static ArrayList<String> arrayPhoto;
+    private AdsUtils.AppOpenAdManager appOpenAdManager;
 
     public static MyApplication getInstance() {
         return mInstance;
+    }
+
+    public AdsUtils.AppOpenAdManager getAppOpenAdManager() {
+        return appOpenAdManager;
     }
 
     private static synchronized void setInstance(MyApplication myApplication) {
@@ -43,8 +49,15 @@ public class MyApplication extends Application
             setInstance(this);
         }
         MultiLanguages.init(this);
-        com.arkay.gkinhindi.utils.AnalyticsHelper.init(this);
-        com.google.android.gms.ads.MobileAds.initialize(this);
+        appOpenAdManager = new AdsUtils.AppOpenAdManager();
+        com.google.android.gms.ads.MobileAds.initialize(this, initializationStatus -> {
+            android.util.Log.d("====AppOpenAdManager", "MobileAds initialized, preloading App Open Ad...");
+            appOpenAdManager.loadAd(
+                    MyApplication.this,
+                    BuildConfig.open_resume,
+                    Constants.open_resume
+            );
+        });
 
         boolean isDark = com.arkay.gkinhindi.PreferenceUtils.getInstance(this).getBoolean(Constants.PREF_NIGHT_MODE, false);
         if (isDark) {
@@ -110,6 +123,17 @@ public class MyApplication extends Application
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
         DefaultLifecycleObserver.super.onStart(owner);
+        android.util.Log.d("====AppOpenAdManager", "ProcessLifecycleOwner onStart: foregroundActivity=" +
+                (foregroundActivity != null ? foregroundActivity.getClass().getSimpleName() : "null"));
+        if (appOpenAdManager != null && foregroundActivity != null) {
+            appOpenAdManager.showAdIfAvailable(
+                    foregroundActivity,
+                    BuildConfig.open_resume,
+                    Constants.open_resume
+            );
+        } else {
+            android.util.Log.d("====AppOpenAdManager", "ProcessLifecycleOwner onStart SKIPPED: manager=" + appOpenAdManager + " | foregroundActivity=" + foregroundActivity);
+        }
     }
 
     @Override
@@ -124,7 +148,7 @@ public class MyApplication extends Application
 
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
-
+        foregroundActivity = activity;
     }
 
     @Override
@@ -144,7 +168,9 @@ public class MyApplication extends Application
 
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
-
+        if (foregroundActivity == activity) {
+            foregroundActivity = null;
+        }
     }
 
 }

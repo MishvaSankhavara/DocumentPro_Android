@@ -113,10 +113,10 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         continueActionText.setOnClickListener(view ->
             AdsUtils.showInterstitialAdFunction(
                 SharePdfAsImageActivity.this,
-                BuildConfig.interstitial_function,
                 BuildConfig.interstitial_function_2ID,
-                Constants.interstitial_function,
+                BuildConfig.interstitial_function,
                 Constants.interstitial_function_2ID,
+                Constants.interstitial_function,
                 () -> {
                     if (selectedToolType == Constants.TOOL_ID_SHARE_PDF_AS_PHOTO) {
                         if (thumbnailAdapter != null && thumbnailAdapter.getSelected_PdfPreview().size() < 50) {

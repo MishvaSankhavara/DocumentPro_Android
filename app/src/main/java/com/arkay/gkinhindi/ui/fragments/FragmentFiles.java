@@ -150,10 +150,10 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             public void onDocClick(DocumentModel document) {
                 AdsUtils.showInterstitialAdFunction(
                         activityContext,
-                        BuildConfig.interstitial_function,
                         BuildConfig.interstitial_function_2ID,
-                        Constants.interstitial_function,
+                        BuildConfig.interstitial_function,
                         Constants.interstitial_function_2ID,
+                        Constants.interstitial_function,
                         () -> Utils.openFile(activityContext, document)
                 );
             }
@@ -177,10 +177,10 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             public void onDocClick(DocumentModel document) {
                 AdsUtils.showInterstitialAdFunction(
                         activityContext,
-                        BuildConfig.interstitial_function,
                         BuildConfig.interstitial_function_2ID,
-                        Constants.interstitial_function,
+                        BuildConfig.interstitial_function,
                         Constants.interstitial_function_2ID,
+                        Constants.interstitial_function,
                         () -> Utils.openFile(activityContext, document)
                 );
             }
@@ -338,10 +338,10 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
         if (Utils.checkPermission(activityContext)) {
             AdsUtils.showInterstitialAdFunction(
                     activityContext,
-                    BuildConfig.interstitial_function,
                     BuildConfig.interstitial_function_2ID,
-                    Constants.interstitial_function,
+                    BuildConfig.interstitial_function,
                     Constants.interstitial_function_2ID,
+                    Constants.interstitial_function,
                     () -> Utils.openListFileActivity(activityContext, allFileType)
             );
         } else {
@@ -371,10 +371,10 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             if (Utils.checkPermission(activityContext)) {
                 AdsUtils.showInterstitialAdFunction(
                         activityContext,
-                        BuildConfig.interstitial_function,
                         BuildConfig.interstitial_function_2ID,
-                        Constants.interstitial_function,
+                        BuildConfig.interstitial_function,
                         Constants.interstitial_function_2ID,
+                        Constants.interstitial_function,
                         () -> {
                             Intent intentRecent = new Intent(activityContext, SelectDocumentActivity.class);
                             intentRecent.putExtra(Constants.EXTRA_FILE_TYPE, Constants.FILE_TYPE_RECENT);
@@ -389,10 +389,10 @@ public class FragmentFiles extends Fragment implements View.OnClickListener {
             if (Utils.checkPermission(activityContext)) {
                 AdsUtils.showInterstitialAdFunction(
                         activityContext,
-                        BuildConfig.interstitial_function,
                         BuildConfig.interstitial_function_2ID,
-                        Constants.interstitial_function,
+                        BuildConfig.interstitial_function,
                         Constants.interstitial_function_2ID,
+                        Constants.interstitial_function,
                         () -> {
                             Intent intentFavorite = new Intent(activityContext, SelectDocumentActivity.class);
                             intentFavorite.putExtra(Constants.EXTRA_FILE_TYPE, Constants.FILE_TYPE_FAVORITE);

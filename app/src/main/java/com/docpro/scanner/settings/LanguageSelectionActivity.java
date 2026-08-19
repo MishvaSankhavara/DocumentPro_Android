@@ -64,10 +64,10 @@ public class LanguageSelectionActivity extends ActivityBase {
             com.arkay.gkinhindi.utils.AdsUtils.showLargeNativeAd(
                     this,
                     adContainer,
-                    BuildConfig.native_language,
                     BuildConfig.native_language_2ID,
-                    Constants.native_language,
-                    Constants.native_language_2ID
+                    BuildConfig.native_language,
+                    Constants.native_language_2ID,
+                    Constants.native_language
             );
         }
 

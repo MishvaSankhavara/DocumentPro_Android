@@ -186,10 +186,10 @@ public class ViewOfficeActivity extends AppNUIActivity {
                 AdsUtils.showBannerAd(
                         this,
                         bannerAdContainer,
-                        BuildConfig.banner_all,
                         BuildConfig.banner_all_2ID,
-                        Constants.banner_all,
-                        Constants.banner_all_2ID
+                        BuildConfig.banner_all,
+                        Constants.banner_all_2ID,
+                        Constants.banner_all
                 );
             }
         } catch (Exception e) {

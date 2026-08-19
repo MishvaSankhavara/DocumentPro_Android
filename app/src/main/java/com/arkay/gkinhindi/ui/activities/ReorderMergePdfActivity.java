@@ -165,10 +165,10 @@ public class ReorderMergePdfActivity extends AppCompatActivity implements OnDrag
         mergeButtonText.setOnClickListener(view -> {
                 AdsUtils.showInterstitialAdFunction(
                     ReorderMergePdfActivity.this,
-                    BuildConfig.interstitial_function,
                     BuildConfig.interstitial_function_2ID,
-                    Constants.interstitial_function,
+                    BuildConfig.interstitial_function,
                     Constants.interstitial_function_2ID,
+                    Constants.interstitial_function,
                     () -> {
                         String sb2 = "Merged" + System.currentTimeMillis();
                         FileRenameDialog dialog = new FileRenameDialog(ReorderMergePdfActivity.this, sb2, nameFile -> {

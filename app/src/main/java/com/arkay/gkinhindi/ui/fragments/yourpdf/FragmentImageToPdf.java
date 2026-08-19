@@ -67,10 +67,10 @@ public class FragmentImageToPdf extends Fragment implements OnPdfTapListener {
         if (activityContext != null) {
             AdsUtils.showInterstitialAdFunction(
                     activityContext,
-                    BuildConfig.interstitial_function,
                     BuildConfig.interstitial_function_2ID,
-                    Constants.interstitial_function,
+                    BuildConfig.interstitial_function,
                     Constants.interstitial_function_2ID,
+                    Constants.interstitial_function,
                     () -> {
                         File file = new File(pdfModel.getAbsolutePath_PDFModel());
                         Utils.openFile(activityContext, file);
@@ -79,10 +79,10 @@ public class FragmentImageToPdf extends Fragment implements OnPdfTapListener {
         } else if (getActivity() != null) {
             AdsUtils.showInterstitialAdFunction(
                     getActivity(),
-                    BuildConfig.interstitial_function,
                     BuildConfig.interstitial_function_2ID,
-                    Constants.interstitial_function,
+                    BuildConfig.interstitial_function,
                     Constants.interstitial_function_2ID,
+                    Constants.interstitial_function,
                     () -> {
                         File file = new File(pdfModel.getAbsolutePath_PDFModel());
                         Utils.openFile(getActivity(), file);

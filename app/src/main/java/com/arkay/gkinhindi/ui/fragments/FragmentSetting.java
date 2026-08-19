@@ -122,14 +122,7 @@ public class FragmentSetting extends Fragment implements View.OnClickListener {
         } else if (idView == R.id.cl_feedback) {
             Utils.feedbackApp(activityContext);
         } else if (idView == R.id.cl_privacy_policy) {
-            try {
-                String url = Constants.PRIVACY_POLICY_URL;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Utils.openPrivacyPolicy(activityContext);
         } else if (idView == R.id.iv_back) {
             if (activityContext != null) {
                 activityContext.onBackPressed();
