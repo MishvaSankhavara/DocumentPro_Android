@@ -130,6 +130,14 @@ public class SplashScreenActivity extends AppCompatActivity {
                         Constants.interstitial_function_2ID = remoteConfig.getBoolean("interstitial_function_2ID");
                     }
 
+                    if (remoteConfig.getAll().containsKey("reward_save")) {
+                        Constants.reward_save = remoteConfig.getBoolean("reward_save");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("reward_save_2ID")) {
+                        Constants.reward_save_2ID = remoteConfig.getBoolean("reward_save_2ID");
+                    }
+
                     Log.d("=====RemoteConfig", "enable_all_ads=" + Constants.enable_all_ads);
                     Log.d("=====RemoteConfig", "native_onboarding=" + Constants.native_onboarding);
                     Log.d("=====RemoteConfig", "native_onboarding_2ID=" + Constants.native_onboarding_2ID);
@@ -147,6 +155,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                     Log.d("=====RemoteConfig", "interstitial_splash_2ID=" + Constants.interstitial_splash_2ID);
                     Log.d("=====RemoteConfig", "interstitial_function=" + Constants.interstitial_function);
                     Log.d("=====RemoteConfig", "interstitial_function_2ID=" + Constants.interstitial_function_2ID);
+                    Log.d("=====RemoteConfig", "reward_save=" + Constants.reward_save);
+                    Log.d("=====RemoteConfig", "reward_save_2ID=" + Constants.reward_save_2ID);
 
                     loadSplashBannerAd();
                     preloadSplashInterstitialAd();

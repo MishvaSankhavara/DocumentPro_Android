@@ -2,6 +2,7 @@ package com.arkay.gkinhindi.ui.dialog;
 
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.arkay.gkinhindi.BuildConfig;
+import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.clickListener.RenameDialogClickListener;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.utils.Utils;
 
 
@@ -43,8 +47,20 @@ public class FileRenameDialog extends Dialog {
                 objectAnimator.start();
             } else if (Utils.isFileNameValid(etFileName.getText().toString())) {
                 if (renameListener != null) {
-                    renameListener.onRenameDialogListener(etFileName.getText().toString());
+                    final String newName = etFileName.getText().toString();
                     dismiss();
+                    if (context instanceof Activity) {
+                        AdsUtils.showRewardedAdSave(
+                                (Activity) context,
+                                BuildConfig.reward_save,
+                                BuildConfig.reward_save_2ID,
+                                Constants.reward_save,
+                                Constants.reward_save_2ID,
+                                () -> renameListener.onRenameDialogListener(newName)
+                        );
+                    } else {
+                        renameListener.onRenameDialogListener(newName);
+                    }
                 }
             } else {
                 ObjectAnimator objectAnimator = Utils.startAnim(dialogRootLayout);

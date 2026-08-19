@@ -26,6 +26,8 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAdView;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 public class AdsUtils {
 
@@ -253,6 +255,85 @@ public class AdsUtils {
                 if (onAdDismissed != null) onAdDismissed.run();
             }
         }, 500);
+    }
+
+    public static void showRewardedAdSave(
+            final Activity activity,
+            final String primaryAdUnitId,
+            final String fallbackAdUnitId,
+            final boolean flag1,
+            final boolean flag2,
+            final Runnable onSaveAction
+    ) {
+        Log.d("====RewardedAdSave", "showRewardedAdSave: enable_all_ads = " + Constants.enable_all_ads +
+                " \n flag1 = " + flag1 + " \n flag2 = " + flag2 +
+                " \n primaryID = " + primaryAdUnitId + " \n fallbackID = " + fallbackAdUnitId);
+
+        if (!Constants.enable_all_ads || (!flag1 && !flag2)) {
+            Log.d("====RewardedAdSave", "showRewardedAdSave: SKIPPED — ads disabled or both flags false");
+            if (onSaveAction != null) onSaveAction.run();
+            return;
+        }
+
+        if (activity == null || activity.isFinishing()) {
+            if (onSaveAction != null) onSaveAction.run();
+            return;
+        }
+
+        final AppLoadingDialog loadingDialog = new AppLoadingDialog(activity);
+        try {
+            loadingDialog.show();
+        } catch (Exception ignored) {}
+
+        final String targetAdUnitId = (flag1 && primaryAdUnitId != null && !primaryAdUnitId.isEmpty())
+                ? primaryAdUnitId
+                : fallbackAdUnitId;
+
+        if (targetAdUnitId == null || targetAdUnitId.isEmpty()) {
+            try {
+                if (loadingDialog.isShowing()) loadingDialog.dismiss();
+            } catch (Exception ignored) {}
+            if (onSaveAction != null) onSaveAction.run();
+            return;
+        }
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        RewardedAd.load(activity, targetAdUnitId, adRequest, new RewardedAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                Log.d("====RewardedAdSave", "onAdLoaded: Rewarded Ad loaded successfully!");
+                try {
+                    if (loadingDialog.isShowing()) loadingDialog.dismiss();
+                } catch (Exception ignored) {}
+
+                rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        Log.d("====RewardedAdSave", "onAdDismissedFullScreenContent: Proceeding to save action");
+                        if (onSaveAction != null) onSaveAction.run();
+                    }
+
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                        Log.d("====RewardedAdSave", "onAdFailedToShowFullScreenContent: " + adError.getMessage());
+                        if (onSaveAction != null) onSaveAction.run();
+                    }
+                });
+
+                rewardedAd.show(activity, rewardItem -> {
+                    Log.d("====RewardedAdSave", "onUserEarnedReward: Amount=" + rewardItem.getAmount());
+                });
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                Log.d("====RewardedAdSave", "onAdFailedToLoad: " + loadAdError.getMessage());
+                try {
+                    if (loadingDialog.isShowing()) loadingDialog.dismiss();
+                } catch (Exception ignored) {}
+                if (onSaveAction != null) onSaveAction.run();
+            }
+        });
     }
 
     public static void showLargeNativeAd(

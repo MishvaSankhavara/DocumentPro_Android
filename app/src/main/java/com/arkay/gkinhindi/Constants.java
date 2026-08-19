@@ -35,6 +35,8 @@ public class Constants {
         public static boolean interstitial_splash_2ID = true;
         public static boolean interstitial_function = true;
         public static boolean interstitial_function_2ID = true;
+        public static boolean reward_save = true;
+        public static boolean reward_save_2ID = true;
 
 
 

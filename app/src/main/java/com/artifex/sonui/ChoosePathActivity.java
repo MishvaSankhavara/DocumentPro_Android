@@ -14,6 +14,9 @@ import android.view.View.OnKeyListener;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.arkay.gkinhindi.BuildConfig;
+import com.arkay.gkinhindi.Constants;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.artifex.sonui.editor.BaseActivity;
 import com.artifex.sonui.editor.SOEditText;
 import com.artifex.sonui.editor.SOEditTextOnEditorActionListener;
@@ -95,7 +98,14 @@ public class ChoosePathActivity extends BaseActivity {
                     com.arkay.gkinhindi.utils.Utils.askPermission(ChoosePathActivity.this);
                     return;
                 }
-                ChoosePathActivity.this.completeSave(fileBrowser);
+                AdsUtils.showRewardedAdSave(
+                        ChoosePathActivity.this,
+                        BuildConfig.reward_save,
+                        BuildConfig.reward_save_2ID,
+                        Constants.reward_save,
+                        Constants.reward_save_2ID,
+                        () -> ChoosePathActivity.this.completeSave(fileBrowser)
+                );
             }
         });
 
@@ -118,7 +128,14 @@ public class ChoosePathActivity extends BaseActivity {
                         com.arkay.gkinhindi.utils.Utils.askPermission(ChoosePathActivity.this);
                         return true;
                     }
-                    ChoosePathActivity.this.completeSave(fileBrowser);
+                    com.arkay.gkinhindi.utils.AdsUtils.showRewardedAdSave(
+                            ChoosePathActivity.this,
+                            com.arkay.gkinhindi.BuildConfig.reward_save,
+                            com.arkay.gkinhindi.BuildConfig.reward_save_2ID,
+                            com.arkay.gkinhindi.Constants.reward_save,
+                            com.arkay.gkinhindi.Constants.reward_save_2ID,
+                            () -> ChoosePathActivity.this.completeSave(fileBrowser)
+                    );
                     return true;
                 } else {
                     return false;
@@ -134,7 +151,14 @@ public class ChoosePathActivity extends BaseActivity {
                         com.arkay.gkinhindi.utils.Utils.askPermission(ChoosePathActivity.this);
                         return true;
                     }
-                    ChoosePathActivity.this.completeSave(fileBrowser);
+                    com.arkay.gkinhindi.utils.AdsUtils.showRewardedAdSave(
+                            ChoosePathActivity.this,
+                            com.arkay.gkinhindi.BuildConfig.reward_save,
+                            com.arkay.gkinhindi.BuildConfig.reward_save_2ID,
+                            com.arkay.gkinhindi.Constants.reward_save,
+                            com.arkay.gkinhindi.Constants.reward_save_2ID,
+                            () -> ChoosePathActivity.this.completeSave(fileBrowser)
+                    );
                 } else {
                     var4 = false;
                 }

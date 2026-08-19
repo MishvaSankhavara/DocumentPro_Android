@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.FileSelectionAdapter;
@@ -23,6 +24,7 @@ import com.arkay.gkinhindi.docHelper.PdfPrintUtils;
 import com.arkay.gkinhindi.clickListener.PdfSelectionListener;
 import com.arkay.gkinhindi.clickListener.PasswordClickListener;
 import com.arkay.gkinhindi.model_reader.PDFReaderModel;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.ui.activities.SharePdfAsImageActivity;
 import com.arkay.gkinhindi.ui.activities.SplitChooseFileActivity;
 import com.docpro.scanner.engine.ProcessingTaskActivity;
@@ -143,11 +145,20 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                 DialogManagerUtils.showProtectedFileDialog(DocPickerActivity.this,
                         R.string.toast_compress_password_protected);
             } else {
-                Intent taskIntent = new Intent(this, ProcessingTaskActivity.class);
-                taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_COMPRESS);
-                taskIntent.putExtra(Constants.EXTRA_PDF_MODEL, pdfModel_listener);
-                startActivity(taskIntent);
-                finish();
+                AdsUtils.showRewardedAdSave(
+                        DocPickerActivity.this,
+                        BuildConfig.reward_save,
+                        BuildConfig.reward_save_2ID,
+                        Constants.reward_save,
+                        Constants.reward_save_2ID,
+                        () -> {
+                            Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
+                            taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_COMPRESS);
+                            taskIntent.putExtra(Constants.EXTRA_PDF_MODEL, pdfModel_listener);
+                            startActivity(taskIntent);
+                            finish();
+                        }
+                );
             }
         } else if (operationMode == Constants.TOOL_ID_SPLIT) {
             if (pdfModel_listener.isProtected_PDFModel()) {
@@ -182,12 +193,21 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
                         if (passwordDialogArr[0] != null) {
                             passwordDialogArr[0].dismiss();
                         }
-                        Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
-                        taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_LOCK_PDF);
-                        taskIntent.putExtra(Constants.EXTRA_PDF_MODEL, pdfModel_listener);
-                        taskIntent.putExtra(Constants.PDF_SET_PASSWORD, pass);
-                        startActivity(taskIntent);
-                        finish();
+                        AdsUtils.showRewardedAdSave(
+                                DocPickerActivity.this,
+                                BuildConfig.reward_save,
+                                BuildConfig.reward_save_2ID,
+                                Constants.reward_save,
+                                Constants.reward_save_2ID,
+                                () -> {
+                                    Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
+                                    taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_LOCK_PDF);
+                                    taskIntent.putExtra(Constants.EXTRA_PDF_MODEL, pdfModel_listener);
+                                    taskIntent.putExtra(Constants.PDF_SET_PASSWORD, pass);
+                                    startActivity(taskIntent);
+                                    finish();
+                                }
+                        );
                     }
                 });
             }
@@ -195,12 +215,21 @@ public class DocPickerActivity extends AppCompatActivity implements PdfSelection
             DialogManagerUtils.showPdfPasswordRemoval(this, pdfModel_listener, new PasswordClickListener() {
                 @Override
                 public void onOkClickListener(String pass) {
-                    Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
-                    taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_UNLOCK_PDF);
-                    taskIntent.putExtra(Constants.EXTRA_PDF_MODEL, pdfModel_listener);
-                    taskIntent.putExtra(Constants.PDF_SET_PASSWORD, pass);
-                    startActivity(taskIntent);
-                    finish();
+                    AdsUtils.showRewardedAdSave(
+                            DocPickerActivity.this,
+                            BuildConfig.reward_save,
+                            BuildConfig.reward_save_2ID,
+                            Constants.reward_save,
+                            Constants.reward_save_2ID,
+                            () -> {
+                                Intent taskIntent = new Intent(DocPickerActivity.this, ProcessingTaskActivity.class);
+                                taskIntent.putExtra(Constants.EXTRA_TOOL_TYPE, Constants.TOOL_ID_UNLOCK_PDF);
+                                taskIntent.putExtra(Constants.EXTRA_PDF_MODEL, pdfModel_listener);
+                                taskIntent.putExtra(Constants.PDF_SET_PASSWORD, pass);
+                                startActivity(taskIntent);
+                                finish();
+                            }
+                    );
                 }
 
             });
