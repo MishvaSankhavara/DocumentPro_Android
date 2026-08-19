@@ -75,6 +75,11 @@
             android:screenOrientation="landscape"
             android:theme="@style/style_slide_show" />
         <activity
+            android:name=".ui.activities.CustomSlideShowActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/style_slide_show" />
+        <activity
             android:name=".ui.activities.MainActivity"
             android:exported="false"
             android:theme="@style/MainActivity" />

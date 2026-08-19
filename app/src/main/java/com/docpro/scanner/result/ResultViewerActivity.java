@@ -15,10 +15,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.PdfViewerPagerAdapter;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.utils.Utils;
+import android.widget.FrameLayout;
 
 import java.util.Objects;
 
@@ -44,6 +47,7 @@ public class ResultViewerActivity extends AppCompatActivity {
 
         setupHeader();
         initializePager();
+        setupBannerAd();
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -104,6 +108,20 @@ public class ResultViewerActivity extends AppCompatActivity {
                     break;
             }
         }).attach();
+    }
+
+    private void setupBannerAd() {
+        FrameLayout bannerAdContainer = findViewById(R.id.banner_ad_container);
+        if (bannerAdContainer != null) {
+            AdsUtils.showBannerAd(
+                    this,
+                    bannerAdContainer,
+                    BuildConfig.banner_all,
+                    BuildConfig.banner_all_2ID,
+                    Constants.banner_all,
+                    Constants.banner_all_2ID
+            );
+        }
     }
 
     private void navigateToMainTools() {

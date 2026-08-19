@@ -91,8 +91,8 @@ public class NUIDocViewPpt extends NUIDocView {
         this.getDoc().clearSelection();
         this.getDoc().o();
         if (mSession != null && mSession.getDoc() != null) {
-            SlideShowActivity.setSession(this.mSession);
-            Intent intent = new Intent(this.getContext(), SlideShowActivity.class);
+            com.arkay.gkinhindi.ui.activities.CustomSlideShowActivity.setSession(this.mSession);
+            Intent intent = new Intent(this.getContext(), com.arkay.gkinhindi.ui.activities.CustomSlideShowActivity.class);
             intent.setAction("android.intent.action.VIEW");
             this.activity().startActivity(intent);
         }

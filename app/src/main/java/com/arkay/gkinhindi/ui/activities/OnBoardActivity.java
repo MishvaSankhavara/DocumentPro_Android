@@ -25,6 +25,7 @@ import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.PreferenceUtils;
 import com.arkay.gkinhindi.adapter_reader.OnboardingScreenAdapter;
+import com.arkay.gkinhindi.utils.AdsUtils;
 
 import java.util.ArrayList;
 
@@ -177,7 +178,7 @@ public class OnBoardActivity extends AppCompatActivity {
             this.listView.add(viewFullAd1);
             android.widget.FrameLayout fullAdFrame1 = viewFullAd1.findViewById(R.id.full_native_ad_frame);
             View shimmer1 = viewFullAd1.findViewById(R.id.shimmer_full_ad);
-            com.arkay.gkinhindi.utils.AdsUtils.showFullScreenNativeAd(
+            AdsUtils.showFullScreenNativeAd(
                     this,
                     fullAdFrame1,
                     shimmer1,
