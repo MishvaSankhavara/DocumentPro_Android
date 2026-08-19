@@ -21,6 +21,10 @@ public class Constants {
         public static boolean enable_all_ads = true;
         public static boolean native_onboarding = true;
         public static boolean native_onboarding_2ID = true;
+        public static boolean native_language = true;
+        public static boolean native_language_2ID = true;
+        public static boolean native_onboarding_full_screen = true;
+        public static boolean native_onboarding_full_screen_2ID = true;
         public static boolean native_home = true;
         public static boolean native_home_2ID = true;
         public static boolean banner_splash = true;

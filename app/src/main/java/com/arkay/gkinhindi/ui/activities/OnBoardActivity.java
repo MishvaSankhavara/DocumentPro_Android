@@ -74,14 +74,14 @@ public class OnBoardActivity extends AppCompatActivity {
             activity.previousPagePosition = position;
 
             if (position == 1) {
-                if (activity.isFullAd1Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID)) {
+                if (activity.isFullAd1Failed || !Constants.enable_all_ads || (!Constants.native_onboarding_full_screen && !Constants.native_onboarding_full_screen_2ID)) {
                     if (activity.onboardingViewPager != null) {
                         int target = isMovingForward ? 2 : 0;
                         activity.onboardingViewPager.setCurrentItem(target, false);
                     }
                 }
             } else if (position == 3) {
-                if (activity.isFullAd2Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID)) {
+                if (activity.isFullAd2Failed || !Constants.enable_all_ads || (!Constants.native_onboarding_full_screen && !Constants.native_onboarding_full_screen_2ID)) {
                     if (activity.onboardingViewPager != null) {
                         int target = isMovingForward ? 4 : 2;
                         activity.onboardingViewPager.setCurrentItem(target, false);
@@ -181,10 +181,10 @@ public class OnBoardActivity extends AppCompatActivity {
                     this,
                     fullAdFrame1,
                     shimmer1,
-                    BuildConfig.native_onboarding,
-                    BuildConfig.native_onboarding_2ID,
-                    Constants.native_onboarding,
-                    Constants.native_onboarding_2ID,
+                    BuildConfig.native_onboarding_full_screen,
+                    BuildConfig.native_onboarding_full_screen_2ID,
+                    Constants.native_onboarding_full_screen,
+                    Constants.native_onboarding_full_screen_2ID,
                     v -> {
                         if (onboardingViewPager != null) {
                             onboardingViewPager.setCurrentItem(2);
@@ -223,10 +223,10 @@ public class OnBoardActivity extends AppCompatActivity {
                     this,
                     fullAdFrame2,
                     shimmer2,
-                    BuildConfig.native_onboarding,
-                    BuildConfig.native_onboarding_2ID,
-                    Constants.native_onboarding,
-                    Constants.native_onboarding_2ID,
+                    BuildConfig.native_onboarding_full_screen,
+                    BuildConfig.native_onboarding_full_screen_2ID,
+                    Constants.native_onboarding_full_screen,
+                    Constants.native_onboarding_full_screen_2ID,
                     v -> {
                         if (onboardingViewPager != null) {
                             onboardingViewPager.setCurrentItem(4);
@@ -260,12 +260,12 @@ public class OnBoardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (previousPagePosition == 0) {
-                    boolean ad1Disabled = isFullAd1Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID);
+                    boolean ad1Disabled = isFullAd1Failed || !Constants.enable_all_ads || (!Constants.native_onboarding_full_screen && !Constants.native_onboarding_full_screen_2ID);
                     onboardingViewPager.setCurrentItem(ad1Disabled ? 2 : 1, true);
                 } else if (previousPagePosition == 1) {
                     onboardingViewPager.setCurrentItem(2, true);
                 } else if (previousPagePosition == 2) {
-                    boolean ad2Disabled = isFullAd2Failed || !Constants.enable_all_ads || (!Constants.native_onboarding && !Constants.native_onboarding_2ID);
+                    boolean ad2Disabled = isFullAd2Failed || !Constants.enable_all_ads || (!Constants.native_onboarding_full_screen && !Constants.native_onboarding_full_screen_2ID);
                     onboardingViewPager.setCurrentItem(ad2Disabled ? 4 : 3, true);
                 } else if (previousPagePosition == 3) {
                     onboardingViewPager.setCurrentItem(4, true);

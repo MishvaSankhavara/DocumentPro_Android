@@ -74,6 +74,22 @@ public class SplashScreenActivity extends AppCompatActivity {
                         Constants.native_onboarding_2ID = remoteConfig.getBoolean("native_onboarding_2ID");
                     }
 
+                    if (remoteConfig.getAll().containsKey("native_language")) {
+                        Constants.native_language = remoteConfig.getBoolean("native_language");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("native_language_2ID")) {
+                        Constants.native_language_2ID = remoteConfig.getBoolean("native_language_2ID");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("native_onboarding_full_screen")) {
+                        Constants.native_onboarding_full_screen = remoteConfig.getBoolean("native_onboarding_full_screen");
+                    }
+
+                    if (remoteConfig.getAll().containsKey("native_onboarding_full_screen_2ID")) {
+                        Constants.native_onboarding_full_screen_2ID = remoteConfig.getBoolean("native_onboarding_full_screen_2ID");
+                    }
+
                     if (remoteConfig.getAll().containsKey("native_home")) {
                         Constants.native_home = remoteConfig.getBoolean("native_home");
                     }
@@ -117,6 +133,10 @@ public class SplashScreenActivity extends AppCompatActivity {
                     Log.d("=====RemoteConfig", "enable_all_ads=" + Constants.enable_all_ads);
                     Log.d("=====RemoteConfig", "native_onboarding=" + Constants.native_onboarding);
                     Log.d("=====RemoteConfig", "native_onboarding_2ID=" + Constants.native_onboarding_2ID);
+                    Log.d("=====RemoteConfig", "native_language=" + Constants.native_language);
+                    Log.d("=====RemoteConfig", "native_language_2ID=" + Constants.native_language_2ID);
+                    Log.d("=====RemoteConfig", "native_onboarding_full_screen=" + Constants.native_onboarding_full_screen);
+                    Log.d("=====RemoteConfig", "native_onboarding_full_screen_2ID=" + Constants.native_onboarding_full_screen_2ID);
                     Log.d("=====RemoteConfig", "native_home=" + Constants.native_home);
                     Log.d("=====RemoteConfig", "native_home_2ID=" + Constants.native_home_2ID);
                     Log.d("=====RemoteConfig", "banner_splash=" + Constants.banner_splash);

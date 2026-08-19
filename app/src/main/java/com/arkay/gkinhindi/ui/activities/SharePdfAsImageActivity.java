@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.arkay.gkinhindi.BuildConfig;
 import com.arkay.gkinhindi.Constants;
 import com.arkay.gkinhindi.R;
 import com.arkay.gkinhindi.adapter_reader.PdfPreviewThumbnailAdapter;
@@ -39,6 +40,7 @@ import com.arkay.gkinhindi.model_reader.PDFReaderModel;
 import com.arkay.gkinhindi.model_reader.PDFPageModel;
 import com.arkay.gkinhindi.ui.customviews.EmptyStateRecyclerView;
 import com.arkay.gkinhindi.ui.dialog.PdfToImageConvertDialog;
+import com.arkay.gkinhindi.utils.AdsUtils;
 import com.arkay.gkinhindi.utils.Utils;
 import com.shockwave.pdfium.PdfDocument;
 import com.shockwave.pdfium.PdfiumCore;
@@ -108,44 +110,49 @@ public class SharePdfAsImageActivity extends AppCompatActivity implements OnThum
         loadingAnimationView = findViewById(R.id.loadingView);
         continueActionText = findViewById(R.id.tv_continue);
         pdfPageRecyclerView = findViewById(R.id.chooser_recycler_view);
-        continueActionText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (selectedToolType == Constants.TOOL_ID_SHARE_PDF_AS_PHOTO) {
-                    if (thumbnailAdapter.getSelected_PdfPreview().size() < 50) {
-                        ArrayList<Uri> arrayList = new ArrayList<>();
-                        for (int i = 0; i < thumbnailAdapter.getSelected_PdfPreview().size(); i++) {
-                            arrayList.add(FileProvider.getUriForFile(context,
-                                    context.getApplicationContext().getPackageName() + ".provider",
-                                    new File(Objects.requireNonNull(thumbnailAdapter.getSelected_PdfPreview().get(i)
-                                            .getThumbnailUri_PDFPageModel().getPath()))));
+        continueActionText.setOnClickListener(view ->
+            AdsUtils.showInterstitialAdFunction(
+                SharePdfAsImageActivity.this,
+                BuildConfig.interstitial_function,
+                BuildConfig.interstitial_function_2ID,
+                Constants.interstitial_function,
+                Constants.interstitial_function_2ID,
+                () -> {
+                    if (selectedToolType == Constants.TOOL_ID_SHARE_PDF_AS_PHOTO) {
+                        if (thumbnailAdapter != null && thumbnailAdapter.getSelected_PdfPreview().size() < 50) {
+                            ArrayList<Uri> arrayList = new ArrayList<>();
+                            for (int i = 0; i < thumbnailAdapter.getSelected_PdfPreview().size(); i++) {
+                                arrayList.add(FileProvider.getUriForFile(context,
+                                        context.getApplicationContext().getPackageName() + ".provider",
+                                        new File(Objects.requireNonNull(thumbnailAdapter.getSelected_PdfPreview().get(i)
+                                                .getThumbnailUri_PDFPageModel().getPath()))));
+                            }
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+                            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_via_photo));
+                            intent.setType("image/jpeg");
+                            String appUrl = com.arkay.gkinhindi.Constants.getAppStoreUrl(SharePdfAsImageActivity.this);
+                            String shareMessage = String.format(getString(R.string.custom_share_message), appUrl);
+                            intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                            intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, arrayList);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(context, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT)
+                                    .show();
                         }
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-                        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_via_photo));
-                        intent.setType("image/jpeg");
-                        String appUrl = com.arkay.gkinhindi.Constants.getAppStoreUrl(SharePdfAsImageActivity.this);
-                        String shareMessage = String.format(getString(R.string.custom_share_message), appUrl);
-                        intent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-                        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, arrayList);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(context, getString(R.string.toast_maximum_file_share), Toast.LENGTH_SHORT)
-                                .show();
+                    } else if (selectedToolType == Constants.TOOL_PDF_TO_PHOTO) {
+                        if (thumbnailAdapter != null) {
+                            PdfToImageConvertDialog dialog = new PdfToImageConvertDialog(SharePdfAsImageActivity.this,
+                                    thumbnailAdapter.getSelected_PdfPreview());
+                            Window window4 = dialog.getWindow();
+                            assert window4 != null;
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            window4.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialog.show();
+                        }
                     }
-                } else if (selectedToolType == Constants.TOOL_PDF_TO_PHOTO) {
-
-                    PdfToImageConvertDialog dialog = new PdfToImageConvertDialog(SharePdfAsImageActivity.this,
-                            thumbnailAdapter.getSelected_PdfPreview());
-                    Window window4 = dialog.getWindow();
-                    assert window4 != null;
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    window4.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    dialog.show();
-
                 }
-            }
-        });
+        ));
     }
 
     @Override

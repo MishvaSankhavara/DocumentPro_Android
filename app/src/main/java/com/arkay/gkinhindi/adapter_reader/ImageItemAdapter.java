@@ -49,6 +49,9 @@ public class ImageItemAdapter extends RecyclerView.Adapter<ImageItemAdapter.View
                 .load(file.getPath())
                 .into(holder.imgPhoto_ImageItem);
 
+        holder.itemView.setOnClickListener(view ->
+                Utils.openFile(mContext_ImageItem, file));
+
         holder.btnDelete_ImageItem.setOnClickListener(view ->
                 Utils.showConfirmDialog(
                         mContext_ImageItem,
@@ -68,15 +71,12 @@ public class ImageItemAdapter extends RecyclerView.Adapter<ImageItemAdapter.View
                                         null,
                                         null);
 
-                                arrayList_ImageItem.remove(
-                                        holder.getAdapterPosition());
-
-                                notifyItemRemoved(
-                                        holder.getAdapterPosition());
-
-                                notifyItemRangeChanged(
-                                        holder.getAdapterPosition(),
-                                        arrayList_ImageItem.size());
+                                int pos = holder.getAdapterPosition();
+                                if (pos != RecyclerView.NO_POSITION && pos < arrayList_ImageItem.size()) {
+                                    arrayList_ImageItem.remove(pos);
+                                    notifyItemRemoved(pos);
+                                    notifyItemRangeChanged(pos, arrayList_ImageItem.size());
+                                }
                             }
                         }));
 
