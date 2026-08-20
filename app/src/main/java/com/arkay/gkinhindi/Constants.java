@@ -58,7 +58,7 @@ public class Constants {
         public static final String STYLE_ROMAN_LOWER = "r";
         public static String DOC_APP_FATAL = "PDF READER FATAL";
 
-        public static String PRIVACY_POLICY_URL = "";
+        public static String PRIVACY_POLICY_URL = "https://arkayapps-document-reader.web.app/privacy_policy.html";
 
         public static String getAppStoreUrl(android.content.Context context) {
             return "https://play.google.com/store/apps/details?id=" + context.getPackageName();
